@@ -36,10 +36,141 @@
     <script src="js/jquery.gpopover.js"></script>
     <script src="https://kit.fontawesome.com/7a424ad03a.js" crossorigin="anonymous"></script>
 
-
+    <script>
+        $(function () {
+            // Use custom options for the right button
+            $('#mypage-btn').gpopover({
+                width: 360,
+                preventHide: true,
+                onShow: function () {
+                    if (console && console.log) console.log("Popover shown.");
+                },
+                onHide: function () {
+                    if (console && console.log) console.log("Popover hidden.");
+                }
+            });
+        });
+    </script>
 </head>
 
 <body>
+
+    <!-- mypage code start -->
+    <div id="popover-mypage-menu" class="gpopover">
+        <div class="container">
+            <div>
+                <div>
+                    <div class="row d-flex justify-content-between ml-2 mr-2 mt-4 pb-4">
+                        <div id="profile-img" style="background: #BDBDBD;">
+                            <img class="profile" src="img/test/5.jpg">
+                        </div>
+                        <div class="h5 login-id align-self-center">
+                            닉네임
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="d-flex justify-content-around bd-highlight">
+                        <div class="p-2 bd-highlight">
+                            <div class="d-flex flex-column bd-highlight ">
+                                <div class="p-2 bd-highlight">
+                                    <div class="justify-content-center">
+                                        <div class="p-2 bd-highlight">
+                                            <i class="fas fa-shapes fa-3x"></i>
+                                        </div>
+                                        <div class="p-2 bd-highlight">
+                                            <a href="show-filteredProjects.html">
+                                                <div class="h6">창작한</div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-2 bd-highlight">
+                            <div class="d-flex flex-column bd-highlight ">
+                                <div class="p-2 bd-highlight">
+                                    <div class="justify-content-center">
+                                        <div class="p-2 bd-highlight">
+                                            <i class="fas fa-hand-holding-usd fa-3x"></i>
+                                        </div>
+                                        <div class="p-2 bd-highlight">
+                                            <a href="show-filteredProjects.html">
+                                                <div class="h6">후원한</div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-2 bd-highlight">
+                            <div class="d-flex flex-column bd-highlight">
+                                <div class="p-2 bd-highlight">
+                                    <div class="justify-content-center">
+                                        <div class="p-2 bd-highlight">
+                                            <i class="far fa-surprise fa-3x"></i>
+                                        </div>
+                                        <div class="p-2 bd-highlight">
+                                            <a href="show-filteredProjects.html">
+                                                <div class="h6">반응한</div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-2 bd-highlight">
+                            <div class="d-flex flex-column bd-highlight ">
+                                <div class="p-2 bd-highlight">
+                                    <div class="justify-content-center">
+                                        <div class="p-2 bd-highlight">
+                                            <i class="fas fa-heart fa-3x"></i>
+                                        </div>
+                                        <div class="p-2 bd-highlight">
+                                            <a href="show-filteredProjects.html">
+                                                <div class="h6">좋아한</div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-end">
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action active">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">보안 인증 하시면 좋데요</h5>
+                                <small>3 days ago</small>
+                            </div>
+                            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget
+                                risus varius blandit.</p>
+                            <small></small>
+                        </a>
+                    </div>
+                </div>
+                <div class="d-flex flex-column bd-highlight mb-3">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="#">
+                                <div class="h6">마이페이지</div>
+                            </a></li>
+                        <li class="list-group-item"><a href="#">
+                                <div class="h6">후원 결제내역</div>
+                            </a></li>
+                        <li class="list-group-item"><a href="#">
+                                <div class="h6">수입내역</div>
+                            </a></li>
+                        <li class="list-group-item"><a href="#">
+                                <div class="h6">로그아웃 하기</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- mypage code end -->
 
     <!-- header-start -->
     <header>
@@ -103,330 +234,56 @@
         </div>
     </header>
     <!-- header-end -->
+    <hr>
+
+    <section class="main-wrapper pt-xl-5 ">
+        <article class="main-content">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-10">
+                        <div class="h3">[공지 제목]</div>
+                    </div>
+                </div>
+                <div class="row m-3">
+                    <div class="d-flex justify-content-start mb-3">
+                        <div id="detail-mypage-profile-img" style="background: #BDBDBD; width:80px; height:80px;">
+                            <img class="profile" src="img/test/1.jpg" > <!-- 공지를 등록한 관리자 프로필 -->
+                        </div>
+                        <div class="d-flex align-items-end ml-2">
+                            <div class="h6 login-id">
+                                FUNTHING관리자 [등록날짜]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <aside>
+                    <div class="h4">[공지 내용들 올라올 위치]</div>
+
+                </aside>
 
 
-    <!-- slider_area_start -->
-    <div class="slider_area">
-        <div class="slider_active owl-carousel">
-            <div class="single_slider d-flex align-items-center justify-content-center slider_bg_1">
-                <div class="container">
+
+                <div class="d-flex justify-content-between p-5">
+                    <div>
+                        <a href="#"><i class="fas fa-thumbs-up fa-2x"></i></a>
+                    </div>
                     <div class="row">
-                        <div class="col-xl-12">
-                            <div class="slider_text text-center">
-                            </div>
-                        </div>
+                        <a href="#"><i class="fas fa-comment fa-2x mr-2"></i></a>
+                        <a href="#"><i class="fab fa-twitter fa-2x mr-2"></i></a>
+                        <a href="#"><i class="fab fa-google-plus-g fa-2x mr-2"></i></a>
                     </div>
                 </div>
-            </div>
-            <div class="single_slider  d-flex align-items-center justify-content-center slider_bg_2">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="slider_text text-center">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="single_slider d-flex align-items-center justify-content-center slider_bg_1">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="slider_text text-center">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="single_slider  d-flex align-items-center justify-content-center slider_bg_2">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="slider_text text-center">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- slider_area_end -->
-    <section class="container">
-        <div>
-            <div class="h3 pt-5 d-flex justify-content-between">
-                <a href="#">주목할 만한 프로젝트<i class="fas fa-chevron-right"></i></a>
-                <div>
-                    <i class="fas fa-chevron-left mr-5"></i>
-                    <i class="fas fa-chevron-right mr-5"></i>
-                </div>
-            </div>
-            <section class="tiles pt-0 mt-0">
-    
-                <!-- 올라온 프로젝트들 목록 표시-->
-                <!-- 기본셋팅은 목록에는 진행중인 프로젝트 전체 목록 표시-->
-                <!---------- 일반 펀딩 목록 보는 양식------ img class 에 가로가 긴 이미지면 landscape 세로가 길면 portrait -->
-                <article>
-    
-                    <div class="project">
-                        <div class="thumbnail-wrap">
-                            <div class="thumbnail">
-                                <div class="centered">
-                                    <img src="./img/test/8.jpg" class="card-img-top landscape" alt="1.jpg">
-                                </div>
-                            </div>
-                        </div>
-                        <h5>프로젝트 제목</h5>
-                        <ul>
-                            <li>Luxaries condition</li>
-                            <li>3 Adults & 2 Children size</li>
-                            <li>Sea view side</li>
-                        </ul>
-                        <div class="mt-10">
-                            <div class="percentage">
-                                <p>2,352,000원 30% </p>
-                                <div class="progress">
-                                    <div class="progress-bar color-7" role="progressbar" style="width: 50%"
-                                        aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                <!-- 추가적으로 목록들 생길 시 JSTL로 반복 추가-->
-            </section>
-            <hr>
-        </div>
 
-        <div>
-            <div class="h3 pt-5 d-flex justify-content-between">
-                <a href="#">진행중인 기획전 <i class="fas fa-chevron-right"></i></a>
-                <div>
-                    <i class="fas fa-chevron-left mr-5"></i>
-                    <i class="fas fa-chevron-right mr-5"></i>
-                </div>
             </div>
-            <section class="tiles pt-0 mt-0">
-    
-                <!-- 올라온 프로젝트들 목록 표시-->
-                <!-- 기본셋팅은 목록에는 진행중인 프로젝트 전체 목록 표시-->
-                <!---------- 일반 펀딩 목록 보는 양식------ img class 에 가로가 긴 이미지면 landscape 세로가 길면 portrait -->
-                <article>
-    
-                    <div class="project">
-                        <div class="thumbnail-wrap">
-                            <div class="thumbnail">
-                                <div class="centered">
-                                    <img src="./img/test/8.jpg" class="card-img-top landscape" alt="1.jpg">
-                                </div>
-                            </div>
-                        </div>
-                        <h5>프로젝트 제목</h5>
-                        <ul>
-                            <li>Luxaries condition</li>
-                            <li>3 Adults & 2 Children size</li>
-                            <li>Sea view side</li>
-                        </ul>
-                        <div class="mt-10">
-                            <div class="percentage">
-                                <p>2,352,000원 30% </p>
-                                <div class="progress">
-                                    <div class="progress-bar color-7" role="progressbar" style="width: 50%"
-                                        aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                <!-- 추가적으로 목록들 생길 시 JSTL로 반복 추가-->
-            </section>
-            <hr>
-        </div>
-
-        <div>
-            <div class="h3 pt-5 d-flex justify-content-between">
-                <a href="#">인기 프로젝트 <i class="fas fa-chevron-right"></i></a>
-                <div>
-                    <i class="fas fa-chevron-left mr-5"></i>
-                    <i class="fas fa-chevron-right mr-5"></i>
-                </div>
-            </div>
-            <section class="tiles pt-0 mt-0">
-    
-                <!-- 올라온 프로젝트들 목록 표시-->
-                <!-- 기본셋팅은 목록에는 진행중인 프로젝트 전체 목록 표시-->
-                <!---------- 일반 펀딩 목록 보는 양식------ img class 에 가로가 긴 이미지면 landscape 세로가 길면 portrait -->
-                <article>
-    
-                    <div class="project">
-                        <div class="thumbnail-wrap">
-                            <div class="thumbnail">
-                                <div class="centered">
-                                    <img src="./img/test/8.jpg" class="card-img-top landscape" alt="1.jpg">
-                                </div>
-                            </div>
-                        </div>
-                        <h5>프로젝트 제목</h5>
-                        <ul>
-                            <li>Luxaries condition</li>
-                            <li>3 Adults & 2 Children size</li>
-                            <li>Sea view side</li>
-                        </ul>
-                        <div class="mt-10">
-                            <div class="percentage">
-                                <p>2,352,000원 30% </p>
-                                <div class="progress">
-                                    <div class="progress-bar color-7" role="progressbar" style="width: 50%"
-                                        aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                <!-- 추가적으로 목록들 생길 시 JSTL로 반복 추가-->
-            </section>
-            <hr>
-        </div>
-
-        <div>
-            <div class="h3 pt-5 d-flex justify-content-between">
-                <a href="#">성공 임박 프로젝트<i class="fas fa-chevron-right"></i></a>
-                <div>
-                    <i class="fas fa-chevron-left mr-5"></i>
-                    <i class="fas fa-chevron-right mr-5"></i>
-                </div>
-            </div>
-            <section class="tiles pt-0 mt-0">
-    
-                <!-- 올라온 프로젝트들 목록 표시-->
-                <!-- 기본셋팅은 목록에는 진행중인 프로젝트 전체 목록 표시-->
-                <!---------- 일반 펀딩 목록 보는 양식------ img class 에 가로가 긴 이미지면 landscape 세로가 길면 portrait -->
-                <article>
-    
-                    <div class="project">
-                        <div class="thumbnail-wrap">
-                            <div class="thumbnail">
-                                <div class="centered">
-                                    <img src="./img/test/8.jpg" class="card-img-top landscape" alt="1.jpg">
-                                </div>
-                            </div>
-                        </div>
-                        <h5>프로젝트 제목</h5>
-                        <ul>
-                            <li>Luxaries condition</li>
-                            <li>3 Adults & 2 Children size</li>
-                            <li>Sea view side</li>
-                        </ul>
-                        <div class="mt-10">
-                            <div class="percentage">
-                                <p>2,352,000원 30% </p>
-                                <div class="progress">
-                                    <div class="progress-bar color-7" role="progressbar" style="width: 50%"
-                                        aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                <!-- 추가적으로 목록들 생길 시 JSTL로 반복 추가-->
-            </section>
-            <hr>
-        </div>
-
-        
-
+        </article>
     </section>
+
     
     <!-- footer -->
     <footer class="footer">
-        <div class="footer_top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-3 col-md-6 col-lg-3">
-                        <div class="footer_widget">
-                            <h3 class="footer_title">
-                                FUnThing 로그인하기
-                            </h3>
-                            <p class="footer_text"> 회원이 아니신가요?</p>
-                            <a href="#" class="line-button">회원가입 하러가기</a>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6 col-lg-3">
-                        <div class="footer_widget">
-                            <h3 class="footer_title">
-                                프로젝트 올리기
-                            </h3>
-                            <p class="footer_text">당신의 창작물을 후원 받아보세요!</p>
-                            <a href="#" class="line-button">프로젝트 올리기</a>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-6 col-lg-2">
-                        <div class="footer_widget">
-                            <h3 class="footer_title">
-                                Navigation
-                            </h3>
-                            <ul>
-                                <li><a href="#">메뉴</a></li>
-                                <li><a href="#">모든 프로젝트 보기</a></li>
-                                <li><a href="#">공지</a></li>
-                                <li><a href="#">이벤트</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6 col-lg-4">
-                        <div class="footer_widget">
-                            <h3 class="footer_title">
-                                검색하기
-                            </h3>
-                            <form action="#" class="search_form">
-                                <input type="text" placeholder="">
-                                <button type="submit">검색</button>
-                            </form>
-                            <p class="search_text">원하시는 프로젝트를 입력해주세요.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="copy-right_text">
-            <div class="container">
-                <div class="footer_border"></div>
-                <div class="row">
-                    <div class="col-xl-8 col-md-7 col-lg-9">
-                        <p class="copy_right">
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Copyright &copy;
-                            <script>document.write(new Date().getFullYear());</script> All rights reserved | This
-                            template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a
-                                href="https://colorlib.com" target="_blank">Colorlib</a>
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </div>
-                    <div class="col-xl-3 col-md-5 col-lg-3">
-                        <div class="socail_links">
-                            <ul>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-search"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-twitter"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-instagram"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </footer>
-
-    <!-- link that opens popup -->
 
     <!-- 로그인 팝업페이지-->
     <form id="login-popup" class="white-popup-block mfp-hide">
@@ -463,6 +320,9 @@
                             <div class="col-5">
                                 <a href="#"><p>아이디|비밀번호 찾기</p></a>
                             </div>
+
+
+
                         </div>
 
                     </div>
@@ -587,7 +447,6 @@
         </div>
     </form>
     <!-- 검색폼 end -->
-
 
 
     <!-- JS here -->
