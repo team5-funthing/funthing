@@ -26,10 +26,25 @@
 		
 	</context-param>
 	
-	
+	<!-- start context -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+
+	<servlet>
+		<servlet-name>start</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/config/userConfig/home-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>start</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
 	
 	
 	<!-- user context -->
@@ -39,9 +54,10 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/config/userConfig/member-servlet.xml</param-value>
+			<param-value>/WEB-INF/config/userConfig/home-servlet.xml</param-value>
 			<!-- 추가할 user 설정 파일 -->
 		</init-param>
-		<load-on-startup>0</load-on-startup>
+		<load-on-startup>1</load-on-startup>
 	</servlet>
 	
 	<servlet-mapping>
@@ -59,7 +75,7 @@
 			<param-value>/WEB-INF/config/adminConfig/admin-servlet.xml</param-value>
 			<!-- 추가할 admin 설정 파일 -->
 		</init-param>
-		<load-on-startup>1</load-on-startup>
+		<load-on-startup>2</load-on-startup>
 	</servlet>
 	
 	<servlet-mapping>
