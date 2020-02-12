@@ -38,7 +38,7 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/config/userConfig/user-servlet.xml</param-value>
+			<param-value>/WEB-INF/config/userConfig/member-servlet.xml</param-value>
 			<!-- 추가할 user 설정 파일 -->
 		</init-param>
 		<load-on-startup>0</load-on-startup>
