@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -14,26 +16,26 @@
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
-    <link rel="stylesheet" href="css/jquery.gpopover.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/themify-icons.css">
-    <link rel="stylesheet" href="css/nice-select.css">
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="css/gijgo.css">
-    <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="css/slicknav.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/jquery.gpopover.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/magnific-popup.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/font-awesome.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/themify-icons.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/nice-select.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/flaticon.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/gijgo.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/animate.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/slicknav.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/style.css">
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/bootstrap.min.css">
 
 
 
     <!-- Include jQuery and the jquery.gpopover plugin -->
-    <script src="js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="js/jquery.gpopover.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/jquery.gpopover.js"></script>
     <script src="https://kit.fontawesome.com/7a424ad03a.js" crossorigin="anonymous"></script>
 
     <script>
@@ -234,123 +236,53 @@
         </div>
     </header>
     <!-- header-end -->
-
     <hr>
 
-    <section class="">
+    <section class="main-wrapper pt-xl-5 ">
+        <article class="main-content">
+            <div class="container">
 
-        <article class="d-flex justify-content-center">
-            <div class="h2 p-5">공지 사항</div>
-        </article>
-
-        <article>
-        
-            <nav>
-                <div class="nav nav-tabs d-flex justify-content-center" id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link active" id="nav-notice-all-tab" data-toggle="tab" href="#nav-notice-all" role="tab"
-                        aria-controls="nav-notice-all" aria-selected="true">모든 소식</a>
-
-                    <a class="nav-item nav-link" id="nav-notice-tab" data-toggle="tab" href="#nav-notice" role="tab"
-                        aria-controls="nav-notice" aria-selected="false">공지 | 알림</a>
-
-                    <a class="nav-item nav-link" id="nav-event-tab" data-toggle="tab" href="#nav-event" role="tab"
-                        aria-controls="nav-event" aria-selected="false">이벤트</a>
+                <div class="row">
+                    <div class="col-10">
+                        <div class="h3">[공지 제목]</div>
+                    </div>
                 </div>
-            </nav>
-
-        </article>
-
-        <article>
-
-            <div class="row p-4">
-                <div class="col-3">
-
-                </div>
-                <div class="col-6">
-                    <div class="">
-                        <div class="tab-content" id="nav-tabContent">
-
-                            <div class="tab-pane fade show active" id="nav-notice-all" role="tabpanel" aria-labelledby="nav-notice-all-tab">
-                                <div class="h4">
-                                        <p>공지 알림 [뱃지 형식]</p>
-                                        <a href="#">공지사항 제목</a>
-                                        <p>fun thing</p><p>올린 날짜</p>
-                                </div>
-                                <hr>
-                            </div>
-                            
-                            <div class="tab-pane fade" id="nav-notice" role="tabpanel" aria-labelledby="nav-notice-tab">
-
-                                <div class="tab-pane fade show active" id="nav-notice" role="tabpanel" aria-labelledby="nav-notice-tab">
-                                    <div class="h4">
-                                            <p>알림 [뱃지 형식]</p>
-                                            <a href="#">공지|알림 제목</a>
-                                            <p>fun thing</p><p>올린 날짜</p>
-                                    </div>
-                                    <hr>
-                                </div>
-
-                            </div>
-                            <div class="tab-pane fade" id="nav-event" role="tabpanel" aria-labelledby="nav-event-tab">
-                                
-                                <div class="tab-pane fade show active" id="nav-event" role="tabpanel" aria-labelledby="nav-event-tab">
-                                    <div class="h4">
-                                            <p>이벤트 [뱃지 형식]</p>
-                                            <a href="#">이벤트 제목</a>
-                                            <p>fun thing</p><p>올린 날짜</p>
-                                    </div>
-                                    <hr>
-                                </div>
-
+                <div class="row m-3">
+                    <div class="d-flex justify-content-start mb-3">
+                        <div id="detail-mypage-profile-img" style="background: #BDBDBD; width:80px; height:80px;">
+                            <img class="profile" src="img/test/1.jpg" > <!-- 공지를 등록한 관리자 프로필 -->
+                        </div>
+                        <div class="d-flex align-items-end ml-2">
+                            <div class="h6 login-id">
+                                FUNTHING관리자 [등록날짜]
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-3">
-                    
+
+                <aside>
+                    <div class="h4">[공지 내용들 올라올 위치]</div>
+
+                </aside>
+
+
+
+                <div class="d-flex justify-content-between p-5">
+                    <div>
+                        <a href="#"><i class="fas fa-thumbs-up fa-2x"></i></a>
+                    </div>
+                    <div class="row">
+                        <a href="#"><i class="fas fa-comment fa-2x mr-2"></i></a>
+                        <a href="#"><i class="fab fa-twitter fa-2x mr-2"></i></a>
+                        <a href="#"><i class="fab fa-google-plus-g fa-2x mr-2"></i></a>
+                    </div>
                 </div>
+
             </div>
-
-
         </article>
-
-        <article class="d-flex justify-content-center">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                  <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                      <span aria-hidden="true">&laquo;</span>
-                    </a>
-                  </li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-        </article>
-
-        <article class="d-flex justify-content-center">
-            <form class="form-inline my-2 my-lg-0">
-                <div class="form-group p-2">
-                    <label for="exampleFormControlSelect1"></label>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                      <option>제목+내용</option>
-                      <option>제목</option>
-                      <option>내용</option>
-                    </select>
-                  </div>
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
-              </form>
-        </article>
-
     </section>
 
+    
     <!-- footer -->
     <footer class="footer">
     </footer>
@@ -520,32 +452,32 @@
 
 
     <!-- JS here -->
-    <script src="js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/isotope.pkgd.min.js"></script>
-    <script src="js/ajax-form.js"></script>
-    <script src="js/waypoints.min.js"></script>
-    <script src="js/jquery.counterup.min.js"></script>
-    <script src="js/imagesloaded.pkgd.min.js"></script>
-    <script src="js/scrollIt.js"></script>
-    <script src="js/jquery.scrollUp.min.js"></script>
-    <script src="js/wow.min.js"></script>
-    <script src="js/nice-select.min.js"></script>
-    <script src="js/jquery.slicknav.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/gijgo.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/popper.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/owl.carousel.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/isotope.pkgd.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/ajax-form.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/waypoints.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/jquery.counterup.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/imagesloaded.pkgd.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/scrollIt.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/jquery.scrollUp.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/wow.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/nice-select.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/jquery.slicknav.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/jquery.magnific-popup.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/plugins.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/gijgo.min.js"></script>
 
     <!--contact js-->
-    <script src="js/contact.js"></script>
-    <script src="js/jquery.ajaxchimp.min.js"></script>
-    <script src="js/jquery.form.js"></script>
-    <script src="js/jquery.validate.min.js"></script>
-    <script src="js/mail-script.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/contact.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/jquery.ajaxchimp.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/jquery.form.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/jquery.validate.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/mail-script.js"></script>
 
-    <script src="js/main.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/main.js"></script>
 
 </body>
 
