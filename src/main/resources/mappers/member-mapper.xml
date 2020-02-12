@@ -4,7 +4,7 @@
 
 <mapper namespace="MemberVO">
 
-	<select id="getMember" parameterType="int" resultType="member">
+	<select id="getMember" parameterType="member" resultType="member">
 		SELECT * 
 		FROM member 
 		WHERE email= #{email}
