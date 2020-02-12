@@ -26,6 +26,10 @@
 		
 	</context-param>
 	
+	
+	
+	
+	
 	<!-- start context -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -47,6 +51,8 @@
 	</servlet-mapping>
 	
 	
+	
+	
 	<!-- user context -->
 	<servlet>
 		<servlet-name>user</servlet-name>
@@ -55,6 +61,7 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/config/userConfig/member-servlet.xml</param-value>
 			<param-value>/WEB-INF/config/userConfig/home-servlet.xml</param-value>
+			<param-value>/WEB-INF/config/userConfig/project-servlet.xml</param-value>
 			<!-- 추가할 user 설정 파일 -->
 		</init-param>
 		<load-on-startup>1</load-on-startup>
