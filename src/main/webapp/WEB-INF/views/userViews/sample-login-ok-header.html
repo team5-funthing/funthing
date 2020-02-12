@@ -1,0 +1,254 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+
+<!-- 로그인 후에 header 부분 마이 프로필로 바뀔 때 필요한 코드 입니다. -->
+
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Montana</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="css/jquery.gpopover.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/themify-icons.css">
+    <link rel="stylesheet" href="css/nice-select.css">
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/gijgo.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/slicknav.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+
+
+    <!-- Include jQuery and the jquery.gpopover plugin -->
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="js/jquery.gpopover.js"></script>
+    <script src="https://kit.fontawesome.com/7a424ad03a.js" crossorigin="anonymous"></script>
+
+    <script>
+        $(function () {
+            // Use custom options for the right button
+            $('#mypage-btn').gpopover({
+                width: 360,
+                preventHide: true,
+                onShow: function () {
+                    if (console && console.log) console.log("Popover shown.");
+                },
+                onHide: function () {
+                    if (console && console.log) console.log("Popover hidden.");
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+
+    <!-- mypage code start -->
+    <div id="popover-mypage-menu" class="gpopover">
+        <div class="container">
+            <div>
+                <div>
+                    <div class="row d-flex justify-content-between ml-2 mr-2 mt-4 pb-4">
+                        <div id="profile-img" style="background: #BDBDBD;">
+                            <img class="profile" src="img/test/5.jpg">
+                        </div>
+                        <div class="h5 login-id align-self-center">
+                            닉네임
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="d-flex justify-content-around bd-highlight">
+                        <div class="p-2 bd-highlight">
+                            <div class="d-flex flex-column bd-highlight ">
+                                <div class="p-2 bd-highlight">
+                                    <div class="justify-content-center">
+                                        <div class="p-2 bd-highlight">
+                                            <i class="fas fa-shapes fa-3x"></i>
+                                        </div>
+                                        <div class="p-2 bd-highlight">
+                                            <a href="show-filteredProjects.html">
+                                                <div class="h6">창작한</div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-2 bd-highlight">
+                            <div class="d-flex flex-column bd-highlight ">
+                                <div class="p-2 bd-highlight">
+                                    <div class="justify-content-center">
+                                        <div class="p-2 bd-highlight">
+                                            <i class="fas fa-hand-holding-usd fa-3x"></i>
+                                        </div>
+                                        <div class="p-2 bd-highlight">
+                                            <a href="show-filteredProjects.html">
+                                                <div class="h6">후원한</div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-2 bd-highlight">
+                            <div class="d-flex flex-column bd-highlight">
+                                <div class="p-2 bd-highlight">
+                                    <div class="justify-content-center">
+                                        <div class="p-2 bd-highlight">
+                                            <i class="far fa-surprise fa-3x"></i>
+                                        </div>
+                                        <div class="p-2 bd-highlight">
+                                            <a href="show-filteredProjects.html">
+                                                <div class="h6">반응한</div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-2 bd-highlight">
+                            <div class="d-flex flex-column bd-highlight ">
+                                <div class="p-2 bd-highlight">
+                                    <div class="justify-content-center">
+                                        <div class="p-2 bd-highlight">
+                                            <i class="fas fa-heart fa-3x"></i>
+                                        </div>
+                                        <div class="p-2 bd-highlight">
+                                            <a href="show-filteredProjects.html">
+                                                <div class="h6">좋아한</div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-end">
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action active">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">보안 인증 하시면 좋데요</h5>
+                                <small>3 days ago</small>
+                            </div>
+                            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget
+                                risus varius blandit.</p>
+                            <small></small>
+                        </a>
+                    </div>
+                </div>
+                <div class="d-flex flex-column bd-highlight mb-3">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="#">
+                                <div class="h6">마이페이지</div>
+                            </a></li>
+                        <li class="list-group-item"><a href="#">
+                                <div class="h6">후원 결제내역</div>
+                            </a></li>
+                        <li class="list-group-item"><a href="#">
+                                <div class="h6">수입내역</div>
+                            </a></li>
+                        <li class="list-group-item"><a href="#">
+                                <div class="h6">로그아웃 하기</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- mypage code end -->
+
+    <!-- header-start -->
+    <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container-fluid p-0">
+                    <div id="sticky-header-align" class="row no-gutters">
+                        <div class="d-flex justify-content-center w-100">
+                            <div class="col-xl-5 col-lg-3 main-menu d-none d-lg-block ">
+                                <nav>
+                                    <ul id="navigation" class="m-0">
+                                        <li><a href="#">프로젝트 보기 <i class="ti-angle-down"></i></a>
+                                            <ul class="submenu">
+                                                <li><a href="show-projects.html">모든 프로젝트</a></li>
+                                                <li><a href="#">리워드 프로젝트</a></li>
+                                                <li><a href="#">후원 프로젝트</a></li>
+                                                <hr />
+                                                <li><a href="#">인기 프로젝트</a></li>
+                                                <li><a href="#">마감임박 프로젝트</a></li>
+                                                <li><a href="#">신규 프로젝트</a></li>
+                                                <hr />
+                                                <li><a href="#">기획전 보러가기</a></li>
+                                            </ul>
+                                        <li><a href="create-project-start.html">프로젝트 올리기</a></li>
+                                        <li><a href="#">더 보기 <i class="ti-angle-down"></i></a>
+                                            <ul class="submenu">
+                                                <li><a href="#"></a></li>
+                                                <li><a href="#">공지</a></li>
+                                                <li><a href="#">알림</a></li>
+                                                <li><a href="#">이벤트</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <div class="col d-flex align-items-center justify-content-center">
+                                <div class="logo-img p-2 bd-highlight">
+                                    <a href="index.html">
+                                        <h2 class="logo">FUNTHING</h2>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xl-5 col-lg-3 d-none d-lg-block">
+                                <div class="nav_right">
+
+                                    <div class="search_icon ">
+                                        <a class="popup-with-form" href="#search-popup">
+                                            <i class="fa fa-search fa-2x pr-1"></i>
+                                        </a>
+                                    </div>
+
+
+                                    <div class="pl-3">
+                                        <a class="popup-with-form" href="#">
+                                            <i class="far fa-bell fa-2x pr-1"></i>
+                                        </a>
+                                    </div>
+
+                                    <div class="pl-3">
+                                        <i class="far fa-envelope fa-2x pr-2"></i>
+                                    </div>
+
+                                    <div class="d-none d-lg-block pl-3 pr-3">
+                                        <a type="button" href="#" id="mypage-btn" data-popover="popover-mypage-menu">
+                                            <img class="profile" src="img/test/5.jpg"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </header>
+    <!-- header-end -->

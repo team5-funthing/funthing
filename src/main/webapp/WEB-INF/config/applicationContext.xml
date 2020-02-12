@@ -16,7 +16,7 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
 	<!--  Data Source -->
-	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
 		<!-- JDBC 드라이버 클래스명 설정 -->
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 		<!-- JDBC 접속 문자열 생성 -->
@@ -27,12 +27,13 @@
 	
 	<!-- Transaction 관리자 설정 -->
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" value="dataSouce"/>
+		<property name="dataSource" ref="dataSource"/>
 	</bean>
+	
 	
 	<!-- myBatis 사용을 위한 설정  -->
 	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource"></property>
+		<property name="dataSource" ref="dataSource"/>
 		<property name="configLocation" value="classpath:mybatis-config.xml"/>
 	</bean>
 	
