@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -13,18 +15,18 @@
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/themify-icons.css">
-    <link rel="stylesheet" href="css/nice-select.css">
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="css/gijgo.css">
-    <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="css/slicknav.css">
-    <link rel="stylesheet" href="css/style.css">
-    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/magnific-popup.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/font-awesome.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/themify-icons.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/nice-select.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/flaticon.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/gijgo.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/animate.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/slicknav.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/style.css">
+    <!-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/responsive.css"> -->
 </head>
 
 <body>
@@ -193,13 +195,13 @@
 
                     <div class="col-xl-12 mt-10 kakao_login_btn-wrapper">
                         <a class="kakao_login_btn" href="#">
-                            <img class="landscape" src="img/apiBtn/naverLoginBtn/네이버 아이디로 로그인_완성형_White.PNG"/>
+                            <img class="landscape" src="${pageContext.request.contextPath}/resources/user/img/apiBtn/naverLoginBtn/네이버 아이디로 로그인_완성형_White.PNG"/>
                         </a>
                     </div>
 
                     <div class="col-xl-12 mt-10 kakao_login_btn-wrapper">
                         <a class="kakao_login_btn" href="#">
-                            <img class="landscape" src="img/apiBtn/kakaoLoginBtn/kakao_account_login_btn_large_wide.png"/>
+                            <img class="landscape" src="${pageContext.request.contextPath}/resources/user/img/apiBtn/kakaoLoginBtn/kakao_account_login_btn_large_wide.png"/>
                         </a>
                     </div>
 
@@ -307,33 +309,33 @@
 
     
     <!-- JS here -->
-    <script src="js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/isotope.pkgd.min.js"></script>
-    <script src="js/ajax-form.js"></script>
-    <script src="js/waypoints.min.js"></script>
-    <script src="js/jquery.counterup.min.js"></script>
-    <script src="js/imagesloaded.pkgd.min.js"></script>
-    <script src="js/scrollIt.js"></script>
-    <script src="js/jquery.scrollUp.min.js"></script>
-    <script src="js/wow.min.js"></script>
-    <script src="js/nice-select.min.js"></script>
-    <script src="js/jquery.slicknav.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/gijgo.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/popper.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/owl.carousel.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/isotope.pkgd.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/ajax-form.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/waypoints.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/jquery.counterup.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/imagesloaded.pkgd.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/scrollIt.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/jquery.scrollUp.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/wow.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/nice-select.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/jquery.slicknav.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/jquery.magnific-popup.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/plugins.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/gijgo.min.js"></script>
 
     <!--contact js-->
-    <script src="js/contact.js"></script>
-    <script src="js/jquery.ajaxchimp.min.js"></script>
-    <script src="js/jquery.form.js"></script>
-    <script src="js/jquery.validate.min.js"></script>
-    <script src="js/mail-script.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/contact.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/jquery.ajaxchimp.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/jquery.form.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/jquery.validate.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/mail-script.js"></script>
 
-    <script src="js/main.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/main.js"></script>
     <script>
         $('#datepicker').datepicker({
             iconsLibrary: 'fontawesome',
