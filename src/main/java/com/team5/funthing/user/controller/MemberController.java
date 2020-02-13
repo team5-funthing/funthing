@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.team5.funthing.user.model.vo.MemberVO;
@@ -17,15 +16,20 @@ public class MemberController {
 	@Autowired
 	private GetMemberService getMemberService;
 	
-	@RequestMapping("/getmember.udo")
+	@RequestMapping("getMember.udo")
 	public String getMember(MemberVO vo, Model model) {
+		System.out.println("MemberController ===> getMember 메서드 수행");
 		
-		getMemberService.getMember(vo);
+		vo.setEmail("test@naver.com");
 		
-		return "#";
+		MemberVO test = getMemberService.getMember(vo);
+		
+		System.out.println(test.toString());
+		
+		return "p-index";
 	}
 	
-	@RequestMapping("/*.udo")
+	@RequestMapping("*.udo")
 	public String showindex() {
 		return "p-index";
 	}

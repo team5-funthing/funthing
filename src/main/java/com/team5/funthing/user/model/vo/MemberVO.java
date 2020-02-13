@@ -1,6 +1,5 @@
 package com.team5.funthing.user.model.vo;
 
-
 public class MemberVO {
 	
 	private String email;
@@ -52,6 +51,11 @@ public class MemberVO {
 	}
 	public void setReport(String report) {
 		this.report = report;
+	}
+	@Override
+	public String toString() {
+		return "MemberVO [email=" + email + ", password=" + password + ", name=" + name + ", phone=" + phone
+				+ ", introduce=" + introduce + ", myImage=" + myImage + ", report=" + report + "]";
 	}
 	
 	
