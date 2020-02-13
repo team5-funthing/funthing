@@ -30,8 +30,22 @@ public class NoticeDAO {
 	}
 	
 	public List<NoticeVO> selectNoticeList(NoticeVO vo){
-		System.out.println("공지사항 글 목록 얻어오기");
-		return noticeSqlSessionTemplate.selectList("NoticeDAO.selectEntireNoticeList", vo);
+		System.out.println("공지사항 공지글 목록 얻어오기");
+		return noticeSqlSessionTemplate.selectList("NoticeDAO.selectNoticeList", vo);
 	}
 	
+	public List<NoticeVO> selectEntireNoticeList(NoticeVO vo){
+		System.out.println("공지사항 전체글 목록 얻어오기");
+		return noticeSqlSessionTemplate.selectList("NoticeDAO.selectEntireNoticeList",vo);
+	}
+	
+	public List<NoticeVO> selectEventNoticeList(NoticeVO vo){
+		System.out.println("공지사항 이벤트글 목록 얻어오기");
+		return noticeSqlSessionTemplate.selectList("NoticeDAO.selectEventNoticeList",vo);
+	}
+
+	public NoticeVO selectNotice(NoticeVO vo) {
+		System.out.println("공지사항 상세 글 얻어오기");
+		return noticeSqlSessionTemplate.selectOne("NoticeDAO.selectNotice", vo);
+	}
 }

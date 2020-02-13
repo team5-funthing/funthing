@@ -14,7 +14,7 @@
 		<result property="param3" column="columnname3" />
 	</resultMap> -->
 	
-	<select id="selectEventList" resultType="notice" parameterType="notice">
+	<select id="selectEventNoticeList" resultType="notice" parameterType="notice">
 		SELECT * FROM notice WHERE noticeCategory = #{noticeCategory}
 	</select>
 	
@@ -24,6 +24,10 @@
 	
 	<select id="selectEntireNoticeList" resultType="notice" parameterType="notice">
 		SELECT * FROM notice ORDER BY noticeNo desc
+	</select>
+
+	<select id="selectNotice" resultType="notice" parameterType="notice">
+		SELECT * FROM notice WHERE noticeNo = #{noticeNo}
 	</select>
 
 	<insert id="insertNotice" parameterType="notice">

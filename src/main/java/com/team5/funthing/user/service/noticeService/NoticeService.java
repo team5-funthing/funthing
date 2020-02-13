@@ -10,5 +10,8 @@ public interface NoticeService {
 	void updateNotice(NoticeVO vo);
 	void deleteNotice(NoticeVO vo);
 	List<NoticeVO> selectNoticeList(NoticeVO vo);
+	List<NoticeVO> selectEntireNoticeList(NoticeVO vo);
+	List<NoticeVO> selectEventNoticeList(NoticeVO vo);
+	NoticeVO selectNotice(NoticeVO vo);
 	
 }

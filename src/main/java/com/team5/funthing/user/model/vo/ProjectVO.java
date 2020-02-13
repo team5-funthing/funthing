@@ -19,7 +19,7 @@ public class ProjectVO {
 	private String email;
 	private String projectTitle; 
 	private int goalMoney; // 펀딩 목표 금액
-	private File projectMainImage;
+	private String projectMainImage;
 	private String Category;
 	private String projectSubTitle;
 	private String projectStory; 
@@ -64,7 +64,7 @@ public class ProjectVO {
 	public void setGoalMoney(int goalMoney) {
 		this.goalMoney = goalMoney;
 	}
-	public Fil getProjectMainImage() {
+	public String getProjectMainImage() {
 		return projectMainImage;
 	}
 	public void setProjectMainImage(String projectMainImage) {
