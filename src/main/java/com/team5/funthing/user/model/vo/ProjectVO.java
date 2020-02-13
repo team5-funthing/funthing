@@ -1,7 +1,8 @@
 package com.team5.funthing.user.model.vo;
 
-import java.io.File;
 import java.util.Date;
+
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 
@@ -14,26 +15,33 @@ import java.util.Date;
 
 public class ProjectVO {
 	
+//	프로젝트 기본설정
 	private int projectNo;
-	private String creator; // 창작자
+	private String creator; // 창작자|업체명
 	private String email;
-	private String projectTitle; 
+	
+//	프로젝트 설정
 	private int goalMoney; // 펀딩 목표 금액
-	private File projectMainImage;
-	private String Category;
+	private String projectTitle;
 	private String projectSubTitle;
+	private MultipartFile projectMainImage;
+	private String category;
+	private Date startDate; // 펀딩 시작 날짜
+	private Date endDate; // 마감 날짜
+	private String projectKeyword; // 검색 시 필요한 키워드
+	
+//	스토리 작성
 	private String projectStory; 
 	private String projectDetail;
 	private String projectCaution;
-	private String projectVideo; 
+	private MultipartFile projectVideo; // 소개 컨텐츠 [추후 사진도 가능하게 변경]
+
 	private String supporters; // 후원자
 	private int fundingMoney; // 펀딩 진행중 모인 금액
-	private String status = "작성중"; // 심사 상태 
+	private char status = 'w'; // 심사 상태  'w'= 대기 'p' = 통과 'f' = 거부
 	private char informationAgree = 'n'; // 정보동의
-	private String projectKeyword; // 검색 시 필요한 키워드
-	private Date startDate; // 펀딩 시작 날짜
-	private Date endDate; // 마감 날짜
 	
+
 	public int getProjectNo() {
 		return projectNo;
 	}
@@ -64,17 +72,17 @@ public class ProjectVO {
 	public void setGoalMoney(int goalMoney) {
 		this.goalMoney = goalMoney;
 	}
-	public Fil getProjectMainImage() {
+	public MultipartFile getProjectMainImage() {
 		return projectMainImage;
 	}
-	public void setProjectMainImage(String projectMainImage) {
+	public void setProjectMainImage(MultipartFile projectMainImage) {
 		this.projectMainImage = projectMainImage;
 	}
 	public String getCategory() {
-		return Category;
+		return category;
 	}
 	public void setCategory(String category) {
-		Category = category;
+		this.category = category;
 	}
 	public String getProjectSubTitle() {
 		return projectSubTitle;
@@ -100,10 +108,10 @@ public class ProjectVO {
 	public void setProjectCaution(String projectCaution) {
 		this.projectCaution = projectCaution;
 	}
-	public String getProjectVideo() {
+	public MultipartFile getProjectVideo() {
 		return projectVideo;
 	}
-	public void setProjectVideo(String projectVideo) {
+	public void setProjectVideo(MultipartFile projectVideo) {
 		this.projectVideo = projectVideo;
 	}
 	public String getSupporters() {
@@ -118,10 +126,10 @@ public class ProjectVO {
 	public void setFundingMoney(int fundingMoney) {
 		this.fundingMoney = fundingMoney;
 	}
-	public String getStatus() {
+	public char getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(char status) {
 		this.status = status;
 	}
 	public char getInformationAgree() {
@@ -148,17 +156,19 @@ public class ProjectVO {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	
 	@Override
 	public String toString() {
 		return "ProjectVO [projectNo=" + projectNo + ", creator=" + creator + ", email=" + email + ", projectTitle="
-				+ projectTitle + ", goalMoney=" + goalMoney + ", projectMainImage=" + projectMainImage + ", Category="
-				+ Category + ", projectSubTitle=" + projectSubTitle + ", projectStory=" + projectStory
+				+ projectTitle + ", goalMoney=" + goalMoney + ", projectMainImage=" + projectMainImage + ", category="
+				+ category + ", projectSubTitle=" + projectSubTitle + ", projectStory=" + projectStory
 				+ ", projectDetail=" + projectDetail + ", projectCaution=" + projectCaution + ", projectVideo="
 				+ projectVideo + ", supporters=" + supporters + ", fundingMoney=" + fundingMoney + ", status=" + status
 				+ ", informationAgree=" + informationAgree + ", projectKeyword=" + projectKeyword + ", startDate="
 				+ startDate + ", endDate=" + endDate + "]";
 	}
-
+	
+		
+	
+	
 	
 }

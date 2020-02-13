@@ -14,7 +14,7 @@
 <body>
   
     <jsp:include page="./include/i-popupover-mypage.jsp"/>
-    <jsp:include page="./include/i-header-login.jsp"/>
+    <jsp:include page="./include/i-header.jsp"/>
 	
 
 	<hr>

@@ -3,7 +3,7 @@
 
 <!-- header-start -->
 <header>
-	<div class="header-area ">
+	<div class="header-area">
 		<div id="sticky-header" class="main-header-area">
 			<div class="container-fluid p-0">
 				<div id="sticky-header-align" class="row no-gutters">
@@ -24,15 +24,15 @@
 											<hr />
 											<li><a href="#">기획전 보러가기</a></li>
 										</ul>
-									<li><a href="create-project-start.html">프로젝트 올리기</a></li>
+									<li><a href="showCreateProjectForm.udo">프로젝트 올리기</a></li>
 									<li><a href="#">더 보기 <i class="ti-angle-down"></i></a>
 										<ul class="submenu">
 											<li><a href="#"></a></li>
 											<li><a href="#">공지</a></li>
 											<li><a href="#">알림</a></li>
 											<li><a href="#">이벤트</a></li>
-
-										</ul></li>
+										</ul>
+									</li>
 								</ul>
 							</nav>
 						</div>

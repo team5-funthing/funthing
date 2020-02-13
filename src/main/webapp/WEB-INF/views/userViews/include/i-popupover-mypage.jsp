@@ -8,7 +8,7 @@
 	                <div>
 	                    <div class="row d-flex justify-content-between ml-2 mr-2 mt-4 pb-4">
 	                        <div id="profile-img" style="background: #BDBDBD;">
-	                            <img class="profile" src="img/test/5.jpg">
+	                            <img class="profile" src="${pageContext.request.contextPath}/resources/user/img/test/5.jpg">
 	                        </div>
 	                        <div class="h5 login-id align-self-center">
 	                            	닉네임
