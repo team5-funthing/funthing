@@ -15,7 +15,7 @@
 <body>
 
     <jsp:include page="./include/i-popupover-mypage.jsp"/>
-    <jsp:include page="./include/i-header-login.jsp"/>
+    <jsp:include page="./include/i-header.jsp"/>
     
     <div class="wrap">
         <div class="container">

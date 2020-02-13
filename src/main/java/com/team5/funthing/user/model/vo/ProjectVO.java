@@ -1,7 +1,8 @@
 package com.team5.funthing.user.model.vo;
 
-import java.io.File;
 import java.util.Date;
+
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 
@@ -14,26 +15,35 @@ import java.util.Date;
 
 public class ProjectVO {
 	
+//	í”„ë¡œì íŠ¸ ê¸°ë³¸ì„¤ì •
 	private int projectNo;
-	private String creator; // Ã¢ÀÛÀÚ
+	private String creator; // ì°½ì‘ì|ì—…ì²´ëª…
 	private String email;
-	private String projectTitle; 
-	private int goalMoney; // Æİµù ¸ñÇ¥ ±İ¾×
-	private String projectMainImage;
+	
+//	í”„ë¡œì íŠ¸ ì„¤ì •
+	private int goalMoney; // í€ë”© ëª©í‘œ ê¸ˆì•¡
+	private MultipartFile projectMainImage;
 	private String Category;
+	private String projectTitle;
 	private String projectSubTitle;
+	private MultipartFile projectMainImage;
+	private String category;
+	private Date startDate; // í€ë”© ì‹œì‘ ë‚ ì§œ
+	private Date endDate; // ë§ˆê° ë‚ ì§œ
+	private String projectKeyword; // ê²€ìƒ‰ ì‹œ í•„ìš”í•œ í‚¤ì›Œë“œ
+	
+//	ìŠ¤í† ë¦¬ ì‘ì„±
 	private String projectStory; 
 	private String projectDetail;
 	private String projectCaution;
-	private String projectVideo; 
-	private String supporters; // ÈÄ¿øÀÚ
-	private int fundingMoney; // Æİµù ÁøÇàÁß ¸ğÀÎ ±İ¾×
-	private String status = "ÀÛ¼ºÁß"; // ½É»ç »óÅÂ 
-	private char informationAgree = 'n'; // Á¤º¸µ¿ÀÇ
-	private String projectKeyword; // °Ë»ö ½Ã ÇÊ¿äÇÑ Å°¿öµå
-	private Date startDate; // Æİµù ½ÃÀÛ ³¯Â¥
-	private Date endDate; // ¸¶°¨ ³¯Â¥
+	private MultipartFile projectVideo; // ì†Œê°œ ì»¨í…ì¸  [ì¶”í›„ ì‚¬ì§„ë„ ê°€ëŠ¥í•˜ê²Œ ë³€ê²½]
+
+	private String supporters; // í›„ì›ì
+	private int fundingMoney; // í€ë”© ì§„í–‰ì¤‘ ëª¨ì¸ ê¸ˆì•¡
+	private char status = 'w'; // ì‹¬ì‚¬ ìƒíƒœ  'w'= ëŒ€ê¸° 'p' = í†µê³¼ 'f' = ê±°ë¶€
+	private char informationAgree = 'n'; // ì •ë³´ë™ì˜
 	
+
 	public int getProjectNo() {
 		return projectNo;
 	}
@@ -64,17 +74,17 @@ public class ProjectVO {
 	public void setGoalMoney(int goalMoney) {
 		this.goalMoney = goalMoney;
 	}
-	public String getProjectMainImage() {
+	public MultipartFile getProjectMainImage() {
 		return projectMainImage;
 	}
-	public void setProjectMainImage(String projectMainImage) {
+	public void setProjectMainImage(MultipartFile projectMainImage) {
 		this.projectMainImage = projectMainImage;
 	}
 	public String getCategory() {
-		return Category;
+		return category;
 	}
 	public void setCategory(String category) {
-		Category = category;
+		this.category = category;
 	}
 	public String getProjectSubTitle() {
 		return projectSubTitle;
@@ -100,10 +110,10 @@ public class ProjectVO {
 	public void setProjectCaution(String projectCaution) {
 		this.projectCaution = projectCaution;
 	}
-	public String getProjectVideo() {
+	public MultipartFile getProjectVideo() {
 		return projectVideo;
 	}
-	public void setProjectVideo(String projectVideo) {
+	public void setProjectVideo(MultipartFile projectVideo) {
 		this.projectVideo = projectVideo;
 	}
 	public String getSupporters() {
@@ -118,10 +128,10 @@ public class ProjectVO {
 	public void setFundingMoney(int fundingMoney) {
 		this.fundingMoney = fundingMoney;
 	}
-	public String getStatus() {
+	public char getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(char status) {
 		this.status = status;
 	}
 	public char getInformationAgree() {
@@ -148,17 +158,19 @@ public class ProjectVO {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	
 	@Override
 	public String toString() {
 		return "ProjectVO [projectNo=" + projectNo + ", creator=" + creator + ", email=" + email + ", projectTitle="
-				+ projectTitle + ", goalMoney=" + goalMoney + ", projectMainImage=" + projectMainImage + ", Category="
-				+ Category + ", projectSubTitle=" + projectSubTitle + ", projectStory=" + projectStory
+				+ projectTitle + ", goalMoney=" + goalMoney + ", projectMainImage=" + projectMainImage + ", category="
+				+ category + ", projectSubTitle=" + projectSubTitle + ", projectStory=" + projectStory
 				+ ", projectDetail=" + projectDetail + ", projectCaution=" + projectCaution + ", projectVideo="
 				+ projectVideo + ", supporters=" + supporters + ", fundingMoney=" + fundingMoney + ", status=" + status
 				+ ", informationAgree=" + informationAgree + ", projectKeyword=" + projectKeyword + ", startDate="
 				+ startDate + ", endDate=" + endDate + "]";
 	}
-
+	
+		
+	
+	
 	
 }
