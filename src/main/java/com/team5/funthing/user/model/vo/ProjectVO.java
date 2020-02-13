@@ -1,5 +1,6 @@
 package com.team5.funthing.user.model.vo;
 
+import java.io.File;
 import java.util.Date;
 
 /**
@@ -18,7 +19,7 @@ public class ProjectVO {
 	private String email;
 	private String projectTitle; 
 	private int goalMoney; // 펀딩 목표 금액
-	private String projectMainImage;
+	private File projectMainImage;
 	private String Category;
 	private String projectSubTitle;
 	private String projectStory; 
@@ -63,7 +64,7 @@ public class ProjectVO {
 	public void setGoalMoney(int goalMoney) {
 		this.goalMoney = goalMoney;
 	}
-	public String getProjectMainImage() {
+	public Fil getProjectMainImage() {
 		return projectMainImage;
 	}
 	public void setProjectMainImage(String projectMainImage) {
