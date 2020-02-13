@@ -24,6 +24,13 @@
 		    <version>1.4</version>
 		</dependency>
 		
+		<!-- commons-io -->
+		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.6</version>
+		</dependency>
+				
 	
 		<!-- javax.mail-api -->
 		<dependency>
@@ -39,9 +46,6 @@
 		    <version>1.4.7</version>
 		</dependency>
 			
-			
-	
-		
 		<!-- Commons Fileupload -->
 		<dependency>
 		    <groupId>commons-fileupload</groupId>
