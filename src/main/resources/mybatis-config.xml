@@ -8,6 +8,7 @@
 		<typeAlias type="com.team5.funthing.user.model.vo.MemberVO" alias="member"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.ProjectVO" alias="project"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.NoticeVO" alias="notice"/>
+		<typeAlias type="com.team5.funthing.user.model.vo.ProjectVO" alias="project"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/member-mapper.xml" />

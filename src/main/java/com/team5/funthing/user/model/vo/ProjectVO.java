@@ -15,31 +15,33 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class ProjectVO {
 	
-//	ÇÁ·ÎÁ§Æ® ±âº»¼³Á¤
+//	í”„ë¡œì íŠ¸ ê¸°ë³¸ì„¤ì •
 	private int projectNo;
-	private String creator; // Ã¢ÀÛÀÚ|¾÷Ã¼¸í
+	private String creator; // ì°½ì‘ì|ì—…ì²´ëª…
 	private String email;
 	
-//	ÇÁ·ÎÁ§Æ® ¼³Á¤
-	private int goalMoney; // Æİµù ¸ñÇ¥ ±İ¾×
+//	í”„ë¡œì íŠ¸ ì„¤ì •
+	private int goalMoney; // í€ë”© ëª©í‘œ ê¸ˆì•¡
+	private MultipartFile projectMainImage;
+	private String Category;
 	private String projectTitle;
 	private String projectSubTitle;
 	private MultipartFile projectMainImage;
 	private String category;
-	private Date startDate; // Æİµù ½ÃÀÛ ³¯Â¥
-	private Date endDate; // ¸¶°¨ ³¯Â¥
-	private String projectKeyword; // °Ë»ö ½Ã ÇÊ¿äÇÑ Å°¿öµå
+	private Date startDate; // í€ë”© ì‹œì‘ ë‚ ì§œ
+	private Date endDate; // ë§ˆê° ë‚ ì§œ
+	private String projectKeyword; // ê²€ìƒ‰ ì‹œ í•„ìš”í•œ í‚¤ì›Œë“œ
 	
-//	½ºÅä¸® ÀÛ¼º
+//	ìŠ¤í† ë¦¬ ì‘ì„±
 	private String projectStory; 
 	private String projectDetail;
 	private String projectCaution;
-	private MultipartFile projectVideo; // ¼Ò°³ ÄÁÅÙÃ÷ [ÃßÈÄ »çÁøµµ °¡´ÉÇÏ°Ô º¯°æ]
+	private MultipartFile projectVideo; // ì†Œê°œ ì»¨í…ì¸  [ì¶”í›„ ì‚¬ì§„ë„ ê°€ëŠ¥í•˜ê²Œ ë³€ê²½]
 
-	private String supporters; // ÈÄ¿øÀÚ
-	private int fundingMoney; // Æİµù ÁøÇàÁß ¸ğÀÎ ±İ¾×
-	private char status = 'w'; // ½É»ç »óÅÂ  'w'= ´ë±â 'p' = Åë°ú 'f' = °ÅºÎ
-	private char informationAgree = 'n'; // Á¤º¸µ¿ÀÇ
+	private String supporters; // í›„ì›ì
+	private int fundingMoney; // í€ë”© ì§„í–‰ì¤‘ ëª¨ì¸ ê¸ˆì•¡
+	private char status = 'w'; // ì‹¬ì‚¬ ìƒíƒœ  'w'= ëŒ€ê¸° 'p' = í†µê³¼ 'f' = ê±°ë¶€
+	private char informationAgree = 'n'; // ì •ë³´ë™ì˜
 	
 
 	public int getProjectNo() {

@@ -34,5 +34,21 @@ public class NoticeServiceImpl implements NoticeService {
 	public List<NoticeVO> selectNoticeList(NoticeVO vo) {
 		return noticeDao.selectNoticeList(vo);
 	}
+
+	@Override
+	public List<NoticeVO> selectEventNoticeList(NoticeVO vo) {
+		return noticeDao.selectEventNoticeList(vo);
+	}
+
+	@Override
+	public List<NoticeVO> selectEntireNoticeList(NoticeVO vo) {
+		return noticeDao.selectEntireNoticeList(vo);
+	}
+
+	@Override
+	public NoticeVO selectNotice(NoticeVO vo) {
+		return noticeDao.selectNotice(vo);
+	}
+	
 	
 }
