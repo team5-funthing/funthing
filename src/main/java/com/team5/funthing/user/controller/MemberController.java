@@ -16,6 +16,7 @@ public class MemberController {
 	@Autowired
 	private GetMemberService getMemberService;
 	
+	
 	@RequestMapping("getMember.udo")
 	public String getMember(MemberVO vo, Model model) {
 		System.out.println("MemberController ===> getMember 메서드 수행");
@@ -29,7 +30,7 @@ public class MemberController {
 		return "p-index";
 	}
 	
-	@RequestMapping("*.udo")
+	@RequestMapping("/*.udo")
 	public String showindex() {
 		return "p-index";
 	}
