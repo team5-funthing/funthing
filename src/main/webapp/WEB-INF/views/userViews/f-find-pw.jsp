@@ -111,8 +111,32 @@
                             </div>
                             <div class="mt-30">
                                 <h5>이메일 입력</h5>
-                                <input class="form-control form-control-lg" type="text" placeholder="이메일 입력"
+                               <input id="inputeamil" name="inputemail" class="form-control form-control-lg" type="text" placeholder="이메일 입력"
                                     onfocus="this.placeholder = ''" onblur="this.placeholder = '이메일 입력'" required
+                                    class="single-input">
+                         
+                                    <a class="btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
+                                    href="javascript:popup()">인증번호 보내기</a>
+                                    
+                    
+                                    <!-- 자바 팝업창 띄우기 메서드. -->
+								<script
+									src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+								<script>
+                                    
+                                     function popup(){                                     	
+                                    	 var email = $('#inputemail').val();
+                                    	 alert(email);
+                                    	// window.open("certification.udo?email="+email,"인증번호가 발송되었습니다.","width=100,height=50");
+                                    	 
+                                     }
+                                  
+                                    </script>
+							</div>
+                            <div class="mt-30">
+                                <h5>인증번호 입력</h5>
+                                <input class="form-control form-control-lg" type="text" placeholder="인증번호 입력"
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = '인증번호 입력'" required
                                     class="single-input">
                             </div>
                             <hr>
@@ -131,14 +155,15 @@
         </div>
     </div>
 
+   
     <!-- 로그인 팝업페이지-->
-    <form id="login-popup" class="white-popup-block mfp-hide">
+    <form id="login-popup" class="white-popup-block mfp-hide" action="loginMember.udo" method="post">
         <div class="popup_box ">
             <div class="popup_inner">
                 <h3>로그인</h3>
-                <form action="#">
+                
                     <div class="mt-10">
-                        <input type="text" name="id" placeholder="이메일 아이디" onfocus="this.placeholder = ''"
+                        <input type="text" name="email" placeholder="이메일 아이디" onfocus="this.placeholder = ''"
                             onblur="this.placeholder = '이메일 아이디'" required class="single-input">
                     </div>
                     <div class="mt-10">
@@ -146,7 +171,7 @@
                             onblur="this.placeholder = '비밀번호'" required class="single-input">
                     </div>
 
-
+                    
 
 
                     <div class="mt-10">
@@ -164,41 +189,38 @@
 
                             </div>
                             <div class="col-5">
-                                <a href="#">
-                                    <p>아이디|비밀번호 찾기</p>
-                                </a>
+                                <a href="#"><p>아이디|비밀번호 찾기</p></a>
                             </div>
                         </div>
 
                     </div>
 
                     <div class="col-xl-12 mt-10">
-
-                        <button type="submit" class="boxed-btn3"> 로그인하기 </button>
+                        
+                        <input type="submit" class="boxed-btn3" value="로그인하기 "> 
                     </div>
 
-                    <hr />
+                    <hr/>
 
                     <div class="col-xl-12 mt-10 kakao_login_btn-wrapper">
                         <a class="kakao_login_btn" href="#">
-                            <img class="landscape" src="img/apiBtn/naverLoginBtn/네이버 아이디로 로그인_완성형_White.PNG" />
+                            <img class="landscape" src="${pageContext.request.contextPath}/resources/user/img/apiBtn/naverLoginBtn/네이버 아이디로 로그인_완성형_White.PNG"/>
                         </a>
                     </div>
 
                     <div class="col-xl-12 mt-10 kakao_login_btn-wrapper">
                         <a class="kakao_login_btn" href="#">
-                            <img class="landscape"
-                                src="img/apiBtn/kakaoLoginBtn/kakao_account_login_btn_large_wide.png" />
+                            <img class="landscape" src="${pageContext.request.contextPath}/resources/user/img/apiBtn/kakaoLoginBtn/kakao_account_login_btn_large_wide.png"/>
                         </a>
                     </div>
 
                     <div class="mt-10">
                         아직 회원이 아니신가요?
                         <p class="registry-p">
-                            <a href="registry-way-select-form.html" class="line-button">FunThing 가입하기</a>
+                            <a href="joinselect.udo" class="line-button">FunThing 가입하기</a>
                         </p>
                     </div>
-                </form>
+               
             </div>
         </div>
     </form>

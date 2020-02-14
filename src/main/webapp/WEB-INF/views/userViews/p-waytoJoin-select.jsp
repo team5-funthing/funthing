@@ -111,7 +111,7 @@
                         <hr>
                         <div class="col-xl-12">
                             <a class="btn btn-registry-way d-none d-lg-inline-block p-4 mb-3 w-100"
-                                href="registry-form.html">이메일로 가입하기</a>
+                                href="emailJoin.udo">이메일로 가입하기</a>
                         </div>
                         <div class="d-flex align-self-center mt-10 w-100">
                             <div class="d-flex align-content-center">
@@ -124,10 +124,74 @@
                         <div class="col-xl-12 mt-10">
                             <button type="submit" class="big-btn">네이버 아이디로 회원가입</button>
                         </div>
-                        <div class="col-xl-12 mt-10">
+ <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+						<!-- 네이버아이디로로그인 버튼 노출 영역 -->
+						<div id="naver_id_login"></div>
+						<!-- //네이버아이디로로그인 버튼 노출 영역 -->
+						<script type="text/javascript">
+							var naver_id_login = new naver_id_login(
+									"bm_Jr_lzbfVgnsh6sEyX", "http://localhost:8080/funthing/naverjoin.udo");
+							var state = naver_id_login.getUniqState();
+							naver_id_login.setButton("green", 1, 69);
+							naver_id_login.setDomain("http://localhost:8080/");
+							naver_id_login.setState(state);
+							naver_id_login.init_naver_id_login();
+							
+			
+						</script>
+
+
+						<div class="col-xl-12 mt-10">
                             <button type="submit" class="big-btn">카카오 아이디로 회원가입</button>
                         </div>
-                        <hr>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+			
+							
+						<a id="custom-login-btn2" href="javascript:loginWithKakao()"> <img
+							src="${pageContext.request.contextPath}/resources/user/img/apiBtn/kakaoLoginBtn/kakao69.png"
+							width="68" />
+						</a>
+				
+						<script type='text/javascript'>
+							
+						    var id;
+						    var name;
+						    var email;
+						    var url = 'http://localhost:8080/funthing/naverjoin.udo';
+					
+							// 사용할 앱의 JavaScript 키를 설정해 주세요.
+							Kakao.init('05602e69457875d5bc6718b74ef34eb9');
+							function loginWithKakao() {
+
+								// 로그인 창을 띄웁니다.
+								Kakao.Auth.login({
+									success : function(json) {
+										//alert(json.access_token);
+										Kakao.API.request({
+											url : '/v2/user/me',
+											success : function(res) {
+												//alert(JSON.stringify(res));
+											
+												 id = res.id;
+												 name = res.properties.nickname;
+												 email = res.kakao_account.email;
+												 location.href=url+'?email='+email+'&password='+id+'&name='+name;
+	
+											},
+											fail : function(error) {
+												alert(JSON.stringify(error));
+											}
+										});
+
+									},
+									fail : function(err) {
+										alert(JSON.stringify(err));
+									}
+								});
+							};
+							
+						</script>
+						<hr>
                     </form>
                     <div class="mt-10">
                         이미 회원가입을 하셨나요?
@@ -144,14 +208,15 @@
     <!-- 회원가입 폼 end -->
 
 
+  
     <!-- 로그인 팝업페이지-->
-    <form id="login-popup" class="white-popup-block mfp-hide">
+    <form id="login-popup" class="white-popup-block mfp-hide" action="loginMember.udo" method="post">
         <div class="popup_box ">
             <div class="popup_inner">
                 <h3>로그인</h3>
-                <form action="#">
+                
                     <div class="mt-10">
-                        <input type="text" name="id" placeholder="이메일 아이디" onfocus="this.placeholder = ''"
+                        <input type="text" name="email" placeholder="이메일 아이디" onfocus="this.placeholder = ''"
                             onblur="this.placeholder = '이메일 아이디'" required class="single-input">
                     </div>
                     <div class="mt-10">
@@ -179,16 +244,13 @@
                             <div class="col-5">
                                 <a href="#"><p>아이디|비밀번호 찾기</p></a>
                             </div>
-
-
-
                         </div>
 
                     </div>
 
                     <div class="col-xl-12 mt-10">
                         
-                        <button type="submit" class="boxed-btn3"> 로그인하기 </button>
+                        <input type="submit" class="boxed-btn3" value="로그인하기 "> 
                     </div>
 
                     <hr/>
@@ -208,10 +270,10 @@
                     <div class="mt-10">
                         아직 회원이 아니신가요?
                         <p class="registry-p">
-                            <a href="registry-way-select-form.html" class="line-button">FunThing 가입하기</a>
+                            <a href="joinselect.udo" class="line-button">FunThing 가입하기</a>
                         </p>
                     </div>
-                </form>
+               
             </div>
         </div>
     </form>
