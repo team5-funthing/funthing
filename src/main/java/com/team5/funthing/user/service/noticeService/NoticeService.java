@@ -13,5 +13,9 @@ public interface NoticeService {
 	List<NoticeVO> selectEntireNoticeList(NoticeVO vo);
 	List<NoticeVO> selectEventNoticeList(NoticeVO vo);
 	NoticeVO selectNotice(NoticeVO vo);
+	List<NoticeVO> selectSearchNoticeList(NoticeVO vo);
+	int selectNoticeCount(NoticeVO vo);
+	
+	
 	
 }

@@ -48,4 +48,13 @@ public class NoticeDAO {
 		System.out.println("공지사항 상세 글 얻어오기");
 		return noticeSqlSessionTemplate.selectOne("NoticeDAO.selectNotice", vo);
 	}
+	
+	public List<NoticeVO> selectSearchNoticeList(NoticeVO vo){
+		System.out.println("공지사항 검색(제목)하여 목록 얻어오기");
+		return noticeSqlSessionTemplate.selectList("NoticeDAO.selectSearchNoticeList",	vo);
+	}
+	
+	public int selectNoticeCount(NoticeVO vo) {
+		return noticeSqlSessionTemplate.selectOne("NoticeDAO.selectNoticeCount",vo);
+	}
 }
