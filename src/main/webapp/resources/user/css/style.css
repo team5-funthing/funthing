@@ -5293,7 +5293,16 @@ img.landscape {
 #project-details-info h4{
     color: #000000;
 }
-/* 
-#project-details-info h4 h2{
-    font-weight: bolder;
-} */
+
+.select-project-Contents,
+.select-project-image {
+    font-weight: 600;
+    color: #7952b3;
+    border-color: #7952b3;
+}
+
+.btn-bd-primary:active, .btn-bd-primary:hover {
+    color: #fff;
+    background-color: #7952b3;
+    border-color: #7952b3;
+}

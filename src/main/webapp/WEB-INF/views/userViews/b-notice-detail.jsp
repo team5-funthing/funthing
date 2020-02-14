@@ -12,7 +12,7 @@
 <body>
 
     <jsp:include page="./include/i-popupover-mypage.jsp"/>
-    <jsp:include page="./include/i-header-login.jsp"/>
+    <jsp:include page="./include/i-header.jsp" />
 	
     <hr>
 
@@ -22,7 +22,7 @@
 
                 <div class="row">
                     <div class="col-10">
-                        <div class="h3">[공지 제목]</div>
+                        <div class="h3">${NoticeDetail.noticeTitle }</div>
                     </div>
                 </div>
                 <div class="row m-3">
@@ -32,14 +32,14 @@
                         </div>
                         <div class="d-flex align-items-end ml-2">
                             <div class="h6 login-id">
-                                FUNTHING관리자 [등록날짜]
+                                ${NoticeDetail.adminId} ${NoticeDetail.noticeDate}
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <aside>
-                    <div class="h4">[공지 내용들 올라올 위치]</div>
+                    <div class="h4">${NoticeDetail.noticeContents }</div>
 
                 </aside>
 
