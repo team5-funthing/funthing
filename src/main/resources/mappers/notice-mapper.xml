@@ -14,6 +14,22 @@
 		<result property="param3" column="columnname3" />
 	</resultMap> -->
 	
+	<select id="selectNoticeCount" resultType="int">
+		select count(*) as noticecount from notice
+	</select>
+	
+	<select id="selectSearchNoticeList" resultType="notice" parameterType="notice">
+		SELECT * 
+		FROM notice 
+		WHERE 1=1
+		<if test="noticeSearchCondition=='title'">
+			AND noticeTitle LIKE '%' || #{noticeSearchContent} || '%' 
+		</if>
+		<if test="noticeSearchCondition=='content'">
+			AND noticeContents LIKE '%' || #{noticeSearchContent} || '%'
+		</if>
+	</select>
+	
 	<select id="selectEventNoticeList" resultType="notice" parameterType="notice">
 		SELECT * FROM notice WHERE noticeCategory = #{noticeCategory}
 	</select>

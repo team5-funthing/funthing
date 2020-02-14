@@ -63,6 +63,7 @@
 			<param-value>/WEB-INF/config/userConfig/home-servlet.xml</param-value>
 			<param-value>/WEB-INF/config/userConfig/project-servlet.xml</param-value>
 			<param-value>/WEB-INF/config/userConfig/notice-servlet.xml</param-value>
+			<param-value>/WEB-INF/config/userConfig/board-servlet.xml</param-value>
 			<!-- 추가할 user 설정 파일 -->
 		</init-param>
 		<load-on-startup>1</load-on-startup>
