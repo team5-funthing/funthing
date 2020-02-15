@@ -7,4 +7,6 @@ public interface InsertProject {
 	 public void insertSocialMember(MemberVO vo);
 	 
 	 public void insertMember(MemberVO vo);
+	 
+	 public void saveImage(MemberVO vo);
 }

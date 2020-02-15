@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- header-start -->
 <header>
 	<div class="header-area">
@@ -44,11 +44,15 @@
 								<h2 class="logo">FUN THING</h2>
 							</a>
 						</div>
-					</div>
-
+					</div >
+						
+					<c:if test="${! empty sessionScope.memberSession }">
+					<jsp:include page="./i-header-nav-right-login-ok.jsp"/>
+					</c:if>
+					<c:if test="${empty sessionScope.memberSession }">
 					<jsp:include page="./i-header-nav-right-login-no.jsp"/>
-					<!-- 로그인 성공시 i-header-nav-right-login-ok.jsp 와 교체 해야한다. -->
-
+					</c:if>
+        
 				</div>
 			</div>
 		</div>

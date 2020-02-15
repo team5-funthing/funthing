@@ -22,4 +22,10 @@ public class InsertProjectImpl implements InsertProject {
 	   public void insertMember(MemberVO vo) {
 	      memberDAO.insertMember(vo);
 	   }
+
+	@Override
+	public void saveImage(MemberVO vo) {
+		memberDAO.saveImage(vo);
+		
+	}
 }

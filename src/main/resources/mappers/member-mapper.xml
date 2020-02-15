@@ -23,6 +23,12 @@
       INSERT INTO MEMBER (EMAIL,PASSWORD,NAME)
       VALUES(#{email},#{password},#{name})
    </insert>
+   
+   <insert id="saveImage" parameterType="member">
+   	INSERT INTO MEMBER (email,myImage)
+   	VALUES (#{email},#{myImage})
+   
+   </insert>
 <!-- 
 	<resultMap type="#modelname" id="YourResultSet">
 		<id property="param1" column="columnname1" />

@@ -18,7 +18,7 @@ public class MemberDAO {
 	}
 	
 	public void insertSocialMember(MemberVO vo) {
-		System.out.println("insertMember 실행");
+		System.out.println("insertSocialMember 실행");
 		System.out.println(vo.toString());
 		sqlSessionTemplate.insert("MemberDAO.insertSocialMember",vo);
 	}
@@ -34,4 +34,8 @@ public class MemberDAO {
 		      sqlSessionTemplate.insert("MemberDAO.insertMember", vo);
 		   }
 	
+	   public void saveImage(MemberVO vo) {
+		   System.out.println("saveImage 실행");
+		   sqlSessionTemplate.insert("MemberDAO.saveImage",vo);
+	   }
 }

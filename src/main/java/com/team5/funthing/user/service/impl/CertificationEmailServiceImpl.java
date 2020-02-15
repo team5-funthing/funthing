@@ -35,8 +35,8 @@ private MimeMessageHelper messageHelper;
 		SecureRandom random = new SecureRandom();
 		String certificationCode = new BigInteger(50, random).toString();
 		messageHelper.setSubject("[Funthing]본인확인 이메일 인증번호");
-		messageHelper.setText("<br><br><br><br><center><h3>인증코드 : <b><h3>"+certificationCode+
-				"</b><br><br><h4>위의 인증코드를 입력하여 주세요</center>");
+		messageHelper.setText("인증코드 : [ "+certificationCode+
+				" ]");
 		messageHelper.setFrom("funthing20@gmail.com","관리자");
 		messageHelper.setTo(vo.getEmail());
 		mailSender.send(message);
@@ -53,8 +53,8 @@ private MimeMessageHelper messageHelper;
 		SecureRandom random = new SecureRandom();
 		String certificationCode = new BigInteger(50, random).toString();
 		messageHelper.setSubject("[Funthing]본인확인 이메일 인증번호");
-		messageHelper.setText("<br><br><br><br><center><h3>인증코드 : <b><h3>"+certificationCode+
-				"</b><br><br><h4>위의 인증코드를 입력하여 주세요</center>");
+		messageHelper.setText("인증코드 : "+certificationCode+
+				"위의 인증코드를 입력하여 주세요</center>");
 		messageHelper.setFrom("funthing20@gmail.com","관리자");
 		messageHelper.setTo(vo.getEmail());
 		mailSender.send(message);
