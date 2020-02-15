@@ -17,8 +17,8 @@ public class ProjectDAO {
 		
 	}
 	
-	public void insertProject(ProjectVO vo) { // 입력/임시 저장 시에 사용 될 메서드
-		
+	public void insertProject(ProjectVO vo) { // 입력|임시 저장 시에 사용 될 메서드
+		sqlSessionTemplate.insert("ProjectDAO.insertProject", vo);
 	}
 	
 	public void updateProject(ProjectVO vo) {
@@ -28,6 +28,25 @@ public class ProjectDAO {
 	public void deleteProject(ProjectVO vo) {
 		
 	}
+	
+	public ProjectVO getProejct(ProjectVO vo) {
+		return sqlSessionTemplate.selectOne("ProjectDAO.getProject", vo);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

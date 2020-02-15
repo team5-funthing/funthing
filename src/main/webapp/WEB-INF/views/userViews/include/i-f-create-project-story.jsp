@@ -29,39 +29,29 @@
 		<label for="projectAgreeField">동의를 진행해야 스토리작성이 가능합니다.</label>
 		<div class="row">
 			<div class="col">
-		<p>공통 표시 광고 가이드라인</p>
-		<p>식품 표시 광고 가이드라인</p>
-		<p>화장품 표시 광고 가이드라인</p>
-		<p>건강보조기구 표시 광고 가이드 라인</p>
-		
-		<p>//체크 동의 완료시</p>
-		<p>[동의 완료] [동의 날짜 시간 ]</p>
-		<p>[동의한 회원 정보]</p>
+				<p>공통 표시 광고 가이드라인</p>
+				<p>식품 표시 광고 가이드라인</p>
+				<p>화장품 표시 광고 가이드라인</p>
+				<p>건강보조기구 표시 광고 가이드 라인</p>
+				
+				<p>//체크 동의 완료시</p>
+				<p>[동의 완료] [동의 날짜 시간 ]</p>
+				<p>[동의한 회원 정보]</p>
 			</div>
 		</div>
-
-		
 	</div>
 </div>
 <div class="p-2 bd-highlight">
-
-	<script type="text/javascript">
-		var oEditors = [];
-		nhn.husky.EZCreator.createInIFrame({
-		 oAppRef: oEditors,
-		 elPlaceHolder: "ir1",
-		 sSkinURI: "./include/se2/SmartEditor2Skin.html",
-		 fCreator: "createSEditor2"
-		});
-	</script>
 	
+
 	<span>프로젝트 스토리*</span>
-	<textarea name="ir1" id="ir1" rows="10" cols="100">스마트 에디터 테스트</textarea>
-	<!-- smart editor 2 -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/common/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+	<div class="w-100" id="editor">
+		<p>테스트 내용 </p>
+	</div>
 	
 </div>
 
+<script src="${pageContext.request.contextPath}/resources/common/js/ckeditor.js"></script>
 
 
 

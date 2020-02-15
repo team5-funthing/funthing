@@ -5,7 +5,9 @@
 <mapper namespace="ProjectDAO">
 
 	<select id="getProject" parameterType="project" resultType="project">
-
+		SELECT * 
+		FROM project
+		WHERE projectno = #{projectNo}
 	</select>
 	
 <!-- 
@@ -15,12 +17,27 @@
 		<result property="param3" column="columnname3" />
 	</resultMap>
 
-	<select id="getAll" resultMap="YourResultSet">
-		SELECT * FROM tablename1
+
+	<select id="getProjectList" resultMap="YourResultSet">
+		
 	</select>
+	
 -->
 
-	<insert id="insertSomething" parameterType="project">
+	<insert id="insertProject" parameterType="project">
+		
+
+		<if test="projectNo == -1">
+			INSERT INTO project(projectNo, creator, email, projectTitle, goalMoney, category, projectSubTitle, projectstory, projectdetail, projectcaution, status, informationagree, startdate, enddate, writestatus)
+			VALUES ((SELECT nvl(max(projectNo), 0) + 1 from project), #{creator}, #{email}, #{projectTitle}, #{goalMoney}, #{category}, #{projectSubTitle}, #{projectStory}, #{projectDetail}, #{projectCaution}, #{status}, #{informationAgree}, #{startDate}, #{endDate}, #{writeStatus})
+		</if>
+		<if test="projectNo != -1">
+			INSERT INTO project(creator, projecttitle, goalmoney, category, projectsubtitle, projectstory, projectdetail, projectcaution, status, informationagree, startdate, enddate, writestatus)
+			VALUES (#{creator}, #{projectTitle}, #{goalMoney}, #{category}, #{projectSubTitle}, #{projectStory}, #{projectDetail}, #{projectCaution}, #{status}, #{informationAgree}, #{startDate}, #{endDate}, #{writeStatus})
+		</if>
+		
+		
+				
 	</insert>
 	
 <!--
