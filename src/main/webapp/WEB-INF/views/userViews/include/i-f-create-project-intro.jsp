@@ -67,6 +67,9 @@
 		<div class="input-group mb-3">
 			<div class="form-group">
 				<label for="projectMainImageFile">대표 이미지 선택하기</label>
+			
+					<input type="file" name="projectMainImageFile" class="form-control-file select-project-image"
+						id="projectMainImageFile">
 				<!-- 
 				<c:choose>
 					<c:when test="${writingProject.projectMainImage eq null}">
@@ -119,7 +122,7 @@
 		</div>
 		<div class="row d-flex align-items-center">
 			<div class="col-xl-12 d-flex flex-wrap">
-				<ul id="addedKeyords">
+				<ul id="addedKeywords">
 					<c:choose>
 						<c:when test="${writingProject.projectKeyword eq null }">
 							
@@ -131,7 +134,6 @@
 						</c:when>
 					</c:choose>
 				</ul>
-				
 			</div>
 		</div>
 	

@@ -5,17 +5,18 @@ import org.springframework.stereotype.Service;
 
 import com.team5.funthing.user.model.dao.ProjectDAO;
 import com.team5.funthing.user.model.vo.ProjectVO;
-import com.team5.funthing.user.service.projectService.InsertProjectService;
+import com.team5.funthing.user.service.projectService.GetProjectService;
 
 @Service
-public class InsertProjectServiceImpl implements InsertProjectService {
-	
+public class GetProjectServiceImpl implements GetProjectService {
+
 	@Autowired
 	private ProjectDAO projectDAO;
-		
+	
 	@Override
-	public void insertProject(ProjectVO vo) {
-		projectDAO.insertProject(vo);
+	public ProjectVO getProject(ProjectVO vo) {
+		
+		return projectDAO.getProejct(vo);
 	}
 
 }

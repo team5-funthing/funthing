@@ -34,6 +34,9 @@
     <script src="${pageContext.request.contextPath}/resources/user/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/user/js/jquery.gpopover.js"></script>
     <script src="https://kit.fontawesome.com/7a424ad03a.js" crossorigin="anonymous"></script>
+  
+  	<!--  CKEditor5 -->
+  	<script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/classic/ckeditor.js"></script>
     
       <script>
         $(function () {
@@ -59,13 +62,27 @@
 	        	
 	        	
 	        	if(toAddKeyword != null){
-	        		$("#addedKeyords").append(
+	        		$("#addedKeywords").append(
 	        				"<li>" + toAddKeyword + "</li> <input type='hidden' name='projectKeyword' value='" + toAddKeyword + "'>");
 
 	        	}
         	})
         })
         
+        $(function (){
+        	
+        	$("#removeKeywordBtn").removeAttr("href")
+        	$("#removeKeywordBtn").click(function(){
+	        	
+	        	var toAddKeyword = $("input[name=projectKeyword]").val();
+	        	
+	        	if(toAddKeyword != null){
+	        		$("#addedKeywords").append(
+	        				"<li>" + toAddKeyword + "</li> <input type='hidden' name='projectKeyword' value='" + toAddKeyword + "'>");
+
+	        	}
+        	})
+        })
         
     </script>
     

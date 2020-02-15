@@ -23,8 +23,11 @@
     
     <c:if test="${msg ne null }">
     	<script>
-    		alert("${msg }");
+    		alert("${msg }, ${writingProject.writeStatus }");
     	</script>
+    	
+    	
+    	
     </c:if>
     
 	<section class="main-wrapper pt-xl-5 pb-5 ">
@@ -36,10 +39,9 @@
 			<div class="container">
 				<div class="row">
 					<div class="col"></div>
-					<div class="col-8">
+					<div class="col-10">
 						<h3 class="mb-4">프로젝트 등록 폼</h3>
-
-						<form action="insertProject.udo" id="tempStorageForm" method="POST" >
+						<form action="insertProject.udo?" id="tempStorageForm" method="POST">
 					<!-- <form action="insertProject.udo" id="tempStorageForm" method="POST" enctype="multi/form-data"> -->
 							<div class="row">
 								<div class="col-3">
@@ -56,8 +58,8 @@
 											aria-selected="false">스토리</a>
 										<a class="nav-link" id="v-pills-settings-tab" data-toggle="pill"
 											href="#v-pills-settings" role="tab" aria-controls="v-pills-settings"
-											aria-selected="false">창작자 정보</a>
-
+											aria-selected="false">리워드 설계</a>
+								
 										<div class="col-xl-12 mt-10 d-flex justify-items-center">
 											<a class="btn btn-lg btn-registry-way d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
 												href="#">작성완료</a>
@@ -69,7 +71,6 @@
 											</a>
 										</div>
 									</div>
-
 								</div>
 
 								<div class="col-9">
@@ -90,7 +91,7 @@
 										</div>
 										<div class="tab-pane fade" id="v-pills-settings" role="tabpanel"
 											aria-labelledby="v-pills-settings-tab">
-											<jsp:include page="./include/i-f-create-project-guid.jsp" />
+											<jsp:include page="./include/i-f-create-project-reward.jsp" />
 										</div>
 									</div>
 								</div>
@@ -106,9 +107,10 @@
 	<jsp:include page="./include/i-footer.jsp"></jsp:include>
 	<jsp:include page="./include/i-popup-login.jsp"></jsp:include>
 	<jsp:include page="./include/i-popup-search.jsp"></jsp:include>
+	<jsp:include page="./include/i-popup-addReward.jsp"></jsp:include>	
 	<jsp:include page="./include/i-body-js.jsp"></jsp:include>
 	<jsp:include page="./include/i-js-datePicker.jsp"></jsp:include>
-	
+
 
 
 </body>
