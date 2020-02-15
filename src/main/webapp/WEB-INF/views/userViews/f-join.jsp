@@ -4,6 +4,7 @@
 <html class="no-js" lang="zxx">
 
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Montana</title>
@@ -107,7 +108,7 @@
                 </div>
                 <div class="col">
                     <div class="col align-self-center">
-                        <form action="#">
+                        <form action="successjoin.udo">
                             <div class="mt-10">
                                 <h2>회원가입</h2>
                             </div>
@@ -118,12 +119,18 @@
                             </div>
                             <div class="mt-10">
                                 <h5>이메일 입력</h5>
-                                <input type="email" name="email" placeholder="이메일 입력" onfocus="this.placeholder = ''"
-                                    onblur="this.placeholder = '이메일 입력'" required class="single-input">
+                                <input type="email" id="email_check" name="email_check" placeholder="이메일 입력" onfocus="this.placeholder = ''"
+                                    onblur="this.placeholder = '이메일 입력'" required class="single-input" >
+                                 
+                            	<div class="single-input" id="emailcheck"></div>
+                            </div>
+                            
+                          	<div class="col-xl-12 mt-10">
+                                <button type="button" class="boxed-btn3" onclick=""> 이메일확인 </button>
                             </div>
                             <div class="mt-10">
-                                <input type="email" name="emailCheck" placeholder="이메일 입력를 다시 입력하세요"
-                                    onfocus="this.placeholder = ''" onblur="this.placeholder = '이메일 입력를 다시 입력하세요'"
+                                <input type="email" name="emailCheck" placeholder="인증번호를 입력하세요"
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = '인증번호를 입력하세요'"
                                     required class="single-input">
                             </div>
                             <div class="mt-10">
@@ -138,11 +145,11 @@
                                     class="single-input">
                             </div>
                             <div class="col-xl-12 mt-10">
-                                <button type="submit" class="boxed-btn3"> 완료 </button>
+                                <button type="submit" id="reg_submit" class="boxed-btn3"> 완료 </button>
                             </div>
                             <div class="mt-10">
                                 <a class="btn btn-registry-way d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
-                                    href="registry-way-select-form.html">뒤로가기</a>
+                                    href="joinselect.udo">뒤로가기</a>
                             </div>
                             <hr>
                         </form>
@@ -204,17 +211,16 @@
     <!-- form itself end -->
 
     <!-- 로그인 팝업페이지-->
-    <form id="login-popup" class="white-popup-block mfp-hide">
+   <form id="login-popup" class="white-popup-block mfp-hide" action="#" method="post">
         <div class="popup_box ">
             <div class="popup_inner">
                 <h3>로그인</h3>
-                <form action="#">
                     <div class="mt-10">
-                        <input type="text" name="id" placeholder="이메일 아이디" onfocus="this.placeholder = ''"
+                        <input type="text" id="login-id" name="email" placeholder="이메일 아이디" onfocus="this.placeholder = ''"
                             onblur="this.placeholder = '이메일 아이디'" required class="single-input">
                     </div>
                     <div class="mt-10">
-                        <input type="password" name="password" placeholder="비밀번호" onfocus="this.placeholder = ''"
+                        <input type="password" id="#login-pw" name="password" placeholder="비밀번호" onfocus="this.placeholder = ''"
                             onblur="this.placeholder = '비밀번호'" required class="single-input">
                     </div>
 
@@ -236,41 +242,38 @@
 
                             </div>
                             <div class="col-5">
-                                <a href="#"><p>아이디|비밀번호 찾기</p></a>
+                                <a href="findidpassword.udo"><p>아이디|비밀번호 찾기</p></a>
                             </div>
-
-
-
                         </div>
 
                     </div>
 
                     <div class="col-xl-12 mt-10">
                         
-                        <button type="submit" class="boxed-btn3"> 로그인하기 </button>
+                        <button class="boxed-btn3" onclick="loginMember.udo"> 로그인하기 </button>
+                        
                     </div>
 
                     <hr/>
 
                     <div class="col-xl-12 mt-10 kakao_login_btn-wrapper">
                         <a class="kakao_login_btn" href="#">
-                            <img class="landscape" src="img/apiBtn/naverLoginBtn/네이버 아이디로 로그인_완성형_White.PNG"/>
+                            <img class="landscape" src="${pageContext.request.contextPath}/resources/user/img/apiBtn/naverLoginBtn/네이버 아이디로 로그인_완성형_White.PNG"/>
                         </a>
                     </div>
 
                     <div class="col-xl-12 mt-10 kakao_login_btn-wrapper">
                         <a class="kakao_login_btn" href="#">
-                            <img class="landscape" src="img/apiBtn/kakaoLoginBtn/kakao_account_login_btn_large_wide.png"/>
+                            <img class="landscape" src="${pageContext.request.contextPath}/resources/user/img/apiBtn/kakaoLoginBtn/kakao_account_login_btn_large_wide.png"/>
                         </a>
                     </div>
 
                     <div class="mt-10">
                         아직 회원이 아니신가요?
                         <p class="registry-p">
-                            <a href="registry-way-select-form.html" class="line-button">FunThing 가입하기</a>
+                            <a href="joinselect.udo" class="line-button">FunThing 가입하기</a>
                         </p>
                     </div>
-                </form>
             </div>
         </div>
     </form>
@@ -385,7 +388,11 @@
     <script src="${pageContext.request.contextPath}/resources/user/js/jquery.magnific-popup.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/user/js/plugins.js"></script>
     <script src="${pageContext.request.contextPath}/resources/user/js/gijgo.min.js"></script>
-
+	
+	<!-- ajax하늘이가만든 js -->
+	<script src="${pageContext.request.contextPath}/resources/user/js/joinajax.js"></script>
+	
+	
     <!--contact js-->
     <script src="${pageContext.request.contextPath}/resources/user/js/contact.js"></script>
     <script src="${pageContext.request.contextPath}/resources/user/js/jquery.ajaxchimp.min.js"></script>

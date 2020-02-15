@@ -5,10 +5,26 @@
 <mapper namespace="MemberDAO">
 
 	<select id="getMember" parameterType="member" resultType="member">
-		SELECT * 
-		FROM member 
-		WHERE email= #{email}
+		SELECT * FROM member 
 	</select>
+	
+	<select id="loginMember" parameterType="member" resultType="member">
+		SELECT * FROM MEMBER WHERE EMAIL = #{email}
+	</select>
+	
+	<insert id="insertMember" parameterType="member">
+		INSERT INTO MEMBER (EMAIL,PASSWORD,NAME)
+		VALUES(#{email},#{password},#{name})
+	</insert>
+	
+	<select id="loginCheck" parameterType="member" resultType="member">
+		SELECT * FROM MEMBER WHERE EMAIL = #{email}
+	</select>
+	
+	<select id= "regEmailCheck" parameterType="String" resultType="int">
+		SELECT count(*) FROM MEMBER WHERE EMAIL = #{email}
+	</select>	
+	
 <!-- 
 	<resultMap type="#modelname" id="YourResultSet">
 		<id property="param1" column="columnname1" />

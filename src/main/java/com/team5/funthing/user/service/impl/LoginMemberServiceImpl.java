@@ -5,18 +5,18 @@ import org.springframework.stereotype.Service;
 
 import com.team5.funthing.user.model.dao.MemberDAO;
 import com.team5.funthing.user.model.vo.MemberVO;
-import com.team5.funthing.user.service.GetMemberService;
+import com.team5.funthing.user.service.LoginMemberService;
 
 @Service
-public class GetMemberServiceImpl implements GetMemberService {
-
+public class LoginMemberServiceImpl implements LoginMemberService {
+	
 	@Autowired
 	private MemberDAO memberDAO;
 	
 	@Override
-	public MemberVO getMember(MemberVO vo) {
-		return memberDAO.getMember(vo);
+	public MemberVO loginMember(MemberVO vo) {
+		
+		return memberDAO.loginMember(vo);
 	}
-	
 
 }

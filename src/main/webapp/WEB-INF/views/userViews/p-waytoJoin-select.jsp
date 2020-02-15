@@ -111,7 +111,7 @@
                         <hr>
                         <div class="col-xl-12">
                             <a class="btn btn-registry-way d-none d-lg-inline-block p-4 mb-3 w-100"
-                                href="registry-form.html">이메일로 가입하기</a>
+                                href="emailjoin.udo">이메일로 가입하기</a>
                         </div>
                         <div class="d-flex align-self-center mt-10 w-100">
                             <div class="d-flex align-content-center">
@@ -122,11 +122,29 @@
                         </div>
                         <hr />
                         <div class="col-xl-12 mt-10">
-                            <button type="submit" class="big-btn">네이버 아이디로 회원가입</button>
+                            <button type="button" onclick="" class="big-btn">네이버 아이디로 회원가입</button>
                         </div>
                         <div class="col-xl-12 mt-10">
-                            <button type="submit" class="big-btn">카카오 아이디로 회원가입</button>
-                        </div>
+                            <button type="button" onclick="javascript:loginWithKakao()" class="big-btn">카카오 아이디로 회원가입</button>
+							<a id="kakao-login-btn"></a> <a
+								href="http://developers.kakao.com/logout"></a>
+							<script type='text/javascript'>
+					
+								Kakao.init('05602e69457875d5bc6718b74ef34eb9');
+								function loginWithKakao() {
+									// 로그인 창을 띄웁니다.
+									Kakao.Auth.login({
+										success : function(authObj) {
+											alert(JSON.stringify(authObj));
+										},
+										fail : function(err) {
+											alert(JSON.stringify(err));
+										}
+									});
+								};
+					
+							</script>
+						</div>
                         <hr>
                     </form>
                     <div class="mt-10">
@@ -145,22 +163,18 @@
 
 
     <!-- 로그인 팝업페이지-->
-    <form id="login-popup" class="white-popup-block mfp-hide">
+   <form id="login-popup" class="white-popup-block mfp-hide" action="#" method="post">
         <div class="popup_box ">
             <div class="popup_inner">
                 <h3>로그인</h3>
-                <form action="#">
                     <div class="mt-10">
-                        <input type="text" name="id" placeholder="이메일 아이디" onfocus="this.placeholder = ''"
+                        <input type="text" id="login-id" name="email" placeholder="이메일 아이디" onfocus="this.placeholder = ''"
                             onblur="this.placeholder = '이메일 아이디'" required class="single-input">
                     </div>
                     <div class="mt-10">
-                        <input type="password" name="password" placeholder="비밀번호" onfocus="this.placeholder = ''"
+                        <input type="password" id="#login-pw" name="password" placeholder="비밀번호" onfocus="this.placeholder = ''"
                             onblur="this.placeholder = '비밀번호'" required class="single-input">
                     </div>
-
-                    
-
 
                     <div class="mt-10">
                         <div class="row">
@@ -177,18 +191,16 @@
 
                             </div>
                             <div class="col-5">
-                                <a href="#"><p>아이디|비밀번호 찾기</p></a>
+                                <a href="findidpassword.udo"><p>아이디|비밀번호 찾기</p></a>
                             </div>
-
-
-
                         </div>
 
                     </div>
 
                     <div class="col-xl-12 mt-10">
                         
-                        <button type="submit" class="boxed-btn3"> 로그인하기 </button>
+                        <button class="boxed-btn3" onclick="loginMember.udo"> 로그인하기 </button>
+                        
                     </div>
 
                     <hr/>
@@ -208,10 +220,9 @@
                     <div class="mt-10">
                         아직 회원이 아니신가요?
                         <p class="registry-p">
-                            <a href="registry-way-select-form.html" class="line-button">FunThing 가입하기</a>
+                            <a href="joinselect.udo" class="line-button">FunThing 가입하기</a>
                         </p>
                     </div>
-                </form>
             </div>
         </div>
     </form>

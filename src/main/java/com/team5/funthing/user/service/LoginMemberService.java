@@ -2,9 +2,7 @@ package com.team5.funthing.user.service;
 
 import com.team5.funthing.user.model.vo.MemberVO;
 
-public interface GetMemberService {
+public interface LoginMemberService {
 	
-	public MemberVO getMember(MemberVO vo);
-	
-	
+	public MemberVO loginMember(MemberVO vo);
 }

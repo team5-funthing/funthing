@@ -18,4 +18,30 @@ public class MemberDAO {
 	}
 	
 	
+	public void insertMember (MemberVO vo) {
+		System.out.println("insertMember 角青");
+		sqlSessionTemplate.insert("MemberDAO.insertMember", vo);
+	}
+	
+	public MemberVO loginMember(MemberVO vo) {
+		System.out.println("loginMember 角青");
+		return sqlSessionTemplate.selectOne("MemberDAO.loginMember", vo);
+		
+	}
+	
+	public MemberVO loginCheck(MemberVO vo) {
+		System.out.println("loginCheck 角青");
+		return sqlSessionTemplate.selectOne("MemberDAO.loginCheck", vo);
+	}
+
+
+	public int regEmailCheck(String email) {
+		System.out.println("regEmailCheck 角青");
+		return 0;
+	}
+
+
+	
+	
+	
 }

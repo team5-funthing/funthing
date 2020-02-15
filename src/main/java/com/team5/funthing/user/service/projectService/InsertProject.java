@@ -1,5 +1,8 @@
 package com.team5.funthing.user.service.projectService;
 
-public interface InsertProject {
+import com.team5.funthing.user.model.vo.MemberVO;
 
+public interface InsertProject {
+	
+	public void insertMember(MemberVO vo);
 }

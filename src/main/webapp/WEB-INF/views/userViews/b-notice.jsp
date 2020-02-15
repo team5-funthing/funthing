@@ -358,17 +358,16 @@
     </footer>
 
     <!-- 로그인 팝업페이지-->
-    <form id="login-popup" class="white-popup-block mfp-hide">
+   <form id="login-popup" class="white-popup-block mfp-hide" action="#" method="post">
         <div class="popup_box ">
             <div class="popup_inner">
                 <h3>로그인</h3>
-                <form action="#">
                     <div class="mt-10">
-                        <input type="text" name="id" placeholder="이메일 아이디" onfocus="this.placeholder = ''"
+                        <input type="text" id="login-id" name="email" placeholder="이메일 아이디" onfocus="this.placeholder = ''"
                             onblur="this.placeholder = '이메일 아이디'" required class="single-input">
                     </div>
                     <div class="mt-10">
-                        <input type="password" name="password" placeholder="비밀번호" onfocus="this.placeholder = ''"
+                        <input type="password" id="#login-pw" name="password" placeholder="비밀번호" onfocus="this.placeholder = ''"
                             onblur="this.placeholder = '비밀번호'" required class="single-input">
                     </div>
 
@@ -390,41 +389,38 @@
 
                             </div>
                             <div class="col-5">
-                                <a href="#"><p>아이디|비밀번호 찾기</p></a>
+                                <a href="findidpassword.udo"><p>아이디|비밀번호 찾기</p></a>
                             </div>
-
-
-
                         </div>
 
                     </div>
 
                     <div class="col-xl-12 mt-10">
                         
-                        <button type="submit" class="boxed-btn3"> 로그인하기 </button>
+                        <button class="boxed-btn3" onclick="loginMember.udo"> 로그인하기 </button>
+                        
                     </div>
 
                     <hr/>
 
                     <div class="col-xl-12 mt-10 kakao_login_btn-wrapper">
                         <a class="kakao_login_btn" href="#">
-                            <img class="landscape" src="img/apiBtn/naverLoginBtn/네이버 아이디로 로그인_완성형_White.PNG"/>
+                            <img class="landscape" src="${pageContext.request.contextPath}/resources/user/img/apiBtn/naverLoginBtn/네이버 아이디로 로그인_완성형_White.PNG"/>
                         </a>
                     </div>
 
                     <div class="col-xl-12 mt-10 kakao_login_btn-wrapper">
                         <a class="kakao_login_btn" href="#">
-                            <img class="landscape" src="img/apiBtn/kakaoLoginBtn/kakao_account_login_btn_large_wide.png"/>
+                            <img class="landscape" src="${pageContext.request.contextPath}/resources/user/img/apiBtn/kakaoLoginBtn/kakao_account_login_btn_large_wide.png"/>
                         </a>
                     </div>
 
                     <div class="mt-10">
                         아직 회원이 아니신가요?
                         <p class="registry-p">
-                            <a href="registry-way-select-form.html" class="line-button">FunThing 가입하기</a>
+                            <a href="joinselect.udo" class="line-button">FunThing 가입하기</a>
                         </p>
                     </div>
-                </form>
             </div>
         </div>
     </form>
