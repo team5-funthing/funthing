@@ -15,7 +15,6 @@ public class CreateProjectServiceImpl implements CreateProjectService {
 
 	@Override
 	public int createProject(ProjectVO vo) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
