@@ -1,6 +1,10 @@
 package com.team5.funthing.user.model.vo;
 
 import java.util.Date;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 
@@ -10,29 +14,46 @@ import java.util.Date;
  *  
  *
  */
-
+@Component
 public class ProjectVO {
 	
+//	프로젝트 기본설정 멤버
 	private int projectNo;
-	private String creator; // 창작자
+	private String creator; 
 	private String email;
-	private String projectTitle; 
-	private int goalMoney; // 펀딩 목표 금액
-	private String projectMainImage;
-	private String Category;
+	
+//	프로젝트 설정 멤버
+	private int goalMoney; 
+	private MultipartFile projectMainImage;
+	private String projectTitle;
 	private String projectSubTitle;
+	private String category;
+	private Date startDate; 
+	private Date endDate;
+	private List<String> projectKeyword; 
+	
+//	프로젝트 소개 멤버
 	private String projectStory; 
+	private String projectSummary;
 	private String projectDetail;
 	private String projectCaution;
-	private String projectVideo; 
-	private String supporters; // 후원자
-	private int fundingMoney; // 펀딩 진행중 모인 금액
-	private String status = "작성중"; // 심사 상태 
-	private char informationAgree = 'n'; // 정보동의
-	private String projectKeyword; // 검색 시 필요한 키워드
-	private Date startDate; // 펀딩 시작 날짜
-	private Date endDate; // 마감 날짜
+	private MultipartFile projectVideo; 
+
+//	그 외 멤버
+	private String supporters; 
+	private int fundingMoney; 
+	private char status = 'w'; 
+	private char informationAgree = 'n'; 
+	private char writeStatus = 'n';
 	
+	
+	
+	public String getProjectSummary() {
+		return projectSummary;
+	}
+	public void setProjectSummary(String projectSummary) {
+		this.projectSummary = projectSummary;
+	}
 	public int getProjectNo() {
 		return projectNo;
 	}
@@ -51,35 +72,53 @@ public class ProjectVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getProjectTitle() {
-		return projectTitle;
-	}
-	public void setProjectTitle(String projectTitle) {
-		this.projectTitle = projectTitle;
-	}
 	public int getGoalMoney() {
 		return goalMoney;
 	}
 	public void setGoalMoney(int goalMoney) {
 		this.goalMoney = goalMoney;
 	}
-	public String getProjectMainImage() {
+	public MultipartFile getProjectMainImage() {
 		return projectMainImage;
 	}
-	public void setProjectMainImage(String projectMainImage) {
+	public void setProjectMainImage(MultipartFile projectMainImage) {
 		this.projectMainImage = projectMainImage;
 	}
-	public String getCategory() {
-		return Category;
+	public String getProjectTitle() {
+		return projectTitle;
 	}
-	public void setCategory(String category) {
-		Category = category;
+	public void setProjectTitle(String projectTitle) {
+		this.projectTitle = projectTitle;
 	}
 	public String getProjectSubTitle() {
 		return projectSubTitle;
 	}
 	public void setProjectSubTitle(String projectSubTitle) {
 		this.projectSubTitle = projectSubTitle;
+	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	public Date getStartDate() {
+		return startDate;
+	}
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+	public Date getEndDate() {
+		return endDate;
+	}
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+	public List<String> getProjectKeyword() {
+		return projectKeyword;
+	}
+	public void setProjectKeyword(List<String> projectKeyword) {
+		this.projectKeyword = projectKeyword;
 	}
 	public String getProjectStory() {
 		return projectStory;
@@ -99,10 +138,10 @@ public class ProjectVO {
 	public void setProjectCaution(String projectCaution) {
 		this.projectCaution = projectCaution;
 	}
-	public String getProjectVideo() {
+	public MultipartFile getProjectVideo() {
 		return projectVideo;
 	}
-	public void setProjectVideo(String projectVideo) {
+	public void setProjectVideo(MultipartFile projectVideo) {
 		this.projectVideo = projectVideo;
 	}
 	public String getSupporters() {
@@ -117,10 +156,10 @@ public class ProjectVO {
 	public void setFundingMoney(int fundingMoney) {
 		this.fundingMoney = fundingMoney;
 	}
-	public String getStatus() {
+	public char getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(char status) {
 		this.status = status;
 	}
 	public char getInformationAgree() {
@@ -129,35 +168,23 @@ public class ProjectVO {
 	public void setInformationAgree(char informationAgree) {
 		this.informationAgree = informationAgree;
 	}
-	public String getProjectKeyword() {
-		return projectKeyword;
+	public char getWriteStatus() {
+		return writeStatus;
 	}
-	public void setProjectKeyword(String projectKeyword) {
-		this.projectKeyword = projectKeyword;
+	public void setWriteStatus(char writeStatus) {
+		this.writeStatus = writeStatus;
 	}
-	public Date getStartDate() {
-		return startDate;
-	}
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-	public Date getEndDate() {
-		return endDate;
-	}
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
-	
 	@Override
 	public String toString() {
-		return "ProjectVO [projectNo=" + projectNo + ", creator=" + creator + ", email=" + email + ", projectTitle="
-				+ projectTitle + ", goalMoney=" + goalMoney + ", projectMainImage=" + projectMainImage + ", Category="
-				+ Category + ", projectSubTitle=" + projectSubTitle + ", projectStory=" + projectStory
+		return "ProjectVO [projectNo=" + projectNo + ", creator=" + creator + ", email=" + email + ", goalMoney="
+				+ goalMoney + ", projectMainImage=" + projectMainImage + ", projectTitle=" + projectTitle
+				+ ", projectSubTitle=" + projectSubTitle + ", category=" + category + ", startDate=" + startDate
+				+ ", endDate=" + endDate + ", projectKeyword=" + projectKeyword + ", projectStory=" + projectStory
 				+ ", projectDetail=" + projectDetail + ", projectCaution=" + projectCaution + ", projectVideo="
 				+ projectVideo + ", supporters=" + supporters + ", fundingMoney=" + fundingMoney + ", status=" + status
-				+ ", informationAgree=" + informationAgree + ", projectKeyword=" + projectKeyword + ", startDate="
-				+ startDate + ", endDate=" + endDate + "]";
+				+ ", informationAgree=" + informationAgree + ", writeStatus=" + writeStatus + "]";
 	}
 
+	
 	
 }

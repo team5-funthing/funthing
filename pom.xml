@@ -16,6 +16,7 @@
 		
 	<dependencies>
 	
+<<<<<<< HEAD
 		
 	
 		<!-- 메일 관련 api    천기웅 수정! 시작 -->
@@ -33,11 +34,34 @@
 			
 	
 		
+=======
+		<!-- javax.mail-api -->
+		<dependency>
+		    <groupId>javax.mail</groupId>
+		    <artifactId>javax.mail-api</artifactId>
+		    <version>1.6.2</version>
+		</dependency>
+		
+		<!-- javax.mail -->
+		<dependency>
+		    <groupId>javax.mail</groupId>
+		    <artifactId>mail</artifactId>
+		    <version>1.4.7</version>
+		</dependency>
+			
+>>>>>>> 193ce0181c850e546df0196c8f9f2b0411ccf7e0
 		<!-- Commons Fileupload -->
 		<dependency>
 		    <groupId>commons-fileupload</groupId>
 		    <artifactId>commons-fileupload</artifactId>
 		    <version>1.4</version>
+		</dependency>
+		
+				<!-- commons-io -->
+		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.6</version>
 		</dependency>
 				
 		

@@ -6,8 +6,15 @@
 	<properties resource="db.properties" />
 	<typeAliases>
 		<typeAlias type="com.team5.funthing.user.model.vo.MemberVO" alias="member"/>
+		<typeAlias type="com.team5.funthing.user.model.vo.ProjectVO" alias="project"/>
+		<typeAlias type="com.team5.funthing.user.model.vo.NoticeVO" alias="notice"/>
+		<typeAlias type="com.team5.funthing.user.model.vo.ProjectVO" alias="project"/>
+		<typeAlias type="com.team5.funthing.user.model.vo.BoardVO" alias="board"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/member-mapper.xml" />
+		<mapper resource="mappers/notice-mapper.xml"/>
+		<mapper resource="mappers/project-mapper.xml" />
+		<mapper resource="mappers/board-mapper.xml" />
 	</mappers>
 </configuration>

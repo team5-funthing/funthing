@@ -1,100 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!doctype html>
+
 <html class="no-js" lang="zxx">
 
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Montana</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- <link rel="manifest" href="site.webmanifest"> -->
-    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
-    <!-- Place favicon.ico in the root directory -->
-
-    <!-- CSS here -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/bootstrap.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/magnific-popup.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/font-awesome.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/themify-icons.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/nice-select.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/flaticon.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/gijgo.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/animate.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/slicknav.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/style.css">
-    <!-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/responsive.css"> -->
+	<jsp:include page="./include/i-head-setting.jsp"/>
+	
 </head>
 
 <body>
-    <!-- header-start -->
-    <header>
-        <div class="header-area ">
-            <div id="sticky-header" class="main-header-area">
-                <div class="container-fluid p-0">
-                    <div id="sticky-header-align" class="row align-self-center no-gutters">
-                        <div class="col-xl-5 col-lg-6">
-                            <div class="main-menu d-none d-lg-block">
-                                <nav>
-                                    <ul id="navigation">
-                                        <li><a href="#">프로젝트 보기 <i class="ti-angle-down"></i></a>
-                                            <ul class="submenu">
-                                                <li><a href="show-projects.html">모든 프로젝트</a></li>
-                                                <li><a href="#">리워드 프로젝트</a></li>
-                                                <li><a href="#">후원 프로젝트</a></li>
-                                                <hr />
-                                                <li><a href="#">인기 프로젝트</a></li>
-                                                <li><a href="#">마감임박 프로젝트</a></li>
-                                                <li><a href="#">신규 프로젝트</a></li>
-                                                <hr />
-                                                <li><a href="#">기획전 보러가기</a></li>
-                                            </ul>
-                                        <li><a href="create-project-start.html">프로젝트 올리기</a></li>
-                                        <li><a href="#">더 보기 <i class="ti-angle-down"></i></a>
-                                            <ul class="submenu">
-                                                <li><a href="#"></a></li>
-                                                <li><a href="#">반응보기</a></li>
-                                                <li><a href="#">elements3</a></li>
-                                                <li><a href="#">elements4</a></li>
-                                                <li><a href="#">elements5</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-2 ">
-                            <div class="logo-img">
-                                <a href="index.html">
-                                    <h2 class="logo">FUN THING</h2>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-xl-5 col-lg-4 d-none d-lg-block">
-                            <div class="nav_right">
-                                <div class="search_icon">
-                                    <a class="popup-with-form" href="#search-popup"><span
-                                            class="fa fa-search"></span></a>
-                                </div>
-                                <div class="login_btn d-none d-lg-block ml-3">
-                                    <a class="popup-with-form" href="#login-popup">로그인 | 회원가입</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="mobile_menu d-block d-lg-none"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- header-end -->
+
+    <jsp:include page="./include/i-popupover-mypage.jsp"/>
+    <jsp:include page="./include/i-header.jsp"/>
     
-    <!-- 회원가입 선택 폼 양식 start -->
+    <!-- 아이디 비밀번호 찾기 폼 start -->
     <div class="wrap">
         <div class="container ">
             <div class="row ">
@@ -288,52 +211,14 @@
     </form>
     <!-- 검색폼 end -->
 
-    <!-- JS here -->
-    <script src="${pageContext.request.contextPath}/resources/user/js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/user/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/user/js/popper.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/user/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/user/js/owl.carousel.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/user/js/isotope.pkgd.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/user/js/ajax-form.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/user/js/waypoints.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/user/js/jquery.counterup.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/user/js/imagesloaded.pkgd.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/user/js/scrollIt.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/user/js/jquery.scrollUp.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/user/js/wow.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/user/js/nice-select.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/user/js/jquery.slicknav.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/user/js/jquery.magnific-popup.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/user/js/plugins.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/user/js/gijgo.min.js"></script>
-
-    <!--contact js-->
-    <script src="${pageContext.request.contextPath}/resources/user/js/contact.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/user/js/jquery.ajaxchimp.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/user/js/jquery.form.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/user/js/jquery.validate.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/user/js/mail-script.js"></script>
-
-    <script src="${pageContext.request.contextPath}/resources/user/js/main.js"></script>
-    <script>
-        $('#datepicker').datepicker({
-            iconsLibrary: 'fontawesome',
-            icons: {
-                rightIcon: '<span class="fa fa-caret-down"></span>'
-            }
-        });
-        $('#datepicker2').datepicker({
-            iconsLibrary: 'fontawesome',
-            icons: {
-                rightIcon: '<span class="fa fa-caret-down"></span>'
-            }
-
-        });
-    </script>
-
-
-
+    <!-- footer -->
+    <footer class="footer">
+    </footer>
+    
+    <jsp:include page="./include/i-popup-login.jsp"></jsp:include>
+	<jsp:include page="./include/i-popup-search.jsp"></jsp:include>
+    <jsp:include page="./include/i-body-js.jsp"></jsp:include>
+    
 </body>
 
 </html>

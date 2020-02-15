@@ -20,6 +20,7 @@ import com.team5.funthing.user.service.projectService.InsertProject;
 @Controller
 @SessionAttributes("member")
 public class MemberController {
+<<<<<<< HEAD
    
    @Autowired
    private GetMemberService getMemberService;
@@ -110,6 +111,29 @@ public class MemberController {
 		session.setAttribute("certificationCode", vo.getCertificationCode());	
 	} catch (Exception e) {
 		e.printStackTrace();
+=======
+	
+	@Autowired
+	private GetMemberService getMemberService;
+	
+	
+	@RequestMapping("getMember.udo")
+	public String getMember(MemberVO vo, Model model) {
+		System.out.println("MemberController ===> getMember 메서드 수행");
+		
+		vo.setEmail("test@naver.com");
+		
+		MemberVO test = getMemberService.getMember(vo);
+		
+		System.out.println(test.toString());
+		
+		return "p-index";
+	}
+	
+	@RequestMapping("/*.udo")
+	public String showindex() {
+		return "p-index";
+>>>>>>> 193ce0181c850e546df0196c8f9f2b0411ccf7e0
 	}
 	   return "f-find-id";
    }
