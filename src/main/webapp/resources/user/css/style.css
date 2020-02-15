@@ -4438,7 +4438,6 @@ h6 {
 }
 
 
-/* 커스텀 */
 .big-btn {
     background: #fff;
     color: #fff;
@@ -4599,20 +4598,7 @@ dl {
     height: 30px;
 }
 
-.btn-registry-way {
-    font-weight: 800;
-    color: #ffe484;
-    border-color: #ffe484;
-}
 
-.btn-registry-way:active,
-.btn-registry-way:hover {
-    color: #2a2730;
-    background-color: #ffe484;
-    border-color: #ffe484;
-}
-
-/* 프로젝트 상세 좋아요 문의하기 공유하기 버튼 */
 .btn-detail-prj-etc-btn {
     font-weight: 800;
     color: #0059b3;
@@ -4629,7 +4615,6 @@ dl {
 }
 
 
-/* 주소검색, 프로젝트 밀어주기 버튼 */
 .btn-spon-prj,
 .btn-find-zipcode {
     font-weight: 800;
@@ -5294,15 +5279,29 @@ img.landscape {
     color: #000000;
 }
 
-.select-project-Contents,
-.select-project-image {
-    font-weight: 600;
+
+.btn-registry-way {
+    font-weight: 800;
     color: #7952b3;
     border-color: #7952b3;
 }
 
-.btn-bd-primary:active, .btn-bd-primary:hover {
+.btn-registry-way:active,
+.btn-registry-way:hover {
     color: #fff;
     background-color: #7952b3;
     border-color: #7952b3;
+}
+
+.btn-registry-way1 {
+    font-weight: 800;
+    color: #ffe484;
+    border-color: #ffe484;
+}
+
+.btn-registry-way1:active,
+.btn-registry-way1:hover {
+    color: #2a2730;
+    background-color: #ffe484;
+    border-color: #ffe484;
 }
