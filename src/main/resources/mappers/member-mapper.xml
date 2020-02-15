@@ -9,6 +9,26 @@
 		FROM member 
 		WHERE email= #{email}
 	</select>
+	
+	<insert id="insertSocialMember" parameterType="member">
+		INSERT INTO member ( email, password, name )
+		VALUES (#{email},#{password},#{name})
+	</insert>
+	
+	<select id="loginMember" parameterType="member" resultType="member">
+      SELECT * FROM MEMBER WHERE EMAIL = #{email}
+   </select>
+   
+	<insert id="insertMember" parameterType="member">
+      INSERT INTO MEMBER (EMAIL,PASSWORD,NAME)
+      VALUES(#{email},#{password},#{name})
+   </insert>
+   
+   <insert id="saveImage" parameterType="member">
+   	INSERT INTO MEMBER (email,myImage)
+   	VALUES (#{email},#{myImage})
+   
+   </insert>
 <!-- 
 	<resultMap type="#modelname" id="YourResultSet">
 		<id property="param1" column="columnname1" />
