@@ -8,7 +8,7 @@
 <head>
 
 	<jsp:include page="./include/i-head-setting.jsp"/>
-  
+
 </head>
 
 <body>
@@ -116,13 +116,13 @@
 		<article class="d-flex justify-content-center">
 			<nav aria-label="Page navigation example">
 				<ul class="pagination">
-					<li class="page-item"><a class="page-link" href="#"
+					<li class="page-item"><a class="page-link" href="selectSearchPageNumberNoticeList.udo?no=${startPageCount - 5}"
 						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 					</a></li>
-					<li class="page-item"><a class="page-link" href="#">1</a></li>
-					<li class="page-item"><a class="page-link" href="#">2</a></li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
-					<li class="page-item"><a class="page-link" href="#"
+					<c:forEach var="i" begin="${startPageCount}" end="${boardPageCount}">
+						<li class="page-item"><a class="page-link" href="selectSearchPageNumberNoticeList.udo?no=${i}">${i}</a></li>
+					</c:forEach>
+					<li class="page-item"><a class="page-link" href="selectSearchPageNumberNoticeList.udo?no=${startPageCount + 5}"
 						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 					</a></li>
 				</ul>
@@ -130,17 +130,16 @@
 		</article>
 
 		<article class="d-flex justify-content-center">
-			<form class="form-inline my-2 my-lg-0">
+			<form class="form-inline my-2 my-lg-0" action="selectSearchTitleNoticeList.udo">
 				<div class="form-group p-2">
-					<label for="exampleFormControlSelect1"></label> <select
-						class="form-control" id="exampleFormControlSelect1">
-						<option>제목+내용</option>
-						<option>제목</option>
-						<option>내용</option>
+					<label for="exampleFormControlSelect1"></label>
+					<select class="form-control" id="exampleFormControlSelect1" name="searchCategory">
+						<option value="title">제목</option>
+						<option value="content">내용</option>
 					</select>
 				</div>
 				<input class="form-control mr-sm-2" type="search"
-					placeholder="Search" aria-label="Search">
+					placeholder="Search" aria-label="Search" name="search">
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
 			</form>
 		</article>

@@ -17,11 +17,11 @@
 											<li><a href="show-projects.html">모든 프로젝트</a></li>
 											<li><a href="#">리워드 프로젝트</a></li>
 											<li><a href="#">후원 프로젝트</a></li>
-											<hr />
+											<hr>
 											<li><a href="#">인기 프로젝트</a></li>
 											<li><a href="#">마감임박 프로젝트</a></li>
 											<li><a href="#">신규 프로젝트</a></li>
-											<hr />
+											<hr>
 											<li><a href="#">기획전 보러가기</a></li>
 										</ul>
 									<li><a href="showCreateProjectForm.udo">프로젝트 올리기</a></li>
@@ -40,7 +40,7 @@
 
 					<div class="col-xl-2 col-lg-2 d-flex align-items-center justify-content-center">
 						<div class="logo-img ">
-							<a href="index.html">
+							<a href="/funthing"> <!-- 홈으로 가능 매핑 바꿔줘야함 -->
 								<h2 class="logo">FUN THING</h2>
 							</a>
 						</div>

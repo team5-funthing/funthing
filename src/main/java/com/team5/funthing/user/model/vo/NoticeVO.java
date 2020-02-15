@@ -10,8 +10,22 @@ public class NoticeVO {
 	private String noticeContents;
 	private Date noticeDate;
 	private String noticeCategory;
+	private String noticeSearchCondition;
+	private String noticeSearchContent;
 	
 	
+	public String getNoticeSearchCondition() {
+		return noticeSearchCondition;
+	}
+	public void setNoticeSearchCondition(String noticeSearchCondition) {
+		this.noticeSearchCondition = noticeSearchCondition;
+	}
+	public String getNoticeSearchContent() {
+		return noticeSearchContent;
+	}
+	public void setNoticeSearchContent(String noticeSearchContent) {
+		this.noticeSearchContent = noticeSearchContent;
+	}
 	public String getNoticeCategory() {
 		return noticeCategory;
 	}
@@ -52,7 +66,8 @@ public class NoticeVO {
 	public String toString() {
 		return "NoticeVO [noticeNo=" + noticeNo + ", adminId=" + adminId + ", noticeTitle=" + noticeTitle
 				+ ", noticeContents=" + noticeContents + ", noticeDate=" + noticeDate + ", noticeCategory="
-				+ noticeCategory + "]";
+				+ noticeCategory + ", noticeSearchCondition=" + noticeSearchCondition + ", noticeSearchContent="
+				+ noticeSearchContent + "]";
 	}
 	
 }

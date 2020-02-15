@@ -363,3 +363,5 @@ $("#select-checkbox").on("click", function() {
     $("div").remove('.to-remove-tag');
   }
 });
+
+
