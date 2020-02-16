@@ -38,7 +38,7 @@
 					<div class="col"></div>
 					<div class="col-10">
 						<h3 class="mb-4">프로젝트 등록 폼</h3>
-						<form action="saveInputWritingProject.udo" id="tempStorageForm" method="POST">
+						<form action="saveInputWritingProject.udo" id="tempStorageForm" method="POST" enctype="multipart/form-data">
 					<!-- <form action="insertProject.udo" id="tempStorageForm" method="POST" enctype="multi/form-data"> -->
 							<input type="hidden" name="projectNo" value="${writingProject.projectNo }">
 							<div class="row">
@@ -58,17 +58,9 @@
 											href="#v-pills-settings" role="tab" aria-controls="v-pills-settings"
 											aria-selected="false">리워드 설계</a>
 											
-										<button type="submit" class="btn btn-secondary btn-lg btn-block mt-5 ">저장하기</button>
-										<button onclick="" id="inputCompleteBtn" class="btn btn-secondary btn-lg btn-block" >작성완료</button>
-										
-										<!-- <div class="col-xl-12 mt-10 d-flex justify-content-center">
-											<a class="btn btn-lg btn-registry-way d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
-												href="#" onclick="document.getElementById('tempStorageForm').submit();">
-												저장하기
-											</a>
-											</div>
-										-->
-									
+										<button type="submit" class="btn btn-secondary btn-lg btn-block mt-5">저장하기</button>
+										<button id="inputCompleteBtn" class="btn btn-secondary btn-lg btn-block" >작성완료</button>
+										<button type="submit" class="btn btn-secondary btn-lg btn-block mt-5" formaction="showPreviewProject.udo">미리보기</button>
 									</div>
 								</div>
 

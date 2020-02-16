@@ -16,6 +16,16 @@
 	</properties>
 
 	<dependencies>
+	
+		
+		<!-- thumbnailator -->
+		<dependency>
+		    <groupId>net.coobird</groupId>
+		    <artifactId>thumbnailator</artifactId>
+		    <version>0.4.9</version>
+		</dependency>
+
+
 
 		<!-- 이미지 업로드 관련 API 천기웅수정! -->
 		<!-- https://mvnrepository.com/artifact/com.jfinal/cos -->
@@ -38,8 +48,6 @@
 			<version>1.6.1</version>
 		</dependency>
 		<!-- 메일 관련 api 천기웅 수정! 끝 -->
-
-
 
 
 		<!-- javax.mail-api -->
