@@ -15,7 +15,7 @@
                              </script>
                              <a href="javascript:popupImgUpload()">  <img class="profile" src="${pageContext.request.contextPath}/resources/user/img/test/5.jpg"></a>
                            </div>
-                           <div>${sessionScope.memberSession.getName()} 님 환영합니다.</div>
+                           <div>${sessionScope.memberSessionName} 님 환영합니다.</div>
                        </div>
                    </div>
                    <div>

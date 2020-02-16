@@ -1,14 +1,14 @@
-package com.team5.funthing.user.service.impl.projectServiceImpl;
+package com.team5.funthing.user.memberServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.team5.funthing.user.memberService.InsertMemberService;
 import com.team5.funthing.user.model.dao.MemberDAO;
 import com.team5.funthing.user.model.vo.MemberVO;
-import com.team5.funthing.user.service.projectService.InsertProject;
 
 @Service
-public class InsertProjectImpl implements InsertProject {
+public class InsertMemberServiceImpl implements InsertMemberService {
 
 	@Autowired
 	MemberDAO memberDAO;
@@ -26,6 +26,6 @@ public class InsertProjectImpl implements InsertProject {
 	@Override
 	public void saveImage(MemberVO vo) {
 		memberDAO.saveImage(vo);
-		
 	}
+
 }
