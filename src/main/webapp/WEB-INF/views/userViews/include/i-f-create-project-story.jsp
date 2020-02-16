@@ -38,23 +38,21 @@
 				<p>[동의 완료] [동의 날짜 시간 ]</p>
 				<p>[동의한 회원 정보]</p>
 			</div>
-		</div>
+			</div>
 	</div>
 </div>
 <div class="p-2 bd-highlight">
 	
 
 	<span>프로젝트 스토리*</span>
-	<div class="w-100" id="editor">
-		<p>테스트 내용 </p>
-	</div>
 	
+	<textarea class="form-control" id="editor">테스트 내용</textarea>
+	<script type="text/javascript">
+	 	CKEDITOR.replace('editor', { height: 500 });
+	</script>
 </div>
 
-<script src="${pageContext.request.contextPath}/resources/common/js/ckeditor.js"></script>
-
-
-
+<!-- <script src="${pageContext.request.contextPath}/resources/common/js/ckeditor.js"></script> -->
 
 
 

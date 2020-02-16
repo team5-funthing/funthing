@@ -3,13 +3,9 @@ package com.team5.funthing.user.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
@@ -20,7 +16,7 @@ import com.team5.funthing.user.service.projectService.GetProjectService;
 import com.team5.funthing.user.service.projectService.InsertProjectService;
 import com.team5.funthing.user.service.projectService.UpdateProjectService;
 
-@Controller
+//@Controller
 public class ProjectController {
 
 	@Autowired
@@ -38,8 +34,8 @@ public class ProjectController {
 	private GetMemberService getMemberService;
 	
 	//작성중인 프로젝트 화면 가져오기
-	@RequestMapping(value="/showCreateProjectForm.udo", method = RequestMethod.GET)
-	public String showCreateProjectForm(HttpSession session, Model model) {
+	@RequestMapping(value="/showStartProjectPage.udo", method = RequestMethod.GET)
+	public String showStartProjectPage(HttpSession session, Model model) {
 
 		// 테스트 용 코드
 		MemberVO test = new MemberVO();
@@ -55,54 +51,31 @@ public class ProjectController {
 		}
 		
 		model.addAttribute("member", test); 
+		return "p-start-project"; // 시작하기 페이지로 이동하자
+	} //테스트 용
+	
+	
+	
+	@RequestMapping(value="/showCreateProjectBasicFrom.udo", method = RequestMethod.GET)
+	public String showCreateProjectForm(HttpSession session, Model model) {
+		return "f-create-project-basic"; // 프로젝트 작성 폼
+	} 
+	
+	@RequestMapping(value = "insertProject.udo", method = RequestMethod.POST)
+	public String insertProject(ProjectVO vo, Model model) {
+		
+		
+		// 프로젝트 제작 첫 시작시에만 시작
+		vo = insertProjectService.insertProject(vo);
+		System.out.println("insertProject 실행 후 =======> " + vo.toString());
+		
+		model.addAttribute("writingProject", vo);
+		
 		return "f-create-project";
 	}
 	
-	
-	
-	@RequestMapping(value = "/getWritingProject.udo", method = RequestMethod.POST)
-	public String getWritingProject(@RequestParam("currentWritingProject")
-									ProjectVO vo, Model model) {
-		
-		model.addAttribute("writingProject", getProjectService.getProject(vo));
-		model.addAttribute("msg", "저장 되었습니다.");
-		
-		System.out.println("------getWritingProject-----");
-		System.out.println(vo.toString());
-		
-		return "f-create-project";
-	}
-	
-	@RequestMapping(value = "/insertProject.udo", method = RequestMethod.POST)
-	public String insertProject(ProjectVO vo,
-								Model model,
-								RedirectAttributes redirect,
-//								@RequestParam(value = "projectMainImage", required = false)MultipartFile projectMainImage,
-								@RequestParam(value = "projectVideo", required = false)MultipartFile projectVideo
-								) {		 
-		System.out.println(vo.toString());
-		char result = writingInputCheck(vo);
-		System.out.println("결과 : " + result);
-		vo.setWriteStatus(result);// 작성완료 체크하여 'y' 또는 'n' 값을 vo에 넣어줌
-		
-		insertProjectService.insertProject(vo);
-		
-		redirect.addAttribute("currentWritingProject", vo);
-		
-		return "redirect:getWritingProject.udo";
-		
-	}
-	
-	
 
 	
-	
-	@RequestMapping(value="/createProject.udo", method = RequestMethod.POST)
-	public String createProject(ProjectVO vo, Model model) {
-		System.out.println("==> createProject.udo 실행");
-		return null;
-	}
-
 	public String updateProject(ProjectVO vo) {
 		return null;
 	}

@@ -24,7 +24,7 @@
 											<hr>
 											<li><a href="#">기획전 보러가기</a></li>
 										</ul>
-									<li><a href="showCreateProjectForm.udo">프로젝트 올리기</a></li>
+									<li><a href="showStartProjectPage.udo">프로젝트 올리기</a></li>
 									<li><a href="#">더 보기 <i class="ti-angle-down"></i></a>
 										<ul class="submenu">
 											<li><a href="#"></a></li>
@@ -47,10 +47,10 @@
 					</div >
 						
 					<c:if test="${! empty sessionScope.memberSession }">
-					<jsp:include page="./i-header-nav-right-login-ok.jsp"/>
+						<jsp:include page="./i-header-nav-right-login-ok.jsp"/>
 					</c:if>
 					<c:if test="${empty sessionScope.memberSession }">
-					<jsp:include page="./i-header-nav-right-login-no.jsp"/>
+						<jsp:include page="./i-header-nav-right-login-no.jsp"/>
 					</c:if>
         
 				</div>

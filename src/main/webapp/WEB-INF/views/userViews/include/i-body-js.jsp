@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 	<!-- JS here -->
     <script src="${pageContext.request.contextPath}/resources/user/js/vendor/modernizr-3.5.0.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/user/js/popper.min.js"></script>
@@ -19,7 +18,7 @@
     <script src="${pageContext.request.contextPath}/resources/user/js/jquery.magnific-popup.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/user/js/plugins.js"></script>
     <script src="${pageContext.request.contextPath}/resources/user/js/gijgo.min.js"></script>
-
+    
     <!--contact js-->
     <script src="${pageContext.request.contextPath}/resources/user/js/contact.js"></script>
     <script src="${pageContext.request.contextPath}/resources/user/js/jquery.ajaxchimp.min.js"></script>
@@ -28,6 +27,9 @@
     <script src="${pageContext.request.contextPath}/resources/user/js/mail-script.js"></script>
 
     <script src="${pageContext.request.contextPath}/resources/user/js/main.js"></script>
+    
+    <!-- CKEditor5 -->
+    <script src="${pageContext.request.contextPath}/resources/common/ckeditor5/build/ckeditor.js"></script>
     
     
     
