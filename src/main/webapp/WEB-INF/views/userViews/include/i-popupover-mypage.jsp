@@ -13,7 +13,7 @@
                             	 window.open("imageUpload.udo","width=100,height=50");
                              }    
                              </script>
-                             <a href="javascript:popupImgUpload()">  <img class="profile" src="${pageContext.request.contextPath}/resources/user/img/test/5.jpg"></a>
+                             <a href="javascript:popupImgUpload()">  <img class="profile" src="${pageContext.request.contextPath}/resources/user/img/test/${sessionScope.myprofile}"></a>
                            </div>
                            <div>${sessionScope.memberSessionName} 님 환영합니다.</div>
                        </div>

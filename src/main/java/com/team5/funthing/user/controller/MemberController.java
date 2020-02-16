@@ -122,29 +122,32 @@ public class MemberController {
    public String saveImage(HttpServletRequest request,MemberVO vo,HttpSession session) throws IOException {
       
        //  디렉토리는    수정해야함.  무조건 절대경로로 삽입해야하며, 우선 기웅님의 경로로 잡는도다.
-      String saveDir= "C:\\funthing\\project\\funthing\\src\\main\\webapp\\resources\\user\\img\\test";
+//      String saveDir= "C:\\funthing\\project\\funthing\\src\\main\\webapp\\resources\\user\\img\\test";
+	  String saveDir= "C:\\tomcat\\wtpwebapps\\funthing\\resources\\user\\img\\test";
       int maxPostSize = 3*1024*1024;
       String encoding = "UTF-8";
       MultipartRequest ms = new MultipartRequest(request, saveDir, maxPostSize, encoding, new DefaultFileRenamePolicy());  
        String renamedFile = ms.getFilesystemName("filename");
        System.out.println( ms.getFilesystemName("filename"));     
        ///  유지보수 에서 실패!!! 할 구간.     
-       String callpath = "/funthing/resources/user/img/test/";
+       
        String email = (String) session.getAttribute("memberSessionEmail");
        vo.setEmail(email);
-       vo.setMyImage(callpath+renamedFile);
+       vo.setMyImage(renamedFile);
       insertMemberService.saveImage(vo);
+      session.setAttribute("myprofile", selectMemberService.getMember(vo).getMyImage());
+      
       return "testing";
    }
      
    @RequestMapping(value="mypage.udo",method=RequestMethod.GET)
    public String myPage(HttpSession session,MemberVO vo,Model model) { //마이페이지로 이동 
-	
-//	    
-//	  String email =  (String)session.getAttribute("memberSessionEmail");
-//	  vo.setEmail(email);
-//	  model.addAttribute("okname",selectMemberService.getMember(vo).getName());
-//	  //  p-detail-mypage 로 리다이렉트 실행시  파라미터값  okname=selectMemberService.getMember(vo).getName() 을 넘겨줌
+   
+//       
+//     String email =  (String)session.getAttribute("memberSessionEmail");
+//     vo.setEmail(email);
+//     model.addAttribute("okname",selectMemberService.getMember(vo).getName());
+//     //  p-detail-mypage 로 리다이렉트 실행시  파라미터값  okname=selectMemberService.getMember(vo).getName() 을 넘겨줌
       return "p-detail-mypage";
    }  
    @RequestMapping(value="logout.udo",method=RequestMethod.GET)

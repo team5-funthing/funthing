@@ -26,7 +26,7 @@
 	
 	        <div class="d-none d-lg-block pl-3 pr-3">
 	            <a type="button" href="#" id="mypage-btn" data-popover="popover-mypage-menu">
-	                <img class="profile" src="${pageContext.request.contextPath}/resources/user/img/test/5.jpg"></a>
+	                <img class="profile" src="${pageContext.request.contextPath}/resources/user/img/test/${sessionScope.myprofile}"></a>
 	        </div>
 	    </div>
 	</div>
