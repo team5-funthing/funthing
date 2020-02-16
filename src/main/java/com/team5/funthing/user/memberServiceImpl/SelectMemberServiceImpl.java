@@ -1,14 +1,14 @@
-package com.team5.funthing.user.service.impl;
+package com.team5.funthing.user.memberServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.team5.funthing.user.memberService.SelectMemberService;
 import com.team5.funthing.user.model.dao.MemberDAO;
 import com.team5.funthing.user.model.vo.MemberVO;
-import com.team5.funthing.user.service.LoginMemberService;
 
 @Service
-public class LoginMemberServiceImpl implements LoginMemberService {
+public class SelectMemberServiceImpl implements SelectMemberService{
 
 	 @Autowired
 	   private MemberDAO memberDAO;
@@ -19,5 +19,10 @@ public class LoginMemberServiceImpl implements LoginMemberService {
 	      return memberDAO.loginMember(vo);
 	   }
 
+	@Override
+	public MemberVO getMember(MemberVO vo) {
+		
+		return memberDAO.getMember(vo);
+	}
 
 }

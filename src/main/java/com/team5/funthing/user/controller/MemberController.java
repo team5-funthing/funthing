@@ -1,9 +1,7 @@
 package com.team5.funthing.user.controller;
 
-import java.io.File;
 import java.io.IOException;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -16,145 +14,146 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-import com.oreilly.servlet.multipart.FileRenamePolicy;
+import com.team5.funthing.user.memberService.CertificationEmailService;
+import com.team5.funthing.user.memberService.InsertMemberService;
+import com.team5.funthing.user.memberService.SelectMemberService;
 import com.team5.funthing.user.model.vo.MemberVO;
-import com.team5.funthing.user.service.CertificationEmailService;
-import com.team5.funthing.user.service.LoginMemberService;
-import com.team5.funthing.user.service.projectService.InsertProject;
 
 @Controller
 @SessionAttributes("member")
 public class MemberController {
 
 
-	
+   
    @Autowired
-   private LoginMemberService loginMemberService;
+   private SelectMemberService selectMemberService;
    
    @Autowired
    private CertificationEmailService certificationEmailService;
    
    @Autowired
-   private InsertProject insertProject;
+   private InsertMemberService insertMemberService;
    
-	/*
-	 * @RequestMapping("getMember.udo") public String getMember(MemberVO vo, Model
-	 * model) { System.out.println("MemberController ===> getMember ë©”ì„œë“œ ìˆ˜í–‰");
-	 * 
-	 * vo.setEmail("test@naver.com");
-	 * 
-	 * MemberVO test = getMemberService.getMember(vo);
-	 * 
-	 * System.out.println(test.toString());
-	 * 
-	 * return "p-index"; }
-	 */
-   
-   
+
    @RequestMapping("*.udo")
    public String showindex() {
       return "p-index";
    }
    
-   @RequestMapping(value="loginmember.udo", method=RequestMethod.POST) // ë¡œê·¸ì¸í™•ì¸
+   @RequestMapping(value="loginmember.udo", method=RequestMethod.POST) // ·Î±×ÀÎÈ®ÀÎ
    public String loginMember(MemberVO vo, HttpServletRequest request,HttpSession session) {
-    System.out.println("ë‹¬ë¼"+loginMemberService.loginMember(vo).getPassword());
+    System.out.println("´Ş¶ó"+selectMemberService.loginMember(vo).getPassword());
     request.getParameter("password");
-		   if(loginMemberService.loginMember(vo).getPassword().equals(request.getParameter("password"))) { //íŒ¨ìŠ¤ì›Œë“œ ë§ì•˜ì„ë•Œ 
-		   session.setAttribute("memberSessionEmail", vo.getEmail());
-		   System.out.println("ì„±ê³µ");
-			   return "p-index";
-		   }else {
-			   System.out.println("ì‹¤íŒ¨");
-			   return "p-index";
-		   }
-	
+         if(selectMemberService.loginMember(vo).getPassword().equals(request.getParameter("password"))) { //ÆĞ½º¿öµå ¸Â¾ÒÀ»¶§ 
+         session.setAttribute("memberSessionEmail", selectMemberService.loginMember(vo).getEmail());
+         session.setAttribute("memberSessionName", selectMemberService.loginMember(vo).getName());
+         System.out.println("¼º°ø");
+            return "p-index";
+         }else {
+            System.out.println("½ÇÆĞ");
+            return "p-index";
+         }
+   
    }
    
    
    
-   @RequestMapping(value="joinselect.udo" ,method=RequestMethod.GET) // íšŒì›ê°€ì…ì„ íƒ í™”ë©´ì´ë™
+   @RequestMapping(value="joinselect.udo" ,method=RequestMethod.GET) // È¸¿ø°¡ÀÔ¼±ÅÃ È­¸éÀÌµ¿
    public String login() {
       return "p-waytoJoin-select";
    }
    
 
-   @RequestMapping(value="findpw.udo",method=RequestMethod.GET) // ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° í™”ë©´ì´ë™
+   @RequestMapping(value="findpw.udo",method=RequestMethod.GET) // ºñ¹Ğ¹øÈ£ Ã£±â È­¸éÀÌµ¿
    public String findpw() {
       return "f-find-pw";
    }
    
-   @RequestMapping(value="emailJoin.udo",method=RequestMethod.GET) // ë©”ì¼ë¡œê°€ì…í•˜ê¸° í™”ë©´ì´ë™
+   @RequestMapping(value="emailJoin.udo",method=RequestMethod.GET) // ¸ŞÀÏ·Î°¡ÀÔÇÏ±â È­¸éÀÌµ¿
    public String emailjoin() {
       return "f-join";
    }
    
-   @RequestMapping(value="successSocialjoin.udo",method=RequestMethod.GET) // ê°€ì…ì„±ê³µí•´ì„œ ë©”ì¸í™”ë©´ì´ë™
+   @RequestMapping(value="successSocialjoin.udo",method=RequestMethod.GET) // °¡ÀÔ¼º°øÇØ¼­ ¸ŞÀÎÈ­¸éÀÌµ¿
    public String successSocialjoin(MemberVO vo) {
-      insertProject.insertSocialMember(vo);
+      insertMemberService.insertSocialMember(vo);
       return "p-index";
    }
    
-   @RequestMapping(value="successjoin.udo",method=RequestMethod.POST) // ê°€ì…ì„±ê³µí•´ì„œ ë©”ì¸í™”ë©´ì´ë™
+   @RequestMapping(value="successjoin.udo",method=RequestMethod.POST) // °¡ÀÔ¼º°øÇØ¼­ ¸ŞÀÎÈ­¸éÀÌµ¿
    public String successjoin(MemberVO vo) {
-	   System.out.println("ì´ë©”ì¼ë¡œ ê°€ì… ì‹¤í–‰!");
-      insertProject.insertMember(vo);
+      System.out.println("ÀÌ¸ŞÀÏ·Î °¡ÀÔ ½ÇÇà!");
+      insertMemberService.insertMember(vo);
       return "p-index";
    }
    
    @RequestMapping(value="naverjoin.udo",method=RequestMethod.GET)
    public String naverJoin(MemberVO vo,HttpServletRequest request) {
-	   return "naverjoin";
+      return "naverjoin";
    }
    
    @RequestMapping(value= "certification.udo" ,method=RequestMethod.GET )
    public String certificationEmail(MemberVO vo,Model model,HttpSession session) {
-	   try {
-		certificationEmailService.sendCertificationEmailforFindPassword(vo);
-		session.setAttribute("certificationCode", vo.getCertificationCode());	
-		System.out.println("vo ì¸ì¦ë²ˆí˜¸ í™•ì¸ :" +vo.getCertificationCode());
-		System.out.println("session ì¸ì¦ë²ˆí˜¸ í™•ì¸ : "+ session.getAttribute("certificationCode"));
-		
-		/// ë¹„ë°€ë²ˆí˜¸ ì¬ì„¤ì • í˜ì´ì§€ì—ì„œ ì„¸ì…˜ ì‚­ì œ í•˜ë„ë¡ !!!!
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
-	   return "f-find-id";
+      try {
+      certificationEmailService.sendCertificationEmail(vo);
+      session.setAttribute("certificationCode", vo.getCertificationCode());   
+      System.out.println("vo ÀÎÁõ¹øÈ£ È®ÀÎ :" +vo.getCertificationCode());
+      System.out.println("session ÀÎÁõ¹øÈ£ È®ÀÎ : "+ session.getAttribute("certificationCode"));
+      
+      /// ºñ¹Ğ¹øÈ£ Àç¼³Á¤ ÆäÀÌÁö¿¡¼­ ¼¼¼Ç »èÁ¦ ÇÏµµ·Ï !!!!
+   } catch (Exception e) {
+      e.printStackTrace();
+   }
+      return "f-find-id";
    }
    
    @RequestMapping(value="test.udo")
    public String tst() {
-	   return "testing";
+      return "testing";
    }
    
    @RequestMapping(value="imageUpload.udo",method=RequestMethod.GET)
    public String imageUpload() {
-	   //ì—…ë¡œë“œë¥¼ ìœ„í•œ ë³„ê°œ í˜ì´ì§€
-	   return "imageUpload";
+      //¾÷·Îµå¸¦ À§ÇÑ º°°³ ÆäÀÌÁö
+      return "imageUpload";
    }
    
    @RequestMapping(value="saveimage.udo",method=RequestMethod.POST)
    public String saveImage(HttpServletRequest request,MemberVO vo,HttpSession session) throws IOException {
-	   
-	    //  ë””ë ‰í† ë¦¬ëŠ”    ìˆ˜ì •í•´ì•¼í•¨.  ë¬´ì¡°ê±´ ì ˆëŒ€ê²½ë¡œë¡œ ì‚½ì…í•´ì•¼í•˜ë©°, ìš°ì„  ê¸°ì›…ë‹˜ì˜ ê²½ë¡œë¡œ ì¡ëŠ”ë„ë‹¤.
-	   String saveDir= "C:\\funthing\\project\\funthing\\src\\main\\webapp\\resources\\user\\img\\test";
-	   int maxPostSize = 3*1024*1024;
-	   String encoding = "UTF-8";
-	   MultipartRequest ms = new MultipartRequest(request, saveDir, maxPostSize, encoding, new DefaultFileRenamePolicy());  
+      
+       //  µğ·ºÅä¸®´Â    ¼öÁ¤ÇØ¾ßÇÔ.  ¹«Á¶°Ç Àı´ë°æ·Î·Î »ğÀÔÇØ¾ßÇÏ¸ç, ¿ì¼± ±â¿õ´ÔÀÇ °æ·Î·Î Àâ´Âµµ´Ù.
+      String saveDir= "C:\\funthing\\project\\funthing\\src\\main\\webapp\\resources\\user\\img\\test";
+      int maxPostSize = 3*1024*1024;
+      String encoding = "UTF-8";
+      MultipartRequest ms = new MultipartRequest(request, saveDir, maxPostSize, encoding, new DefaultFileRenamePolicy());  
        String renamedFile = ms.getFilesystemName("filename");
        System.out.println( ms.getFilesystemName("filename"));     
-       ///  ìœ ì§€ë³´ìˆ˜ ì—ì„œ ì‹¤íŒ¨!!! í•  êµ¬ê°„.     
+       ///  À¯Áöº¸¼ö ¿¡¼­ ½ÇÆĞ!!! ÇÒ ±¸°£.     
        String callpath = "/funthing/resources/user/img/test/";
        String email = (String) session.getAttribute("memberSessionEmail");
        vo.setEmail(email);
        vo.setMyImage(callpath+renamedFile);
-	   insertProject.saveImage(vo);
-	   return "testing";
+      insertMemberService.saveImage(vo);
+      return "testing";
    }
-	  
-		
-		
-		
+     
+   @RequestMapping(value="mypage.udo",method=RequestMethod.GET)
+   public String myPage(HttpSession session,MemberVO vo,Model model) { //¸¶ÀÌÆäÀÌÁö·Î ÀÌµ¿ 
+	
+//	    
+//	  String email =  (String)session.getAttribute("memberSessionEmail");
+//	  vo.setEmail(email);
+//	  model.addAttribute("okname",selectMemberService.getMember(vo).getName());
+//	  //  p-detail-mypage ·Î ¸®´ÙÀÌ·ºÆ® ½ÇÇà½Ã  ÆÄ¶ó¹ÌÅÍ°ª  okname=selectMemberService.getMember(vo).getName() À» ³Ñ°ÜÁÜ
+      return "p-detail-mypage";
+   }  
+   @RequestMapping(value="logout.udo",method=RequestMethod.GET)
+   public String logOut(HttpSession session) { //·Î±×¾Æ¿ô 
+     session.invalidate();
+      return "p-index";
+   }    
+      
+      
  
    
 }

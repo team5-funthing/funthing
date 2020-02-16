@@ -43,7 +43,7 @@
                              <a class="btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
                                     href="javascript:popup()">인증번호 보내기</a>
                             
-                                <input type="email" name="emailCheck" placeholder="인증번호를 입력하세요"
+                                <input type="text" name="emailCheck" placeholder="인증번호를 입력하세요"
                                     onfocus="this.placeholder = ''" onblur="this.placeholder = '인증번호를 입력하세요'"
                                     required class="single-input">
                             </div>

@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
-import com.team5.funthing.user.service.GetMemberService;
 import com.team5.funthing.user.service.projectService.CreateProjectService;
 import com.team5.funthing.user.service.projectService.DeleteProjectService;
 import com.team5.funthing.user.service.projectService.GetProjectService;
@@ -33,30 +31,8 @@ public class ProjectController2 {
 	@Autowired
 	private GetProjectService getProjectService;
 	
-	@Autowired
-	private GetMemberService getMemberService;
-	
-	
-	@RequestMapping(value="/showStartProjectPage.udo", method = RequestMethod.GET)
-	public String showStartProjectPage(HttpSession session, Model model) {
 
-		// 테스트 용 코드
-		MemberVO test = new MemberVO();
-		test.setEmail("test@naver.com");
-		test = getMemberService.getMember(test);
-		session.setAttribute("email", test.getEmail());
-		
-		String loginId = (String)session.getAttribute("email");
-		
-		
-		if(loginId == null) {
-			model.addAttribute("msg", "로그인 후 이용 가능합니다.");
-			return "p-index";
-		}
-		
-		model.addAttribute("member", test); 
-		return "p-start-project"; // 시작하기 페이지로 이동하자
-	} //테스트 용
+	
 	
 	@RequestMapping(value="/showCreateProjectBasicForm.udo", method = RequestMethod.GET)
 	public String showCreateProjectBasicForm(HttpSession session, ProjectVO vo, Model model) {
