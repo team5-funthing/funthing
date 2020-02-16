@@ -44,15 +44,24 @@ public class MemberController {
    public String loginMember(MemberVO vo, HttpServletRequest request,HttpSession session) {
     System.out.println("달라"+selectMemberService.loginMember(vo).getPassword());
     request.getParameter("password");
-         if(selectMemberService.loginMember(vo).getPassword().equals(request.getParameter("password"))) { //패스워드 맞았을때 
+    if(selectMemberService.loginMember(vo) != null) { //vo가 널이아닐때 로그인 성공시
+         if(selectMemberService.loginMember(vo).getPassword().equals(request.getParameter("password"))) { //패스워드 맞았을때  
          session.setAttribute("memberSessionEmail", selectMemberService.loginMember(vo).getEmail());
          session.setAttribute("memberSessionName", selectMemberService.loginMember(vo).getName());
+         session.setAttribute("myprofile", selectMemberService.loginMember(vo).getMyImage()); //로그인하자마자 보여야되서 추가함 이게맞는건가요?귱씨?확인
+         
+  
+         System.out.println(selectMemberService.getMember(vo).getMyImage());
          System.out.println("성공");
+         
             return "p-index";
          }else {
             System.out.println("실패");
             return "p-index";
          }
+    }else { //vo가 널일때 로그인 실패시
+    	return "p-index";
+    }
    
    }
    
@@ -137,7 +146,7 @@ public class MemberController {
       insertMemberService.saveImage(vo);
       session.setAttribute("myprofile", selectMemberService.getMember(vo).getMyImage());
       
-      return "testing";
+      return "p-index";
    }
      
    @RequestMapping(value="mypage.udo",method=RequestMethod.GET)
