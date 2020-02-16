@@ -6,4 +6,5 @@ public interface GetMemberService {
 	
 	public MemberVO getMember(MemberVO vo);
 
+	
 }

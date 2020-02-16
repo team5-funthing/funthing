@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
+
 <h3>계좌 설정</h3>
 <div class="p-2 bd-highlight">
 	<span>본인 인증 [넣어 말어]</span>
