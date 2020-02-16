@@ -21,13 +21,10 @@
 	<jsp:include page="./include/i-popupover-mypage.jsp"/>
     <jsp:include page="./include/i-header.jsp"/>
     
-    <c:if test="${msg ne null }">
+    <c:if test="${writingProject.projectNo ne -1 }">
     	<script>
-    		alert("${msg }, ${writingProject.writeStatus }");
+    		alert("글 상태 : ${writingProject.writeStatus }  projectNo : ${writingProject.projectNo}");
     	</script>
-    	
-    	
-    	
     </c:if>
     
 	<section class="main-wrapper pt-xl-5 pb-5 ">
@@ -41,8 +38,9 @@
 					<div class="col"></div>
 					<div class="col-10">
 						<h3 class="mb-4">프로젝트 등록 폼</h3>
-						<form action="insertProject.udo?" id="tempStorageForm" method="POST">
+						<form action="saveInputWritingProject.udo" id="tempStorageForm" method="POST">
 					<!-- <form action="insertProject.udo" id="tempStorageForm" method="POST" enctype="multi/form-data"> -->
+							<input type="hidden" name="projectNo" value="${writingProject.projectNo }">
 							<div class="row">
 								<div class="col-3">
 									<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
@@ -59,17 +57,18 @@
 										<a class="nav-link" id="v-pills-settings-tab" data-toggle="pill"
 											href="#v-pills-settings" role="tab" aria-controls="v-pills-settings"
 											aria-selected="false">리워드 설계</a>
-								
-										<div class="col-xl-12 mt-10 d-flex justify-items-center">
-											<a class="btn btn-lg btn-registry-way d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
-												href="#">작성완료</a>
-										</div>
-										<div class="col-xl-12 mt-10 d-flex justify-content-center">
+											
+										<button type="submit" class="btn btn-secondary btn-lg btn-block mt-5 ">저장하기</button>
+										<button onclick="" id="inputCompleteBtn" class="btn btn-secondary btn-lg btn-block" >작성완료</button>
+										
+										<!-- <div class="col-xl-12 mt-10 d-flex justify-content-center">
 											<a class="btn btn-lg btn-registry-way d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
 												href="#" onclick="document.getElementById('tempStorageForm').submit();">
 												저장하기
 											</a>
-										</div>
+											</div>
+										-->
+									
 									</div>
 								</div>
 
@@ -110,6 +109,35 @@
 	<jsp:include page="./include/i-popup-addReward.jsp"></jsp:include>	
 	<jsp:include page="./include/i-body-js.jsp"></jsp:include>
 	<jsp:include page="./include/i-js-datePicker.jsp"></jsp:include>
+	
+	<c:choose>
+	    <c:when test="${writingProject.writeStatus eq 'y'.charAt(0) }">
+	    	<script>
+		   		  $(function() {
+		   			    $("#inputCompleteBtn")
+		   			      	.click(function() {
+		   			    	  	alert("작성완료 클릭!"); 
+		   			    	})
+		   			    	
+		   			      	.prop("disabled", false);
+		   			});
+	    	</script>
+	    </c:when>
+	    	    <c:when test="${writingProject.writeStatus eq 'n'.charAt(0) }">
+	    	<script>
+	    	
+		   		  $(function() {
+		   			    $("#inputCompleteBtn")
+		   			      	.click(function() {
+		   			    	  	alert("작성완료 클릭!"); 
+		   			    	})
+		   			    	
+		   			      	.prop("disabled", true);
+		   			});
+	    	</script>
+	    </c:when>
+    </c:choose>
+    
 
 
 

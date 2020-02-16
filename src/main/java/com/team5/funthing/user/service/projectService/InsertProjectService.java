@@ -4,6 +4,6 @@ import com.team5.funthing.user.model.vo.ProjectVO;
 
 public interface InsertProjectService {
 
-	public void insertProject(ProjectVO vo);
+	public ProjectVO insertProject(ProjectVO vo);
 	
 }

@@ -10,8 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @author bummit
  * 
  * 	Funthing Project 
- *  
- *
+ * 
  */
 public class ProjectVO {
 	
@@ -43,15 +42,6 @@ public class ProjectVO {
 	private char status = 'w'; 
 	private char informationAgree = 'n'; 
 	private char writeStatus = 'n';
-	
-	
-	
-	public String getProjectSummary() {
-		return projectSummary;
-	}
-	public void setProjectSummary(String projectSummary) {
-		this.projectSummary = projectSummary;
-	}
 	public int getProjectNo() {
 		return projectNo;
 	}
@@ -124,6 +114,12 @@ public class ProjectVO {
 	public void setProjectStory(String projectStory) {
 		this.projectStory = projectStory;
 	}
+	public String getProjectSummary() {
+		return projectSummary;
+	}
+	public void setProjectSummary(String projectSummary) {
+		this.projectSummary = projectSummary;
+	}
 	public String getProjectDetail() {
 		return projectDetail;
 	}
@@ -178,11 +174,24 @@ public class ProjectVO {
 				+ goalMoney + ", projectMainImage=" + projectMainImage + ", projectTitle=" + projectTitle
 				+ ", projectSubTitle=" + projectSubTitle + ", category=" + category + ", startDate=" + startDate
 				+ ", endDate=" + endDate + ", projectKeyword=" + projectKeyword + ", projectStory=" + projectStory
-				+ ", projectDetail=" + projectDetail + ", projectCaution=" + projectCaution + ", projectVideo="
-				+ projectVideo + ", supporters=" + supporters + ", fundingMoney=" + fundingMoney + ", status=" + status
-				+ ", informationAgree=" + informationAgree + ", writeStatus=" + writeStatus + "]";
+				+ ", projectSummary=" + projectSummary + ", projectDetail=" + projectDetail + ", projectCaution="
+				+ projectCaution + ", projectVideo=" + projectVideo + ", supporters=" + supporters + ", fundingMoney="
+				+ fundingMoney + ", status=" + status + ", informationAgree=" + informationAgree + ", writeStatus="
+				+ writeStatus + ", getProjectNo()=" + getProjectNo() + ", getCreator()=" + getCreator()
+				+ ", getEmail()=" + getEmail() + ", getGoalMoney()=" + getGoalMoney() + ", getProjectMainImage()="
+				+ getProjectMainImage() + ", getProjectTitle()=" + getProjectTitle() + ", getProjectSubTitle()="
+				+ getProjectSubTitle() + ", getCategory()=" + getCategory() + ", getStartDate()=" + getStartDate()
+				+ ", getEndDate()=" + getEndDate() + ", getProjectKeyword()=" + getProjectKeyword()
+				+ ", getProjectStory()=" + getProjectStory() + ", getProjectSummary()=" + getProjectSummary()
+				+ ", getProjectDetail()=" + getProjectDetail() + ", getProjectCaution()=" + getProjectCaution()
+				+ ", getProjectVideo()=" + getProjectVideo() + ", getSupporters()=" + getSupporters()
+				+ ", getFundingMoney()=" + getFundingMoney() + ", getStatus()=" + getStatus()
+				+ ", getInformationAgree()=" + getInformationAgree() + ", getWriteStatus()=" + getWriteStatus()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
 	}
-
+	
+	
 	
 	
 }

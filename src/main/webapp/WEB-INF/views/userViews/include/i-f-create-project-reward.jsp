@@ -18,7 +18,7 @@
 			<c:when test="${addedReward eq null }">
 			</c:when>
 			<c:when test="${addedReward ne null }">
-			<!-- 	<c:forEach var="reward" items="addedReward"> -->
+		<!-- 	<c:forEach var="reward" items="addedReward"> -->
 					<li>
 						<input type="hidden" name="rewardNo" value="${addedReward.rewardNo }">
 						<div class="card m-4" style="width: 25rem;">

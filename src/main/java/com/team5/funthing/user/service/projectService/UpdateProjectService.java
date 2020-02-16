@@ -4,6 +4,6 @@ import com.team5.funthing.user.model.vo.ProjectVO;
 
 public interface UpdateProjectService {
 	
-	public int updateProject(ProjectVO vo);
+	public void updateProject(ProjectVO vo);
 
 }

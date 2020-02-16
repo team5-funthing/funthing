@@ -27,18 +27,17 @@
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/bootstrap.min.css">
 
-
-
     <!-- Include jQuery and the jquery.gpopover plugin -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/user/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/user/js/jquery.gpopover.js"></script>
     <script src="https://kit.fontawesome.com/7a424ad03a.js" crossorigin="anonymous"></script>
-  
-  	<!--  CKEditor5 -->
-  	<script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/classic/ckeditor.js"></script>
     
-      <script>
+    <!-- CKEditor5 -->
+    <script src="${pageContext.request.contextPath}/resources/common/ckeditor5/build/ckeditor.js"></script>
+    
+  
+    <script>
         $(function () {
             // Use custom options for the right button
             $('#mypage-btn').gpopover({

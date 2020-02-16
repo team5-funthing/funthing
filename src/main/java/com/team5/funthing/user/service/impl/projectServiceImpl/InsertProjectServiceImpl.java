@@ -14,8 +14,8 @@ public class InsertProjectServiceImpl implements InsertProjectService {
 	private ProjectDAO projectDAO;
 		
 	@Override
-	public void insertProject(ProjectVO vo) {
-		projectDAO.insertProject(vo);
+	public ProjectVO insertProject(ProjectVO vo) {
+		return projectDAO.insertProject(vo); 
 	}
 
 }
