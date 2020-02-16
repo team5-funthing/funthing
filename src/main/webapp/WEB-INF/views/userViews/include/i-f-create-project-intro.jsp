@@ -67,24 +67,20 @@
 		<div class="input-group mb-3">
 			<div class="form-group">
 				<label for="projectMainImageFile">대표 이미지 선택하기</label>
-			
-					<input type="file" name="projectMainImageFile" class="form-control-file select-project-image"
-						id="projectMainImageFile">
-				<!-- 
 				<c:choose>
 					<c:when test="${writingProject.projectMainImage eq null}">
-						<input type="file" name="projectMainImage"
+						<input type="file" name="uploadImage"
 							class="form-control-file select-project-image"
 							id="projectMainImageFile">
 					</c:when>
 					<c:when test="${writingProject.projectMainImage ne null}">
-						<input type="file" name="projectMainImage"
+						<input type="file" name="uploadImage"
 							value="${writingProject.projectMainImage }"
 							class="form-control-file select-project-image"
 							id="projectMainImageFile">
 					</c:when>
 				</c:choose>
-				-->
+				
 			</div>
 		</div>
 	</div>

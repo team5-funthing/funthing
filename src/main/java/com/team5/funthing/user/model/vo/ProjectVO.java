@@ -21,7 +21,7 @@ public class ProjectVO {
 	
 //	프로젝트 설정 멤버
 	private int goalMoney; 
-	private MultipartFile projectMainImage;
+	private String projectMainImage;
 	private String projectTitle="";
 	private String projectSubTitle="";
 	private String category=""; 
@@ -34,7 +34,7 @@ public class ProjectVO {
 	private String projectSummary="";
 	private String projectDetail="";
 	private String projectCaution="";
-	private MultipartFile projectVideo; // null ok
+	private String projectVideo; // null ok
 
 //	그 외 멤버
 	private String supporters; 
@@ -66,10 +66,10 @@ public class ProjectVO {
 	public void setGoalMoney(int goalMoney) {
 		this.goalMoney = goalMoney;
 	}
-	public MultipartFile getProjectMainImage() {
+	public String getProjectMainImage() {
 		return projectMainImage;
 	}
-	public void setProjectMainImage(MultipartFile projectMainImage) {
+	public void setProjectMainImage(String projectMainImage) {
 		this.projectMainImage = projectMainImage;
 	}
 	public String getProjectTitle() {
@@ -132,10 +132,10 @@ public class ProjectVO {
 	public void setProjectCaution(String projectCaution) {
 		this.projectCaution = projectCaution;
 	}
-	public MultipartFile getProjectVideo() {
+	public String getProjectVideo() {
 		return projectVideo;
 	}
-	public void setProjectVideo(MultipartFile projectVideo) {
+	public void setProjectVideo(String projectVideo) {
 		this.projectVideo = projectVideo;
 	}
 	public String getSupporters() {
@@ -177,20 +177,9 @@ public class ProjectVO {
 				+ ", projectSummary=" + projectSummary + ", projectDetail=" + projectDetail + ", projectCaution="
 				+ projectCaution + ", projectVideo=" + projectVideo + ", supporters=" + supporters + ", fundingMoney="
 				+ fundingMoney + ", status=" + status + ", informationAgree=" + informationAgree + ", writeStatus="
-				+ writeStatus + ", getProjectNo()=" + getProjectNo() + ", getCreator()=" + getCreator()
-				+ ", getEmail()=" + getEmail() + ", getGoalMoney()=" + getGoalMoney() + ", getProjectMainImage()="
-				+ getProjectMainImage() + ", getProjectTitle()=" + getProjectTitle() + ", getProjectSubTitle()="
-				+ getProjectSubTitle() + ", getCategory()=" + getCategory() + ", getStartDate()=" + getStartDate()
-				+ ", getEndDate()=" + getEndDate() + ", getProjectKeyword()=" + getProjectKeyword()
-				+ ", getProjectStory()=" + getProjectStory() + ", getProjectSummary()=" + getProjectSummary()
-				+ ", getProjectDetail()=" + getProjectDetail() + ", getProjectCaution()=" + getProjectCaution()
-				+ ", getProjectVideo()=" + getProjectVideo() + ", getSupporters()=" + getSupporters()
-				+ ", getFundingMoney()=" + getFundingMoney() + ", getStatus()=" + getStatus()
-				+ ", getInformationAgree()=" + getInformationAgree() + ", getWriteStatus()=" + getWriteStatus()
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
-				+ "]";
+				+ writeStatus + "]";
 	}
-	
+		
 	
 	
 	
