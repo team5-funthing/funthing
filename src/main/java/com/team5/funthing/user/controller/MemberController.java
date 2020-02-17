@@ -158,7 +158,7 @@ public class MemberController {
 	@RequestMapping(value="imageUpload.udo",method=RequestMethod.GET)
 	public String imageUpload() {
 		//업로드를 위한 별개 페이지
-		return "imageUpload";
+		return "f-imageUpload";
 	}
 
 	@RequestMapping(value="saveimage.udo",method=RequestMethod.POST)
@@ -166,9 +166,11 @@ public class MemberController {
 
 		//  디렉토리는    수정해야함.  무조건 절대경로로 삽입해야하며, 우선 기웅님의 경로로 잡는도다.
 		//      String saveDir= "C:\\funthing\\project\\funthing\\src\\main\\webapp\\resources\\user\\img\\test";
-		String saveDir= "C:\\tomcat\\wtpwebapps\\funthing\\resources\\user\\img\\test";
+		String saveDir= "C:\\Users\\BEGGAR\\Desktop\\apache-tomcat-9.0.29\\wtpwebapps\\funthing\\resources\\user\\img\\test";
 		int maxPostSize = 3*1024*1024;
+		
 		String encoding = "UTF-8";
+		System.out.println(request.getParameterNames());
 		MultipartRequest ms = new MultipartRequest(request, saveDir, maxPostSize, encoding, new DefaultFileRenamePolicy());  
 		String renamedFile = ms.getFilesystemName("filename");
 		System.out.println( ms.getFilesystemName("filename"));     
