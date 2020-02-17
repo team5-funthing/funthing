@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-import com.team5.funthing.user.memberService.CertificationEmailService;
+import com.team5.funthing.common.utils.SendMailUtil;
 import com.team5.funthing.user.memberService.GetMemberService;
 import com.team5.funthing.user.memberService.InsertImageService;
 import com.team5.funthing.user.memberService.InsertMemberService;
@@ -25,9 +25,11 @@ import com.team5.funthing.user.model.vo.MemberVO;
 @SessionAttributes("member")
 public class MemberController {
 
-	@Autowired
-	private CertificationEmailService certificationEmailService;
+//	@Autowired
+//	private CertificationEmailService certificationEmailService;
 
+	@Autowired
+	private SendMailUtil sendMailUtil;
 
 	@Autowired
 	private GetMemberService getMemberService;
@@ -137,10 +139,9 @@ public class MemberController {
 	@RequestMapping(value= "certification.udo" ,method=RequestMethod.GET )
 	public String certificationEmail(MemberVO vo,Model model,HttpSession session) {
 		try {
-			certificationEmailService.sendCertificationEmail(vo);
-			session.setAttribute("certificationCode", vo.getCertificationCode());   
-			System.out.println("vo 인증번호 확인 :" +vo.getCertificationCode());
-			System.out.println("session 인증번호 확인 : "+ session.getAttribute("certificationCode"));
+			String certificationCode = sendMailUtil.createCertificationCode(50);
+			sendMailUtil.sendMail("[Funthing] 인증번호 입니다.", "인증번호 ["+certificationCode+"]", "ajoqwer@gmail.com");	
+			session.setAttribute("certificationCode", certificationCode);   
 			/// 비밀번호 재설정 페이지에서 세션 삭제 하도록 !!!!
 		} catch (Exception e) {
 			e.printStackTrace();
