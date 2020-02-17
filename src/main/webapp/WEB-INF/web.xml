@@ -88,7 +88,7 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/config/adminConfig/admin-servlet.xml</param-value>
-			<param-value>/WEB-INF/config/adminConfig/adminCSBoard-servlet.xml</param-value>
+
 			<!-- 추가할 admin 설정 파일 -->
 		</init-param>
 		<load-on-startup>1</load-on-startup>

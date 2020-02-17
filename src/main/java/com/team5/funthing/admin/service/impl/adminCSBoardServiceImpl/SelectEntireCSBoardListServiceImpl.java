@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.team5.funthing.admin.model.dao.AdminCSBoardDAO;
-import com.team5.funthing.admin.service.adminCSBoardService.selectEntireCSBoardListService;
+import com.team5.funthing.admin.service.adminCSBoardService.SelectEntireCSBoardListService;
 import com.team5.funthing.user.model.vo.CSBoardVO;
 
 @Service
-public class SelectEntireCSBoardListServiceImpl implements selectEntireCSBoardListService{
+public class SelectEntireCSBoardListServiceImpl implements SelectEntireCSBoardListService{
 	
 	@Autowired
 	private AdminCSBoardDAO adminCSBoardDAO;
