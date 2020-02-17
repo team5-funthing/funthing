@@ -14,10 +14,6 @@
 		INSERT INTO member ( email, password, name )
 		VALUES (#{email},#{password},#{name})
 	</insert>
-	
-	<select id="loginMember" parameterType="member" resultType="member">
-      SELECT * FROM MEMBER WHERE EMAIL = #{email}
-   </select>
    
 	<insert id="insertMember" parameterType="member">
       INSERT INTO MEMBER (EMAIL,PASSWORD,NAME)

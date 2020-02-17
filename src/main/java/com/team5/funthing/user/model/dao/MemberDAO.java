@@ -23,11 +23,6 @@ public class MemberDAO {
       sqlSessionTemplate.insert("MemberDAO.insertSocialMember",vo);
    }
    
-      public MemberVO loginMember(MemberVO vo) {
-            System.out.println("loginMember 실행");
-            return sqlSessionTemplate.selectOne("MemberDAO.loginMember", vo);
-            
-         }
       
       public void insertMember (MemberVO vo) {
             System.out.println("insertMember 실행");

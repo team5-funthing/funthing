@@ -20,7 +20,8 @@
                 </div>
                 <div class="col">
                     <div class="col align-self-center">
-                        <form action="successjoin.udo">
+                    
+                        <form action="successjoin.udo" method="post">
                             <div class="mt-10">
                                 <h2>회원가입</h2>
                             </div>
@@ -42,7 +43,8 @@
                         
                          
                             <div class="col-xl-12 mt-10">
-                                <button type="submit" class="boxed-btn3"> 완료 </button>
+                                <button type="submit" class="boxed-btn3"> 회원가입 </button>
+                                <button type="submit" class="boxed-btn3" formaction="socialLoginSuccess.udo" > 이미 회원가입을 하셨던 분들은 여기를 눌러주세요</button>
                             </div>
                             <div class="mt-10">
                                 <a class="btn btn-registry-way d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
@@ -50,6 +52,7 @@
                             </div>
                             <hr>
                         </form>
+                     
                     </div>
                 </div>
                 <div class="col">
@@ -78,7 +81,6 @@
 			var daumPassword = getParam('password');
 			document.getElementById('password').value = daumPassword;
 			var daumName = decodeURIComponent(getParam('name'));
-			alert(daumName);
 			document.getElementById('name').value = daumName;		
 		}
 	});
@@ -93,7 +95,6 @@
 	 if(naver_id_login.getProfileData('email')!=null){
     var naverEemail = naver_id_login.getProfileData('email');
     document.getElementById("email").value = naverEemail;
-    alert("이건 되는데");
     var naverName = naver_id_login.getProfileData('name')
     document.getElementById("name").value = naverName;
  

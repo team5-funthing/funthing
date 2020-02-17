@@ -13,7 +13,7 @@
 
 
 <img src="${pageContext.request.contextPath}/resources/user/img/test/testinggw.png">
-<button id="requestBtn">ㅂㅌ</button>
+<button id="requestBtn">${param.test } ${test }</button>
 
 
 
