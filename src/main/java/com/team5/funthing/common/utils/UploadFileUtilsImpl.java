@@ -23,6 +23,9 @@ public class UploadFileUtilsImpl implements UploadFileUtils {
 		
 		String newFileName = uid + "_" + fileName;
 		System.out.println("newFileName : " + newFileName);
+		newFileName.replaceAll("-", "").trim();
+		System.out.println("newFileName.replaceAll(\"-\", \"\").trim() : " + newFileName );
+		
 		String imgPath = uploadPath + ymdPath;
 		
 		File target = new File(imgPath, newFileName);
