@@ -14,12 +14,16 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.team5.funthing.user.model.vo.DeliveryAddressVO;
 import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.service.projectService.CreateProjectService;
 import com.team5.funthing.user.service.projectService.DeleteProjectService;
+import com.team5.funthing.user.service.projectService.GetDeliveryAddressService;
 import com.team5.funthing.user.service.projectService.GetProjectService;
+import com.team5.funthing.user.service.projectService.InsertDeliveryAddressService;
 import com.team5.funthing.user.service.projectService.InsertProjectService;
+import com.team5.funthing.user.service.projectService.UpdateDeliveryAddressService;
 import com.team5.funthing.user.service.projectService.UpdateProjectService;
 
 @Controller
@@ -36,6 +40,12 @@ public class ProjectController {
    private DeleteProjectService deleteProjectService;
    @Autowired
    private GetProjectService getProjectService;
+   @Autowired
+   private InsertDeliveryAddressService insertDeliveryAddressService;
+   @Autowired
+   private UpdateDeliveryAddressService updateDeliveryAddressService;
+   @Autowired
+   private GetDeliveryAddressService getDeliveryAddressService;
    
    @RequestMapping(value="/showStartProjectPage.udo", method = RequestMethod.GET)
    public String showStartProjectPage(HttpSession session, Model model) {
@@ -129,6 +139,30 @@ public class ProjectController {
    public String paymentReservation(ProjectVO vo) {
 	   
 	   return "sample/f-payment-reservation";
+   }
+   
+   
+   @RequestMapping(value="insertDeliveryAddress.udo",method =RequestMethod.GET)
+   public String insertDeliveryAddress(DeliveryAddressVO vo,HttpSession session) {
+	   vo.setEmail((String)session.getAttribute("memberSessionEmail"));
+	   ///   주소정보 관련해서   input태그   해당 vo와 이름맞춘다.   zipcode  address1  address2
+	   insertDeliveryAddressService.insertDeliveryAddress(vo);
+	   return "#";
+   }
+   
+   @RequestMapping(value="updateDeliveryAddress.udo",method=RequestMethod.GET)
+   public String updateDeliveryAddress(DeliveryAddressVO vo,HttpSession session) {
+	   vo.setEmail((String)session.getAttribute("memberSessionEmail"));
+	   ///   주소정보 관련해서   input태그   해당 vo와 이름맞춘다.   zipcode  address1  address2
+	   updateDeliveryAddressService.updateDeliveryAddress(vo);
+	   return "#";
+   }
+   
+   @RequestMapping(value="getDeliveryAddress.udo",method=RequestMethod.GET)
+   public String getDeliveryAddress(DeliveryAddressVO vo,HttpSession session){
+	   vo.setEmail((String)session.getAttribute("memberSessionEmail"));
+	   getDeliveryAddressService.getDeliveryAddress(vo);
+	   return "#";
    }
 
 //----------------------------------------------------------------------
