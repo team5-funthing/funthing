@@ -9,7 +9,7 @@ public class AdminHomeController {
 	@RequestMapping("admin.ado")
 	public String showIndex() {
 		System.out.println("메서드 실행");
-		return "p-index";
+		return "p-statistics";
 	}
 	
 }
