@@ -14,16 +14,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.team5.funthing.user.model.vo.DeliveryAddressVO;
 import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.service.projectService.CreateProjectService;
 import com.team5.funthing.user.service.projectService.DeleteProjectService;
-import com.team5.funthing.user.service.projectService.GetDeliveryAddressService;
 import com.team5.funthing.user.service.projectService.GetProjectService;
-import com.team5.funthing.user.service.projectService.InsertDeliveryAddressService;
 import com.team5.funthing.user.service.projectService.InsertProjectService;
-import com.team5.funthing.user.service.projectService.UpdateDeliveryAddressService;
 import com.team5.funthing.user.service.projectService.UpdateProjectService;
 
 @Controller
@@ -40,12 +36,7 @@ public class ProjectController {
    private DeleteProjectService deleteProjectService;
    @Autowired
    private GetProjectService getProjectService;
-   @Autowired
-   private InsertDeliveryAddressService insertDeliveryAddressService;
-   @Autowired
-   private UpdateDeliveryAddressService updateDeliveryAddressService;
-   @Autowired
-   private GetDeliveryAddressService getDeliveryAddressService;
+
    
    @RequestMapping(value="/showStartProjectPage.udo", method = RequestMethod.GET)
    public String showStartProjectPage(HttpSession session, Model model) {
@@ -60,7 +51,7 @@ public class ProjectController {
       
       
       if(loginId == null) {
-         model.addAttribute("msg", "ì•„ì´ë””ê°€ ì—†ìŠµë‹ˆë‹¤.");
+         model.addAttribute("msg", "¾ÆÀÌµğ°¡ ¾ø½À´Ï´Ù.");
          return "p-index";
       }
       
@@ -89,11 +80,11 @@ public class ProjectController {
          session.setAttribute("insertedProject", vo);
       }
       else {
-         System.out.println("í”„ë¡œì íŠ¸ ë²ˆí˜¸ : " + checkVO.getProjectNo());
+         System.out.println("ÇÁ·ÎÁ§Æ® ¹øÈ£ : " + checkVO.getProjectNo());
          vo = checkVO;
       }
       
-      System.out.println("insertProject í”„ë¡œì íŠ¸ ë‚´ìš© =======> " + vo.toString());
+      System.out.println("insertProject ÇÁ·ÎÁ§Æ® ³»¿ë =======> " + vo.toString());
       model.addAttribute("writingProject", vo);
 
       return "f-create-project";
@@ -114,14 +105,14 @@ public class ProjectController {
          vo.setProjectMainImage("C:/funthing/projectTestUploadFiles/" + filename);
       }
       
-      System.out.println(" í”„ë¡œì íŠ¸ ë‚´ìš© ====> " + vo.toString());
+      System.out.println(" ÇÁ·ÎÁ§Æ® ³»¿ë ====> " + vo.toString());
       
       
       vo.setWriteStatus(writingInputCheck(vo));
       updateProjectService.updateProject(vo);
    
       model.addAttribute("writingProject", vo);
-      model.addAttribute("msg", "ì´ê±´ë­ì•¼");
+      model.addAttribute("msg", "ÀÌ°Ç¹¹¾ß");
       
       return "f-create-project";
    } // 
@@ -135,35 +126,6 @@ public class ProjectController {
       
    }//
   
-   @RequestMapping(value="paymentReservation.udo", method = RequestMethod.GET)
-   public String paymentReservation(ProjectVO vo) {
-	   
-	   return "sample/f-payment-reservation";
-   }
-   
-   
-   @RequestMapping(value="insertDeliveryAddress.udo",method =RequestMethod.GET)
-   public String insertDeliveryAddress(DeliveryAddressVO vo,HttpSession session) {
-	   vo.setEmail((String)session.getAttribute("memberSessionEmail"));
-	   ///   ì£¼ì†Œì •ë³´ ê´€ë ¨í•´ì„œ   inputíƒœê·¸   í•´ë‹¹ voì™€ ì´ë¦„ë§ì¶˜ë‹¤.   zipcode  address1  address2
-	   insertDeliveryAddressService.insertDeliveryAddress(vo);
-	   return "#";
-   }
-   
-   @RequestMapping(value="updateDeliveryAddress.udo",method=RequestMethod.GET)
-   public String updateDeliveryAddress(DeliveryAddressVO vo,HttpSession session) {
-	   vo.setEmail((String)session.getAttribute("memberSessionEmail"));
-	   ///   ì£¼ì†Œì •ë³´ ê´€ë ¨í•´ì„œ   inputíƒœê·¸   í•´ë‹¹ voì™€ ì´ë¦„ë§ì¶˜ë‹¤.   zipcode  address1  address2
-	   updateDeliveryAddressService.updateDeliveryAddress(vo);
-	   return "#";
-   }
-   
-   @RequestMapping(value="getDeliveryAddress.udo",method=RequestMethod.GET)
-   public String getDeliveryAddress(DeliveryAddressVO vo,HttpSession session){
-	   vo.setEmail((String)session.getAttribute("memberSessionEmail"));
-	   getDeliveryAddressService.getDeliveryAddress(vo);
-	   return "#";
-   }
 
   
 //----------------------------------------------------------------------
