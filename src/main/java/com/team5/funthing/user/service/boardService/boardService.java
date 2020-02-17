@@ -5,6 +5,7 @@ import java.util.List;
 import com.team5.funthing.user.model.vo.BoardVO;
 import com.team5.funthing.user.model.vo.NoticeVO;
 
+
 public interface BoardService {
 	
 	int selectBoardCount();
@@ -14,5 +15,4 @@ public interface BoardService {
 	int getEndRow(int currentPageNum);
 	int getStartPage(int currentPageNum);
 	int getEndPage(int startPageNum);
-	
 }

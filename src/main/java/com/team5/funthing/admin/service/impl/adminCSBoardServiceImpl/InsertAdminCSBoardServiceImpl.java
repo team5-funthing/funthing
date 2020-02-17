@@ -5,10 +5,10 @@ import org.springframework.stereotype.Service;
 
 import com.team5.funthing.admin.model.dao.AdminCSBoardDAO;
 import com.team5.funthing.admin.model.vo.AdminCSBoardVO;
-import com.team5.funthing.admin.service.adminCSBoardService.insertAdminCSBoardService;
+import com.team5.funthing.admin.service.adminCSBoardService.InsertAdminCSBoardService;
 
 @Service
-public class InsertAdminCSBoardServiceImpl implements insertAdminCSBoardService{
+public class InsertAdminCSBoardServiceImpl implements InsertAdminCSBoardService{
 
 	@Autowired
 	private AdminCSBoardDAO adminCSBoardDAO;
