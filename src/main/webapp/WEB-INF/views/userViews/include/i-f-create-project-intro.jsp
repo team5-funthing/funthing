@@ -6,13 +6,11 @@
 <div class="d-flex flex-column bd-highlight mb-3">
 
 	<script>
-			$(document).ready(function(){
-				$("#categorySelectBox").val("${writingProject.category }").prop("selected", true);
-			});
+		$(document).ready(function(){
+			$("#categorySelectBox").val("${writingProject.category }").prop("selected", true);
+		});
 	</script>
-
-
-
+	
 	<div class="p-2 bd-highlight">
 		<span>펀딩 목표 금액</span>
 		<c:choose>
@@ -30,6 +28,7 @@
 		</c:choose>
 
 	</div>
+	
 	<div class="p-2 bd-highlight">
 		<span>프로젝트 제목</span>
 		<c:choose>
@@ -46,6 +45,7 @@
 			</c:when>
 		</c:choose>
 	</div>
+	
 	<div class="p-2 bd-highlight">
 		<span>프로젝트 소제목</span>
 		<c:choose>
@@ -60,28 +60,27 @@
 					class="single-input">
 			</c:when>
 		</c:choose>
-
 	</div>
+	
 	<div class="p-2 bd-highlight">
 		<span>프로젝트 대표 이미지</span>
 		<div class="input-group mb-3">
 			<div class="form-group">
 				<label for="projectMainImageFile">대표 이미지 선택하기</label>
-				<!-- 
 				<c:choose>
 					<c:when test="${writingProject.projectMainImage eq null}">
-						<input type="file" name="projectMainImage"
+						<input type="file" name="uploadImage"
 							class="form-control-file select-project-image"
 							id="projectMainImageFile">
 					</c:when>
 					<c:when test="${writingProject.projectMainImage ne null}">
-						<input type="file" name="projectMainImage"
+						<input type="file" name="uploadImage"
 							value="${writingProject.projectMainImage }"
 							class="form-control-file select-project-image"
 							id="projectMainImageFile">
 					</c:when>
 				</c:choose>
-				-->
+				
 			</div>
 		</div>
 	</div>
@@ -108,7 +107,6 @@
         </div>
 	</div>
 	<div class="p-2 bd-highlight">
-
 		<span>검색용 태그* </span>
 		<div class="row d-flex align-items-center">
 			<div class="col-xl-6">
@@ -119,10 +117,9 @@
 		</div>
 		<div class="row d-flex align-items-center">
 			<div class="col-xl-12 d-flex flex-wrap">
-				<ul id="addedKeyords">
+				<ul id="addedKeywords">
 					<c:choose>
 						<c:when test="${writingProject.projectKeyword eq null }">
-							
 						</c:when>
 						<c:when test="${writingProject.projectKeyword ne null }">
 							<c:forEach var="keyword" items="${writingProject.projectKeyword }">
@@ -131,13 +128,7 @@
 						</c:when>
 					</c:choose>
 				</ul>
-				
 			</div>
 		</div>
-	
-	</div>
-	<div class="p-2 bd-highlight">
-		<span>개인 정보 수집 동의</span><br> <span>(선택)funThing의 유용한 뉴스레터
-			받기</span>
 	</div>
 </div>

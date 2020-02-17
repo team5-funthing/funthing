@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- header-start -->
 <header>
 	<div class="header-area">
@@ -24,7 +24,7 @@
 											<hr>
 											<li><a href="#">기획전 보러가기</a></li>
 										</ul>
-									<li><a href="showCreateProjectForm.udo">프로젝트 올리기</a></li>
+									<li><a href="showStartProjectPage.udo">프로젝트 올리기</a></li>
 									<li><a href="#">더 보기 <i class="ti-angle-down"></i></a>
 										<ul class="submenu">
 											<li><a href="#"></a></li>
@@ -44,11 +44,15 @@
 								<h2 class="logo">FUN THING</h2>
 							</a>
 						</div>
-					</div>
-
-					<jsp:include page="./i-header-nav-right-login-no.jsp"/>
-					<!-- 로그인 성공시 i-header-nav-right-login-ok.jsp 와 교체 해야한다. -->
-
+					</div >
+						
+					<c:if test="${! empty sessionScope.memberSessionEmail }">
+						<jsp:include page="./i-header-nav-right-login-ok.jsp"/>
+					</c:if>
+					<c:if test="${empty sessionScope.memberSessionEmail }">
+						<jsp:include page="./i-header-nav-right-login-no.jsp"/>
+					</c:if>
+        
 				</div>
 			</div>
 		</div>

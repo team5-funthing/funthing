@@ -25,7 +25,7 @@
                 </div>
                 <div class="col">
                     <div class="col align-self-center">
-                        <form action="#">
+                        <form action="successjoin.udo" method="post">
                             <div class="mt-10">
                                 <h2>회원가입</h2>
                             </div>
@@ -36,14 +36,29 @@
                             </div>
                             <div class="mt-10">
                                 <h5>이메일 입력</h5>
-                                <input type="email" name="email" placeholder="이메일 입력" onfocus="this.placeholder = ''"
+                                <input type="email" id="email" name="email" placeholder="이메일 입력" onfocus="this.placeholder = ''"
                                     onblur="this.placeholder = '이메일 입력'" required class="single-input">
                             </div>
                             <div class="mt-10">
-                                <input type="email" name="emailCheck" placeholder="이메일 입력를 다시 입력하세요"
-                                    onfocus="this.placeholder = ''" onblur="this.placeholder = '이메일 입력를 다시 입력하세요'"
+                             <a class="btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
+                                    href="javascript:popup()">인증번호 보내기</a>
+                            
+                                <input type="text" name="emailCheck" placeholder="인증번호를 입력하세요"
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = '인증번호를 입력하세요'"
                                     required class="single-input">
                             </div>
+                           
+							<script
+								src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+							<script>
+								function popup() {
+									var email = document.getElementById('email').value;
+									window.open("certification.udo?email="
+											+ email, "인증번호가 발송되었습니다.",
+											"width=50,height=10");
+								}
+							</script>
+							<input id="sessionCode" type="hidden" value="<%=session.getAttribute("certificationCode")%>">
                             <div class="mt-10">
                                 <h5>비밀번호</h5>
                                 <input type="password" name="password" placeholder="비밀번호를 입력하세요"
@@ -56,14 +71,27 @@
                                     class="single-input">
                             </div>
                             <div class="col-xl-12 mt-10">
-                                <button type="submit" class="boxed-btn3"> 완료 </button>
+                                <input type="submit" onclick="class="boxed-btn3" value="완료">
                             </div>
                             <div class="mt-10">
                                 <a class="btn btn-registry-way d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
-                                    href="registry-way-select-form.html">뒤로가기</a>
+                                    href="joinselect.udo">뒤로가기</a>
                             </div>
                             <hr>
                         </form>
+                          <script>                                    
+                                       /// 입력된 값과 세션에 저장된 인증값 비교해서 비밀번호 변경페이지 이동 처리.
+                                       function changePassword(){    
+                                    	if(document.getElementById('sessionCode').value == document.getElementById('certification').value){
+                                    		alert("성공");
+                                    		location.href = "#";                                    		
+                                    	}else{
+                                    		document.getElementById('certification').value = "";
+                                    		document.getElementById('certification').focus();
+                                    		alert("인증번호가 틀렸습니다. 다시 입력해주세요.");                                    		
+                                    	}
+                                       } // changePassword() 종료                                        
+                                    </script>
                     </div>
                 </div>
                 <div class="col">
@@ -72,12 +100,7 @@
         </div>
     </div>
     <!-- 회원가입 폼 end -->
-
-
-    <!-- footer -->
-    <footer class="footer">
-    </footer>
-    
+  
     <jsp:include page="./include/i-popup-login.jsp"></jsp:include>
 	<jsp:include page="./include/i-popup-search.jsp"></jsp:include>
     <jsp:include page="./include/i-body-js.jsp"></jsp:include>

@@ -1855,6 +1855,14 @@ h3 {
     padding: 60px 40px
 }
 
+.addReward_popup_box {
+    background: #ffffff;
+    display: inline-block;
+    z-index: 9;
+    width: 650px;
+    padding: 60px 40px
+}
+
 .report_popup_box {
     background: #ffffff;
     display: inline-block;
@@ -4438,6 +4446,7 @@ h6 {
 }
 
 
+/* 커스텀 */
 .big-btn {
     background: #fff;
     color: #fff;
@@ -4498,12 +4507,14 @@ h6 {
     color: #009DFF;
 }
 
+#reward-popup .white-popup-block input,
 #report-popup .white-popup-block input,
 #search-popup .white-popup-block input {
     width: 100%;
     height: 50px
 }
 
+#reward-popup,
 #report-popup,
 #search-popup {
     display: inline-block;
@@ -4518,12 +4529,14 @@ h6 {
     transform: translate(-50%, -50%)
 }
 
+#reward-popup .mfp-close-btn-in .mfp-close,
 #report-popup .mfp-close-btn-in .mfp-close,
 #search-popup .mfp-close-btn-in .mfp-close {
     color: #333;
     display: none !important
 }
 
+#reward-popup button.mfp-close,
 #report-popup button.mfp-close,
 #search-popup button.mfp-close {
     display: none !important
@@ -4598,7 +4611,20 @@ dl {
     height: 30px;
 }
 
+.btn-registry-way {
+    font-weight: 800;
+    color: #ffe484;
+    border-color: #ffe484;
+}
 
+.btn-registry-way:active,
+.btn-registry-way:hover {
+    color: #2a2730;
+    background-color: #ffe484;
+    border-color: #ffe484;
+}
+
+/* 프로젝트 상세 좋아요 문의하기 공유하기 버튼 */
 .btn-detail-prj-etc-btn {
     font-weight: 800;
     color: #0059b3;
@@ -4615,6 +4641,7 @@ dl {
 }
 
 
+/* 주소검색, 프로젝트 밀어주기 버튼 */
 .btn-spon-prj,
 .btn-find-zipcode {
     font-weight: 800;
@@ -5247,17 +5274,6 @@ img.landscape {
     height: 100%; 
 }
 
-
-
-
-
-
-
-
-
-
-
-
 #mypage-btn,
 #mypage-profile-btn {
 
@@ -5278,30 +5294,7 @@ img.landscape {
 #project-details-info h4{
     color: #000000;
 }
-
-
-.btn-registry-way {
-    font-weight: 800;
-    color: #7952b3;
-    border-color: #7952b3;
-}
-
-.btn-registry-way:active,
-.btn-registry-way:hover {
-    color: #fff;
-    background-color: #7952b3;
-    border-color: #7952b3;
-}
-
-.btn-registry-way1 {
-    font-weight: 800;
-    color: #ffe484;
-    border-color: #ffe484;
-}
-
-.btn-registry-way1:active,
-.btn-registry-way1:hover {
-    color: #2a2730;
-    background-color: #ffe484;
-    border-color: #ffe484;
-}
+/* 
+#project-details-info h4 h2{
+    font-weight: bolder;
+} */

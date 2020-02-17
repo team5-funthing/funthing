@@ -1,5 +1,6 @@
 package com.team5.funthing.user.model.vo;
 
+
 public class MemberVO {
 	
 	private String email;
@@ -9,6 +10,20 @@ public class MemberVO {
 	private String introduce;
 	private String myImage;
 	private String report;
+	
+	
+	
+	
+	private String certificationCode;
+	public String getCertificationCode() {
+		return certificationCode;
+	}
+	public void setCertificationCode(String certificationCode) {
+		this.certificationCode = certificationCode;
+	}
+	
+	
+	
 	
 	public String getEmail() {
 		return email;
