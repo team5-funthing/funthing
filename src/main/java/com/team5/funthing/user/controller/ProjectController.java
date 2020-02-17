@@ -124,7 +124,12 @@ public class ProjectController {
       return "p-project-details";
       
    }//
-
+  
+   @RequestMapping(value="paymentReservation.udo", method = RequestMethod.GET)
+   public String paymentReservation(ProjectVO vo) {
+	   
+	   return "sample/f-payment-reservation";
+   }
 
 //----------------------------------------------------------------------
    
