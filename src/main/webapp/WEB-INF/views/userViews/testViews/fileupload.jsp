@@ -80,9 +80,7 @@
 						</p>
 					</textarea>
 
-</div>
-
-<script src="${pageContext.request.contextPath}/resources/common/ckeditor5/js/ckeditor.js"></script>                    
+					<script src="${pageContext.request.contextPath}/resources/common/ckeditor5/js/ckeditor.js"></script>                    
 
                 </div>
                 <div class="col">

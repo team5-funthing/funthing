@@ -16,7 +16,6 @@ import com.team5.funthing.admin.service.adminCSBoardService.InsertAdminCSBoardSe
 import com.team5.funthing.admin.service.adminCSBoardService.SelectCSBoardService;
 import com.team5.funthing.admin.service.adminCSBoardService.SelectEntireCSBoardListService;
 import com.team5.funthing.admin.service.adminCSBoardService.UpdateReplyCheckCSBoardService;
-import com.team5.funthing.user.memberService.CertificationEmailService;
 import com.team5.funthing.user.model.vo.CSBoardVO;
 import com.team5.funthing.user.model.vo.MemberVO;
 
@@ -31,8 +30,8 @@ public class AdminCSBoardController {
 	private UpdateReplyCheckCSBoardService updateReplyCheckCSBoardService;
 	@Autowired
 	private SelectCSBoardService selectCSBoardService;
-	@Autowired
-	private CertificationEmailService certificationEmailService;
+//	@Autowired
+//	private CertificationEmailService certificationEmailService;
 	@Autowired
 	private JavaMailSender jms;
 	

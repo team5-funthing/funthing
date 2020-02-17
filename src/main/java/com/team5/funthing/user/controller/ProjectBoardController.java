@@ -40,8 +40,9 @@ public class ProjectBoardController {
 	
 	@Autowired
 	private GetProjectService getProjectService; //프로젝트 가져오기 
-	@Autowired
-	private SelectMemberService selectMemberService; //프로젝트 가져오기 
+	
+//	@Autowired
+//	private SelectMemberService selectMemberService; //프로젝트 가져오기 
 	
 	
 	
