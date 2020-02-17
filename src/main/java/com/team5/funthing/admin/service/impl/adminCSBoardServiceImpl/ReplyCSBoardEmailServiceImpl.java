@@ -28,7 +28,7 @@ public class ReplyCSBoardEmailServiceImpl implements ReplyCSBoardEmailService {
 		message = mailSender.createMimeMessage();
 		messageHelper = new MimeMessageHelper(message,true,"UTF-8");
 		//
-		messageHelper.setSubject("[\""+cvo.getCsTitle()+"\"] [문의답변]"+avo.getAdminCSTitle());
+		messageHelper.setSubject("[\""+cvo.getCsTitle()+"\"] [문의답변]:"+avo.getAdminCSTitle());
 		messageHelper.setText(avo.getAdminCSContent());
 		messageHelper.setFrom("funthing20@gmail.com",avo.getAdminID());
 		messageHelper.setTo(cvo.getEmail());
