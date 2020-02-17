@@ -1,8 +1,12 @@
 package com.team5.funthing.admin.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,7 +16,9 @@ import com.team5.funthing.admin.service.adminCSBoardService.InsertAdminCSBoardSe
 import com.team5.funthing.admin.service.adminCSBoardService.SelectCSBoardService;
 import com.team5.funthing.admin.service.adminCSBoardService.SelectEntireCSBoardListService;
 import com.team5.funthing.admin.service.adminCSBoardService.UpdateReplyCheckCSBoardService;
+import com.team5.funthing.user.memberService.CertificationEmailService;
 import com.team5.funthing.user.model.vo.CSBoardVO;
+import com.team5.funthing.user.model.vo.MemberVO;
 
 @Controller
 public class AdminCSBoardController {
@@ -25,9 +31,14 @@ public class AdminCSBoardController {
 	private UpdateReplyCheckCSBoardService updateReplyCheckCSBoardService;
 	@Autowired
 	private SelectCSBoardService selectCSBoardService;
+	@Autowired
+	private CertificationEmailService certificationEmailService;
+	@Autowired
+	private JavaMailSender jms;
 	
 	private List<CSBoardVO> entireCSBoardList;
 	private CSBoardVO selectCSBoard;
+	
 	
 	@RequestMapping("selectEntireAdminCSBoardList.ado")
 	public ModelAndView selectEntireAdminCSBoardList(CSBoardVO vo){
@@ -39,18 +50,12 @@ public class AdminCSBoardController {
 		return mav; 
 	}
 	
-	@RequestMapping("updateReplyCheckCSBoard.ado")
-	public String updateReplyCheckCSBoard(CSBoardVO vo){
-		
-		updateReplyCheckCSBoardService.updateReplyCheckCSBoard(vo);
-		
-		return "";
-	}
-	
 	@RequestMapping("insertAdminCSBoard.ado")
-	public String insertAdminCSBoard(AdminCSBoardVO vo){
+	public String insertAdminCSBoard(AdminCSBoardVO avo,CSBoardVO cvo){
 		
-		insertAdminCSBoardService.insertAdminCSBoard(vo);
+		insertAdminCSBoardService.insertAdminCSBoard(avo);
+		updateReplyCheckCSBoardService.updateReplyCheckCSBoard(cvo);
+
 		
 		return ""; 
 	}
