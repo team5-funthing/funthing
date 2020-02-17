@@ -12,6 +12,7 @@ import net.coobird.thumbnailator.Thumbnails;
 
 @Component("uploadFileUtils")
 public class UploadFileUtilsImpl implements UploadFileUtils {
+
 	
 	static final int THUMB_WIDTH = 300;
 	static final int THUMB_HEIGHT = 300;

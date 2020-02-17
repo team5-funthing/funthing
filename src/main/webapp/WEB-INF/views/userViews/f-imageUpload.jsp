@@ -8,11 +8,11 @@
 </head>
 <body>
 
+
 <form action="saveimage.udo" method="post" enctype="multipart/form-data">
-<input id="filename" name="filename"  type="file" accept="image/*">
+<input  type="file" accept="image/*" >
 <input type="submit" value="저장">
 </form>
-
 
 </body>
 </html>
