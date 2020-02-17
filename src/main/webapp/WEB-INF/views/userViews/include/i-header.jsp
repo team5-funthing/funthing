@@ -31,6 +31,7 @@
 											<li><a href="#">공지</a></li>
 											<li><a href="#">알림</a></li>
 											<li><a href="#">이벤트</a></li>
+											<li><a href="#">고객센터</a></li>
 										</ul>
 									</li>
 								</ul>
