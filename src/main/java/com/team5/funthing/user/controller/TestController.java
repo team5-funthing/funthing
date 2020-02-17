@@ -2,6 +2,8 @@ package com.team5.funthing.user.controller;
 
 import java.io.File;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.team5.funthing.common.utils.UploadFileUtils;
+import com.team5.funthing.common.utils.UploadPath;
 import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.service.projectService.UpdateProjectService;
 
@@ -18,10 +21,13 @@ import com.team5.funthing.user.service.projectService.UpdateProjectService;
 public class TestController {
 	
 	@Autowired
+	private UploadFileUtils uploadFileUtils;
+	
+	@Autowired
 	private UpdateProjectService updateProjectService;
 	
-	
-	private String uploadPath = "C:/funthing/project/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/funthing/resources/user/";
+	@Autowired
+	private UploadPath uploadPath;
 
 	
 	@RequestMapping("/showUpload.tdo")
@@ -33,18 +39,24 @@ public class TestController {
 	@RequestMapping(value="/uploadTest.tdo", method = RequestMethod.POST)
 	public String testUpload(ProjectVO vo, @RequestParam("uploadFile")MultipartFile uploadFile, MultipartHttpServletRequest request) throws Exception {
 		
-		System.out.println("uploadPath : " + uploadPath);
-		String imgUploadPath = uploadPath + "uploadImg";
-		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+		
+		String realPath =uploadPath.getUPLOADPATH();
+		
+		//fileUpload
+		System.out.println("uploadPath : " + uploadPath.getUPLOADPATH());
+		String imgUploadPath = realPath + "uploadImg"; // uploadImg Æú´õ
+		String ymdPath = uploadFileUtils.calcPath(imgUploadPath);
 		String fileName = null;
 		
 		if(uploadFile != null) {
-			fileName = UploadFileUtils.fileUpload(imgUploadPath, uploadFile.getOriginalFilename(), uploadFile.getBytes(), ymdPath);
+			fileName = uploadFileUtils.fileUpload(imgUploadPath, uploadFile.getOriginalFilename(), uploadFile.getBytes(), ymdPath);
 		}else {
 			fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
 		}
 		
-		vo.setProjectMainImage(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+		String proejctMainImagePath = File.separator + "imgUpload" + ymdPath + File.separator + fileName;
+		
+		vo.setProjectMainImage(proejctMainImagePath);
 		vo.setProjectVideo(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
 		vo.setProjectNo(49);
 		vo.setCreator("uploadTester");
