@@ -8,23 +8,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team5.funthing.admin.model.vo.AdminCSBoardVO;
-import com.team5.funthing.admin.service.impl.adminCSBoardServiceImpl.InsertAdminCSBoardServiceImpl;
-import com.team5.funthing.admin.service.impl.adminCSBoardServiceImpl.SelectCSBoardServiceImpl;
-import com.team5.funthing.admin.service.impl.adminCSBoardServiceImpl.SelectEntireCSBoardListServiceImpl;
-import com.team5.funthing.admin.service.impl.adminCSBoardServiceImpl.UpdateReplyCheckCSBoardServiceImpl;
+import com.team5.funthing.admin.service.adminCSBoardService.InsertAdminCSBoardService;
+import com.team5.funthing.admin.service.adminCSBoardService.SelectCSBoardService;
+import com.team5.funthing.admin.service.adminCSBoardService.SelectEntireCSBoardListService;
+import com.team5.funthing.admin.service.adminCSBoardService.UpdateReplyCheckCSBoardService;
 import com.team5.funthing.user.model.vo.CSBoardVO;
 
 @Controller
 public class AdminCSBoardController {
 
 	@Autowired
-	private SelectEntireCSBoardListServiceImpl  selectEntireAdminCSBoardListServiceImpl;
+	private SelectEntireCSBoardListService  selectEntireAdminCSBoardListService;
 	@Autowired
-	private InsertAdminCSBoardServiceImpl insertAdminCSBoardServiceImpl;
+	private InsertAdminCSBoardService insertAdminCSBoardService;
 	@Autowired
-	private UpdateReplyCheckCSBoardServiceImpl updateReplyCheckCSBoardServiceImpl;
+	private UpdateReplyCheckCSBoardService updateReplyCheckCSBoardService;
 	@Autowired
-	private SelectCSBoardServiceImpl selectCSBoardServiceImpl;
+	private SelectCSBoardService selectCSBoardService;
 	
 	private List<CSBoardVO> entireCSBoardList;
 	private CSBoardVO selectCSBoard;
@@ -32,7 +32,7 @@ public class AdminCSBoardController {
 	@RequestMapping("selectEntireAdminCSBoardList.ado")
 	public ModelAndView selectEntireAdminCSBoardList(CSBoardVO vo){
 		//전체 목록
-		entireCSBoardList = selectEntireAdminCSBoardListServiceImpl.selectEntireCSBoardList(vo);
+		entireCSBoardList = selectEntireAdminCSBoardListService.selectEntireCSBoardList(vo);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("entireCSBoardList",entireCSBoardList);
 		mav.setViewName("");
@@ -42,7 +42,7 @@ public class AdminCSBoardController {
 	@RequestMapping("updateReplyCheckCSBoard.ado")
 	public String updateReplyCheckCSBoard(CSBoardVO vo){
 		
-		updateReplyCheckCSBoardServiceImpl.updateReplyCheckCSBoard(vo);
+		updateReplyCheckCSBoardService.updateReplyCheckCSBoard(vo);
 		
 		return "";
 	}
@@ -50,7 +50,7 @@ public class AdminCSBoardController {
 	@RequestMapping("insertAdminCSBoard.ado")
 	public String insertAdminCSBoard(AdminCSBoardVO vo){
 		
-		insertAdminCSBoardServiceImpl.insertAdminCSBoard(vo);
+		insertAdminCSBoardService.insertAdminCSBoard(vo);
 		
 		return ""; 
 	}
@@ -58,7 +58,7 @@ public class AdminCSBoardController {
 	@RequestMapping("selectCSBoard.ado")
 	public ModelAndView selectCSBoard(CSBoardVO vo){
 		
-		selectCSBoard = selectCSBoardServiceImpl.selectCSBoard(vo);
+		selectCSBoard = selectCSBoardService.selectCSBoard(vo);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("selectCSBoard",selectCSBoard);
