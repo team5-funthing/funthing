@@ -20,7 +20,9 @@ public class UploadFileUtilsImpl implements UploadFileUtils {
 		
 		UUID uid = UUID.randomUUID();
 		
+		
 		String newFileName = uid + "_" + fileName;
+		System.out.println("newFileName : " + newFileName);
 		String imgPath = uploadPath + ymdPath;
 		
 		File target = new File(imgPath, newFileName);
@@ -32,9 +34,9 @@ public class UploadFileUtilsImpl implements UploadFileUtils {
 		System.out.println("File.separator : " + File.separator);
 		System.out.println("newFileName : " + newFileName);
 		
-		File image = new File(imgPath + File.separator + newFileName);
+		File image = new File(imgPath + File.separator + newFileName); // 일반 이미지가 들어가는 경로
 		
-		File thumbnail = new File(imgPath + File.separator + "s" + File.separator + thumbFileName);
+		File thumbnail = new File(imgPath + File.separator + "s" + File.separator + thumbFileName); // 썸네일 이미지가 들어가는 폴더 경로
 		
 		if (image.exists()) {
 			thumbnail.getParentFile().mkdirs();

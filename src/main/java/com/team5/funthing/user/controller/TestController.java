@@ -28,22 +28,20 @@ public class TestController {
 	
 	@Autowired
 	private UploadPath uploadPath;
-
 	
 	@RequestMapping("/showUpload.tdo")
 	public String showUpload() {
 		return "fileupload";
 	}
 	
-	
 	@RequestMapping(value="/uploadTest.tdo", method = RequestMethod.POST)
 	public String testUpload(ProjectVO vo, @RequestParam("uploadFile")MultipartFile uploadFile, MultipartHttpServletRequest request) throws Exception {
 		
 		
-		String realPath =uploadPath.getUPLOADPATH();
+		String realPath = uploadPath.getUploadPath();
 		
 		//fileUpload
-		System.out.println("uploadPath : " + uploadPath.getUPLOADPATH());
+		System.out.println("uploadPath : " + realPath);
 		String imgUploadPath = realPath + "uploadImg"; // uploadImg Æú´õ
 		String ymdPath = uploadFileUtils.calcPath(imgUploadPath);
 		String fileName = null;
@@ -55,6 +53,8 @@ public class TestController {
 		}
 		
 		String proejctMainImagePath = File.separator + "imgUpload" + ymdPath + File.separator + fileName;
+		
+		
 		
 		vo.setProjectMainImage(proejctMainImagePath);
 		vo.setProjectVideo(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);

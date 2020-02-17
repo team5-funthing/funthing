@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.team5.funthing.user.memberService.SelectMemberService;
 import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.service.projectService.CreateProjectService;
@@ -37,8 +36,7 @@ public class ProjectController {
 	private DeleteProjectService deleteProjectService;
 	@Autowired
 	private GetProjectService getProjectService;
-	@Autowired
-	private SelectMemberService selectMemberService;
+	
 	
 	@RequestMapping(value="/showStartProjectPage.udo", method = RequestMethod.GET)
 	public String showStartProjectPage(HttpSession session, Model model) {
@@ -46,7 +44,6 @@ public class ProjectController {
 		// 테스트 용 코드
 		MemberVO test = new MemberVO();
 		test.setEmail("test@naver.com");
-		test = selectMemberService.getMember(test);
 		session.setAttribute("email", test.getEmail());
 		
 		String loginId = (String)session.getAttribute("email");
@@ -99,7 +96,6 @@ public class ProjectController {
 		
 		MultipartFile uploadImage = request.getFile("uploadImage");
 		
-		
 		System.out.println(uploadImage == null);
 		if(!uploadImage.isEmpty()) {
 			String filename = uploadImage.getOriginalFilename();
@@ -125,8 +121,8 @@ public class ProjectController {
 	public String showPreviewProject(ProjectVO vo, Model model) {
 		
 		model.addAttribute("previewProject", vo);
-		
 		return "p-project-details";
+		
 	}// 프로젝트 미리보기 이동.
 
 
@@ -142,7 +138,6 @@ public class ProjectController {
 		
 		return 'n';
 	}
-	
 	
 	public boolean nullCheck(ProjectVO project) {
 		// 추후에 이미지, 홍보 영상, 동의  등 체크 변수에 추가해야한다. 

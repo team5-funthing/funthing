@@ -19,10 +19,10 @@ import com.team5.funthing.user.model.vo.MemberVO;
 public class CertificationEmailServiceImpl implements CertificationEmailService {
 
 
-@Autowired
-private JavaMailSender mailSender;
-private MimeMessage message;
-private MimeMessageHelper messageHelper;
+	@Autowired
+	private JavaMailSender mailSender;
+	private MimeMessage message;
+	private MimeMessageHelper messageHelper;
 
 
 
