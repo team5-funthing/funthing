@@ -60,7 +60,7 @@ public class ProjectController {
       
       
       if(loginId == null) {
-         model.addAttribute("msg", "¾ÆÀÌµğ°¡ ¾ø½À´Ï´Ù.");
+         model.addAttribute("msg", "ì•„ì´ë””ê°€ ì—†ìŠµë‹ˆë‹¤.");
          return "p-index";
       }
       
@@ -89,11 +89,11 @@ public class ProjectController {
          session.setAttribute("insertedProject", vo);
       }
       else {
-         System.out.println("ÇÁ·ÎÁ§Æ® ¹øÈ£ : " + checkVO.getProjectNo());
+         System.out.println("í”„ë¡œì íŠ¸ ë²ˆí˜¸ : " + checkVO.getProjectNo());
          vo = checkVO;
       }
       
-      System.out.println("insertProject ÇÁ·ÎÁ§Æ® ³»¿ë =======> " + vo.toString());
+      System.out.println("insertProject í”„ë¡œì íŠ¸ ë‚´ìš© =======> " + vo.toString());
       model.addAttribute("writingProject", vo);
 
       return "f-create-project";
@@ -114,14 +114,14 @@ public class ProjectController {
          vo.setProjectMainImage("C:/funthing/projectTestUploadFiles/" + filename);
       }
       
-      System.out.println(" ÇÁ·ÎÁ§Æ® ³»¿ë ====> " + vo.toString());
+      System.out.println(" í”„ë¡œì íŠ¸ ë‚´ìš© ====> " + vo.toString());
       
       
       vo.setWriteStatus(writingInputCheck(vo));
       updateProjectService.updateProject(vo);
    
       model.addAttribute("writingProject", vo);
-      model.addAttribute("msg", "ÀÌ°Ç¹¹¾ß");
+      model.addAttribute("msg", "ì´ê±´ë­ì•¼");
       
       return "f-create-project";
    } // 
@@ -145,7 +145,7 @@ public class ProjectController {
    @RequestMapping(value="insertDeliveryAddress.udo",method =RequestMethod.GET)
    public String insertDeliveryAddress(DeliveryAddressVO vo,HttpSession session) {
 	   vo.setEmail((String)session.getAttribute("memberSessionEmail"));
-	   ///   ÁÖ¼ÒÁ¤º¸ °ü·ÃÇØ¼­   inputÅÂ±×   ÇØ´ç vo¿Í ÀÌ¸§¸ÂÃá´Ù.   zipcode  address1  address2
+	   ///   ì£¼ì†Œì •ë³´ ê´€ë ¨í•´ì„œ   inputíƒœê·¸   í•´ë‹¹ voì™€ ì´ë¦„ë§ì¶˜ë‹¤.   zipcode  address1  address2
 	   insertDeliveryAddressService.insertDeliveryAddress(vo);
 	   return "#";
    }
@@ -153,7 +153,7 @@ public class ProjectController {
    @RequestMapping(value="updateDeliveryAddress.udo",method=RequestMethod.GET)
    public String updateDeliveryAddress(DeliveryAddressVO vo,HttpSession session) {
 	   vo.setEmail((String)session.getAttribute("memberSessionEmail"));
-	   ///   ÁÖ¼ÒÁ¤º¸ °ü·ÃÇØ¼­   inputÅÂ±×   ÇØ´ç vo¿Í ÀÌ¸§¸ÂÃá´Ù.   zipcode  address1  address2
+	   ///   ì£¼ì†Œì •ë³´ ê´€ë ¨í•´ì„œ   inputíƒœê·¸   í•´ë‹¹ voì™€ ì´ë¦„ë§ì¶˜ë‹¤.   zipcode  address1  address2
 	   updateDeliveryAddressService.updateDeliveryAddress(vo);
 	   return "#";
    }
@@ -165,6 +165,7 @@ public class ProjectController {
 	   return "#";
    }
 
+  
 //----------------------------------------------------------------------
    
    public char writingInputCheck(ProjectVO vo) {
@@ -197,9 +198,5 @@ public class ProjectController {
          
       }
    }
-      
- 
-
-
 
 }
