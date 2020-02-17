@@ -36,14 +36,16 @@ public class MemberController {
    
 
    @RequestMapping("*.udo")
-   public String showindex() {
+   public String showindex(MemberVO vo, HttpSession session) {
       return "p-index";
+//      return "p-start-project";
+
    }
    
    @RequestMapping(value="loginmember.udo", method=RequestMethod.POST) // 로그인확인
    public String loginMember(MemberVO vo, HttpServletRequest request,HttpSession session) {
     System.out.println("달라"+selectMemberService.loginMember(vo).getPassword());
-    request.getParameter("password");
+
     if(selectMemberService.loginMember(vo) != null) { //vo가 널이아닐때 로그인 성공시
          if(selectMemberService.loginMember(vo).getPassword().equals(request.getParameter("password"))) { //패스워드 맞았을때  
          session.setAttribute("memberSessionEmail", selectMemberService.loginMember(vo).getEmail());
@@ -54,7 +56,8 @@ public class MemberController {
          System.out.println(selectMemberService.getMember(vo).getMyImage());
          System.out.println("성공");
          
-            return "p-index";
+//            return "p-index";
+            return "p-test-board-write";
          }else {
             System.out.println("실패");
             return "p-index";
@@ -144,7 +147,7 @@ public class MemberController {
        vo.setEmail(email);
        vo.setMyImage(renamedFile);
       insertMemberService.saveImage(vo);
-      session.setAttribute("myprofile", selectMemberService.getMember(vo).getMyImage());
+//      session.setAttribute("myprofile", selectMemberService.getMember(vo).getMyImage());
       
       return "p-index";
    }

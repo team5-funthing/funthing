@@ -29,11 +29,9 @@ public class ProjectController {
 	private GetProjectService getProjectService;
 	
 	
-	
-	
-	
+
 	@RequestMapping(value="/showCreateProjectBasicFrom.udo", method = RequestMethod.GET)
-	public String showCreateProjectForm(HttpSession session, Model model) {
+	public String showCreateProjectForm(HttpSession session, Model model) { 
 		return "f-create-project-basic"; // 프로젝트 작성 폼
 	} 
 	
