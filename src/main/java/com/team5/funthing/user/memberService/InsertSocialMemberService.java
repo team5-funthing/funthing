@@ -2,12 +2,7 @@ package com.team5.funthing.user.memberService;
 
 import com.team5.funthing.user.model.vo.MemberVO;
 
-public interface InsertMemberService {
+public interface InsertSocialMemberService {
 
-
-
-
-	public void insertMember(MemberVO vo);
-
-
+	public void insertSocialMember(MemberVO vo);
 }
