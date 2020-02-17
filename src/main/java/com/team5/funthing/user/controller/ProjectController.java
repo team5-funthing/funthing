@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.team5.funthing.user.memberService.SelectMemberService;
+import com.team5.funthing.user.memberService.GetMemberService;
 import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.service.projectService.CreateProjectService;
@@ -38,7 +38,7 @@ public class ProjectController {
 	@Autowired
 	private GetProjectService getProjectService;
 	@Autowired
-	private SelectMemberService selectMemberService;
+	private GetMemberService getMemberService;
 	
 	@RequestMapping(value="/showStartProjectPage.udo", method = RequestMethod.GET)
 	public String showStartProjectPage(HttpSession session, Model model) {
@@ -46,7 +46,7 @@ public class ProjectController {
 		// 테스트 용 코드
 		MemberVO test = new MemberVO();
 		test.setEmail("test@naver.com");
-		test = selectMemberService.getMember(test);
+		test = getMemberService.getMember(test);
 		session.setAttribute("email", test.getEmail());
 		
 		String loginId = (String)session.getAttribute("email");
