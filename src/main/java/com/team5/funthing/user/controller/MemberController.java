@@ -78,7 +78,6 @@ public class MemberController {
 	@RequestMapping(value="getMember.udo", method=RequestMethod.POST) // 로그인확인
 	public String getMember(MemberVO vo, HttpServletRequest request,HttpSession session) {
 		System.out.println("getMember.udo 실행");
-		session.invalidate();  // 로그인 전 세션초기화 
 		if(getMemberService.getMember(vo) != null) { //vo가 널이아닐때 로그인 성공시
 			if(getMemberService.getMember(vo).getPassword().equals(request.getParameter("password"))) { //패스워드 맞았을때  
 				session.setAttribute("memberSessionEmail", getMemberService.getMember(vo).getEmail());

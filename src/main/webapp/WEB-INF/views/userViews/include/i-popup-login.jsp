@@ -2,7 +2,7 @@
 
     
 	<!-- 로그인 팝업페이지-->
-    <form id="login-popup" class="white-popup-block mfp-hide" action="loginmember.udo" method="post">
+    <form id="login-popup" class="white-popup-block mfp-hide" action="getMember.udo" method="post">
         <div class="popup_box ">
             <div class="popup_inner">
                 <h3>로그인</h3>
