@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 import com.team5.funthing.user.model.dao.BoardDAO;
 import com.team5.funthing.user.model.vo.BoardVO;
 import com.team5.funthing.user.model.vo.NoticeVO;
-import com.team5.funthing.user.service.boardService.boardService;
+import com.team5.funthing.user.service.boardService.BoardService;
 
 @Service
-public class BoardServiceImpl implements boardService{
+public class BoardServiceImpl implements BoardService{
 	
 	@Autowired
 	private BoardDAO boardDao;

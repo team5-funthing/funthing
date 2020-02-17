@@ -13,19 +13,12 @@ public class InsertMemberServiceImpl implements InsertMemberService {
 	@Autowired
 	MemberDAO memberDAO;
 
-	@Override
-	public void insertSocialMember(MemberVO vo) {
-		memberDAO.insertSocialMember(vo);
-	}
+	
 	
 	@Override
 	   public void insertMember(MemberVO vo) {
 	      memberDAO.insertMember(vo);
 	   }
 
-	@Override
-	public void saveImage(MemberVO vo) {
-		memberDAO.saveImage(vo);
-	}
 
 }
