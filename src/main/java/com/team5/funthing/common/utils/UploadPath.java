@@ -1,4 +1,4 @@
-package com.team5.funthing.common.utils.uploadUtils;
+package com.team5.funthing.common.utils;
 
 import org.springframework.stereotype.Component;
 

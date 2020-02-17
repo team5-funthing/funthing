@@ -78,6 +78,7 @@ public class MemberController {
 	@RequestMapping(value="getMember.udo", method=RequestMethod.POST) // 로그인확인
 	public String getMember(MemberVO vo, HttpServletRequest request,HttpSession session) {
 		System.out.println("getMember.udo 실행");
+		session.invalidate();  // 로그인 전 세션초기화 
 		if(getMemberService.getMember(vo) != null) { //vo가 널이아닐때 로그인 성공시
 			if(getMemberService.getMember(vo).getPassword().equals(request.getParameter("password"))) { //패스워드 맞았을때  
 				session.setAttribute("memberSessionEmail", getMemberService.getMember(vo).getEmail());
@@ -166,7 +167,7 @@ public class MemberController {
 
 		//  디렉토리는    수정해야함.  무조건 절대경로로 삽입해야하며, 우선 기웅님의 경로로 잡는도다.
 		//      String saveDir= "C:\\funthing\\project\\funthing\\src\\main\\webapp\\resources\\user\\img\\test";
-		String saveDir= "C:/funthing/project/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/funthing/resources/user/uploadImg/";
+		String saveDir= "C:\\tomcat\\wtpwebapps\\funthing\\resources\\user\\img\\test";
 		int maxPostSize = 3*1024*1024;
 		String encoding = "UTF-8";
 		MultipartRequest ms = new MultipartRequest(request, saveDir, maxPostSize, encoding, new DefaultFileRenamePolicy());  

@@ -67,36 +67,20 @@
 		<div class="input-group mb-3">
 			<div class="form-group">
 				<label for="projectMainImageFile">대표 이미지 선택하기</label>
-				<%= request.getRealPath("/") %>		
 				<c:choose>
 					<c:when test="${writingProject.projectMainImage eq null}">
 						<input type="file" name="uploadImage"
 							class="form-control-file select-project-image"
 							id="projectMainImageFile">
-                        <hr>
-                        <div class="select_img"><img src="" /></div>
 					</c:when>
 					<c:when test="${writingProject.projectMainImage ne null}">
-						<h4>이미지 바꾸기</h4>
 						<input type="file" name="uploadImage"
+							value="${writingProject.projectMainImage }"
 							class="form-control-file select-project-image"
 							id="projectMainImageFile">
-						<div class="select_img m-3"><img style="width: 500px; height: auto;" src="${writingProject.projectMainImage }" /></div>					
 					</c:when>
 				</c:choose>
 				
-				<script>
-	            	$("#projectMainImageFile").change(function(){
-	            		if(this.files && this.files[0]){
-	            			var reader = new FileReader;
-	            			reader.onload = function(data){
-	            				$(".select_img img").attr("src", data.target.result).width(500);
-	            			}
-	            			reader.readAsDataURL(this.files[0]);
-	            		}
-	            	})
-			    </script>
-			    
 			</div>
 		</div>
 	</div>
