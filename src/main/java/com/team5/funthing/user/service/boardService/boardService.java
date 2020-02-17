@@ -5,7 +5,7 @@ import java.util.List;
 import com.team5.funthing.user.model.vo.BoardVO;
 import com.team5.funthing.user.model.vo.NoticeVO;
 
-public interface boardService {
+public interface BoardService {
 	
 	int selectBoardCount();
 	int calculateTotalPage(int noticeCountTotal);
