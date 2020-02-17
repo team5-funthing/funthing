@@ -7,28 +7,21 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.team5.funthing.user.model.vo.CSBoardVO;
 import com.team5.funthing.user.model.vo.NoticeVO;
-import com.team5.funthing.user.service.impl.csboardServiceImpl.insertCSBoardServiceImpl;
+import com.team5.funthing.user.service.impl.csboardServiceImpl.InsertCSBoardServiceImpl;
 
 @Controller
 public class CSBoardController {
 	
 	@Autowired
-	private insertCSBoardServiceImpl insertCSBoardServiceImpl;
-	
-	
-	@RequestMapping("/insertCSBoardForm.udo")
-	public String insertCSBoardForm() {
+	private InsertCSBoardServiceImpl insertCSBoardServiceImpl;
 		
-	    return "b-csboard2";
-	}
-	
 	@RequestMapping("/insertCSBoard.udo")
 	public String insertCSBoard(CSBoardVO vo) {
 		System.out.println("컨트롤러 고객문의 인서트");
 		
 		insertCSBoardServiceImpl.insertCSBoard(vo);
 		
-	    return "p-index";
+	    return "";
 	}
 	
 }

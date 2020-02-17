@@ -8,7 +8,7 @@ import com.team5.funthing.user.model.vo.CSBoardVO;
 import com.team5.funthing.user.service.csboardService.CSBoardService;
 
 @Service
-public class insertCSBoardServiceImpl implements CSBoardService{
+public class InsertCSBoardServiceImpl implements CSBoardService{
 	
 	@Autowired
 	private CSBoardDAO csboardDao;
