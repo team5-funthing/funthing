@@ -37,8 +37,11 @@
 			 SELECT project_seq.currval FROM dual
 		</selectKey>
 				
-		INSERT INTO project(projectno, creator, email, projectTitle, goalMoney, category, projectSubTitle, projectstory, projectSummary, projectcaution, status, informationagree, startdate, enddate, writestatus)
-		VALUES (project_seq.nextval, #{creator}, #{email}, #{projectTitle}, #{goalMoney}, #{category}, #{projectSubTitle}, #{projectStory}, #{projectSummary}, #{projectCaution}, #{status}, #{informationAgree}, #{startDate}, #{endDate}, #{writeStatus})
+	<!--	INSERT INTO project(projectno, creator, email, projectTitle, goalMoney, category, projectSubTitle, projectstory, projectSummary, projectcaution, status, informationagree, startdate, enddate, writestatus)
+		VALUES (project_seq.nextval, #{creator}, #{email}, #{projectTitle}, #{goalMoney}, #{category}, #{projectSubTitle}, #{projectStory}, #{projectSummary}, #{projectCaution}, #{status}, #{informationAgree}, #{startDate}, #{endDate}, #{writeStatus}) -->
+		INSERT INTO project(projectno, creator, email)
+		VALUES (project_seq.nextval, #{creator}, #{email})
+		
 		
 	</insert>
 
@@ -53,7 +56,7 @@
 	
 	<update id="updateProject" parameterType="project">
 		UPDATE project
-		SET creator = #{creator}, projectTitle = #{projectTitle},  goalmoney = #{goalMoney}, category = #{category}, projectsubtitle = #{projectSubTitle}, projectstory = #{projectStory}, projectsummary = #{projectSummary}, projectcaution = #{projectCaution}, status = #{status}, informationagree = #{informationAgree}, startDate = #{startDate}, endDate = #{endDate}, writestatus = #{writeStatus} 																																									  
+		SET creator = #{creator}, projectTitle = #{projectTitle},  goalmoney = #{goalMoney}, projectMainImage = #{projectMainImage}, category = #{category}, projectsubtitle = #{projectSubTitle}, projectstory = #{projectStory}, projectsummary = #{projectSummary}, projectcaution = #{projectCaution}, status = #{status}, informationagree = #{informationAgree}, startDate = #{startDate}, endDate = #{endDate}, writestatus = #{writeStatus} 																																									  
 		WHERE projectNo = #{projectNo}
 	</update>
 	

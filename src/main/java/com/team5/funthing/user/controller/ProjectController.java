@@ -1,8 +1,7 @@
 package com.team5.funthing.user.controller;
 
-import java.io.File;
-import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.team5.funthing.common.utils.uploadUtils.UploadFileUtils;
 import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.service.projectService.CreateProjectService;
@@ -26,6 +26,7 @@ import com.team5.funthing.user.service.projectService.UpdateProjectService;
 @SessionAttributes("project")
 public class ProjectController {
 	
+	
 	@Autowired
 	private CreateProjectService createProjectService;
 	@Autowired
@@ -37,41 +38,43 @@ public class ProjectController {
 	@Autowired
 	private GetProjectService getProjectService;
 	
+	@Autowired
+	private UploadFileUtils projectUploadFileUtilsImpl;
+	
 	@RequestMapping(value="/showStartProjectPage.udo", method = RequestMethod.GET)
 	public String showStartProjectPage(HttpSession session, Model model) {
-
-		// í…ŒìŠ¤íŠ¸ ìš© ì½”ë“œ
+		
+		// Å×½ºÆ® ¿ë ÄÚµå
 		MemberVO test = new MemberVO();
 		test.setEmail("test@naver.com");
-    
 		session.setAttribute("email", test.getEmail());
 		
 		String loginId = (String)session.getAttribute("email");
 		
 		
 		if(loginId == null) {
-			model.addAttribute("msg", "ë¡œê·¸ì¸ í›„ ì´ìš© ê°€ëŠ¥í•©ë‹ˆë‹¤.");
+			model.addAttribute("msg", "·Î±×ÀÎ ÈÄ ÀÌ¿ë °¡´ÉÇÕ´Ï´Ù.");
 			return "p-index";
 		}
 		
 		model.addAttribute("member", test); 
-		return "p-start-project"; // ì‹œì‘í•˜ê¸° í˜ì´ì§€ë¡œ ì´ë™í•˜ì
-	} // ë¡œê·¸ì¸ ì‹œì—ë§Œ í”„ë¡œì íŠ¸ ë§Œë“¤ê¸° ì ‘ê·¼ ê°€ëŠ¥í•˜ë„ë¡ í•˜ê¸°ìœ„í•´ ì„¸ì…˜ì— ì €ì¥ëœ ê°’ í™•ì¸ í›„ í˜ì´ì§€ ì´ë™.
+		return "p-start-project"; // ½ÃÀÛÇÏ±â ÆäÀÌÁö·Î ÀÌµ¿ÇÏÀÚ
+	} // ·Î±×ÀÎ ½Ã¿¡¸¸ ÇÁ·ÎÁ§Æ® ¸¸µé±â Á¢±Ù °¡´ÉÇÏµµ·Ï ÇÏ±âÀ§ÇØ ¼¼¼Ç¿¡ ÀúÀåµÈ °ª È®ÀÎ ÈÄ ÆäÀÌÁö ÀÌµ¿.
 	
 	@RequestMapping(value="/showCreateProjectBasicForm.udo", method = RequestMethod.GET)
 	public String showCreateProjectBasicForm(HttpSession session, ProjectVO vo, Model model) {
 		
 		session.removeAttribute("insertedProject");
-		System.out.println("insertedProject ì‚­ì œ");
+		System.out.println("insertedProject »èÁ¦");
 		model.addAttribute("basicProjectSetting", vo);
 		
-		return "f-create-project-basic"; // í”„ë¡œì íŠ¸ ì‘ì„± í¼
-	} // í”„ë¡œì íŠ¸ ë§Œë“¤ê¸° ì‹œì‘ í˜ì´ì§€ì—ì„œ ìˆ˜í–‰
+		return "f-create-project-basic"; // ÇÁ·ÎÁ§Æ® ÀÛ¼º Æû
+	} // ÇÁ·ÎÁ§Æ® ¸¸µé±â ½ÃÀÛ ÆäÀÌÁö¿¡¼­ ¼öÇà
 	
 	@RequestMapping(value = "insertProject.udo", method = RequestMethod.POST)
 	public String insertProject(HttpSession session, ProjectVO vo, Model model) {
 		
-		// í”„ë¡œì íŠ¸ ì œì‘ ì²« ì‹œì‘ì‹œì—ë§Œ ì‹œì‘
+		// ÇÁ·ÎÁ§Æ® Á¦ÀÛ Ã¹ ½ÃÀÛ½Ã¿¡¸¸ ½ÃÀÛ
 		ProjectVO checkVO = (ProjectVO)session.getAttribute("insertedProject");
 		
 		if(checkVO == null) {
@@ -79,42 +82,31 @@ public class ProjectController {
 			session.setAttribute("insertedProject", vo);
 		}
 		else {
-			System.out.println("ìƒˆë¡œê³ ì¹¨ í™•ì¸ : " + checkVO.getProjectNo());
+			System.out.println("»õ·Î°íÄ§ È®ÀÎ : " + checkVO.getProjectNo());
 			vo = checkVO;
 		}
 		
-		System.out.println("insertProject ë˜ëŠ” ìƒˆë¡œê³ ì¹¨ ì‹¤í–‰ í›„ =======> " + vo.toString());
+		System.out.println("insertProject ¶Ç´Â »õ·Î°íÄ§ ½ÇÇà ÈÄ =======> " + vo.toString());
 		model.addAttribute("writingProject", vo);
 
 		return "f-create-project";
-	} // í”„ë¡œì íŠ¸ ì‘ì„± ì‹œì‘í• ë•Œ ë©”ì„œë“œ 
+	} // ÇÁ·ÎÁ§Æ® ÀÛ¼º ½ÃÀÛÇÒ¶§ ¸Ş¼­µå 
 	
 	@RequestMapping(value = "saveInputWritingProject.udo", method = RequestMethod.POST)
-	public String saveInputWritingProject(MultipartHttpServletRequest request,
-											ProjectVO vo, 
-											Model model) throws IOException {
+	public String saveInputWritingProject(@RequestParam(name = "uploadImage")MultipartFile uploadFile, ProjectVO vo, Model model, HttpServletRequest request) throws Exception {
 		
-		MultipartFile uploadImage = request.getFile("uploadImage");
+		vo = projectUploadFileUtilsImpl.useUtil(uploadFile, vo);
+
 		
-		System.out.println(uploadImage == null);
-		if(!uploadImage.isEmpty()) {
-			String filename = uploadImage.getOriginalFilename();
-			uploadImage.transferTo(new File("C:/funthing/projectTestUploadFiles/" + filename));
-			
-			vo.setProjectMainImage("C:/funthing/projectTestUploadFiles/" + filename);
-		}
-		
-		System.out.println("ì €ì¥í•˜ê¸° í´ë¦­ ====> " + vo.toString());
-		
-		
+		System.out.println("ÀúÀåÇÏ±â Å¬¸¯ ====> " + vo.toString());
 		vo.setWriteStatus(writingInputCheck(vo));
 		updateProjectService.updateProject(vo);
 	
 		model.addAttribute("writingProject", vo);
-		model.addAttribute("msg", "ì €ì¥ ë˜ì—ˆìŠµë‹ˆë‹¤");
+		model.addAttribute("msg", "ÀúÀå µÇ¾ú½À´Ï´Ù");
 		
 		return "f-create-project";
-	} // ì‘ì„±ì¤‘ì¸ í”„ë¡œì íŠ¸ ì €ì¥í•˜ê¸°.
+	} // ÀÛ¼ºÁßÀÎ ÇÁ·ÎÁ§Æ® ÀúÀåÇÏ±â.
 	
 	
 	@RequestMapping(value = "showPreviewProject.udo", method = RequestMethod.POST)
@@ -123,7 +115,7 @@ public class ProjectController {
 		model.addAttribute("previewProject", vo);
 		return "p-project-details";
 		
-	}// í”„ë¡œì íŠ¸ ë¯¸ë¦¬ë³´ê¸° ì´ë™.
+	}// ÇÁ·ÎÁ§Æ® ¹Ì¸®º¸±â ÀÌµ¿.
 
 
 //----------------------------------------------------------------------
@@ -140,7 +132,7 @@ public class ProjectController {
 	}
 	
 	public boolean nullCheck(ProjectVO project) {
-		// ì¶”í›„ì— ì´ë¯¸ì§€, í™ë³´ ì˜ìƒ, ë™ì˜  ë“± ì²´í¬ ë³€ìˆ˜ì— ì¶”ê°€í•´ì•¼í•œë‹¤. 
+		// ÃßÈÄ¿¡ ÀÌ¹ÌÁö, È«º¸ ¿µ»ó, µ¿ÀÇ  µî Ã¼Å© º¯¼ö¿¡ Ãß°¡ÇØ¾ßÇÑ´Ù. 
 		if(
 				project.getGoalMoney() == 0 ||
 				project.getProjectTitle() == null || project.getProjectTitle() == "" || 
