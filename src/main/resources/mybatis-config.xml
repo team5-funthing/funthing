@@ -11,7 +11,7 @@
 		<typeAlias type="com.team5.funthing.user.model.vo.BoardVO" alias="board"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.CSBoardVO" alias="csboard"/>
 		<!-- user : admin -->
-		<typeAlias type="com.team5.funthing.admin.model.vo.adminCSBoardVO" alias="adminCSBoard"/>
+		<typeAlias type="com.team5.funthing.admin.model.vo.AdminCSBoardVO" alias="adminCSBoard"/>
 		
 	</typeAliases>
 	<mappers>
