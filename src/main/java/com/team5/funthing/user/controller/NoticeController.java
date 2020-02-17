@@ -11,16 +11,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.team5.funthing.user.model.vo.BoardVO;
 import com.team5.funthing.user.model.vo.NoticeVO;
-import com.team5.funthing.user.service.impl.boardServiceImpl.BoardServiceImpl;
-import com.team5.funthing.user.service.impl.noticeServiceImpl.NoticeServiceImpl;
+import com.team5.funthing.user.service.boardService.BoardService;
+import com.team5.funthing.user.service.noticeService.NoticeService;
 
 @Controller
 public class NoticeController {
 
 	@Autowired
-	private NoticeServiceImpl noticeServiceImpl;
+	private NoticeService noticeServiceImpl;
 	@Autowired
-	private BoardServiceImpl boardServiceImpl;
+	private BoardService boardServiceImpl;
 
 	private List<NoticeVO> EntireNoticeList;//전체목록
 	private List<NoticeVO> noticeList;//전체목록
