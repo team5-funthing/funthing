@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 
@@ -67,7 +68,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">notice_input</h4>
+                        <h4 class="page-title">공지 글</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
@@ -99,37 +100,35 @@
                             <div class="card-body">
                                 <h4 class="card-title m-b-0" style="padding:20px;">공지사항</h4>
                         <!-- Create the editor container -->
-                    
+                   	<form action="insertAdminNoticeBoard.ado">
                         <div style="padding-bottom: 5px;" >
                             <label style="padding-right: 5px;"> 제목 </label>
-                            <input type="text" size="50%;"
-                            >
-                        
-                            <select >
-                                <option value="" selected="selected">분류</option>
-                                <option value="AAA">AAA</option>
-                                <option value="BBB">BBB</option>
-                                <option value="CCC">CCC</option>
+                            <input type="text" size="50%" name = "noticeTitle" value="${vo.noticeTitle}">
+                   			<input type="hidden" name="noticeNo" value="${vo.noticeNo }">
+                            <select name="noticeCategory">
+                                <option value="공지" <c:if test="${vo.noticeCategory eq '공지'}">selected</c:if>>공지</option>
+                                <option value="이벤트"<c:if test="${vo.noticeCategory eq '이벤트'}">selected</c:if>>이벤트</option>
                             </select>
-                        
-                        
-                        
-                        </div>
-
-
-
-                        <div id="editor" style="height: 300px;">
+                        </div>                       
+                        <textarea name="editor1" rows = "7" cols = "50">${vo.noticeContents}</textarea>
+                        <!-- <div id="editor" style="height: 300px;">
                             <p></p>
                             <p><strong></strong> </p>
                             <p>
                                 <br>
                             </p>
-                        </div>
+                        </div> -->
                         <div align="center" style="padding-top: 15px;">
-                            <input type="button" value="등록" >
-                            <a href="C:\Users\pjh\Desktop\5jo\matrix-admin-master\index.html"><input type="button" value="취소" ></a>
+							<c:choose>
+								<c:when test="${vo.noticeNo ne null}">
+									<input type="submit" formaction="updateAdminNoticeBoard.ado" value="수정">							
+								</c:when>
+							</c:choose>                  		
+                            <input type="submit" value="등록" >
+                            <input type="submit" formaction="deleteAdminNoticeBoard.ado" value="삭제">
+                            <a href="adminNoticeInput.ado"><input type="button" value="뒤로" ></a>
                         </div>
-
+					</form>
                     </div>
                 </div>
             </div>
@@ -200,6 +199,8 @@
     <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/jquery-minicolors/jquery.minicolors.min.js"></script>
     <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/quill/dist/quill.min.js"></script>
+    <!-- CKEditor 전용 라이브러리 -->
+    <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
     <script>
         //***********************************//
         // For select 2
@@ -242,6 +243,9 @@
             theme: 'snow'
         });
 
+    </script>
+    <script>
+           CKEDITOR.replace( 'editor1' );
     </script>
 </body>
 
