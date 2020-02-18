@@ -14,8 +14,8 @@ import com.team5.funthing.admin.model.vo.AdminCSBoardVO;
 import com.team5.funthing.admin.service.adminCSBoardService.InsertAdminCSBoardService;
 import com.team5.funthing.admin.service.adminCSBoardService.SelectCSBoardService;
 import com.team5.funthing.admin.service.adminCSBoardService.SelectEntireCSBoardListService;
-import com.team5.funthing.admin.service.adminCSBoardService.SendMailUtil;
 import com.team5.funthing.admin.service.adminCSBoardService.UpdateReplyCheckCSBoardService;
+import com.team5.funthing.common.utils.SendMailUtil;
 import com.team5.funthing.user.model.vo.CSBoardVO;
 
 @Controller
@@ -39,7 +39,6 @@ public class AdminCSBoardController {
 	
 	@RequestMapping("selectEntireAdminCSBoardList.ado")
 	public ModelAndView selectEntireAdminCSBoardList(CSBoardVO vo){
-		//ÀüÃ¼ ¸ñ·Ï
 		entireCSBoardList = selectEntireAdminCSBoardListService.selectEntireCSBoardList(vo);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("entireCSBoardList",entireCSBoardList);
@@ -52,7 +51,7 @@ public class AdminCSBoardController {
 		
 		insertAdminCSBoardService.insertAdminCSBoard(avo);
 		updateReplyCheckCSBoardService.updateReplyCheckCSBoard(cvo);
-		sendMailUtil.sendMail(avo, cvo);
+		sendMailUtil.sendMail("[\""+cvo.getCsTitle()+"\"] [���Ǵ亯]:"+avo.getAdminCSTitle(), avo.getAdminCSContent(),cvo.getEmail());
 		
 		return ""; 
 	}
