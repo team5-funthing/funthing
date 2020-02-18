@@ -1,21 +1,15 @@
 package com.team5.funthing.user.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.team5.funthing.user.memberService.SelectMemberService;
-import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.model.vo.ProjectBoardVO;
-import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.service.projectBoardService.DeleteProjectBoardService;
 import com.team5.funthing.user.service.projectBoardService.EntireDeleateProjectBoardService;
 import com.team5.funthing.user.service.projectBoardService.InsertProjectBoardService;
@@ -82,24 +76,10 @@ public class ProjectBoardController {
 		return ""; //어느화면으로 갈건지 
 	}
 	
-	@RequestMapping("replyBoard.udo")
-	public String insertReplyProjectBoard(ProjectVO projectVO, MemberVO memberVO, ProjectBoardVO vo, HttpSession session) { //답글작성하기 (Maker만 수행가능) 
-		
-		String makerEmail = projectVO.getEmail();
-		session.setAttribute("memberSessionEmail", selectMemberService.loginMember(memberVO).getEmail());
-		
-		if(makerEmail.equals("memberSessionEmail")) { //메이커이메일과 프로젝트 보드의 이메일이 같으면 
-			entireDeleteProjectBoardService.entireDeleateProjectBoard(vo);
-			return ""; //어느화면으로 갈건지 
-			
-		}else {
-			
-			return ""; //어느화면으로 갈건지 
-			
-		}
+
 		
 	
-	}
+	
 	
 	
 	
