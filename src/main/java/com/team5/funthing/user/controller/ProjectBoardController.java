@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.model.vo.ProjectBoardVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
+import com.team5.funthing.user.service.memberService.GetMemberService;
 import com.team5.funthing.user.service.projectBoardService.DeleteProjectBoardService;
 import com.team5.funthing.user.service.projectBoardService.EntireDeleateProjectBoardService;
 import com.team5.funthing.user.service.projectBoardService.InsertProjectBoardService;
@@ -37,8 +38,8 @@ public class ProjectBoardController {
 	@Autowired
 	private GetProjectService getProjectService; //프로젝트 가져오기 
 	
-//	@Autowired
-//	private SelectMemberService selectMemberService; //프로젝트 가져오기 
+	@Autowired
+	private GetMemberService getMemberService; //프로젝트 가져오기 
 	
 	
 	
@@ -82,7 +83,7 @@ public class ProjectBoardController {
 	public String insertReplyProjectBoard(ProjectVO projectVO, MemberVO memberVO, ProjectBoardVO vo, HttpSession session) { //답글작성하기 (Maker만 수행가능) 
 		
 		String makerEmail = projectVO.getEmail();
-		session.setAttribute("memberSessionEmail", selectMemberService.loginMember(memberVO).getEmail());
+		session.setAttribute("memberSessionEmail", getMemberService.getMember(memberVO).getEmail());
 		
 		if(makerEmail.equals("memberSessionEmail")) { //메이커이메일과 프로젝트 보드의 이메일이 같으면 
 			entireDeleteProjectBoardService.entireDeleateProjectBoard(vo);

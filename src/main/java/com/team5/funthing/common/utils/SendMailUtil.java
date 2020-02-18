@@ -5,8 +5,8 @@ import java.io.UnsupportedEncodingException;
 import javax.mail.MessagingException;
 
 public interface SendMailUtil {
-
-	public String createCertificationCode(int codeLength);
+	
+	String createCertificationCode(int codeLength);
 	
 	public void sendMail(String emailTitle,String emailContent,
 			String receiverEmailAddress) 
