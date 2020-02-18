@@ -71,7 +71,7 @@
                                     class="single-input">
                             </div>
                             <div class="col-xl-12 mt-10">
-                                <input type="submit" onclick="class="boxed-btn3" value="완료"> 
+                                <input type="submit" onclick="class="boxed-btn3" value="완료">
                             </div>
                             <div class="mt-10">
                                 <a class="btn btn-registry-way d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"

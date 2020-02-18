@@ -60,7 +60,7 @@
 								<c:forEach var="list" items="${EntireNoticeList}">
 									<div class="h4">
 										<p>공지 알림 [뱃지 형식]</p>
-										<a href="selectNotice.udo?no=${list.noticeNo}">${list.noticeTitle }</a>
+										<a href="selectNotice.udo?no=${list.noticeNo}">${list.noticeTitle}</a>
 										<p>${list.adminId }</p>
 										<p>${list.noticeDate }</p>
 									</div>

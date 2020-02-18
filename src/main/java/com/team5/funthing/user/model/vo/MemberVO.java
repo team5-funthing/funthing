@@ -1,5 +1,6 @@
 package com.team5.funthing.user.model.vo;
 
+
 public class MemberVO {
 	
 	private String email;
@@ -10,7 +11,9 @@ public class MemberVO {
 	private String myImage;
 	private String report;
 	
-	//DB컬럼에는 없는  이메일 인증코드  DB 컬럼에는 추가 안함.
+	
+	
+	
 	private String certificationCode;
 	public String getCertificationCode() {
 		return certificationCode;

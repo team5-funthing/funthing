@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="ProjectBoardDAO">
+ 
+ 	<insert id="insertProjectBoard"  parameterType="projectboard">
+		INSERT INTO projectboard(projectboardno, email, projectno, projectboardcontents) 
+		VALUES(projectboard_seq.nextval, #{email},#{projectno},#{projectboardcontents})
+	</insert>
+	
+	<insert id="insertMakerProjectBoard"  parameterType="projectboard">
+		INSERT INTO projectboard(projectboardno, email, projectno, position, projectboardcontents,projectboarddate) 
+		VALUES(projectboard_seq.nextval, #{email}, #{projectno}, #{position}, #{projectboardcontents}, sysdate)
+	</insert>
+	
+	<update id="updateProjectBoard" parameterType="projectboard">
+		UPDATE projectboard 
+		SET projectboardcontents = #{projectboardcontents} WHERE email = #{email}
+	</update>
+	
+ 	<delete id="deleateProjectBoard" parameterType="projectboard">
+		DELETE FROM projectboard WHERE email = #{email}
+	</delete>
+ 	
+ 	<delete id="entireDeleateProjectBoard" parameterType="projectboard">
+ 		DELETE FROM projectboard where projectno = #{projectno} and email = #{email}
+ 	</delete>
+ 	
+ 	<resultMap type="Member" id="Member">
+		<id column="email" property="email" />
+		<result column="name" property="name" />
+	</resultMap>
+
+	<resultMap type="projectboard" id="projectboard">
+		<id column="email" property="email" />
+		<result column="position" property="position" />
+		<result column="projectboardcontents" property="projectboardcontents" />
+		<result column="projectboarddate" property="projectboarddate" />
+		<collection property="Member" resultMap="Member"></collection>
+	</resultMap>
+ 	
+ 	<select id="selectEntireProjectBoardList" parameterType="projectboard" resultMap="projectboard">
+	select member.name, projectboard.position, projectboard.projectboardcontents, projectboard.projectboarddate from projectboard join member on member.email = projectboard.email order by projectboard.projectboarddate desc
+	</select>
+ 	
+ 	
+ </mapper>

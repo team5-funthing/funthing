@@ -26,30 +26,35 @@ public class NoticeController {
 	private List<NoticeVO> noticeList;//전체목록
 	private List<NoticeVO> EventNoticeList;//전체목록
 	
-	@RequestMapping("selectNoticeList.udo")
-	public ModelAndView selectNoticeList(NoticeVO vo) {
+	@RequestMapping("selectEntireNoticeList.udo")
+	public ModelAndView selectEntireNoticeList(NoticeVO vo,BoardVO bvo, HttpServletRequest request) {
 		
-		EntireNoticeList = noticeServiceImpl.selectEntireNoticeList(vo);
+		int currentPageNum = 1;
 		
+		int startRow = boardServiceImpl.getStartRow(currentPageNum);				//페이지의 번호를 받아서 보여줄 첫째 글 번호
+		int endRow = boardServiceImpl.getEndRow(currentPageNum);					//페이지의 번호를 받아서 보여줄 마지막 글 번호
+		
+		bvo.setNoticeStartRow(startRow);
+		bvo.setNoticeEndRow(endRow);
+		
+		List<NoticeVO> selectedNoticeList = boardServiceImpl.selectBoardEachPage(bvo);
+		//시작줄과 끝줄의 번호를 받아서 해당목록을 보여주는 메서드
+		
+		//====================================================================================
+
 		vo.setNoticeCategory("이벤트");
 		EventNoticeList = noticeServiceImpl.selectEventNoticeList(vo);
 		vo.setNoticeCategory("공지");
 		noticeList = noticeServiceImpl.selectNoticeList(vo);		
 		
-		int boardSelectCount = boardServiceImpl.selectBoardCount(); //boardSelectCount 전체 글의 수
-		int boardPageCount = boardServiceImpl.calculateTotalPage(boardSelectCount);// boardPageCount 페이지의 전체 수
-		
-		BoardVO bvo = new BoardVO();
-		bvo.setNoticeStartRow(1);
-		bvo.setNoticeEndRow(5);
-		EntireNoticeList = boardServiceImpl.selectBoardEachPage(bvo);
 		
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("boardPageCount",boardPageCount);
+		mav.addObject("startPageCount", startRow);
+		mav.addObject("boardPageCount",endRow);
+		mav.addObject("EntireNoticeList",selectedNoticeList);
 		mav.addObject("noticeList", noticeList);
 		mav.addObject("EventNoticeList",EventNoticeList);
-		mav.addObject("EntireNoticeList",EntireNoticeList);
 		mav.setViewName("b-notice");
 		
 		return mav;
@@ -93,9 +98,11 @@ public class NoticeController {
 	
 	@RequestMapping("selectSearchPageNumberNoticeList.udo")
 	public ModelAndView selectSearchPageNumberNoticeList(BoardVO vo, HttpServletRequest request) {
+		int currentPageNum = Integer.parseInt(request.getParameter("no"));
+		if(currentPageNum < 0)	currentPageNum = 1;			//page의 카운트가 1보다 작아지는 경우 1로 초기화
 		
 		//-----------------------글 번호를 넘겨받아 일정 개수를 보여주는 부분-----------------------------
-		int currentPageNum = Integer.parseInt(request.getParameter("no"));
+
 		int startRow = boardServiceImpl.getStartRow(currentPageNum);
 		int endRow = boardServiceImpl.getEndRow(currentPageNum);
 		
@@ -107,12 +114,15 @@ public class NoticeController {
 	
 		//---------------------------------------페이지 블럭 처리----------------------------------
 		int boardSelectCount = boardServiceImpl.selectBoardCount(); 				//boardSelectCount 전체 글의 수
-		//int boardPageCount = boardServiceImpl.calculateTotalPage(boardSelectCount);	//boardPageCount 페이지의 전체 수
+		int boardPageCount = boardServiceImpl.calculateTotalPage(boardSelectCount);	//boardPageCount 페이지의 전체 수
 		
 		int startPage = boardServiceImpl.getStartPage(currentPageNum);				//처음 페이지의 수를 얻어옴		
 		
 		
 		int endPage = boardServiceImpl.getEndPage(startPage);						//끝 페이지의 수를 얻어옴
+		if(endPage >= boardPageCount) {
+			endPage = boardPageCount;
+		}
 		
 		ModelAndView mav = new ModelAndView();
 		

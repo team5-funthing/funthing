@@ -29,16 +29,17 @@ public class AdminCSBoardController {
 	private UpdateReplyCheckCSBoardService updateReplyCheckCSBoardService;
 	@Autowired
 	private SelectCSBoardService selectCSBoardService;
+
 	@Autowired
 	private SendMailUtil sendMailUtil;
-	
+
 	private List<CSBoardVO> entireCSBoardList;
 	private CSBoardVO selectCSBoard;
 	
 	
 	@RequestMapping("selectEntireAdminCSBoardList.ado")
 	public ModelAndView selectEntireAdminCSBoardList(CSBoardVO vo){
-		//¿¸√º ∏Ò∑œ
+		//√Ä√º√É¬º ¬∏√±¬∑√è
 		entireCSBoardList = selectEntireAdminCSBoardListService.selectEntireCSBoardList(vo);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("entireCSBoardList",entireCSBoardList);
