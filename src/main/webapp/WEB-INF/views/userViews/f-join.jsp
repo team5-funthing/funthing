@@ -71,7 +71,7 @@
                                     class="single-input">
                             </div>
                             <div class="col-xl-12 mt-10">
-                                <input type="submit" onclick="class='boxed-btn3'" value="완료">
+                                <input type="submit" onclick="class="boxed-btn3" value="완료">
                             </div>
                             <div class="mt-10">
                                 <a class="btn btn-registry-way d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
@@ -82,8 +82,8 @@
                           <script>                                    
                                        /// 입력된 값과 세션에 저장된 인증값 비교해서 비밀번호 변경페이지 이동 처리.
                                        function changePassword(){    
-                                    	if(document.getElementById('sessionCode').value == document.getElementById('certification').value && document.getElementById("password").value ==
-                                    		document.getElementById("password").value){
+                                    	if(document.getElementById('sessionCode').value == document.getElementById('certification').value){
+                                    		alert("성공");
                                     		location.href = "#";                                    		
                                     	}else{
                                     		document.getElementById('certification').value = "";

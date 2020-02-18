@@ -3,7 +3,7 @@
     
 <!doctype html>
 
-<html>
+<html class="no-js" lang="zxx">
 
 
 <head>

@@ -2,12 +2,7 @@ package com.team5.funthing.user.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +15,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.team5.funthing.common.utils.SendMailUtil;
+import com.team5.funthing.user.memberService.GetMemberService;
+import com.team5.funthing.user.memberService.InsertImageService;
+import com.team5.funthing.user.memberService.InsertMemberService;
+import com.team5.funthing.user.memberService.InsertSocialMemberService;
 import com.team5.funthing.user.model.vo.MemberVO;
-import com.team5.funthing.user.service.memberService.GetMemberService;
-import com.team5.funthing.user.service.memberService.InsertImageService;
-import com.team5.funthing.user.service.memberService.InsertMemberService;
-import com.team5.funthing.user.service.memberService.InsertSocialMemberService;
 
 @Controller
 @SessionAttributes("member")
@@ -57,69 +52,81 @@ public class MemberController {
 		return "f-socialjoin";
 	}
 	@RequestMapping(value="socialLoginSuccess.udo",method=RequestMethod.POST)
-	public void socialLoginSuccess(HttpServletRequest request,HttpServletResponse response, HttpSession session,MemberVO vo) throws IOException {   
-		System.out.println("socialLoginSuccess.udo �α��� ����");
-		if(getMemberService.getMember(vo) != null) { //
-			if(getMemberService.getMember(vo).getPassword().equals(request.getParameter("password"))) { 
-				
+	public String socialLoginSuccess(HttpServletRequest request,HttpSession session,MemberVO vo) {   
+		System.out.println("socialLoginSuccess.udo 실행");
+		//   session.invalidate();  // 로그인 전 세션초기화 
+		System.out.println("소셜 패스워드 :"+getMemberService.getMember(vo).getPassword());
+		if(getMemberService.getMember(vo) != null) { //vo가 널이아닐때 로그인 성공시
+			if(getMemberService.getMember(vo).getPassword().equals(request.getParameter("password"))) { //패스워드 맞았을때  
 				session.setAttribute("memberSessionEmail", getMemberService.getMember(vo).getEmail());
 				session.setAttribute("memberSessionName", getMemberService.getMember(vo).getName());
-				if(session.getAttribute("myprofile")!=null) {
-				session.setAttribute("myprofile", getMemberService.getMember(vo).getMyImage()); //
-				}
-				response.sendRedirect("*.udo");
+				session.setAttribute("myprofile", getMemberService.getMember(vo).getMyImage());   
+				System.out.println(getMemberService.getMember(vo).getMyImage());
+				System.out.println("소셜로그인 성공");
+
+				return "p-index";
+			}else {
+				System.out.println("소셜로그인 실패");
+				return "p-waytoJoin-select";   //실제로 사용될 일 없는것. 
 			}
+		}else { //vo가 널일때 로그인 실패시
+			System.out.println("소셜로그인 실패");
+			return "p-waytoJoin-select";
 		}
+
 	}
 
-	@RequestMapping(value="getMember.udo", method=RequestMethod.POST) // 
-	public void getMember(MemberVO vo, HttpServletRequest request,HttpSession session,HttpServletResponse response) throws IOException {
-		System.out.println("getMember.udo �α��νõ�");
-		if(getMemberService.getMember(vo) != null) { //
-			if(getMemberService.getMember(vo).getPassword().equals(request.getParameter("password"))) { 
-				
+
+	@RequestMapping(value="getMember.udo", method=RequestMethod.POST) // 로그인확인
+	public String getMember(MemberVO vo, HttpServletRequest request,HttpSession session) {
+		System.out.println("getMember.udo 실행");
+		if(getMemberService.getMember(vo) != null) { //vo가 널이아닐때 로그인 성공시
+			if(getMemberService.getMember(vo).getPassword().equals(request.getParameter("password"))) { //패스워드 맞았을때  
 				session.setAttribute("memberSessionEmail", getMemberService.getMember(vo).getEmail());
 				session.setAttribute("memberSessionName", getMemberService.getMember(vo).getName());
-				if(session.getAttribute("myprofile")!=null) {
-				session.setAttribute("myprofile", getMemberService.getMember(vo).getMyImage()); //
-				}
-				response.sendRedirect("*.udo");
+				session.setAttribute("myprofile", getMemberService.getMember(vo).getMyImage()); //로그인하자마자 보여야되서 추가함 이게맞는건가요?騙?확인
+
+
+				System.out.println(getMemberService.getMember(vo).getMyImage());
+				System.out.println("성공");
+
+				return "p-index";
+			}else {
+				System.out.println("실패");
+				return "p-index";
 			}
+		}else { //vo가 널일때 로그인 실패시
+			return "p-index";
 		}
+
 	}
 
-	@RequestMapping(value="joinselect.udo" ,method=RequestMethod.GET) // 
-	public String login(HttpSession session) {
-		if(session.getAttribute("certificationCode")!=null) {
-			session.removeAttribute("certificationCode");
-			}
+
+	@RequestMapping(value="joinselect.udo" ,method=RequestMethod.GET) // 회원가입선택 화면이동
+	public String login() {
 		return "p-waytoJoin-select";
 	}
 
-	@RequestMapping(value="findpw.udo",method=RequestMethod.GET)
-	public String findPassword() {
+
+	@RequestMapping(value="findpw.udo",method=RequestMethod.GET) // 비밀번호 찾기 화면이동
+	public String findpw() {
 		return "f-find-pw";
 	}
 
-	@RequestMapping(value="emailJoin.udo",method=RequestMethod.GET) // 
+	@RequestMapping(value="emailJoin.udo",method=RequestMethod.GET) // 메일로가입하기 화면이동
 	public String emailjoin() {
 		return "f-join";
 	}
 
-	@RequestMapping(value="successSocialjoin.udo",method=RequestMethod.GET) // 
-	public String successSocialjoin(MemberVO vo,HttpSession session) {
-		if(session.getAttribute("certificationCode")!=null) {
-		session.removeAttribute("certificationCode");
-		}
+	@RequestMapping(value="successSocialjoin.udo",method=RequestMethod.GET) // 가입성공해서 메인화면이동
+	public String successSocialjoin(MemberVO vo) {
 		insertSocialMemberService.insertSocialMember(vo);
 		return "p-index";
 	}
 
-	@RequestMapping(value="successjoin.udo",method=RequestMethod.POST) // 
-	public String successjoin(MemberVO vo,HttpSession session) {
-		if(session.getAttribute("certificationCode")!=null) {
-			session.removeAttribute("certificationCode");
-			}
+	@RequestMapping(value="successjoin.udo",method=RequestMethod.POST) // 가입성공해서 메인화면이동
+	public String successjoin(MemberVO vo) {
+		System.out.println("이메일로 가입 실행!");
 		insertMemberService.insertMember(vo);
 		return "p-index";
 	}
@@ -130,54 +137,67 @@ public class MemberController {
 	}
 
 	@RequestMapping(value= "certification.udo" ,method=RequestMethod.GET )
-	public String certificationEmail(MemberVO vo,HttpSession session) {
+	public String certificationEmail(MemberVO vo,Model model,HttpSession session) {
 		try {
 			String certificationCode = sendMailUtil.createCertificationCode(50);
-			sendMailUtil.sendMail("[Funthing] ������ȣ �Դϴ�.", "������ȣ  : ["+certificationCode+"]", "ajoqwer@gmail.com");	
+			sendMailUtil.sendMail("[Funthing] 인증번호 입니다.", "인증번호 ["+certificationCode+"]", "ajoqwer@gmail.com");	
 			session.setAttribute("certificationCode", certificationCode);   
+			/// 비밀번호 재설정 페이지에서 세션 삭제 하도록 !!!!
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "p-callback";
+		return "f-find-id";
 	}
-
 
 	@RequestMapping(value="test.udo")
 	public String tst(Model model) {
 
-
+		model.addAttribute("test", "이것도 맞아");
 		return "testing";
 	}
 
 	@RequestMapping(value="imageUpload.udo",method=RequestMethod.GET)
 	public String imageUpload() {
+		//업로드를 위한 별개 페이지
 		return "f-imageUpload";
 	}
 
 	@RequestMapping(value="saveimage.udo",method=RequestMethod.POST)
 	public String saveImage(HttpServletRequest request,MemberVO vo,HttpSession session) throws IOException {
-		String saveDir= request.getRealPath("/resources/user/img/test");
-		int maxPostSize = 10*1024*1024;  // 10MB 
+
+		//  디렉토리는    수정해야함.  무조건 절대경로로 삽입해야하며, 우선 기웅님의 경로로 잡는도다.
+		//      String saveDir= "C:\\funthing\\project\\funthing\\src\\main\\webapp\\resources\\user\\img\\test";
+		String saveDir= "C:\\Users\\BEGGAR\\Desktop\\apache-tomcat-9.0.29\\wtpwebapps\\funthing\\resources\\user\\img\\test";
+		int maxPostSize = 3*1024*1024;
+		
 		String encoding = "UTF-8";
-		MultipartRequest ms;
-			ms = new MultipartRequest(request, saveDir, maxPostSize, encoding, new DefaultFileRenamePolicy());
-		String renamedFile = ms.getFilesystemName("filename");   
+		System.out.println(request.getParameterNames());
+		MultipartRequest ms = new MultipartRequest(request, saveDir, maxPostSize, encoding, new DefaultFileRenamePolicy());  
+		String renamedFile = ms.getFilesystemName("filename");
+		System.out.println( ms.getFilesystemName("filename"));     
+		///  유지보수 에서 실패!!! 할 구간.     
+
 		String email = (String) session.getAttribute("memberSessionEmail");
 		vo.setEmail(email);
 		vo.setMyImage(renamedFile);
 		insertImageService.insertImage(vo);
-		session.removeAttribute("myprofile");
-		session.setAttribute("myprofile", getMemberService.getMember(vo).getMyImage());
-		return "p-callback";
+		//  session.setAttribute("myprofile", getMemberService.getMember(vo).getMyImage());
+
+		return "p-index";
 	}
 
 	@RequestMapping(value="mypage.udo",method=RequestMethod.GET)
-	public String myPage(HttpSession session,MemberVO vo,Model model) {  
-	return "p-detail-mypage";
+	public String myPage(HttpSession session,MemberVO vo,Model model) { //마이페이지로 이동 
+
+		//       
+		//     String email =  (String)session.getAttribute("memberSessionEmail");
+		//     vo.setEmail(email);
+		//     model.addAttribute("okname",getMemberService.getMember(vo).getName());
+		//     //  p-detail-mypage 로 리다이렉트 실행시  파라미터값  okname=getMemberService.getMember(vo).getName() 을 넘겨줌
+		return "p-detail-mypage";
 	}  
-	
 	@RequestMapping(value="logout.udo",method=RequestMethod.GET)
-	public String logOut(HttpSession session) { 
+	public String logOut(HttpSession session) { //로그아웃 
 		session.invalidate();
 		return "p-index";
 	}    

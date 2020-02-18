@@ -10,7 +10,7 @@
 
 
 <form action="saveimage.udo" method="post" enctype="multipart/form-data">
-<input  type="file" id="filename" name="filename" accept="image/*" >
+<input  type="file" accept="image/*" >
 <input type="submit" value="저장">
 </form>
 
