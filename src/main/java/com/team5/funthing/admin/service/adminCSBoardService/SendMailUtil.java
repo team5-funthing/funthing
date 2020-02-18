@@ -7,8 +7,11 @@ import javax.mail.MessagingException;
 import com.team5.funthing.admin.model.vo.AdminCSBoardVO;
 import com.team5.funthing.user.model.vo.CSBoardVO;
 
-public interface ReplyCSBoardEmailService {
+public interface SendMailUtil {
+
 	
-	public void sendReplyEmail(AdminCSBoardVO avo, CSBoardVO cvo) throws UnsupportedEncodingException, MessagingException;
+	
+	public void sendMail(AdminCSBoardVO avo, CSBoardVO cvo) 
+					throws MessagingException, UnsupportedEncodingException;
 
 }
