@@ -11,32 +11,27 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.team5.funthing.admin.model.vo.AdminCSBoardVO;
-import com.team5.funthing.admin.service.adminCSBoardService.ReplyCSBoardEmailService;
+import com.team5.funthing.admin.service.adminCSBoardService.SendMailUtil;
 import com.team5.funthing.user.model.vo.CSBoardVO;
 
-
 @Service
-public class ReplyCSBoardEmailServiceImpl implements ReplyCSBoardEmailService {
+public class SendMailUtilImpl implements SendMailUtil{
 	
 	@Autowired
 	private JavaMailSender mailSender;
 	private MimeMessage message;
 	private MimeMessageHelper messageHelper;
+
 	
-	@Override
-	public void sendReplyEmail(AdminCSBoardVO avo,CSBoardVO cvo) throws UnsupportedEncodingException, MessagingException {
+	public void sendMail(AdminCSBoardVO avo, CSBoardVO cvo) throws MessagingException, UnsupportedEncodingException {
 		message = mailSender.createMimeMessage();
 		messageHelper = new MimeMessageHelper(message,true,"UTF-8");
-		
 		messageHelper.setSubject("[\""+cvo.getCsTitle()+"\"] [문의답변]:"+avo.getAdminCSTitle());
-		System.out.println("문의답변");
 		messageHelper.setText(avo.getAdminCSContent());
-		messageHelper.setFrom("funthing20@gmail.com",avo.getAdminID());
+		messageHelper.setFrom("funthing@gmail.com","관리자");
 		messageHelper.setTo(cvo.getEmail());
 		mailSender.send(message);
-		
-		
-
 	}
-
+	
+	
 }

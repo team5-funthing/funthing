@@ -6,7 +6,6 @@ import java.util.List;
 import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,10 +14,9 @@ import com.team5.funthing.admin.model.vo.AdminCSBoardVO;
 import com.team5.funthing.admin.service.adminCSBoardService.InsertAdminCSBoardService;
 import com.team5.funthing.admin.service.adminCSBoardService.SelectCSBoardService;
 import com.team5.funthing.admin.service.adminCSBoardService.SelectEntireCSBoardListService;
+import com.team5.funthing.admin.service.adminCSBoardService.SendMailUtil;
 import com.team5.funthing.admin.service.adminCSBoardService.UpdateReplyCheckCSBoardService;
-import com.team5.funthing.user.memberService.CertificationEmailService;
 import com.team5.funthing.user.model.vo.CSBoardVO;
-import com.team5.funthing.user.model.vo.MemberVO;
 
 @Controller
 public class AdminCSBoardController {
@@ -32,9 +30,7 @@ public class AdminCSBoardController {
 	@Autowired
 	private SelectCSBoardService selectCSBoardService;
 	@Autowired
-	private CertificationEmailService certificationEmailService;
-	@Autowired
-	private JavaMailSender jms;
+	private SendMailUtil sendMailUtil;
 	
 	private List<CSBoardVO> entireCSBoardList;
 	private CSBoardVO selectCSBoard;
@@ -51,11 +47,11 @@ public class AdminCSBoardController {
 	}
 	
 	@RequestMapping("insertAdminCSBoard.ado")
-	public String insertAdminCSBoard(AdminCSBoardVO avo,CSBoardVO cvo){
+	public String insertAdminCSBoard(AdminCSBoardVO avo,CSBoardVO cvo) throws UnsupportedEncodingException, MessagingException{
 		
 		insertAdminCSBoardService.insertAdminCSBoard(avo);
 		updateReplyCheckCSBoardService.updateReplyCheckCSBoard(cvo);
-
+		sendMailUtil.sendMail(avo, cvo);
 		
 		return ""; 
 	}
