@@ -11,6 +11,7 @@
 		<typeAlias type="com.team5.funthing.user.model.vo.BoardVO" alias="board"/>
 
 		<typeAlias type="com.team5.funthing.user.model.vo.ProjectBoardVO" alias="projectboard"/>
+		<typeAlias type="com.team5.funthing.user.model.vo.ProjectAccountInformationVO" alias="projectAccountInformation"/>
 
 		<typeAlias type="com.team5.funthing.user.model.vo.CSBoardVO" alias="csboard"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.DeliveryAddressVO" alias="deliveryAddress"/>
@@ -27,6 +28,7 @@
 		<mapper resource="mappers/board-mapper.xml" />
 
 		<mapper resource="mappers/projectboard-mapper.xml" />
+		<mapper resource="mappers/projectAccountInformation-mapper.xml"/>
 
 		<mapper resource="mappers/csboard-mapper.xml" />
 		<mapper resource="mappers/deliveryAddress-mapper.xml"/>

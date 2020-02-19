@@ -2,13 +2,13 @@ package com.team5.funthing.user.controller;
 
 import java.io.IOException;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -53,8 +53,6 @@ public class MemberController {
 		return "f-socialjoin";
 	}
 	@RequestMapping(value="socialLoginSuccess.udo",method=RequestMethod.POST)
-
-
 	public void socialLoginSuccess(HttpServletRequest request,HttpSession session,MemberVO vo,HttpServletResponse response) throws IOException {   
 		System.out.println("socialLoginSuccess.udo ");
 
@@ -67,87 +65,104 @@ public class MemberController {
 				    }
 
 					response.sendRedirect("member.udo");
+				}else {
+					response.sendRedirect("findpw.udo");
 				}
 		
 			}
-
 		}
 
 
 	@RequestMapping(value="getMember.udo", method=RequestMethod.POST) 
 	public void getMember(MemberVO vo, HttpServletRequest request,HttpSession session,HttpServletResponse response) throws IOException {
-
+        System.out.println("컨펌스위치 리턴값 :"+request.getParameter("confirm-switch"));
 		if(getMemberService.getMember(vo) != null) { 
 			if(getMemberService.getMember(vo).getPassword().equals(request.getParameter("password"))) { 
-				session.setAttribute("memberSessionEmail", getMemberService.getMember(vo).getEmail());
-				session.setAttribute("memberSessionName", getMemberService.getMember(vo).getName());
+				if(request.getParameter("confirm-switch") != null) {
+					Cookie cookieid = new Cookie("funthingCookieId",vo.getEmail());
+					cookieid.setMaxAge(60*60*24*30);  /// cookie's life setting 30 days 
+					Cookie cookiepw = new Cookie("funthingCookiePw",vo.getPassword());
+					cookiepw.setMaxAge(60*60*24*30); /// cookie's life setting 30 days 
+					response.addCookie(cookieid);
+					response.addCookie(cookiepw);
+				}else {
+					Cookie cookieid = new Cookie("funthingCookieId",null);
+					cookieid.setMaxAge(0);  /// kill the cookie 
+					Cookie cookiepw = new Cookie("funthingCookiePw",null);
+					cookiepw.setMaxAge(0); /// kill the cookie
+				}
+				session.setAttribute("memberSessionEmail", vo.getEmail());
+				session.setAttribute("memberSessionName", vo.getName());
 			    if(session.getAttribute("myprifile")!=null) {
 				session.setAttribute("myprofile", getMemberService.getMember(vo).getMyImage()); 
 			    }
 
 				response.sendRedirect("member.udo");
+			}else {
+				response.sendRedirect("findpw.udo");
 			}
-
+	
 		}
 	}
-
 
 	@RequestMapping(value="joinselect.udo" ,method=RequestMethod.GET)
 	public String login(HttpSession session) {
 		if(session.getAttribute("certificationCode")!=null) {
 			session.removeAttribute("certificationCode");
 		}
+		if(session.getAttribute("emailCheck")!=null) {
+			session.removeAttribute("emailCheck");
+		}
 		return "p-waytoJoin-select";
 	}
 
 
-
 	@RequestMapping(value="findpw.udo",method=RequestMethod.GET) 
-
 	public String findpw() {
 		return "f-find-pw";
 	}
 
-ing(value="emailJoin.udo",method=RequestMethod.GET) // ï§ë¶¿ìªæ¿¡ìï¿½ï¿½ì¯ï¿½ë¸¯æ¹²ï¿½ ï¿½ìï§ëì ï¿½ë£
-
 	@RequestMapping(value="emailJoin.udo",method=RequestMethod.GET) 
-
 	public String emailjoin() {
 		return "f-join";
 	}
-
 
 	@RequestMapping(value="successSocialjoin.udo",method=RequestMethod.GET) 
 	public String successSocialjoin(MemberVO vo,HttpSession session) {
 		if(session.getAttribute("certificationCode")!=null) {
 			session.removeAttribute("certificationCode");
 		}
+		if(session.getAttribute("emailCheck")!=null) {
+			session.removeAttribute("emailCheck");
+		}
 		insertSocialMemberService.insertSocialMember(vo);
 		return "p-index";
 	}
-
 
 	@RequestMapping(value="successjoin.udo",method=RequestMethod.POST) 
 	public String successjoin(MemberVO vo,HttpSession session) {
 		if(session.getAttribute("certificationCode")!=null) {
 			session.removeAttribute("certificationCode");
 		}
+		if(session.getAttribute("emailCheck")!=null) {
+			session.removeAttribute("emailCheck");
+		}
 		insertMemberService.insertMember(vo);
 		return "p-index";
 	}
 
 	@RequestMapping(value="socialjoin.udo",method=RequestMethod.GET)
-	public String socialJoin(MemberVO vo,HttpServletRequest request) {
+	public String socialJoin() {
 		return "f-socialjoin";
 	}
 
 	@RequestMapping(value= "certification.udo" ,method=RequestMethod.GET )
-	public String certificationEmail(MemberVO vo,Model model,HttpSession session) {
+	public String certificationEmail(MemberVO vo,HttpSession session) {
 		try {
 			String certificationCode = sendMailUtil.createCertificationCode(50);
-
-			sendMailUtil.sendMail("[Funthing] ÀÎÁõ¹øÈ£ ", "ÀÎÁõ¹øÈ£ ["+certificationCode+"]", vo.getEmail());	
+			sendMailUtil.sendMail("[Funthing] 인증번호 ", "인증번호 ["+certificationCode+"]", vo.getEmail());	
 			session.setAttribute("certificationCode", certificationCode);   
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -155,25 +170,27 @@ ing(value="emailJoin.udo",method=RequestMethod.GET) // ï§ë¶¿ìªæ¿¡�
 	}
 
 	@RequestMapping(value="test.udo")
-	public String tst(Model model) {
+	public String tst() {
+		String afk=null;
+        if(afk==null) {
+        	System.out.println("널이지렁");
+        }
 		return "testing";
 	}
 
 	@RequestMapping(value="imageUpload.udo",method=RequestMethod.GET)
 	public String imageUpload() {
-
 		return "f-imageUpload";
 	}
 
 	@RequestMapping(value="saveimage.udo",method=RequestMethod.POST)
 	public String saveImage(HttpServletRequest request,MemberVO vo,HttpSession session) throws IOException {
-		String saveDir= request.getRealPath("/resources/user/img/test");
 
+		String saveDir= request.getRealPath("/resources/user/img/test");
 		int maxPostSize = 3*1024*1024;
 		String encoding = "UTF-8";
 		MultipartRequest ms = new MultipartRequest(request, saveDir, maxPostSize, encoding, new DefaultFileRenamePolicy());  
 		String renamedFile = ms.getFilesystemName("filename");
-
 		String email = (String) session.getAttribute("memberSessionEmail");
 		vo.setEmail(email);
 		vo.setMyImage(renamedFile);
@@ -183,10 +200,10 @@ ing(value="emailJoin.udo",method=RequestMethod.GET) // ï§ë¶¿ìªæ¿¡�
 	}
 
 	@RequestMapping(value="mypage.udo",method=RequestMethod.GET)
-	public String myPage(MemberVO vo,Model model) {
+	public String myPage() {
 		return "p-detail-mypage";
 	}  
-  
+	
 	@RequestMapping(value="logout.udo",method=RequestMethod.GET)
 	public String logOut(HttpSession session) {
 		session.invalidate();
@@ -194,4 +211,15 @@ ing(value="emailJoin.udo",method=RequestMethod.GET) // ï§ë¶¿ìªæ¿¡�
 	}    
 
 
+	@RequestMapping(value="emailCheck.udo",method=RequestMethod.GET)
+	public String duplicationCheck(HttpServletRequest request,MemberVO vo,HttpSession session) {
+		vo.setEmail(request.getParameter("email"));
+		if(getMemberService.getMember(vo).getPassword()!=null) {
+			System.out.println("존재하는 메일  (실패)");	
+		}else {
+			System.out.println("사용가능한 메일  (성공)");
+			session.setAttribute("emailCheck", vo.getEmail());
+		}
+		return "p-callback";
+	}
 }

@@ -56,6 +56,16 @@
 									window.open("certification.udo?email="
 											+ email, "인증번호가 발송되었습니다.",
 											"width=50,height=10");
+									
+									window.open("http://localhost:8080/funthing/emailCheck.udo");
+									
+                            		if(${sessionScope.emailCheck}!=null){
+                            			alert("사용 가능한 메일입니다.");
+                            		}else{
+                            			alert("이미 가입된 이메일 입니다.  이메일을 다시 확인해 주세요");
+                            			document.getElementById("email").value="";
+                            		}
+                            	}
 								}
 							</script>
 							<input id="sessionCode" type="hidden" value="<%=session.getAttribute("certificationCode")%>">
@@ -90,7 +100,9 @@
                                     		document.getElementById('certification').focus();
                                     		alert("인증번호가 틀렸습니다. 다시 입력해주세요.");                                    		
                                     	}
-                                       } // changePassword() 종료                                        
+                                       }
+                                       
+                                       // changePassword() 종료                                        
                                     </script>
                     </div>
                 </div>
