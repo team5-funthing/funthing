@@ -53,80 +53,80 @@ public class MemberController {
 	}
 	@RequestMapping(value="socialLoginSuccess.udo",method=RequestMethod.POST)
 	public String socialLoginSuccess(HttpServletRequest request,HttpSession session,MemberVO vo) {   
-		System.out.println("socialLoginSuccess.udo 실행");
-		//   session.invalidate();  // 로그인 전 세션초기화 
-		System.out.println("소셜 패스워드 :"+getMemberService.getMember(vo).getPassword());
-		if(getMemberService.getMember(vo) != null) { //vo가 널이아닐때 로그인 성공시
-			if(getMemberService.getMember(vo).getPassword().equals(request.getParameter("password"))) { //패스워드 맞았을때  
+		System.out.println("socialLoginSuccess.udo �떎�뻾");
+		//   session.invalidate();  // 濡쒓렇�씤 �쟾 �꽭�뀡珥덇린�솕 
+		System.out.println("�냼�뀥 �뙣�뒪�썙�뱶 :"+getMemberService.getMember(vo).getPassword());
+		if(getMemberService.getMember(vo) != null) { //vo媛� �꼸�씠�븘�땺�븣 濡쒓렇�씤 �꽦怨듭떆
+			if(getMemberService.getMember(vo).getPassword().equals(request.getParameter("password"))) { //�뙣�뒪�썙�뱶 留욎븯�쓣�븣  
 				session.setAttribute("memberSessionEmail", getMemberService.getMember(vo).getEmail());
 				session.setAttribute("memberSessionName", getMemberService.getMember(vo).getName());
 				session.setAttribute("myprofile", getMemberService.getMember(vo).getMyImage());   
 				System.out.println(getMemberService.getMember(vo).getMyImage());
-				System.out.println("소셜로그인 성공");
+				System.out.println("�냼�뀥濡쒓렇�씤 �꽦怨�");
 
 				return "p-index";
 			}else {
-				System.out.println("소셜로그인 실패");
-				return "p-waytoJoin-select";   //실제로 사용될 일 없는것. 
+				System.out.println("�냼�뀥濡쒓렇�씤 �떎�뙣");
+				return "p-waytoJoin-select";   //�떎�젣濡� �궗�슜�맆 �씪 �뾾�뒗寃�. 
 			}
-		}else { //vo가 널일때 로그인 실패시
-			System.out.println("소셜로그인 실패");
+		}else { //vo媛� �꼸�씪�븣 濡쒓렇�씤 �떎�뙣�떆
+			System.out.println("�냼�뀥濡쒓렇�씤 �떎�뙣");
 			return "p-waytoJoin-select";
 		}
 
 	}
 
 
-	@RequestMapping(value="getMember.udo", method=RequestMethod.POST) // 로그인확인
+	@RequestMapping(value="getMember.udo", method=RequestMethod.POST) // 濡쒓렇�씤�솗�씤
 	public String getMember(MemberVO vo, HttpServletRequest request,HttpSession session) {
-		System.out.println("getMember.udo 실행");
-		if(getMemberService.getMember(vo) != null) { //vo가 널이아닐때 로그인 성공시
-			if(getMemberService.getMember(vo).getPassword().equals(request.getParameter("password"))) { //패스워드 맞았을때  
+		System.out.println("getMember.udo �떎�뻾");
+		if(getMemberService.getMember(vo) != null) { //vo媛� �꼸�씠�븘�땺�븣 濡쒓렇�씤 �꽦怨듭떆
+			if(getMemberService.getMember(vo).getPassword().equals(request.getParameter("password"))) { //�뙣�뒪�썙�뱶 留욎븯�쓣�븣  
 				session.setAttribute("memberSessionEmail", getMemberService.getMember(vo).getEmail());
 				session.setAttribute("memberSessionName", getMemberService.getMember(vo).getName());
-				session.setAttribute("myprofile", getMemberService.getMember(vo).getMyImage()); //로그인하자마자 보여야되서 추가함 이게맞는건가요?騙?확인
+				session.setAttribute("myprofile", getMemberService.getMember(vo).getMyImage()); //濡쒓렇�씤�븯�옄留덉옄 蹂댁뿬�빞�릺�꽌 異붽��븿 �씠寃뚮쭪�뒗嫄닿��슂?혗蟯�?�솗�씤
 
 
 				System.out.println(getMemberService.getMember(vo).getMyImage());
-				System.out.println("성공");
+				System.out.println("�꽦怨�");
 
 				return "p-index";
 			}else {
-				System.out.println("실패");
+				System.out.println("�떎�뙣");
 				return "p-index";
 			}
-		}else { //vo가 널일때 로그인 실패시
+		}else { //vo媛� �꼸�씪�븣 濡쒓렇�씤 �떎�뙣�떆
 			return "p-index";
 		}
 
 	}
 
 
-	@RequestMapping(value="joinselect.udo" ,method=RequestMethod.GET) // 회원가입선택 화면이동
+	@RequestMapping(value="joinselect.udo" ,method=RequestMethod.GET) // �쉶�썝媛��엯�꽑�깮 �솕硫댁씠�룞
 	public String login() {
 		return "p-waytoJoin-select";
 	}
 
 
-	@RequestMapping(value="findpw.udo",method=RequestMethod.GET) // 비밀번호 찾기 화면이동
+	@RequestMapping(value="findpw.udo",method=RequestMethod.GET) // 鍮꾨�踰덊샇 李얘린 �솕硫댁씠�룞
 	public String findpw() {
 		return "f-find-pw";
 	}
 
-	@RequestMapping(value="emailJoin.udo",method=RequestMethod.GET) // 메일로가입하기 화면이동
+	@RequestMapping(value="emailJoin.udo",method=RequestMethod.GET) // 硫붿씪濡쒓��엯�븯湲� �솕硫댁씠�룞
 	public String emailjoin() {
 		return "f-join";
 	}
 
-	@RequestMapping(value="successSocialjoin.udo",method=RequestMethod.GET) // 가입성공해서 메인화면이동
+	@RequestMapping(value="successSocialjoin.udo",method=RequestMethod.GET) // 媛��엯�꽦怨듯빐�꽌 硫붿씤�솕硫댁씠�룞
 	public String successSocialjoin(MemberVO vo) {
 		insertSocialMemberService.insertSocialMember(vo);
 		return "p-index";
 	}
 
-	@RequestMapping(value="successjoin.udo",method=RequestMethod.POST) // 가입성공해서 메인화면이동
+	@RequestMapping(value="successjoin.udo",method=RequestMethod.POST) // 媛��엯�꽦怨듯빐�꽌 硫붿씤�솕硫댁씠�룞
 	public String successjoin(MemberVO vo) {
-		System.out.println("이메일로 가입 실행!");
+		System.out.println("�씠硫붿씪濡� 媛��엯 �떎�뻾!");
 		insertMemberService.insertMember(vo);
 		return "p-index";
 	}
@@ -140,9 +140,9 @@ public class MemberController {
 	public String certificationEmail(MemberVO vo,Model model,HttpSession session) {
 		try {
 			String certificationCode = sendMailUtil.createCertificationCode(50);
-			sendMailUtil.sendMail("[Funthing] 인증번호 입니다.", "인증번호 ["+certificationCode+"]", "ajoqwer@gmail.com");	
+			sendMailUtil.sendMail("[Funthing] �씤利앸쾲�샇 �엯�땲�떎.", "�씤利앸쾲�샇 ["+certificationCode+"]", "ajoqwer@gmail.com");	
 			session.setAttribute("certificationCode", certificationCode);   
-			/// 비밀번호 재설정 페이지에서 세션 삭제 하도록 !!!!
+			/// 鍮꾨�踰덊샇 �옱�꽕�젙 �럹�씠吏��뿉�꽌 �꽭�뀡 �궘�젣 �븯�룄濡� !!!!
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -152,22 +152,22 @@ public class MemberController {
 	@RequestMapping(value="test.udo")
 	public String tst(Model model) {
 
-		model.addAttribute("test", "이것도 맞아");
+		model.addAttribute("test", "�씠寃껊룄 留욎븘");
 		return "testing";
 	}
 
 	@RequestMapping(value="imageUpload.udo",method=RequestMethod.GET)
 	public String imageUpload() {
-		//업로드를 위한 별개 페이지
+		//�뾽濡쒕뱶瑜� �쐞�븳 蹂꾧컻 �럹�씠吏�
 		return "f-imageUpload";
 	}
 
 	@RequestMapping(value="saveimage.udo",method=RequestMethod.POST)
 	public String saveImage(HttpServletRequest request,MemberVO vo,HttpSession session) throws IOException {
 
-		//  디렉토리는    수정해야함.  무조건 절대경로로 삽입해야하며, 우선 기웅님의 경로로 잡는도다.
+		//  �뵒�젆�넗由щ뒗    �닔�젙�빐�빞�븿.  臾댁“嫄� �젅��寃쎈줈濡� �궫�엯�빐�빞�븯硫�, �슦�꽑 湲곗썒�떂�쓽 寃쎈줈濡� �옟�뒗�룄�떎.
 		//      String saveDir= "C:\\funthing\\project\\funthing\\src\\main\\webapp\\resources\\user\\img\\test";
-		String saveDir= "C:\\Users\\BEGGAR\\Desktop\\apache-tomcat-9.0.29\\wtpwebapps\\funthing\\resources\\user\\img\\test";
+		String saveDir= "C:/funthing/project/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/funthing/resources/user/uploadImg";
 		int maxPostSize = 3*1024*1024;
 		
 		String encoding = "UTF-8";
@@ -175,7 +175,7 @@ public class MemberController {
 		MultipartRequest ms = new MultipartRequest(request, saveDir, maxPostSize, encoding, new DefaultFileRenamePolicy());  
 		String renamedFile = ms.getFilesystemName("filename");
 		System.out.println( ms.getFilesystemName("filename"));     
-		///  유지보수 에서 실패!!! 할 구간.     
+		///  �쑀吏�蹂댁닔 �뿉�꽌 �떎�뙣!!! �븷 援ш컙.     
 
 		String email = (String) session.getAttribute("memberSessionEmail");
 		vo.setEmail(email);
@@ -187,17 +187,17 @@ public class MemberController {
 	}
 
 	@RequestMapping(value="mypage.udo",method=RequestMethod.GET)
-	public String myPage(HttpSession session,MemberVO vo,Model model) { //마이페이지로 이동 
+	public String myPage(HttpSession session,MemberVO vo,Model model) { //留덉씠�럹�씠吏�濡� �씠�룞 
 
 		//       
 		//     String email =  (String)session.getAttribute("memberSessionEmail");
 		//     vo.setEmail(email);
 		//     model.addAttribute("okname",getMemberService.getMember(vo).getName());
-		//     //  p-detail-mypage 로 리다이렉트 실행시  파라미터값  okname=getMemberService.getMember(vo).getName() 을 넘겨줌
+		//     //  p-detail-mypage 濡� 由щ떎�씠�젆�듃 �떎�뻾�떆  �뙆�씪誘명꽣媛�  okname=getMemberService.getMember(vo).getName() �쓣 �꽆寃⑥쨲
 		return "p-detail-mypage";
 	}  
 	@RequestMapping(value="logout.udo",method=RequestMethod.GET)
-	public String logOut(HttpSession session) { //로그아웃 
+	public String logOut(HttpSession session) { //濡쒓렇�븘�썐 
 		session.invalidate();
 		return "p-index";
 	}    

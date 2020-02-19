@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SendMailUtilImpl implements SendMailUtil{
-	
 	@Autowired
 	private JavaMailSender mailSender;
 	private MimeMessage message;

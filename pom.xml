@@ -16,7 +16,7 @@
 	</properties>
 
 	<dependencies>
-	
+		
 		
 		<!-- thumbnailator -->
 		<dependency>
@@ -24,8 +24,6 @@
 		    <artifactId>thumbnailator</artifactId>
 		    <version>0.4.9</version>
 		</dependency>
-
-
 
 		<!-- 이미지 업로드 관련 API 천기웅수정! -->
 		<!-- https://mvnrepository.com/artifact/com.jfinal/cos -->

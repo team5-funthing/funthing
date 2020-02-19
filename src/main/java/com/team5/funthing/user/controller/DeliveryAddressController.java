@@ -14,7 +14,7 @@ import com.team5.funthing.user.service.projectService.InsertDeliveryAddressServi
 import com.team5.funthing.user.service.projectService.UpdateDeliveryAddressService;
 
 @Controller
-public class DeliveryAddress {
+public class DeliveryAddressController {
 	
 	   @Autowired
 	   private InsertDeliveryAddressService insertDeliveryAddressService;
