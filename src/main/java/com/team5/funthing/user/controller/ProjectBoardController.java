@@ -1,12 +1,9 @@
 package com.team5.funthing.user.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -15,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.model.vo.ProjectBoardVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
+import com.team5.funthing.user.service.memberService.GetMemberService;
 import com.team5.funthing.user.service.projectBoardService.DeleteProjectBoardService;
 import com.team5.funthing.user.service.projectBoardService.EntireDeleateProjectBoardService;
 import com.team5.funthing.user.service.projectBoardService.InsertProjectBoardService;
@@ -38,23 +36,23 @@ public class ProjectBoardController {
 	private UpdateProjectBoardService updateProjectBoardService;
 	
 	@Autowired
-	private GetProjectService getProjectService; //ÇÁ·ÎÁ§Æ® °¡Á®¿À±â 
+	private GetProjectService getProjectService; //í”„ë¡œì íŠ¸ ê°€ì ¸ì˜¤ê¸° 
 	
-//	@Autowired
-//	private SelectMemberService selectMemberService; //ÇÁ·ÎÁ§Æ® °¡Á®¿À±â 
+	@Autowired
+	private GetMemberService getMemberService; //í”„ë¡œì íŠ¸ ê°€ì ¸ì˜¤ê¸° 
 	
 	
 	
 	@RequestMapping(value = "insertprojectBoard.udo", method=RequestMethod.GET )
-	public ModelAndView insertProjectBoard(ProjectBoardVO vo, HttpSession session) { //±Ûµî·ÏÇÏ±â
-		System.out.println("¿©±â±îÁö ¾È¿Í?");
+	public ModelAndView insertProjectBoard(ProjectBoardVO vo, HttpSession session) { //ê¸€ë“±ë¡í•˜ê¸°
+		System.out.println("ì—¬ê¸°ê¹Œì§€ ì•ˆì™€?");
 		vo.setProjectno(2020);
 		insertProjectBoardService.insertProjectBoard(vo);
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("List",selectEntireProjectBoardListService.selectEntireProjectBoardList(vo)); //ÀüÃ¼¸ñ·Ï¸®½ºÆ® °¡Á®¿À±â 
+		mav.addObject("List",selectEntireProjectBoardListService.selectEntireProjectBoardList(vo)); //ì „ì²´ëª©ë¡ë¦¬ìŠ¤íŠ¸ ê°€ì ¸ì˜¤ê¸° 
 		System.out.println(selectEntireProjectBoardListService.selectEntireProjectBoardList(vo).get(0).getMember().getName());
 		mav.setViewName("p-test-board");
-		return mav; //¾î´ÀÈ­¸éÀ¸·Î °¥°ÇÁö 
+		return mav; //ì–´ëŠí™”ë©´ìœ¼ë¡œ ê°ˆê±´ì§€ 
 	}
 	
 //	@RequestMapping("selectProjectBoardList.udo")
@@ -64,36 +62,37 @@ public class ProjectBoardController {
 //	}
 	
 	@RequestMapping("updateProjectBoard.udo")
-	public String updateProjectBoard(ProjectBoardVO vo) { //±Û¼öÁ¤ÇÏ±â 
+	public String updateProjectBoard(ProjectBoardVO vo) { //ê¸€ìˆ˜ì •í•˜ê¸° 
 		updateProjectBoardService.updateProjectBoard(vo);
-		return ""; //¾î´ÀÈ­¸éÀ¸·Î °¥°ÇÁö 
+		return ""; //ì–´ëŠí™”ë©´ìœ¼ë¡œ ê°ˆê±´ì§€ 
 	}
 	
 	@RequestMapping("deleteProjectBoard.udo")
-	public String deleteProjectBoard(ProjectBoardVO vo) { //±Û °³º°Áö¿ì±â 
+	public String deleteProjectBoard(ProjectBoardVO vo) { //ê¸€ ê°œë³„ì§€ìš°ê¸° 
 		deleteProjectBoardService.deleteProjectBoard(vo);
-		return ""; //¾î´ÀÈ­¸éÀ¸·Î °¥°ÇÁö 
+		return ""; //ì–´ëŠí™”ë©´ìœ¼ë¡œ ê°ˆê±´ì§€ 
 	}
 	
 	@RequestMapping("deleteAllProjectBoard.udo")
-	public String deleteAllProjectBoard(ProjectBoardVO vo) { //±Û ÀüÃ¼Áö¿ì±â 
+	public String deleteAllProjectBoard(ProjectBoardVO vo) { //ê¸€ ì „ì²´ì§€ìš°ê¸° 
 		entireDeleteProjectBoardService.entireDeleateProjectBoard(vo);
-		return ""; //¾î´ÀÈ­¸éÀ¸·Î °¥°ÇÁö 
+		return ""; //ì–´ëŠí™”ë©´ìœ¼ë¡œ ê°ˆê±´ì§€ 
 	}
 	
 	@RequestMapping("replyBoard.udo")
-	public String insertReplyProjectBoard(ProjectVO projectVO, MemberVO memberVO, ProjectBoardVO vo, HttpSession session) { //´ä±ÛÀÛ¼ºÇÏ±â (Maker¸¸ ¼öÇà°¡´É) 
+	public String insertReplyProjectBoard(ProjectVO projectVO, MemberVO memberVO, ProjectBoardVO vo, HttpSession session) { //ë‹µê¸€ì‘ì„±í•˜ê¸° (Makerë§Œ ìˆ˜í–‰ê°€ëŠ¥) 
 		
 		String makerEmail = projectVO.getEmail();
-//		session.setAttribute("memberSessionEmail", selectMemberService.loginMember(memberVO).getEmail());
+
+		session.setAttribute("memberSessionEmail", getMemberService.getMember(memberVO).getEmail());
 		
-		if(makerEmail.equals("memberSessionEmail")) { //¸ŞÀÌÄ¿ÀÌ¸ŞÀÏ°ú ÇÁ·ÎÁ§Æ® º¸µåÀÇ ÀÌ¸ŞÀÏÀÌ °°À¸¸é 
+		if(makerEmail.equals("memberSessionEmail")) { //ë©”ì´ì»¤ì´ë©”ì¼ê³¼ í”„ë¡œì íŠ¸ ë³´ë“œì˜ ì´ë©”ì¼ì´ ê°™ìœ¼ë©´ 
 			entireDeleteProjectBoardService.entireDeleateProjectBoard(vo);
-			return ""; //¾î´ÀÈ­¸éÀ¸·Î °¥°ÇÁö 
+			return ""; //ì–´ëŠí™”ë©´ìœ¼ë¡œ ê°ˆê±´ì§€ 
 			
 		}else {
 			
-			return ""; //¾î´ÀÈ­¸éÀ¸·Î °¥°ÇÁö 
+			return ""; //ì–´ëŠí™”ë©´ìœ¼ë¡œ ê°ˆê±´ì§€ 
 			
 		}
 		

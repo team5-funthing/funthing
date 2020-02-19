@@ -46,7 +46,17 @@ public class AdminCSBoardController {
 		mav.setViewName("");
 		return mav; 
 	}
-
+  
+	@RequestMapping("insertAdminCSBoard.ado")
+	public String insertAdminCSBoard(AdminCSBoardVO avo,CSBoardVO cvo) throws UnsupportedEncodingException, MessagingException{
+		
+		insertAdminCSBoardService.insertAdminCSBoard(avo);
+		updateReplyCheckCSBoardService.updateReplyCheckCSBoard(cvo);
+		sendMailUtil.sendMail("[\""+cvo.getCsTitle()+"\"] [¹®ÀÇ´äº¯]:"+avo.getAdminCSTitle(), avo.getAdminCSContent(),cvo.getEmail());
+		
+		return ""; 
+	}
+  
 	@RequestMapping("selectCSBoard.ado")
 	public ModelAndView selectCSBoard(CSBoardVO vo){
 		
