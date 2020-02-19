@@ -53,6 +53,8 @@ public class MemberController {
 		return "f-socialjoin";
 	}
 	@RequestMapping(value="socialLoginSuccess.udo",method=RequestMethod.POST)
+
+
 	public void socialLoginSuccess(HttpServletRequest request,HttpSession session,MemberVO vo,HttpServletResponse response) throws IOException {   
 		System.out.println("socialLoginSuccess.udo ");
 
@@ -68,6 +70,7 @@ public class MemberController {
 				}
 		
 			}
+
 		}
 
 
@@ -84,9 +87,10 @@ public class MemberController {
 
 				response.sendRedirect("member.udo");
 			}
-	
+
 		}
 	}
+
 
 	@RequestMapping(value="joinselect.udo" ,method=RequestMethod.GET)
 	public String login(HttpSession session) {
@@ -97,15 +101,21 @@ public class MemberController {
 	}
 
 
+
 	@RequestMapping(value="findpw.udo",method=RequestMethod.GET) 
+
 	public String findpw() {
 		return "f-find-pw";
 	}
 
+ing(value="emailJoin.udo",method=RequestMethod.GET) // ï§ë¶¿ìªæ¿¡ìï¿½ï¿½ì¯ï¿½ë¸¯æ¹²ï¿½ ï¿½ìï§ëì ï¿½ë£
+
 	@RequestMapping(value="emailJoin.udo",method=RequestMethod.GET) 
+
 	public String emailjoin() {
 		return "f-join";
 	}
+
 
 	@RequestMapping(value="successSocialjoin.udo",method=RequestMethod.GET) 
 	public String successSocialjoin(MemberVO vo,HttpSession session) {
@@ -115,6 +125,7 @@ public class MemberController {
 		insertSocialMemberService.insertSocialMember(vo);
 		return "p-index";
 	}
+
 
 	@RequestMapping(value="successjoin.udo",method=RequestMethod.POST) 
 	public String successjoin(MemberVO vo,HttpSession session) {
@@ -134,9 +145,9 @@ public class MemberController {
 	public String certificationEmail(MemberVO vo,Model model,HttpSession session) {
 		try {
 			String certificationCode = sendMailUtil.createCertificationCode(50);
-			sendMailUtil.sendMail("[Funthing] ������ȣ ", "������ȣ ["+certificationCode+"]", vo.getEmail());	
-			session.setAttribute("certificationCode", certificationCode);   
 
+			sendMailUtil.sendMail("[Funthing] ÀÎÁõ¹øÈ£ ", "ÀÎÁõ¹øÈ£ ["+certificationCode+"]", vo.getEmail());	
+			session.setAttribute("certificationCode", certificationCode);   
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -145,7 +156,6 @@ public class MemberController {
 
 	@RequestMapping(value="test.udo")
 	public String tst(Model model) {
-
 		return "testing";
 	}
 
@@ -157,12 +167,13 @@ public class MemberController {
 
 	@RequestMapping(value="saveimage.udo",method=RequestMethod.POST)
 	public String saveImage(HttpServletRequest request,MemberVO vo,HttpSession session) throws IOException {
-
 		String saveDir= request.getRealPath("/resources/user/img/test");
+
 		int maxPostSize = 3*1024*1024;
 		String encoding = "UTF-8";
 		MultipartRequest ms = new MultipartRequest(request, saveDir, maxPostSize, encoding, new DefaultFileRenamePolicy());  
 		String renamedFile = ms.getFilesystemName("filename");
+
 		String email = (String) session.getAttribute("memberSessionEmail");
 		vo.setEmail(email);
 		vo.setMyImage(renamedFile);
@@ -173,10 +184,9 @@ public class MemberController {
 
 	@RequestMapping(value="mypage.udo",method=RequestMethod.GET)
 	public String myPage(MemberVO vo,Model model) {
-
-
 		return "p-detail-mypage";
 	}  
+  
 	@RequestMapping(value="logout.udo",method=RequestMethod.GET)
 	public String logOut(HttpSession session) {
 		session.invalidate();

@@ -8,12 +8,12 @@
                    <div>
                        <div class="row d-flex justify-content-between ml-2 mr-2 mt-4 pb-4">
                            <div id="profile-img" style="background: #BDBDBD;">
-          <!--                    <script>
+                             <script>
                              function popupImgUpload(){                                      		 
                             	 window.open("imageUpload.udo","width=100,height=50");
-                             }    <a href = "javascript:popupImgUpload()"
-                             </script> -->
-                             <a href="imageUpload.udo">  <img class="profile" src="${pageContext.request.contextPath}/resources/user/img/test/${sessionScope.myprofile}"></a>
+                             }    
+                             </script>
+                             <a href="javascript:popupImgUpload()">  <img class="profile" src="${pageContext.request.contextPath}/resources/user/img/test/${sessionScope.myprofile}"></a>
                            </div>
                            <div>${sessionScope.memberSessionName} 님 환영합니다.</div>
                        </div>

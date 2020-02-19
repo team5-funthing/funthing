@@ -67,17 +67,17 @@
 		<div class="input-group mb-3">
 			<div class="form-group">
 				<label for="projectMainImageFile">대표 이미지 선택하기</label>
+				<%= request.getRealPath("/") %>		
 				<c:choose>
-					<c:when test="${writingProject.projectMainImage eq ''}">
+					<c:when test="${writingProject.projectMainImage eq null}">
 						<input type="file" name="uploadImage"
 							class="form-control-file select-project-image"
 							id="projectMainImageFile">
                         <hr>
                         <div class="select_img"><img src="" /></div>
 					</c:when>
-					<c:when test="${writingProject.projectMainImage ne ''}">
+					<c:when test="${writingProject.projectMainImage ne null}">
 						<h4>이미지 바꾸기</h4>
-						<input type="hidden" name="projectMainImage" value="${writingProject.projectMainImage }">
 						<input type="file" name="uploadImage"
 							class="form-control-file select-project-image"
 							id="projectMainImageFile">

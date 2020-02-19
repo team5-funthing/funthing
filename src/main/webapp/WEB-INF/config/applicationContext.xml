@@ -14,8 +14,8 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-
-	<!-- 메일 인증 관련  -->
+	
+		<!-- 메일 인증 관련  -->
 	<context:property-placeholder
 		location="classpath:emailProperties.properties" />
 	
@@ -35,7 +35,7 @@
         </property>
     </bean>
 	<!--  메일 인증관련 끝 -->
-	
+
 	<!--  Data Source -->
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
 		<!-- JDBC 드라이버 클래스명 설정 -->
@@ -62,6 +62,4 @@
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
 	</bean>
 	
-	<context:component-scan base-package="com.team5.funthing"></context:component-scan>
-		
 </beans>
