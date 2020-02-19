@@ -1,4 +1,4 @@
-package com.team5.funthing.admin.impl.adminNoticeBoardService;
+package com.team5.funthing.admin.service.impl.adminNoticeBoardServiceImpl;
 
 import java.util.List;
 

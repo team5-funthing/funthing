@@ -1,4 +1,4 @@
-package com.team5.funthing.admin.impl.adminNoticeBoardService;
+package com.team5.funthing.admin.service.impl.adminNoticeBoardServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

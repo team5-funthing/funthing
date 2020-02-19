@@ -171,7 +171,7 @@
                         <div class="card card-hover">
                             <div class="box bg-warning text-center">
                                 <h1 class="font-light text-white"><i class="mdi mdi-headset"></i></h1>
-                                <h6 class="text-white"><a href="C:\Users\pjh\Desktop\5jo\matrix-admin-master\customercenter.html">고객센터</a></h6>
+                                <h6 class="text-white"><a href="customerService.ado">고객센터</a></h6>
                             </div>
                         </div>
                     </div>
@@ -180,7 +180,7 @@
                         <div class="card card-hover">
                             <div class="box bg-danger text-center">
                                 <h1 class="font-light text-white"><i class="mdi mdi-bell-ring-outline"></i></h1>
-                                <h6 class="text-white"><a href="C:\Users\pjh\Desktop\5jo\matrix-admin-master\notice_input.html">공지사항</a></h6>
+                                <h6 class="text-white"><a href="adminNoticeInput.ado">공지사항</a></h6>
                             </div>
                         </div>
                     </div>

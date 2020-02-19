@@ -49,10 +49,6 @@
 				document.loginForm.submit();
 			}
 		}
-		
-		function findPassword(){
-			alert("관리자에게 문의하시기 바랍니다. \n 문의번호 : 010-1234-5678");
-		}
 	</script>
 </head>
 
@@ -106,7 +102,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <div class="p-t-20">
-                                        <button class="btn btn-info" id="to-recover" onClick="findPassword()"><i class="fa fa-lock m-r-5"></i>비밀번호 찾기</button>
+                                        
                                         <button id="loginButton" class="btn btn-success float-right" onClick="return LoginCheck()">로그인</button>
                                     </div>
                                 </div>
