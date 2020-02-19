@@ -49,11 +49,11 @@
 		VALUES ((SELECT nvl(max(projectNo), 0) + 1 from project), #{creator}, #{email}, #{projectTitle}, #{goalMoney}, #{category}, #{projectSubTitle}, #{projectStory}, #{projectsummary}, #{projectCaution}, #{status}, #{informationAgree}, #{startDate}, #{endDate}, #{writeStatus})
 
 	    SELECT @@IDENTITY AS seq
-	</select> --> 
+	</select> -->
 	
 	<update id="updateProject" parameterType="project">
 		UPDATE project
-		SET creator = #{creator}, projectTitle = #{projectTitle},  goalmoney = #{goalMoney}, category = #{category}, projectsubtitle = #{projectSubTitle}, projectstory = #{projectStory}, projectsummary = #{projectSummary}, projectcaution = #{projectCaution}, status = #{status}, informationagree = #{informationAgree}, startDate = #{startDate}, endDate = #{endDate}, writestatus = #{writeStatus} 																																									  
+		SET creator = #{creator}, projectTitle = #{projectTitle},  goalMoney = #{goalMoney}, projectMainImage = #{projectMainImage}, projectIntroduceImage = #{projectIntroduceImage}, projectIntroduceVideo = #{projectIntroduceVideo}, category = #{category}, projectsubtitle = #{projectSubTitle}, projectstory = #{projectStory}, projectsummary = #{projectSummary}, projectcaution = #{projectCaution}, status = #{status}, informationagree = #{informationAgree}, startDate = #{startDate}, endDate = #{endDate}, writestatus = #{writeStatus} 																																									  
 		WHERE projectNo = #{projectNo}
 	</update>
 	

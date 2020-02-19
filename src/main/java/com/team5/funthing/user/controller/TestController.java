@@ -1,33 +1,23 @@
 package com.team5.funthing.user.controller;
 
-import java.io.File;
-
-import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.team5.funthing.common.utils.UploadFileUtils;
-import com.team5.funthing.common.utils.UploadPath;
-import com.team5.funthing.user.model.vo.ProjectVO;
+import com.team5.funthing.common.utils.uploadUtils.UploadUtil;
 import com.team5.funthing.user.service.projectService.UpdateProjectService;
 
 @Controller
 public class TestController {
 	
 	@Autowired
-	private UploadFileUtils uploadFileUtils;
+	private UploadUtil uploadFileUtils;
 	
 	@Autowired
 	private UpdateProjectService updateProjectService;
 	
-	@Autowired
-	private UploadPath uploadPath;
+
 	
 	@RequestMapping("/showUpload.tdo")
 	public String showUpload() {

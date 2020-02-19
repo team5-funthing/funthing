@@ -75,7 +75,7 @@ public class MemberController {
 
 	@RequestMapping(value="getMember.udo", method=RequestMethod.POST) 
 	public void getMember(MemberVO vo, HttpServletRequest request,HttpSession session,HttpServletResponse response) throws IOException {
-        System.out.println("ÄÁÆß½ºÀ§Ä¡ ¸®ÅÏ°ª :"+request.getParameter("confirm-switch"));
+        System.out.println("ì»¨íŒìŠ¤ìœ„ì¹˜ ë¦¬í„´ê°’ :"+request.getParameter("confirm-switch"));
 		if(getMemberService.getMember(vo) != null) { 
 			if(getMemberService.getMember(vo).getPassword().equals(request.getParameter("password"))) { 
 				if(request.getParameter("confirm-switch") != null) {
@@ -160,7 +160,7 @@ public class MemberController {
 	public String certificationEmail(MemberVO vo,HttpSession session) {
 		try {
 			String certificationCode = sendMailUtil.createCertificationCode(50);
-			sendMailUtil.sendMail("[Funthing] ÀÎÁõ¹øÈ£ ", "ÀÎÁõ¹øÈ£ ["+certificationCode+"]", vo.getEmail());	
+			sendMailUtil.sendMail("[Funthing] ì¸ì¦ë²ˆí˜¸ ", "ì¸ì¦ë²ˆí˜¸ ["+certificationCode+"]", vo.getEmail());	
 			session.setAttribute("certificationCode", certificationCode);   
 
 		} catch (Exception e) {
@@ -173,7 +173,7 @@ public class MemberController {
 	public String tst() {
 		String afk=null;
         if(afk==null) {
-        	System.out.println("³ÎÀÌÁö··");
+        	System.out.println("ë„ì´ì§€ë ");
         }
 		return "testing";
 	}
@@ -215,9 +215,9 @@ public class MemberController {
 	public String duplicationCheck(HttpServletRequest request,MemberVO vo,HttpSession session) {
 		vo.setEmail(request.getParameter("email"));
 		if(getMemberService.getMember(vo).getPassword()!=null) {
-			System.out.println("Á¸ÀçÇÏ´Â ¸ŞÀÏ  (½ÇÆĞ)");	
+			System.out.println("ì¡´ì¬í•˜ëŠ” ë©”ì¼  (ì‹¤íŒ¨)");	
 		}else {
-			System.out.println("»ç¿ë°¡´ÉÇÑ ¸ŞÀÏ  (¼º°ø)");
+			System.out.println("ì‚¬ìš©ê°€ëŠ¥í•œ ë©”ì¼  (ì„±ê³µ)");
 			session.setAttribute("emailCheck", vo.getEmail());
 		}
 		return "p-callback";
