@@ -1,19 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 	<!-- 로그인 팝업페이지-->
+
     <form id="login-popup" class="white-popup-block mfp-hide" action="getMember.udo" method="post">
         <div class="popup_box ">
             <div class="popup_inner">
                 <h3>로그인</h3>
-            
+            		
                     <div class="mt-10">
-                        <input type="text" name="email" placeholder="이메일 아이디" onfocus="this.placeholder = ''"
-                            onblur="this.placeholder = '이메일 아이디'" required class="single-input">
+                    <c:if test="${not empty cookie.funthingCookieId.value }">
+                        <input type="text" name="email" id="email" placeholder="이메일 아이디" onfocus="this.placeholder = ''"
+                            onblur="this.placeholder = '이메일 아이디'" value="${cookie.funthingCookieId.value }" required class="single-input">
+                    </c:if>
+                     <c:if test="${ empty cookie.funthingCookieId.value }">
+                    <input type="text" name="email" id="email" placeholder="이메일 아이디" onfocus="this.placeholder = ''"
+                            onblur="this.placeholder = '이메일 아이디'"  required class="single-input">
+                     </c:if>
                     </div>
                     <div class="mt-10">
-                        <input type="password" name="password" placeholder="비밀번호" onfocus="this.placeholder = ''"
-                            onblur="this.placeholder = '비밀번호'" required class="single-input">
+                    <c:if test="${not empty cookie.funthingCookiePw.value }">
+                        <input type="password" name="password" id="password" placeholder="비밀번호" onfocus="this.placeholder = ''"
+                            onblur="this.placeholder = '비밀번호'" value="${cookie.funthingCookiePw.value }"  required class="single-input">
+                    </c:if>
+                    <c:if test="${empty cookie.funthingCookiePw.value }">
+                     <input type="password" name="password" id="password" placeholder="비밀번호" onfocus="this.placeholder = ''"
+                            onblur="this.placeholder = '비밀번호'" value=""  required class="single-input">
+                    </c:if>
                     </div>
 
                     <div class="mt-10">
@@ -21,7 +34,7 @@
                             <div class="col-5">
                                 <div class="switch-wrap d-flex justify-content-start ml-3">
                                     <div class="confirm-switch mr-1">
-                                        <input type="checkbox" id="confirm-switch" checked>
+                                        <input type="checkbox" id="confirm-switch" name="confirm-switch" checked>
                                         <label for="confirm-switch"></label>
                                     </div>
                                     <p>아이디 기억하기</p>
