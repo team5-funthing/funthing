@@ -19,7 +19,7 @@
 		<!-- user : admin -->
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminCSBoardVO" alias="adminCSBoard"/>
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminNoticeBoardVO" alias="adminNoticeBoard"/>
-
+		<typeAlias type="com.team5.funthing.admin.model.vo.AdminMemberVO" alias="adminMember"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/member-mapper.xml" />
@@ -36,6 +36,6 @@
 		<!-- user : admin -->
 		<mapper resource="mappers/adminCSBoard-mapper.xml" />
 		<mapper resource="mappers/adminNoticeBoard-mapper.xml"/>
-
+		<mapper resource="mappers/adminLogin-mapper.xml"/>
 	</mappers>
 </configuration>
