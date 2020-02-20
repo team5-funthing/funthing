@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.team5.funthing.user.model.vo.ProjectBoardVO;
 
-public interface SelectEntireProjectBoardListService {
+public interface GetEntireProjectBoardListService {
 	
-	public List<ProjectBoardVO> selectEntireProjectBoardList(ProjectBoardVO vo);
+	public List<ProjectBoardVO> getEntireProjectBoardList(ProjectBoardVO vo);
 }

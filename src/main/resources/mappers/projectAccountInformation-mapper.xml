@@ -8,7 +8,7 @@
 	
 		SELECT * 
 		FROM projectaccountinformation
-		WHERE projectno = #{projectNo}
+		WHERE projectno = #{projectno}
 		
 	</select>
 
@@ -16,20 +16,20 @@
 
 		UPDATE projectAccountInformation
 		SET (projectBank=#{projectBank},projectAccountName=#{projectAccountName},projectAccount=#{projectAccount},bankBookImg=#{bankBookImg})
-        WHERE projectno = #{projectNo}
+        WHERE projectno = #{projectno}
 
 </update>
 
 <insert id="insertProjectAccountInformation" parameterType="projectAccountInformation" >
 		INSERT INTO projectAccountInformation
-		(projectBank,projectAccountName,projectAccount,bankBookImg)
- 		VALUES (#{projectBank},#{projectAccountName},#{projectAccount},#{bankBookImg})
+		(projectno,projectBank,projectAccountName,projectAccount,bankBookImg)
+ 		VALUES (#{projectno},#{projectBank},#{projectAccountName},#{projectAccount},#{bankBookImg})
 </insert>
 
 <delete id="deleteProjectAccountInformationService" parameterType="projectAccountInformation">
 
 		DELETE PROJECTACCOUNTINFORMATION
-		WHERE projectno = #{projectNo}
+		WHERE projectno = #{projectno}
 		
 </delete>
 </mapper>

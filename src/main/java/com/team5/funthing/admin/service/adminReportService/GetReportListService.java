@@ -4,7 +4,8 @@ import java.util.List;
 
 import com.team5.funthing.user.model.vo.ReportVO;
 
-public interface SelectEntireReportListService {
+public interface GetReportListService {
 
-	List<ReportVO>selectEntireReportList(ReportVO vo);
+	List<ReportVO> getReportList(ReportVO vo);
+	
 }

@@ -27,6 +27,16 @@ public class ProjectAccountInformationDAO {
 	public void deleteProjectAccountInformation(ProjectAccountInformationVO vo) {
 		projectAccountSqlSessionTemplate.delete("ProjectAccountInformationDAO.deleteProjectAccountInformation",vo);
 	}
+	
+	public boolean accountcheck(ProjectAccountInformationVO vo) {
+		boolean result;
+		if(projectAccountSqlSessionTemplate.selectOne("ProjectAccountInformationDAO.getProjectAccountInformation",vo)==null) {
+			result=true;
+		}else {
+			result=false;
+		}
+		return result;
+	}
 }
 
 

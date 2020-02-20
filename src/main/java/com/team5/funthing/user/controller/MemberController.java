@@ -47,6 +47,12 @@ public class MemberController {
 	public String showindex() {
 		return "p-index";
 	}
+	
+	@RequestMapping("mem.udo") //하늘실험용
+	public String showsky(HttpSession session, MemberVO vo) {
+		
+		return "p-test-board-write";
+	}
 
 	@RequestMapping(value="socialLogin.udo",method=RequestMethod.GET)
 	public String socialLogin() {   
@@ -75,7 +81,7 @@ public class MemberController {
 
 	@RequestMapping(value="getMember.udo", method=RequestMethod.POST) 
 	public void getMember(MemberVO vo, HttpServletRequest request,HttpSession session,HttpServletResponse response) throws IOException {
-        System.out.println("컨펌스위치 리턴값 :"+request.getParameter("confirm-switch"));
+        System.out.println("而⑦럩�뒪�쐞移� 由ы꽩媛� :"+request.getParameter("confirm-switch"));
 		if(getMemberService.getMember(vo) != null) { 
 			if(getMemberService.getMember(vo).getPassword().equals(request.getParameter("password"))) { 
 				if(request.getParameter("confirm-switch") != null) {
@@ -91,13 +97,14 @@ public class MemberController {
 					Cookie cookiepw = new Cookie("funthingCookiePw",null);
 					cookiepw.setMaxAge(0); /// kill the cookie
 				}
-				session.setAttribute("memberSessionEmail", vo.getEmail());
-				session.setAttribute("memberSessionName", vo.getName());
+				session.setAttribute("memberSessionEmail", getMemberService.getMember(vo).getEmail());
+				session.setAttribute("memberSessionName", getMemberService.getMember(vo).getName());
+				session.setAttribute("memberSessionPosition", getMemberService.getMember(vo).getPosition());
 			    if(session.getAttribute("myprifile")!=null) {
 				session.setAttribute("myprofile", getMemberService.getMember(vo).getMyImage()); 
 			    }
-
 				response.sendRedirect("member.udo");
+//				response.sendRedirect("mem.udo"); //하늘실험중
 			}else {
 				response.sendRedirect("findpw.udo");
 			}
@@ -160,7 +167,7 @@ public class MemberController {
 	public String certificationEmail(MemberVO vo,HttpSession session) {
 		try {
 			String certificationCode = sendMailUtil.createCertificationCode(50);
-			sendMailUtil.sendMail("[Funthing] 인증번호 ", "인증번호 ["+certificationCode+"]", vo.getEmail());	
+			sendMailUtil.sendMail("[Funthing] �씤利앸쾲�샇 ", "�씤利앸쾲�샇 ["+certificationCode+"]", vo.getEmail());	
 			session.setAttribute("certificationCode", certificationCode);   
 
 		} catch (Exception e) {
@@ -173,7 +180,7 @@ public class MemberController {
 	public String tst() {
 		String afk=null;
         if(afk==null) {
-        	System.out.println("널이지렁");
+        	System.out.println("�꼸�씠吏��쟻");
         }
 		return "testing";
 	}
@@ -215,9 +222,9 @@ public class MemberController {
 	public String duplicationCheck(HttpServletRequest request,MemberVO vo,HttpSession session) {
 		vo.setEmail(request.getParameter("email"));
 		if(getMemberService.getMember(vo).getPassword()!=null) {
-			System.out.println("존재하는 메일  (실패)");	
+			System.out.println("議댁옱�븯�뒗 硫붿씪  (�떎�뙣)");	
 		}else {
-			System.out.println("사용가능한 메일  (성공)");
+			System.out.println("�궗�슜媛��뒫�븳 硫붿씪  (�꽦怨�)");
 			session.setAttribute("emailCheck", vo.getEmail());
 		}
 		return "p-callback";
