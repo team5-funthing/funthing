@@ -10,11 +10,11 @@ import com.team5.funthing.user.model.vo.CSBoardVO;
 public class CSBoardDAO {
 	
 	@Autowired
-	private SqlSessionTemplate csboardSqlSessionTemplate;
+	private SqlSessionTemplate sqlSessionTemplate;
 	
 	public void insertCSBoard(CSBoardVO vo) {
 		System.out.println("고객문의 게시판에 글 입력");
-		csboardSqlSessionTemplate.insert("CSBoardDAO.insertCSBoard", vo);
+		sqlSessionTemplate.insert("CSBoardDAO.insertCSBoard", vo);
 	}
 	
 	

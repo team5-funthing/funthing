@@ -15,7 +15,8 @@ public class UpdateReplyCheckCSBoardServiceImpl implements UpdateReplyCheckCSBoa
 	
 	@Override
 	public void updateReplyCheckCSBoard(CSBoardVO vo) {
-		
+		System.out.println("임플에서 받은 vo");
+		System.out.println(vo.toString());
 		adminCSBoardDAO.updateReplyCheckCSBoard(vo);
 	}
 

@@ -9,9 +9,7 @@
 		<typeAlias type="com.team5.funthing.user.model.vo.NoticeVO" alias="notice"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.ProjectVO" alias="project"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.BoardVO" alias="board"/>
-
 		<typeAlias type="com.team5.funthing.user.model.vo.ProjectBoardVO" alias="projectboard"/>
-
 		<typeAlias type="com.team5.funthing.user.model.vo.CSBoardVO" alias="csboard"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.DeliveryAddressVO" alias="deliveryAddress"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.ReportVO" alias="report"/>
@@ -24,14 +22,13 @@
 		<mapper resource="mappers/notice-mapper.xml"/>
 		<mapper resource="mappers/project-mapper.xml" />
 		<mapper resource="mappers/board-mapper.xml" />
-
 		<mapper resource="mappers/projectboard-mapper.xml" />
-
 		<mapper resource="mappers/csboard-mapper.xml" />
 		<mapper resource="mappers/deliveryAddress-mapper.xml"/>
 		<mapper resource="mappers/report-mapper.xml" />
 		<!-- user : admin -->
 		<mapper resource="mappers/adminCSBoard-mapper.xml" />
+		<mapper resource="mappers/adminReport-mapper.xml" />
 		
 	</mappers>
 </configuration>
