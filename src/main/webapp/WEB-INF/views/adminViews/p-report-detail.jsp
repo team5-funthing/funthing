@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 
@@ -15,10 +14,12 @@
     <link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath }/resources/admin/assets/images/favicon.png">
     <title>Matrix Template - The Ultimate Multipurpose admin template</title>
     <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/multicheck/multicheck.css">
-    <link href="${pageContext.request.contextPath }/resources/admin/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/css/float-chart.css" rel="stylesheet">
     <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/admin/assets/libs/select2/dist/css/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/admin/assets/libs/jquery-minicolors/jquery.minicolors.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/admin/assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/admin/assets/libs/quill/dist/quill.snow.css">
     <link href="${pageContext.request.contextPath }/resources/admin/dist/css/style.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -66,7 +67,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">customercenter</h4>
+                        <h4 class="page-title">report_detail</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
@@ -89,64 +90,55 @@
 
 
 
-            <!-- 여기에 들어갈거-->
-            <div class="card">
-                <div class="p-20">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title m-b-0">고객센터</h5>
-                    <div class="table-responsive">
-                    
-                    
-                    
-                        <table id="zero_config" class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th style="width: 10%;">번호</th>
-                                    <th >제목</th>
-                                    <th style="width: 20%;">질문자</th>
-                                    <th style="width: 10%;">처리상태</th>
-                                    
-                                    
-                                </tr>
-                            </thead>
-                            <tbody>
-                            	<c:forEach var="list" items="${csBoardList}">
-                                <tr>
-                                    <td>${list.CSID}</td>
-                                    <td><a href="http://localhost:8080/funthing/getCSBoard.ado?CSID=${list.CSID}">${list.csTitle}</a></td>
-                                    <td>${list.email}</td>
-                                    <td>${list.replyProgress}</td>
-
-                                </tr>
-                                </c:forEach>
-                                
-                              
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>번호</th>
-                                    <th>제목</th>
-                                    <th>질문자</th>
-                                    <th>처리상태</th>
-                                 
-                                </tr>
-                            </tfoot>
+           <!-- editor -->
+           <div class="card">
+            <div class="p-20">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title m-b-0">신고글 상세보기</h4>
+                        <!-- Create the editor container -->
+                        
+                        <table style="margin-bottom: 1%;margin-top: 1%;">
+                            <tr>
+                                <th >신고 프로젝트명 </th>
+                                <td style="padding-top: 2%; padding-bottom: 2%;"><input type="text" size="50%;" readonly value="${projectVO.projectTitle}"></td>
+                            </tr>
+                            <tr>
+                                <th>신고자</th>
+                                <td> <input type="text" size="50%;" readonly value="${report.email}">  </td>
+                            </tr>
+                            <tr>
+                                <th>신고분류</th>
+                                <td style="padding-top: 2%; padding-bottom: 2%;"> <input type="text" size="50%;" readonly value="${report.reasonSelect}">  </td>
+                            </tr>
+	
                         </table>
-                        
-                        
-                    </div>
+                        <div align="">
+                            <textarea style="width: 80%; height: 150px; overflow: auto; padding: 10px; white-space:pre-wrap; resize: none;"  readonly>
+                            ${report.reason}
+                            </textarea>
+                        </div>
+                       
+                  
+                        <div align="center" style="padding-top: 2%;">
+                        	
+                            <a href="http://localhost:8080/funthing/getReportList.ado"><input type="button" value="뒤로"></a>
+                        </div>
+                       
 
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-</div>
+        
 
-            
+
+
+
                 <!-- ============================================================== -->
                 <!-- End Container fluid  -->
                 <!-- ============================================================== -->
@@ -194,15 +186,60 @@
         <script src="${pageContext.request.contextPath }/resources/admin/dist/js/pages/chart/chart-page-init.js"></script>
 
 
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/multicheck/jquery.multicheck.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/DataTables/datatables.min.js"></script>
-        <script>
-            /****************************************
-             *       Basic Table                   *
-             ****************************************/
-            $('#zero_config').DataTable();
-        </script>
+
+        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/admin/dist/js/pages/mask/mask.init.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/select2/dist/js/select2.full.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/select2/dist/js/select2.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/jquery-asColor/dist/jquery-asColor.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/jquery-asGradient/dist/jquery-asGradient.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/jquery-asColorPicker/dist/jquery-asColorPicker.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/jquery-minicolors/jquery.minicolors.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/quill/dist/quill.min.js"></script>
+    <script>
+        //***********************************//
+        // For select 2
+        //***********************************//
+        $(".select2").select2();
+
+        /*colorpicker*/
+        $('.demo').each(function() {
+        //
+        // Dear reader, it's actually very easy to initialize MiniColors. For example:
+        //
+        //  $(selector).minicolors();
+        //
+        // The way I've done it below is just for the demo, so don't get confused
+        // by it. Also, data- attributes aren't supported at this time...they're
+        // only used for this demo.
+        //
+        $(this).minicolors({
+                control: $(this).attr('data-control') || 'hue',
+                position: $(this).attr('data-position') || 'bottom left',
+
+                change: function(value, opacity) {
+                    if (!value) return;
+                    if (opacity) value += ', ' + opacity;
+                    if (typeof console === 'object') {
+                        console.log(value);
+                    }
+                },
+                theme: 'bootstrap'
+            });
+
+        });
+        /*datwpicker*/
+        jQuery('.mydatepicker').datepicker();
+        jQuery('#datepicker-autoclose').datepicker({
+            autoclose: true,
+            todayHighlight: true
+        });
+        var quill = new Quill('#editor', {
+            theme: 'snow'
+        });
+
+    </script>
 </body>
 
 </html>

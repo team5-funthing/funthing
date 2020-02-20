@@ -102,26 +102,31 @@
                         
                         <table style="margin-bottom: 1%;margin-top: 1%;">
                             <tr>
-                                <th >제목</th>
-                                <td style="padding-top: 2%; padding-bottom: 2%;"><input type="text" size="50%;" readonly></td>
+                                <th >제목 </th>
+                                <td style="padding-top: 2%; padding-bottom: 2%;"><input type="text" size="50%;" readonly value="${getCSBoard.csTitle}"></td>
                             </tr>
                             <tr>
-                                <th>이메일</th>
-                                <td> <input type="text" size="50%;" readonly>  </td>
+                                <th>이메일 </th>
+                                <td> <input type="text" size="50%;" readonly value="${getCSBoard.email}">  </td>
                             </tr>
 
                         </table>
                         
-
-
-                        <form>
                             <textarea style="width: 80%; height: 150px; overflow: auto; padding: 10px; white-space:pre-wrap; resize: none;"  readonly>
+                            ${getCSBoard.csContent}
                             </textarea>
-                        </form>
-                       
+                        
+                       <form method="POST" action="insertAdminCSBoard.ado">
+                       <textarea name="adminCSContent" placeholder="답글 적는 부분" style="width: 80%; height: 150px; overflow: auto; padding: 10px; white-space:pre-wrap; resize: none;"></textarea>
+                        <input type="hidden" name="csTitle" value="${getCSBoard.csTitle}">
+                        <input type="hidden" name="email" value="${getCSBoard.email}">
+                        <input type="hidden" name="CSID" value="${getCSBoard.CSID}">
+                  
                         <div align="center" style="padding-top: 2%;">
-                            <a href="C:\Users\pjh\Desktop\5jo\matrix-admin-master\customercenter.html"><input type="button" value="뒤로"></a>
+                        	<input type="submit" value="확인">
+                            <a href="http://localhost:8080/funthing/getAdminCSBoardList.ado"><input type="button" value="뒤로"></a>
                         </div>
+                        </form>
 
                     </div>
                 </div>

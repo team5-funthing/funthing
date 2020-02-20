@@ -37,87 +37,89 @@ public class ProjectBoardController {
 	
 	
 	@RequestMapping(value = "insertProjectBoard.udo", method = RequestMethod.POST )
-	public String insertProjectBoard(ProjectBoardVO vo, Model model) { //»õ±Ûµî·ÏÇÏ±â
+	public String insertProjectBoard(ProjectBoardVO vo, Model model) { //ìƒˆê¸€ë“±ë¡í•˜ê¸°
 		
-		System.out.println("±Ûµî·ÏÇÑ´Ù");
-		vo.setProjectNo(2020); //ÀÌºÎºĞ ³ªÁß¿¡ ¹Ù²ã¾ßµÊ Áö±İÀº ÀÓ½Ã·Î ÇÁ·ÎÁ§Æ® ³Ñ¹ö »ı¼º
+		System.out.println("ê¸€ë“±ë¡í•œë‹¤");
+		vo.setProjectNo(2020); //ì´ë¶€ë¶„ ë‚˜ì¤‘ì— ë°”ê¿”ì•¼ë¨ ì§€ê¸ˆì€ ì„ì‹œë¡œ í”„ë¡œì íŠ¸ ë„˜ë²„ ìƒì„±
 		
 		insertProjectBoardService.insertProjectBoard(vo);
 		
 		List<ProjectBoardVO> getProjectBoardList = getEntireProjectBoardListService.getEntireProjectBoardList(vo);
-		model.addAttribute("list", getProjectBoardList); //ÀüÃ¼¸ñ·Ï¸®½ºÆ® °¡Á®¿À±â
+		model.addAttribute("list", getProjectBoardList); //ì „ì²´ëª©ë¡ë¦¬ìŠ¤íŠ¸ ê°€ì ¸ì˜¤ê¸°
 		
-		return "p-test-board"; //ÀüÃ¼±Û º¸¿©ÁÖ´Â °÷ 
+		return "p-test-board"; //ì „ì²´ê¸€ ë³´ì—¬ì£¼ëŠ” ê³³ 
 			
 		
 	}
 	
 	@RequestMapping(value="newBoard.udo", method = RequestMethod.POST)
-	public String newProjectBoard() { //»õ±ÛÀÛ¼ºÈ­¸éÀ¸·Î °¡±â
+	public String newProjectBoard() { //ìƒˆê¸€ì‘ì„±í™”ë©´ìœ¼ë¡œ ê°€ê¸°
 		
-		return "p-test-board-write"; //±Û ÀÛ¼ºÇÏ´Â°÷
+		return "p-test-board-write"; //ê¸€ ì‘ì„±í•˜ëŠ”ê³³
 			
 	}
 	
 	
 	@RequestMapping(value="replyBoard.udo", method = RequestMethod.POST)
-	public String replyProjectBoard(ProjectBoardVO vo, Model model) { //´ä±ÛÀÛ¼ºÈ­¸éÀ¸·Î °¡±â (Maker¸¸ ¼öÇà°¡´É)
+	public String replyProjectBoard(ProjectBoardVO vo, Model model) { //ë‹µê¸€ì‘ì„±í™”ë©´ìœ¼ë¡œ ê°€ê¸° (Makerë§Œ ìˆ˜í–‰ê°€ëŠ¥)
 		
 		vo.setProjectBoardNo(vo.getProjectBoardNo());
 		vo.setStep(vo.getStep());
 		model.addAttribute("vo", vo);	
 		
-		return "p-test-board-reply"; //´ä±Û ÀÛ¼ºÇÏ´Â °÷
+		return "p-test-board-reply"; //ë‹µê¸€ ì‘ì„±í•˜ëŠ” ê³³
 			
 	}
 	
 	@RequestMapping(value="insertReplyProjectBoard.udo", method = RequestMethod.POST)
-	public String insertReplyProjectBoard(ProjectBoardVO vo, Model model) { //´ä±ÛÀÛ¼ºÇÏ±â (Maker¸¸ ¼öÇà°¡´É)
+	public String insertReplyProjectBoard(ProjectBoardVO vo, Model model) { //ë‹µê¸€ì‘ì„±í•˜ê¸° (Makerë§Œ ìˆ˜í–‰ê°€ëŠ¥)
 		
-		System.out.println("´ä±ÛÀÛ¼ºÇÏ±â");
+		System.out.println("ë‹µê¸€ì‘ì„±í•˜ê¸°");
 		
 		insertProjectBoardReplyService.insertProjectBoardReply(vo);
 		List<ProjectBoardVO> getProjectBoardList = getEntireProjectBoardListService.getEntireProjectBoardList(vo);
-		model.addAttribute("list", getProjectBoardList);//ÀüÃ¼¸ñ·Ï¸®½ºÆ® °¡Á®¿À±â
+		model.addAttribute("list", getProjectBoardList);//ì „ì²´ëª©ë¡ë¦¬ìŠ¤íŠ¸ ê°€ì ¸ì˜¤ê¸°
 		
-		return "p-test-board"; //ÀüÃ¼±Û º¸¿©ÁÖ´Â °÷
+		return "p-test-board"; //ì „ì²´ê¸€ ë³´ì—¬ì£¼ëŠ” ê³³
 			
 	}
 	
 	
 	@RequestMapping(value = "updateProjectBoard.udo", method = RequestMethod.POST )
-	public String updateProjectBoard(ProjectBoardVO vo, Model model, HttpSession session) { //±Û¼öÁ¤ÇÏ±â
+	public String updateProjectBoard(ProjectBoardVO vo, Model model, HttpSession session) { //ê¸€ìˆ˜ì •í•˜ê¸°
 	
-		System.out.println("±Û¼öÁ¤ÇÏ±â");
+		System.out.println("ê¸€ìˆ˜ì •í•˜ê¸°");
 		
 		updateProjectBoardService.updateProjectBoard(vo);	
-		model.addAttribute("list",getEntireProjectBoardListService.getEntireProjectBoardList(vo)); //ÀüÃ¼¸ñ·Ï¸®½ºÆ® °¡Á®¿À±â 
+		model.addAttribute("list",getEntireProjectBoardListService.getEntireProjectBoardList(vo)); //ì „ì²´ëª©ë¡ë¦¬ìŠ¤íŠ¸ ê°€ì ¸ì˜¤ê¸° 
 
-		return "p-test-board"; //ÀüÃ¼±Û º¸¿©ÁÖ´Â °÷
+
+		return "p-test-board"; //ì „ì²´ê¸€ ë³´ì—¬ì£¼ëŠ” ê³³
 	 
 	}
 	
 	@RequestMapping(value = "getProjectBoard.udo", method = RequestMethod.POST)
-	public String updateProjectBoard(ProjectBoardVO vo, Model model) { //¼±ÅÃÇÑ ±Û °¡Á®¿À±â
+	public String updateProjectBoard(ProjectBoardVO vo, Model model) { //ì„ íƒí•œ ê¸€ ê°€ì ¸ì˜¤ê¸°
+
 		
-		System.out.println("±Û¼öÁ¤ÇÒ ±Û ³Ñ±â±â");
+		System.out.println("ê¸€ìˆ˜ì •í•  ê¸€ ë„˜ê¸°ê¸°");
 			
-		String getProjectboardcontents = getChoiceProjectBoardService.getChoiceProjectBoard(vo); //ÄÁÅÙÃ÷ ±Û °¡Á®¿À±â 
+		String getProjectboardcontents = getChoiceProjectBoardService.getChoiceProjectBoard(vo); //ì»¨í…ì¸  ê¸€ ê°€ì ¸ì˜¤ê¸° 
 		vo.setProjectBoardContents(getProjectboardcontents);
 		model.addAttribute("vo", vo);	
 
-		return "p-test-board-write"; //±Û ¼öÁ¤ ÇÏ´Â °÷
+		return "p-test-board-write"; //ê¸€ ìˆ˜ì • í•˜ëŠ” ê³³
 	}
 	
 	@RequestMapping(value="deleteProjectBoard.udo" , method = RequestMethod.POST)
-	public String deleteProjectBoard(ProjectBoardVO vo, Model model) { //±Û »èÁ¦ÇÏ±â
+	public String deleteProjectBoard(ProjectBoardVO vo, Model model) { //ê¸€ ì‚­ì œí•˜ê¸°
 		
-		System.out.println("±Û »èÁ¦ÇÑ´Ù");
+		System.out.println("ê¸€ ì‚­ì œí•œë‹¤");
 		
 		deleteProjectBoardService.deleteProjectBoard(vo);
-		model.addAttribute("list",getEntireProjectBoardListService.getEntireProjectBoardList(vo)); //ÀüÃ¼¸ñ·Ï¸®½ºÆ® °¡Á®¿À±â 
+		model.addAttribute("list",getEntireProjectBoardListService.getEntireProjectBoardList(vo)); //ì „ì²´ëª©ë¡ë¦¬ìŠ¤íŠ¸ ê°€ì ¸ì˜¤ê¸° 
 
-		return "p-test-board"; //ÀüÃ¼±Û º¸¿©ÁÖ´Â °÷
+		return "p-test-board"; //ì „ì²´ê¸€ ë³´ì—¬ì£¼ëŠ” ê³³
 	}
 	
 	

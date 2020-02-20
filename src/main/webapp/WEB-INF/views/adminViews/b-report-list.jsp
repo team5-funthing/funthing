@@ -26,6 +26,7 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 </head>
 
 <body>
@@ -66,7 +67,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">customercenter</h4>
+                        <h4 class="page-title">report</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
@@ -96,46 +97,49 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title m-b-0">고객센터</h5>
+                                    <h5 class="card-title m-b-0">신고목록</h5>
                     <div class="table-responsive">
                     
                     
-                    
+                    	<form method="POST" id="getReport">
+                    	
                         <table id="zero_config" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
                                     <th style="width: 10%;">번호</th>
-                                    <th >제목</th>
-                                    <th style="width: 20%;">질문자</th>
-                                    <th style="width: 10%;">처리상태</th>
-                                    
-                                    
+                                    <th >프로젝트 번호</th>
+                                    <th style="width: 20%;">아이디</th>
+                                    <th style="width: 10%;">날짜</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            	<c:forEach var="list" items="${csBoardList}">
+                            
+                           
+                           
+                            	<c:forEach var="list" items="${reportList}">
                                 <tr>
-                                    <td>${list.CSID}</td>
-                                    <td><a href="http://localhost:8080/funthing/getCSBoard.ado?CSID=${list.CSID}">${list.csTitle}</a></td>
+                                    <td>${list.reportNo}</td>
+                                    <td>
+                                    <a href="http://localhost:8080/funthing/getReport.ado?reportNo=${list.reportNo}&projectNo=${list.projectNo}">${list.reasonSelect} 관련 신고</a>
+                                    </td>
                                     <td>${list.email}</td>
-                                    <td>${list.replyProgress}</td>
-
+                                    <td>${list.reportDate}</td>
                                 </tr>
                                 </c:forEach>
-                                
+                            
                               
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <th>번호</th>
-                                    <th>제목</th>
-                                    <th>질문자</th>
-                                    <th>처리상태</th>
+                                    <th>프로젝트 번호</th>
+                                    <th>아이디</th>
+                                    <th>날짜</th>
                                  
                                 </tr>
                             </tfoot>
                         </table>
-                        
+                        </form>
                         
                     </div>
 
