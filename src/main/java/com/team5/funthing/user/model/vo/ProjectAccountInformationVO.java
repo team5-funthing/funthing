@@ -2,7 +2,7 @@ package com.team5.funthing.user.model.vo;
 
 public class ProjectAccountInformationVO {
 	
-	private int projectNo;
+	private int projectno;
 	private String projectBank;
 	private String projectAccountName;
 	private String projectAccount;
@@ -10,17 +10,17 @@ public class ProjectAccountInformationVO {
 	
 	@Override
 	public String toString() {
-		return "ProjectAccountInformationVO [projectNo=" + projectNo + ", projectBank=" + projectBank
+		return "ProjectAccountInformationVO [projectNo=" + projectno + ", projectBank=" + projectBank
 				+ ", projectAccountName=" + projectAccountName + ", projectAccount=" + projectAccount + ", bankBookImg="
 				+ bankBookImg + "]";
 	}
 
-	public int getProjectNo() {
-		return projectNo;
+	public int getProjectno() {
+		return projectno;
 	}
 
-	public void setProjectNo(int projectNo) {
-		this.projectNo = projectNo;
+	public void setProjectno(int projectNo) {
+		this.projectno = projectNo;
 	}
 
 	public String getProjectBank() {

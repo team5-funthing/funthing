@@ -5,4 +5,6 @@ import com.team5.funthing.user.model.vo.ProjectAccountInformationVO;
 public interface GetProjectAccountInformationService {
 
 	public ProjectAccountInformationVO getProjectAccountInformation(ProjectAccountInformationVO vo);
+	
+	   public boolean accountCheck(ProjectAccountInformationVO vo) ;
 }
