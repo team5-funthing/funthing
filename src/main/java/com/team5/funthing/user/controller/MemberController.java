@@ -47,6 +47,12 @@ public class MemberController {
 	public String showindex() {
 		return "p-index";
 	}
+	
+	@RequestMapping("mem.udo") //하늘실험용
+	public String showsky(HttpSession session, MemberVO vo) {
+		
+		return "p-test-board-write";
+	}
 
 	@RequestMapping(value="socialLogin.udo",method=RequestMethod.GET)
 	public String socialLogin() {   
@@ -91,13 +97,14 @@ public class MemberController {
 					Cookie cookiepw = new Cookie("funthingCookiePw",null);
 					cookiepw.setMaxAge(0); /// kill the cookie
 				}
-				session.setAttribute("memberSessionEmail", vo.getEmail());
-				session.setAttribute("memberSessionName", vo.getName());
+				session.setAttribute("memberSessionEmail", getMemberService.getMember(vo).getEmail());
+				session.setAttribute("memberSessionName", getMemberService.getMember(vo).getName());
+				session.setAttribute("memberSessionPosition", getMemberService.getMember(vo).getPosition());
 			    if(session.getAttribute("myprifile")!=null) {
 				session.setAttribute("myprofile", getMemberService.getMember(vo).getMyImage()); 
 			    }
-
 				response.sendRedirect("member.udo");
+//				response.sendRedirect("mem.udo"); //하늘실험중
 			}else {
 				response.sendRedirect("findpw.udo");
 			}
