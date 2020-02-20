@@ -3,46 +3,55 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
  <mapper namespace="ProjectBoardDAO">
- 
- 	<insert id="insertProjectBoard"  parameterType="projectboard">
-		INSERT INTO projectboard(projectboardno, email, projectno, projectboardcontents) 
-		VALUES(projectboard_seq.nextval, #{email},#{projectno},#{projectboardcontents})
+ 	
+ 	<!-- 글등록 -->
+ 	<insert id="insertProjectBoard"  parameterType="projectBoard">
+		INSERT INTO projectboard(projectboardno, email, projectno, projectboardcontents, ref) 
+		VALUES(projectboard_seq.nextval, #{email},#{projectNo},#{projectBoardContents}, projectboard_seq.currval )
 	</insert>
 	
-	<insert id="insertMakerProjectBoard"  parameterType="projectboard">
-		INSERT INTO projectboard(projectboardno, email, projectno, position, projectboardcontents,projectboarddate) 
-		VALUES(projectboard_seq.nextval, #{email}, #{projectno}, #{position}, #{projectboardcontents}, sysdate)
-	</insert>
-	
-	<update id="updateProjectBoard" parameterType="projectboard">
+	<!-- 글수정 -->
+	<update id="updateProjectBoard" parameterType="projectBoard">
 		UPDATE projectboard 
-		SET projectboardcontents = #{projectboardcontents} WHERE email = #{email}
+		SET projectBoardContents = #{projectBoardContents} WHERE projectBoardNo = #{projectBoardNo}
 	</update>
 	
- 	<delete id="deleateProjectBoard" parameterType="projectboard">
-		DELETE FROM projectboard WHERE email = #{email}
+	<!-- 선택한 글 select문  -->
+	<select id="getChoiceProjectBoard" parameterType="projectBoard" resultType="String">
+		SELECT projectboardcontents FROM projectboard WHERE projectBoardNo = #{projectBoardNo}
+	</select>
+	
+	<!-- 글삭제  -->
+ 	<delete id="deleateProjectBoard" parameterType="projectBoard">
+		DELETE FROM projectboard WHERE projectBoardNo = #{projectBoardNo}
 	</delete>
  	
- 	<delete id="entireDeleateProjectBoard" parameterType="projectboard">
- 		DELETE FROM projectboard where projectno = #{projectno} and email = #{email}
- 	</delete>
+ 	
+ 	<!-- 전체게시판리스트 뽑기 (조인문사용함 = 이름가져와야되서) -->
  	
  	<resultMap type="Member" id="Member">
-		<id column="email" property="email" />
+		<result column="email" property="email" />
 		<result column="name" property="name" />
 	</resultMap>
 
-	<resultMap type="projectboard" id="projectboard">
-		<id column="email" property="email" />
-		<result column="position" property="position" />
-		<result column="projectboardcontents" property="projectboardcontents" />
-		<result column="projectboarddate" property="projectboarddate" />
+	<resultMap type="projectBoard" id="projectBoard">
+		<result column="email" property="email" />
+		<result column="projectBoardContents" property="projectBoardContents" />
+		<result column="projectBoardDate" property="projectBoardDate" />
+		<result column="projectBoardNo" property="projectBoardNo" />
 		<collection property="Member" resultMap="Member"></collection>
 	</resultMap>
  	
- 	<select id="selectEntireProjectBoardList" parameterType="projectboard" resultMap="projectboard">
-	select member.name, projectboard.position, projectboard.projectboardcontents, projectboard.projectboarddate from projectboard join member on member.email = projectboard.email order by projectboard.projectboarddate desc
+ 	<select id="getEntireProjectBoardList" parameterType="projectBoard"  resultMap="projectBoard">
+		select member.name,projectboard.* from(select * from projectboard order by ref desc, step asc) projectboard join member on member.email = projectboard.email
 	</select>
- 	
- 	
+	
+	
+	<!-- 답글등록 -->
+	<insert id="insertProjectBoardReply"  parameterType="projectBoard">
+		INSERT INTO projectboard(projectboardno, email, projectno, projectboardcontents, ref, step) 
+		VALUES(projectboard_seq.nextval, #{email},#{projectNo},#{projectBoardContents},#{ref},(select nvl(max(step),0)+1 from projectboard where ref = #{ref}))
+	</insert>
+	
+	
  </mapper>

@@ -11,7 +11,15 @@ public class MemberVO {
 	private String myImage;
 	private String report;
 	
-	
+	//테스트용 
+	private String position;
+
+	public String getPosition() {
+		return position;
+	}
+	public void setPosition(String position) {
+		this.position = position;
+	}
 	
 	
 	private String certificationCode;
