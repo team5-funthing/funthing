@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProjectAccountInformationDAO">
+
+<select id="getProjectAccountInformation" parameterType="projectAccountInformation" resultType="projectAccountInformation">
+	
+		SELECT * 
+		FROM projectaccountinformation
+		WHERE projectno = #{projectNo}
+		
+	</select>
+
+<update id="updateProjectAccountInformation" parameterType="projectAccountInformation">
+
+		UPDATE projectAccountInformation
+		SET (projectBank=#{projectBank},projectAccountName=#{projectAccountName},projectAccount=#{projectAccount},bankBookImg=#{bankBookImg})
+        WHERE projectno = #{projectNo}
+
+</update>
+
+<insert id="insertProjectAccountInformation" parameterType="projectAccountInformation" >
+		INSERT INTO projectAccountInformation
+		(projectBank,projectAccountName,projectAccount,bankBookImg)
+ 		VALUES (#{projectBank},#{projectAccountName},#{projectAccount},#{bankBookImg})
+</insert>
+
+<delete id="deleteProjectAccountInformationService" parameterType="projectAccountInformation">
+
+		DELETE PROJECTACCOUNTINFORMATION
+		WHERE projectno = #{projectNo}
+		
+</delete>
+</mapper>

@@ -33,6 +33,24 @@
                             </div>
                             <div class="col-xl-12 mt-10">
                                 <button type="button" onclick="" class="boxed-btn3">이메일 중복확인 </button>
+                                <script>
+                                	function duplicateCheck(){
+                                		location.href="http://localhost:8080/funthing/emailCheck.udo?email="+
+                                				document.getElementById("email").value;
+                                	}
+                                	
+                                	function tryjoin(){
+                                		
+                                		if(${sessionScope.emailCheck}!=null){
+                                			alert("사용가능한 메일입니다!");
+                                			location.href="http://localhost:8080/funthing/successjoin.udo";
+                                		}else{
+                                			alert("이미 가입된 이메일 입니다.  이메일을 다시 확인해 주세요");
+                                			document.getElementById("email").value="";
+                                		}
+                                
+                                	}
+                                </script>
                             </div>
 							     <div class="mt-10">
                                 <h5>이름</h5>
