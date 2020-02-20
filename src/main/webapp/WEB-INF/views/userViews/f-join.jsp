@@ -42,7 +42,6 @@
                             <div class="mt-10">
                              <a class="btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
                                     href="javascript:popup()">인증번호 보내기</a>
-                            
                                 <input type="text" name="emailCheck" placeholder="인증번호를 입력하세요"
                                     onfocus="this.placeholder = ''" onblur="this.placeholder = '인증번호를 입력하세요'"
                                     required class="single-input">
@@ -51,22 +50,24 @@
 							<script
 								src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 							<script>
-								function popup() {
-									var email = document.getElementById('email').value;
+								
+							function popup() {
+					
+									 var email = document.getElementById('email').value;
 									window.open("certification.udo?email="
 											+ email, "인증번호가 발송되었습니다.",
 											"width=50,height=10");
 									
 									window.open("http://localhost:8080/funthing/emailCheck.udo");
-									
-                            		if(${sessionScope.emailCheck}!=null){
+								
+									if(${sessionScope.emailCheck}!=null){
                             			alert("사용 가능한 메일입니다.");
                             		}else{
                             			alert("이미 가입된 이메일 입니다.  이메일을 다시 확인해 주세요");
                             			document.getElementById("email").value="";
-                            		}
+                            		}  
                             	}
-								}
+								
 							</script>
 							<input id="sessionCode" type="hidden" value="<%=session.getAttribute("certificationCode")%>">
                             <div class="mt-10">

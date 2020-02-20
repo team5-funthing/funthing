@@ -63,6 +63,9 @@
                               프로젝트</a> <a class="nav-item nav-link" id="nav-like-prj-list-tab"
                               data-toggle="tab" href="#nav-like-prj-list" role="tab"
                               aria-controls="nav-like-prj-list" aria-selected="false">좋아요
+                              프로젝트</a><a class="nav-item nav-link" id="nav-like-prj-list-tab"
+                              data-toggle="tab" href="#nav-like-prj-list" role="tab"
+                              aria-controls="nav-like-prj-list" aria-selected="false">예정중인 관심
                               프로젝트</a>
                         </div>
                      </nav>

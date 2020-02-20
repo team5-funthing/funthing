@@ -22,23 +22,33 @@ public class ProjectAccountInformationController {
 		GetProjectAccountInformationService getProjectAccountInformation;
 		@Autowired
 		DeleteProjectAccountInformationService deleteProjectAccountInformation;
-		
-		@RequestMapping(path="accountInfo.udo",method=RequestMethod.GET)
-		public String goAccountInfo() {
+		@RequestMapping(path="account.udo",method=RequestMethod.GET)
+		public String goAccountIn() {
 			return "f-accountInfo";
 		}
-		
-		@RequestMapping(path="insertOrUpdateProjectAccountInformation.udo",method=RequestMethod.POST)
-		public String insertPAI(ProjectAccountInformationVO vo) {
-			if(getProjectAccountInformation.getProjectAccountInformation(vo).getProjectBank()==null) {
-				insertProjectAccountInformation.insertProjectAccountInformation(vo);
-			}else {
-				updateProjectAccountInformation.updateProjectAccountInformation(vo);
-			}
-			
-			return "forward:accountInfo.udo";
+		@RequestMapping(path="accountInfo.udo",method=RequestMethod.GET)
+		public String goAccountInfo() {
+			return "redirect:account.udo/?projectno=1";
 		}
 		
+		
+		/////   이거 메소드 하나에 몰아넣지 못하니 찢어라.  찢고   하나씩 만드셈!!!   
+		@RequestMapping(path="insertProjectAccountInformation.udo",method=RequestMethod.POST)
+		public String insertPAI(ProjectAccountInformationVO vo) {
+		
+				insertProjectAccountInformation.insertProjectAccountInformation(vo);
+	
+		
+			return "";
+		}
+
+		@RequestMapping(path="UpdateProjectAccountInformation.udo",method=RequestMethod.POST)
+		public String updatePAI(ProjectAccountInformationVO vo) {
+
+			updateProjectAccountInformation.updateProjectAccountInformation(vo);
+			
+			return "";
+		}
 	
 		@RequestMapping(path="deleteProjectAccountInformation.udo",method=RequestMethod.POST)
 		public String deletePAI(ProjectAccountInformationVO vo) {
