@@ -24,6 +24,7 @@
     <c:if test="${writingProject.projectNo ne -1 }">
     	<script>
     		alert("글 상태 : ${writingProject.writeStatus }  projectNo : ${writingProject.projectNo}");
+    		
     	</script>
     </c:if>
     
