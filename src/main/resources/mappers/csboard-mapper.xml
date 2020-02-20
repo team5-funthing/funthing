@@ -4,9 +4,9 @@
 
 <mapper namespace="CSBoardDAO">
 
-	<insert id="insertCSboard" parameterType="csboard">
-		INSERT INTO CSBOARD(CSID, email, csTitle, csContent, csRegdate, replyProgress) 
-		VALUES(CSBoard_seq.nextval, #{email}, #{csTitle}, #{csContent}, #{csRegdate}, #{replyProgress})
+	<insert id="insertCSBoard" parameterType="csboard">
+		INSERT INTO CSBOARD(CSID, email, csTitle, csContent) 
+		VALUES(CSBoard_seq.nextval, #{email}, #{csTitle}, #{csContent})
 	</insert>
 	
 

@@ -24,8 +24,8 @@
   	
     <jsp:include page="./include/i-popupover-mypage.jsp"/> 
     <jsp:include page="./include/i-header.jsp"/> 
-      
-      
+     
+     
     <!-- 회원가입 선택 폼 양식 start -->
     <div class="wrap">
         <div class="container ">
@@ -51,7 +51,7 @@
         </div>
     </div>
     <!-- 회원가입 폼 end -->
-
+ 	
 
     <footer class="footer">
     </footer>

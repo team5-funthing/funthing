@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserCreatorDAO">
+
+	<update id="updateCreator" parameterType="userCreator">
+		UPDATE makerMember 
+		SET makerPhone=#{makerPhone}, businessNumber=#{businessNumber}, 
+		businessAddress=#{businessAddress}, businessFileLink=#{businessFileLink}, lv=#{lv}
+		WHERE creator = #{creator}
+	</update>
+	
+	<insert id="insertCreator" parameterType="adminCreator">
+		INSERT INTO makerMember (creator, email, makerPhone, businessNumber, businessAddress, businessFileLink, lv)
+		VALUES(#{creator}, #{email}, #{makerPhone}, #{businessNumber}, #{businessAddress}, #{businessFileLink}, #{lv})
+	</insert>
+
+</mapper>

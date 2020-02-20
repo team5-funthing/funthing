@@ -9,6 +9,7 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="p-t-30">
+
                         <li class="sidebar-item"> 
                         	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="adminIndex.ado" aria-expanded="false">
                         		<i class="mdi-apps"></i>
@@ -56,6 +57,7 @@
                                 <i class="mdi mdi-account-card-details"></i>
                                 <span class="hide-menu">개인정보 처리방침 </span>
                             </a>
+
                         </li>
                     </ul>
                 </nav>
