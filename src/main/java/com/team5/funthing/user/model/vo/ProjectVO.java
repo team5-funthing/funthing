@@ -3,8 +3,6 @@ package com.team5.funthing.user.model.vo;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.web.multipart.MultipartFile;
-
 /**
  * 
  * @author bummit
@@ -16,16 +14,18 @@ public class ProjectVO {
 	
 //	프로젝트 기본설정 멤버
 	private int projectNo = -1; 
-	private String creator=""; 
-	private String email="";
+	private String creator = ""; 
+	private String email = "";
 	
 //	프로젝트 설정 멤버
 	private int goalMoney; 
-	private String projectMainImage;
-	private String projectTitle="";
-	private String projectSubTitle="";
+	private String projectMainImage = "";
+	private String projectIntroduceImage = ""; // 추후 여러장 가능하게 변경
+	private String projectIntroduceVideo = "";
+	private String projectTitle = "";
+	private String projectSubTitle = "";
 	private String category=""; 
-	private Date startDate= new Date(); 
+	private Date startDate = new Date(); 
 	private Date endDate = new Date(); 
 	private List<String> projectKeyword; // null ok
 	
@@ -34,7 +34,7 @@ public class ProjectVO {
 	private String projectSummary="";
 	private String projectDetail="";
 	private String projectCaution="";
-	private String projectVideo; // null ok
+	 // null ok
 
 //	그 외 멤버
 	private String supporters; 
@@ -71,6 +71,18 @@ public class ProjectVO {
 	}
 	public void setProjectMainImage(String projectMainImage) {
 		this.projectMainImage = projectMainImage;
+	}
+	public String getProjectIntroduceImage() {
+		return projectIntroduceImage;
+	}
+	public void setProjectIntroduceImage(String projectIntroduceImage) {
+		this.projectIntroduceImage = projectIntroduceImage;
+	}
+	public String getProjectIntroduceVideo() {
+		return projectIntroduceVideo;
+	}
+	public void setProjectIntroduceVideo(String projectIntroduceVideo) {
+		this.projectIntroduceVideo = projectIntroduceVideo;
 	}
 	public String getProjectTitle() {
 		return projectTitle;
@@ -132,12 +144,6 @@ public class ProjectVO {
 	public void setProjectCaution(String projectCaution) {
 		this.projectCaution = projectCaution;
 	}
-	public String getProjectVideo() {
-		return projectVideo;
-	}
-	public void setProjectVideo(String projectVideo) {
-		this.projectVideo = projectVideo;
-	}
 	public String getSupporters() {
 		return supporters;
 	}
@@ -171,16 +177,15 @@ public class ProjectVO {
 	@Override
 	public String toString() {
 		return "ProjectVO [projectNo=" + projectNo + ", creator=" + creator + ", email=" + email + ", goalMoney="
-				+ goalMoney + ", projectMainImage=" + projectMainImage + ", projectTitle=" + projectTitle
-				+ ", projectSubTitle=" + projectSubTitle + ", category=" + category + ", startDate=" + startDate
-				+ ", endDate=" + endDate + ", projectKeyword=" + projectKeyword + ", projectStory=" + projectStory
-				+ ", projectSummary=" + projectSummary + ", projectDetail=" + projectDetail + ", projectCaution="
-				+ projectCaution + ", projectVideo=" + projectVideo + ", supporters=" + supporters + ", fundingMoney="
-				+ fundingMoney + ", status=" + status + ", informationAgree=" + informationAgree + ", writeStatus="
-				+ writeStatus + "]";
+				+ goalMoney + ", projectMainImage=" + projectMainImage + ", projectIntroduceImage="
+				+ projectIntroduceImage + ", projectIntroduceVideo=" + projectIntroduceVideo + ", projectTitle="
+				+ projectTitle + ", projectSubTitle=" + projectSubTitle + ", category=" + category + ", startDate="
+				+ startDate + ", endDate=" + endDate + ", projectKeyword=" + projectKeyword + ", projectStory="
+				+ projectStory + ", projectSummary=" + projectSummary + ", projectDetail=" + projectDetail
+				+ ", projectCaution=" + projectCaution + ", supporters=" + supporters + ", fundingMoney=" + fundingMoney
+				+ ", status=" + status + ", informationAgree=" + informationAgree + ", writeStatus=" + writeStatus
+				+ "]";
 	}
+	
 		
-	
-	
-	
 }
