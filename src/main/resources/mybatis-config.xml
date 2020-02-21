@@ -16,7 +16,7 @@
 
 		<typeAlias type="com.team5.funthing.user.model.vo.ProjectAccountInformationVO" alias="projectAccountInformation"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.RewardVO" alias="reward"/>
-		<typeAlias type="com.team5.funthing.user.model.vo.UserCreatorVO" alias="userCreator"/>
+		<typeAlias type="com.team5.funthing.user.model.vo.CreatorVO" alias="Creator"/>
 
 
 		<typeAlias type="com.team5.funthing.user.model.vo.CSBoardVO" alias="csboard"/>
@@ -27,7 +27,6 @@
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminNoticeBoardVO" alias="adminNoticeBoard"/>
 
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminMemberVO" alias="adminMember"/>
-		<typeAlias type="com.team5.funthing.admin.model.vo.AdminCreatorVO" alias="adminCreator"/>
     
     
 	</typeAliases>
@@ -44,7 +43,7 @@
 
 		<mapper resource="mappers/projectAccountInformation-mapper.xml"/>
 		<mapper resource="mappers/reward-mapper.xml"/>
-		<mapper resource="mappers/userCreator-mapper.xml"/>
+		<mapper resource="mappers/creator-mapper.xml"/>
 		
 
 		<mapper resource="mappers/csboard-mapper.xml" />
@@ -52,11 +51,8 @@
 		<mapper resource="mappers/report-mapper.xml" />
 		<!-- user : admin -->
 		<mapper resource="mappers/adminCSBoard-mapper.xml" />
-
-
 		<mapper resource="mappers/adminNoticeBoard-mapper.xml"/>
 		<mapper resource="mappers/adminLogin-mapper.xml"/>
-		<mapper resource="mappers/adminCreator-mapper.xml"/>
  
 	</mappers>
 </configuration>

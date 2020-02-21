@@ -21,21 +21,24 @@
 			<c:when test="${rewardList ne null }">
 				<c:forEach var="addedReward" items="${rewardList}">
 					<li>
-						<div class="card m-4" style="width: 25rem;">
-						  	<div class="card-body">
-							    <h5 class="price">${addedReward.rewardPrice}</h5>
-							    <h6 class="rewardname">${addedReward.rewardName }</h6>
-							    <p class="rewardContent">${addedReward.rewardContent }</p>
-							    <a href="#reward-popup" class="popup-with-form editReward">편집</a> 
-							    <a href="deleteReward.udo?projectNo=${projectNo}&rewardNo=${addedReward.rewardNo}" class="card-link">삭제</a>
-						  	</div>
-						 </div>
+						${addedReward}
+						<form method="post" action="deleteReward.udo">
+							<input type="hidden" name="projectNo" value="${addedReward.projectNo}">
+							<input type="hidden" id="rewardNum" name="rewardNo" value="${addedReward.rewardNo}">
+							<div class="card m-4" style="width: 25rem;">
+							  	<div class="card-body">
+								    <h5 class="price">${addedReward.rewardPrice}</h5>
+								    <h6 class="rewardname">${addedReward.rewardName}</h6>
+								    <p class="rewardContent">${addedReward.rewardContent}</p>
+								    <a href="#reward-popup" class="popup-with-form editReward">편집</a> 
+								    <input type="submit" value="삭제">
+							  	</div>
+							 </div>
+						 </form>
 					</li>
 				</c:forEach>
 			</c:when>
 		</c:choose>
 	</ul>
 	
-	
-
 </div>

@@ -43,7 +43,7 @@ public class RewardController {
 		return "f-create-project";
 	}
 	
-	@RequestMapping(value= "insertReward.udo", method = RequestMethod.POST)
+	@RequestMapping(value= "insertReward.udo", method=RequestMethod.POST)
 	public String insertReward(RewardVO vo, Model model,HttpServletRequest request) {
 		
 		int projectNo = Integer.parseInt(request.getParameter("projectNo"));
@@ -51,17 +51,17 @@ public class RewardController {
 		System.out.println(vo.toString());
 		
 		insertRewardService.insertReward(vo);
+		System.out.println("입력완료");
 		System.out.println(vo.getRewardNo());
 		
 		List<RewardVO> rewardList = getRewardListService.getRewardList(vo);
 		System.out.println(rewardList.toString());
 		model.addAttribute("projectNo", projectNo);
 		model.addAttribute("rewardList", rewardList);
-		
 		return "f-create-project";
 	}
 	
-	@RequestMapping(value="deleteReward.udo")
+	@RequestMapping(value="deleteReward.udo" , method=RequestMethod.POST)
 	public String deleteReward(RewardVO vo,Model model,HttpServletRequest request) {
 		
 		int projectNo = Integer.parseInt(request.getParameter("projectNo"));
@@ -80,8 +80,14 @@ public class RewardController {
 	}
 	
 	@RequestMapping(value="updateReward.udo")
-	public void updateReward() {
+	public String updateReward() {
 		System.out.println("아하하하하");
+		return "i-popup-addReward";
+	}
+	
+	@RequestMapping(value="getReward.udo")
+	public void getReward() {
+		System.out.println("버튼 누름");
 	}
 	
 }
