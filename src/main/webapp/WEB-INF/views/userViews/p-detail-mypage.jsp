@@ -34,7 +34,7 @@
                      <div class="d-inline-flex p-2 bd-highlight">
                         <a
                            class="btn btn-lg btn-detail-mypage d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
-                           href="#">프로필 변경</a>
+                           href="updateProfile.udo">프로필 변경</a>
                      </div>
                      <div class="d-inline-flex p-2 bd-highlight">
                         <a
@@ -44,7 +44,7 @@
                      <div class="d-inline-flex p-2 bd-highlight">
                         <a
                            class="btn btn-lg btn-detail-mypage d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
-                           href="#">결제내역 변경</a>
+                           href="#">결제내역 확인</a>
                      </div>
                   </div>
 

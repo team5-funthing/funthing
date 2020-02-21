@@ -225,4 +225,13 @@ public class MemberController {
 		}
 		return "p-callback";
 	}
+	
+	
+	@RequestMapping(value="updateProfile.udo",method=RequestMethod.GET)
+	public String updateProfile() {
+		return "f-update-profile";
+	}
+	
+	
+	
 }

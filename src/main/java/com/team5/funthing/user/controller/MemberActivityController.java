@@ -43,9 +43,7 @@ public class MemberActivityController {
 		myLikeProjectList(session, vo, vo1, model);
 		myReportProjectList(session, vo, vo1, model);
 		myReservationProjectList(session, vo, vo1, model);
-		System.out.println(model.getAttribute("projectLikeList"));
-		System.out.println(model.getAttribute("projectReportList"));
-		System.out.println(model.getAttribute("projectReservationList"));
+
 		return "p-detail-mypage";
 	}  
 	

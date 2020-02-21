@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -87,7 +91,7 @@
                                         <label for="image">
                                             <input type="file" name="image" id="image" style="display:none;" />
                                             <div id="detail-mypage-profile-img" class="">
-                                                <img class="profile" src="img/test/5.jpg">
+                                                <img class="profile" src="${pageContext.request.contextPath}/resources/user/img/test/2.jpg">
                                             </div>
                                         </label>
                                     </div>
@@ -106,45 +110,23 @@
 
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
-                                <label for="validationDefault01">이름</label>
-                                <input type="text" class="form-control" id="validationDefault01" value="[로그인 아이디]"
-                                    required>
+                                <label for="validationDefault01">비밀번호</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
                             </div>
                         </div>
-                        <div class="form-row">
-                            <div class="col-md-3 mb-3">
-                                <label for="validationDefault04">지역</label>
-                                <select class="custom-select" id="validationDefault04" required>
-                                    <option selected disabled value="">Choose...</option>
-                                    <option>...</option>
-                                </select>
+                             <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="validationDefault01">비밀번호 확인</label>
+                                <input type="password" class="form-control" id="password-check" required>
                             </div>
                         </div>
-                        <div class="form-row">
-                            <div class="col-md-3">
-                                <label for="validationDefault04">연락처</label>
+                             <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="validationDefault01">연락처</label> 
+                                <input type="text" class="form-control" id="phone" name="phone" required> <label for="exampleFormControlTextarea1" class="mr-1"> - 없이 입력해주세요</label>
                             </div>
                         </div>
-                        <div class="form-row">
-                            <form class="form-inline">
-                                <div class="col-md-3 mb-3">
-                                    <select class="custom-select" id="validationDefault04" required>
-                                        <option selected disabled value="">Choose...</option>
-                                        <option>...</option>
-                                    </select>
-                                </div>
-                                <div class="form-group mx-sm-3 mb-2" style="width: 120px;">
-                                    <label for="inputPassword2" class="sr-only">Password</label>
-                                    <input type="password" class="form-control" id="inputPassword2"
-                                        placeholder="Password">
-                                </div>
-                                <div class="form-group mx-sm-3 mb-2 " style="width: 120px;">
-                                    <label for="inputPassword2" class="sr-only">Password</label>
-                                    <input type="password" class="form-control" id="inputPassword2"
-                                        placeholder="Password">
-                                </div>
-                            </form>
-                        </div>
+            
 
                         <div class="form-row">
                             <div class="form-group mb-3 w-100">
@@ -154,14 +136,19 @@
                         </div>
 
                         <hr>
-                        <div class="form-inline pb-5 justify-content-center">
+                        <div class="form-inline pb-5 justify-content-center"
+                        >
+                            <div class="mt-10">
+                                <a class="btn btn-registry-way-cancel d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
+                                    href="#">회원탈퇴</a>
+                            </div>
                             <div class="mt-10">
                                 <a class="btn btn-registry-way-cancel d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
                                     href="#">취소</a>
                             </div>
-                            <div class="mt-10">
+                               <div class="mt-10">
                                 <a class="btn btn-registry-way-cancel d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
-                                    href="registry-way-select-form.html">완료</a>
+                                    href="#">완료</a>
                             </div>
                         </div>
                     </form>
