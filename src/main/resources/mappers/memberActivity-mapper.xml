@@ -3,72 +3,97 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="MemberActivityDAO">
-
+	<!-- 한개의 projectno 가 가지고있는 좋아요 , 시고 , 예약 숫자   -->
 	<select id="projectLikeCount" parameterType="memberActivity"
 		resultType="_int">
-		SELECT COUNT likecount
+		SELECT COUNT (likecount)
 		FROM memberactivity
-		WHERE (likecount='y' AND #{projectno})
+		WHERE (likecount='y' AND projectno = #{projectno})
 
 	</select>
 
 	<select id="projectReportCount" parameterType="memberActivity"
 		resultType="_int">
-		SELECT COUNT reportcount
+		SELECT COUNT (reportcoun)t
 		FROM memberactivity
-		WHERE (reportcount='y' AND #{projectno})
+		WHERE (reportcount='y' AND projectno = #{projectno})
 
 	</select>
 
 	<select id="projectReservationCount"
 		parameterType="memberActivity" resultType="_int">
-		SELECT COUNT reservationcount
+		SELECT COUNT (reservationcount)
 		FROM memberactivity
-		WHERE (reservationcount='y' AND #{projectno})
+		WHERE (reservationcount='y' projectno = AND #{projectno})
 
 	</select>
+	<!-- -->
 
-
+<!--  한개의 email 이 행했던  좋아요 , 신고 , 예약 숫자   -->
 	<select id="memberLikeCount" parameterType="memberActivity"
 		resultType="_int">
-		SELECT COUNT likecount
+		SELECT COUNT (likecount)
 		FROM memberactivity
-		WHERE (likecount='y' AND #{eamil})
+		WHERE (likecount='y' AND email = #{eamil})
 	</select>
 
 	<select id="memberReportCount" parameterType="memberActivity"
 		resultType="_int">
-		SELECT COUNT likecount
+		SELECT COUNT (reportcount)
 		FROM memberactivity
-		WHERE (likecount='y' AND #{eamil})
+		WHERE (reportcount='y' AND email = #{eamil})
 	</select>
 
 	<select id="memberReservationCount"
 		parameterType="memberActivity" resultType="_int">
-		SELECT COUNT likecount
+		SELECT COUNT (reservationcount)
 		FROM memberactivity
-		WHERE (likecount='y' AND #{eamil})
+		WHERE (reservationcount='y' AND email = #{eamil})
 	</select>
+<!--  -->  
 
+
+  <!-- 한개의 email이  좋아요,신고,예약을  행한 프로젝트 번호  -->
+
+	<select id="getLikeProjectno" parameterType="memberActivity" resultType="memberActivity">
+		SELECT projectno 
+		FROM memberactivity
+		WHERE (likecount='y' AND email = #{email})
+	
+	</select>
+	
+	<select id="getReportProjectno" parameterType="memberActivity" resultType="memberActivity">
+		SELECT projectno 
+		FROM memberactivity
+		WHERE (reportcount='y' AND email = #{email})
+	
+	</select>
+		<select id="getReservationProjectno" parameterType="memberActivity" resultType="memberActivity">
+		SELECT projectno 
+		FROM memberactivity
+		WHERE (reservationcount='y' AND email = #{email})
+	</select>
+	
 	<insert id="insertMemberActivity"
 		parameterType="memberActivity">
 		INSERT INTO memberactivity
-		FROM
+		VALUES
 		(#{email},#{projectno},#{likeCount},#{reportCount},#{reservationCount})
 	</insert>
+    
 
 	<update id="updateMemberActivity"
 		parameterType="memberActivity">
 		UPDATE memberActivity
 		SET (likeCount=#{likeCount}, reprotCount=#{reportCount} ,
 		reservationCount=#{reservationCount})
-		WHERE (email=#{email} AND projectboardno=${projectboarno})
+		WHERE (email=#{email} AND projectno=${projectno})
 	</update>
 
 	<delete id="deleteMemberActivity"
 		parameterType="memberActivity">
 		DELETE memberActivity
-		WHERE (email=#{email} AND projectboardno=${projectboarno})
+		WHERE (email=#{email} AND projectno=${projectno})
 
 	</delete>
 </mapper>

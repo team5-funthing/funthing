@@ -4,7 +4,7 @@ public class MemberActivityVO {
 
 	
 	private String email;
-	private int projectboardno;
+	private int projectno;
 	private String likeCount;
 	private String reservationCount;
 	private String reportCount;
@@ -23,7 +23,7 @@ public class MemberActivityVO {
 
 	@Override
 	public String toString() {
-		return "MemberActivityVO [email=" + email + ", projectboardno=" + projectboardno + ", likeCount=" + likeCount
+		return "MemberActivityVO [email=" + email + ", projectno=" + projectno + ", likeCount=" + likeCount
 				+ ", reservationCount=" + reservationCount + ", reportCount=" + reportCount + ", projectLikeCount="
 				+ projectLikeCount + ", projectReportCount=" + projectReportCount + ", projectReservationCount="
 				+ projectReservationCount + ", memberLikeCount=" + memberLikeCount + ", memberReportCount="
@@ -89,15 +89,15 @@ public class MemberActivityVO {
 
 
 
-	public int getProjectboardno() {
-		return projectboardno;
+	public int getprojectno() {
+		return projectno;
 	}
 
 
 
 
-	public void setProjectboardno(int projectboardno) {
-		this.projectboardno = projectboardno;
+	public void setprojectno(int projectno) {
+		this.projectno = projectno;
 	}
 
 
