@@ -27,6 +27,7 @@
 
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminMemberVO" alias="adminMember"/>
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminCreatorVO" alias="adminCreator"/>
+		
     
     
 	</typeAliases>
@@ -55,6 +56,9 @@
 		<mapper resource="mappers/adminNoticeBoard-mapper.xml"/>
 		<mapper resource="mappers/adminLogin-mapper.xml"/>
 		<mapper resource="mappers/adminCreator-mapper.xml"/>
+ 
+ 		<mapper resource="mappers/adminReport-mapper.xml"/>
+ 		<mapper resource="mappers/adminMemberManagement-mapper.xml"/>
  
 	</mappers>
 </configuration>

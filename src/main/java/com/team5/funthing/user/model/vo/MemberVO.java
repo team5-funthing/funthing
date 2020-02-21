@@ -11,6 +11,8 @@ public class MemberVO {
 	private String myImage;
 	private String report;
 	
+	private UserCreatorVO userCreator;
+	
 	//테스트용 
 	private String position;
 
