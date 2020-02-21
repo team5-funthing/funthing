@@ -11,7 +11,7 @@
 
 
 <head>
-
+	<!-- jquery.js파일 있음 -->
 	<jsp:include page="./include/i-head-setting.jsp" />
 
 </head>

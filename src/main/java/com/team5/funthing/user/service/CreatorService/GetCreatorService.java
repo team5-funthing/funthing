@@ -2,8 +2,8 @@ package com.team5.funthing.user.service.CreatorService;
 
 import com.team5.funthing.user.model.vo.CreatorVO;
 
-public interface InsertCreatorService {
+public interface GetCreatorService {
 
-	public int insertCreator(CreatorVO vo);
+	public CreatorVO getCreator(CreatorVO vo);
 	
 }

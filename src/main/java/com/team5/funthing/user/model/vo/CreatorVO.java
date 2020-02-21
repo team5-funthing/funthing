@@ -1,14 +1,14 @@
-package com.team5.funthing.admin.model.vo;
+package com.team5.funthing.user.model.vo;
 
-public class AdminCreatorVO {
-	
+public class CreatorVO {
+
 	private String creator;
 	private String email;
 	private String makerPhone;
 	private String businessNumber;
 	private String businessAddress;
 	private String businessFileLink;
-	private String lv;						//메이커의 등급
+	private String lv;					//메이커의 등급
 	
 	public String getCreator() {
 		return creator;
@@ -55,9 +55,9 @@ public class AdminCreatorVO {
 	
 	@Override
 	public String toString() {
-		return "AdminCreatorVO [creator=" + creator + ", email=" + email + ", makerPhone=" + makerPhone
+		return "UserMakerMemberVO [creator=" + creator + ", email=" + email + ", makerPhone=" + makerPhone
 				+ ", businessNumber=" + businessNumber + ", businessAddress=" + businessAddress + ", businessFileLink="
 				+ businessFileLink + ", lv=" + lv + "]";
 	}
-	
+		
 }
