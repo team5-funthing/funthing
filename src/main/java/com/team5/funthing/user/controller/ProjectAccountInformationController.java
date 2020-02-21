@@ -24,7 +24,7 @@ public class ProjectAccountInformationController {
 		DeleteProjectAccountInformationService deleteProjectAccountInformation;
 		@RequestMapping(path="account.udo",method=RequestMethod.GET)
 		public String goAccountIn() {
-			return "f-accountInfo";
+			return "#";
 		}
 		@RequestMapping(path="accountInfo.udo",method=RequestMethod.GET)
 		public String goAccountInfo() {
@@ -34,26 +34,31 @@ public class ProjectAccountInformationController {
 		
 		/////   이거 메소드 하나에 몰아넣지 못하니 찢어라.  찢고   하나씩 만드셈!!!   
 		@RequestMapping(path="insertProjectAccountInformation.udo",method=RequestMethod.POST)
-		public String insertPAI(ProjectAccountInformationVO vo) {
+		public void insertPAI(ProjectAccountInformationVO vo) {
 		
 				insertProjectAccountInformation.insertProjectAccountInformation(vo);
-	
-		
-			return "";
+	    
 		}
 
 		@RequestMapping(path="UpdateProjectAccountInformation.udo",method=RequestMethod.POST)
-		public String updatePAI(ProjectAccountInformationVO vo) {
+		public void updatePAI(ProjectAccountInformationVO vo) {
 
 			updateProjectAccountInformation.updateProjectAccountInformation(vo);
 			
-			return "";
 		}
 	
 		@RequestMapping(path="deleteProjectAccountInformation.udo",method=RequestMethod.POST)
-		public String deletePAI(ProjectAccountInformationVO vo) {
+		public void deletePAI(ProjectAccountInformationVO vo) {
+		
 			deleteProjectAccountInformation.deleteProjectAccountInformation(vo);
-			return "";
+			
 		}
-	
+		
+		@RequestMapping(path="getProjectAccount",method=RequestMethod.GET)
+		public void getProjectAccount(ProjectAccountInformationVO vo) {
+			
+			getProjectAccountInformation.accountCheck(vo);
+			System.out.println(getProjectAccountInformation.accountCheck(vo));
+			System.out.println(getProjectAccountInformation.getProjectAccountInformation(vo).toString());
+		}
 }

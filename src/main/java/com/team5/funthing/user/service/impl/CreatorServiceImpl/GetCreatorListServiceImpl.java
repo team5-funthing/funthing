@@ -1,22 +1,23 @@
 package com.team5.funthing.user.service.impl.CreatorServiceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.team5.funthing.user.model.dao.CreatorDAO;
 import com.team5.funthing.user.model.vo.CreatorVO;
-import com.team5.funthing.user.service.CreatorService.UpdateCreatorService;
+import com.team5.funthing.user.service.CreatorService.GetCreatorListService;
 
 @Service
-public class UpdateCreatorServiceImpl implements UpdateCreatorService{
+public class GetCreatorListServiceImpl implements GetCreatorListService {
 
 	@Autowired
-	private CreatorDAO userCreatorDAO;
-
+	private CreatorDAO CreatorDAO;
+	
 	@Override
-	public int updateCreator(CreatorVO vo) {
-		return userCreatorDAO.updateCreator(vo);
+	public List<CreatorVO> getCreatorList(CreatorVO vo) {
+		return CreatorDAO.getCreatorList(vo);
 	}
-	
-	
+
 }

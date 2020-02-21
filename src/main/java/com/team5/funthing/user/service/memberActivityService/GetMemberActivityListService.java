@@ -9,4 +9,10 @@ public interface GetMemberActivityListService {
 	public MemberActivityVO getMemberActivityProjectList(MemberActivityVO vo);
 
 	public MemberActivityVO getMemberActivityMemberList(MemberActivityVO vo);
+	
+	public List<MemberActivityVO> getLikeProjectnoList(MemberActivityVO vo);
+	
+	public List<MemberActivityVO> getReportProjectnoList(MemberActivityVO vo);
+	
+	public List<MemberActivityVO> getReservationProjectnoList(MemberActivityVO vo);
 }

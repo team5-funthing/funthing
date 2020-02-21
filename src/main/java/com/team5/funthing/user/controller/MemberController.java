@@ -47,6 +47,12 @@ public class MemberController {
 	public String showindex() {
 		return "p-index";
 	}
+	
+	@RequestMapping("mem.udo") 
+	public String showsky(HttpSession session, MemberVO vo) {
+		
+		return "p-test-board-write";
+	}
 
 	@RequestMapping(value="socialLogin.udo",method=RequestMethod.GET)
 	public String socialLogin() {   
@@ -58,7 +64,9 @@ public class MemberController {
 
 		if(getMemberService.getMember(vo) != null) { 
 			if(getMemberService.getMember(vo).getPassword().equals(request.getParameter("password"))) { 
+			
 				session.setAttribute("memberSessionEmail", getMemberService.getMember(vo).getEmail());
+				System.out.println("·Î±×ÀÎ½Ã ¼¼¼Ç¿¡ ´ã±ä ÀÌ¸ŞÀÏ È®ÀÎ:"+session.getAttribute("memberSessionEmail"));
 				session.setAttribute("memberSessionName", getMemberService.getMember(vo).getName());
 				if(session.getAttribute("myprifile")!=null) {
 					session.setAttribute("myprofile", getMemberService.getMember(vo).getMyImage()); 
@@ -75,7 +83,6 @@ public class MemberController {
 
 	@RequestMapping(value="getMember.udo", method=RequestMethod.POST) 
 	public void getMember(MemberVO vo, HttpServletRequest request,HttpSession session,HttpServletResponse response) throws IOException {
-        System.out.println("è€Œâ‘¦ëŸ©ï¿½ë’ªï¿½ìç§»ï¿½ ç”±Ñ‹ê½©åª›ï¿½ :"+request.getParameter("confirm-switch"));
 		if(getMemberService.getMember(vo) != null) { 
 			if(getMemberService.getMember(vo).getPassword().equals(request.getParameter("password"))) { 
 				if(request.getParameter("confirm-switch") != null) {
@@ -91,13 +98,14 @@ public class MemberController {
 					Cookie cookiepw = new Cookie("funthingCookiePw",null);
 					cookiepw.setMaxAge(0); /// kill the cookie
 				}
-				session.setAttribute("memberSessionEmail", vo.getEmail());
-				session.setAttribute("memberSessionName", vo.getName());
+				session.setAttribute("memberSessionEmail", getMemberService.getMember(vo).getEmail());
+				session.setAttribute("memberSessionName", getMemberService.getMember(vo).getName());
+				session.setAttribute("memberSessionPosition", getMemberService.getMember(vo).getPosition());
 			    if(session.getAttribute("myprifile")!=null) {
 				session.setAttribute("myprofile", getMemberService.getMember(vo).getMyImage()); 
 			    }
-
 				response.sendRedirect("member.udo");
+//				response.sendRedirect("mem.udo"); 
 			}else {
 				response.sendRedirect("findpw.udo");
 			}
@@ -160,7 +168,7 @@ public class MemberController {
 	public String certificationEmail(MemberVO vo,HttpSession session) {
 		try {
 			String certificationCode = sendMailUtil.createCertificationCode(50);
-			sendMailUtil.sendMail("[Funthing] ï¿½ì”¤ï§ì•¸ì¾²ï¿½ìƒ‡ ", "ï¿½ì”¤ï§ì•¸ì¾²ï¿½ìƒ‡ ["+certificationCode+"]", vo.getEmail());	
+			sendMailUtil.sendMail("[Funthing] ÀÎÁõ¹øÈ£ÀÔ´Ï´Ù. ", "ÀÎÁõ¹øÈ£ : ["+certificationCode+"]", vo.getEmail());	
 			session.setAttribute("certificationCode", certificationCode);   
 
 		} catch (Exception e) {
@@ -199,10 +207,7 @@ public class MemberController {
 		return "p-index";
 	}
 
-	@RequestMapping(value="mypage.udo",method=RequestMethod.GET)
-	public String myPage() {
-		return "p-detail-mypage";
-	}  
+
 	
 	@RequestMapping(value="logout.udo",method=RequestMethod.GET)
 	public String logOut(HttpSession session) {
@@ -214,10 +219,8 @@ public class MemberController {
 	@RequestMapping(value="emailCheck.udo",method=RequestMethod.GET)
 	public String duplicationCheck(HttpServletRequest request,MemberVO vo,HttpSession session) {
 		vo.setEmail(request.getParameter("email"));
-		if(getMemberService.getMember(vo).getPassword()!=null) {
-			System.out.println("è­°ëŒì˜±ï¿½ë¸¯ï¿½ë’— ï§ë¶¿ì”ª  (ï¿½ë–ï¿½ë™£)");	
+		if(getMemberService.getMember(vo).getPassword()!=null) {	
 		}else {
-			System.out.println("ï¿½ê¶—ï¿½ìŠœåª›ï¿½ï¿½ë’«ï¿½ë¸³ ï§ë¶¿ì”ª  (ï¿½ê½¦æ€¨ï¿½)");
 			session.setAttribute("emailCheck", vo.getEmail());
 		}
 		return "p-callback";

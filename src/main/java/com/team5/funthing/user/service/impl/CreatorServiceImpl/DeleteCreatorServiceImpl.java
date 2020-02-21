@@ -5,17 +5,17 @@ import org.springframework.stereotype.Service;
 
 import com.team5.funthing.user.model.dao.CreatorDAO;
 import com.team5.funthing.user.model.vo.CreatorVO;
-import com.team5.funthing.user.service.CreatorService.UpdateCreatorService;
+import com.team5.funthing.user.service.CreatorService.DeleteCreatorService;
 
 @Service
-public class UpdateCreatorServiceImpl implements UpdateCreatorService{
+public class DeleteCreatorServiceImpl implements DeleteCreatorService {
 
 	@Autowired
-	private CreatorDAO userCreatorDAO;
+	private CreatorDAO CreatorDAO;
 
 	@Override
-	public int updateCreator(CreatorVO vo) {
-		return userCreatorDAO.updateCreator(vo);
+	public void deleteCreator(CreatorVO vo) {
+		CreatorDAO.deleteCreator(vo);
 	}
 	
 	

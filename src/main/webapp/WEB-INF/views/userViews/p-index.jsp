@@ -34,16 +34,16 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/animate.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/slicknav.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/style.css">
-
+	
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/bootstrap.min.css">
 
 
 
 
-<head>
+
 
 	<jsp:include page="./include/i-head-setting.jsp"/>
-	
+
 </head>
 
 <body>
@@ -284,10 +284,9 @@
             <hr>
         </div>
     </section>
-    
-
 
     <jsp:include page="./include/i-footer.jsp"/>
+   
     
     <jsp:include page="./include/i-popup-login.jsp"></jsp:include>
 	<jsp:include page="./include/i-popup-search.jsp"></jsp:include>
