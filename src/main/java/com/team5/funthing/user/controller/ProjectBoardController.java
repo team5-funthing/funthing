@@ -52,7 +52,7 @@ public class ProjectBoardController {
 		
 	}
 	
-	@RequestMapping(value="newBoard.udo", method = RequestMethod.POST)
+	@RequestMapping(value="insertNewBoard.udo", method = RequestMethod.POST)
 	public String newProjectBoard() { //새글작성화면으로 가기
 		
 		return "p-test-board-write"; //글 작성하는곳
@@ -104,7 +104,7 @@ public class ProjectBoardController {
 		
 		System.out.println("글수정할 글 넘기기");
 			
-		String getProjectboardcontents = getChoiceProjectBoardService.getChoiceProjectBoard(vo); //컨텐츠 글 가져오기 
+		String getProjectboardcontents = getChoiceProjectBoardService.getChoiceProjectBoard(vo).getProjectBoardContents(); //컨텐츠 글 가져오기 
 		vo.setProjectBoardContents(getProjectboardcontents);
 		model.addAttribute("vo", vo);	
 

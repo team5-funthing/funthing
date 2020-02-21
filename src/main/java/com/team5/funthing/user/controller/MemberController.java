@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -47,11 +48,13 @@ public class MemberController {
 	public String showindex() {
 		return "p-index";
 	}
-	
+
 	@RequestMapping("mem.udo") 
 	public String showsky(HttpSession session, MemberVO vo) {
+
 		
-		return "p-test-board-write";
+//		return "p-test-board-write";
+		return "p-test-project-maker-user-list";
 	}
 
 	@RequestMapping(value="socialLogin.udo",method=RequestMethod.GET)
@@ -66,7 +69,7 @@ public class MemberController {
 			if(getMemberService.getMember(vo).getPassword().equals(request.getParameter("password"))) { 
 			
 				session.setAttribute("memberSessionEmail", getMemberService.getMember(vo).getEmail());
-				System.out.println("·Î±×ÀÎ½Ã ¼¼¼Ç¿¡ ´ã±ä ÀÌ¸ŞÀÏ È®ÀÎ:"+session.getAttribute("memberSessionEmail"));
+				System.out.println("ë¡œê·¸ì¸ì‹œ ì„¸ì…˜ì— ë‹´ê¸´ ì´ë©”ì¼ í™•ì¸:"+session.getAttribute("memberSessionEmail"));
 				session.setAttribute("memberSessionName", getMemberService.getMember(vo).getName());
 				if(session.getAttribute("myprifile")!=null) {
 					session.setAttribute("myprofile", getMemberService.getMember(vo).getMyImage()); 
@@ -83,6 +86,7 @@ public class MemberController {
 
 	@RequestMapping(value="getMember.udo", method=RequestMethod.POST) 
 	public void getMember(MemberVO vo, HttpServletRequest request,HttpSession session,HttpServletResponse response) throws IOException {
+
 		if(getMemberService.getMember(vo) != null) { 
 			if(getMemberService.getMember(vo).getPassword().equals(request.getParameter("password"))) { 
 				if(request.getParameter("confirm-switch") != null) {
@@ -104,8 +108,10 @@ public class MemberController {
 			    if(session.getAttribute("myprifile")!=null) {
 				session.setAttribute("myprofile", getMemberService.getMember(vo).getMyImage()); 
 			    }
+
 				response.sendRedirect("member.udo");
 //				response.sendRedirect("mem.udo"); 
+
 			}else {
 				response.sendRedirect("findpw.udo");
 			}
@@ -168,7 +174,8 @@ public class MemberController {
 	public String certificationEmail(MemberVO vo,HttpSession session) {
 		try {
 			String certificationCode = sendMailUtil.createCertificationCode(50);
-			sendMailUtil.sendMail("[Funthing] ÀÎÁõ¹øÈ£ÀÔ´Ï´Ù. ", "ÀÎÁõ¹øÈ£ : ["+certificationCode+"]", vo.getEmail());	
+
+			sendMailUtil.sendMail("[Funthing] ì¸ì¦ë²ˆí˜¸ì…ë‹ˆë‹¤. ", "ì¸ì¦ë²ˆí˜¸ : ["+certificationCode+"]", vo.getEmail());	
 			session.setAttribute("certificationCode", certificationCode);   
 
 		} catch (Exception e) {
@@ -181,7 +188,7 @@ public class MemberController {
 	public String tst() {
 		String afk=null;
         if(afk==null) {
-        	System.out.println("ï¿½ê¼¸ï¿½ì” ï§ï¿½ï¿½ìŸ»");
+        	System.out.println("");
         }
 		return "testing";
 	}
@@ -219,6 +226,7 @@ public class MemberController {
 	@RequestMapping(value="emailCheck.udo",method=RequestMethod.GET)
 	public String duplicationCheck(HttpServletRequest request,MemberVO vo,HttpSession session) {
 		vo.setEmail(request.getParameter("email"));
+    
 		if(getMemberService.getMember(vo).getPassword()!=null) {	
 		}else {
 			session.setAttribute("emailCheck", vo.getEmail());

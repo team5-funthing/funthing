@@ -1,6 +1,6 @@
 package com.team5.funthing.user.model.vo;
 
-public class UserCreatorVO {
+public class CreatorVO {
 
 	private String creator;
 	private String email;
@@ -8,8 +8,8 @@ public class UserCreatorVO {
 	private String businessNumber;
 	private String businessAddress;
 	private String businessFileLink;
-	private String lv;					//¸ÞÀÌÄ¿ÀÇ µî±Þ
-	
+	private String lv;					//Â¸ÃžÃ€ÃŒÃ„Â¿Ã€Ã‡ ÂµÃ®Â±Ãž
+
 	public String getCreator() {
 		return creator;
 	}
@@ -52,6 +52,7 @@ public class UserCreatorVO {
 	public void setLv(String lv) {
 		this.lv = lv;
 	}
+
 	
 	@Override
 	public String toString() {

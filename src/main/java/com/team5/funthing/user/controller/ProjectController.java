@@ -91,7 +91,7 @@ public class ProjectController {
 	} // 프로젝트 만들기 시작 페이지에서 수행
 	
 	
-	
+	//리워드 등록시에 목록을 추가하는 메서드 입력()
 	@RequestMapping(value = "insertProject.udo", method = RequestMethod.POST)
 	public String insertProject(HttpSession session, ProjectVO vo, Model model) {
 		
@@ -111,6 +111,7 @@ public class ProjectController {
 		
 		System.out.println("insertProject 또는 새로고침 실행 후 =======> " + vo.toString());
 		model.addAttribute("writingProject", vo);
+		model.addAttribute("projectNo", vo.getProjectNo());
 
 		return "f-create-project";
 	} // 프로젝트 작성 시작할때 메서드 

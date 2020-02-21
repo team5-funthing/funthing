@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/animate.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/slicknav.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/style.css">
-
+	
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/bootstrap.min.css">
 
 
@@ -46,6 +46,7 @@
     <script>
         $(function () {
 
+<<<<<<< HEAD
 
             // Use custom options for the right button
             $('#mypage-btn').gpopover({
@@ -60,6 +61,12 @@
             });
         });
     </script>
+=======
+
+
+	<jsp:include page="./include/i-head-setting.jsp"/>
+
+>>>>>>> 1f13f3b240316ba767f21fbb55882bd25dc77eff
 </head>
 
 <body>
@@ -300,10 +307,9 @@
             <hr>
         </div>
     </section>
-    
-
 
     <jsp:include page="./include/i-footer.jsp"/>
+   
     
     <jsp:include page="./include/i-popup-login.jsp"></jsp:include>
 	<jsp:include page="./include/i-popup-search.jsp"></jsp:include>

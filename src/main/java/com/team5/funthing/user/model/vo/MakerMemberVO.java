@@ -1,15 +1,15 @@
-package com.team5.funthing.admin.model.vo;
+package com.team5.funthing.user.model.vo;
 
-public class AdminCreatorVO {
-	
+public class MakerMemberVO {
+
 	private String creator;
 	private String email;
-	private String makerPhone;
+	private String MakerPhone;
+	private String businessSelect;
 	private String businessNumber;
 	private String businessAddress;
-	private String businessFileLink;
-	private String lv;						//메이커의 등급
-	
+	private String businessFilelink;
+	private String lv;
 	public String getCreator() {
 		return creator;
 	}
@@ -23,10 +23,16 @@ public class AdminCreatorVO {
 		this.email = email;
 	}
 	public String getMakerPhone() {
-		return makerPhone;
+		return MakerPhone;
 	}
 	public void setMakerPhone(String makerPhone) {
-		this.makerPhone = makerPhone;
+		MakerPhone = makerPhone;
+	}
+	public String getBusinessSelect() {
+		return businessSelect;
+	}
+	public void setBusinessSelect(String businessSelect) {
+		this.businessSelect = businessSelect;
 	}
 	public String getBusinessNumber() {
 		return businessNumber;
@@ -40,11 +46,11 @@ public class AdminCreatorVO {
 	public void setBusinessAddress(String businessAddress) {
 		this.businessAddress = businessAddress;
 	}
-	public String getBusinessFileLink() {
-		return businessFileLink;
+	public String getBusinessFilelink() {
+		return businessFilelink;
 	}
-	public void setBusinessFileLink(String businessFileLink) {
-		this.businessFileLink = businessFileLink;
+	public void setBusinessFilelink(String businessFilelink) {
+		this.businessFilelink = businessFilelink;
 	}
 	public String getLv() {
 		return lv;
@@ -52,12 +58,13 @@ public class AdminCreatorVO {
 	public void setLv(String lv) {
 		this.lv = lv;
 	}
-	
 	@Override
 	public String toString() {
-		return "AdminCreatorVO [creator=" + creator + ", email=" + email + ", makerPhone=" + makerPhone
-				+ ", businessNumber=" + businessNumber + ", businessAddress=" + businessAddress + ", businessFileLink="
-				+ businessFileLink + ", lv=" + lv + "]";
+		return "MakerMemberVO [creator=" + creator + ", email=" + email + ", MakerPhone=" + MakerPhone
+				+ ", businessSelect=" + businessSelect + ", businessNumber=" + businessNumber + ", businessAddress="
+				+ businessAddress + ", businessFilelink=" + businessFilelink + ", lv=" + lv + "]";
 	}
+	
+	
 	
 }
