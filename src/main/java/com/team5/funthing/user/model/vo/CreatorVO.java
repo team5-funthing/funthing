@@ -1,6 +1,6 @@
 package com.team5.funthing.user.model.vo;
 
-public class UserCreatorVO {
+public class CreatorVO {
 
 	private String creator;
 	private String email;

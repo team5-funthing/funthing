@@ -4,12 +4,13 @@ import java.util.List;
 
 public class RewardVO {
 	
-	private int price;
+	private int rewardPrice;						
 	private int rewardNo;
 	private int projectNo;
 	private String rewardName;
 	private String rewardContent;
-	private List<String> rewardOption;
+	private String rewardOption;		//CRUD 테스트를 위하여 한줄의 글로 입력
+	//private List<String> rewardOption;
 	private int shippingFee;
 	private int rewardAmount;
 	
@@ -19,11 +20,11 @@ public class RewardVO {
 	public void setShippingFee(int shippingFee) {
 		this.shippingFee = shippingFee;
 	}
-	public int getPrice() {
-		return price;
+	public int getRewardPrice() {
+		return rewardPrice;
 	}
-	public void setPrice(int price) {
-		this.price = price;
+	public void setRewardPrice(int rewardPrice) {
+		this.rewardPrice = rewardPrice;
 	}
 	public int getRewardNo() {
 		return rewardNo;
@@ -43,14 +44,20 @@ public class RewardVO {
 	public void setRewardName(String rewardName) {
 		this.rewardName = rewardName;
 	}
-	public List<String> getRewardOption() {
-		return rewardOption;
-	}
-	public void setRewardOption(List<String> rewardOption) {
-		this.rewardOption = rewardOption;
-	}
+//	public List<String> getRewardOption() {
+//		return rewardOption;
+//	}
+//	public void setRewardOption(List<String> rewardOption) {
+//		this.rewardOption = rewardOption;
+//	}
 	public String getRewardContent() {
 		return rewardContent;
+	}
+	public String getRewardOption() {
+		return rewardOption;
+	}
+	public void setRewardOption(String rewardOption) {
+		this.rewardOption = rewardOption;
 	}
 	public void setRewardContent(String rewardContent) {
 		this.rewardContent = rewardContent;
@@ -61,17 +68,15 @@ public class RewardVO {
 	public void setRewardAmount(int rewardAmount) {
 		this.rewardAmount = rewardAmount;
 	}
-	
 	@Override
 	public String toString() {
-		return "RewardVO [price=" + price + ", rewardNo=" + rewardNo + ", projectNo=" + projectNo + ", rewardName="
-				+ rewardName + ", rewardOption=" + rewardOption + ", rewardContent=" + rewardContent + ", rewardAmount="
-				+ rewardAmount + ", getPrice()=" + getPrice() + ", getRewardNo()=" + getRewardNo() + ", getProjectNo()="
-				+ getProjectNo() + ", getRewardName()=" + getRewardName() + ", getRewardOption()=" + getRewardOption()
-				+ ", getRewardContent()=" + getRewardContent() + ", getRewardAmount()=" + getRewardAmount()
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
-				+ "]";
+		return "RewardVO [rewardPrice=" + rewardPrice + ", rewardNo=" + rewardNo + ", projectNo=" + projectNo
+				+ ", rewardName=" + rewardName + ", rewardContent=" + rewardContent + ", rewardOption=" + rewardOption
+				+ ", shippingFee=" + shippingFee + ", rewardAmount=" + rewardAmount + "]";
 	}
+	
+	
+	
 	
 	
 	

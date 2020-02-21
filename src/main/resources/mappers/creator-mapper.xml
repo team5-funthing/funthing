@@ -2,16 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="UserCreatorDAO">
+<mapper namespace="CreatorDAO">
 
-	<update id="updateCreator" parameterType="userCreator">
+	<select id="getCreatorList" parameterType="Creator" resultType="Creator">
+		SELECT * FROM makerMember
+	</select>
+	
+	<select id="getCreator" parameterType="Creator" resultType="Creator">
+		SELECT * FROM makerMember WHERE creator = #{creator}
+	</select>
+	
+	<delete id="deleteCreator" parameterType="Creator">
+		DELETE FROM makerMember WHERE creator = #{creator}
+	</delete>
+
+	<update id="updateCreator" parameterType="Creator">
 		UPDATE makerMember 
 		SET makerPhone=#{makerPhone}, businessNumber=#{businessNumber}, 
 		businessAddress=#{businessAddress}, businessFileLink=#{businessFileLink}, lv=#{lv}
 		WHERE creator = #{creator}
 	</update>
 	
-	<insert id="insertCreator" parameterType="adminCreator">
+	<insert id="insertCreator" parameterType="Creator">
 		INSERT INTO makerMember (creator, email, makerPhone, businessNumber, businessAddress, businessFileLink, lv)
 		VALUES(#{creator}, #{email}, #{makerPhone}, #{businessNumber}, #{businessAddress}, #{businessFileLink}, #{lv})
 	</insert>
