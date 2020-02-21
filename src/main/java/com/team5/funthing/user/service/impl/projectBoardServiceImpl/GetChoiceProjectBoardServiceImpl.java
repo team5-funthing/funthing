@@ -15,7 +15,7 @@ public class GetChoiceProjectBoardServiceImpl implements GetChoiceProjectBoardSe
 	
 
 	@Override
-	public String getChoiceProjectBoard(ProjectBoardVO vo) {
+	public ProjectBoardVO getChoiceProjectBoard(ProjectBoardVO vo) {
 		return projectBoardDAO.getChoiceProjectBoard(vo);
 	}
 

@@ -17,8 +17,8 @@
 	</update>
 	
 	<!-- 선택한 글 select문  -->
-	<select id="getChoiceProjectBoard" parameterType="projectBoard" resultType="String">
-		SELECT projectboardcontents FROM projectboard WHERE projectBoardNo = #{projectBoardNo}
+	<select id="getChoiceProjectBoard" parameterType="projectBoard" resultType="projectBoard">
+		SELECT * FROM projectboard WHERE projectBoardNo = #{projectBoardNo}
 	</select>
 	
 	<!-- 글삭제  -->
