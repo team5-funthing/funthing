@@ -4,5 +4,5 @@ import com.team5.funthing.user.model.vo.ProjectBoardVO;
 
 public interface GetChoiceProjectBoardService {
 		
-	public String getChoiceProjectBoard(ProjectBoardVO vo);
+	public ProjectBoardVO getChoiceProjectBoard(ProjectBoardVO vo);
 }

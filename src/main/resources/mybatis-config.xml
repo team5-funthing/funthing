@@ -21,6 +21,7 @@
 		<typeAlias type="com.team5.funthing.user.model.vo.DeliveryAddressVO" alias="deliveryAddress"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.ReportVO" alias="report"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.UserCreatorVO" alias="userCreator"/>
+		<typeAlias type="com.team5.funthing.user.model.vo.ProjectAskMessageVO" alias="projectAskMessage"/>
 		<!-- user : admin -->
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminCSBoardVO" alias="adminCSBoard"/>
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminNoticeBoardVO" alias="adminNoticeBoard"/>
@@ -48,6 +49,7 @@
 		<mapper resource="mappers/deliveryAddress-mapper.xml"/>
 		<mapper resource="mappers/report-mapper.xml" />
 		<mapper resource="mappers/userCreator-mapper.xml"/>
+		<mapper resource="mappers/projectAskMessage-mapper.xml"/>
 		<!-- user : admin -->
 		<mapper resource="mappers/adminCSBoard-mapper.xml" />
 

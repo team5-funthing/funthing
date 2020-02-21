@@ -10,6 +10,8 @@ public class UserCreatorVO {
 	private String businessFileLink;
 	private String lv;					//메이커의 등급
 	
+	
+	
 	public String getCreator() {
 		return creator;
 	}
@@ -52,12 +54,13 @@ public class UserCreatorVO {
 	public void setLv(String lv) {
 		this.lv = lv;
 	}
-	
 	@Override
 	public String toString() {
-		return "UserMakerMemberVO [creator=" + creator + ", email=" + email + ", makerPhone=" + makerPhone
+		return "UserCreatorVO [creator=" + creator + ", email=" + email + ", makerPhone=" + makerPhone
 				+ ", businessNumber=" + businessNumber + ", businessAddress=" + businessAddress + ", businessFileLink="
 				+ businessFileLink + ", lv=" + lv + "]";
 	}
+	
+	
 		
 }
