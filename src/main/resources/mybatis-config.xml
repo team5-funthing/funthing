@@ -28,10 +28,10 @@
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminNoticeBoardVO" alias="adminNoticeBoard"/>
 
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminMemberVO" alias="adminMember"/>
-
-    
     
 	</typeAliases>
+  
+  
 	<mappers>
 		<mapper resource="mappers/member-mapper.xml" />
 		<mapper resource="mappers/notice-mapper.xml"/>

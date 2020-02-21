@@ -48,7 +48,6 @@ public class MemberController {
 	public String showindex() {
 		return "p-index";
 	}
-	
 
 	@RequestMapping("mem.udo") 
 	public String showsky(HttpSession session, MemberVO vo) {
@@ -70,7 +69,7 @@ public class MemberController {
 			if(getMemberService.getMember(vo).getPassword().equals(request.getParameter("password"))) { 
 			
 				session.setAttribute("memberSessionEmail", getMemberService.getMember(vo).getEmail());
-				System.out.println("·Î±×ÀÎ½Ã ¼¼¼Ç¿¡ ´ã±ä ÀÌ¸ŞÀÏ È®ÀÎ:"+session.getAttribute("memberSessionEmail"));
+				System.out.println("ë¡œê·¸ì¸ì‹œ ì„¸ì…˜ì— ë‹´ê¸´ ì´ë©”ì¼ í™•ì¸:"+session.getAttribute("memberSessionEmail"));
 				session.setAttribute("memberSessionName", getMemberService.getMember(vo).getName());
 				if(session.getAttribute("myprifile")!=null) {
 					session.setAttribute("myprofile", getMemberService.getMember(vo).getMyImage()); 
@@ -112,7 +111,7 @@ public class MemberController {
 
 				response.sendRedirect("member.udo");
 //				response.sendRedirect("mem.udo"); 
-				
+
 			}else {
 				response.sendRedirect("findpw.udo");
 			}
@@ -176,7 +175,7 @@ public class MemberController {
 		try {
 			String certificationCode = sendMailUtil.createCertificationCode(50);
 
-			sendMailUtil.sendMail("[Funthing] ÀÎÁõ¹øÈ£ÀÔ´Ï´Ù. ", "ÀÎÁõ¹øÈ£ : ["+certificationCode+"]", vo.getEmail());	
+			sendMailUtil.sendMail("[Funthing] ì¸ì¦ë²ˆí˜¸ì…ë‹ˆë‹¤. ", "ì¸ì¦ë²ˆí˜¸ : ["+certificationCode+"]", vo.getEmail());	
 			session.setAttribute("certificationCode", certificationCode);   
 
 		} catch (Exception e) {
@@ -227,7 +226,7 @@ public class MemberController {
 	@RequestMapping(value="emailCheck.udo",method=RequestMethod.GET)
 	public String duplicationCheck(HttpServletRequest request,MemberVO vo,HttpSession session) {
 		vo.setEmail(request.getParameter("email"));
-
+    
 		if(getMemberService.getMember(vo).getPassword()!=null) {	
 		}else {
 			session.setAttribute("emailCheck", vo.getEmail());
