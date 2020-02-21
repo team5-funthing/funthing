@@ -1,4 +1,4 @@
-package com.team5.funthing.user.service.projectService;
+package com.team5.funthing.user.service.DeliveryService;
 
 import com.team5.funthing.user.model.vo.DeliveryAddressVO;
 

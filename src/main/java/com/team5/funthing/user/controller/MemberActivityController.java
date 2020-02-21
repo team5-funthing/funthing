@@ -1,6 +1,7 @@
 package com.team5.funthing.user.controller;
 
 import java.util.List;
+import java.util.Vector;
 
 import javax.servlet.http.HttpSession;
 
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.team5.funthing.user.model.vo.MemberActivityVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
@@ -34,49 +36,61 @@ public class MemberActivityController {
 	@Autowired
 	GetProjectService getProjectService;
 
+	@RequestMapping(value="mypage.udo",method=RequestMethod.GET)
+	public String myPage(HttpSession session,MemberActivityVO vo,ProjectVO vo1,Model model) {
+		System.out.println("마이페이지 이동시 세션에 담긴 이메일 확인:"+session.getAttribute("memberSessionEmail"));
+		myProjectList(vo1, model, session);
+		myLikeProjectList(session, vo, vo1, model);
+		myReportProjectList(session, vo, vo1, model);
+		myReservationProjectList(session, vo, vo1, model);
+		System.out.println(model.getAttribute("projectLikeList"));
+		System.out.println(model.getAttribute("projectReportList"));
+		System.out.println(model.getAttribute("projectReservationList"));
+		return "p-detail-mypage";
+	}  
+	
+
 	
 	
-	@RequestMapping("gmas1")
+	
+	
+	
+//	=============================================================================
 	public void myProjectList(ProjectVO vo,Model model,HttpSession session) {
 		vo.setEmail((String)session.getAttribute("memberSessionEmail"));
+		System.out.println("myprojectVO 의 email값 :"+vo.getEmail());
+        System.out.println(getProjectServiceByEmailService.getProjectListByEmail(vo).toString());
 		model.addAttribute("myProjectList",getProjectServiceByEmailService.getProjectListByEmail(vo));
 	}
 	
-	@RequestMapping("gmas2")
+
 	public void myLikeProjectList(HttpSession session,MemberActivityVO vo,ProjectVO vo1,Model model) {
-		List<ProjectVO> projectList = null;
+		List<ProjectVO> projectLikeList = new Vector<ProjectVO>();
 		vo.setEmail((String)session.getAttribute("memberSessionEmail"));
 		for(MemberActivityVO list:getMemberActivityService.getLikeProjectnoList(vo)) {
 			vo1.setProjectNo(list.getprojectno());
-			projectList.add(getProjectService.getProject(vo1));
+			projectLikeList.add(getProjectService.getProject(vo1));
 		}
-		System.out.println(projectList.get(0));
-		System.out.println(projectList.get(1));
-		model.addAttribute(projectList);
+		model.addAttribute("projectLikeList",projectLikeList);
 	}
-	@RequestMapping("imas1")
+
 	public void myReportProjectList(HttpSession session,MemberActivityVO vo,ProjectVO vo1,Model model) {
-		List<ProjectVO> projectList = null;
+		List<ProjectVO> projectReportList = new Vector<ProjectVO>();
 		vo.setEmail((String)session.getAttribute("memberSessionEmail"));
 		for(MemberActivityVO list:getMemberActivityService.getReportProjectnoList(vo)) {
 			vo1.setProjectNo(list.getprojectno());
-			projectList.add(getProjectService.getProject(vo1));
+			projectReportList.add(getProjectService.getProject(vo1));
 		}
-		System.out.println(projectList.get(0));
-		System.out.println(projectList.get(1));
-		model.addAttribute(projectList);
+		model.addAttribute("projectReportList",projectReportList);
 	}
-	@RequestMapping("umas1")
+
 	public void myReservationProjectList(HttpSession session,MemberActivityVO vo,ProjectVO vo1,Model model) {
-		List<ProjectVO> projectList = null;
+		List<ProjectVO> projectReservationList = new Vector<ProjectVO>();
 		vo.setEmail((String)session.getAttribute("memberSessionEmail"));
 		for(MemberActivityVO list:getMemberActivityService.getReservationProjectnoList(vo)) {
 			vo1.setProjectNo(list.getprojectno());
-			projectList.add(getProjectService.getProject(vo1));
+			projectReservationList.add(getProjectService.getProject(vo1));
 		}
-		System.out.println(projectList.get(0));
-		System.out.println(projectList.get(1));
-		model.addAttribute(projectList);
-		
+		model.addAttribute("projectReservationList",projectReservationList);
 	}
 }

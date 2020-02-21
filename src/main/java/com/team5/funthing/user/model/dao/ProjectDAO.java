@@ -45,7 +45,7 @@ public class ProjectDAO {
 	
 	
 	public List<ProjectVO> getProjectListByEmail(ProjectVO vo){
-		return sqlSessionTemplate.selectList("ProjectDAO.getProjectnoList",vo);
+		return sqlSessionTemplate.selectList("ProjectDAO.getProjectListByEmail",vo);
 	}
 	
 	

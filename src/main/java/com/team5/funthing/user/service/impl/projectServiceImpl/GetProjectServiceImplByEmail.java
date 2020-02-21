@@ -19,7 +19,6 @@ public class GetProjectServiceImplByEmail implements GetProjectServiceByEmail {
 
 	@Override
 	public List<ProjectVO> getProjectListByEmail(ProjectVO vo) {
-		// TODO Auto-generated method stub
 		return projectDAO.getProjectListByEmail(vo);
 	}
 

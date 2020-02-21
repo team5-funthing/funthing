@@ -77,7 +77,7 @@
 	<insert id="insertMemberActivity"
 		parameterType="memberActivity">
 		INSERT INTO memberactivity
-		FROM
+		VALUES
 		(#{email},#{projectno},#{likeCount},#{reportCount},#{reservationCount})
 	</insert>
     

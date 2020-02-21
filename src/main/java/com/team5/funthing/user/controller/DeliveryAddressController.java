@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.team5.funthing.user.model.vo.DeliveryAddressVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
-import com.team5.funthing.user.service.projectService.GetDeliveryAddressService;
-import com.team5.funthing.user.service.projectService.InsertDeliveryAddressService;
-import com.team5.funthing.user.service.projectService.UpdateDeliveryAddressService;
+import com.team5.funthing.user.service.DeliveryService.GetDeliveryAddressService;
+import com.team5.funthing.user.service.DeliveryService.InsertDeliveryAddressService;
+import com.team5.funthing.user.service.DeliveryService.UpdateDeliveryAddressService;
 
 @Controller
 public class DeliveryAddressController {
