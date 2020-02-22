@@ -41,9 +41,13 @@
 		<result column="projectBoardNo" property="projectBoardNo" />
 		<collection property="Member" resultMap="Member"></collection>
 	</resultMap>
+	
+	<select id="getProjectBoard" parameterType="projectBoard"  resultMap="projectBoard">
+		SELECT * FROM projectBoard where projectNo = ${projectNo}
+	</select>
  	
  	<select id="getEntireProjectBoardList" parameterType="projectBoard"  resultMap="projectBoard">
-		select member.name,projectboard.* from(select * from projectboard order by ref desc, step asc) projectboard join member on member.email = projectboard.email
+		select member.name,projectboard.* from(select * from projectboard where projectNo = ${projectNo} order by ref desc, step asc ) projectboard join member on member.email = projectboard.email
 	</select>
 	
 	

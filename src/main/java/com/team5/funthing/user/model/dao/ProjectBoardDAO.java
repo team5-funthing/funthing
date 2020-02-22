@@ -48,4 +48,9 @@ public class ProjectBoardDAO {
 		System.out.println("프로젝트 답글 입력");
 		
 	}
+	public List<ProjectBoardVO> getProjectBoard(ProjectBoardVO vo) {
+		System.out.println("프로젝트보드에 있는거 다 가져오기");
+		
+		return projectBoardSqlSessionTemplate.selectList("ProjectBoardDAO.getProjectBoard",vo);
+	}
 }
