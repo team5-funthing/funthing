@@ -10,10 +10,11 @@ import java.util.List;
  * 	Funthing Project 
  * 
  */
+
 public class ProjectVO {
 	
 //	프로젝트 기본설정 멤버
-	private int projectNo = -1; 
+	private Integer projectNo = -1; 
 	private String creator = ""; 
 	private String email = "";
 	
@@ -27,7 +28,6 @@ public class ProjectVO {
 	private String category=""; 
 	private Date startDate = new Date(); 
 	private Date endDate = new Date(); 
-	private List<String> projectKeyword; // null ok
 	
 //	프로젝트 소개 멤버
 	private String projectStory=""; 
@@ -114,12 +114,6 @@ public class ProjectVO {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	public List<String> getProjectKeyword() {
-		return projectKeyword;
-	}
-	public void setProjectKeyword(List<String> projectKeyword) {
-		this.projectKeyword = projectKeyword;
-	}
 	public String getProjectStory() {
 		return projectStory;
 	}
@@ -174,18 +168,18 @@ public class ProjectVO {
 	public void setWriteStatus(char writeStatus) {
 		this.writeStatus = writeStatus;
 	}
+	
 	@Override
 	public String toString() {
 		return "ProjectVO [projectNo=" + projectNo + ", creator=" + creator + ", email=" + email + ", goalMoney="
 				+ goalMoney + ", projectMainImage=" + projectMainImage + ", projectIntroduceImage="
 				+ projectIntroduceImage + ", projectIntroduceVideo=" + projectIntroduceVideo + ", projectTitle="
 				+ projectTitle + ", projectSubTitle=" + projectSubTitle + ", category=" + category + ", startDate="
-				+ startDate + ", endDate=" + endDate + ", projectKeyword=" + projectKeyword + ", projectStory="
-				+ projectStory + ", projectSummary=" + projectSummary + ", projectDetail=" + projectDetail
-				+ ", projectCaution=" + projectCaution + ", supporters=" + supporters + ", fundingMoney=" + fundingMoney
-				+ ", status=" + status + ", informationAgree=" + informationAgree + ", writeStatus=" + writeStatus
-				+ "]";
+				+ startDate + ", endDate=" + endDate + ", projectStory=" + projectStory + ", projectSummary="
+				+ projectSummary + ", projectDetail=" + projectDetail + ", projectCaution=" + projectCaution
+				+ ", supporters=" + supporters + ", fundingMoney=" + fundingMoney + ", status=" + status
+				+ ", informationAgree=" + informationAgree + ", writeStatus=" + writeStatus + "]";
 	}
-	
+
 		
 }

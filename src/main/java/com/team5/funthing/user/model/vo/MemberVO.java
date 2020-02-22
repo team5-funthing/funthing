@@ -12,8 +12,6 @@ public class MemberVO {
 	private String report;
 	
 	
-	
-	
 	private String certificationCode;
 	public String getCertificationCode() {
 		return certificationCode;
@@ -21,8 +19,6 @@ public class MemberVO {
 	public void setCertificationCode(String certificationCode) {
 		this.certificationCode = certificationCode;
 	}
-	
-	
 	
 	
 	public String getEmail() {

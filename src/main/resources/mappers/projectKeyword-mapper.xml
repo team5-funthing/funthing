@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProjectKeywordDAO">
+
+<!--
+	<select id="getSomething" parameterType="int" resultType="#package.#modelname">
+		SELECT
+		columnname1,
+		columnname2,
+		columnname3
+		FROM tablename1
+		WHERE columnname1 = #{value}
+	</select>
+
+	<resultMap type="#modelname" id="YourResultSet">
+		<id property="param1" column="columnname1" />
+		<result property="param2" column="columnname2" />
+		<result property="param3" column="columnname3" />
+	</resultMap>
+ -->
+	<select id="getProjectKeywordList" resultType="projectKeyword">
+		SELECT * FROM projectKeyword where projectNo = #{projectNo}
+	</select>
+	
+ 
+ 
+	<insert id="insertProjectKeyword" parameterType="projectKeyword">
+		
+		INSERT INTO projectKeyword(projectNo, keyword) VALUES (#{projectNo}, #{keyword})
+	
+	</insert>
+	
+
+<!-- 
+	<update id="updateSomething" parameterType="#modelname">
+		UPDATE tablename1
+		SET
+		columnname1=#{param1}
+		WHERE
+		columnname2 = #{param2}
+	</update>
+	
+ -->
+ 
+	<delete id="deleteProjectKeyword" parameterType="projectKeyword">
+		DELETE FROM projectKeyword 
+		WHERE projectNo = #{projectNo }
+	</delete>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

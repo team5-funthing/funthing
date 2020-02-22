@@ -108,8 +108,6 @@ public class MemberController {
 		return "f-find-pw";
 	}
 
-ing(value="emailJoin.udo",method=RequestMethod.GET) // ï§ë¶¿ìªæ¿¡ìï¿½ï¿½ì¯ï¿½ë¸¯æ¹²ï¿½ ï¿½ìï§ëì ï¿½ë£
-
 	@RequestMapping(value="emailJoin.udo",method=RequestMethod.GET) 
 
 	public String emailjoin() {
@@ -146,7 +144,6 @@ ing(value="emailJoin.udo",method=RequestMethod.GET) // ï§ë¶¿ìªæ¿¡�
 		try {
 			String certificationCode = sendMailUtil.createCertificationCode(50);
 
-			sendMailUtil.sendMail("[Funthing] ÀÎÁõ¹øÈ£ ", "ÀÎÁõ¹øÈ£ ["+certificationCode+"]", vo.getEmail());	
 			session.setAttribute("certificationCode", certificationCode);   
 		} catch (Exception e) {
 			e.printStackTrace();

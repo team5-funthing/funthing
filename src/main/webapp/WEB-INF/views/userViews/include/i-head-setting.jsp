@@ -33,11 +33,13 @@
     <script src="${pageContext.request.contextPath}/resources/user/js/jquery.gpopover.js"></script>
     <script src="https://kit.fontawesome.com/7a424ad03a.js" crossorigin="anonymous"></script>
     
-    <!-- CKEditor5 -->
-    <script src="${pageContext.request.contextPath}/resources/common/ckeditor5/build/ckeditor.js"></script>
+   <!-- CKEditor4 -->
+    <script src="${pageContext.request.contextPath}/resources/common/ckeditor/ckeditor.js"></script>
     
   
     <script>
+    
+    
         $(function () {
             // Use custom options for the right button
             $('#mypage-btn').gpopover({
@@ -52,37 +54,7 @@
             });
         });
         
-        $(function (){
-        	
-        	$("#addKeywordBtn").removeAttr("href")
-        	$("#addKeywordBtn").click(function(){
-	        	
-	        	var toAddKeyword = $("input[name=projectKeyword]").val();
-	        	
-	        	
-	        	if(toAddKeyword != null){
-	        		$("#addedKeywords").append(
-	        				"<li>" + toAddKeyword + "</li> <input type='hidden' name='projectKeyword' value='" + toAddKeyword + "'>");
 
-	        	}
-        	})
-        })
-        
-        $(function (){
-        	
-        	$("#removeKeywordBtn").removeAttr("href")
-        	$("#removeKeywordBtn").click(function(){
-	        	
-	        	var toAddKeyword = $("input[name=projectKeyword]").val();
-	        	
-	        	if(toAddKeyword != null){
-	        		$("#addedKeywords").append(
-	        				"<li>" + toAddKeyword + "</li> <input type='hidden' name='projectKeyword' value='" + toAddKeyword + "'>");
-
-	        	}
-        	})
-        })
-        
     </script>
     
     

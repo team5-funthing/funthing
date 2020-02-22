@@ -5298,3 +5298,19 @@ img.landscape {
 #project-details-info h4 h2{
     font-weight: bolder;
 } */
+
+.btn-bd-keyword {
+    font-weight: 600;
+    color: #7952b3;
+    border: 1px solid transparent;
+    border-color: #7952b3;
+}
+
+
+.btn-bd-keyword:active, .btn-bd-keyword:hover {
+    color: #fff;
+    background-color: #7952b3;
+    border-color: #7952b3;
+}
+
+

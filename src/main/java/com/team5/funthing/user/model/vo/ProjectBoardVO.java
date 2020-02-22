@@ -5,10 +5,9 @@ import java.sql.Date;
 public class ProjectBoardVO {
 	
 	
-	
 	private int projectboardno;
 	private String email;
-	private int projectno;
+	private Integer projectno;
 	private String position;
 	private String projectboardcontents;
 	private Date projectboarddate;
@@ -17,8 +16,6 @@ public class ProjectBoardVO {
 	private int ref;
 	
 	private MemberVO Member;
-	
-	
 	
 	
 	public MemberVO getMember() {

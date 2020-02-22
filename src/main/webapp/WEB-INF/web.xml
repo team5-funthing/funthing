@@ -4,8 +4,6 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
 
-
-
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter
@@ -20,7 +18,7 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
+
 
 
 	<context-param>
@@ -43,7 +41,8 @@
 		</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/config/userConfig/home-servlet.xml</param-value>
+			<param-value>/WEB-INF/config/userConfig/home-servlet.xml
+			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
@@ -63,7 +62,8 @@
 		</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/config/userConfig/user-servlet.xml</param-value>
+			<param-value>/WEB-INF/config/userConfig/user-servlet.xml
+			</param-value>
 			<!-- 추가할 user 설정 파일 -->
 		</init-param>
 		<load-on-startup>1</load-on-startup>
@@ -85,8 +85,10 @@
 			<param-value>/WEB-INF/config/adminConfig/admin-servlet.xml
 			</param-value>
 			<!-- 추가할 admin 설정 파일 -->
-			<param-value>/WEB-INF/config/adminConfig/adminCSBoard-servlet.xml</param-value>
-			<param-value>/WEB-INF/config/adminConfig/adminNoticeBoard-servlet.xml</param-value>
+			<param-value>/WEB-INF/config/adminConfig/adminCSBoard-servlet.xml
+			</param-value>
+			<param-value>/WEB-INF/config/adminConfig/adminNoticeBoard-servlet.xml
+			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
@@ -97,35 +99,42 @@
 	</servlet-mapping>
 
 
-
-
-
-	<!-- test context -->
+	<!-- ******** -->
+	<!-- CKFinder -->
+	<!-- ******** -->
+<!--
 	<servlet>
-		<servlet-name>test</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet
-		</servlet-class>
+		<servlet-name>ConnectorServlet</servlet-name>
+		<serlvet-class>com.ckfinder.connector.ConnectorServlet</serlvet-class>
 		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/config/userConfig/test-servlet.xml
-			</param-value>
+			<param-name>XMLConfig</param-name>
+			<param-value>/WEB-INF/config/ckfinder-config.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>false</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-
+	
 	<servlet-mapping>
-		<servlet-name>test</servlet-name>
-		<url-pattern>*.tdo</url-pattern>
+		<servlet-name>ConnectorServlet</servlet-name>
+		<url-pattern>/ckfinder/core/connector/java/connector.java</url-pattern>
 	</servlet-mapping>
-
-
-
-
-
-
-
-
-
-
+ -->
 
 </web-app>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

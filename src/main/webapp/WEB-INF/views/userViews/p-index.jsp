@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <!doctype html>
-<html class="no-js" lang="zxx">
+<html class="no-js">
 
 <head>
     <script>
