@@ -66,8 +66,8 @@
 
 				<article>
 					<div class="row">
+					
 						<div class="col-lg-10 posts-list">
-						
 							<div class="single-project-details">
 								<div class="feature-img">
 									<img class="img-fluid" src="img/test/1.jpg" alt="">
@@ -260,11 +260,6 @@
 		                           </div>    
 		                      </div>
 		                </c:forEach>
-
-			
-		
-		
-		
 	
 		                        <div class="comment-list">
 		                           <div class="single-comment justify-content-between d-flex">
@@ -352,8 +347,10 @@
 								</div>
 							</div>
 						</div>
+						
+						
+						
 					</div>
-
 				</article>
 				<hr>
 			</div>
