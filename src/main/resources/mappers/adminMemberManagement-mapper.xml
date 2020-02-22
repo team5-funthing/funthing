@@ -17,7 +17,7 @@
 	 
 	<!-- 창작자는 adminCreator-Mapper.xml에 리스트랑 상세보기 기능 구현 되어있음 -->
 	<!-- 창작자 회원등급 변경 -->
-	<update id="updateMakerMemberGrade" parameterType="userCreator">
+	<update id="updateMakerMemberGrade" parameterType="creator">
 		UPDATE makerMember SET lv = ${lv} WHERE creator = ${creator}
 	</update>
 	
@@ -32,10 +32,10 @@
 		<result column="myImage" property="myImage" />
 		<result column="report" property="report" />
 		<result column="position" property="position" />
-		<collection property="userCreator" resultMap="userCreator"></collection>
+		<collection property="creator" resultMap="creator"></collection>
 	</resultMap>
 	
-	<resultMap type="userCreator" id="userCreator">
+	<resultMap type="creator" id="creator">
 		<result column="email" property="email" />
 		<result column="makerPhone" property="makerphone" />
 		<result column="businessSelect" property="businessSelect" />
@@ -47,7 +47,7 @@
 	
 	<!-- 조인문 member + makermember -->
 	<select id="getMemberJoinMaker" resultType="member" parameterType="member">
-	select member.*, userCreator.* from member full outer join userCreator on member.email = userCreator.email
+	select member.*, creator.* from member full outer join creator on member.email = creator.email
 	</select>
 	
 </mapper>

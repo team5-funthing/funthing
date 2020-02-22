@@ -19,7 +19,7 @@
 
 		<typeAlias type="com.team5.funthing.user.model.vo.ProjectAccountInformationVO" alias="projectAccountInformation"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.RewardVO" alias="reward"/>
-		<typeAlias type="com.team5.funthing.user.model.vo.CreatorVO" alias="Creator"/>
+		<typeAlias type="com.team5.funthing.user.model.vo.CreatorVO" alias="creator"/>
 
 
 		<typeAlias type="com.team5.funthing.user.model.vo.CSBoardVO" alias="csboard"/>
