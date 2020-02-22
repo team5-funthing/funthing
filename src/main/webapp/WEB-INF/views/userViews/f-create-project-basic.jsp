@@ -46,8 +46,6 @@
 								<a class="btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
 									href="#" >뒤로가기</a>
 							</div>
-							
-							
 						</form>
 					</div>
 				</div>

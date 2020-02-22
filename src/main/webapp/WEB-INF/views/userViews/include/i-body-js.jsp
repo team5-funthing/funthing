@@ -28,8 +28,8 @@
 
     <script src="${pageContext.request.contextPath}/resources/user/js/main.js"></script>
     
-    <!-- CKEditor5 -->
-    <script src="${pageContext.request.contextPath}/resources/common/ckeditor5/build/ckeditor.js"></script>
+    
+   
     
     
     

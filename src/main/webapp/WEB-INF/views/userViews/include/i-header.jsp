@@ -46,7 +46,7 @@
 						</div>
 					</div >
 						
-					<c:if test="${! empty sessionScope.memberSessionEmail }">
+					<c:if test="${!empty sessionScope.memberSessionEmail }">
 						<jsp:include page="./i-header-nav-right-login-ok.jsp"/>
 					</c:if>
 					<c:if test="${empty sessionScope.memberSessionEmail }">

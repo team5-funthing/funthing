@@ -3,9 +3,7 @@ package com.team5.funthing.user.model.vo;
 import java.sql.Date;
 
 public class ProjectBoardVO {
-	
-	
-	
+
 	private int projectBoardNo = -1;
 	private String email;
 	private int projectNo = 2020;
@@ -17,8 +15,6 @@ public class ProjectBoardVO {
 	private int ref;
 	
 	private MemberVO Member;
-	
-	
 	
 	
 	public MemberVO getMember() {

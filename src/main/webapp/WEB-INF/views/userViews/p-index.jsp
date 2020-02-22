@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <!doctype html>
-<html class="no-js" lang="zxx">
+<html class="no-js">
 
 <head>
     <script>
@@ -21,6 +21,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
     <!-- Place favicon.ico in the root directory -->
 
+
     <!-- CSS here -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/jquery.gpopover.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/bootstrap.min.css">
@@ -36,10 +37,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/style.css">
 	
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/bootstrap.min.css">
-
-
-
-
 
 
 	<jsp:include page="./include/i-head-setting.jsp"/>

@@ -1,0 +1,23 @@
+package com.team5.funthing.user.service.impl.keywordServiceImpl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.team5.funthing.user.model.dao.KeywordDAO;
+import com.team5.funthing.user.model.vo.KeywordVO;
+import com.team5.funthing.user.service.keywordService.InsertKeywordService;
+
+@Service
+public class InserKeywordServiceImpl implements InsertKeywordService {
+
+	@Autowired
+	private KeywordDAO keywordDAO;
+
+	@Override
+	public void insertKeyword(KeywordVO vo) {
+		
+		keywordDAO.insertKeyword(vo);
+		
+	}
+
+}

@@ -13,7 +13,7 @@ public class MemberVO {
 	
 	private UserCreatorVO userCreator;
 	
-	//�׽�Ʈ�� 
+	//Å×½ºÆ®¿ë 
 	private String position;
 
 	public String getPosition() {
@@ -22,8 +22,7 @@ public class MemberVO {
 	public void setPosition(String position) {
 		this.position = position;
 	}
-	
-	
+  
 	private String certificationCode;
 	public String getCertificationCode() {
 		return certificationCode;
@@ -31,8 +30,6 @@ public class MemberVO {
 	public void setCertificationCode(String certificationCode) {
 		this.certificationCode = certificationCode;
 	}
-	
-	
 	
 	
 	public String getEmail() {

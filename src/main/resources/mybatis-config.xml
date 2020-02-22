@@ -5,6 +5,9 @@
 <configuration>
 	<properties resource="db.properties" />
 	<typeAliases>
+	
+		<typeAlias type="com.team5.funthing.user.model.vo.ProjectKeywordVO" alias="projectKeyword"/>
+		<typeAlias type="com.team5.funthing.user.model.vo.KeywordVO" alias="keyword"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.MemberVO" alias="member"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.NoticeVO" alias="notice"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.ProjectVO" alias="project"/>
@@ -33,8 +36,11 @@
   
   
 	<mappers>
+	
+		<mapper resource="mappers/projectKeyword-mapper.xml"/>
+		<mapper resource="mappers/keyword-mapper.xml"/>
 		<mapper resource="mappers/member-mapper.xml" />
-		<mapper resource="mappers/notice-mapper.xml"/>
+		<mapper resource="mappers/notice-mapper.xml" />
 		<mapper resource="mappers/project-mapper.xml" />
 		<mapper resource="mappers/board-mapper.xml" />
 
