@@ -1,12 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!doctype html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<html class="no-js" lang="zxx">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<!doctype html>
+<html class="no-js">
 
 <head>
 
-<jsp:include page="./include/i-head-setting.jsp" />
+	<jsp:include page="./include/i-head-setting.jsp" />
 
 </head>
 
@@ -196,70 +197,71 @@
 		                        </form>
 		                     </div>
 		                     
-		                     <!-- 프로젝트 리뷰 게시판 리스트 보여주는곳  -->
+		                    <!-- 프로젝트 리뷰 게시판 리스트 보여주는곳  -->
 		                    
 		                    			
 							<div class="comments-area">
 		                        <h4> 리뷰 게시판</h4>
-							 <c:forEach var="getProjectBoard" items="${getProjectBoard}">
-		                        <div class="comment-list">
-		                           <div class="single-comment justify-content-between d-flex">
-		                              <div class="user justify-content-between d-flex">
-		                                 <div class="thumb">
-		                                    <img src="img/comment/comment_1.png" alt="">
-		                                 </div>
-		                                 <div class="desc">
-		                                    <p class="comment">
-		                                     ${getProjectBoard.projectBoardNo}
-		                                    </p>
-		                                    <div class="d-flex justify-content-between">
-		                                       <div class="d-flex align-items-center">
-		                                          <h5>
-		                                             <a href="#">${getProjectBoard.projectBoardNo}</a>
-		                                          </h5>
-		                                          <p class="date">${getProjectBoard.projectBoardNo}</p>
-		                                       </div>
-		                                       <div class="reply-btn">
-		                                          <a type="submit"  href="#" class="button button-contactForm btn_1 boxed-btn pt-1 pl-3 pr-3 pb-1">
-		                                             Reply
-		                                          </a>
-		                                       </div>
-		                                    </div>
-		                                    
-		                     
-		                                    <div class="d-flex justify-content-around mt-3">
-		                                       <div class="d-flex align-items-center">
-		                                          <div class="single-comment justify-content-between d-flex">
-		                                             <div class="user justify-content-between d-flex p-3" style="background-color: whitesmoke;">
-		                                                <div class="thumb">
-		                                                   <img src="img/comment/comment_2.png" alt="">
-		                                                </div>
-		                                                <div class="desc">
-		                                                   <p class="comment">
-		                                                     ${getProjectBoard.projectBoardNo}
-		                                                   </p>
-		                                                   <div class="d-flex justify-content-between">
-		                                                      <div class="d-flex align-items-center">
-		                                                         <h5>
-		                                                            <a href="#">${getProjectBoard.projectBoardNo}</a>
-		                                                         </h5>
-		                                                         <p class="date">${getProjectBoard.projectBoardNo} </p>
-		                                                      </div>
-		                                                   </div>
-		                                                </div>
-		                                             </div>
-		                                          </div>
-		                                       </div>
-		                                       <div class="d-flex align-items-center">
-		
-		                                       </div>
-		                                    </div>
-		                                  
-		                                 </div>
-		                              </div>
-		                           </div>    
-		                      </div>
-		                </c:forEach>
+
+		                      	<c:forEach var="getProjectBoard" items="${getProjectBoard}">
+			                        <div class="comment-list">
+			                           <div class="single-comment justify-content-between d-flex">
+			                              <div class="user justify-content-between d-flex">
+			                                 <div class="thumb">
+			                                    <img src="img/comment/comment_1.png" alt="">
+			                                 </div>
+			                                 <div class="desc">
+			                                    <p class="comment">
+			                                     ${getProjectBoard.projectBoardContents}
+			                                    </p>
+			                                    <div class="d-flex justify-content-between">
+			                                       <div class="d-flex align-items-center">
+			                                          <h5>
+			                                             <a href="#">${getProjectBoard.member.name}</a>
+			                                          </h5>
+			                                          <p class="date">${getProjectBoard.projectBoardDate}</p>
+			                                       </div>
+			                                       <div class="reply-btn">
+			                                          <a type="submit"  href="#" class="button button-contactForm btn_1 boxed-btn pt-1 pl-3 pr-3 pb-1">
+			                                             Reply
+			                                          </a>
+			                                       </div>
+			                                    </div>
+			                                    
+			                     
+			                                    <div class="d-flex justify-content-around mt-3">
+			                                       <div class="d-flex align-items-center">
+			                                          <div class="single-comment justify-content-between d-flex">
+			                                             <div class="user justify-content-between d-flex p-3" style="background-color: whitesmoke;">
+			                                                <div class="thumb">
+			                                                   <img src="img/comment/comment_2.png" alt="">
+			                                                </div>
+			                                                <div class="desc">
+			                                                   <p class="comment">
+			                                                     ${getProjectBoard.projectBoardNo}
+			                                                   </p>
+			                                                   <div class="d-flex justify-content-between">
+			                                                      <div class="d-flex align-items-center">
+			                                                         <h5>
+			                                                            <a href="#">${getProjectBoard.projectBoardNo}</a>
+			                                                         </h5>
+			                                                         <p class="date">${getProjectBoard.projectBoardNo} </p>
+			                                                      </div>
+			                                                   </div>
+			                                                </div>
+			                                             </div>
+			                                          </div>
+			                                       </div>
+			                                       <div class="d-flex align-items-center">
+			
+			                                       </div>
+			                                    </div>
+			                                  
+			                                 </div>
+			                              </div>
+			                           </div>    
+			                      	</div>
+		                		</c:forEach>
 	
 		                        <div class="comment-list">
 		                           <div class="single-comment justify-content-between d-flex">
