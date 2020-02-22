@@ -49,14 +49,6 @@ public class MemberController {
 		return "p-index";
 	}
 
-	@RequestMapping("mem.udo") 
-	public String showsky(HttpSession session, MemberVO vo) {
-
-		
-//		return "p-test-board-write";
-		return "p-test-project-maker-user-list";
-	}
-
 	@RequestMapping(value="socialLogin.udo",method=RequestMethod.GET)
 	public String socialLogin() {   
 		return "f-socialjoin";
@@ -109,7 +101,6 @@ public class MemberController {
 			    }
 
 				response.sendRedirect("member.udo");
-//				response.sendRedirect("mem.udo"); 
 
 			}else {
 				response.sendRedirect("findpw.udo");
