@@ -120,7 +120,7 @@
                         <div class="thumbnail-wrap">
                             <div class="thumbnail">
                                 <div class="centered">
-                                    <img src="${pageContext.request.contextPath}/resources/user/img/test/8.jpg" class="card-img-top landscape" alt="1.jpg">
+                                    <a href="projectDetails.udo"><img src="${pageContext.request.contextPath}/resources/user/img/test/8.jpg" class="card-img-top landscape" alt="1.jpg"></a>
                                 </div>
                             </div>
                         </div>

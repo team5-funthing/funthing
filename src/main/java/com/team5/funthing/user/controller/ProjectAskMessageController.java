@@ -45,6 +45,8 @@ public class ProjectAskMessageController {
 	private GetEntireProjectMakerAskMessageListService getEntireProjectMakerAskMessageListService;
 	
 	
+
+	
 	@RequestMapping(value="insertNewAskMessage.udo", method = RequestMethod.POST)
 	public String insertNewAskMessage(ProjectAskMessageVO vo, Model model) { //문의메세지 입력 화면으로 가기
 		

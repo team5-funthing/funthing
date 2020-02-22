@@ -165,39 +165,43 @@
 							</div>
 							
 							
-							<!-- 프로젝트 리뷰 게시판 -->
+							<!-- 프로젝트 리뷰 게시판 글 작성하기  -->
+							
+							
 							<div class="comment-form">
 		                        <h4>리뷰 게시판 글 남기기</h4>
-		                        <form class="form-contact comment_form" action="#" id="commentForm">
+		                        <form class="form-contact comment_form" action="insertProjectBoard.udo" id="commentForm" method="post">
 		                           <div class="row">
 		                              <div class="col-12">
 		                                 <div class="form-group">
-		                                    <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
+		                                    <textarea class="form-control w-100" name="projectBoardContents" id="projectBoardContents" cols="30" rows="9"
 		                                       placeholder="Write Comment"></textarea>
 		                                 </div>
 		                              </div>
 		                              <div class="col-sm-6">
 		                                 <div class="form-group">
-		                                    <input class="form-control" name="name" id="name" type="text" placeholder="Name">
+		                                    <input class="form-control" name="name" id="name" type="text" placeholder="Name" value="${sessionScope.memberSessionName}">
 		                                 </div>
 		                              </div>
 		                              <div class="col-sm-6">
 		                                 <div class="form-group">
-		                                    <input class="form-control" name="email" id="email" type="email"
-		                                       placeholder="Email">
+		                                    <input class="form-control" name="email" id="email" type="email" 
+		                                       placeholder="Email" value="${sessionScope.memberSessionEmail}">
 		                                 </div>
 		                              </div>
 		                           </div>
 		                           <div class="form-group">
-		                              <button type="submit" class="button button-contactForm btn_1 boxed-btn">Send
-		                                 Message</button>
+		                              <button type="submit" class="button button-contactForm btn_1 boxed-btn">Send Message</button>
 		                           </div>
 		                        </form>
 		                     </div>
-							
+		                     
+		                     <!-- 프로젝트 리뷰 게시판 리스트 보여주는곳  -->
+		                    
+		                    			
 							<div class="comments-area">
 		                        <h4> 리뷰 게시판</h4>
-		
+							 <c:forEach var="getProjectBoard" items="${getProjectBoard}">
 		                        <div class="comment-list">
 		                           <div class="single-comment justify-content-between d-flex">
 		                              <div class="user justify-content-between d-flex">
@@ -206,23 +210,23 @@
 		                                 </div>
 		                                 <div class="desc">
 		                                    <p class="comment">
-		                                       Multiply sea night grass fourth day sea lesser rule open subdue female fill which
-		                                       them
-		                                       Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+		                                     ${getProjectBoard.projectBoardNo}
 		                                    </p>
 		                                    <div class="d-flex justify-content-between">
 		                                       <div class="d-flex align-items-center">
 		                                          <h5>
-		                                             <a href="#">송하늘</a>
+		                                             <a href="#">${getProjectBoard.projectBoardNo}</a>
 		                                          </h5>
-		                                          <p class="date">December 4, 2017 at 3:12 pm </p>
+		                                          <p class="date">${getProjectBoard.projectBoardNo}</p>
 		                                       </div>
 		                                       <div class="reply-btn">
-		                                          <a type="submit"  href="projectAskReply.html" class="button button-contactForm btn_1 boxed-btn pt-1 pl-3 pr-3 pb-1">
+		                                          <a type="submit"  href="#" class="button button-contactForm btn_1 boxed-btn pt-1 pl-3 pr-3 pb-1">
 		                                             Reply
 		                                          </a>
 		                                       </div>
 		                                    </div>
+		                                    
+		                     
 		                                    <div class="d-flex justify-content-around mt-3">
 		                                       <div class="d-flex align-items-center">
 		                                          <div class="single-comment justify-content-between d-flex">
@@ -232,16 +236,14 @@
 		                                                </div>
 		                                                <div class="desc">
 		                                                   <p class="comment">
-		                                                      Multiply sea night grass fourth day sea lesser rule open subdue female fill which
-		                                                      them
-		                                                      Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+		                                                     ${getProjectBoard.projectBoardNo}
 		                                                   </p>
 		                                                   <div class="d-flex justify-content-between">
 		                                                      <div class="d-flex align-items-center">
 		                                                         <h5>
-		                                                            <a href="#">강성범</a>
+		                                                            <a href="#">${getProjectBoard.projectBoardNo}</a>
 		                                                         </h5>
-		                                                         <p class="date">December 4, 2017 at 3:12 pm </p>
+		                                                         <p class="date">${getProjectBoard.projectBoardNo} </p>
 		                                                      </div>
 		                                                   </div>
 		                                                </div>
@@ -252,13 +254,13 @@
 		
 		                                       </div>
 		                                    </div>
+		                                  
 		                                 </div>
 		                              </div>
-		                           </div>
-		                        </div>
-		                        
-		                        
-		
+		                           </div>    
+		                      </div>
+		                </c:forEach>
+	
 		                        <div class="comment-list">
 		                           <div class="single-comment justify-content-between d-flex">
 		                              <div class="user justify-content-between d-flex">
