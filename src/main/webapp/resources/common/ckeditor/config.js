@@ -4,6 +4,11 @@
  */
 
 CKEDITOR.editorConfig = function( config ) {
+	
+	
+	config.filebrowserUploadUrl = 'storyUpload.udo';
+	config.language = 'ko';
+	
 	// Define changes to default configuration here. For example:
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';

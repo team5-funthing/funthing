@@ -72,14 +72,7 @@
 	
 	$(function(){
 		
-		CKEDITOR.replace('editor', {
-			
-			language: 'ko',
-			
-			fileBrowserUploadUrl: '/storyUpload.udo'
-			
-		});
-
+		CKEDITOR.replace('editor')
 		
 	});
 	

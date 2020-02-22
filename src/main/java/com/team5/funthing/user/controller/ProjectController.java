@@ -126,7 +126,7 @@ public class ProjectController {
 
 
 
-	@RequestMapping(value = "insertProject.udo", method = RequestMethod.POST)
+	@RequestMapping(value = "/insertProject.udo", method = RequestMethod.POST)
 	public String insertProject(HttpSession session, ProjectVO vo, Model model) {
 
 		// 프로젝트 제작 첫 시작시에만 시작
@@ -152,7 +152,7 @@ public class ProjectController {
 
 	
 //	redirectAttributes.addAttribute("","")
-	@RequestMapping(value = "saveInputWritingProject.udo", method = RequestMethod.POST)
+	@RequestMapping(value = "/saveInputWritingProject.udo", method = RequestMethod.POST)
 	public String saveInputWritingProject(	@RequestParam(name = "uploadImage", required = false)MultipartFile uploadFile, 
 											@RequestParam(name = "keywords", required = false)List<String> toAddKeywords, 
 //											RedirectAttributes redirectAttributes,
@@ -201,7 +201,7 @@ public class ProjectController {
 	}
 	
 	
-	@RequestMapping(value = "showPreviewProject.udo", method = RequestMethod.POST)
+	@RequestMapping(value = "/showPreviewProject.udo", method = RequestMethod.POST)
 	public String showPreviewProject(ProjectVO pvo, Model model) throws Exception { // 프로젝트 임시저장 시 실행되는 메서드
 		
 		projectKeywordVO.setProjectNo(pvo.getProjectNo());
