@@ -6,7 +6,7 @@ public class ProjectBoardVO {
 
 	private int projectBoardNo = -1;
 	private String email;
-	private int projectNo;
+	private int projectNo = 2020;
 	private String projectBoardContents;
 	private Date projectBoardDate;
 	private int step;

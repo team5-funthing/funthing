@@ -198,12 +198,11 @@
 		                     </div>
 		                     
 		                    <!-- 프로젝트 리뷰 게시판 리스트 보여주는곳  -->
-		                    
-		                    			
+                    			
 							<div class="comments-area">
 		                        <h4> 리뷰 게시판</h4>
-
-		                      	<c:forEach var="getProjectBoard" items="${getProjectBoard}">
+								<c:forEach var="b1" items="${getProjectBoard}">
+		                      		<c:if test="${b1.step eq 0}">
 			                        <div class="comment-list">
 			                           <div class="single-comment justify-content-between d-flex">
 			                              <div class="user justify-content-between d-flex">
@@ -212,14 +211,14 @@
 			                                 </div>
 			                                 <div class="desc">
 			                                    <p class="comment">
-			                                     ${getProjectBoard.projectBoardContents}
+			                                     ${b1.projectBoardContents}
 			                                    </p>
 			                                    <div class="d-flex justify-content-between">
 			                                       <div class="d-flex align-items-center">
 			                                          <h5>
-			                                             <a href="#">${getProjectBoard.member.name}</a>
+			                                             <a href="#">${b1.member.name}</a>
 			                                          </h5>
-			                                          <p class="date">${getProjectBoard.projectBoardDate}</p>
+			                                          <p class="date">${b1.projectBoardDate}</p>
 			                                       </div>
 			                                       <div class="reply-btn">
 			                                          <a type="submit"  href="#" class="button button-contactForm btn_1 boxed-btn pt-1 pl-3 pr-3 pb-1">
@@ -227,8 +226,8 @@
 			                                          </a>
 			                                       </div>
 			                                    </div>
-			                                    
-			                     
+			                                    <c:forEach var="b2" items="${getProjectBoard}">
+			                     				<c:if test="${b1.ref eq b2.ref && b1.step ne b2.step}">
 			                                    <div class="d-flex justify-content-around mt-3">
 			                                       <div class="d-flex align-items-center">
 			                                          <div class="single-comment justify-content-between d-flex">
@@ -238,14 +237,14 @@
 			                                                </div>
 			                                                <div class="desc">
 			                                                   <p class="comment">
-			                                                     ${getProjectBoard.projectBoardNo}
+			                                                     ${b2.projectBoardContents}
 			                                                   </p>
 			                                                   <div class="d-flex justify-content-between">
 			                                                      <div class="d-flex align-items-center">
 			                                                         <h5>
-			                                                            <a href="#">${getProjectBoard.projectBoardNo}</a>
+			                                                            <a href="#">${b2.member.name}</a>
 			                                                         </h5>
-			                                                         <p class="date">${getProjectBoard.projectBoardNo} </p>
+			                                                         <p class="date">${b2.projectBoardDate} </p>
 			                                                      </div>
 			                                                   </div>
 			                                                </div>
@@ -253,74 +252,18 @@
 			                                          </div>
 			                                       </div>
 			                                       <div class="d-flex align-items-center">
-			
+			                             
 			                                       </div>
 			                                    </div>
-			                                  
+			                                    
+			                                    </c:if>
+			                                    </c:forEach>
 			                                 </div>
 			                              </div>
 			                           </div>    
 			                      	</div>
-		                		</c:forEach>
-	
-		                        <div class="comment-list">
-		                           <div class="single-comment justify-content-between d-flex">
-		                              <div class="user justify-content-between d-flex">
-		                                 <div class="thumb">
-		                                    <img src="img/comment/comment_1.png" alt="">
-		                                 </div>
-		                                 <div class="desc">
-		                                    <p class="comment">
-		                                       Multiply sea night grass fourth day sea lesser rule open subdue female fill which
-		                                       them
-		                                       Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-		                                    </p>
-		                                    <div class="d-flex justify-content-between">
-		                                       <div class="d-flex align-items-center">
-		                                          <h5>
-		                                             <a href="#">송하늘</a>
-		                                          </h5>
-		                                          <p class="date">December 4, 2017 at 3:12 pm </p>
-		                                       </div>
-		                                       <div class="reply-btn">
-		                                          <a type="submit"  href="projectAskReply.html" class="button button-contactForm btn_1 boxed-btn pt-1 pl-3 pr-3 pb-1">
-		                                             Reply
-		                                          </a>
-		                                       </div>
-		                                    </div>
-		                                    <div class="d-flex justify-content-around mt-3">
-		                                       <div class="d-flex align-items-center">
-		                                          <div class="single-comment justify-content-between d-flex">
-		                                             <div class="user justify-content-between d-flex p-3" style="background-color: whitesmoke;">
-		                                                <div class="thumb">
-		                                                   <img src="img/comment/comment_2.png" alt="">
-		                                                </div>
-		                                                <div class="desc">
-		                                                   <p class="comment">
-		                                                      Multiply sea night grass fourth day sea lesser rule open subdue female fill which
-		                                                      them
-		                                                      Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-		                                                   </p>
-		                                                   <div class="d-flex justify-content-between">
-		                                                      <div class="d-flex align-items-center">
-		                                                         <h5>
-		                                                            <a href="#">강성범</a>
-		                                                         </h5>
-		                                                         <p class="date">December 4, 2017 at 3:12 pm </p>
-		                                                      </div>
-		                                                   </div>
-		                                                </div>
-		                                             </div>
-		                                          </div>
-		                                       </div>
-		                                       <div class="d-flex align-items-center">
-		
-		                                       </div>
-		                                    </div>
-		                                 </div>
-		                              </div>
-		                           </div>
-		                        </div>
+			                      </c:if>
+			                      </c:forEach>
 		                  	</div>	
 						</div>
 						
