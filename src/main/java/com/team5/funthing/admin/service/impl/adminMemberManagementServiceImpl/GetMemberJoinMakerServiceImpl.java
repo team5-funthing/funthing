@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.team5.funthing.admin.model.dao.AdminMemberManagementDAO;
 import com.team5.funthing.admin.service.adminMemberManagementService.GetMemberJoinMakerService;
 import com.team5.funthing.admin.service.adminMemberManagementService.GetMemberListService;
-import com.team5.funthing.admin.service.adminMemberManagementService.GetMemberService;
 import com.team5.funthing.user.model.vo.MemberVO;
 
 @Service
