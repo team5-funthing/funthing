@@ -1,103 +1,130 @@
 package com.team5.funthing.user.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.model.vo.ProjectBoardVO;
-import com.team5.funthing.user.model.vo.ProjectVO;
-import com.team5.funthing.user.service.memberService.GetMemberService;
 import com.team5.funthing.user.service.projectBoardService.DeleteProjectBoardService;
-import com.team5.funthing.user.service.projectBoardService.EntireDeleateProjectBoardService;
+import com.team5.funthing.user.service.projectBoardService.GetChoiceProjectBoardService;
+import com.team5.funthing.user.service.projectBoardService.GetEntireProjectBoardListService;
+import com.team5.funthing.user.service.projectBoardService.InsertProjectBoardReplyService;
 import com.team5.funthing.user.service.projectBoardService.InsertProjectBoardService;
-import com.team5.funthing.user.service.projectBoardService.SelectEntireProjectBoardListService;
 import com.team5.funthing.user.service.projectBoardService.UpdateProjectBoardService;
-import com.team5.funthing.user.service.projectService.GetProjectService;
 
 @Controller
-@SessionAttributes("member")
 public class ProjectBoardController {
 	
 	@Autowired
 	private DeleteProjectBoardService deleteProjectBoardService;
 	@Autowired
-	private EntireDeleateProjectBoardService entireDeleteProjectBoardService;
-	@Autowired
 	private InsertProjectBoardService insertProjectBoardService;
 	@Autowired
-	private SelectEntireProjectBoardListService selectEntireProjectBoardListService;
+	private GetEntireProjectBoardListService getEntireProjectBoardListService;
 	@Autowired
 	private UpdateProjectBoardService updateProjectBoardService;
-	
 	@Autowired
-	private GetProjectService getProjectService; //í”„ë¡œì íŠ¸ ê°€ì ¸ì˜¤ê¸° 
-	
+	private GetChoiceProjectBoardService getChoiceProjectBoardService;
 	@Autowired
-	private GetMemberService getMemberService; //í”„ë¡œì íŠ¸ ê°€ì ¸ì˜¤ê¸° 
-	
-	
-	
-	@RequestMapping(value = "insertprojectBoard.udo", method=RequestMethod.GET )
-	public ModelAndView insertProjectBoard(ProjectBoardVO vo, HttpSession session) { //ê¸€ë“±ë¡í•˜ê¸°
-		System.out.println("ì—¬ê¸°ê¹Œì§€ ì•ˆì™€?");
-		vo.setProjectno(2020);
-		insertProjectBoardService.insertProjectBoard(vo);
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("List",selectEntireProjectBoardListService.selectEntireProjectBoardList(vo)); //ì „ì²´ëª©ë¡ë¦¬ìŠ¤íŠ¸ ê°€ì ¸ì˜¤ê¸° 
-		System.out.println(selectEntireProjectBoardListService.selectEntireProjectBoardList(vo).get(0).getMember().getName());
-		mav.setViewName("p-test-board");
-		return mav; //ì–´ëŠí™”ë©´ìœ¼ë¡œ ê°ˆê±´ì§€ 
-	}
-	
-//	@RequestMapping("selectProjectBoardList.udo")
-//	public String selectProjectBoardList(ProjectBoardVO vo, Model model) { 
-//		model.addAttribute("List",selectEntireProjectBoardListService.selectEntireProjectBoardList(vo));
-//		return "p-test-board";
-//	}
-	
-	@RequestMapping("updateProjectBoard.udo")
-	public String updateProjectBoard(ProjectBoardVO vo) { //ê¸€ìˆ˜ì •í•˜ê¸° 
-		updateProjectBoardService.updateProjectBoard(vo);
-		return ""; //ì–´ëŠí™”ë©´ìœ¼ë¡œ ê°ˆê±´ì§€ 
-	}
-	
-	@RequestMapping("deleteProjectBoard.udo")
-	public String deleteProjectBoard(ProjectBoardVO vo) { //ê¸€ ê°œë³„ì§€ìš°ê¸° 
-		deleteProjectBoardService.deleteProjectBoard(vo);
-		return ""; //ì–´ëŠí™”ë©´ìœ¼ë¡œ ê°ˆê±´ì§€ 
-	}
-	
-	@RequestMapping("deleteAllProjectBoard.udo")
-	public String deleteAllProjectBoard(ProjectBoardVO vo) { //ê¸€ ì „ì²´ì§€ìš°ê¸° 
-		entireDeleteProjectBoardService.entireDeleateProjectBoard(vo);
-		return ""; //ì–´ëŠí™”ë©´ìœ¼ë¡œ ê°ˆê±´ì§€ 
-	}
-	
-	@RequestMapping("replyBoard.udo")
-	public String insertReplyProjectBoard(ProjectVO projectVO, MemberVO memberVO, ProjectBoardVO vo, HttpSession session) { //ë‹µê¸€ì‘ì„±í•˜ê¸° (Makerë§Œ ìˆ˜í–‰ê°€ëŠ¥) 
-		
-		String makerEmail = projectVO.getEmail();
+	private InsertProjectBoardReplyService insertProjectBoardReplyService;
 
-		session.setAttribute("memberSessionEmail", getMemberService.getMember(memberVO).getEmail());
-		
-		if(makerEmail.equals("memberSessionEmail")) { //ë©”ì´ì»¤ì´ë©”ì¼ê³¼ í”„ë¡œì íŠ¸ ë³´ë“œì˜ ì´ë©”ì¼ì´ ê°™ìœ¼ë©´ 
-			entireDeleteProjectBoardService.entireDeleateProjectBoard(vo);
-			return ""; //ì–´ëŠí™”ë©´ìœ¼ë¡œ ê°ˆê±´ì§€ 
-			
-		}else {
-			
-			return ""; //ì–´ëŠí™”ë©´ìœ¼ë¡œ ê°ˆê±´ì§€ 
-			
-		}
-		
 	
+	
+	@RequestMapping(value = "insertProjectBoard.udo", method = RequestMethod.POST )
+	public String insertProjectBoard(ProjectBoardVO vo, Model model) { //»õ±Ûµî·ÏÇÏ±â
+		
+		System.out.println("±Ûµî·ÏÇÑ´Ù");
+		vo.setProjectNo(2020); //ÀÌºÎºĞ ³ªÁß¿¡ ¹Ù²ã¾ßµÊ Áö±İÀº ÀÓ½Ã·Î ÇÁ·ÎÁ§Æ® ³Ñ¹ö »ı¼º
+		
+		insertProjectBoardService.insertProjectBoard(vo);
+		
+		List<ProjectBoardVO> getProjectBoardList = getEntireProjectBoardListService.getEntireProjectBoardList(vo);
+		model.addAttribute("list", getProjectBoardList); //ÀüÃ¼¸ñ·Ï¸®½ºÆ® °¡Á®¿À±â
+		
+		return "p-test-board"; //ÀüÃ¼±Û º¸¿©ÁÖ´Â °÷ 
+			
+		
 	}
+	
+	@RequestMapping(value="insertNewBoard.udo", method = RequestMethod.POST)
+	public String newProjectBoard() { //»õ±ÛÀÛ¼ºÈ­¸éÀ¸·Î °¡±â
+		
+		return "p-test-board-write"; //±Û ÀÛ¼ºÇÏ´Â°÷
+			
+	}
+	
+	
+	@RequestMapping(value="replyBoard.udo", method = RequestMethod.POST)
+	public String replyProjectBoard(ProjectBoardVO vo, Model model) { //´ä±ÛÀÛ¼ºÈ­¸éÀ¸·Î °¡±â (Maker¸¸ ¼öÇà°¡´É)
+		
+		vo.setProjectBoardNo(vo.getProjectBoardNo());
+		vo.setStep(vo.getStep());
+		model.addAttribute("vo", vo);	
+		
+		return "p-test-board-reply"; //´ä±Û ÀÛ¼ºÇÏ´Â °÷
+			
+	}
+	
+	@RequestMapping(value="insertReplyProjectBoard.udo", method = RequestMethod.POST)
+	public String insertReplyProjectBoard(ProjectBoardVO vo, Model model) { //´ä±ÛÀÛ¼ºÇÏ±â (Maker¸¸ ¼öÇà°¡´É)
+		
+		System.out.println("´ä±ÛÀÛ¼ºÇÏ±â");
+		
+		insertProjectBoardReplyService.insertProjectBoardReply(vo);
+		List<ProjectBoardVO> getProjectBoardList = getEntireProjectBoardListService.getEntireProjectBoardList(vo);
+		model.addAttribute("list", getProjectBoardList);//ÀüÃ¼¸ñ·Ï¸®½ºÆ® °¡Á®¿À±â
+		
+		return "p-test-board"; //ÀüÃ¼±Û º¸¿©ÁÖ´Â °÷
+			
+	}
+	
+	
+	@RequestMapping(value = "updateProjectBoard.udo", method = RequestMethod.POST )
+	public String updateProjectBoard(ProjectBoardVO vo, Model model, HttpSession session) { //±Û¼öÁ¤ÇÏ±â
+	
+		System.out.println("±Û¼öÁ¤ÇÏ±â");
+		
+		updateProjectBoardService.updateProjectBoard(vo);	
+		model.addAttribute("list",getEntireProjectBoardListService.getEntireProjectBoardList(vo)); //ÀüÃ¼¸ñ·Ï¸®½ºÆ® °¡Á®¿À±â 
+
+
+		return "p-test-board"; //ÀüÃ¼±Û º¸¿©ÁÖ´Â °÷
+	 
+	}
+	
+	@RequestMapping(value = "getProjectBoard.udo", method = RequestMethod.POST)
+	public String updateProjectBoard(ProjectBoardVO vo, Model model) { //¼±ÅÃÇÑ ±Û °¡Á®¿À±â
+
+		
+		System.out.println("±Û¼öÁ¤ÇÒ ±Û ³Ñ±â±â");
+			
+		String getProjectboardcontents = getChoiceProjectBoardService.getChoiceProjectBoard(vo).getProjectBoardContents(); //ÄÁÅÙÃ÷ ±Û °¡Á®¿À±â 
+		vo.setProjectBoardContents(getProjectboardcontents);
+		model.addAttribute("vo", vo);	
+
+		return "p-test-board-write"; //±Û ¼öÁ¤ ÇÏ´Â °÷
+	}
+	
+	@RequestMapping(value="deleteProjectBoard.udo" , method = RequestMethod.POST)
+	public String deleteProjectBoard(ProjectBoardVO vo, Model model) { //±Û »èÁ¦ÇÏ±â
+		
+		System.out.println("±Û »èÁ¦ÇÑ´Ù");
+		
+		deleteProjectBoardService.deleteProjectBoard(vo);
+		model.addAttribute("list",getEntireProjectBoardListService.getEntireProjectBoardList(vo)); //ÀüÃ¼¸ñ·Ï¸®½ºÆ® °¡Á®¿À±â 
+
+		return "p-test-board"; //ÀüÃ¼±Û º¸¿©ÁÖ´Â °÷
+	}
+	
+	
+	
+	
 	
 	
 	

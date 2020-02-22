@@ -7,6 +7,5 @@ public interface InsertProjectBoardService {
 	
 	public void insertProjectBoard(ProjectBoardVO vo);
 	
-	public void insertMakerProjectBoard(ProjectBoardVO vo);
 
 }

@@ -5,25 +5,25 @@
 <mapper namespace="AdminCSBoardDAO">
 
 	<!-- 어드민이 문의사항 게시판 전체글 목록을 보는 메소드 -->
-	<select id="selectEntireCSBoardList" resultType="csboard" parameterType="csboard">
+	<select id="getCSBoardList" resultType="csboard" parameterType="csboard">
 		SELECT * FROM csboard ORDER BY CSID desc
 	</select>
 	
 	<!-- 어드민이 문의사항 글 한개의 상세보기 메소드 -->
-	<select id="selectCSBoard" resultType="csboard" parameterType="csboard">
-		SELECT * FROM csboard WHERE  = #{CSID}
+	<select id="getCSBoard" resultType="csboard" parameterType="csboard">
+		SELECT * FROM csboard WHERE CSID = #{CSID}
 	</select>
 	
 	<!-- 답변하면 답변처리 완료로 바꿔주기위한 메소드 -->
 	<update id="updateReplyCheckCSBoard" parameterType="csboard">
 		UPDATE csboard
-		SET REPLYPROGRESS = 'Y' WHERE CSID = #{CSID}
+		SET replyProgress = 'Y' WHERE CSID = #{CSID}
 	</update>
 	
 	<!-- 어드민 답변글 저장 -->
 	<insert id="insertAdminCSBoard"  parameterType="adminCSBoard">
-		INSERT INTO adminCSBoard(CSID,adminId,adminCSTitle,adminCSContent,adminCSRegdate) 
-		VALUES(adminCSBoard_seq.nextval, #{adminId}, #{adminCSTitle}, #{adminContent}, #{adminCSRegdate})
+		INSERT INTO adminCSBoard(CSID,adminID,adminCSTitle,adminCSContent) 
+		VALUES(adminCSBoard_seq.nextval, #{adminID}, #{adminCSTitle}, #{adminCSContent})
 	</insert>
 	
 	

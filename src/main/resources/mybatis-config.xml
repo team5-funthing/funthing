@@ -13,16 +13,28 @@
 		<typeAlias type="com.team5.funthing.user.model.vo.ProjectVO" alias="project"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.BoardVO" alias="board"/>
 
+        <typeAlias type="com.team5.funthing.user.model.vo.MemberActivityVO" alias="memberActivity"/>   
+
 		<typeAlias type="com.team5.funthing.user.model.vo.ProjectBoardVO" alias="projectboard"/>
+
+		<typeAlias type="com.team5.funthing.user.model.vo.ProjectAccountInformationVO" alias="projectAccountInformation"/>
+		<typeAlias type="com.team5.funthing.user.model.vo.RewardVO" alias="reward"/>
+		<typeAlias type="com.team5.funthing.user.model.vo.CreatorVO" alias="Creator"/>
+
 
 		<typeAlias type="com.team5.funthing.user.model.vo.CSBoardVO" alias="csboard"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.DeliveryAddressVO" alias="deliveryAddress"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.ReportVO" alias="report"/>
+
 		<!-- user : admin -->
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminCSBoardVO" alias="adminCSBoard"/>
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminNoticeBoardVO" alias="adminNoticeBoard"/>
 
+		<typeAlias type="com.team5.funthing.admin.model.vo.AdminMemberVO" alias="adminMember"/>
+    
 	</typeAliases>
+  
+  
 	<mappers>
 	
 		<mapper resource="mappers/projectKeyword-mapper.xml"/>
@@ -32,14 +44,27 @@
 		<mapper resource="mappers/project-mapper.xml" />
 		<mapper resource="mappers/board-mapper.xml" />
 
+		<mapper resource="mappers/memberActivity-mapper.xml"/>
+
+
 		<mapper resource="mappers/projectboard-mapper.xml" />
+
+		<mapper resource="mappers/projectAccountInformation-mapper.xml"/>
+		<mapper resource="mappers/reward-mapper.xml"/>
+		<mapper resource="mappers/creator-mapper.xml"/>
+		
 
 		<mapper resource="mappers/csboard-mapper.xml" />
 		<mapper resource="mappers/deliveryAddress-mapper.xml"/>
 		<mapper resource="mappers/report-mapper.xml" />
+
 		<!-- user : admin -->
 		<mapper resource="mappers/adminCSBoard-mapper.xml" />
 		<mapper resource="mappers/adminNoticeBoard-mapper.xml"/>
-
+		<mapper resource="mappers/adminLogin-mapper.xml"/>
+ 
+ 		<mapper resource="mappers/adminReport-mapper.xml"/>
+ 		<mapper resource="mappers/adminMemberManagement-mapper.xml"/>
+ 
 	</mappers>
 </configuration>

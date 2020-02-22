@@ -11,7 +11,18 @@ public class MemberVO {
 	private String myImage;
 	private String report;
 	
+	private UserCreatorVO userCreator;
 	
+	//Å×½ºÆ®¿ë 
+	private String position;
+
+	public String getPosition() {
+		return position;
+	}
+	public void setPosition(String position) {
+		this.position = position;
+	}
+  
 	private String certificationCode;
 	public String getCertificationCode() {
 		return certificationCode;

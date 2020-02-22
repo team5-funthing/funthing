@@ -19,10 +19,6 @@ public class InsertProjectBoardServiceImpl implements InsertProjectBoardService 
 
 	}
 
-	@Override
-	public void insertMakerProjectBoard(ProjectBoardVO vo) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 }

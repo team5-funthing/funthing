@@ -14,10 +14,15 @@ public class AdminReportDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
+
 	
-	public List<ReportVO> selectEntireReportList(ReportVO vo){
-		
-		return sqlSessionTemplate.selectList("AdminReportDAO.selectEntireReportList", vo);
+	
+	public List<ReportVO> getReportList(ReportVO vo){
+		return sqlSessionTemplate.selectList("AdminReportDAO.getReportList", vo);
+	}
+	
+	public ReportVO getReprot(ReportVO vo) {
+		return sqlSessionTemplate.selectOne("AdminReportDAO.getReport",vo);
 	}
 	
 	
