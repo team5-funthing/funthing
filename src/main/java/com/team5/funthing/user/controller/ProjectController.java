@@ -40,7 +40,7 @@ import com.team5.funthing.user.service.projectService.UpdateProjectService;
 @SessionAttributes("project")
 public class ProjectController {
 
-// ===================== ì£¼ìš” í•„ìˆ˜ ì„œë¹„ìŠ¤ ì£¼ì… ==============
+// ===================== ÁÖ¿ä ÇÊ¼ö ¼­ºñ½º ÁÖÀÔ ==============
 	
 	@Autowired
 	private CreateProjectService createProjectService;
@@ -54,7 +54,7 @@ public class ProjectController {
 	private GetProjectService getProjectService;
 
 	
-// ===================== ë¶€ ì„œë¹„ìŠ¤ ì£¼ì… ================	
+// ===================== ºÎ ¼­ºñ½º ÁÖÀÔ ================	
 
 	// Keyword Service
 	@Autowired
@@ -71,7 +71,7 @@ public class ProjectController {
 	@Autowired
 	private DeleteProjectKeywordService deleteProjectKeywordService;
 	
-// ===================== VO ì£¼ì… =====================
+// ===================== VO ÁÖÀÔ =====================
 	
 	@Autowired
 	private ProjectKeywordVO projectKeywordVO;
@@ -81,7 +81,7 @@ public class ProjectController {
 	
 	
 	
-// ===================== ìœ í‹¸ ì£¼ì… =====================
+// ===================== À¯Æ¿ ÁÖÀÔ =====================
 
 	@Autowired
 	private UploadUtil projectMainImageUploadUtils;
@@ -91,12 +91,12 @@ public class ProjectController {
 	
 	
 	
-// ===================== ë©”ì„œë“œ =======================	
+// ===================== ¸Ş¼­µå =======================	
 	
 	@RequestMapping(value="/showStartProjectPage.udo", method = RequestMethod.GET)
 	public String showStartProjectPage(HttpSession session, Model model) {
 
-		// í…ŒìŠ¤íŠ¸ ìš© ì½”ë“œ
+		// Å×½ºÆ® ¿ë ÄÚµå
 		MemberVO test = new MemberVO();
 		test.setEmail("test@naver.com");
 		session.setAttribute("email", test.getEmail());
@@ -105,13 +105,13 @@ public class ProjectController {
 
 
 		if(loginId == null) {
-			model.addAttribute("msg", "ë¡œê·¸ì¸ í›„ ì´ìš© ê°€ëŠ¥í•©ë‹ˆë‹¤.");
+			model.addAttribute("msg", "·Î±×ÀÎ ÈÄ ÀÌ¿ë °¡´ÉÇÕ´Ï´Ù.");
 			return "p-index";
 		}
 
 		model.addAttribute("member", test); 
-		return "p-start-project"; // ì‹œì‘í•˜ê¸° í˜ì´ì§€ë¡œ ì´ë™í•˜ì
-	} // ë¡œê·¸ì¸ ì‹œì—ë§Œ í”„ë¡œì íŠ¸ ë§Œë“¤ê¸° ì ‘ê·¼ ê°€ëŠ¥í•˜ë„ë¡ í•˜ê¸°ìœ„í•´ ì„¸ì…˜ì— ì €ì¥ëœ ê°’ í™•ì¸ í›„ í˜ì´ì§€ ì´ë™.
+		return "p-start-project"; // ½ÃÀÛÇÏ±â ÆäÀÌÁö·Î ÀÌµ¿ÇÏÀÚ
+	} // ·Î±×ÀÎ ½Ã¿¡¸¸ ÇÁ·ÎÁ§Æ® ¸¸µé±â Á¢±Ù °¡´ÉÇÏµµ·Ï ÇÏ±âÀ§ÇØ ¼¼¼Ç¿¡ ÀúÀåµÈ °ª È®ÀÎ ÈÄ ÆäÀÌÁö ÀÌµ¿.
 
 	
 	
@@ -121,33 +121,33 @@ public class ProjectController {
 		session.removeAttribute("insertedProject");
 		model.addAttribute("basicProjectSetting", vo);
 
-		return "f-create-project-basic"; // í”„ë¡œì íŠ¸ ì‘ì„± í¼
-	} // í”„ë¡œì íŠ¸ ë§Œë“¤ê¸° ì‹œì‘ í˜ì´ì§€ì—ì„œ ìˆ˜í–‰
+		return "f-create-project-basic"; // ÇÁ·ÎÁ§Æ® ÀÛ¼º Æû
+	} // ÇÁ·ÎÁ§Æ® ¸¸µé±â ½ÃÀÛ ÆäÀÌÁö¿¡¼­ ¼öÇà
   
-	//ë¦¬ì›Œë“œ ë“±ë¡ì‹œì— ëª©ë¡ì„ ì¶”ê°€í•˜ëŠ” ë©”ì„œë“œ ì…ë ¥()
+	//¸®¿öµå µî·Ï½Ã¿¡ ¸ñ·ÏÀ» Ãß°¡ÇÏ´Â ¸Ş¼­µå ÀÔ·Â()
 	@RequestMapping(value = "/insertProject.udo", method = RequestMethod.POST)
 	public String insertProject(HttpSession session, ProjectVO vo, Model model) {
 
-		// í”„ë¡œì íŠ¸ ì œì‘ ì²« ì‹œì‘ì‹œì—ë§Œ ì‹œì‘
+		// ÇÁ·ÎÁ§Æ® Á¦ÀÛ Ã¹ ½ÃÀÛ½Ã¿¡¸¸ ½ÃÀÛ
 		ProjectVO checkVO = (ProjectVO)session.getAttribute("insertedProject");
 
 
-		// ìƒˆë¡œê³ ì¹¨ì„ í•  ê²½ìš°ì— ë°˜ë³µì ìœ¼ë¡œ requestMapping ì‘ì—…ì´ ìˆ˜í–‰ë˜ëŠ” ë¶€ë¶„ì„ ë°©ì§€í•˜ê¸° ìœ„í•œ ì½”ë“œ
+		// »õ·Î°íÄ§À» ÇÒ °æ¿ì¿¡ ¹İº¹ÀûÀ¸·Î requestMapping ÀÛ¾÷ÀÌ ¼öÇàµÇ´Â ºÎºĞÀ» ¹æÁöÇÏ±â À§ÇÑ ÄÚµå
 		if(checkVO == null) {
 			vo = insertProjectService.insertProject(vo);
 			session.setAttribute("insertedProject", vo);
 		}
 		else {
-			System.out.println("ìƒˆë¡œê³ ì¹¨ í™•ì¸ : " + checkVO.getProjectNo());
+			System.out.println("»õ·Î°íÄ§ È®ÀÎ : " + checkVO.getProjectNo());
 			vo = checkVO;
 		}
 
-		System.out.println("insertProject ë˜ëŠ” ìƒˆë¡œê³ ì¹¨ ì‹¤í–‰ í›„ =======> " + vo.toString());
+		System.out.println("insertProject ¶Ç´Â »õ·Î°íÄ§ ½ÇÇà ÈÄ =======> " + vo.toString());
 		model.addAttribute("writingProject", vo);
 		model.addAttribute("projectNo", vo.getProjectNo());
 
 		return "f-create-project";
-	} // í”„ë¡œì íŠ¸ ì‘ì„± ì‹œì‘í• ë•Œ ë©”ì„œë“œ 
+	} // ÇÁ·ÎÁ§Æ® ÀÛ¼º ½ÃÀÛÇÒ¶§ ¸Ş¼­µå 
 
 
 	
@@ -157,12 +157,12 @@ public class ProjectController {
 											@RequestParam(name = "keywords", required = false)List<String> toAddKeywords, 
 //											RedirectAttributes redirectAttributes,
 											ProjectVO pvo,
-											Model model) throws Exception { // í”„ë¡œì íŠ¸ ì„ì‹œì €ì¥ ì‹œ ì‹¤í–‰ë˜ëŠ” ë©”ì„œë“œ
+											Model model) throws Exception { // ÇÁ·ÎÁ§Æ® ÀÓ½ÃÀúÀå ½Ã ½ÇÇàµÇ´Â ¸Ş¼­µå
 		
-		// ì—…ë¡œë“œ ì‹œí‚¨ íŒŒì¼ì´ ì´ë¯¸ ì¡´ì¬í•˜ëŠ” ê²½ìš° íŒŒì¼ ì„ íƒì„ ë‹¤ì‹œ ì•ˆí•œ ê²½ìš°ì— ë‚˜ì˜¬ ìˆ˜ ìˆëŠ” ìƒí™© ì²˜ë¦¬
-		// ì—…ë¡œë“œ ì´ë¯¸ì§€ë¥¼ ë³€ê²½í•  ê²½ìš°
+		// ¾÷·Îµå ½ÃÅ² ÆÄÀÏÀÌ ÀÌ¹Ì Á¸ÀçÇÏ´Â °æ¿ì ÆÄÀÏ ¼±ÅÃÀ» ´Ù½Ã ¾ÈÇÑ °æ¿ì¿¡ ³ª¿Ã ¼ö ÀÖ´Â »óÈ² Ã³¸®
+		// ¾÷·Îµå ÀÌ¹ÌÁö¸¦ º¯°æÇÒ °æ¿ì
 		if(!uploadFile.isEmpty()) {  
-			//ì œê±°ë  íŒŒì¼ê²½ë¡œë¥¼ voê°ì²´ì—ì„œ ê°€ì ¸ì˜¤ê¸°
+			//Á¦°ÅµÉ ÆÄÀÏ°æ·Î¸¦ vo°´Ã¼¿¡¼­ °¡Á®¿À±â
 			String toRemoveFilePath = pvo.getProjectMainImage();
 			String voName = pvo.getClass().getSimpleName();
 			String toSettingPath = projectMainImageUploadUtils.upload(uploadFile, voName, toRemoveFilePath);
@@ -174,11 +174,11 @@ public class ProjectController {
 		
 		if(toAddKeywords != null) {
 			
-			//DBì— ìƒˆë¡œìš´ í‚¤ì›Œë“œ ì¶”ê°€ ë©”ì„œë“œ
+			//DB¿¡ »õ·Î¿î Å°¿öµå Ãß°¡ ¸Ş¼­µå
 			insertKeyword(toAddKeywords, keywordVO);
 			int deleteCount = deleteProjectKeyword(pvo);
-			System.out.println("[" + pvo.getProjectNo() + "]ì˜ í‚¤ì›Œë“œ ì‚­ì œ ìˆ˜ : " + deleteCount + "ê°œ");
-			//DBì— í”„ë¡œì íŠ¸ì™€ ì—°ê²°ë˜ëŠ” í‚¤ì›Œë“œë¥¼ ì¶”ê°€ í•˜ëŠ” ë©”ì„œë“œ
+			System.out.println("[" + pvo.getProjectNo() + "]ÀÇ Å°¿öµå »èÁ¦ ¼ö : " + deleteCount + "°³");
+			//DB¿¡ ÇÁ·ÎÁ§Æ®¿Í ¿¬°áµÇ´Â Å°¿öµå¸¦ Ãß°¡ ÇÏ´Â ¸Ş¼­µå
 			insertProjectKeyword(toAddKeywords, pvo.getProjectNo());
 		}
 		
@@ -189,20 +189,20 @@ public class ProjectController {
 		List<ProjectKeywordVO> projectKeywordList = getProjectKeywordList(pvo);
 		
 //		for(ProjectKeywordVO projectKeyword : projectKeywordList) {
-//			System.out.println("getProjectKeywordList ì‹¤í–‰ í›„ ê²°ê³¼ê°’ : " + projectKeyword.toString());
+//			System.out.println("getProjectKeywordList ½ÇÇà ÈÄ °á°ú°ª : " + projectKeyword.toString());
 //		}
 		
 		
 		model.addAttribute("writingProject", pvo);
 		model.addAttribute("addedKeywordList", projectKeywordList);
-		model.addAttribute("msg", "ì €ì¥ ë˜ì—ˆìŠµë‹ˆë‹¤");
+		model.addAttribute("msg", "ÀúÀå µÇ¾ú½À´Ï´Ù");
 		
 		return "f-create-project";
 	}
 	
 	
 	@RequestMapping(value = "/showPreviewProject.udo", method = RequestMethod.POST)
-	public String showPreviewProject(ProjectVO pvo, Model model) throws Exception { // í”„ë¡œì íŠ¸ ì„ì‹œì €ì¥ ì‹œ ì‹¤í–‰ë˜ëŠ” ë©”ì„œë“œ
+	public String showPreviewProject(ProjectVO pvo, Model model) throws Exception { // ÇÁ·ÎÁ§Æ® ÀÓ½ÃÀúÀå ½Ã ½ÇÇàµÇ´Â ¸Ş¼­µå
 		
 		projectKeywordVO.setProjectNo(pvo.getProjectNo());
 		List<ProjectKeywordVO> projectKeywordList = getProjectKeywordListService.getProjectKeywordList(projectKeywordVO);
@@ -220,7 +220,7 @@ public class ProjectController {
 	
 	
 	
-	//=================== ê¸°íƒ€ ë©”ì„œë“œ =================================
+	//=================== ±âÅ¸ ¸Ş¼­µå =================================
 
 	public char writingInputCheck(ProjectVO vo) {
 
@@ -232,8 +232,8 @@ public class ProjectController {
 
 		return 'n';
 	}
-	public boolean nullCheck(ProjectVO project) { //ì„ì‹œ ì €ì¥ëœ í”„ë¡œì íŠ¸ ë¹ˆì¹¸ ì²´í¬
-		// ì¶”í›„ì— ì´ë¯¸ì§€, í™ë³´ ì˜ìƒ, ë™ì˜  ë“± ì²´í¬ ë³€ìˆ˜ì— ì¶”ê°€í•´ì•¼í•œë‹¤. 
+	public boolean nullCheck(ProjectVO project) { //ÀÓ½Ã ÀúÀåµÈ ÇÁ·ÎÁ§Æ® ºóÄ­ Ã¼Å©
+		// ÃßÈÄ¿¡ ÀÌ¹ÌÁö, È«º¸ ¿µ»ó, µ¿ÀÇ  µî Ã¼Å© º¯¼ö¿¡ Ãß°¡ÇØ¾ßÇÑ´Ù. 
 		if(
 				project.getGoalMoney() == 0 ||
 				project.getProjectTitle() == null || project.getProjectTitle() == "" || 
@@ -264,7 +264,7 @@ public class ProjectController {
 					}
 				}
 		
-				//ì…ë ¥í•œ í‚¤ì›Œë“œ ì¤‘ì— DBì— ì¡´ì¬í•˜ëŠ” í‚¤ì›Œë“œê°€ ì•„ë‹ˆë¼ë©´ í‚¤ì›Œë“œ ì¶”ê°€
+				//ÀÔ·ÂÇÑ Å°¿öµå Áß¿¡ DB¿¡ Á¸ÀçÇÏ´Â Å°¿öµå°¡ ¾Æ´Ï¶ó¸é Å°¿öµå Ãß°¡
 				if(!isExist) {
 					kvo.setKeyword(toAddKeyword);
 					insertKeywordService.insertKeyword(kvo);
@@ -290,7 +290,7 @@ public class ProjectController {
 		
 		for(int i = 0; i < projectKeywordList.size(); i++) {
 			String keyword = projectKeywordList.get(i).getKeyword().replace("#", "").trim();
-			System.out.println(i + "ë²ˆì§¸ keyword : " + keyword);
+			System.out.println(i + "¹øÂ° keyword : " + keyword);
 			projectKeywordList.get(i).setKeyword(keyword);
 			
 		}
