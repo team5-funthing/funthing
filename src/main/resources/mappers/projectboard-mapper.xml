@@ -36,20 +36,19 @@
 
 	<resultMap type="projectBoard" id="projectBoard">
 		<result column="email" property="email" />
+		<result column="projectNo" property="projectNo"/>
 		<result column="projectBoardContents" property="projectBoardContents" />
 		<result column="projectBoardDate" property="projectBoardDate" />
 		<result column="projectBoardNo" property="projectBoardNo" />
 		<collection property="Member" resultMap="Member"></collection>
 	</resultMap>
 	
-	<select id="getProjectBoard" parameterType="projectBoard"  resultMap="projectBoard">
+ 	<select id="getEntireProjectBoardList" parameterType="projectBoard"  resultMap="projectBoard">
+		select member.name, projectboard.* from(select * from projectboard where projectNo = ${projectNo} order by ref desc, step asc ) projectboard join member on member.email = projectboard.email
+	</select>
+		<select id="getProjectBoard" parameterType="projectBoard"  resultMap="projectBoard">
 		SELECT * FROM projectBoard where projectNo = ${projectNo}
 	</select>
- 	
- 	<select id="getEntireProjectBoardList" parameterType="projectBoard"  resultMap="projectBoard">
-		select member.name,projectboard.* from(select * from projectboard where projectNo = ${projectNo} order by ref desc, step asc ) projectboard join member on member.email = projectboard.email
-	</select>
-	
 	
 	<!-- 답글등록 -->
 	<insert id="insertProjectBoardReply"  parameterType="projectBoard">

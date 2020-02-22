@@ -14,7 +14,6 @@ import com.team5.funthing.user.model.vo.ProjectBoardVO;
 import com.team5.funthing.user.service.projectBoardService.DeleteProjectBoardService;
 import com.team5.funthing.user.service.projectBoardService.GetChoiceProjectBoardService;
 import com.team5.funthing.user.service.projectBoardService.GetEntireProjectBoardListService;
-import com.team5.funthing.user.service.projectBoardService.GetProjectBoardService;
 import com.team5.funthing.user.service.projectBoardService.InsertProjectBoardReplyService;
 import com.team5.funthing.user.service.projectBoardService.InsertProjectBoardService;
 import com.team5.funthing.user.service.projectBoardService.UpdateProjectBoardService;
@@ -34,8 +33,6 @@ public class ProjectBoardController {
 	private GetChoiceProjectBoardService getChoiceProjectBoardService;
 	@Autowired
 	private InsertProjectBoardReplyService insertProjectBoardReplyService;
-	@Autowired
-	private GetProjectBoardService getProjectBoardService;
 
 	
 	@RequestMapping(value="projectDetails.udo", method = RequestMethod.GET)
@@ -44,13 +41,12 @@ public class ProjectBoardController {
 		vo.setProjectNo(2020); //이부분 나중에 바꿔야됨 지금은 임시로 프로젝트 넘버 생성
 		
 		System.out.println("프로젝트 게시판 글 가져오기 ");
-		
 		List<ProjectBoardVO> getProjectBoardList = getEntireProjectBoardListService.getEntireProjectBoardList(vo);
 		model.addAttribute("getProjectBoard", getProjectBoardList); //전체목록리스트 이름이랑 같이 조인해서 가져오기
 		
 		for(ProjectBoardVO list : getProjectBoardList) {
-	          System.out.println("list 확인하는곳 "+ list.toString());
-	       }
+        	System.out.println("list 확인하는곳 "+ list.toString());
+	    }
 		
 		return "p-project-details"; //글 작성하는곳
 	}
