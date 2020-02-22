@@ -125,6 +125,11 @@ public class UploadUtilImpl implements UploadUtil {
 	public void remove(String filePath, String voName) {
 		
 		// dirIndex에 -1이 들어오면 업로드를 처음 요청하는 상황이므로  바로 return: 메서드 종료
+		
+		if(filePath == null){
+			return;
+		}
+		
 		int dirIndex = filePath.indexOf(voName);
 		if (dirIndex == -1 ) {
 			System.out.println("업로드 첫 요청");

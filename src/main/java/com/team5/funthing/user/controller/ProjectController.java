@@ -88,9 +88,6 @@ public class ProjectController {
 
 	
 	
-	
-	
-	
 // ===================== 메서드 =======================	
 	
 	@RequestMapping(value="/showStartProjectPage.udo", method = RequestMethod.GET)
@@ -170,8 +167,6 @@ public class ProjectController {
 			pvo.setProjectMainImage(toSettingPath);
 		}
 		
-		
-		
 		if(toAddKeywords != null) {
 			
 			//DB에 새로운 키워드 추가 메서드
@@ -187,12 +182,7 @@ public class ProjectController {
 
 		
 		List<ProjectKeywordVO> projectKeywordList = getProjectKeywordList(pvo);
-		
-//		for(ProjectKeywordVO projectKeyword : projectKeywordList) {
-//			System.out.println("getProjectKeywordList 실행 후 결과값 : " + projectKeyword.toString());
-//		}
-		
-		
+
 		model.addAttribute("writingProject", pvo);
 		model.addAttribute("addedKeywordList", projectKeywordList);
 		model.addAttribute("msg", "저장 되었습니다");
@@ -213,12 +203,6 @@ public class ProjectController {
 
 	}
 
-	
-	
-	
-	
-	
-	
 	
 	//=================== 기타 메서드 =================================
 

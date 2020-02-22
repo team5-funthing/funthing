@@ -8,9 +8,7 @@
 
 	<div class="input-group mb-3">
 		<div class="form-group">
-		
-		<!-- 	<label for="exampleFormControlFile1">소개 컨텐츠를 선택하세요.(영상)</label> 
-			<input type="file" name="projectVideo" class="form-control-file select-project-image" id="exampleFormControlFile1"> -->
+			<iframe width="640" height="360" src="https://www.youtube.com/embed/RgVs8mkgHSU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 		</div>
 	</div>
 	
