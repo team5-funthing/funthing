@@ -177,7 +177,6 @@ public class ProjectController {
 			//DB에 새로운 키워드 추가 메서드
 			insertKeyword(toAddKeywords, keywordVO);
 			int deleteCount = deleteProjectKeyword(pvo);
-			System.out.println("[" + pvo.getProjectNo() + "]의 키워드 삭제 수 : " + deleteCount + "개");
 			//DB에 프로젝트와 연결되는 키워드를 추가 하는 메서드
 			insertProjectKeyword(toAddKeywords, pvo.getProjectNo());
 		}
