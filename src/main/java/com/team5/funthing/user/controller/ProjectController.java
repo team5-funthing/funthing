@@ -1,5 +1,6 @@
 package com.team5.funthing.user.controller;
 
+import java.net.URL;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 
@@ -16,6 +17,7 @@ import com.team5.funthing.common.utils.uploadUtils.UploadUtil;
 import com.team5.funthing.user.model.vo.KeywordVO;
 import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.model.vo.ProjectKeywordVO;
+import com.team5.funthing.user.model.vo.ProjectStoryVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.service.keywordService.GetKeywordListService;
 import com.team5.funthing.user.service.keywordService.InsertKeywordService;
@@ -77,6 +79,8 @@ public class ProjectController {
 	private ProjectKeywordVO projectKeywordVO;
 	@Autowired
 	private KeywordVO keywordVO;
+	@Autowired
+	private ProjectStoryVO projectStory;
 	
 	
 	
@@ -150,9 +154,12 @@ public class ProjectController {
 	
 //	redirectAttributes.addAttribute("","")
 	@RequestMapping(value = "/saveInputWritingProject.udo", method = RequestMethod.POST)
-	public String saveInputWritingProject(	@RequestParam(name = "uploadImage", required = false)MultipartFile uploadFile, 
+	public String saveInputWritingProject(	@RequestParam(name = "uploadImage", required = false)MultipartFile uploadFile,
+											@RequestParam(name = "projectStoryImageUpload", required = false)MultipartFile projectStoryImageUpload,
 											@RequestParam(name = "keywords", required = false)List<String> toAddKeywords, 
+											@RequestParam(name = "projectVideo", required = false)String projectStoryVideoPath,
 //											RedirectAttributes redirectAttributes,
+											ProjectStoryVO psvo,
 											ProjectVO pvo,
 											Model model) throws Exception { // 프로젝트 임시저장 시 실행되는 메서드
 		
@@ -163,12 +170,10 @@ public class ProjectController {
 			String toRemoveFilePath = pvo.getProjectMainImage();
 			String voName = pvo.getClass().getSimpleName();
 			String toSettingPath = projectMainImageUploadUtils.upload(uploadFile, voName, toRemoveFilePath);
-
 			pvo.setProjectMainImage(toSettingPath);
 		}
 		
 		if(toAddKeywords != null) {
-			
 			//DB에 새로운 키워드 추가 메서드
 			insertKeyword(toAddKeywords, keywordVO);
 			int deleteCount = deleteProjectKeyword(pvo);
@@ -187,8 +192,12 @@ public class ProjectController {
 		model.addAttribute("addedKeywordList", projectKeywordList);
 		model.addAttribute("msg", "저장 되었습니다");
 		
+		
 		return "f-create-project";
+		
 	}
+	
+	
 	
 	
 	@RequestMapping(value = "/showPreviewProject.udo", method = RequestMethod.POST)
