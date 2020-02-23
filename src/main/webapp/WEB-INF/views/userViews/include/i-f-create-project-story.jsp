@@ -7,10 +7,64 @@
 	<span>소개 컨텐츠 [영상]</span>
 
 	<div class="input-group mb-3">
-		<div class="form-group">
-			<iframe width="640" height="360" src="https://www.youtube.com/embed/RgVs8mkgHSU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		<c:if test="${projectStory eq null}">
+			<input type="url" name="projectStoryVideo">
+		</c:if>
+		<c:if test="${projectStory ne null}">
+			${projectStory.projectStoryVideo }
+		</c:if>
+		
+		<div class="m-4">
+			<div class="form-group">
+				<iframe width="640" height="360" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			</div>
 		</div>
 	</div>
+	
+	<c:choose>
+		<c:when test="${projectStory.projectStoryImagePath eq ''}">
+			<input type="file" name="uploadImage"
+				class="form-control-file select-project-image"
+				id="projectStoryImagePath">
+                     <hr>
+                     <div class="select_img"><img src="" /></div>
+		</c:when>
+		<c:when test="${projectStory.projectStoryImagePath ne ''}">
+			<h5>이미지 바꾸기</h5>
+			<input type="hidden" name="projectStoryImagePath" value="${projectStory.projectStoryImagePath }">
+			<input type="file" name="projectStoryImageUpload"
+				class="form-control-file select-project-image"
+				id="projectStoryImagePath">
+			<div class="select_img m-3"><img style="width: 500px; height: auto;" src="${projectStory.projectStoryImagePath }" /></div>					
+		</c:when>
+	</c:choose>
+	
+				
+	<script>
+       	$("#projectStoryImagePath").change(function(){
+       		if(this.files && this.files[0]){
+       			var reader = new FileReader;
+       			reader.onload = function(data){
+       				$(".select_img img").attr("src", data.target.result).width(500);
+       			}
+       			reader.readAsDataURL(this.files[0]);
+       		}
+       	})
+       	
+       	$("#projectStoryVideo").change(function(){
+       		if(this.files && this.files[0]){
+       			var reader = new FileReader;
+       			reader.onload = function(data){
+       				$(".select_img img").attr("src", data.target.result).width(500);
+       			}
+       			reader.readAsDataURL(this.files[0]);
+       		}
+       	})
+    </script>	
+	
+	
+	
+	
 	
 </div>
 <div class="p-2 bd-highlight">
