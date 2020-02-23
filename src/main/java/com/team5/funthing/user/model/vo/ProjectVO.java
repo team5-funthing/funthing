@@ -3,6 +3,8 @@ package com.team5.funthing.user.model.vo;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 /**
  * 
  * @author bummit
@@ -11,6 +13,7 @@ import java.util.List;
  * 
  */
 
+@Component
 public class ProjectVO {
 	
 //	프로젝트 기본설정 멤버
@@ -30,13 +33,20 @@ public class ProjectVO {
 //	프로젝트 소개 멤버
 	private String projectSummary="";
 	private String projectCaution="";
+//	private List<String> projectIntroduceImage;
+	private String projectIntroduceVideo="";
+	private String projectStory="";
 
-//	그 외 멤버
-	private String supporters; 
-	private int fundingMoney; 
+
+//  기타 멤버
 	private char status = 'w'; 
-	private char informationAgree = 'n'; 
 	private char writeStatus = 'n';
+	
+//  sql문에 적용 안된 멤버
+	private int fundingMoney; 
+	private String supporters; 
+	private char informationAgree = 'n'; 
+	
 	public Integer getProjectNo() {
 		return projectNo;
 	}
@@ -109,6 +119,24 @@ public class ProjectVO {
 	public void setProjectCaution(String projectCaution) {
 		this.projectCaution = projectCaution;
 	}
+//	public List<String> getProjectIntroduceImage() {
+//		return projectIntroduceImage;
+//	}
+//	public void setProjectIntroduceImage(List<String> projectIntroduceImage) {
+//		this.projectIntroduceImage = projectIntroduceImage;
+//	}
+	public String getProjectIntroduceVideo() {
+		return projectIntroduceVideo;
+	}
+	public void setProjectIntroduceVideo(String projectIntroduceVideo) {
+		this.projectIntroduceVideo = projectIntroduceVideo;
+	}
+	public String getProjectStory() {
+		return projectStory;
+	}
+	public void setProjectStory(String projectStory) {
+		this.projectStory = projectStory;
+	}
 	public String getSupporters() {
 		return supporters;
 	}
@@ -139,18 +167,18 @@ public class ProjectVO {
 	public void setWriteStatus(char writeStatus) {
 		this.writeStatus = writeStatus;
 	}
-	
 	@Override
 	public String toString() {
 		return "ProjectVO [projectNo=" + projectNo + ", creator=" + creator + ", email=" + email + ", goalMoney="
 				+ goalMoney + ", projectMainImage=" + projectMainImage + ", projectTitle=" + projectTitle
 				+ ", projectSubTitle=" + projectSubTitle + ", category=" + category + ", startDate=" + startDate
 				+ ", endDate=" + endDate + ", projectSummary=" + projectSummary + ", projectCaution=" + projectCaution
-				+ ", supporters=" + supporters + ", fundingMoney=" + fundingMoney + ", status=" + status
-				+ ", informationAgree=" + informationAgree + ", writeStatus=" + writeStatus + "]";
+				+ ", projectIntroduceVideo="
+				+ projectIntroduceVideo + ", projectStory=" + projectStory + ", supporters=" + supporters
+				+ ", fundingMoney=" + fundingMoney + ", status=" + status + ", informationAgree=" + informationAgree
+				+ ", writeStatus=" + writeStatus + "]";
 	}
 	
 	
 	
-		
 }

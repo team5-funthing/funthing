@@ -8,81 +8,130 @@
 
 	<!-- ProjectVideo Youtube 영상 올리기 -->
 	<div class="input-group mb-3">
-	
-		<c:if test="${projectStory eq null}">
-			<input type="text" id="urlVideo" name="projectStoryVideo" class="form-control" placeholder="소개 영상으로 올리려는 영상 URL 주소를 입력하세요." aria-label="소개 영상으로 올리려는 영상 URL 주소를 입력하세요." aria-describedby="urlBtn">
-			<div class="input-group-append urlBtn-registry">
-			  <button class="btn btn-outline-secondary" type="button" id="urlBtn">등록</button>
-			</div>
-			<div class="m-4">
-				<div id="toAppendIframeDiv" class="form-group">
-			</div>
-		</div>
-		</c:if>
 		
-		<c:if test="${projectStory ne null}">
-			<div class='input-group-append urlBtn-remove'>
-				<a class='btn fas fa-times fa-2x' type='button' id='urlBtn'></a>
-			</div>
-			<div class="m-4">
-				<div id="toAppendIframeDiv" class="form-group">
-					${projectStory.projectStoryVideo }
+		<c:choose>
+			<c:when test="${writingProject.projectIntroduceVideo eq null || writingProject.projectIntroduceVideo eq ''}">
+			
+				<input type="text" id="urlVideo" class="form-control" placeholder="소개 영상으로 올리려는 영상 URL 주소를 입력하세요." aria-label="소개 영상으로 올리려는 영상 URL 주소를 입력하세요." aria-describedby="urlBtn">
+				<div class="input-group-append urlBtn-registry">
+				  <button class="btn btn-outline-secondary" type="button" id="urlBtn">등록</button>
 				</div>
-			</div>
-		
-		</c:if>
+				<div class="m-4">
+					<div id="toAppendIframeDiv" class="form-group"></div>
+				</div>
+				<input type="hidden" id="projectIntroduceVideoInput" name="projectIntroduceVideo">
+			</c:when>
+			
+			<c:when test="${writingProject.projectIntroduceVideo ne null || writingProject.projectIntroduceVideo ne ''}">
+				
+				<input type="text" id="urlVideo" value="${writingProject.projectIntroduceVideo }" disabled  class="form-control" placeholder="소개 영상으로 올리려는 영상 URL 주소를 입력하세요." aria-label="소개 영상으로 올리려는 영상 URL 주소를 입력하세요." aria-describedby="urlBtn">
+				<div class="input-group-append urlBtn-registry">
+				  <button class="btn btn-outline-secondary" type="button" id="urlBtn" disabled>등록</button>
+				</div>
+				
+				
+				
+				<div class='input-group-append urlBtn-remove'>
+					<a class='btn fas fa-times fa-2x' type='button' id='urlBtn'></a>
+				</div>
+				<div class="m-4">
+					<div id="toAppendIframeDiv" class="form-group">
+						${writingProject.projectIntroduceVideo }
+					</div>
+					<input type="hidden" id="projectIntroduceVideoInput"   name="projectIntroduceVideo" value="${writingProject.projectIntroduceVideo }">
+				</div>
+			
+			</c:when>
+		</c:choose>
 	</div>
 	
 	<script>
-       	$("#urlBtn").on("click", function(){
+		$(document).on("click","#urlBtn",function(){	
        		console.log("실행")
        		var sourceCode = $('#urlVideo').val();
        		
-       		//var url = url.substring(url.lastIndexOf('/')+1);
-       		//console.log("수정 후 :" + url);
+       		function replaceAll(sourceCode, oldChar, newChar){
+       			return sourceCode.split(oldChar).join(newChar);
+       		}
+       	
+       		sourceCode = replaceAll(sourceCode, '\"', "\'");
+       		console.log(sourceCode);
+       		
        		if(sourceCode != ""){
        			$("#toAppendIframeDiv").append(sourceCode);
+       			$("#projectIntroduceVideoInput").attr("value", sourceCode);
+       			
        			var removeUrlBtn = "<div class='input-group-append urlBtn-remove'><a class='btn fas fa-times fa-2x' type='button' id='urlBtn'></a></div>";
+       			
        			$(".urlBtn-registry").after(removeUrlBtn);
        			$("#urlBtn").attr("disabled", true);
        			$("#urlVideo").attr("disabled", true);
+       			
+       			$("iframe").attr("width", "640");
+        		$("iframe").attr("heith", "360");
+       			
        		}
        	});
+       	
+		
+       	$(document).on("click",".urlBtn-remove",function(){
+       		$("#urlVideo").attr("value", "");
+       		$("#projectIntroduceVideoInput").removeAttr("value");
+       		$("#urlBtn").attr("disabled", false);
+   			$("#urlVideo").attr("disabled", false);
+   			$("#toAppendIframeDiv").empty();
+   			$("div").remove(".urlBtn-remove"); // X 버튼 지우기
+       	 });
+       	
+       	
+       	$(function(){
+       		$("iframe").load(function(){ //iframe 컨텐츠가 로드 된 후에 호출됩니다.
+       			$("iframe").attr("width", "640");
+        		$("iframe").attr("heith", "360");
+       		});
+       	});
+       	
     </script>
 	
 	
 	
 	
-	
+	<!-- projectIntroduceImage -->
 	<c:choose>
-		<c:when test="${projectStory.projectStoryImagePath eq ''}">
-			<input type="file" name="uploadImage"
+		<c:when test="${projectIntroduceImage.projectIntroduceImage eq ''}">
+			<input type="file" name="projectIntroduceImageUpload"
 				class="form-control-file select-project-image"
-				id="projectStoryImagePath">
-                     <hr>
-                     <div class="select_img"><img src="" /></div>
+				id="projectIntroduceImage">
+                    <hr>
+                    <div class="select_img"><img src="" /></div>
 		</c:when>
-		<c:when test="${projectStory.projectStoryImagePath ne ''}">
-			<input type="hidden" name="projectStoryImagePath" value="${projectStory.projectStoryImagePath }">
-			<input type="file" name="projectStoryImageUpload"
+		<c:when test="${projectIntroduceImage.projectIntroduceImage ne ''}">
+			<input type="hidden" name="projectIntroduceImageUpload" value="${projectIntroduceImage.projectIntroduceImage }">
+			
+			<input type="file" name="projectIntroduceImageUpload"
 				class="form-control-file select-project-image"
-				id="projectStoryImagePath">
-			<div class="select_img m-3"><img style="width: 500px; height: auto;" src="${projectStory.projectStoryImagePath }" /></div>					
+				id="projectIntroduceImage">
+			<div class="select_introduce_img m-3"><img style="width: 250px; height: auto;" src="${projectIntroduceImage.projectIntroduceImage }" /></div>					
 		</c:when>
 	</c:choose>
 	
 	
 	<script>
-       	$("#projectStoryImagePath").change(function(){
+       	$("#projectIntroduceImage").change(function(){
        		if(this.files && this.files[0]){
        			var reader = new FileReader;
        			reader.onload = function(data){
-       				$(".select_img img").attr("src", data.target.result).width(500);
+       				$(".select_introduce_img img").attr("src", data.target.result).width(500);
        			}
        			reader.readAsDataURL(this.files[0]);
        		}
        	})
     </script>	
+    
+    
+    
+    
+    
 	
 	
 </div>
@@ -124,12 +173,11 @@
 	<span>프로젝트 스토리*</span>
 	
 	<c:choose>
-		<c:when test="${projectStory.projectStory eq null }">
+		<c:when test="${writingProject.projectStory eq null }">
 			<textarea class="mt-1" name="projectStory" class="form-control" id="editor" rows="20">
-				자기만의 프로젝트 스토리를 만들어주세요!
 			</textarea>
 		</c:when>
-		<c:when test="${projectStory.projectStory ne null }">
+		<c:when test="${writingProject.projectStory ne null }">
 			<textarea class="mt-1" name="projectStory" class="form-control" id="editor" rows="20">${writingProject.projectStory}</textarea>
 		</c:when>
 	</c:choose>

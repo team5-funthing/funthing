@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProjectIntroduceImageDAO">
+
+
+	<insert id="insertProjectIntroduceImage" parameterType="projectIntroduceImage">
+		
+		INSERT INTO projectIntroduceImage(projectIntroduceImageNo, projectNo, projectIntroduceImage) 
+		VALUES(projectIntroduceImage_seq.nextval, #{projectNo}, #{projectIntroduceImage})
+		
+	</insert>
+	
+	<select id="getProjectIntroduceImageList" parameterType="projectIntroduceImage" resultType="projectIntroduceImage">
+		
+		SELECT * 
+		FROM projectIntroduceImage
+		WHERE projectNo = #{projectNo}
+		
+	</select>
+
+
+
+</mapper>

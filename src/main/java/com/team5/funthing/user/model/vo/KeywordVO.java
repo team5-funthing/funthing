@@ -1,7 +1,5 @@
 package com.team5.funthing.user.model.vo;
 
-import java.util.List;
-
 import org.springframework.stereotype.Component;
 
 

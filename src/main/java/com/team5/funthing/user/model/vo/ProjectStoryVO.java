@@ -9,8 +9,9 @@ public class ProjectStoryVO {
 	private int projectStoryImageNo = -1;
 	private int projectNo = -1;
 	private String projectStory;
-	private String projectStoryImagePath;
-	private String projectStoryVideoPath;
+	private String projectStoryImage;
+	private String projectStoryVideo;
+	
 	public int getProjectStoryImageNo() {
 		return projectStoryImageNo;
 	}
@@ -29,24 +30,26 @@ public class ProjectStoryVO {
 	public void setProjectStory(String projectStory) {
 		this.projectStory = projectStory;
 	}
-	public String getProjectStoryImagePath() {
-		return projectStoryImagePath;
+	public String getProjectStoryImage() {
+		return projectStoryImage;
 	}
-	public void setProjectStoryImagePath(String projectStoryImagePath) {
-		this.projectStoryImagePath = projectStoryImagePath;
+	public void setProjectStoryImage(String projectStoryImage) {
+		this.projectStoryImage = projectStoryImage;
 	}
-	public String getProjectStoryVideoPath() {
-		return projectStoryVideoPath;
+	public String getProjectStoryVideo() {
+		return projectStoryVideo;
 	}
-	public void setProjectStoryVideoPath(String projectStoryVideoPath) {
-		this.projectStoryVideoPath = projectStoryVideoPath;
+	public void setProjectStoryVideo(String projectStoryVideo) {
+		this.projectStoryVideo = projectStoryVideo;
 	}
 	@Override
 	public String toString() {
 		return "ProjectStoryVO [projectStoryImageNo=" + projectStoryImageNo + ", projectNo=" + projectNo
-				+ ", projectStory=" + projectStory + ", projectStoryImagePath=" + projectStoryImagePath
-				+ ", projectStoryVideoPath=" + projectStoryVideoPath + "]";
+				+ ", projectStory=" + projectStory + ", projectStoryImage=" + projectStoryImage + ", projectStoryVideo="
+				+ projectStoryVideo + "]";
 	}
+	
+	
 	
 	
 	
