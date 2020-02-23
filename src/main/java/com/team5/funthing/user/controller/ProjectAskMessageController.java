@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.model.vo.ProjectAskMessageVO;
 import com.team5.funthing.user.model.vo.ProjectBoardVO;
-import com.team5.funthing.user.service.ProjectAskMessageService.GetChoiceProjectAskMessageService;
-import com.team5.funthing.user.service.ProjectAskMessageService.GetEntireProjectAskMessageListService;
-import com.team5.funthing.user.service.ProjectAskMessageService.GetEntireProjectMakerAskMessageListService;
-import com.team5.funthing.user.service.ProjectAskMessageService.GetMakerMemberCreatorService;
-import com.team5.funthing.user.service.ProjectAskMessageService.InsertProjectAskContentsService;
-import com.team5.funthing.user.service.ProjectAskMessageService.UpdateProjectAskReplyContentsStatusService;
+import com.team5.funthing.user.service.projectAskMessageService.GetChoiceProjectAskMessageService;
+import com.team5.funthing.user.service.projectAskMessageService.GetEntireProjectAskMessageListService;
+import com.team5.funthing.user.service.projectAskMessageService.GetEntireProjectMakerAskMessageListService;
+import com.team5.funthing.user.service.projectAskMessageService.GetMakerMemberCreatorService;
+import com.team5.funthing.user.service.projectAskMessageService.InsertProjectAskContentsService;
+import com.team5.funthing.user.service.projectAskMessageService.UpdateProjectAskReplyContentsStatusService;
 import com.team5.funthing.user.service.projectBoardService.GetChoiceProjectBoardService;
 
 @Controller
