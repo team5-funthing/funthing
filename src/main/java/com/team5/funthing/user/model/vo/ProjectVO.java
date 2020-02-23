@@ -21,8 +21,6 @@ public class ProjectVO {
 //	프로젝트 설정 멤버
 	private int goalMoney; 
 	private String projectMainImage = "";
-	private String projectIntroduceImage = ""; // 추후 여러장 가능하게 변경
-	private String projectIntroduceVideo = "";
 	private String projectTitle = "";
 	private String projectSubTitle = "";
 	private String category=""; 
@@ -30,11 +28,8 @@ public class ProjectVO {
 	private Date endDate = new Date(); 
 	
 //	프로젝트 소개 멤버
-	private String projectStory=""; 
-	private String projectStoryImage="";
 	private String projectSummary="";
 	private String projectCaution="";
-	 // null ok
 
 //	그 외 멤버
 	private String supporters; 
@@ -72,18 +67,6 @@ public class ProjectVO {
 	public void setProjectMainImage(String projectMainImage) {
 		this.projectMainImage = projectMainImage;
 	}
-	public String getProjectIntroduceImage() {
-		return projectIntroduceImage;
-	}
-	public void setProjectIntroduceImage(String projectIntroduceImage) {
-		this.projectIntroduceImage = projectIntroduceImage;
-	}
-	public String getProjectIntroduceVideo() {
-		return projectIntroduceVideo;
-	}
-	public void setProjectIntroduceVideo(String projectIntroduceVideo) {
-		this.projectIntroduceVideo = projectIntroduceVideo;
-	}
 	public String getProjectTitle() {
 		return projectTitle;
 	}
@@ -113,18 +96,6 @@ public class ProjectVO {
 	}
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
-	}
-	public String getProjectStory() {
-		return projectStory;
-	}
-	public void setProjectStory(String projectStory) {
-		this.projectStory = projectStory;
-	}
-	public String getProjectStoryImage() {
-		return projectStoryImage;
-	}
-	public void setProjectStoryImage(String projectStoryImage) {
-		this.projectStoryImage = projectStoryImage;
 	}
 	public String getProjectSummary() {
 		return projectSummary;
@@ -172,14 +143,14 @@ public class ProjectVO {
 	@Override
 	public String toString() {
 		return "ProjectVO [projectNo=" + projectNo + ", creator=" + creator + ", email=" + email + ", goalMoney="
-				+ goalMoney + ", projectMainImage=" + projectMainImage + ", projectIntroduceImage="
-				+ projectIntroduceImage + ", projectIntroduceVideo=" + projectIntroduceVideo + ", projectTitle="
-				+ projectTitle + ", projectSubTitle=" + projectSubTitle + ", category=" + category + ", startDate="
-				+ startDate + ", endDate=" + endDate + ", projectStory=" + projectStory + ", projectStoryImage="
-				+ projectStoryImage + ", projectSummary=" + projectSummary + ", projectCaution=" + projectCaution
+				+ goalMoney + ", projectMainImage=" + projectMainImage + ", projectTitle=" + projectTitle
+				+ ", projectSubTitle=" + projectSubTitle + ", category=" + category + ", startDate=" + startDate
+				+ ", endDate=" + endDate + ", projectSummary=" + projectSummary + ", projectCaution=" + projectCaution
 				+ ", supporters=" + supporters + ", fundingMoney=" + fundingMoney + ", status=" + status
 				+ ", informationAgree=" + informationAgree + ", writeStatus=" + writeStatus + "]";
 	}
 	
 	
+	
+		
 }

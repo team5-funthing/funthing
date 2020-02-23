@@ -22,6 +22,7 @@
 	</div>
 	
 	<c:choose>
+	
 		<c:when test="${projectStory.projectStoryImagePath eq ''}">
 			<input type="file" name="uploadImage"
 				class="form-control-file select-project-image"
@@ -30,7 +31,6 @@
                      <div class="select_img"><img src="" /></div>
 		</c:when>
 		<c:when test="${projectStory.projectStoryImagePath ne ''}">
-			<h5>이미지 바꾸기</h5>
 			<input type="hidden" name="projectStoryImagePath" value="${projectStory.projectStoryImagePath }">
 			<input type="file" name="projectStoryImageUpload"
 				class="form-control-file select-project-image"
@@ -38,6 +38,7 @@
 			<div class="select_img m-3"><img style="width: 500px; height: auto;" src="${projectStory.projectStoryImagePath }" /></div>					
 		</c:when>
 	</c:choose>
+	
 	
 				
 	<script>

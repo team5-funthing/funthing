@@ -29,6 +29,10 @@ import com.team5.funthing.user.service.projectService.DeleteProjectService;
 import com.team5.funthing.user.service.projectService.GetProjectService;
 import com.team5.funthing.user.service.projectService.InsertProjectService;
 import com.team5.funthing.user.service.projectService.UpdateProjectService;
+import com.team5.funthing.user.service.projectStoryService.DeleteProjectStoryService;
+import com.team5.funthing.user.service.projectStoryService.GetProjectStoryService;
+import com.team5.funthing.user.service.projectStoryService.InsertProjectStoryService;
+import com.team5.funthing.user.service.projectStoryService.UpdateProjectStoryService;
 
 
 /**
@@ -72,6 +76,17 @@ public class ProjectController {
 	private GetProjectKeywordListService getProjectKeywordListService;
 	@Autowired
 	private DeleteProjectKeywordService deleteProjectKeywordService;
+	
+	// ProjectStory Service
+	@Autowired
+	private InsertProjectStoryService insertProjectStoryService;
+	@Autowired
+	private DeleteProjectStoryService deleteProjectStoryService;
+	@Autowired
+	private UpdateProjectStoryService updateProjectStoryService;
+	@Autowired
+	private GetProjectStoryService getProjectStoryService;
+	
 	
 // ===================== VO 주입 =====================
 	
@@ -163,23 +178,20 @@ public class ProjectController {
 											ProjectVO pvo,
 											Model model) throws Exception { // 프로젝트 임시저장 시 실행되는 메서드
 		
-		// 업로드 시킨 파일이 이미 존재하는 경우 파일 선택을 다시 안한 경우에 나올 수 있는 상황 처리
-		// 업로드 이미지를 변경할 경우
-		if(!uploadFile.isEmpty()) {  
-			//제거될 파일경로를 vo객체에서 가져오기
-			String toRemoveFilePath = pvo.getProjectMainImage();
+
+		if(!uploadFile.isEmpty()) { // 업로드 시킨 파일이 이미 존재하는 경우 파일 선택을 다시 안한 경우에 나올 수 있는 상황 처리  
+			String toRemoveFilePath = pvo.getProjectMainImage(); //제거될 파일경로를 vo객체에서 가져오기
 			String voName = pvo.getClass().getSimpleName();
 			String toSettingPath = projectMainImageUploadUtils.upload(uploadFile, voName, toRemoveFilePath);
 			pvo.setProjectMainImage(toSettingPath);
 		}
 		
 		if(toAddKeywords != null) {
-			//DB에 새로운 키워드 추가 메서드
-			insertKeyword(toAddKeywords, keywordVO);
-			int deleteCount = deleteProjectKeyword(pvo);
-			//DB에 프로젝트와 연결되는 키워드를 추가 하는 메서드
-			insertProjectKeyword(toAddKeywords, pvo.getProjectNo());
+			insertKeyword(toAddKeywords, keywordVO); //DB에 새로운 키워드 추가 메서드
+			deleteProjectKeyword(pvo);
+			insertProjectKeyword(toAddKeywords, pvo.getProjectNo());//DB에 프로젝트와 연결되는 키워드를 추가 하는 메서드
 		}
+		
 		
 		pvo.setWriteStatus(writingInputCheck(pvo));
 		updateProjectService.updateProject(pvo);
@@ -197,8 +209,6 @@ public class ProjectController {
 	}
 	
 	
-	
-	
 	@RequestMapping(value = "/showPreviewProject.udo", method = RequestMethod.POST)
 	public String showPreviewProject(ProjectVO pvo, Model model) throws Exception { // 프로젝트 임시저장 시 실행되는 메서드
 		
@@ -209,38 +219,6 @@ public class ProjectController {
 		model.addAttribute("previewProject", pvo);
 		return "p-project-details";
 
-	}
-
-	
-	//=================== 기타 메서드 =================================
-
-	public char writingInputCheck(ProjectVO vo) {
-
-		boolean result = nullCheck(vo);
-
-		if(result) {
-			return 'y';
-		}
-
-		return 'n';
-	}
-	public boolean nullCheck(ProjectVO project) { //임시 저장된 프로젝트 빈칸 체크
-		// 추후에 이미지, 홍보 영상, 동의  등 체크 변수에 추가해야한다. 
-		if(
-				project.getGoalMoney() == 0 ||
-				project.getProjectTitle() == null || project.getProjectTitle() == "" || 
-				project.getProjectSubTitle() == null || project.getProjectSubTitle() == "" ||
-				project.getProjectStory() == null || project.getProjectStory() == "" ||
-				project.getProjectSummary() == null || project.getProjectSummary() == "" 
-				) 
-		{
-			return false;
-
-		}
-		else {
-			return true;
-
-		}
 	}
 	public void insertKeyword(List<String> toAddKeywords, KeywordVO kvo) {
 
@@ -298,7 +276,36 @@ public class ProjectController {
 		return deleteCount;
 	}
 	
-	
+	//=================== 기타 메서드 =================================
+
+	public char writingInputCheck(ProjectVO vo) {
+
+		boolean result = nullCheck(vo);
+
+		if(result) {
+			return 'y';
+		}
+
+		return 'n';
+	}
+	public boolean nullCheck(ProjectVO project) { //임시 저장된 프로젝트 빈칸 체크
+		// 추후에 이미지, 홍보 영상, 동의  등 체크 변수에 추가해야한다. 
+		if(
+				project.getGoalMoney() == 0 ||
+				project.getProjectTitle() == null || project.getProjectTitle() == "" || 
+				project.getProjectSubTitle() == null || project.getProjectSubTitle() == "" ||
+//				project.getProjectStory() == null || project.getProjectStory() == "" ||
+				project.getProjectSummary() == null || project.getProjectSummary() == "" 
+				) 
+		{
+			return false;
+
+		}
+		else {
+			return true;
+
+		}
+	}
 	
 	
 }
