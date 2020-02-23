@@ -224,23 +224,23 @@ public class ProjectController {
 
 		List<KeywordVO> existKeywords = getKeywordListService.getKeywordList();
 		
-			for(String toAddKeyword : toAddKeywords) {
-		
-				boolean isExist = false;
-				for(KeywordVO existKeyword : existKeywords) {
-					if(toAddKeyword.equals(existKeyword.getKeyword())) {
-						isExist = true;
-						break;
-					}
+		for(String toAddKeyword : toAddKeywords) {
+	
+			boolean isExist = false;
+			for(KeywordVO existKeyword : existKeywords) {
+				if(toAddKeyword.equals(existKeyword.getKeyword())) {
+					isExist = true;
+					break;
 				}
-		
-				//입력한 키워드 중에 DB에 존재하는 키워드가 아니라면 키워드 추가
-				if(!isExist) {
-					kvo.setKeyword(toAddKeyword);
-					insertKeywordService.insertKeyword(kvo);
-				}
-		
 			}
+	
+			//입력한 키워드 중에 DB에 존재하는 키워드가 아니라면 키워드 추가
+			if(!isExist) {
+				kvo.setKeyword(toAddKeyword);
+				insertKeywordService.insertKeyword(kvo);
+			}
+	
+		}
 		
 	}
 	public void insertProjectKeyword(List<String> toAddKeywords, int currentProjectNo) {

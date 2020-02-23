@@ -1,15 +1,11 @@
 package com.team5.funthing.common.controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,15 +15,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonObject;
-import com.team5.funthing.common.utils.uploadUtils.InitRealPathController;
 import com.team5.funthing.common.utils.uploadUtils.UploadUtil;
 import com.team5.funthing.user.model.vo.ProjectStoryVO;
 
 @Controller
 public class CKEditorFileUploadController {
 	
-	@Autowired
-	private InitRealPathController initRealPathController;
 	@Autowired
 	private UploadUtil uploadutil;
 	
@@ -63,8 +56,7 @@ public class CKEditorFileUploadController {
 		response.setContentType("text/html");
 	
 		// json 데이터로 등록
-		// {"uploaded" : 1, "uploadName" : "test.jpg", "url" : "/img/text.jpg"}
-		// 이런 형태로 리턴이 나가야한데요.
+		// ex ==> {"uploaded" : 1, "uploadName" : "test.jpg", "url" : "/img/text.jpg"}
 		json.addProperty("uploaded", 1);
 		json.addProperty("uploadName", uploadName);
 		json.addProperty("url", projectStory.getProjectStoryImagePath());
