@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 
@@ -23,6 +24,21 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+<style type="text/css">
+	.info_table{
+	text-align: right; 
+	padding: 5px;
+	}
+	.cinfo_table{
+	text-align: center; 
+	padding: 5px;
+	}
+	
+</style>
+
+
+
 </head>
 
 <body>
@@ -94,44 +110,77 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title m-b-0"></h5>
-                            <div>
-                               
+                            <form action="updateMakerMemberGrade.ado" method="POST">
+                            
+                            <div align="center">
+                              <input type="hidden" name="email" value="${member.email}">
                             <table>
                                 <tr>
-                                    <th>ID</th>
-                                    <td>qdqwdwd</td>
-                                    
-                                    <th>이름</th>
-                                    <td>박정호</td>
+                                    <th class="info_table">ID</th>
+                                    <td class="cinfo_table">${member.email}</td>
                                 </tr>
                                 <tr>
-                                    <th>PW</th>
-                                    <td>pass1212312</td>
+                                	<th class="info_table">이름</th>
+                                    <td class="cinfo_table">${member.name}</td>
                                 </tr>
                                 <tr>
-                                    <th>주소</th>
-                                    <td>경기도 용인시</td>
+                                    <th class="info_table">연락처</th>
+                                    <td class="cinfo_table">${member.phone}</td>
                                 </tr>
                                 <tr>
-                                    <th>Email</th>
-                                    <td>parkjeongho@naba.com</td>
+                                    <th class="info_table">자기소개</th>
+                                    <td class="cinfo_table">${member.introduce}</td>
                                 </tr>
+                                <tr>
+                                    <th class="info_table">신고횟수</th>
+                                    <td class="cinfo_table">${member.report}</td>
+                                </tr>
+                                <tr>
+                                    <th class="info_table">창작자/업체명</th>
+                                    <td class="cinfo_table">${member.creator.creator}</td>
+                                </tr>
+                                <tr>
+                                    <th class="info_table">회원등급</th>
+                                    <td class="cinfo_table">
+										
+										<c:if test="${ lv eq null }">
+                                   		</c:if>
+                                   		
+                                   		<c:if test="${ lv ne null }">
+                                   			<select id="gradeSelectBox" name="lv">
+                                    			<option value="브론즈">브론즈</option>
+	                                    		<option value="실버">실버</option>
+	                                    		<option value="골드">골드</option>
+	                                    		<option value="다이아">다이아</option>
+                                   			</select>
+                                   		</c:if>
+                                   		
+                                   	
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="info_table">업체 연락처</th>
+                                    <td class="cinfo_table">${member.creator.makerPhone}</td>
+                                </tr>
+                                <tr>
+                                    <th class="info_table">사업자 등록번호</th>
+                                    <td class="cinfo_table">${member.creator.businessNumber}</td>
+                                </tr>
+                                <tr>
+                                    <th class="info_table">사업자 주소</th>
+                                    <td class="cinfo_table">${member.creator.businessAddress}</td>
+                                </tr>
+                                
                             </table>
  
                             </div>
-                            <div style="padding-right: 15%;">
-                                <form>
-                               		<Label>등급
-	                                    <select>
-	                                        <option value="브론즈">브론즈</option>
-	                                        <option value="실버">실버</option>
-	                                        <option value="골드">골드</option>
-	                                        <option value="다이아">다이아</option>
-	                                    </select>
-                                    </Label>
-                                </form>
-                               <a href="C:\Users\pjh\Desktop\5jo\matrix-admin-master\member_list.html"> <input type="button" value="확인" style="float: right;"></a>
+                            
+                            <div align="center" style="padding: 10px;">
+                                <input type="submit" value="확인">
+                                <a href="http://localhost:8080/funthing/getMemberList.ado"><input type="button" value="취소"></a>
                             </div>
+                            </form>
+                            
 
                             
     
@@ -188,7 +237,13 @@
         <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.crosshair.js"></script>
         <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
         <script src="${pageContext.request.contextPath }/resources/admin/dist/js/pages/chart/chart-page-init.js"></script>
-
+		<script>
+		$(document).ready(function(){
+   		$("#gradeSelectBox").val("${member.creator.lv}").prop("selected", true);
+   		});
+		</script>
 </body>
+
+
 
 </html>
