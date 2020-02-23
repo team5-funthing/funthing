@@ -6,23 +6,55 @@
 <div class="p-2 bd-highlight">
 	<span>소개 컨텐츠 [영상]</span>
 
+	<!-- ProjectVideo Youtube 영상 올리기 -->
 	<div class="input-group mb-3">
+	
 		<c:if test="${projectStory eq null}">
-			<input type="url" name="projectStoryVideo">
-		</c:if>
-		<c:if test="${projectStory ne null}">
-			${projectStory.projectStoryVideo }
-		</c:if>
-		
-		<div class="m-4">
-			<div class="form-group">
-				<iframe width="640" height="360" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			<input type="text" id="urlVideo" name="projectStoryVideo" class="form-control" placeholder="소개 영상으로 올리려는 영상 URL 주소를 입력하세요." aria-label="소개 영상으로 올리려는 영상 URL 주소를 입력하세요." aria-describedby="urlBtn">
+			<div class="input-group-append urlBtn-registry">
+			  <button class="btn btn-outline-secondary" type="button" id="urlBtn">등록</button>
+			</div>
+			<div class="m-4">
+				<div id="toAppendIframeDiv" class="form-group">
 			</div>
 		</div>
+		</c:if>
+		
+		<c:if test="${projectStory ne null}">
+			<div class='input-group-append urlBtn-remove'>
+				<a class='btn fas fa-times fa-2x' type='button' id='urlBtn'></a>
+			</div>
+			<div class="m-4">
+				<div id="toAppendIframeDiv" class="form-group">
+					${projectStory.projectStoryVideo }
+				</div>
+			</div>
+		
+		</c:if>
 	</div>
 	
-	<c:choose>
+	<script>
+       	$("#urlBtn").on("click", function(){
+       		console.log("실행")
+       		var sourceCode = $('#urlVideo').val();
+       		
+       		//var url = url.substring(url.lastIndexOf('/')+1);
+       		//console.log("수정 후 :" + url);
+       		if(sourceCode != ""){
+       			$("#toAppendIframeDiv").append(sourceCode);
+       			var removeUrlBtn = "<div class='input-group-append urlBtn-remove'><a class='btn fas fa-times fa-2x' type='button' id='urlBtn'></a></div>";
+       			$(".urlBtn-registry").after(removeUrlBtn);
+       			$("#urlBtn").attr("disabled", true);
+       			$("#urlVideo").attr("disabled", true);
+       		}
+       	});
+    </script>
 	
+	
+	
+	
+	
+	<c:choose>
 		<c:when test="${projectStory.projectStoryImagePath eq ''}">
 			<input type="file" name="uploadImage"
 				class="form-control-file select-project-image"
@@ -40,7 +72,6 @@
 	</c:choose>
 	
 	
-				
 	<script>
        	$("#projectStoryImagePath").change(function(){
        		if(this.files && this.files[0]){
@@ -51,20 +82,7 @@
        			reader.readAsDataURL(this.files[0]);
        		}
        	})
-       	
-       	$("#projectStoryVideo").change(function(){
-       		if(this.files && this.files[0]){
-       			var reader = new FileReader;
-       			reader.onload = function(data){
-       				$(".select_img img").attr("src", data.target.result).width(500);
-       			}
-       			reader.readAsDataURL(this.files[0]);
-       		}
-       	})
     </script>	
-	
-	
-	
 	
 	
 </div>
@@ -106,12 +124,12 @@
 	<span>프로젝트 스토리*</span>
 	
 	<c:choose>
-		<c:when test="${writingProject.projectStory eq null }">
+		<c:when test="${projectStory.projectStory eq null }">
 			<textarea class="mt-1" name="projectStory" class="form-control" id="editor" rows="20">
 				자기만의 프로젝트 스토리를 만들어주세요!
 			</textarea>
 		</c:when>
-		<c:when test="${writingProject.projectStory ne null }">
+		<c:when test="${projectStory.projectStory ne null }">
 			<textarea class="mt-1" name="projectStory" class="form-control" id="editor" rows="20">${writingProject.projectStory}</textarea>
 		</c:when>
 	</c:choose>
