@@ -45,31 +45,31 @@
 			 SELECT project_seq.currval FROM dual
 		</selectKey>
 				
-		INSERT INTO project(projectno, creator, email, projectTitle, goalMoney, category, projectSubTitle, projectstory, projectSummary, projectcaution, status, informationagree, startdate, enddate, writestatus)
-		VALUES (project_seq.nextval, #{creator}, #{email}, #{projectTitle}, #{goalMoney}, #{category}, #{projectSubTitle}, #{projectStory}, #{projectSummary}, #{projectCaution}, #{status}, #{informationAgree}, #{startDate}, #{endDate}, #{writeStatus})
+		INSERT INTO project(projectno, creator, email, projectTitle, goalMoney, category, projectSubTitle, projectSummary, projectcaution, status, informationagree, startdate, enddate, writestatus)
+		VALUES (project_seq.nextval, #{creator}, #{email}, #{projectTitle}, #{goalMoney}, #{category}, #{projectSubTitle}, #{projectSummary}, #{projectCaution}, #{status}, #{informationAgree}, #{startDate}, #{endDate}, #{writeStatus})
 		
 	</insert>
 
 
 <!-- <select id="insertProject" parameterType="project" resultType="int">
 		
-		INSERT INTO project(projectNo, creator, email, projectTitle, goalMoney, category, projectSubTitle, projectstory, projectsummary, projectcaution, status, informationagree, startdate, enddate, writestatus)
-		VALUES ((SELECT nvl(max(projectNo), 0) + 1 from project), #{creator}, #{email}, #{projectTitle}, #{goalMoney}, #{category}, #{projectSubTitle}, #{projectStory}, #{projectsummary}, #{projectCaution}, #{status}, #{informationAgree}, #{startDate}, #{endDate}, #{writeStatus})
+		INSERT INTO project(projectNo, creator, email, projectTitle, goalMoney, category, projectSubTitle, projectsummary, projectcaution, status, informationagree, startdate, enddate, writestatus)
+		VALUES ((SELECT nvl(max(projectNo), 0) + 1 from project), #{creator}, #{email}, #{projectTitle}, #{goalMoney}, #{category}, #{projectSubTitle}, #{projectsummary}, #{projectCaution}, #{status}, #{informationAgree}, #{startDate}, #{endDate}, #{writeStatus})
 
 	    SELECT @@IDENTITY AS seq
 	</select> -->
 	
 	<update id="updateProject" parameterType="project">
 		UPDATE project
-		SET creator = #{creator}, projectTitle = #{projectTitle},  goalMoney = #{goalMoney}, projectMainImage = #{projectMainImage}, projectIntroduceImage = #{projectIntroduceImage}, projectIntroduceVideo = #{projectIntroduceVideo}, category = #{category}, projectsubtitle = #{projectSubTitle}, projectstory = #{projectStory}, projectsummary = #{projectSummary}, projectcaution = #{projectCaution}, status = #{status}, informationagree = #{informationAgree}, startDate = #{startDate}, endDate = #{endDate}, writestatus = #{writeStatus} 																																									  
+		SET creator = #{creator}, projectTitle = #{projectTitle},  goalMoney = #{goalMoney}, projectMainImage = #{projectMainImage}, projectIntroduceImage = #{projectIntroduceImage}, projectIntroduceVideo = #{projectIntroduceVideo}, category = #{category}, projectsubtitle = #{projectSubTitle}, projectsummary = #{projectSummary}, projectcaution = #{projectCaution}, status = #{status}, informationagree = #{informationAgree}, startDate = #{startDate}, endDate = #{endDate}, writestatus = #{writeStatus} 																																									  
 		WHERE projectNo = #{projectNo}
 	</update>
 	
-<!--
+
 	<delete id="deleteSomething" parameterType="int">
 		DELETE FROM tablename1 WHERE
 		columnname1 = #{param1}
 	</delete>
- -->
+
 
 </mapper>

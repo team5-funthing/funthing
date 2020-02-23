@@ -200,12 +200,9 @@
 
                         </div>
                         
-                     </div>
-                     
-        <!----------------만든 프로젝트 양식 -------------------->                
+                     </div>           
                      <div class="tab-pane fade " id="nav-like-prj-list" role="tabpane"
                         aria-labelledby="nav-like-prj-list-tab">
-
                         <div class="container">
                            <section class="tiles">
                                   <!----------------만든 프로젝트 양식 -------------------->

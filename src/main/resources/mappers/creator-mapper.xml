@@ -4,26 +4,26 @@
 
 <mapper namespace="CreatorDAO">
 
-	<select id="getCreatorList" parameterType="Creator" resultType="Creator">
+	<select id="getCreatorList" parameterType="creator" resultType="creator">
 		SELECT * FROM makerMember
 	</select>
 	
-	<select id="getCreator" parameterType="Creator" resultType="Creator">
+	<select id="getCreator" parameterType="creator" resultType="creator">
 		SELECT * FROM makerMember WHERE creator = #{creator}
 	</select>
 	
-	<delete id="deleteCreator" parameterType="Creator">
+	<delete id="deleteCreator" parameterType="creator">
 		DELETE FROM makerMember WHERE creator = #{creator}
 	</delete>
 
-	<update id="updateCreator" parameterType="Creator">
+	<update id="updateCreator" parameterType="creator">
 		UPDATE makerMember 
 		SET makerPhone=#{makerPhone}, businessNumber=#{businessNumber}, 
 		businessAddress=#{businessAddress}, businessFileLink=#{businessFileLink}, lv=#{lv}
 		WHERE creator = #{creator}
 	</update>
 	
-	<insert id="insertCreator" parameterType="Creator">
+	<insert id="insertCreator" parameterType="creator">
 		INSERT INTO makerMember (creator, email, makerPhone, businessNumber, businessAddress, businessFileLink, lv)
 		VALUES(#{creator}, #{email}, #{makerPhone}, #{businessNumber}, #{businessAddress}, #{businessFileLink}, #{lv})
 	</insert>

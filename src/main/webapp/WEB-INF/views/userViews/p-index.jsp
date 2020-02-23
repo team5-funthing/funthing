@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <!doctype html>
-<html class="no-js" lang="zxx">
+<html class="no-js">
 
 <head>
     <script>
@@ -20,6 +20,7 @@
     <!-- <link rel="manifest" href="site.webmanifest"> -->
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
     <!-- Place favicon.ico in the root directory -->
+
 
     <!-- CSS here -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/jquery.gpopover.css">
@@ -38,6 +39,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/bootstrap.min.css">
 
 
+
     <!-- Include jQuery and the jquery.gpopover plugin -->
     <script src="js/vendor/jquery-1.12.4.min.js"></script>
     <script src="js/jquery.gpopover.js"></script>
@@ -46,7 +48,6 @@
     <script>
         $(function () {
 
-<<<<<<< HEAD
 
             // Use custom options for the right button
             $('#mypage-btn').gpopover({
@@ -61,12 +62,11 @@
             });
         });
     </script>
-=======
 
 
 	<jsp:include page="./include/i-head-setting.jsp"/>
 
->>>>>>> 1f13f3b240316ba767f21fbb55882bd25dc77eff
+
 </head>
 
 <body>
@@ -146,7 +146,7 @@
                         <div class="thumbnail-wrap">
                             <div class="thumbnail">
                                 <div class="centered">
-                                    <img src="${pageContext.request.contextPath}/resources/user/img/test/8.jpg" class="card-img-top landscape" alt="1.jpg">
+                                    <a href="projectDetails.udo"><img src="${pageContext.request.contextPath}/resources/user/img/test/8.jpg" class="card-img-top landscape" alt="1.jpg"></a>
                                 </div>
                             </div>
                         </div>

@@ -49,14 +49,6 @@ public class MemberController {
 		return "p-index";
 	}
 
-	@RequestMapping("mem.udo") 
-	public String showsky(HttpSession session, MemberVO vo) {
-
-		
-//		return "p-test-board-write";
-		return "p-test-project-maker-user-list";
-	}
-
 	@RequestMapping(value="socialLogin.udo",method=RequestMethod.GET)
 	public String socialLogin() {   
 		return "f-socialjoin";
@@ -69,7 +61,7 @@ public class MemberController {
 			if(getMemberService.getMember(vo).getPassword().equals(request.getParameter("password"))) { 
 			
 				session.setAttribute("memberSessionEmail", getMemberService.getMember(vo).getEmail());
-				System.out.println("로그인시 세션에 담긴 이메일 확인:"+session.getAttribute("memberSessionEmail"));
+				System.out.println(""+session.getAttribute("memberSessionEmail"));
 				session.setAttribute("memberSessionName", getMemberService.getMember(vo).getName());
 				if(session.getAttribute("myprifile")!=null) {
 					session.setAttribute("myprofile", getMemberService.getMember(vo).getMyImage()); 
@@ -104,13 +96,11 @@ public class MemberController {
 				}
 				session.setAttribute("memberSessionEmail", getMemberService.getMember(vo).getEmail());
 				session.setAttribute("memberSessionName", getMemberService.getMember(vo).getName());
-				session.setAttribute("memberSessionPosition", getMemberService.getMember(vo).getPosition());
 			    if(session.getAttribute("myprifile")!=null) {
 				session.setAttribute("myprofile", getMemberService.getMember(vo).getMyImage()); 
 			    }
 
 				response.sendRedirect("member.udo");
-//				response.sendRedirect("mem.udo"); 
 
 			}else {
 				response.sendRedirect("findpw.udo");
@@ -175,7 +165,7 @@ public class MemberController {
 		try {
 			String certificationCode = sendMailUtil.createCertificationCode(50);
 
-			sendMailUtil.sendMail("[Funthing] 인증번호입니다. ", "인증번호 : ["+certificationCode+"]", vo.getEmail());	
+			sendMailUtil.sendMail("[Funthing] ", " : ["+certificationCode+"]", vo.getEmail());	
 			session.setAttribute("certificationCode", certificationCode);   
 
 		} catch (Exception e) {

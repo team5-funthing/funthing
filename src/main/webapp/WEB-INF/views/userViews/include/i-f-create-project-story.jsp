@@ -6,13 +6,84 @@
 <div class="p-2 bd-highlight">
 	<span>소개 컨텐츠 [영상]</span>
 
+	<!-- ProjectVideo Youtube 영상 올리기 -->
 	<div class="input-group mb-3">
-		<div class="form-group">
-		
-		<!-- 	<label for="exampleFormControlFile1">소개 컨텐츠를 선택하세요.(영상)</label> 
-			<input type="file" name="projectVideo" class="form-control-file select-project-image" id="exampleFormControlFile1"> -->
+	
+		<c:if test="${projectStory eq null}">
+			<input type="text" id="urlVideo" name="projectStoryVideo" class="form-control" placeholder="소개 영상으로 올리려는 영상 URL 주소를 입력하세요." aria-label="소개 영상으로 올리려는 영상 URL 주소를 입력하세요." aria-describedby="urlBtn">
+			<div class="input-group-append urlBtn-registry">
+			  <button class="btn btn-outline-secondary" type="button" id="urlBtn">등록</button>
+			</div>
+			<div class="m-4">
+				<div id="toAppendIframeDiv" class="form-group">
+			</div>
 		</div>
+		</c:if>
+		
+		<c:if test="${projectStory ne null}">
+			<div class='input-group-append urlBtn-remove'>
+				<a class='btn fas fa-times fa-2x' type='button' id='urlBtn'></a>
+			</div>
+			<div class="m-4">
+				<div id="toAppendIframeDiv" class="form-group">
+					${projectStory.projectStoryVideo }
+				</div>
+			</div>
+		
+		</c:if>
 	</div>
+	
+	<script>
+       	$("#urlBtn").on("click", function(){
+       		console.log("실행")
+       		var sourceCode = $('#urlVideo').val();
+       		
+       		//var url = url.substring(url.lastIndexOf('/')+1);
+       		//console.log("수정 후 :" + url);
+       		if(sourceCode != ""){
+       			$("#toAppendIframeDiv").append(sourceCode);
+       			var removeUrlBtn = "<div class='input-group-append urlBtn-remove'><a class='btn fas fa-times fa-2x' type='button' id='urlBtn'></a></div>";
+       			$(".urlBtn-registry").after(removeUrlBtn);
+       			$("#urlBtn").attr("disabled", true);
+       			$("#urlVideo").attr("disabled", true);
+       		}
+       	});
+    </script>
+	
+	
+	
+	
+	
+	<c:choose>
+		<c:when test="${projectStory.projectStoryImagePath eq ''}">
+			<input type="file" name="uploadImage"
+				class="form-control-file select-project-image"
+				id="projectStoryImagePath">
+                     <hr>
+                     <div class="select_img"><img src="" /></div>
+		</c:when>
+		<c:when test="${projectStory.projectStoryImagePath ne ''}">
+			<input type="hidden" name="projectStoryImagePath" value="${projectStory.projectStoryImagePath }">
+			<input type="file" name="projectStoryImageUpload"
+				class="form-control-file select-project-image"
+				id="projectStoryImagePath">
+			<div class="select_img m-3"><img style="width: 500px; height: auto;" src="${projectStory.projectStoryImagePath }" /></div>					
+		</c:when>
+	</c:choose>
+	
+	
+	<script>
+       	$("#projectStoryImagePath").change(function(){
+       		if(this.files && this.files[0]){
+       			var reader = new FileReader;
+       			reader.onload = function(data){
+       				$(".select_img img").attr("src", data.target.result).width(500);
+       			}
+       			reader.readAsDataURL(this.files[0]);
+       		}
+       	})
+    </script>	
+	
 	
 </div>
 <div class="p-2 bd-highlight">
@@ -52,39 +123,31 @@
 
 	<span>프로젝트 스토리*</span>
 	
-	<textarea class="mt-1" name="projectStory" class="form-control" id="editor" rows="10">
-		<h2>TEST 글이에요.</h2>
-		<p>
-			This may be the first time you hear about this made-up disorder but
-			it actually isn’t so far from the truth. Even the studies that were conducted almost half a century show that
-			<strong>the language you speak has more effects on you than you realise</strong>.
-		</p>
-		<p>
-			One of the very first experiments conducted on this topic dates back to 1964.
-			<a href="https://www.researchgate.net/publication/9440038_Language_and_TAT_content_in_bilinguals">In the experiment</a>
-			designed by linguist Ervin-Tripp who is an authority expert in psycholinguistic and sociolinguistic studies,
-			adults who are bilingual in English in French were showed series of pictures and were asked to create 3-minute stories.
-			In the end participants emphasized drastically different dynamics for stories in English and French.
-		</p>
-		<p>
-			Another ground-breaking experiment which included bilingual Japanese women married to American men in San Francisco were
-			asked to complete sentences. The goal of the experiment was to investigate whether or not human feelings and thoughts
-			are expressed differently in <strong>different language mindsets</strong>.
-			<Here>is a sample from the the experiment:</Here>
-		</p>
-		<p>
-			More recent <a href="https://books.google.pl/books?id=1LMhWGHGkRUC">studies</a> show, the language a person speaks affects
-			their cognition, behaviour, emotions and hence <strong>their personality</strong>.
-			This shouldn’t come as a surprise
-			<a href="https://en.wikipedia.org/wiki/Lateralization_of_brain_function">since we already know</a> that different regions
-			of the brain become more active depending on the person’s activity at hand. Since structure, information and especially
-			<strong>the culture</strong> of languages varies substantially and the language a person speaks is an essential element of daily life.
-		</p>
-	</textarea>
+	<c:choose>
+		<c:when test="${projectStory.projectStory eq null }">
+			<textarea class="mt-1" name="projectStory" class="form-control" id="editor" rows="20">
+				자기만의 프로젝트 스토리를 만들어주세요!
+			</textarea>
+		</c:when>
+		<c:when test="${projectStory.projectStory ne null }">
+			<textarea class="mt-1" name="projectStory" class="form-control" id="editor" rows="20">${writingProject.projectStory}</textarea>
+		</c:when>
+	</c:choose>
+	
+	
 
 </div>
 
-<script src="${pageContext.request.contextPath}/resources/common/ckeditor5/js/ckeditor.js"></script>
+<script>
+	
+	
+	$(function(){
+		
+		CKEDITOR.replace('editor')
+		
+	});
+	
+</script>
 
 
 
