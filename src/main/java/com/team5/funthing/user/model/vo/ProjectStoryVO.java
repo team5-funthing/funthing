@@ -8,6 +8,7 @@ public class ProjectStoryVO {
 	
 	private int projectStoryImageNo = -1;
 	private int projectNo = -1;
+	private String projectStory;
 	private String projectStoryImagePath;
 	private String projectStoryVideoPath;
 	public int getProjectStoryImageNo() {
@@ -21,6 +22,12 @@ public class ProjectStoryVO {
 	}
 	public void setProjectNo(int projectNo) {
 		this.projectNo = projectNo;
+	}
+	public String getProjectStory() {
+		return projectStory;
+	}
+	public void setProjectStory(String projectStory) {
+		this.projectStory = projectStory;
 	}
 	public String getProjectStoryImagePath() {
 		return projectStoryImagePath;
@@ -36,12 +43,10 @@ public class ProjectStoryVO {
 	}
 	@Override
 	public String toString() {
-		return "ProjectIntroduceVO [projectStoryImageNo=" + projectStoryImageNo + ", projectNo=" + projectNo
-				+ ", projectStoryImagePath=" + projectStoryImagePath + ", projectStoryVideoPath="
-				+ projectStoryVideoPath + "]";
+		return "ProjectStoryVO [projectStoryImageNo=" + projectStoryImageNo + ", projectNo=" + projectNo
+				+ ", projectStory=" + projectStory + ", projectStoryImagePath=" + projectStoryImagePath
+				+ ", projectStoryVideoPath=" + projectStoryVideoPath + "]";
 	}
-
-	
 	
 	
 	

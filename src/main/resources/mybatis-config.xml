@@ -4,13 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<properties resource="db.properties" />
+	
 	<typeAliases>
 	
+		<typeAlias type="com.team5.funthing.user.model.vo.ProjectVO" alias="project"/>
+		<typeAlias type="com.team5.funthing.user.model.vo.ProjectStoryVO" alias="projectStory"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.ProjectKeywordVO" alias="projectKeyword"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.KeywordVO" alias="keyword"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.MemberVO" alias="member"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.NoticeVO" alias="notice"/>
-		<typeAlias type="com.team5.funthing.user.model.vo.ProjectVO" alias="project"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.BoardVO" alias="board"/>
 
         <typeAlias type="com.team5.funthing.user.model.vo.MemberActivityVO" alias="memberActivity"/>   
@@ -36,7 +38,8 @@
   
   
 	<mappers>
-	
+		
+		<mapper resource="mappers/projectStory-mapper.xml"/>
 		<mapper resource="mappers/projectKeyword-mapper.xml"/>
 		<mapper resource="mappers/keyword-mapper.xml"/>
 		<mapper resource="mappers/member-mapper.xml" />
