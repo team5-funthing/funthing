@@ -10,7 +10,18 @@ public class MemberVO {
 	private String introduce;
 	private String myImage;
 	private String report;
+	private String position; //ÇÏ´Ã½ÇÇè
 	
+	
+	//ÇÏ´Ã½ÇÇè
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
 	private CreatorVO creator;
 
 	public String getEmail() {
@@ -80,9 +91,13 @@ public class MemberVO {
 	@Override
 	public String toString() {
 		return "MemberVO [email=" + email + ", password=" + password + ", name=" + name + ", phone=" + phone
-				+ ", introduce=" + introduce + ", myImage=" + myImage + ", report=" + report + ", creator=" + creator
-				+ "]";
+				+ ", introduce=" + introduce + ", myImage=" + myImage + ", report=" + report + ", position=" + position
+				+ ", creator=" + creator + "]";
 	}
+
+	
+
+	
 	
 	
 	

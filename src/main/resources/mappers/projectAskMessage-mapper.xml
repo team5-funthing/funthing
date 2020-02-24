@@ -33,7 +33,7 @@
 	
 	<!-- 멤버테이블과 메이커멤버테이블을 조인하여 메이커(창작자명) 가져오기 -->
 	
-	<resultMap type="userCreator" id="userCreator">
+	<resultMap type="creator" id="creator">
 		<result column="creator" property="creator" />
 		<result column="email" property="email" />
 	</resultMap>
@@ -41,11 +41,11 @@
 	<resultMap type="member" id="member">
 		<result column="email" property="email" />
 		<result column="name" property="name" />
-		<collection property="userCreator" resultMap="userCreator"></collection>
+		<collection property="creator" resultMap="creator"></collection>
 	</resultMap>
  	
  	<select id="getMakerMemberCreator" parameterType="member"  resultMap="member">
-		select userCreator.creator, member.name, member.email from member join userCreator on userCreator.email = #{email} and member.email= #{email}
+		select creator.creator, member.name, member.email from member join creator on creator.email = #{email} and member.email= #{email}
 	</select>
 	
 	<!-- 메이커 관련 전체 문의글 가져오기 -->
