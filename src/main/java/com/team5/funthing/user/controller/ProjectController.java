@@ -30,6 +30,7 @@ import com.team5.funthing.user.service.projectKeywordService.GetProjectKeywordLi
 import com.team5.funthing.user.service.projectKeywordService.InsertProjectKeywordService;
 import com.team5.funthing.user.service.projectService.CreateProjectService;
 import com.team5.funthing.user.service.projectService.DeleteProjectService;
+import com.team5.funthing.user.service.projectService.GetProjectListByEmailService;
 import com.team5.funthing.user.service.projectService.GetProjectService;
 import com.team5.funthing.user.service.projectService.InsertProjectService;
 import com.team5.funthing.user.service.projectService.UpdateProjectService;
@@ -57,6 +58,9 @@ public class ProjectController {
 	private DeleteProjectService deleteProjectService;
 	@Autowired
 	private GetProjectService getProjectService;
+	
+	@Autowired 
+	private GetProjectListByEmailService getProjectListByEmailService;
 
 	
 // ===================== 부 서비스 주입 ================	
@@ -104,22 +108,13 @@ public class ProjectController {
 // ===================== 메서드 =======================	
 	
 	@RequestMapping(value="/showStartProjectPage.udo", method = RequestMethod.GET)
-	public String showStartProjectPage(HttpSession session, Model model) {
-
-		// 테스트 용 코드
-		MemberVO test = new MemberVO();
-		test.setEmail("test@naver.com");
-		session.setAttribute("email", test.getEmail());
-
-		String loginId = (String)session.getAttribute("email");
-
-
-		if(loginId == null) {
+	public String startProject(HttpSession session, Model model) {
+		String loginEmail = (String)session.getAttribute("memberSessionEmail");
+		if(loginEmail == null) {
 			model.addAttribute("msg", "로그인 후 이용 가능합니다.");
 			return "p-index";
 		}
-
-		model.addAttribute("member", test); 
+		model.addAttribute("loginEmail", loginEmail); 
 		return "p-start-project"; // 시작하기 페이지로 이동하자
 	} // 로그인 시에만 프로젝트 만들기 접근 가능하도록 하기위해 세션에 저장된 값 확인 후 페이지 이동.
 	
@@ -151,24 +146,32 @@ public class ProjectController {
 	
 	
 	
-	
-	
-	
-	
-	
-	
 	@RequestMapping(value="/showCreateProjectBasicForm.udo", method = RequestMethod.GET)
 	public String showCreateProjectBasicForm(HttpSession session, ProjectVO vo, Model model) {
 
 		session.removeAttribute("updatingProject");
+		String loginEmail = (String)session.getAttribute("memberSessionEmail");
+		vo.setEmail(loginEmail);
+		
+		List<ProjectVO> getProjectList = getProjectListByEmailService.getProjectListByEmail(vo);
+		if(getProjectList != null) {
+			System.out.println("========getProjectList=============");
+			for(ProjectVO getProject : getProjectList) {
+				System.out.println(getProject.toString());
+			}
+			System.out.println("===================================");
+			System.out.println();
+			model.addAttribute("getProjectList", getProjectList);
+		}
 		model.addAttribute("basicProjectSetting", vo);
 		
-
 		return "f-create-project-basic"; // 프로젝트 작성 폼
 	} // 프로젝트 만들기 시작 페이지에서 수행
 	
 	
   
+	
+	
 	
 	//리워드 등록시에 목록을 추가하는 메서드 입력()
 	@RequestMapping(value = "/insertProject.udo", method = RequestMethod.POST)
@@ -184,7 +187,6 @@ public class ProjectController {
 			session.setAttribute("updatingProject", vo);
 		}
 		else {
-			System.out.println("새로고침 확인 : " + checkVO.getProjectNo());
 			vo = checkVO;
 		}
 		model.addAttribute("writingProject", vo);
@@ -228,7 +230,7 @@ public class ProjectController {
 		redirectAttributes.addAttribute("currentProjectNo", pvo.getProjectNo());
 		redirectAttributes.addAttribute("msg", "저장 되었습니다");
 		
-		return "redirect: getWritingProject.udo";
+		return "redirect:getWritingProject.udo";
 		
 		
 	}

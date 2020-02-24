@@ -18,7 +18,7 @@ import com.team5.funthing.user.service.memberActivityService.GetMemberActivityLi
 import com.team5.funthing.user.service.memberActivityService.InsertMemberActivityService;
 import com.team5.funthing.user.service.memberActivityService.UpdateMemberActivityService;
 import com.team5.funthing.user.service.projectService.GetProjectService;
-import com.team5.funthing.user.service.projectService.GetProjectServiceByEmail;
+import com.team5.funthing.user.service.projectService.GetProjectListByEmailService;
 
 @Controller
 public class MemberActivityController {
@@ -32,11 +32,11 @@ public class MemberActivityController {
 	@Autowired
 	UpdateMemberActivityService updateMemberActivityService;
 	@Autowired
-	GetProjectServiceByEmail getProjectServiceByEmailService;
+	GetProjectListByEmailService getProjectServiceByEmailService;
 	@Autowired
 	GetProjectService getProjectService;
 
-	@RequestMapping(value="mypage.udo",method=RequestMethod.GET)
+	@RequestMapping(value="mypage.udo", method = RequestMethod.GET)
 	public String myPage(HttpSession session,MemberActivityVO vo,ProjectVO vo1,Model model) {
 		System.out.println("마이페이지 이동시 세션에 담긴 이메일 확인:"+session.getAttribute("memberSessionEmail"));
 		myProjectList(vo1, model, session);

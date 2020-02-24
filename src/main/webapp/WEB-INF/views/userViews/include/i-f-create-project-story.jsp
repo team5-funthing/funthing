@@ -68,7 +68,7 @@
        			$("#urlVideo").attr("disabled", true);
        			
        			$("iframe").attr("width", "640");
-        		$("iframe").attr("heith", "360");
+        		$("iframe").attr("height", "360");
        			
        		}
        	});
@@ -154,17 +154,8 @@
 			</ul>
 		</c:when>
 	</c:choose>
-	
-	
-
-    
-    
-    
-    
-    
-	
-	
 </div>
+
 <div class="p-2 bd-highlight">
 	<span>프로젝트 요약</span>
 	<div class="form-group">

@@ -9,22 +9,31 @@
 	
 	<div class="p-2 bd-highlight">
 		<span>펀딩 목표 금액</span>
-		<c:choose>
-			<c:when test="${writingProject.goalMoney eq null}">
-				<input type="text" name="goalMoney" value="0" placeholder="펀딩 목표 금액을 입력하세요."
-					onfocus="this.placeholder = ''"
-					onblur="this.placeholder = '펀딩 목표 금액을 입력하세요.'" class="single-input">
-			</c:when>
-			<c:when test="${writingProject.goalMoney ne null}">
-				<input type="text" name="goalMoney"
-					value="${writingProject.goalMoney }" placeholder="펀딩 목표 금액을 입력하세요."
-					onfocus="this.placeholder = ''"
-					onblur="this.placeholder = '펀딩 목표 금액을 입력하세요.'" class="single-input">
-			</c:when>
-		</c:choose>
-
-	</div>
+		<div class="row d-flex align-items-center">
+			<div class="col-4">
+				<c:choose>
+					<c:when test="${writingProject.goalMoney eq null}">
+						<input type="text" name="goalMoney" value="0" placeholder="펀딩 목표 금액을 입력하세요."
+							onfocus="this.placeholder = ''"
+							onblur="this.placeholder = '펀딩 목표 금액을 입력하세요.'" class="single-input">
+							
+		
+					</c:when>
+					<c:when test="${writingProject.goalMoney ne null}">
+						<input type="text" name="goalMoney"
+							value="${writingProject.goalMoney }" placeholder="펀딩 목표 금액을 입력하세요."
+							onfocus="this.placeholder = ''"
+							onblur="this.placeholder = '펀딩 목표 금액을 입력하세요.'" class="single-input">
+							
+					</c:when>
+				</c:choose>
+			</div>
+			<div class="col-8">
+				<div class="h6">원</div>
+			</div>
+		</div>
 	
+	</div>
 	<div class="p-2 bd-highlight">
 		<span>프로젝트 제목</span>
 		<c:choose>
@@ -72,12 +81,11 @@
                         <div class="select_img"><img src="" /></div>
 					</c:when>
 					<c:when test="${writingProject.projectMainImage ne ''}">
-						<h4>이미지 바꾸기</h4>
 						<input type="hidden" name="projectMainImage" value="${writingProject.projectMainImage }">
 						<input type="file" name="uploadImage"
 							class="form-control-file select-project-image"
 							id="projectMainImageFile">
-						<div class="select_img m-3"><img style="width: 500px; height: auto;" src="${writingProject.projectMainImage }" /></div>					
+						<div class="select_img m-3"><img style="width: 300px; height: auto;" src="${writingProject.projectMainImage }" /></div>					
 					</c:when>
 				</c:choose>
 				
@@ -86,7 +94,7 @@
 	            		if(this.files && this.files[0]){
 	            			var reader = new FileReader;
 	            			reader.onload = function(data){
-	            				$(".select_img img").attr("src", data.target.result).width(500);
+	            				$(".select_img img").attr("src", data.target.result).width(300);
 	            			}
 	            			reader.readAsDataURL(this.files[0]);
 	            		}
@@ -125,41 +133,41 @@
 	<div class="p-2 bd-highlight">
 	
 		 <script>
-		 
-		        $(function (){
-		        	const no = 1;
-		        	$("#addKeywordBtn").removeAttr("href");
-		        	$("#addKeywordBtn").click(function(){
-			        	var toAddKeyword = $("input[name=projectKeyword]").val();
-			        	if(toAddKeyword != ""){
-			        		$("#addedKeywords").append(
-			        				"<li id='keyword" + no + "' class='btn-lg btn-bd-keyword d-none d-lg-inline-block m-1' onclick='$('li').remove('#keyword" + no + "')'>" + '#' + toAddKeyword + "<input type='hidden' name='keywords' value='" + '#' + toAddKeyword + "'></li>");
-							no++
-			        	}
-		        	})
-		        })
+			 
+			    $(document).on("click","#addKeywordBtn",function(){
+			    	const no = 1;
+		        	var toAddKeyword = $("input[name=projectKeyword]").val();
+		        	if(toAddKeyword != ""){
+		        		$("#addedKeywords").append(
+		        				"<li id='keyword" + no + "' class='btn-lg btn-bd-keyword d-none d-lg-inline-block m-1' onclick='$('li#keyword" + no + "').remove()'>" + '#' + toAddKeyword + "<input type='hidden' name='keywords' value='" + '#' + toAddKeyword + "'></li>");
+						no++
+		        	}
+		        	
+		        	
+		        	
+		       	 });
 	         
-		        $(function (){
-		        	$(".addedKeyword").removeAttr("href")
+		         $(function (){
+		        	 $(".addedKeyword").removeAttr("href")
 		      
-			    })
+			     })
+			    
 			    
 		</script>
 	
 	
-		<span>검색용 태그* </span>
+		<span>검색용 태그*</span>
 		<div class="row d-flex align-items-center mb-5">
 		
 			<div class="col-xl-6">
 				<input type="text" id="keyword" name="projectKeyword" placeholder="#검색 키워드를 입력해주세요." onfocus="this.placeholder = ''" class="single-input">
 			</div>
 			
-			<a href="#" id="addKeywordBtn"><i class="fas fa-plus fa-2x"></i></a>
+			<a href="javascript:void(0);" id="addKeywordBtn"><i class="fas fa-plus fa-2x"></i></a>
 			
 		</div>
 		
 
-																									<!--     	${fn:length(list) }		    -->
 		<div class="row d-flex align-content-between flex-wrap">
 			<div class="col-xl-12 d-flex bd-highlight mb-3">
 				<ul id="addedKeywords">
@@ -176,7 +184,7 @@
 							<c:forEach var="addedKeyword" items="${addedKeywordList }" varStatus="step">
 							
 								<li id="${keywordId }${step.count}" class="btn-lg btn-bd-keyword d-none d-lg-inline-block m-1" onclick=" $('li').remove('#${keywordId }${step.count}')">
-									<a href="#" class="addedKeyword">${tag }${addedKeyword.keyword }</a>
+									<a href="javascript:void(0);" class="addedKeyword">${tag }${addedKeyword.keyword }</a>
 									<input type="hidden" name="keywords" value="${tag }${addedKeyword.keyword }">
 								</li>
 								
