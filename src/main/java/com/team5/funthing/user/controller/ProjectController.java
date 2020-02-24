@@ -245,6 +245,7 @@ public class ProjectController {
 		return "p-project-details";
 
 	}
+	
 	public void insertKeyword(List<String> toAddKeywords, KeywordVO kvo) {
 
 		List<KeywordVO> existKeywords = getKeywordListService.getKeywordList();
@@ -279,7 +280,6 @@ public class ProjectController {
 	}
 	public List<ProjectKeywordVO> getProjectKeywordList(ProjectVO pvo){
 		
-		System.out.println("projectKeywordVO : " + projectKeywordVO.toString());
 		if(projectKeywordVO == null) {
 			System.out.println("projectKeywordVO Null");
 			return null;
@@ -325,6 +325,8 @@ public class ProjectController {
 			}
 			
 			List<String> tmpUploadList = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);
+			
+			
 			if(tmpUploadList != null) {
 				for(String toInsertImage : tmpUploadList) {
 					System.out.println("toInsertImage : " + toInsertImage);
@@ -338,8 +340,7 @@ public class ProjectController {
 			}
 		}
 		
-	}
-	
+	}	
 	public void projectMainImageUploader(List<MultipartFile> toDoUploadList, ProjectVO vo) throws Exception {
 		
 		List<String> toRemoveFilePath = new ArrayList<String>();
@@ -358,11 +359,6 @@ public class ProjectController {
 			}
 		}
 	}
-	
-	
-	
-	
-	
 	
 	
 	

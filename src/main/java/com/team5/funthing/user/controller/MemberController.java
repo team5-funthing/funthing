@@ -32,9 +32,10 @@ public class MemberController {
 
 	@Autowired
 	private SendMailUtil sendMailUtil;
-
 	@Autowired
 	private GetMemberService getMemberService;
+	@Autowired
+	private MemberVO memberVO;
 
 
 	@Autowired
@@ -53,27 +54,36 @@ public class MemberController {
 	public String socialLogin() {   
 		return "f-socialjoin";
 	}
+	
 	@RequestMapping(value="socialLoginSuccess.udo",method=RequestMethod.POST)
-	public void socialLoginSuccess(HttpServletRequest request,HttpSession session,MemberVO vo,HttpServletResponse response) throws IOException {   
-		System.out.println("socialLoginSuccess.udo ");
-
-		if(getMemberService.getMember(vo) != null) { 
-			if(getMemberService.getMember(vo).getPassword().equals(request.getParameter("password"))) { 
-			
-				session.setAttribute("memberSessionEmail", getMemberService.getMember(vo).getEmail());
-				System.out.println(""+session.getAttribute("memberSessionEmail"));
-				session.setAttribute("memberSessionName", getMemberService.getMember(vo).getName());
-				if(session.getAttribute("myprifile")!=null) {
-					session.setAttribute("myprofile", getMemberService.getMember(vo).getMyImage()); 
-				    }
-
-					response.sendRedirect("member.udo");
-				}else {
-					response.sendRedirect("findpw.udo");
-				}
+	public void socialLoginSuccess(MemberVO vo, HttpSession session, HttpServletResponse response) throws IOException {   
 		
+		System.out.println("socialLoginSuccess.udo");
+		System.out.println("로그인 시도 : " + vo.toString());
+		
+		
+		if(getMemberService.getMember(vo) != null) {
+			memberVO = getMemberService.getMember(vo);
+			if(memberVO.getPassword().equals(vo.getPassword())) { 
+				
+				session.setAttribute("memberSessionEmail", getMemberService.getMember(vo).getEmail());
+				System.out.println(""+ session.getAttribute("memberSessionEmail"));
+				session.setAttribute("memberSessionName", getMemberService.getMember(vo).getName());
+				if(session.getAttribute("myprifile") != null) {
+					session.setAttribute("myprofile", getMemberService.getMember(vo).getMyImage()); 
+				}
+
+				response.sendRedirect("member.udo");
+				
+			}else {
+				
+				response.sendRedirect("findpw.udo");
+				
 			}
+
 		}
+	}
+
 
 
 	@RequestMapping(value="getMember.udo", method=RequestMethod.POST) 

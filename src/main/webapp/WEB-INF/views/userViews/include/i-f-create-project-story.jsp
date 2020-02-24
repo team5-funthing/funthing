@@ -46,9 +46,9 @@
 	</div>
 	
 	<script>
-		$(document).on("click","#urlBtn",function(){	
-       		console.log("실행")
-       		var sourceCode = $('#urlVideo').val();
+		$(document).on("click","#urlBtn",function(){
+			
+			var sourceCode = $('#urlVideo').val();
        		
        		function replaceAll(sourceCode, oldChar, newChar){
        			return sourceCode.split(oldChar).join(newChar);
@@ -83,50 +83,80 @@
    			$("div").remove(".urlBtn-remove"); // X 버튼 지우기
        	 });
        	
-       	
-       	$(function(){
-       		$("iframe").load(function(){ //iframe 컨텐츠가 로드 된 후에 호출됩니다.
-       			$("iframe").attr("width", "640");
-        		$("iframe").attr("heith", "360");
-       		});
-       	});
-       	
+
     </script>
 	
-	
-	
+		또는
 	
 	<!-- projectIntroduceImage -->
 	<c:choose>
-		<c:when test="${projectIntroduceImage.projectIntroduceImage eq ''}">
+		<c:when test="${projectIntroduceImageList eq null}">
 			<input type="file" name="projectIntroduceImageUpload"
 				class="form-control-file select-project-image"
 				id="projectIntroduceImage">
-                    <hr>
-                    <div class="select_img"><img src="" /></div>
+                <hr>
+                
+	            <ul id="projectIntroduceImageUl">
+					<li id="projectIntroduceImageLi">
+						<div class="select_introduce_img m-3">
+							<img style="width: 200px; height: auto;" src="${projectIntroduceImage.projectIntroduceImage }" />
+						</div>
+					</li>
+				</ul>
+                
+                <div class="select_introduce_img"><img src="" /></div>
+                
+	            <script>
+	            	
+	            	// 일단 1. 버튼 눌렸을시
+	            	// <div class="select_introduce_img"><img src="" /></div> 코드 추가되게 하기
+	            	$(document).on("change","#projectIntroduceImage",function(){
+	            		alert("감지감지");
+	            		
+		            	$("#projectIntroduceImageUl").append("<div class='select_introduce_img'><img src='' /></div>");
+		            	
+		            	// 여기서부터 손보기
+		            	
+		           		if(this.files && this.files[0]){
+		           			var reader = new FileReader;
+		            		$("#projectIntroduceImageLi").append(
+		            				"<li id='keyword" + no + "' class='btn-lg btn-bd-keyword d-none d-lg-inline-block m-1' onclick='$('li').remove('#keyword" + no + "')'>" + '#' + toAddKeyword + "<input type='hidden' name='keywords' value='" + '#' + toAddKeyword + "'></li>");
+		    				no++
+		           			reader.onload = function(data){
+		           				$(".select_introduce_img img").attr("src", data.target.result).width(500);
+		           			}
+		           			reader.readAsDataURL(this.files[0]);
+		           		}
+	            	});
+	            	
+			    </script>
+			    	
 		</c:when>
-		<c:when test="${projectIntroduceImage.projectIntroduceImage ne ''}">
-			<input type="hidden" name="projectIntroduceImageUpload" value="${projectIntroduceImage.projectIntroduceImage }">
-			
-			<input type="file" name="projectIntroduceImageUpload"
-				class="form-control-file select-project-image"
-				id="projectIntroduceImage">
-			<div class="select_introduce_img m-3"><img style="width: 250px; height: auto;" src="${projectIntroduceImage.projectIntroduceImage }" /></div>					
+		
+		<c:when test="${projectIntroduceImageList ne null}">
+			<input type="file" name="projectIntroduceImageUpload" 
+					class="form-control-file select-project-image"
+					id="projectIntroduceImage">
+			<ul id="projectIntroduceImageUl">
+	
+				<c:forEach var="projectIntroduceImage" items="${projectIntroduceImageList }" varStatus="step">
+				
+					<input type="hidden" name="projectIntroduceImageUpload" value="${projectIntroduceImage.projectIntroduceImage }">
+					
+					<li id="projectIntroduceImageLi" value="">
+						<div class="select_introduce_img m-3">
+							<img style="width: 200px; height: auto;" src="${projectIntroduceImage.projectIntroduceImage }" />
+						</div>
+					</li>
+					
+				</c:forEach>
+				
+			</ul>
 		</c:when>
 	</c:choose>
 	
 	
-	<script>
-       	$("#projectIntroduceImage").change(function(){
-       		if(this.files && this.files[0]){
-       			var reader = new FileReader;
-       			reader.onload = function(data){
-       				$(".select_introduce_img img").attr("src", data.target.result).width(500);
-       			}
-       			reader.readAsDataURL(this.files[0]);
-       		}
-       	})
-    </script>	
+
     
     
     

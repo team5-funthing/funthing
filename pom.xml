@@ -61,7 +61,7 @@
 			<artifactId>javax.mail</artifactId>
 			<version>1.6.1</version>
 		</dependency>
-		<!-- 메일 관련 api 천기웅 수정! 끝 -->
+		<!--  -->
 
 
 		<!-- javax.mail-api -->

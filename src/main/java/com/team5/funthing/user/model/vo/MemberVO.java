@@ -1,6 +1,8 @@
 package com.team5.funthing.user.model.vo;
 
+import org.springframework.stereotype.Component;
 
+@Component
 public class MemberVO {
 	
 	private String email;
