@@ -123,13 +123,27 @@
 		<span>프로젝트 기간 설정</span>
 		<div class="row">
 			<div class="col-xl-6">
-	            <!-- <input name="startDate" id="start" placeholder="펀딩 시작 날짜"> -->
+	            <input type="text" name="startDate"placeholder="펀딩 시작 날짜">
 	        </div>
-	        <div class="col-xl-6">
-	            <!-- <input name="endDate" id="end" placeholder="펀딩 종료 날짜"> -->
+	        <div>
+	        	
 	        </div>
         </div>
 	</div>
+	
+	<script>
+	
+        $('#datepicker').datepicker({
+            iconsLibrary: 'fontawesome',
+            icons: {
+             rightIcon: '<span class="fa fa-caret-down"></span>'
+         }
+        });
+        
+    </script>
+	
+	
+	
 	<div class="p-2 bd-highlight">
 	
 		 <script>

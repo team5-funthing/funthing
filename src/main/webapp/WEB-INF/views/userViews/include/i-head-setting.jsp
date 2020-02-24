@@ -36,7 +36,12 @@
    <!-- CKEditor4 -->
     <script src="${pageContext.request.contextPath}/resources/common/ckeditor/ckeditor.js"></script>
     
-  
+    <!-- DatePicker -->
+    <script src="${pageContext.request.contextPath}/resources/user/js/datepicker.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/i18n/datepicker.ko.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/datepicker.min.css">
+  	
+    
     <script>
     
     
