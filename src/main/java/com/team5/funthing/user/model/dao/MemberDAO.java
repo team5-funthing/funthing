@@ -33,4 +33,14 @@ public class MemberDAO {
          System.out.println("saveImage 실행");
          sqlSessionTemplate.insert("MemberDAO.saveImage",vo);
       }
+      
+      public void updateMember(MemberVO vo) {
+    	  System.out.println("updateMember 실행 ");
+    	  sqlSessionTemplate.update("MemberDAO.updateMember",vo);
+      }
+      
+      public void deleteMember(MemberVO vo) {
+    	  System.out.println("deleteMember 실행");
+    	  sqlSessionTemplate.delete("MemberDAO.deleteMember", vo);
+      }
 }
