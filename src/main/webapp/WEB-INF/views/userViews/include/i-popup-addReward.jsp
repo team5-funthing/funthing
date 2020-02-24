@@ -5,43 +5,66 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
 
 <!-- 리워드 추가하기 폼  -->
-	<script>
+	<script type="text/javascript">
 		var rewardNo  =2;
 	//	alert(writingProject.projectNo);
 	//	var tt = writingProject.projectNo;
 		
 		//f-create-project-reward의 
-		if(rewardNo !== null){
-			alert("실행된당.");
-		}
+	//	if(rewardNo !== null){
+	//		alert("실행된당.");
+	//	}
 		$(document).ready(function(){
-			$("#getData").click(function(){
-				
-				alert($("#rewardNum").val());
-				return;
-			});			
+			$("#addBtn").click(function(){
+				$("#rewardNum").remove();
+			});
+			$("li").click(function(){
+				var index = $(this).attr('id');
+				var sendData = {indexData : index};
+				$.ajax({
+					type:"POST",
+					url:"getReward.udo",
+					data:sendData,
+					success:function(data){
+						$("<input type='text' id='rewardNum' name='rewardNo' readonly>").insertBefore("input[name=rewardPrice]");
+						var rewardVO = JSON.parse(data);
+						$("input[name=rewardPrice]").val(rewardVO.rewardPrice);
+						$("input[name=rewardName]").val(rewardVO.rewardName);
+						$("textarea[name=rewardContent]").val(rewardVO.rewardContent);
+						$("#categorySelectBox").val(rewardVO.rewardOption).prop("selected",true);
+						$("input[name=shippingFee]").val(rewardVO.shippingFee);
+						$("input[name=rewardAmount]").val(rewardVO.rewardAmount);
+						$("input[name=rewardNo]").val(rewardVO.rewardNo);
+						
+					},
+					error:function(){
+						alert('실패');
+					}
+				});
+			});
 		});
+		
+		
 	</script>
    <!-- ${writingProject.projectNo}를 문자열에서 숫자로 형변환 -->
    <form action="insertReward.udo" method="post" id="reward-popup" class="white-popup-block mfp-hide">
    		<input type="hidden" name="projectNo" value="${projectNo}">
-   		<!-- <input type=""> -->
+
        	<div class="addReward_popup_box">
            <div class="popup_inner">
                <div class="container">
                    <div class="row p-2">
                        <div class="col-1"></div>
                        <div class="col-7 h3" style="color:black; font-weight: bold;">
-                           	리워드 추가  
+                           	리워드 추가 
                        </div>
-                       <button id="getData">값 불러오기</button>
                        <div class="col-3"></div>
                        <div class="col-1"></div>
                    </div>
-
+		
                    <div class="row p-3">
                        <div class="col-4" style="font-weight: bold; color: darkslateblue">금액</div>
-                       <div class="col-5">
+                       <div class="col-5">                
                            <input type="text" name="rewardPrice" class="form-control">
                        </div>
                        <div class="col-2">원</div>
@@ -93,7 +116,7 @@
                                </div>
                                <!-- String인 shippingFee를 number로 바꾸어주는 코드 -->
                                <div class="col-7 p-1">
-                                   <input type="text" name="shippingFee" class="form-control" value = "0">
+                                   <input type="text" name="shippingFee" class="form-control">
                                </div>
                                <div class="col-2">원</div>
                            </div>
@@ -141,6 +164,9 @@
                        </div>
                    </div>
                    <div class="row d-flex justify-content-end">
+                   	   <div>
+                           <input type="submit" formaction="updateReward.udo" value="수정" >
+                       </div>
                        <div>
                            <a id="cancleBtn" class="btn btn-lg btn-report-cancel d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
                                href="showReward.udo?projectNo=${projectNo}" >취소</a>
