@@ -13,7 +13,7 @@
 	<!-- 글수정 -->
 	<update id="updateProjectBoard" parameterType="projectBoard">
 		UPDATE projectboard 
-		SET projectBoardContents = #{projectBoardContents} WHERE projectBoardNo = #{projectBoardNo}
+		SET projectBoardContents = #{projectBoardContents}, projectBoardDate = sysdate WHERE projectBoardNo = #{projectBoardNo}
 	</update>
 	
 	<!-- 선택한 글 select문  -->
@@ -24,6 +24,24 @@
 	<!-- 글삭제  -->
  	<delete id="deleateProjectBoard" parameterType="projectBoard">
 		DELETE FROM projectboard WHERE projectBoardNo = #{projectBoardNo}
+	</delete>
+	
+	
+	
+	<!-- 선택한 답변글 select문  -->
+	<select id="getChoiceProjectBoardReply" parameterType="projectBoard" resultType="projectBoard">
+		SELECT * FROM projectboard WHERE ref = #{ref} and step = #{step}
+	</select>
+	
+	<!-- 선택한 답변글 수정 -->
+	<update id="updateProjectBoardReply" parameterType="projectBoard">
+		UPDATE projectboard 
+		SET projectBoardContents = #{projectBoardContents}, projectBoardDate = sysdate WHERE ref = #{ref} and step = #{step}
+	</update>
+	
+	<!-- 글삭제  -->
+ 	<delete id="deleateProjectBoardReply" parameterType="projectBoard">
+		DELETE FROM projectboard WHERE ref = #{ref} and step = #{step}
 	</delete>
  	
  	
@@ -50,9 +68,6 @@
 		select member.name, projectboard.* from(select * from projectboard where projectNo = ${projectNo} order by ref desc, step asc ) projectboard join member on member.email = projectboard.email
 	</select>
 	
-	<select id="getProjectBoard" parameterType="projectBoard"  resultMap="projectBoard">
-		SELECT * FROM projectBoard where projectNo = ${projectNo}
-	</select>
 	
 	<!-- 답글등록 -->
 	<insert id="insertProjectBoardReply"  parameterType="projectBoard">

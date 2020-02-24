@@ -51,7 +51,7 @@
                                         <table id="myTable" class="display">
                                             <thead>
                                                 <tr>
-                                                    <th>프로젝트명</th>
+                                                    <th>문의번호</th>
                                                     <th>작성자</th>
                                                     <th style="width: 250px">메시지 제목</th>
                                                     <th>작성날짜</th>
@@ -59,20 +59,15 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            <c:forEach var="messagelist" items="${messagelist}">
                                                 <tr>
-                                                    <td>Row 1 Data 1</td>
-                                                    <td>Row 1 Data 2</td>
-                                                    <td>Row 1 Data 1Row 1 Data 1Row 1 Data 1Row 1 Data 1Row 1 Data 1</td>
-                                                    <td>Row 1 Data 2</td>
-                                                    <td>Row 1 Data 2</td>
+                                                    <td>${messagelist.projectAskNo }</td>
+                                                    <td>${messagelist.email }</td>
+                                                    <td>${messagelist.projectAskContentsTitle}</td>
+                                                    <td>${messagelist.projectAskDate}</td>
+                                                    <td>${messagelist.projectAskReplyStatus}</td>
                                                 </tr>
-                                                <tr>
-                                                    <td>Row 1 Data 1</td>
-                                                    <td>Row 1 Data 2</td>
-                                                    <td>Row 1 Data 1</td>
-                                                    <td>Row 1 Data 2</td>
-                                                    <td>Row 1 Data 2</td>
-                                                </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
                                         

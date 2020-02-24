@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.team5.funthing.user.model.vo.MemberActivityVO;
+import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
+import com.team5.funthing.user.service.ProjectAskMessageService.GetMakerMemberCreatorService;
 import com.team5.funthing.user.service.memberActivityService.DeleteMemberActivityService;
 import com.team5.funthing.user.service.memberActivityService.GetMemberActivityListService;
 import com.team5.funthing.user.service.memberActivityService.InsertMemberActivityService;
@@ -35,9 +37,11 @@ public class MemberActivityController {
 	GetProjectServiceByEmail getProjectServiceByEmailService;
 	@Autowired
 	GetProjectService getProjectService;
+	@Autowired
+	GetMakerMemberCreatorService getMakerMemberCreatorService;
 
 	@RequestMapping(value="mypage.udo",method=RequestMethod.GET)
-	public String myPage(HttpSession session,MemberActivityVO vo,ProjectVO vo1,Model model) {
+	public String myPage(HttpSession session,MemberActivityVO vo,ProjectVO vo1,Model model, MemberVO vo2) {
 		System.out.println("마이페이지 이동시 세션에 담긴 이메일 확인:"+session.getAttribute("memberSessionEmail"));
 		myProjectList(vo1, model, session);
 		myLikeProjectList(session, vo, vo1, model);
@@ -46,6 +50,8 @@ public class MemberActivityController {
 		System.out.println(model.getAttribute("projectLikeList"));
 		System.out.println(model.getAttribute("projectReportList"));
 		System.out.println(model.getAttribute("projectReservationList"));
+		
+		
 		return "p-detail-mypage";
 	}  
 	
