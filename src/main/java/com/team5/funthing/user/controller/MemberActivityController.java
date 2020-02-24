@@ -42,16 +42,12 @@ public class MemberActivityController {
 
 	@RequestMapping(value="mypage.udo",method=RequestMethod.GET)
 	public String myPage(HttpSession session,MemberActivityVO vo,ProjectVO vo1,Model model, MemberVO vo2) {
-		System.out.println("¸¶ÀÌÆäÀÌÁö ÀÌµ¿½Ã ¼¼¼Ç¿¡ ´ã±ä ÀÌ¸ŞÀÏ È®ÀÎ:"+session.getAttribute("memberSessionEmail"));
+		System.out.println("ë§ˆì´í˜ì´ì§€ ì´ë™ì‹œ ì„¸ì…˜ì— ë‹´ê¸´ ì´ë©”ì¼ í™•ì¸:"+session.getAttribute("memberSessionEmail"));
 		myProjectList(vo1, model, session);
 		myLikeProjectList(session, vo, vo1, model);
 		myReportProjectList(session, vo, vo1, model);
 		myReservationProjectList(session, vo, vo1, model);
-		System.out.println(model.getAttribute("projectLikeList"));
-		System.out.println(model.getAttribute("projectReportList"));
-		System.out.println(model.getAttribute("projectReservationList"));
-		
-		
+
 		return "p-detail-mypage";
 	}  
 	
@@ -64,7 +60,7 @@ public class MemberActivityController {
 //	=============================================================================
 	public void myProjectList(ProjectVO vo,Model model,HttpSession session) {
 		vo.setEmail((String)session.getAttribute("memberSessionEmail"));
-		System.out.println("myprojectVO ÀÇ email°ª :"+vo.getEmail());
+		System.out.println("myprojectVO ì˜ emailê°’ :"+vo.getEmail());
         System.out.println(getProjectServiceByEmailService.getProjectListByEmail(vo).toString());
 		model.addAttribute("myProjectList",getProjectServiceByEmailService.getProjectListByEmail(vo));
 	}
