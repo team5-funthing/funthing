@@ -52,7 +52,7 @@
 							class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2"
 							href="#">좋아요</a> <a
 							class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2"
-							href="#">문의하기</a> <a
+							href="showInsertwAskMessage.udo?projectNo=${vo.projectNo }">문의하기</a> <a
 							class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2"
 							href="#">공유하기</a>
 
@@ -244,12 +244,33 @@
 																</h5>
 																<p class="date">${b1.projectBoardDate}</p>
 															</div>
-															<div class="reply-btn">
-					                                           <a type="submit" href="projectAskReply.html"
-					                                              class="button button-contactForm btn_1 boxed-btn pt-1 pl-3 pr-3 pb-1">
-					                                              Reply
-					                                           </a>
-															</div>
+															<c:choose>
+																<c:when
+																	test="${ b1.email eq sessionScope.memberSessionEmail }">
+
+																	<div class="reply-btn">
+																		<a type="submit" href="getProjectBoard.udo?projectBoardNo=${b1.projectBoardNo }"
+																			class="button button-contactForm btn_1 boxed-btn pt-1 pl-2 pr-2 pb-0">
+																			수정 </a> 
+																		<a type="submit" href="deleteProjectBoard.udo?projectBoardNo=${b1.projectBoardNo }"
+																			class="button button-contactForm btn_1 boxed-btn pt-1 pl-2 pr-2 pb-0">
+																			삭제 </a>
+
+																	</div>
+
+																</c:when>
+
+
+																<c:when
+																	test="${sessionScope.memberSessionEmail eq 'shn807@naver.com' }">
+
+																		<div class="reply-btn">
+																			<a type="submit" href="replyBoard.udo?projectBoardNo=${b1.projectBoardNo }"
+																				class="button button-contactForm btn_1 boxed-btn pt-1 pl-3 pr-3 pb-1">
+																				Reply </a>
+																		</div>
+																	</c:when>
+															</c:choose>
 														</div>
 														
 														<!-- projectBoard Reply 시작 -->
@@ -274,18 +295,20 @@
 							                                                          </h5>
 							                                                          <p class="date">${b2.projectBoardDate}</p>
 							                                                       </div>
-							                                                       <div class="reply-btn">
-							                                                       		<a type="submit" href="projectAskReply.html"
-											                                               class="button button-contactForm btn_1 boxed-btn pt-1 pl-2 pr-2 pb-0">
-											                                              	수정
-											                                            </a>
-											                                            <a type="submit" href="projectAskReply.html"
-											                                               class="button button-contactForm btn_1 boxed-btn pt-1 pl-2 pr-2 pb-0">
-											                                              	 삭제
-											                                            </a>
-											                                           
-																				   </div>
-							                                                    </div>
+							                                                       <c:if test="${ b2.email eq sessionScope.memberSessionEmail }">
+							                                                       	<form action="getProjectBoardReply.udo" method="post">
+																						<div class="reply-btn">
+																							<input type="submit" 
+																							class="button button-contactForm btn_1 boxed-btn pt-1 pl-2 pr-2 pb-0" value="수정">
+																								 <input type="submit" formaction="deleteProjectBoardReply.udo"
+																								class="button button-contactForm btn_1 boxed-btn pt-1 pl-2 pr-2 pb-0" value="삭제"> 
+																								<input type="hidden" name="step" id="step" value="${b2.step}"> 
+																								<input type="hidden" name="ref" id="ref" value="${b2.ref}">
+
+																								</div>
+																						</form>
+																					</c:if>
+																					</div>
 							                                                </div>
 							                                             </div>
 							                                          </div>
@@ -293,6 +316,7 @@
 							                                       <div class="d-flex align-items-center">
 							                                       </div>
 							                                    </div>
+							                                 
 							                            	</c:if>
 					                                    </c:forEach>
 														<!-- projectBoard Reply 끝 -->

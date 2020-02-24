@@ -7,17 +7,19 @@ import org.springframework.stereotype.Service;
 
 import com.team5.funthing.user.model.dao.ProjectBoardDAO;
 import com.team5.funthing.user.model.vo.ProjectBoardVO;
-import com.team5.funthing.user.service.projectBoardService.GetProjectBoardService;
+import com.team5.funthing.user.service.projectBoardService.GetChoiceProjectBoardReplyService;
 
 @Service
-public class GetProjectBoardServiceImpl implements GetProjectBoardService {
+public class GetChoiceProjectBoardReplyServiceImpl implements GetChoiceProjectBoardReplyService {
 	
 	@Autowired
 	private ProjectBoardDAO projectBoardDAO;
 	
+
 	@Override
-	public List<ProjectBoardVO> getProjectBoard(ProjectBoardVO vo) {
-		return projectBoardDAO.getProjectBoard(vo);
+	public ProjectBoardVO getChoiceProjectBoardReply(ProjectBoardVO vo) {
+		// TODO Auto-generated method stub
+		return projectBoardDAO.getChoiceProjectBoardReply(vo);
 	}
 
 }
