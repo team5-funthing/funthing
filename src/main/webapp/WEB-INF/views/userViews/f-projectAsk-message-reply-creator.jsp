@@ -75,13 +75,24 @@
                         </div>
                          <div class="col-sm-6">
                               <div class="form-group">
-                                 <input class="form-control" name="creator" id="creator" type="text" value="${choiceProjectAskMessage.creator }" placeholder="창작자명">
+                                 <input class="form-control" name="creator" id="creator" type="text" value="${vo3.creator }" placeholder="창작자명">
                               </div>
                            </div>
-                          
+                           <div class="col-sm-6">
+                              <div class="form-group">
+                                 <input class="form-control" name="email" id="email" type="email" value="${sessionScope.memberSessionEmail}" placeholder="Email">
+                              </div>
+                           </div>
                         </div>
                         
                   </div>
+                 <!-- 미답변일때 나오는 버튼  (단!,크리에이터일때만 )-->        
+                  <c:if test="${choiceProjectAskMessage.projectAskReplyStatus eq '미답변' }">
+                  <div class="form-group">
+                     <input type="submit" class="button button-contactForm btn_1 boxed-btn" value="작성하기">
+                     <input type="hidden" name="projectAskReplyStatus" value="답변완료">  
+                  </div>
+                  </c:if>
                  
                   </form>
                   
