@@ -17,6 +17,13 @@
 
 	<dependencies>
 		
+		<!-- java객체를 JSON String으로 바꾸어주는 라이브러리 -->
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+    		<groupId>com.fasterxml.jackson.core</groupId>
+    		<artifactId>jackson-databind</artifactId>
+    		<version>2.9.9</version>
+		</dependency>
 		
 		<!-- thumbnailator -->
 		<dependency>

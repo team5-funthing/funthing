@@ -11,7 +11,7 @@
 </div>
 <div class="p-2 bd-highlight">
 
-	<a class="popup-with-form btn btn-lg btn-registry-way d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
+	<a id="addBtn" class="popup-with-form btn btn-lg btn-registry-way d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
 		href="#reward-popup">추가하기</a>
 			
 	<ul id="addedKeyords">
@@ -20,21 +20,18 @@
 			</c:when>
 			<c:when test="${rewardList ne null }">
 				<c:forEach var="addedReward" items="${rewardList}">
-					<li>
-						${addedReward}
-						<form method="post" action="deleteReward.udo">
-							<input type="hidden" name="projectNo" value="${addedReward.projectNo}">
-							<input type="hidden" id="rewardNum" name="rewardNo" value="${addedReward.rewardNo}">
-							<div class="card m-4" style="width: 25rem;">
-							  	<div class="card-body">
-								    <h5 class="price">${addedReward.rewardPrice}</h5>
-								    <h6 class="rewardname">${addedReward.rewardName}</h6>
-								    <p class="rewardContent">${addedReward.rewardContent}</p>
-								    <a href="#reward-popup" class="popup-with-form editReward">편집</a> 
-								    <input type="submit" value="삭제">
-							  	</div>
-							 </div>
-						 </form>
+					<li id="${addedReward.rewardNo}">
+						<input type="hidden" name="rewardNo" value="${addedReward.rewardNo}">
+						<input type="hidden" name="projectNo" value="${addedReward.projectNo}">
+						<div class="card m-4" style="width: 25rem;">
+							<div class="card-body">
+								<h5 class="price">${addedReward.rewardPrice}</h5>
+								<h6 class="rewardname">${addedReward.rewardName}</h6>
+								<p class="rewardContent">${addedReward.rewardContent}</p>
+								<a href="#reward-popup" class="popup-with-form editReward">편집</a>
+								<input type="submit" formaction="deleteReward.udo?projectNo=${projectNo}&rewardNo=${addedReward.rewardNo}" value="삭제">
+							</div>
+						</div>
 					</li>
 				</c:forEach>
 			</c:when>

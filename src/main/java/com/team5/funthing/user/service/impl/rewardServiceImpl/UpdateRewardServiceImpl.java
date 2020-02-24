@@ -14,7 +14,7 @@ public class UpdateRewardServiceImpl implements UpdateRewardService {
 	private RewardDAO rewardDAO;
 	
 	public int updateReward(RewardVO vo) {
-		return rewardDAO.deleteReward(vo);
+		return rewardDAO.updateReward(vo);
 	}
 	
 }
