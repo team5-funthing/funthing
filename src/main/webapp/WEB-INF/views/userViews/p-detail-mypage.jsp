@@ -39,9 +39,11 @@
                      <div class="d-inline-flex p-2 bd-highlight">
                         <a
                            class="btn btn-lg btn-detail-mypage d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
-                           href="showMyPageMessage.udo?email=${sessionScope.memberSessionEmail }?creator=${memberVO.creator}">메세지</a>
+                           href="showDetailMyPage.udo">메세지</a>
                        <input type="hidden" name="email" value="${sessionScope.memberSessionEmail}">
-                       <input type="hidden" name="creator" value="${memberVO.creator}">
+                       
+                    
+                     
                            
                      </div>
                      <div class="d-inline-flex p-2 bd-highlight">
