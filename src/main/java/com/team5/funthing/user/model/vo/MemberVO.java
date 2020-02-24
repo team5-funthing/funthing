@@ -12,8 +12,11 @@ public class MemberVO {
 	private String introduce;
 	private String myImage;
 	private String report;
+
+
 	private String position;
-	
+
+
 	private CreatorVO creator;
 	
 	
@@ -94,9 +97,13 @@ public class MemberVO {
 	@Override
 	public String toString() {
 		return "MemberVO [email=" + email + ", password=" + password + ", name=" + name + ", phone=" + phone
-				+ ", introduce=" + introduce + ", myImage=" + myImage + ", report=" + report + ", creator=" + creator
-				+ "]";
+				+ ", introduce=" + introduce + ", myImage=" + myImage + ", report=" + report + ", position=" + position
+				+ ", creator=" + creator + "]";
 	}
+
+	
+
+	
 	
 	
 	

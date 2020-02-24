@@ -9,7 +9,7 @@ public class RewardVO {
 	private int projectNo;
 	private String rewardName;
 	private String rewardContent;
-	private String rewardOption;		//CRUD 테스트를 위하여 한줄의 글로 입력
+	private String rewardOption;
 	//private List<String> rewardOption;
 	private int shippingFee;
 	private int rewardAmount;
@@ -44,7 +44,14 @@ public class RewardVO {
 	public void setRewardName(String rewardName) {
 		this.rewardName = rewardName;
 	}
-//	public List<String> getRewardOption() {
+	
+	public String getRewardOption() {
+		return rewardOption;
+	}
+	public void setRewardOption(String rewardOption) {
+		this.rewardOption = rewardOption;
+	}
+	//	public List<String> getRewardOption() {
 //		return rewardOption;
 //	}
 //	public void setRewardOption(List<String> rewardOption) {
@@ -52,12 +59,6 @@ public class RewardVO {
 //	}
 	public String getRewardContent() {
 		return rewardContent;
-	}
-	public String getRewardOption() {
-		return rewardOption;
-	}
-	public void setRewardOption(String rewardOption) {
-		this.rewardOption = rewardOption;
 	}
 	public void setRewardContent(String rewardContent) {
 		this.rewardContent = rewardContent;
@@ -74,11 +75,6 @@ public class RewardVO {
 				+ ", rewardName=" + rewardName + ", rewardContent=" + rewardContent + ", rewardOption=" + rewardOption
 				+ ", shippingFee=" + shippingFee + ", rewardAmount=" + rewardAmount + "]";
 	}
-	
-	
-	
-	
-	
 	
 	
 }

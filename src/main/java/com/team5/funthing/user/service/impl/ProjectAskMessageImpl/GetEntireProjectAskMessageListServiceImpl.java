@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.team5.funthing.user.model.dao.ProjectAskMessageDAO;
 import com.team5.funthing.user.model.vo.ProjectAskMessageVO;
-import com.team5.funthing.user.service.projectAskMessageService.GetEntireProjectAskMessageListService;
+import com.team5.funthing.user.service.ProjectAskMessageService.GetEntireProjectAskMessageListService;
 
 @Service
 public class GetEntireProjectAskMessageListServiceImpl implements GetEntireProjectAskMessageListService {

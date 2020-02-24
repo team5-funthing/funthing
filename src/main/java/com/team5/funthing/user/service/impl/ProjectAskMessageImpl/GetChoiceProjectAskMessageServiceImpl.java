@@ -5,7 +5,8 @@ import org.springframework.stereotype.Service;
 
 import com.team5.funthing.user.model.dao.ProjectAskMessageDAO;
 import com.team5.funthing.user.model.vo.ProjectAskMessageVO;
-import com.team5.funthing.user.service.projectAskMessageService.GetChoiceProjectAskMessageService;
+import com.team5.funthing.user.service.ProjectAskMessageService.GetChoiceProjectAskMessageService;
+
 
 @Service
 public class GetChoiceProjectAskMessageServiceImpl implements GetChoiceProjectAskMessageService {

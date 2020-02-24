@@ -48,9 +48,20 @@ public class ProjectBoardDAO {
 		System.out.println("프로젝트 답글 입력");
 		
 	}
-	public List<ProjectBoardVO> getProjectBoard(ProjectBoardVO vo) {
-		System.out.println("프로젝트보드에 있는거 다 가져오기");
+
+	public ProjectBoardVO getChoiceProjectBoardReply(ProjectBoardVO vo) {
+		System.out.println("프로젝트 답글 정보 가져오기");
+		return projectBoardSqlSessionTemplate.selectOne("ProjectBoardDAO.getChoiceProjectBoardReply",vo);
+	}
+	
+	public void updateProjectBoardReply(ProjectBoardVO vo) {
+		projectBoardSqlSessionTemplate.update("ProjectBoardDAO.updateProjectBoardReply", vo);
+		System.out.println("프로젝트 답글 정보 수정하기");
 		
-		return projectBoardSqlSessionTemplate.selectList("ProjectBoardDAO.getProjectBoard",vo);
+	}
+	public void deleateProjectBoardReply(ProjectBoardVO vo) {
+		projectBoardSqlSessionTemplate.delete("ProjectBoardDAO.deleateProjectBoardReply", vo);
+		System.out.println("프로젝트 답글 삭제  ");
+		
 	}
 }
