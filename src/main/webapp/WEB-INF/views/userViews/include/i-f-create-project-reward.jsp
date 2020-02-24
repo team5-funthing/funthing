@@ -14,7 +14,7 @@
 	<a id="addBtn" class="popup-with-form btn btn-lg btn-registry-way d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
 		href="#reward-popup">추가하기</a>
 			
-	<ul id="addedKeyords">
+	<ul id="">
 		<c:choose>
 			<c:when test="${rewardList eq null }">
 			</c:when>

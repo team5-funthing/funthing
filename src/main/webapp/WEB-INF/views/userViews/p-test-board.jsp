@@ -8,10 +8,16 @@
 <title>게시판글목록</title>
 </head>
 <body>
-	
+	<h1>
+	메이커에게 문의하기 
+	<form action="insertNewAskMessage.udo" method="post">
+	<input type="submit" value="문의글작성하기">
+	</form>
+	</h1>
+
 	<h1>
 	게시판
-	<form action="newBoard.udo" method="post">
+	<form action="insertNewBoard.udo" method="post">
 	<input type="submit" name="newText" value="새글작성">
 	</form>
 	</h1>
@@ -37,8 +43,8 @@
 				<c:choose>
 					<c:when test="${ board.email eq sessionScope.memberSessionEmail }">
 						<tr>
-							<td colspan="5"><input type="submit" value="수정"></input> <input
-								type="submit" formaction="deleteProjectBoard.udo" value="삭제"></input>
+							<td colspan="5"><input type="submit" value="수정"></input> 
+							<input type="submit" formaction="deleteProjectBoard.udo" value="삭제"></input>
 
 							</td>
 

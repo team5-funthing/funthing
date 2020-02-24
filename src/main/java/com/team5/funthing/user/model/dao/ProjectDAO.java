@@ -1,5 +1,7 @@
 package com.team5.funthing.user.model.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,31 +20,26 @@ public class ProjectDAO {
 	}
 	
 	public ProjectVO insertProject(ProjectVO vo) { // 입력|임시 저장 시에 사용 될 메서드
-		
-		System.out.println(" DAO(before) : " + vo.getProjectNo());
-		sqlSessionTemplate.insert("ProjectDAO.insertProject", vo);
-		System.out.println(" DAO(after) : " + vo.getProjectNo());
+		sqlSessionTemplate.insert("insertProject", vo);
 		return vo;
 	}
 	
 	public void updateProject(ProjectVO vo) {
-		
-		System.out.println(" DAO(update before) : " + vo.toString());
-		sqlSessionTemplate.update("ProjectDAO.updateProject", vo);
-		System.out.println(" DAO(update after) : " + vo.toString());
-		
+		sqlSessionTemplate.update("updateProject", vo);
 	}
 	
 	public void deleteProject(ProjectVO vo) {
 		
 	}
 	
-	public ProjectVO getProejct(ProjectVO vo) {
-		return sqlSessionTemplate.selectOne("ProjectDAO.getProject", vo);
+	public ProjectVO getProject(ProjectVO vo) {
+		return sqlSessionTemplate.selectOne("getProject", vo);
 	}
 	
 	
-	
+	public List<ProjectVO> getProjectListByEmail(ProjectVO vo){
+		return sqlSessionTemplate.selectList("getProjectListByEmail",vo);
+	}
 	
 	
 	

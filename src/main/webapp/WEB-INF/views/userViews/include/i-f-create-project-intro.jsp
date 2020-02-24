@@ -1,15 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 	
 <div class="h4" style="color: black; font-weight: bolder;">프로젝트 소개</div>
 <div class="d-flex flex-column bd-highlight mb-3">
 
-	<script>
-		$(document).ready(function(){
-			$("#categorySelectBox").val("${writingProject.category }").prop("selected", true);
-		});
-	</script>
 	
 	<div class="p-2 bd-highlight">
 		<span>펀딩 목표 금액</span>
@@ -102,9 +98,13 @@
 	</div>
 	<div class="p-2 bd-highlight">
 		<span>프로젝트 분류[카테고리]</span>
-		
-			<select id="categorySelectBox" name="category" class="custom-select">
-		  		<option selected>카테고리 선택</option>
+			
+			<script>
+				$(document).ready(function(){		
+					$("#categorySelectBox").val("${writingProject.category }").prop("selected", true);
+				});
+			</script>
+			<select id="categorySelectBox" name="category" class="custom-select" >
 				<option value="book">도서</option>
 				<option value="publish">출판</option>
 				<option value="performance">공연</option>
@@ -123,28 +123,71 @@
         </div>
 	</div>
 	<div class="p-2 bd-highlight">
+	
+		 <script>
+		
+		        $(function (){
+		        	const no = 1;
+		        	$("#addKeywordBtn").removeAttr("href");
+		        	$("#addKeywordBtn").click(function(){
+			        	var toAddKeyword = $("input[name=projectKeyword]").val();
+			        	if(toAddKeyword != ""){
+			        		$("#addedKeywords").append(
+			        				"<li id='keyword" + no + "' class='btn-lg btn-bd-keyword d-none d-lg-inline-block m-1' onclick='$('li').remove('#keyword" + no + "')'>" + '#' + toAddKeyword + "<input type='hidden' name='keywords' value='" + '#' + toAddKeyword + "'></li>");
+							no++
+			        	}
+		        	})
+		        })
+	         
+		        $(function (){
+		        	$(".addedKeyword").removeAttr("href")
+		      
+			    })
+			    
+		</script>
+	
+	
 		<span>검색용 태그* </span>
-		<div class="row d-flex align-items-center">
+		<div class="row d-flex align-items-center mb-5">
+		
 			<div class="col-xl-6">
-				<input type="text" id="keyword" name="projectKeyword" placeholder="#검색 키워드를 입력해주세요."onfocus="this.placeholder = ''"
-					class="single-input">
+				<input type="text" id="keyword" name="projectKeyword" placeholder="#검색 키워드를 입력해주세요." onfocus="this.placeholder = ''" class="single-input">
 			</div>
-			<a href="#" id="addKeywordBtn"><i class="fas fa-plus fa-1x"></i></a>
+			
+			<a href="#" id="addKeywordBtn"><i class="fas fa-plus fa-2x"></i></a>
+			
 		</div>
-		<div class="row d-flex align-items-center">
-			<div class="col-xl-12 d-flex flex-wrap">
+		
+
+																									<!--     	${fn:length(list) }		    -->
+		<div class="row d-flex align-content-between flex-wrap">
+			<div class="col-xl-12 d-flex bd-highlight mb-3">
 				<ul id="addedKeywords">
+				
+					<c:set var="tag" value="#"/>
+					<c:set var="keywordId" value="keyword"/>
+					
 					<c:choose>
-						<c:when test="${writingProject.projectKeyword eq null }">
+					
+						<c:when test="${addedKeywordList eq null }">
 						</c:when>
-						<c:when test="${writingProject.projectKeyword ne null }">
-							<c:forEach var="keyword" items="${writingProject.projectKeyword }">
-								<li>${keyword }</li><input type="hidden" name="projectKeyword" value="${keyword }">
+						<c:when test="${addedKeywordList ne null }">
+						
+							<c:forEach var="addedKeyword" items="${addedKeywordList }" varStatus="step">
+							
+								<li id="${keywordId }${step.count}" class="btn-lg btn-bd-keyword d-none d-lg-inline-block m-1" onclick=" $('li').remove('#${keywordId }${step.count}')">
+									<a href="#" class="addedKeyword">${tag }${addedKeyword.keyword }</a>
+									<input type="hidden" name="keywords" value="${tag }${addedKeyword.keyword }">
+								</li>
+								
 							</c:forEach>
+							
 						</c:when>
 					</c:choose>
+
 				</ul>
 			</div>
 		</div>
+		
 	</div>
 </div>

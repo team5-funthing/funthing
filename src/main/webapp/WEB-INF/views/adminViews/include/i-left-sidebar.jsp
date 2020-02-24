@@ -23,7 +23,7 @@
                         	</a>
                         </li>
                         <li class="sidebar-item"> 
-                        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="memberManagement.ado" aria-expanded="false">
+                        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="getMemberList.ado" aria-expanded="false">
                                 <i class="mdi mdi-account-multiple"></i>
                                 <span class="hide-menu">회원관리</span>
                             </a>

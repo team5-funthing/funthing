@@ -2,7 +2,9 @@ package com.team5.funthing.common.utils.uploadUtils;
 
 import java.io.File;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,31 +44,50 @@ public class UploadUtilImpl implements UploadUtil {
 //	static final int THUMB_WIDTH = 300;
 //	static final int THUMB_HEIGHT = 300;
 
+	
 	@Override
-	public String upload(MultipartFile uploadFile, String voName, String toRemoveFilePath) throws Exception {
+	public List<String> upload(List<MultipartFile> uploadFiles, String voName, List<String> toRemoveFilePath) throws Exception {
 		
+		List<String> uploadCompletePaths = new ArrayList<String>();
+		
+		String realPath = initRealPathController.getRealPath(); // 업로드 파일의 실제 저장될 경로 
 		String temp = voName.replace("VO", "");
 		String dirName = File.separator + temp.substring(0, 1).toLowerCase() + temp.substring(1); // vo 클래스 네임을 폴더 명으로 사용하기 위한 변수 ex) ProjectVO ---> project
-
-		//이미지 바꾸기 시에 수행 되는 메서드
-		remove(toRemoveFilePath, dirName);
-		
-		String realPath = initRealPathController.getRealPath(); // 업로드 파일의 실제 저장될 경로
-		String dirPath = calcPath(realPath, dirName); // 
+		String dirPath = calcPath(realPath, dirName);
 		String fileName = null;
-		
-		//경로에 따른 폴더 및 파일 생성 코드
-		if(uploadFile != null) {
-			fileName = fileUpload(realPath, uploadFile.getOriginalFilename(), uploadFile.getBytes(), dirPath);
-		}else {
-			System.out.println("업로드 할 파일 없이 실행 ");
-			return null;
+				
+				
+		//이미지 바꾸기 시에 수행 되는 메서드
+		if(toRemoveFilePath != null) {
+			for(String removePath : toRemoveFilePath) {
+				remove(removePath, dirName);
+			}
 		}
 		
-		//DB에 저장할 경로
-		return File.separator + "funthing" + File.separator + "resources" + File.separator + "upload" + dirPath + File.separator + fileName; 
+		for(MultipartFile uploadFile : uploadFiles) {
+			
+			//경로에 따른 폴더 및 파일 생성 코드
+			if(uploadFile != null) {
+				String originalFileName = uploadFile.getOriginalFilename().trim();
+				if( originalFileName != "") {
+					
+					fileName = fileUpload(realPath, uploadFile.getOriginalFilename(), uploadFile.getBytes(), dirPath);
+					
+				}else {
+					return null;
+				}
+			}else {
+				System.out.println("업로드 할 파일 없이 실행 ");
+				return null;
+			}
+			
+			//DB에 저장할 경로
+			String completePath = File.separator + "funthing" + File.separator + "resources" + File.separator + "upload" + dirPath + File.separator + fileName;
+			uploadCompletePaths.add(completePath);
 
-
+		}
+		
+		return uploadCompletePaths;
 	}
 
 	@Override
@@ -125,6 +146,11 @@ public class UploadUtilImpl implements UploadUtil {
 	public void remove(String filePath, String voName) {
 		
 		// dirIndex에 -1이 들어오면 업로드를 처음 요청하는 상황이므로  바로 return: 메서드 종료
+		
+		if(filePath == null){
+			return;
+		}
+		
 		int dirIndex = filePath.indexOf(voName);
 		if (dirIndex == -1 ) {
 			System.out.println("업로드 첫 요청");

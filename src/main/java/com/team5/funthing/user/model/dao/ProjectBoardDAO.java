@@ -36,7 +36,7 @@ public class ProjectBoardDAO {
 		return getProjectBoardList;
 
 	}
-	public String getChoiceProjectBoard(ProjectBoardVO vo) {
+	public ProjectBoardVO getChoiceProjectBoard(ProjectBoardVO vo) {
 		
 		System.out.println("프로젝트 게시판 선택한 글 수정하기");
 		return projectBoardSqlSessionTemplate.selectOne("ProjectBoardDAO.getChoiceProjectBoard", vo);
@@ -47,5 +47,10 @@ public class ProjectBoardDAO {
 		projectBoardSqlSessionTemplate.insert("ProjectBoardDAO.insertProjectBoardReply", vo);
 		System.out.println("프로젝트 답글 입력");
 		
+	}
+	public List<ProjectBoardVO> getProjectBoard(ProjectBoardVO vo) {
+		System.out.println("프로젝트보드에 있는거 다 가져오기");
+		
+		return projectBoardSqlSessionTemplate.selectList("ProjectBoardDAO.getProjectBoard",vo);
 	}
 }

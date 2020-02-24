@@ -17,8 +17,8 @@
 	</update>
 	
 	<!-- 선택한 글 select문  -->
-	<select id="getChoiceProjectBoard" parameterType="projectBoard" resultType="String">
-		SELECT projectboardcontents FROM projectboard WHERE projectBoardNo = #{projectBoardNo}
+	<select id="getChoiceProjectBoard" parameterType="projectBoard" resultType="projectBoard">
+		SELECT * FROM projectboard WHERE projectBoardNo = #{projectBoardNo}
 	</select>
 	
 	<!-- 글삭제  -->
@@ -36,16 +36,23 @@
 
 	<resultMap type="projectBoard" id="projectBoard">
 		<result column="email" property="email" />
+		<result column="projectNo" property="projectNo"/>
 		<result column="projectBoardContents" property="projectBoardContents" />
 		<result column="projectBoardDate" property="projectBoardDate" />
 		<result column="projectBoardNo" property="projectBoardNo" />
+		<result column="step" property="step" />
+		<result column="ref" property="ref" />
+		
 		<collection property="Member" resultMap="Member"></collection>
 	</resultMap>
- 	
+	
  	<select id="getEntireProjectBoardList" parameterType="projectBoard"  resultMap="projectBoard">
-		select member.name,projectboard.* from(select * from projectboard order by ref desc, step asc) projectboard join member on member.email = projectboard.email
+		select member.name, projectboard.* from(select * from projectboard where projectNo = ${projectNo} order by ref desc, step asc ) projectboard join member on member.email = projectboard.email
 	</select>
 	
+	<select id="getProjectBoard" parameterType="projectBoard"  resultMap="projectBoard">
+		SELECT * FROM projectBoard where projectNo = ${projectNo}
+	</select>
 	
 	<!-- 답글등록 -->
 	<insert id="insertProjectBoardReply"  parameterType="projectBoard">

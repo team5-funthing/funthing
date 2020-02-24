@@ -35,24 +35,40 @@ public class ProjectBoardController {
 	private InsertProjectBoardReplyService insertProjectBoardReplyService;
 
 	
+	@RequestMapping(value="projectDetails.udo", method = RequestMethod.GET)
+	public String projectDetails(ProjectBoardVO vo, Model model) { //이미지클릭시 프로젝트 상세 페이지로 이동
+		
+		vo.setProjectNo(2020); //이부분 나중에 바꿔야됨 지금은 임시로 프로젝트 넘버 생성
+		
+		System.out.println("프로젝트 게시판 글 가져오기 ");
+		List<ProjectBoardVO> getProjectBoardList = getEntireProjectBoardListService.getEntireProjectBoardList(vo);
+		model.addAttribute("getProjectBoard", getProjectBoardList); //전체목록리스트 이름이랑 같이 조인해서 가져오기
+		
+		for(ProjectBoardVO list : getProjectBoardList) {
+        	System.out.println("list 확인하는곳 "+ list.toString());
+	    }
+		
+		return "p-project-details"; //글 작성하는곳
+	}
+	
 	
 	@RequestMapping(value = "insertProjectBoard.udo", method = RequestMethod.POST )
-	public String insertProjectBoard(ProjectBoardVO vo, Model model) { //새글등록하기
+	public String insertProjectBoard(ProjectBoardVO vo) { //새글등록하기
 		
-		System.out.println("글등록한다");
-		vo.setProjectNo(2020); //이부분 나중에 바꿔야됨 지금은 임시로 프로젝트 넘버 생성
+		System.out.println("프로젝트 게시판 새글등록한다");
+		
 		
 		insertProjectBoardService.insertProjectBoard(vo);
 		
-		List<ProjectBoardVO> getProjectBoardList = getEntireProjectBoardListService.getEntireProjectBoardList(vo);
-		model.addAttribute("list", getProjectBoardList); //전체목록리스트 가져오기
-		
-		return "p-test-board"; //전체글 보여주는 곳 
-			
+		return "redirect: projectDetails.udo";
 		
 	}
 	
-	@RequestMapping(value="newBoard.udo", method = RequestMethod.POST)
+	
+	
+	
+	
+	@RequestMapping(value="insertNewBoard.udo", method = RequestMethod.POST)
 	public String newProjectBoard() { //새글작성화면으로 가기
 		
 		return "p-test-board-write"; //글 작성하는곳
@@ -104,7 +120,7 @@ public class ProjectBoardController {
 		
 		System.out.println("글수정할 글 넘기기");
 			
-		String getProjectboardcontents = getChoiceProjectBoardService.getChoiceProjectBoard(vo); //컨텐츠 글 가져오기 
+		String getProjectboardcontents = getChoiceProjectBoardService.getChoiceProjectBoard(vo).getProjectBoardContents(); //컨텐츠 글 가져오기 
 		vo.setProjectBoardContents(getProjectboardcontents);
 		model.addAttribute("vo", vo);	
 

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -47,12 +48,6 @@ public class MemberController {
 	public String showindex() {
 		return "p-index";
 	}
-	
-	@RequestMapping("mem.udo") //하늘실험용
-	public String showsky(HttpSession session, MemberVO vo) {
-		
-		return "p-test-board-write";
-	}
 
 	@RequestMapping(value="socialLogin.udo",method=RequestMethod.GET)
 	public String socialLogin() {   
@@ -64,7 +59,9 @@ public class MemberController {
 
 		if(getMemberService.getMember(vo) != null) { 
 			if(getMemberService.getMember(vo).getPassword().equals(request.getParameter("password"))) { 
+			
 				session.setAttribute("memberSessionEmail", getMemberService.getMember(vo).getEmail());
+				System.out.println(""+session.getAttribute("memberSessionEmail"));
 				session.setAttribute("memberSessionName", getMemberService.getMember(vo).getName());
 				if(session.getAttribute("myprifile")!=null) {
 					session.setAttribute("myprofile", getMemberService.getMember(vo).getMyImage()); 
@@ -81,7 +78,7 @@ public class MemberController {
 
 	@RequestMapping(value="getMember.udo", method=RequestMethod.POST) 
 	public void getMember(MemberVO vo, HttpServletRequest request,HttpSession session,HttpServletResponse response) throws IOException {
-        System.out.println("而⑦럩�뒪�쐞移� 由ы꽩媛� :"+request.getParameter("confirm-switch"));
+
 		if(getMemberService.getMember(vo) != null) { 
 			if(getMemberService.getMember(vo).getPassword().equals(request.getParameter("password"))) { 
 				if(request.getParameter("confirm-switch") != null) {
@@ -99,12 +96,12 @@ public class MemberController {
 				}
 				session.setAttribute("memberSessionEmail", getMemberService.getMember(vo).getEmail());
 				session.setAttribute("memberSessionName", getMemberService.getMember(vo).getName());
-				session.setAttribute("memberSessionPosition", getMemberService.getMember(vo).getPosition());
 			    if(session.getAttribute("myprifile")!=null) {
 				session.setAttribute("myprofile", getMemberService.getMember(vo).getMyImage()); 
 			    }
+
 				response.sendRedirect("member.udo");
-//				response.sendRedirect("mem.udo"); //하늘실험중
+
 			}else {
 				response.sendRedirect("findpw.udo");
 			}
@@ -167,7 +164,8 @@ public class MemberController {
 	public String certificationEmail(MemberVO vo,HttpSession session) {
 		try {
 			String certificationCode = sendMailUtil.createCertificationCode(50);
-			sendMailUtil.sendMail("[Funthing] �씤利앸쾲�샇 ", "�씤利앸쾲�샇 ["+certificationCode+"]", vo.getEmail());	
+
+			sendMailUtil.sendMail("[Funthing] ", " : ["+certificationCode+"]", vo.getEmail());	
 			session.setAttribute("certificationCode", certificationCode);   
 
 		} catch (Exception e) {
@@ -180,7 +178,7 @@ public class MemberController {
 	public String tst() {
 		String afk=null;
         if(afk==null) {
-        	System.out.println("�꼸�씠吏��쟻");
+        	System.out.println("");
         }
 		return "testing";
 	}
@@ -206,10 +204,7 @@ public class MemberController {
 		return "p-index";
 	}
 
-	@RequestMapping(value="mypage.udo",method=RequestMethod.GET)
-	public String myPage() {
-		return "p-detail-mypage";
-	}  
+
 	
 	@RequestMapping(value="logout.udo",method=RequestMethod.GET)
 	public String logOut(HttpSession session) {
@@ -221,10 +216,9 @@ public class MemberController {
 	@RequestMapping(value="emailCheck.udo",method=RequestMethod.GET)
 	public String duplicationCheck(HttpServletRequest request,MemberVO vo,HttpSession session) {
 		vo.setEmail(request.getParameter("email"));
-		if(getMemberService.getMember(vo).getPassword()!=null) {
-			System.out.println("議댁옱�븯�뒗 硫붿씪  (�떎�뙣)");	
+    
+		if(getMemberService.getMember(vo).getPassword()!=null) {	
 		}else {
-			System.out.println("�궗�슜媛��뒫�븳 硫붿씪  (�꽦怨�)");
 			session.setAttribute("emailCheck", vo.getEmail());
 		}
 		return "p-callback";

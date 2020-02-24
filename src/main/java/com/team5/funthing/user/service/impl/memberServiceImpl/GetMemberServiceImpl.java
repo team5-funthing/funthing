@@ -10,8 +10,8 @@ import com.team5.funthing.user.service.memberService.GetMemberService;
 @Service
 public class GetMemberServiceImpl implements GetMemberService{
 
-	 @Autowired
-	   private MemberDAO memberDAO;
+	@Autowired
+	private MemberDAO memberDAO;
 	   
 
 
