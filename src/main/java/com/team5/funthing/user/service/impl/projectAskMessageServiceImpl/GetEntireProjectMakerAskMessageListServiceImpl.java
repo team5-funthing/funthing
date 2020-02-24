@@ -1,4 +1,4 @@
-package com.team5.funthing.user.service.impl.ProjectAskMessageImpl;
+package com.team5.funthing.user.service.impl.projectAskMessageServiceImpl;
 
 import java.util.List;
 

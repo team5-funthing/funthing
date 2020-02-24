@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.team5.funthing.user.model.vo.MemberActivityVO;
 import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
-import com.team5.funthing.user.service.ProjectAskMessageService.GetMakerMemberCreatorService;
+import com.team5.funthing.user.service.projectAskMessageService.GetMakerMemberCreatorService;
 import com.team5.funthing.user.service.memberActivityService.DeleteMemberActivityService;
 import com.team5.funthing.user.service.memberActivityService.GetMemberActivityListService;
 import com.team5.funthing.user.service.memberActivityService.InsertMemberActivityService;
