@@ -9,7 +9,8 @@ public class RewardVO {
 	private int projectNo;
 	private String rewardName;
 	private String rewardContent;
-	private List<String> rewardOption;
+	private String rewardOption;
+	//private List<String> rewardOption;
 	private int shippingFee;
 	private int rewardAmount;
 	
@@ -43,12 +44,19 @@ public class RewardVO {
 	public void setRewardName(String rewardName) {
 		this.rewardName = rewardName;
 	}
-	public List<String> getRewardOption() {
+	
+	public String getRewardOption() {
 		return rewardOption;
 	}
-	public void setRewardOption(List<String> rewardOption) {
+	public void setRewardOption(String rewardOption) {
 		this.rewardOption = rewardOption;
 	}
+	//	public List<String> getRewardOption() {
+//		return rewardOption;
+//	}
+//	public void setRewardOption(List<String> rewardOption) {
+//		this.rewardOption = rewardOption;
+//	}
 	public String getRewardContent() {
 		return rewardContent;
 	}
@@ -61,12 +69,12 @@ public class RewardVO {
 	public void setRewardAmount(int rewardAmount) {
 		this.rewardAmount = rewardAmount;
 	}
-	
 	@Override
 	public String toString() {
 		return "RewardVO [rewardPrice=" + rewardPrice + ", rewardNo=" + rewardNo + ", projectNo=" + projectNo
 				+ ", rewardName=" + rewardName + ", rewardContent=" + rewardContent + ", rewardOption=" + rewardOption
 				+ ", shippingFee=" + shippingFee + ", rewardAmount=" + rewardAmount + "]";
 	}
+	
 	
 }

@@ -45,6 +45,9 @@
 					}
 				});
 			});
+			$("option").click(function(){
+				var selectedOption = $(this).val();
+			});
 		});
 		
 		
@@ -148,7 +151,7 @@
                    <div class="row p-3">
                         <div class="col-4" style="font-weight: bold; color: darkslateblue">발송시작일</div>
                         <div class="col-4 pr-1">
-                           <select id="categorySelectBox" name="category" class="custom-select">
+                           <select id="rewardSendDate" name="category" class="custom-select">
                                <option selected="selected">연도/월</option>
                                <option value=""></option>
                                <option value=""></option>
@@ -157,7 +160,7 @@
                        </div>
                        <div class="col-4">
 
-                           <select id="categorySelectBox" name="category" class="custom-select">
+                           <select id="rewardSendTime" name="category" class="custom-select">
                                <option selected="selected">시기</option>
                                <option value=""></option>
                                <option value=""></option>
