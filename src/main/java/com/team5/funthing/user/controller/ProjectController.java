@@ -1,7 +1,8 @@
 package com.team5.funthing.user.controller;
 
-import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +13,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team5.funthing.common.utils.uploadUtils.UploadUtil;
 import com.team5.funthing.user.model.vo.KeywordVO;
 import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.model.vo.ProjectKeywordVO;
-import com.team5.funthing.user.model.vo.ProjectStoryVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
+import com.team5.funthing.user.model.vo.ProjectIntroduceImageVO;
 import com.team5.funthing.user.service.keywordService.GetKeywordListService;
 import com.team5.funthing.user.service.keywordService.InsertKeywordService;
+import com.team5.funthing.user.service.projectIntroduceImageService.GetProjectIntroduceImageListService;
+import com.team5.funthing.user.service.projectIntroduceImageService.InsertProjectIntroduceImageService;
 import com.team5.funthing.user.service.projectKeywordService.DeleteProjectKeywordService;
 import com.team5.funthing.user.service.projectKeywordService.GetProjectKeywordListService;
 import com.team5.funthing.user.service.projectKeywordService.InsertProjectKeywordService;
@@ -29,10 +33,6 @@ import com.team5.funthing.user.service.projectService.DeleteProjectService;
 import com.team5.funthing.user.service.projectService.GetProjectService;
 import com.team5.funthing.user.service.projectService.InsertProjectService;
 import com.team5.funthing.user.service.projectService.UpdateProjectService;
-import com.team5.funthing.user.service.projectStoryService.DeleteProjectStoryService;
-import com.team5.funthing.user.service.projectStoryService.GetProjectStoryService;
-import com.team5.funthing.user.service.projectStoryService.InsertProjectStoryService;
-import com.team5.funthing.user.service.projectStoryService.UpdateProjectStoryService;
 
 
 /**
@@ -40,7 +40,6 @@ import com.team5.funthing.user.service.projectStoryService.UpdateProjectStorySer
  * @author qpara
  *
  */
-
 
 @Controller
 @SessionAttributes("project")
@@ -77,35 +76,30 @@ public class ProjectController {
 	@Autowired
 	private DeleteProjectKeywordService deleteProjectKeywordService;
 	
-	// ProjectStory Service
-	@Autowired
-	private InsertProjectStoryService insertProjectStoryService;
-	@Autowired
-	private DeleteProjectStoryService deleteProjectStoryService;
-	@Autowired
-	private UpdateProjectStoryService updateProjectStoryService;
-	@Autowired
-	private GetProjectStoryService getProjectStoryService;
 	
+	// ProjectIntroduceImage Service
+	@Autowired
+	private InsertProjectIntroduceImageService insertProjectIntroduceImageService;
+	@Autowired
+	private GetProjectIntroduceImageListService getProjectIntroduceImageListService;
 	
 // ===================== VO 주입 =====================
 	
+	@Autowired
+	private ProjectVO projectVO;
 	@Autowired
 	private ProjectKeywordVO projectKeywordVO;
 	@Autowired
 	private KeywordVO keywordVO;
 	@Autowired
-	private ProjectStoryVO projectStory;
-	
-	
+	private ProjectIntroduceImageVO projectIntroduceImageVO;
+
 	
 	
 // ===================== 유틸 주입 =====================
 
 	@Autowired
-	private UploadUtil projectMainImageUploadUtils;
-
-	
+	private UploadUtil uploadUtil;
 	
 // ===================== 메서드 =======================	
 	
@@ -128,87 +122,118 @@ public class ProjectController {
 		model.addAttribute("member", test); 
 		return "p-start-project"; // 시작하기 페이지로 이동하자
 	} // 로그인 시에만 프로젝트 만들기 접근 가능하도록 하기위해 세션에 저장된 값 확인 후 페이지 이동.
+	
+	
 
+	@RequestMapping(value="/getWritingProject.udo", method = RequestMethod.GET)
+	public String getProject(@RequestParam int currentProjectNo, @RequestParam String msg, Model model) {
+		
+		projectVO.setProjectNo(currentProjectNo);
+		projectIntroduceImageVO.setProjectNo(currentProjectNo);
+		
+		projectVO = getProjectService.getProject(projectVO);
+		System.out.println("redirect: pvo : " + projectVO.toString());
+		List<ProjectIntroduceImageVO> projectIntroduceImageList = getProjectIntroduceImageListService.getProjectIntroduceImageList(projectIntroduceImageVO);
+		List<ProjectKeywordVO> projectKeywordList = getProjectKeywordList(projectVO);
+		
+		if(projectIntroduceImageList != null) {
+			model.addAttribute("projectIntroduceImageList", projectIntroduceImageList);
+		}
+		if(projectKeywordList != null) {
+			model.addAttribute("addedKeywordList", projectKeywordList);
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("writingProject", projectVO);
+		
+		return "f-create-project";
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	@RequestMapping(value="/showCreateProjectBasicForm.udo", method = RequestMethod.GET)
 	public String showCreateProjectBasicForm(HttpSession session, ProjectVO vo, Model model) {
 
-		session.removeAttribute("insertedProject");
+		session.removeAttribute("updatingProject");
 		model.addAttribute("basicProjectSetting", vo);
+		
 
 		return "f-create-project-basic"; // 프로젝트 작성 폼
 	} // 프로젝트 만들기 시작 페이지에서 수행
+	
+	
   
+	
 	//리워드 등록시에 목록을 추가하는 메서드 입력()
 	@RequestMapping(value = "/insertProject.udo", method = RequestMethod.POST)
 	public String insertProject(HttpSession session, ProjectVO vo, Model model) {
 
 		// 프로젝트 제작 첫 시작시에만 시작
-		ProjectVO checkVO = (ProjectVO)session.getAttribute("insertedProject");
+		ProjectVO checkVO = (ProjectVO)session.getAttribute("updatingProject");
 
 
 		// 새로고침을 할 경우에 반복적으로 requestMapping 작업이 수행되는 부분을 방지하기 위한 코드
 		if(checkVO == null) {
 			vo = insertProjectService.insertProject(vo);
-			session.setAttribute("insertedProject", vo);
+			session.setAttribute("updatingProject", vo);
 		}
 		else {
 			System.out.println("새로고침 확인 : " + checkVO.getProjectNo());
 			vo = checkVO;
 		}
-
-		System.out.println("insertProject 또는 새로고침 실행 후 =======> " + vo.toString());
 		model.addAttribute("writingProject", vo);
 		model.addAttribute("projectNo", vo.getProjectNo());
 
 		return "f-create-project";
 	} // 프로젝트 작성 시작할때 메서드 
 
-
 	
-//	redirectAttributes.addAttribute("","")
+	
 	@RequestMapping(value = "/saveInputWritingProject.udo", method = RequestMethod.POST)
-	public String saveInputWritingProject(	@RequestParam(name = "uploadImage", required = false)MultipartFile uploadFile,
-											@RequestParam(name = "projectStoryImageUpload", required = false)MultipartFile projectStoryImageUpload,
-											@RequestParam(name = "keywords", required = false)List<String> toAddKeywords, 
-											@RequestParam(name = "projectVideo", required = false)String projectStoryVideoPath,
-//											RedirectAttributes redirectAttributes,
-											ProjectStoryVO psvo,
-											ProjectVO pvo,
-											Model model) throws Exception { // 프로젝트 임시저장 시 실행되는 메서드
-		
+	public String updateProject(	@RequestParam(name = "uploadImage", required = false)List<MultipartFile> projectMainImageUpload,
+									@RequestParam(name = "projectIntroduceImageUpload", required = false)List<MultipartFile> projectIntroduceImageUploadList,
+									@RequestParam(name = "keywords", required = false)List<String> toAddKeywords,
+									ProjectVO pvo,
+									RedirectAttributes redirectAttributes,
+									Model model) throws Exception { // 프로젝트 임시저장 시 실행되는 메서드
 
-		if(!uploadFile.isEmpty()) { // 업로드 시킨 파일이 이미 존재하는 경우 파일 선택을 다시 안한 경우에 나올 수 있는 상황 처리  
-			String toRemoveFilePath = pvo.getProjectMainImage(); //제거될 파일경로를 vo객체에서 가져오기
-			String voName = pvo.getClass().getSimpleName();
-			String toSettingPath = projectMainImageUploadUtils.upload(uploadFile, voName, toRemoveFilePath);
-			pvo.setProjectMainImage(toSettingPath);
-		}
+		
+		int ProjectNo = pvo.getProjectNo();
+		
+		System.out.println("-------------임시저장 실행----------------");
+		System.out.println(pvo.toString());
+		System.out.println("--------------------------------------");
+		
+		
+		projectIntroduceImageUploader(projectIntroduceImageUploadList, projectIntroduceImageVO, ProjectNo);
+		projectMainImageUploader(projectMainImageUpload, pvo);
+
 		
 		if(toAddKeywords != null) {
 			insertKeyword(toAddKeywords, keywordVO); //DB에 새로운 키워드 추가 메서드
-			deleteProjectKeyword(pvo);
+			deleteProjectKeyword(pvo); // 기존 프로젝트에 있던 키워드들 삭제
 			insertProjectKeyword(toAddKeywords, pvo.getProjectNo());//DB에 프로젝트와 연결되는 키워드를 추가 하는 메서드
 		}
-		
-		
-		pvo.setWriteStatus(writingInputCheck(pvo));
+		pvo.setWriteStatus(writingInputCheck(pvo)); // 입력해야하는 작성부분 체크
 		updateProjectService.updateProject(pvo);
+		
 
 		
-		List<ProjectKeywordVO> projectKeywordList = getProjectKeywordList(pvo);
-
-		model.addAttribute("writingProject", pvo);
-		model.addAttribute("addedKeywordList", projectKeywordList);
-		model.addAttribute("msg", "저장 되었습니다");
+		redirectAttributes.addAttribute("currentProjectNo", pvo.getProjectNo());
+		redirectAttributes.addAttribute("msg", "저장 되었습니다");
 		
+		return "redirect: getWritingProject.udo";
 		
-		return "f-create-project";
 		
 	}
-	
-	
+
+
 	@RequestMapping(value = "/showPreviewProject.udo", method = RequestMethod.POST)
 	public String showPreviewProject(ProjectVO pvo, Model model) throws Exception { // 프로젝트 임시저장 시 실행되는 메서드
 		
@@ -254,13 +279,17 @@ public class ProjectController {
 	}
 	public List<ProjectKeywordVO> getProjectKeywordList(ProjectVO pvo){
 		
+		System.out.println("projectKeywordVO : " + projectKeywordVO.toString());
+		if(projectKeywordVO == null) {
+			System.out.println("projectKeywordVO Null");
+			return null;
+		}
 		projectKeywordVO.setProjectNo(pvo.getProjectNo());
 		
 		List<ProjectKeywordVO> projectKeywordList = getProjectKeywordListService.getProjectKeywordList(projectKeywordVO);
 		
 		for(int i = 0; i < projectKeywordList.size(); i++) {
 			String keyword = projectKeywordList.get(i).getKeyword().replace("#", "").trim();
-			System.out.println(i + "번째 keyword : " + keyword);
 			projectKeywordList.get(i).setKeyword(keyword);
 			
 		}
@@ -278,6 +307,65 @@ public class ProjectController {
 	
 	//=================== 기타 메서드 =================================
 
+	
+	
+	
+	public void projectIntroduceImageUploader(List<MultipartFile> toDoUploadList, ProjectIntroduceImageVO vo, int ProjectNo) throws Exception {
+			
+		List<String>toRemoveFilePath = new ArrayList<String>();
+		
+		if(!toDoUploadList.get(0).isEmpty()){ //프로젝트 소개 이미지 기존업로드 제거 및 새 업로드, DB 추가 작업 메서드
+			vo.setProjectNo(ProjectNo);
+			String voName = vo.getClass().getSimpleName();
+			
+			List<ProjectIntroduceImageVO> projectIntroduceImageList = getProjectIntroduceImageListService.getProjectIntroduceImageList(vo);
+			
+			for(ProjectIntroduceImageVO projectIntroduceImage : projectIntroduceImageList) {
+				toRemoveFilePath.add(projectIntroduceImage.getProjectIntroduceImage());
+			}
+			
+			List<String> tmpUploadList = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);
+			if(tmpUploadList != null) {
+				for(String toInsertImage : tmpUploadList) {
+					System.out.println("toInsertImage : " + toInsertImage);
+					projectIntroduceImageVO.setProjectIntroduceImage(toInsertImage);
+					
+					
+					insertProjectIntroduceImageService.insertProjectIntroduceImage(projectIntroduceImageVO);
+				} // 소개 이미지 경로 DB에 추가
+			}else {
+				return;
+			}
+		}
+		
+	}
+	
+	public void projectMainImageUploader(List<MultipartFile> toDoUploadList, ProjectVO vo) throws Exception {
+		
+		List<String> toRemoveFilePath = new ArrayList<String>();
+
+				
+		if(!toDoUploadList.get(0).isEmpty()) { // 업로드 시킨 파일이 이미 존재하는 경우 파일 선택을 다시 안한 경우에 나올 수 있는 상황 처리  
+			toRemoveFilePath.add(vo.getProjectMainImage()); //제거될 파일경로를 vo객체에서 가져오기
+			String voName = vo.getClass().getSimpleName();
+			List<String> toSettingPath = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);
+			if(toSettingPath == null) return;
+			
+			int cnt = 1;
+			for(String toInsertImage : toSettingPath) {
+				System.out.println("cnt : " + cnt++);
+				vo.setProjectMainImage(toInsertImage);
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	public char writingInputCheck(ProjectVO vo) {
 
 		boolean result = nullCheck(vo);
@@ -285,7 +373,6 @@ public class ProjectController {
 		if(result) {
 			return 'y';
 		}
-
 		return 'n';
 	}
 	public boolean nullCheck(ProjectVO project) { //임시 저장된 프로젝트 빈칸 체크

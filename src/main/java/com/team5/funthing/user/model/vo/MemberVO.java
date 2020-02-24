@@ -10,10 +10,16 @@ public class MemberVO {
 	private String introduce;
 	private String myImage;
 	private String report;
-	private String position; //ÇÏ´Ã½ÇÇè
+
+
+	private String position;
+
+
+	private CreatorVO creator;
 	
 	
-	//ÇÏ´Ã½ÇÇè
+	
+
 	public String getPosition() {
 		return position;
 	}
@@ -21,8 +27,6 @@ public class MemberVO {
 	public void setPosition(String position) {
 		this.position = position;
 	}
-
-	private CreatorVO creator;
 
 	public String getEmail() {
 		return email;
