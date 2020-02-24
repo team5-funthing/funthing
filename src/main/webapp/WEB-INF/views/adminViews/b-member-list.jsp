@@ -112,11 +112,11 @@
                                 <tr>
                                     <td>${list.name}</td>
                                     <td>
-                                    <a href="http://localhost:8080/funthing/getReport.ado?email=${list.email}">${list.email}</a>
+                                    <a href="http://localhost:8080/funthing/getMember.ado?email=${list.email}">${list.email}</a>
                                     </td>
-                                    <td>${list.name}</td>
-                                    <td>${list.name}</td>
-                                    <td>${list.name}</td>
+                                    <td>${list.creator.creator}</td>
+                                    <td>${list.creator.lv}</td>
+                                    
                                 </tr>
                                 </c:forEach>
                                            

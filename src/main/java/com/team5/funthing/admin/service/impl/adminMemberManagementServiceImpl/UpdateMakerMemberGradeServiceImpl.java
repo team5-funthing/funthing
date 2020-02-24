@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.team5.funthing.admin.model.dao.AdminMemberManagementDAO;
 import com.team5.funthing.admin.service.adminMemberManagementService.UpdateMakerMemberGradeService;
-import com.team5.funthing.user.model.vo.MakerMemberVO;
+import com.team5.funthing.user.model.vo.CreatorVO;
 
 @Service
 public class UpdateMakerMemberGradeServiceImpl implements UpdateMakerMemberGradeService{
@@ -14,7 +14,7 @@ public class UpdateMakerMemberGradeServiceImpl implements UpdateMakerMemberGrade
 	private AdminMemberManagementDAO adminMemberManagementDAO;
 	
 	@Override
-	public void UpdateMakerMemberGrade(MakerMemberVO vo) {
+	public void UpdateMakerMemberGrade(CreatorVO vo) {
 		adminMemberManagementDAO.updateMakerMemberGrade(vo);
 	}
 	

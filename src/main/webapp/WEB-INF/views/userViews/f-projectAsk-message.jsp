@@ -24,8 +24,9 @@
          <div class="w-75">
 
             <article>
+            <form class="form-contact comment_form" action="insertProjectAskContents.udo" id="commentForm" method="post">
                <div class="col-lg-10 posts-list">
-                  <div class="h2">프로젝트 이름 [변수]</div>
+                  <div class="h2">Project Title " ${vo.projectTitle} "</div>
                   <div class="comment-form pt-2">
                      
                      <h4>프로젝트 문의하기</h4>
@@ -37,13 +38,16 @@
                               </div>
                               <div class="desc">
                                  <p class="comment h3">
-                                    <input type="text" name="변수명">
+                                    <input type="text" name="projectAskContentsTitle" placeholder="Title">
                                  </p>
                                  <div class="d-flex justify-content-between">
                                     <div class="d-flex align-items-center">
                                        <h5>
                                           	작성자 
-                                          <a href="#">송하늘</a>
+                                          <a href="#" name="name">${sessionScope.memberSessionName }</a>
+                                          <input type="hidden" name="email" value="${sessionScope.memberSessionEmail}">
+                                          <input type="hidden" name="creator" value="${vo.creator}">
+                                          
                                        </h5>
                                     </div>
                                  </div>
@@ -54,18 +58,18 @@
                         </div>
                      </div>
 
-                     <form class="form-contact comment_form" action="#" id="commentForm">
+                     
                         <div class="row">
                            <div class="col-12">
                               <div class="form-group">
-                                 <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
+                                 <textarea class="form-control w-100" name="projectAskContents" id="projectAskContents" cols="30" rows="9"
                                     placeholder="Write Comment"></textarea>
                               </div>
                            </div>
                         </div>
                         <div class="form-group">
                            <button type="submit" class="button button-contactForm btn_1 boxed-btn"> 작성하기</button>
-                           <button type="submit" class="button button-contactForm btn_1 boxed-btn"> 취소하기</button>
+                           <button type="submit" formaction="projectDetails.udo" class="button button-contactForm btn_1 boxed-btn"> 취소하기</button>
                         </div>
                      </form>
                   </div>

@@ -9,7 +9,7 @@
 	</select>
 	
 	<select id="getReward" parameterType="reward" resultType="reward">
-		SELECT * FROM reward WHERE projectNo =#{projectNo} and rewardNo = #{rewardNo}
+		SELECT * FROM reward WHERE rewardNo = #{rewardNo}
 	</select>
 	
 	<insert id="insertReward" parameterType="reward">
@@ -21,9 +21,9 @@
 	</insert>
 
 	<update id="updateReward" parameterType="reward">
-		UPDATE FROM reward 
+		UPDATE reward 
 		SET rewardName=#{rewardName}, rewardOption=#{rewardOption}, rewardContent=#{rewardContent}, rewardAmount=#{rewardAmount}, rewardPrice=#{rewardPrice}
-		WHERE rewardNo=#{rewardNo} AND projectNo=#{projectNo}
+		WHERE rewardNo=#{rewardNo}
 	</update>
 	
 	<delete id="deleteReward" parameterType="reward">

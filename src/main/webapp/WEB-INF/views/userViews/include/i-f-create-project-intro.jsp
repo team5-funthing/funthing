@@ -6,11 +6,6 @@
 <div class="h4" style="color: black; font-weight: bolder;">프로젝트 소개</div>
 <div class="d-flex flex-column bd-highlight mb-3">
 
-	<script>
-		$(document).ready(function(){
-			$("#categorySelectBox").val("${writingProject.category }").prop("selected", true);
-		});
-	</script>
 	
 	<div class="p-2 bd-highlight">
 		<span>펀딩 목표 금액</span>
@@ -103,7 +98,12 @@
 	</div>
 	<div class="p-2 bd-highlight">
 		<span>프로젝트 분류[카테고리]</span>
-		
+			
+			<script>
+				$(document).ready(function(){		
+					$("#categorySelectBox").val("${writingProject.category }").prop("selected", true);
+				});
+			</script>
 			<select id="categorySelectBox" name="category" class="custom-select" >
 				<option value="book">도서</option>
 				<option value="publish">출판</option>

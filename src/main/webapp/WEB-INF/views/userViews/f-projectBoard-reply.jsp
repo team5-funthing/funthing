@@ -36,25 +36,15 @@
                               </div>
                               <div class="desc">
                                  <p class="comment">
-                                    Multiply sea night grass fourth day sea lesser rule open subdue female fill which
-                                    them
-                                    Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                                    Multiply sea night grass fourth day sea lesser rule open subdue female fill which
-                                    them
-                                    Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                                    Multiply sea night grass fourth day sea lesser rule open subdue female fill which
-                                    them
-                                    Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                                    Multiply sea night grass fourth day sea lesser rule open subdue female fill which
-                                    them
-                                    Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+                                   ${vo.projectBoardContents}
                                  </p>
                                  <div class="d-flex justify-content-between">
                                     <div class="d-flex align-items-center">
                                        <h5>
-                                          <a href="#">송하늘</a>
+                                          <a href="#">${vo.email}</a>
                                        </h5>
-                                       <p class="date">December 4, 2017 at 3:12 pm </p>
+              
+                                       <p class="date">${vo.projectBoardDate}</p>
                                     </div>
                                  </div>
                                  <div class="d-flex justify-content-around mt-3">
@@ -64,29 +54,30 @@
                         </div>
                      </div>
 
-                     <form class="form-contact comment_form" action="#" id="commentForm">
+                     <form class="form-contact comment_form" action="insertReplyProjectBoard.udo" id="commentForm" method="post">
                         <div class="row d-flex align-items-center">
                            <div class="col-sm-6">
                               <div class="form-group">
-                                 <input class="form-control" name="name" id="name" type="text" placeholder="창작자명">
+                                 <input class="form-control" name="name" id="name" type="text" value="${sessionScope.memberSessionName}" placeholder="창작자명">
+                                 <input type="hidden" name="ref" value= "${vo.projectBoardNo}"  >
                               </div>
                            </div>
                            <div class="col-sm-6">
                               <div class="form-group">
-                                 <input class="form-control" name="email" id="email" type="email" placeholder="Email">
+                                 <input class="form-control" name="email" id="email" type="email" value="${sessionScope.memberSessionEmail}" placeholder="Email">
                               </div>
                            </div>
                         </div>
                         <div class="col-12">
                            <div class="form-group">
-                              <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
+                              <textarea class="form-control w-100" name="projectBoardContents" cols="30" rows="9"
                                  placeholder="Write Comment"></textarea>
                            </div>
                         </div>
                   </div>
                   <div class="form-group">
                      <button type="submit" class="button button-contactForm btn_1 boxed-btn"> 작성하기</button>
-                     <button type="submit" class="button button-contactForm btn_1 boxed-btn"> 취소하기</button>
+                     <button type="submit" formaction="projectDetails.udo" class="button button-contactForm btn_1 boxed-btn"> 취소하기</button>
                   </div>
                   </form>
                </div>

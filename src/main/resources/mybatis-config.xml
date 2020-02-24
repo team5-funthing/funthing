@@ -6,9 +6,9 @@
 	<properties resource="db.properties" />
 	
 	<typeAliases>
-	
+		
+		<typeAlias type="com.team5.funthing.user.model.vo.ProjectIntroduceImageVO" alias="projectIntroduceImage"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.ProjectVO" alias="project"/>
-		<typeAlias type="com.team5.funthing.user.model.vo.ProjectStoryVO" alias="projectStory"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.ProjectKeywordVO" alias="projectKeyword"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.KeywordVO" alias="keyword"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.MemberVO" alias="member"/>
@@ -27,6 +27,7 @@
 		<typeAlias type="com.team5.funthing.user.model.vo.CSBoardVO" alias="csboard"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.DeliveryAddressVO" alias="deliveryAddress"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.ReportVO" alias="report"/>
+		<typeAlias type="com.team5.funthing.user.model.vo.ProjectAskMessageVO" alias="projectAskMessage"/>
 
 		<!-- user : admin -->
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminCSBoardVO" alias="adminCSBoard"/>
@@ -39,7 +40,7 @@
   
 	<mappers>
 		
-		<mapper resource="mappers/projectStory-mapper.xml"/>
+ 		<mapper resource="mappers/projectIntroduceImage-mapper.xml"/>
 		<mapper resource="mappers/projectKeyword-mapper.xml"/>
 		<mapper resource="mappers/keyword-mapper.xml"/>
 		<mapper resource="mappers/member-mapper.xml" />
@@ -60,6 +61,7 @@
 		<mapper resource="mappers/csboard-mapper.xml" />
 		<mapper resource="mappers/deliveryAddress-mapper.xml"/>
 		<mapper resource="mappers/report-mapper.xml" />
+		<mapper resource="mappers/projectAskMessage-mapper.xml"/>
 
 		<!-- user : admin -->
 		<mapper resource="mappers/adminCSBoard-mapper.xml" />
@@ -68,6 +70,5 @@
  
  		<mapper resource="mappers/adminReport-mapper.xml"/>
  		<mapper resource="mappers/adminMemberManagement-mapper.xml"/>
- 
 	</mappers>
 </configuration>
