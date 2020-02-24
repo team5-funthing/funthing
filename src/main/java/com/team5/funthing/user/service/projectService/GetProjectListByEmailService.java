@@ -4,8 +4,7 @@ import java.util.List;
 
 import com.team5.funthing.user.model.vo.ProjectVO;
 
-public interface GetProjectServiceByEmail {
-
+public interface GetProjectListByEmailService {
 	
 	public List<ProjectVO> getProjectListByEmail(ProjectVO vo);
 }

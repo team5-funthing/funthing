@@ -20,7 +20,7 @@ import com.team5.funthing.user.service.memberActivityService.InsertMemberActivit
 import com.team5.funthing.user.service.memberActivityService.UpdateMemberActivityService;
 import com.team5.funthing.user.service.ProjectAskMessageService.GetMakerMemberCreatorService;
 import com.team5.funthing.user.service.projectService.GetProjectService;
-import com.team5.funthing.user.service.projectService.GetProjectServiceByEmail;
+import com.team5.funthing.user.service.projectService.GetProjectListByEmailService;
 
 @Controller
 public class MemberActivityController {
@@ -34,11 +34,12 @@ public class MemberActivityController {
 	@Autowired
 	UpdateMemberActivityService updateMemberActivityService;
 	@Autowired
-	GetProjectServiceByEmail getProjectServiceByEmailService;
+	GetProjectListByEmailService getProjectServiceByEmailService;
 	@Autowired
 	GetProjectService getProjectService;
 	@Autowired
 	GetMakerMemberCreatorService getMakerMemberCreatorService;
+
 
 	@RequestMapping(value="mypage.udo",method=RequestMethod.GET)
 	public String myPage(HttpSession session,MemberActivityVO vo,ProjectVO vo1,Model model, MemberVO vo2) {
