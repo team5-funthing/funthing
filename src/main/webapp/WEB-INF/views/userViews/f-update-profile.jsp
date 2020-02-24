@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -71,7 +75,7 @@
             <div class="col-6">
 
                 <div class="col mt-5 ">
-                    <form action="#">
+                    
                         <div class="mt-10">
                             <div class="h4">
                                 프로필 변경 [프로필 설정]
@@ -80,71 +84,66 @@
                         </div>
 
                         <div class="d-flex justify-content-start mt-5">
-                            <div class="col-3 mr-4">프로필 사진</div>
+                            <div class="col-3 mr-4">프로필 사진 (변경하시려면 사진을 눌러 변경할 사진을 선택해 주세요) </div>
                             <div class="col-10">
+                               <form id="imageupload" action="#" method="post" enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col-5 align-self-center">
                                         <label for="image">
                                             <input type="file" name="image" id="image" style="display:none;" />
                                             <div id="detail-mypage-profile-img" class="">
-                                                <img class="profile" src="img/test/5.jpg">
+                                                <img class="profile" src="${pageContext.request.contextPath}/resources/user/img/test/2.jpg">
                                             </div>
                                         </label>
                                     </div>
                                     <div class="col align-self-center">
                                         <div>
-                                            <a href="#" class="genric-btn success medium" style="width: 110px;">바꾸기</a>
+                                            <input type="file"  id="imageButton" class="genric-btn success medium" style="width: 110px;" value="바꾸기"/>
                                         </div>
                                         <div class="mt-2">
-                                            <a href="#" class="genric-btn success medium" style="width: 110px;">삭제</a>
+                                            <input type="button" formaction="" class="genric-btn success medium" style="width: 110px;" value="삭제">
                                         </div>
-                                    </div>
+										<script type="text/javascript">
+										function imageUpLoad(){ 
+											var form = $('#imageupload')[0];
+											var formdata = new FormData(form);
+											formdata.append('image1',$('#image')[0].files[0]);
+											formdata.append('image2',$('#imageButton')[0].files[0]);
+											$.ajax({ type:"POST",
+												url:"getReward.udo",   /// 이미지업로드 서버 처리 ㄱ_ㄱ    
+												processData:false,
+												contetType:false,
+												data:formdata,
+												success:function(data){
+													
+											},error:function(){ alert('이미지 업로드가 실패했습니다.'); };
+										</script>
+									</div>
                                 </div>
+                                 </form>
                             </div>
                         </div>
                         <hr>
-
+                 		<form>
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
-                                <label for="validationDefault01">이름</label>
-                                <input type="text" class="form-control" id="validationDefault01" value="[로그인 아이디]"
-                                    required>
+                                <label for="validationDefault01">비밀번호 변경하기</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
                             </div>
                         </div>
-                        <div class="form-row">
-                            <div class="col-md-3 mb-3">
-                                <label for="validationDefault04">지역</label>
-                                <select class="custom-select" id="validationDefault04" required>
-                                    <option selected disabled value="">Choose...</option>
-                                    <option>...</option>
-                                </select>
+                             <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="validationDefault01">비밀번호 확인</label>
+                                <input type="password" class="form-control" id="passwordcheck" required>
                             </div>
                         </div>
-                        <div class="form-row">
-                            <div class="col-md-3">
-                                <label for="validationDefault04">연락처</label>
+                             <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="validationDefault01">연락처</label> 
+                                <input type="text" class="form-control" id="phone" name="phone" required> <label for="exampleFormControlTextarea1" class="mr-1"> - 없이 입력해주세요</label>
                             </div>
                         </div>
-                        <div class="form-row">
-                            <form class="form-inline">
-                                <div class="col-md-3 mb-3">
-                                    <select class="custom-select" id="validationDefault04" required>
-                                        <option selected disabled value="">Choose...</option>
-                                        <option>...</option>
-                                    </select>
-                                </div>
-                                <div class="form-group mx-sm-3 mb-2" style="width: 120px;">
-                                    <label for="inputPassword2" class="sr-only">Password</label>
-                                    <input type="password" class="form-control" id="inputPassword2"
-                                        placeholder="Password">
-                                </div>
-                                <div class="form-group mx-sm-3 mb-2 " style="width: 120px;">
-                                    <label for="inputPassword2" class="sr-only">Password</label>
-                                    <input type="password" class="form-control" id="inputPassword2"
-                                        placeholder="Password">
-                                </div>
-                            </form>
-                        </div>
+            
 
                         <div class="form-row">
                             <div class="form-group mb-3 w-100">
@@ -154,17 +153,26 @@
                         </div>
 
                         <hr>
-                        <div class="form-inline pb-5 justify-content-center">
+                        <div class="form-inline pb-5 justify-content-center"
+                        >
                             <div class="mt-10">
-                                <a class="btn btn-registry-way-cancel d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
-                                    href="#">취소</a>
+                                <input type="button" value="회원탈퇴" class="btn btn-registry-way-cancel d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
+                                    formaction="deleteCheckMember.udo">
+                                    <script>
+                                
+                                    
+                                    </script>
                             </div>
                             <div class="mt-10">
-                                <a class="btn btn-registry-way-cancel d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
-                                    href="registry-way-select-form.html">완료</a>
+                                <input type="button" value="취소" class="btn btn-registry-way-cancel d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
+                                    formaction="mypage.udo">
+                            </div>
+                               <div class="mt-10">
+                                <button class="btn btn-registry-way-cancel d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
+                                    formaction="updateMember.udo">완료</button>
                             </div>
                         </div>
-                    </form>
+                   </form>
                 </div>
             </div>
             <div class="col-2">

@@ -39,7 +39,33 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/bootstrap.min.css">
 
 
+
+    <!-- Include jQuery and the jquery.gpopover plugin -->
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="js/jquery.gpopover.js"></script>
+    <script src="https://kit.fontawesome.com/7a424ad03a.js" crossorigin="anonymous"></script>
+
+    <script>
+        $(function () {
+
+
+            // Use custom options for the right button
+            $('#mypage-btn').gpopover({
+                width: 360,
+                preventHide: true,
+                onShow: function () {
+                    if (console && console.log) console.log("Popover shown.");
+                },
+                onHide: function () {
+                    if (console && console.log) console.log("Popover hidden.");
+                }
+            });
+        });
+    </script>
+
+
 	<jsp:include page="./include/i-head-setting.jsp"/>
+
 
 </head>
 

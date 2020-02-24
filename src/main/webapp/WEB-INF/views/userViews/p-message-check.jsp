@@ -19,6 +19,7 @@
 	<!-- ------------------ -->
 
 	<section class="main-wrapper pt-xl-5 ">
+
 		<div class="main-content">
 			<div class="container">
 
@@ -200,6 +201,7 @@
 			</div>
 		</div>
 	</section>
+
 
 	<!-- -------------------- -->
 

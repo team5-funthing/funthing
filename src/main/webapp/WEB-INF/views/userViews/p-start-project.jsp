@@ -33,9 +33,10 @@
                 <div class="col">
                 </div>
                 <div class="col align-self-center">
+                
                     <form id="startProjectForm" action="showCreateProjectBasicForm.udo" method="GET">
                         <hr>
-                        <input type="hidden" name="email" value="${member.email }">
+                        <input type="hidden" name="email" value="${loginEmail }">
                         <div class="col-xl-12 mt-10 d-flex justify-content-center">
                             <a class="btn btn-lg btn-registry-way d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
                                 href="#" onclick="document.getElementById('startProjectForm').submit();">
@@ -43,7 +44,7 @@
                         </div>
                         <hr>
                     </form>
-
+                         
                 </div>
                 <div class="col">
                 </div>

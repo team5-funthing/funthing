@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!doctype html>
 
 <html class="no-js" lang="zxx">
@@ -57,14 +59,54 @@
 	</div>
 
 
+	<c:if test="${getProjectList ne null}">
+	
+	    <!-- 작성중인 프로젝트 존재할 경우 나오는 팝업 -->
+	    <form action ="mypage.udo" method="GET" id="exist-writingProject-popup" class="white-popup-block mfp-hide" >
+	        <div class="popup_box">
+	            <div class="popup_inner">
+					현재 작성 중인 프로젝트가 있습니다.
+                    <p>작성 중인 프로젝트를 수정하거나 새로운 프로젝트를 시작할 수 있습니다.</p>
+                    <div class="d-flex justify-content-around">
+                        <a href="#" class="btn-lg btn-bd-purple d-none d-lg-inline-block m-1 popup-modal-dismiss">새로 만들기</a>
+                        <a href="#" onclick="document.getElementById('exist-writingProject-popup').submit();" 
+                        		class="btn-lg btn-bd-purple d-none d-lg-inline-block m-1">프로젝트 수정하기</a>
+                    </div>
+	            </div>
+	        </div>
+	    </form>
+		
+	</c:if>	
+	
+	<script>
+
+		//프로젝트 시작 시 나오는 폼
+		$(document).ready(function () {
+			$.magnificPopup.open({
+				 items: {
+				     src: '#exist-writingProject-popup' 
+				 },
+				 type: 'inline',
+				 preloader: false,
+				 modal: true
+				 
+			});
+			
+			$(document).on('click', '.popup-modal-dismiss', function (e) {
+				e.preventDefault();
+				$.magnificPopup.close();
+			});
+		});	
+	</script>
+
 
 
 	<!-- footer -->
 	<footer class="footer"> </footer>
 
-	<jsp:include page="./include/i-popup-login.jsp"></jsp:include> -->
-	<jsp:include page="./include/i-popup-search.jsp"></jsp:include> -->
-	<jsp:include page="./include/i-body-js.jsp"></jsp:include> -->
+	<jsp:include page="./include/i-popup-login.jsp"></jsp:include>
+	<jsp:include page="./include/i-popup-search.jsp"></jsp:include>
+	<jsp:include page="./include/i-body-js.jsp"></jsp:include>
 
 </body>
 </html>
