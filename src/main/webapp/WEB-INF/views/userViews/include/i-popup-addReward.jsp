@@ -15,6 +15,10 @@
 	//		alert("실행된당.");
 	//	}
 		$(document).ready(function(){
+			//$("option").click(function(){
+				//var option = $("select[name=]").val();
+				//alert()
+			//});
 			$("#addBtn").click(function(){
 				$("#rewardNum").remove();
 			});
@@ -35,7 +39,6 @@
 						$("input[name=shippingFee]").val(rewardVO.shippingFee);
 						$("input[name=rewardAmount]").val(rewardVO.rewardAmount);
 						$("input[name=rewardNo]").val(rewardVO.rewardNo);
-						
 					},
 					error:function(){
 						alert('실패');
