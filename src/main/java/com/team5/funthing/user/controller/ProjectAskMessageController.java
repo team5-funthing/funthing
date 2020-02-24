@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.team5.funthing.user.model.vo.CreatorVO;
 import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.model.vo.ProjectAskMessageVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
+
 import com.team5.funthing.user.service.projectAskMessageService.GetChoiceProjectAskMessageService;
 import com.team5.funthing.user.service.projectAskMessageService.GetEntireProjectAskMessageListService;
 import com.team5.funthing.user.service.projectAskMessageService.GetEntireProjectMakerAskMessageListService;
@@ -35,11 +37,8 @@ public class ProjectAskMessageController {
 	private InsertProjectAskContentsService insertProjectAskContentsService;
 	@Autowired
 	private UpdateProjectAskReplyContentsStatusService updateProjectAskReplyContentsStatusService;
-	
 	@Autowired
 	private GetMakerMemberCreatorService getMakerMemberCreatorService;
-	@Autowired
-	private GetChoiceProjectBoardService getChoiceProjectBoardService;
 	@Autowired
 	private GetEntireProjectMakerAskMessageListService getEntireProjectMakerAskMessageListService;
 	@Autowired
@@ -48,131 +47,154 @@ public class ProjectAskMessageController {
 
 	
 	@RequestMapping(value="showInsertwAskMessage.udo", method = RequestMethod.GET)
-	public String showInsertwAskMessage(ProjectVO vo, Model model) { //占쏙옙占실메쇽옙占쏙옙 占쌉뤄옙 화占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙
+
+	public String showInsertwAskMessage(ProjectVO vo, Model model) { 
 		
-		System.out.println("占쏙옙占쏙옙占쏙옙트no占쏙옙占쏙옙 占싼억옙都占�");
+		System.out.println("문의하기 누르면 메세지입력창으로 이동");
 		
-		//1.占쏙옙占쏙옙占쏙옙트 占싼뱄옙占쏙옙 占쏙옙占쏙옙占쏙옙트 占쏙옙占싱븝옙占쏙옙 占쏙옙占쏙옙占쏙옙트 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 
-		vo.setProjectTitle(getProjectService.getProject(vo).getProjectTitle());//title占쏙옙占쏙옙占쏙옙占쏙옙
-		vo.setCreator(getProjectService.getProject(vo).getCreator());//creator占쏙옙占쏙옙占쏙옙占쏙옙
+		vo.setProjectTitle(getProjectService.getProject(vo).getProjectTitle());//title 가져오기
+		vo.setCreator(getProjectService.getProject(vo).getCreator());//creator 가져오기
 		
 		model.addAttribute("vo",vo);
 		
-		System.out.println("占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙"+getProjectService.getProject(vo).toString());
+		System.out.println("여기찍히니 애미나이야"+getProjectService.getProject(vo).toString());
 		
-		return "f-projectAsk-message"; //占쏙옙 占쌜쇽옙占싹는곤옙
+		return "f-projectAsk-message"; //문의하기 입력창으로 
 			
 	}
 	@RequestMapping(value="insertProjectAskContents.udo", method = RequestMethod.POST)
-	public String insertProjectAskContents(ProjectAskMessageVO vo, Model model) { //占쏙옙占실메쇽옙占쏙옙 占쌉뤄옙占싹깍옙 
+	public String insertProjectAskContents(ProjectAskMessageVO vo) { //참여자가 => 메이커에게 문의하기 입력
 		
-		insertProjectAskContentsService.insertProjectAskContents(vo); //占쌨쇽옙占쏙옙 占쌉뤄옙 
-//		List<ProjectAskMessageVO>getEntireMessageList = getEntireProjectAskMessageListService.getEntireProjectAskMessageList(vo);//占쏙옙체占쏙옙瞿占쏙옙占쏙옙殮占�
-//		model.addAttribute("messagelist", getEntireMessageList);
+		insertProjectAskContentsService.insertProjectAskContents(vo); //문의하기 입력 
 		
-		return "p-project-details"; //占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙 占쌨쇽옙占쏙옙 占쏙옙 占쏙옙占쏙옙트 확占쏙옙占싹는곤옙
+		return "p-project-details"; //프로젝트 페이지로 이동 
+
 			
 	}
 	
-	
-//--------------------------------占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 占쌨쇽옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙------------------------------------(占싱거울옙占쏙옙占쌍어도占실놂옙?)
 	
 
-	@RequestMapping(value="showMyPageMessage.udo",method = RequestMethod.GET)
-	public String showMyPageMessage(MemberVO vo, ProjectAskMessageVO vo2, Model model, HttpSession session) { //占쌨쇽옙占쏙옙 占쏙옙占쏙옙트占쏙옙 占싱듸옙
+//--------------------------------마이페이지에서 메세지 클릭시 들어오는곳------------------------------------(여기있어야되는건가?)
+	
+	
+	@RequestMapping(value="showDetailMyPage.udo",method = RequestMethod.GET)
+	public String showDetailMyPage(MemberVO vo, ProjectAskMessageVO vo2, Model model, HttpSession session) { 
+
+		vo.setEmail((String)session.getAttribute("memberSessionEmail"));
 		
-		
-		if(getMakerMemberCreatorService.getMakerMemberCreator(vo) != null) { //占쏙옙占쏙옙커占싹띰옙
+		if(getMakerMemberCreatorService.getMakerMemberCreator(vo) != null) { //메이커 일때
+
+//			1.creator인지 확인하기 
+			MemberVO getMakerMember = getMakerMemberCreatorService.getMakerMemberCreator(vo); 
+			model.addAttribute("getMakerMember",getMakerMember);
 			
-			
-//			vo2.setCreator("KGB占쏙옙占쏙옙티"); //占싱부븝옙 占쏙옙占쌩울옙 占쌕뀐옙森占� 占쏙옙占쏙옙占쏙옙 占쌈시뤄옙 占쏙옙占쏙옙占쏙옙트 占싼뱄옙 占쏙옙占쏙옙
-//			model.addAttribute("vo",vo2);
-			
-			session.setAttribute("makerCreator",getMakerMemberCreatorService.getMakerMemberCreator(vo).getEmail());
-			System.out.println("占쏙옙占쏙옙占쏙옙占�"+(String)session.getAttribute("makerCreator"));
-			
-			List<ProjectAskMessageVO>getEntireMakerMessageList = getEntireProjectMakerAskMessageListService.getEntireProjectMakerAskMessageList(vo2);//占쏙옙체占쏙옙瞿占쏙옙占쏙옙殮占�
+			System.out.println("뭐가찍히니 찍혀야돼"+getMakerMember);
+			vo2.setCreator(getMakerMember.getCreator().getCreator());
+			model.addAttribute("vo2",vo2);
+	
+			List<ProjectAskMessageVO>getEntireMakerMessageList = getEntireProjectMakerAskMessageListService.getEntireProjectMakerAskMessageList(vo2);
 			model.addAttribute("messagelist", getEntireMakerMessageList);
 			
-			return "p-message-check"; //占쏙옙占쏙옙커占쌨쇽옙占쏙옙 占쏙옙占쏙옙트(占쏙옙占쏙옙占쏙옙占�) 확占쏙옙占싹는곤옙 
-		}else {
-			System.out.println("혹占쏙옙 占쏙옙占쏙옙占� 占승거댐옙?");
-			return "p-detail-mypage"; 
+			
+			vo2.setEmail((String)session.getAttribute("memberSessionEmail"));
+			if(getEntireProjectAskMessageListService.getEntireProjectAskMessageList(vo2) != null) { //내가 보낸 문의글이있을때 
+				
+				System.out.println("메이커이면서 문의글이 있씁니다.");
+				List<ProjectAskMessageVO> getEntireProjectAskMessageList = getEntireProjectAskMessageListService.getEntireProjectAskMessageList(vo2);
+				model.addAttribute("getMessageList",getEntireProjectAskMessageList);
+				
+				
+			}
+			
+			return "p-message-check"; //메세지 리스트로 
+			
+		}else { //메이커가 아닐때 
+			
+			System.out.println("메이커가 아닙니다.");
+				
+			vo2.setEmail((String)session.getAttribute("memberSessionEmail"));
+			if(getEntireProjectAskMessageListService.getEntireProjectAskMessageList(vo2) != null) { //내가 보낸 문의글이있을때 
+				
+				System.out.println("메이커는 아니지만 문의글이 있씁니다.");
+				List<ProjectAskMessageVO> getEntireProjectAskMessageList = getEntireProjectAskMessageListService.getEntireProjectAskMessageList(vo2);
+				model.addAttribute("getMessageList",getEntireProjectAskMessageList);
+				
+				
+			}
+			return "p-message-check"; 
 		}
-		
-			
 	}
 	
-	
-//---------------------------------占쏙옙占쏙옙커占싹띰옙-----------------------------------
-	
-	@RequestMapping(value="getEntireMakerMessageList.udo", method = RequestMethod.POST)
-	public String getMakerMemberCreator(MemberVO vo, ProjectAskMessageVO vo2, Model model, HttpSession session) { //占쏙옙占쏙옙커占쏙옙占쏙옙 占쏙옙 占쏙옙占실몌옙占쏙옙트
+	//크리에이터가 보는 메세지 상세페이지 
+	@RequestMapping(value="getChoiceProjectAskMessageC.udo", method = RequestMethod.GET) //문의번호 물고 들어오기 
+	public String getChoiceProjectAskMessageC(ProjectAskMessageVO vo, MemberVO vo2, CreatorVO vo3, Model model, HttpSession session) { //리스트중 선택한 문의메세지 상세페이지로 이동
 		
-		if(getMakerMemberCreatorService.getMakerMemberCreator(vo) != null) { //占쏙옙占쏙옙커占싹띰옙
-			
-			vo2.setCreator("KGB占쏙옙占쏙옙티"); //占싱부븝옙 占쏙옙占쌩울옙 占쌕뀐옙森占� 占쏙옙占쏙옙占쏙옙 占쌈시뤄옙 占쏙옙占쏙옙占쏙옙트 占싼뱄옙 占쏙옙占쏙옙
-			model.addAttribute("vo",vo2);
-			
-			session.setAttribute("makerCreator",getMakerMemberCreatorService.getMakerMemberCreator(vo).getEmail());
-			System.out.println("占쏙옙占쏙옙占쏙옙占�"+(String)session.getAttribute("makerCreator"));
-			
-			List<ProjectAskMessageVO>getEntireMakerMessageList = getEntireProjectMakerAskMessageListService.getEntireProjectMakerAskMessageList(vo2);//占쏙옙체占쏙옙瞿占쏙옙占쏙옙殮占�
-			model.addAttribute("messagelist", getEntireMakerMessageList);
-			
-			return "p-test-project-ask-list";  //占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙 占쌨쇽옙占쏙옙 占쏙옙 占쏙옙占쏙옙트 확占쏙옙占싹는곤옙
-			
-			
-		}else {//占싹뱄옙회占쏙옙占싹띰옙
-			
-		
-			return "p-test-project-maker-user-list"; //占쏙옙占쏙옙트 占쏙옙튼 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 
-		}
-		
-		
-			
-	}
-	
-	
-//---------------------------------占쏙옙占쏙옙커占싣닐띰옙-----------------------------------------
-	
-	@RequestMapping(value="getEntireProjectAskMessageList.udo", method = RequestMethod.POST)
-	public String getEntireProjectAskMessageList(ProjectAskMessageVO vo, Model model) { // 占쏙옙占쏙옙 占식울옙占쏙옙 占쌨쇽옙占쏙옙 占쏙옙체占쏙옙瞿占쏙옙占쏙옙殮占�
-		
-		List<ProjectAskMessageVO>getEntireMessageList = getEntireProjectAskMessageListService.getEntireProjectAskMessageList(vo);//占쏙옙체占쏙옙瞿占쏙옙占쏙옙殮占�
-		model.addAttribute("messagelist", getEntireMessageList);
-		
-		return "p-message-check"; //占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙 占쌨쇽옙占쏙옙 占쏙옙 占쏙옙占쏙옙트 확占쏙옙占싹는곤옙
-			
-	}
-	
-	
-	
-	@RequestMapping(value="getChoiceProjectAskMessage.udo", method = RequestMethod.GET)
-	public String getChoiceProjectAskMessage(MemberVO vo2, ProjectAskMessageVO vo, Model model) { //占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쌨쇽옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 占싱듸옙  
 		
 
-		ProjectAskMessageVO getChoiceProjectAskMessage = getChoiceProjectAskMessageService.getChoiceProjectAskMessage(vo); //占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙트 占쏙옙占쏙옙占싱깍옙 
+		ProjectAskMessageVO getChoiceProjectAskMessage = getChoiceProjectAskMessageService.getChoiceProjectAskMessage(vo); 
 		model.addAttribute("choiceProjectAskMessage", getChoiceProjectAskMessage);
 		
-		return "p-test-project-ask-choicelist"; //占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쌨쇽옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 확占쏙옙占싹는곤옙
+		vo2.setEmail((String)session.getAttribute("memberSessionEmail"));
+		MemberVO getMakerMember = getMakerMemberCreatorService.getMakerMemberCreator(vo2); 
+		vo3.setCreator(getMakerMember.getCreator().getCreator());
+		model.addAttribute("vo3",vo3);
+    
+		return "f-projectAsk-message-reply-creator"; //크리에이터가 답변다는 곳
 			
 	}
+	
+
+	//크리에이터 아닌 일반회원이 보는 메세지 상세페이지
+	@RequestMapping(value="getChoiceProjectAskMessage.udo", method = RequestMethod.GET) //문의번호 물고 들어오기 
+	public String getChoiceProjectAskMessage(ProjectAskMessageVO vo, MemberVO vo2, CreatorVO vo3, Model model, HttpSession session) { //리스트중 선택한 문의메세지 상세페이지로 이동
+		
+		
+
+		ProjectAskMessageVO getChoiceProjectAskMessage = getChoiceProjectAskMessageService.getChoiceProjectAskMessage(vo); 
+		model.addAttribute("choiceProjectAskMessage", getChoiceProjectAskMessage);
+		
+		vo2.setEmail((String)session.getAttribute("memberSessionEmail"));
+		
+//		MemberVO getMakerMember = getMakerMemberCreatorService.getMakerMemberCreator(vo2); 
+//		vo3.setCreator(getMakerMember.getCreator().getCreator());	
+//		model.addAttribute("vo3",vo3);
+		
+		
+		
+		
+		
+		
+		return "f-projectAsk-message-reply"; //크리에이터가 답변다는 곳
+
+			
+	}
+	
+	@RequestMapping(value="updateProjectAskReplyContentsStatus.udo", method = RequestMethod.POST)
+	public String updateProjectAskReplyContentsStatus(ProjectAskMessageVO vo) { //답변을 달면 수정으로 들어간다
+		
+		updateProjectAskReplyContentsStatusService.updateProjectAskReplyContentsStatus(vo);
+		System.out.println("답변을 달았습니다.");
+		
+		
+		return "redirect: showDetailMyPage.udo"; 
+	}
+
+	@RequestMapping(value="getEntireProjectAskMessageList.udo", method = RequestMethod.POST)
+	public String getEntireProjectAskMessageList(ProjectAskMessageVO vo, Model model) { //내아이디로 보낸메세지찾기
+		
+		
+		List<ProjectAskMessageVO> getEntireProjectAskMessageList = getEntireProjectAskMessageListService.getEntireProjectAskMessageList(vo);
+		model.addAttribute("getMessageList",getEntireProjectAskMessageList);
+	
+		return "redirect: showDetailMyPage.udo"; 
+	}
+
+	
+	
+	
 	
 	
 
-	@RequestMapping(value="updateProjectAskReplyContentsStatus.udo", method = RequestMethod.POST)
-	public String updateProjectAskReplyContentsStatus(ProjectAskMessageVO vo, Model model) { //占썰변占싹뤄옙
-		
-		updateProjectAskReplyContentsStatusService.updateProjectAskReplyContentsStatus(vo);
-		System.out.println("占썰변占쏙옙占쏙옙占쏙옙트占싹뤄옙");
-		
-		List<ProjectAskMessageVO>getEntireMessageList = getEntireProjectAskMessageListService.getEntireProjectAskMessageList(vo);//占쏙옙체占쏙옙瞿占쏙옙占쏙옙殮占�
-		model.addAttribute("messagelist", getEntireMessageList);
-		
-		return "p-test-project-ask-list"; //占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙 占쌨쇽옙占쏙옙 占쏙옙 占쏙옙占쏙옙트 확占쏙옙占싹는곤옙
-			
-	}
 	
 	
 	

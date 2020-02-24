@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.team5.funthing.user.model.vo.CreatorVO;
 import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.model.vo.ProjectAskMessageVO;
 import com.team5.funthing.user.model.vo.ProjectBoardVO;
@@ -55,7 +56,8 @@ public class ProjectAskMessageDAO {
 		
 		return getEntireProjectMakerAskMessageList;
 	}
-	
+
+
 
 	
 	
