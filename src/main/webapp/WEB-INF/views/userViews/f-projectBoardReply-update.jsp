@@ -27,7 +27,7 @@
 										<div class="col-12">
 											<div class="form-group">
 												<textarea class="form-control w-100" name="projectBoardContents" 
-													id="projectBoardContents" cols="30" rows="9" value="${vo.projectBoardContents}"></textarea>
+													id="projectBoardContents" cols="30" rows="9" >${vo.projectBoardContents}</textarea>
 											</div>
 										</div>
 										<div class="col-sm-6">

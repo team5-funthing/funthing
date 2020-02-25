@@ -57,6 +57,11 @@ public class ProjectAskMessageDAO {
 		return getEntireProjectMakerAskMessageList;
 	}
 
+	public List<ProjectAskMessageVO> getProjectAskMessage(ProjectAskMessageVO vo) {
+		System.out.println("where조건절 없이 projectAskMessage테이블 모두가져오기");
+		return projectAskMessageSqlSessionTemplate.selectList("projectAskMessageDAO.getProjectAskMessage",vo);
+	}
+
 
 
 	
