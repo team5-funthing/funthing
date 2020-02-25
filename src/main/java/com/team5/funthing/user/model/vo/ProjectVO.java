@@ -1,6 +1,6 @@
 package com.team5.funthing.user.model.vo;
 
-import java.util.Date;
+import java.sql.Date;
 
 import org.springframework.stereotype.Component;
 
@@ -26,8 +26,8 @@ public class ProjectVO {
 	private String projectTitle = "";
 	private String projectSubTitle = "";
 	private String category=""; 
-	private Date startDate = new Date(); 
-	private Date endDate = new Date(); 
+	private Date startDate;
+	private Date endDate; 
 	
 //	프로젝트 소개 멤버
 	private String projectSummary="";
@@ -118,12 +118,6 @@ public class ProjectVO {
 	public void setProjectCaution(String projectCaution) {
 		this.projectCaution = projectCaution;
 	}
-//	public List<String> getProjectIntroduceImage() {
-//		return projectIntroduceImage;
-//	}
-//	public void setProjectIntroduceImage(List<String> projectIntroduceImage) {
-//		this.projectIntroduceImage = projectIntroduceImage;
-//	}
 	public String getProjectIntroduceVideo() {
 		return projectIntroduceVideo;
 	}

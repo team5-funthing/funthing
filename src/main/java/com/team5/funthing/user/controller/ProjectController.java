@@ -1,13 +1,20 @@
 package com.team5.funthing.user.controller;
 
+import java.beans.PropertyEditorSupport;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,10 +24,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team5.funthing.common.utils.uploadUtils.UploadUtil;
 import com.team5.funthing.user.model.vo.KeywordVO;
-import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.model.vo.ProjectKeywordVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
+import com.team5.funthing.user.model.vo.RewardVO;
 import com.team5.funthing.user.model.vo.ProjectIntroduceImageVO;
+import com.team5.funthing.user.service.RewardService.GetRewardListService;
 import com.team5.funthing.user.service.keywordService.GetKeywordListService;
 import com.team5.funthing.user.service.keywordService.InsertKeywordService;
 import com.team5.funthing.user.service.projectIntroduceImageService.GetProjectIntroduceImageListService;
@@ -86,6 +94,9 @@ public class ProjectController {
 	private InsertProjectIntroduceImageService insertProjectIntroduceImageService;
 	@Autowired
 	private GetProjectIntroduceImageListService getProjectIntroduceImageListService;
+	@Autowired
+	private GetRewardListService getRewardListService;
+	
 	
 // ===================== VO 주입 =====================
 	
@@ -97,13 +108,34 @@ public class ProjectController {
 	private KeywordVO keywordVO;
 	@Autowired
 	private ProjectIntroduceImageVO projectIntroduceImageVO;
-
+	@Autowired
+	private RewardVO rewardVO;
 	
 	
 // ===================== 유틸 주입 =====================
 
 	@Autowired
 	private UploadUtil uploadUtil;
+	
+	
+	
+// ===================== initBinder ==================
+	
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(Date.class, new PropertyEditorSupport() {
+            
+			@Override
+            public void setAsText(String text) throws IllegalArgumentException {
+                // "text" 파라미터는 클라이언트가 보낸 데이터이다.
+                // 이렇게 문자열로 보낸 데이터는 java.sql.Date 객체로 바꿔야 한다.
+                this.setValue(Date.valueOf(text));
+            }
+        });
+	}
+	
+	
+	
 	
 // ===================== 메서드 =======================	
 	
@@ -160,7 +192,6 @@ public class ProjectController {
 				System.out.println(getProject.toString());
 			}
 			System.out.println("===================================");
-			System.out.println();
 			model.addAttribute("getProjectList", getProjectList);
 		}
 		model.addAttribute("basicProjectSetting", vo);
@@ -236,17 +267,32 @@ public class ProjectController {
 	}
 
 
+	
 	@RequestMapping(value = "/showPreviewProject.udo", method = RequestMethod.POST)
 	public String showPreviewProject(ProjectVO pvo, Model model) throws Exception { // 프로젝트 임시저장 시 실행되는 메서드
+		System.out.println("뭐가 문제죠?");
+		int projectNo = pvo.getProjectNo();
 		
-		projectKeywordVO.setProjectNo(pvo.getProjectNo());
+		projectKeywordVO.setProjectNo(projectNo);
 		List<ProjectKeywordVO> projectKeywordList = getProjectKeywordListService.getProjectKeywordList(projectKeywordVO);
 		
+		projectIntroduceImageVO.setProjectNo(projectNo);
+		List<ProjectIntroduceImageVO>projectIntroduceImageList = getProjectIntroduceImageListService.getProjectIntroduceImageList(projectIntroduceImageVO);
+		
+		rewardVO.setProjectNo(projectNo);
+		List<RewardVO> rewardList = getRewardListService.getRewardList(rewardVO);
+		model.addAttribute("rewardList", rewardList);
+		model.addAttribute("projectIntroduceImageList", projectIntroduceImageList);
 		model.addAttribute("previewProjectKeywordList", projectKeywordList);
 		model.addAttribute("previewProject", pvo);
-		return "p-project-details";
+		
+		return "p-project-details2";
 
 	}
+	
+	
+	
+	
 	
 	public void insertKeyword(List<String> toAddKeywords, KeywordVO kvo) {
 
@@ -316,7 +362,7 @@ public class ProjectController {
 			
 		List<String>toRemoveFilePath = new ArrayList<String>();
 		
-		if(!toDoUploadList.get(0).isEmpty()){ //프로젝트 소개 이미지 기존업로드 제거 및 새 업로드, DB 추가 작업 메서드
+		if(!toDoUploadList.isEmpty()){ //프로젝트 소개 이미지 기존업로드 제거 및 새 업로드, DB 추가 작업 메서드
 			vo.setProjectNo(ProjectNo);
 			String voName = vo.getClass().getSimpleName();
 			
@@ -348,7 +394,7 @@ public class ProjectController {
 		List<String> toRemoveFilePath = new ArrayList<String>();
 
 				
-		if(!toDoUploadList.get(0).isEmpty()) { // 업로드 시킨 파일이 이미 존재하는 경우 파일 선택을 다시 안한 경우에 나올 수 있는 상황 처리  
+		if(!toDoUploadList.isEmpty()) { // 업로드 시킨 파일이 이미 존재하는 경우 파일 선택을 다시 안한 경우에 나올 수 있는 상황 처리  
 			toRemoveFilePath.add(vo.getProjectMainImage()); //제거될 파일경로를 vo객체에서 가져오기
 			String voName = vo.getClass().getSimpleName();
 			List<String> toSettingPath = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);

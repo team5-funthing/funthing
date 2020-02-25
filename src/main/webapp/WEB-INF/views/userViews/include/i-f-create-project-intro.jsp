@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 	
 <div class="h4" style="color: black; font-weight: bolder;">프로젝트 소개</div>
 <div class="d-flex flex-column bd-highlight mb-3">
-
 	
 	<div class="p-2 bd-highlight">
 		<span>펀딩 목표 금액</span>
@@ -16,15 +15,12 @@
 						<input type="text" name="goalMoney" value="0" placeholder="펀딩 목표 금액을 입력하세요."
 							onfocus="this.placeholder = ''"
 							onblur="this.placeholder = '펀딩 목표 금액을 입력하세요.'" class="single-input">
-							
-		
 					</c:when>
 					<c:when test="${writingProject.goalMoney ne null}">
 						<input type="text" name="goalMoney"
 							value="${writingProject.goalMoney }" placeholder="펀딩 목표 금액을 입력하세요."
 							onfocus="this.placeholder = ''"
 							onblur="this.placeholder = '펀딩 목표 금액을 입력하세요.'" class="single-input">
-							
 					</c:when>
 				</c:choose>
 			</div>
@@ -69,7 +65,7 @@
 	
 	<div class="p-2 bd-highlight">
 		<span>프로젝트 대표 이미지</span>
-		<div class="input-group mb-3">
+		<div class="input-group mb-1">
 			<div class="form-group">
 				<label for="projectMainImageFile">대표 이미지 선택하기</label>
 				<c:choose>
@@ -77,7 +73,6 @@
 						<input type="file" name="uploadImage"
 							class="form-control-file select-project-image"
 							id="projectMainImageFile">
-                        <hr>
                         <div class="select_img"><img src="" /></div>
 					</c:when>
 					<c:when test="${writingProject.projectMainImage ne ''}">
@@ -104,7 +99,8 @@
 			</div>
 		</div>
 	</div>
-	<div class="p-2 bd-highlight">
+	
+	<div class="p-2 bd-highlight mb-2">
 		<span>프로젝트 분류[카테고리]</span>
 			
 			<script>
@@ -119,32 +115,55 @@
 				<option value="art">예술</option>
 			</select>
 	</div>
-	<div class="p-2 bd-highlight">
+	
+	<div class="p-2 bd-highlight mb-2">
 		<span>프로젝트 기간 설정</span>
 		<div class="row">
-			<div class="col-xl-6">
-	            <input type="text" name="startDate"placeholder="펀딩 시작 날짜">
-	        </div>
-	        <div>
-	        	
-	        </div>
+			<c:choose>
+				<c:when test="${writingProject.endDate eq null }">
+					<div class="col-xl-6">
+			            <input type="text" name="endDate" id="endDate" class="datepicker-here" data-language='ko' data-position='right top'>
+			            <i class="far fa-calendar-alt"></i>
+			            <p id="afterSelectDate"></p>				
+	        		</div>
+				</c:when>
+				<c:when test="${writingProject.endDate ne null }">
+					<div class="col-xl-6">
+						
+						<fmt:formatDate var="getEndDate" pattern="yyyy-MM-dd" value="${writingProject.endDate }" />
+						
+			            <input type="text" id="endDate" class="datepicker-here" data-language='ko' data-position='right top'>
+						<p id="afterSelectDate">
+							펀딩 결제일 &nbsp;
+							<strong><span style="color: #2980b9">${writingProject.endDate }</span></strong>
+							펀딩이 성공 종료 된 후 결제가 +4 영업일 동안 진행됩니다.<br /> 정산금 지급예정일 보름에서 정산은 최대
+							한달&nbsp;이내에 시작될 예정이며, 정산금 지급까지는 종료일 기준 최대 +20 영업일이 소요됩니다.&nbsp;
+							<input type="text" name="endDate" value="${getEndDate }">
+						</p>
+					</div>
+				</c:when>
+			</c:choose>
+
         </div>
 	</div>
 	
 	<script>
 	
-        $('#datepicker').datepicker({
-            iconsLibrary: 'fontawesome',
-            icons: {
-             rightIcon: '<span class="fa fa-caret-down"></span>'
-         }
-        });
-        
-    </script>
+		$("#endDate").on("change", function(){
+			var end = $("#endDate").val();
+			$("#endDate").attr("name", "endDate");
+			$("#afterSelectDate").empty();
+			$("#afterSelectDate").append(
+					"펀딩 결제일 &nbsp;<strong><span style='color:#2980b9'> "+ end +"</span></strong>"
+					+ "펀딩이 성공 종료 된 후 결제가 +4 영업일 동안 진행됩니다.<br />"
+					+ "정산금 지급예정일 보름에서 정산은 최대 한달&nbsp;이내에 시작될 예정이며, 정산금 지급까지는 종료일 기준 최대 +20 영업일이 소요됩니다.&nbsp");
+		});
+		
+		
+		
+	</script>
 	
-	
-	
-	<div class="p-2 bd-highlight">
+	<div class="p-2 bd-highlight mb-2">
 	
 		 <script>
 			 
@@ -156,8 +175,6 @@
 		        				"<li id='keyword" + no + "' class='btn-lg btn-bd-keyword d-none d-lg-inline-block m-1' onclick='$('li#keyword" + no + "').remove()'>" + '#' + toAddKeyword + "<input type='hidden' name='keywords' value='" + '#' + toAddKeyword + "'></li>");
 						no++
 		        	}
-		        	
-		        	
 		        	
 		       	 });
 	         

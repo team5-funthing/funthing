@@ -6,7 +6,7 @@
     monthsShort: ['1월','2월','3월','4월','5월','6월', '7월','8월','9월','10월','11월','12월'],
     today: '오늘',
     clear: '정리',
-    dateFormat: 'mm/dd/yyyy',
+    dateFormat: 'yyyy-mm-dd',
     timeFormat: 'hh:ii aa',
     firstDay: 0
 }; })(jQuery);
