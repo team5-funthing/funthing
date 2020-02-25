@@ -1,9 +1,8 @@
 package com.team5.funthing.user.model.vo;
 
-import java.util.Date;
-import java.util.List;
+import java.sql.Date;
 
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.stereotype.Component;
 
 /**
  * 
@@ -12,40 +11,45 @@ import org.springframework.web.multipart.MultipartFile;
  * 	Funthing Project 
  * 
  */
+
+@Component
 public class ProjectVO {
 	
 //	프로젝트 기본설정 멤버
-	private int projectNo = -1; 
-	private String creator=""; 
-	private String email="";
+	private Integer projectNo = -1; 
+	private String creator = ""; 
+	private String email = "";
 	
 //	프로젝트 설정 멤버
 	private int goalMoney; 
-	private String projectMainImage;
-	private String projectTitle="";
-	private String projectSubTitle="";
+	private String projectMainImage = "";
+	private String projectTitle = "";
+	private String projectSubTitle = "";
 	private String category=""; 
-	private Date startDate= new Date(); 
-	private Date endDate = new Date(); 
-	private List<String> projectKeyword; // null ok
+	private Date startDate;
+	private Date endDate; 
 	
 //	프로젝트 소개 멤버
-	private String projectStory=""; 
 	private String projectSummary="";
-	private String projectDetail="";
 	private String projectCaution="";
-	private String projectVideo; // null ok
+//	private List<String> projectIntroduceImage;
+	private String projectIntroduceVideo="";
+	private String projectStory="";
 
-//	그 외 멤버
-	private String supporters; 
-	private int fundingMoney; 
+
+//  기타 멤버
 	private char status = 'w'; 
-	private char informationAgree = 'n'; 
 	private char writeStatus = 'n';
-	public int getProjectNo() {
+	
+//  sql문에 적용 안된 멤버
+	private int fundingMoney; 
+	private String supporters; 
+	private char informationAgree = 'n'; 
+	
+	public Integer getProjectNo() {
 		return projectNo;
 	}
-	public void setProjectNo(int projectNo) {
+	public void setProjectNo(Integer projectNo) {
 		this.projectNo = projectNo;
 	}
 	public String getCreator() {
@@ -102,29 +106,11 @@ public class ProjectVO {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	public List<String> getProjectKeyword() {
-		return projectKeyword;
-	}
-	public void setProjectKeyword(List<String> projectKeyword) {
-		this.projectKeyword = projectKeyword;
-	}
-	public String getProjectStory() {
-		return projectStory;
-	}
-	public void setProjectStory(String projectStory) {
-		this.projectStory = projectStory;
-	}
 	public String getProjectSummary() {
 		return projectSummary;
 	}
 	public void setProjectSummary(String projectSummary) {
 		this.projectSummary = projectSummary;
-	}
-	public String getProjectDetail() {
-		return projectDetail;
-	}
-	public void setProjectDetail(String projectDetail) {
-		this.projectDetail = projectDetail;
 	}
 	public String getProjectCaution() {
 		return projectCaution;
@@ -132,11 +118,17 @@ public class ProjectVO {
 	public void setProjectCaution(String projectCaution) {
 		this.projectCaution = projectCaution;
 	}
-	public String getProjectVideo() {
-		return projectVideo;
+	public String getProjectIntroduceVideo() {
+		return projectIntroduceVideo;
 	}
-	public void setProjectVideo(String projectVideo) {
-		this.projectVideo = projectVideo;
+	public void setProjectIntroduceVideo(String projectIntroduceVideo) {
+		this.projectIntroduceVideo = projectIntroduceVideo;
+	}
+	public String getProjectStory() {
+		return projectStory;
+	}
+	public void setProjectStory(String projectStory) {
+		this.projectStory = projectStory;
 	}
 	public String getSupporters() {
 		return supporters;
@@ -173,13 +165,12 @@ public class ProjectVO {
 		return "ProjectVO [projectNo=" + projectNo + ", creator=" + creator + ", email=" + email + ", goalMoney="
 				+ goalMoney + ", projectMainImage=" + projectMainImage + ", projectTitle=" + projectTitle
 				+ ", projectSubTitle=" + projectSubTitle + ", category=" + category + ", startDate=" + startDate
-				+ ", endDate=" + endDate + ", projectKeyword=" + projectKeyword + ", projectStory=" + projectStory
-				+ ", projectSummary=" + projectSummary + ", projectDetail=" + projectDetail + ", projectCaution="
-				+ projectCaution + ", projectVideo=" + projectVideo + ", supporters=" + supporters + ", fundingMoney="
-				+ fundingMoney + ", status=" + status + ", informationAgree=" + informationAgree + ", writeStatus="
-				+ writeStatus + "]";
+				+ ", endDate=" + endDate + ", projectSummary=" + projectSummary + ", projectCaution=" + projectCaution
+				+ ", projectIntroduceVideo="
+				+ projectIntroduceVideo + ", projectStory=" + projectStory + ", supporters=" + supporters
+				+ ", fundingMoney=" + fundingMoney + ", status=" + status + ", informationAgree=" + informationAgree
+				+ ", writeStatus=" + writeStatus + "]";
 	}
-		
 	
 	
 	

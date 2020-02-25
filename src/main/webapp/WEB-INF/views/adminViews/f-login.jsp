@@ -21,6 +21,35 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+	<style>
+		#showLoginResult{
+			background-color:#343A40;
+			height:30px;
+			width:358px;
+		}
+		#showLoginResultText{
+			color:white;		
+		}
+	</style>
+	<script>
+		
+		$(document).ready(function(){
+			document.getElementById("loginButton").focus();
+		});
+	
+		function LoginCheck(){
+			
+			if(document.loginForm.adminId.value==""){
+				alert("아이디를 입력하지 않았습니다.");
+				return false;
+			}else if(document.loginForm.adminPassword.value==""){
+				alert("비밀번호를 입력하지 않았습니다.");
+				return false;
+			}else{
+				document.loginForm.submit();
+			}
+		}
+	</script>
 </head>
 
 <body>
@@ -44,32 +73,37 @@
             <div class="auth-box bg-dark border-top border-secondary">
                 <div id="loginform">
                     <div class="text-center p-t-20 p-b-20">
-                        <H2>Fun Thing - admin</H2>
+                        <H2>FunThing - admin</H2>
                     </div>
                     <!-- Form -->
-                    <form class="form-horizontal m-t-20" id="loginform" action="index.html">
-                        <div class="row p-b-30">
+                    <form class="form-horizontal m-t-20" name="loginForm" id="loginform" action="LoginCheck.ado" method="post">
+                        <div class="row p-b-30" style="padding:0">
                             <div class="col-12">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-success text-white" id="basic-addon1"><i class="ti-user"></i></span>
                                     </div>
-                                    <input type="text" class="form-control form-control-lg" placeholder="아이디" aria-label="Username" aria-describedby="basic-addon1" required="">
+                                    <input type="text" name="adminId" class="form-control form-control-lg" placeholder="아이디" aria-label="Username" aria-describedby="basic-addon1" >
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-warning text-white" id="basic-addon2"><i class="ti-pencil"></i></span>
                                     </div>
-                                    <input type="text" class="form-control form-control-lg" placeholder="비밀번호" aria-label="Password" aria-describedby="basic-addon1" required="">
+                                    <input type="password" name="adminPassword" class="form-control form-control-lg" placeholder="비밀번호" aria-label="Password" aria-describedby="basic-addon1" >
                                 </div>
                             </div>
+                        </div>
+                        <div id="showLoginResult">
+                        	<div id="showLoginResultText" align="center">
+                        		${loginResult}
+                        	</div>
                         </div>
                         <div class="row border-top border-secondary">
                             <div class="col-12">
                                 <div class="form-group">
                                     <div class="p-t-20">
                                         
-                                        <button class="btn btn-success float-right" type="submit">로그인</button>
+                                        <button id="loginButton" class="btn btn-success float-right" onClick="return LoginCheck()">로그인</button>
                                     </div>
                                 </div>
                             </div>

@@ -3,94 +3,97 @@ package com.team5.funthing.user.model.vo;
 import java.sql.Date;
 
 public class ProjectBoardVO {
-	
-	
-	
-	private int projectboardno;
+
+	private int projectBoardNo = -1;
 	private String email;
-	private int projectno;
-	private String position;
-	private String projectboardcontents;
-	private Date projectboarddate;
+	private int projectNo = 325;
+	private String projectBoardContents;
+	private Date projectBoardDate;
 	private int step;
 	private int depth;
 	private int ref;
 	
 	private MemberVO Member;
-	
-	
-	
-	
-	public MemberVO getMember() {
-		return Member;
+
+	public int getProjectBoardNo() {
+		return projectBoardNo;
 	}
-	public void setMember(MemberVO member) {
-		Member = member;
+
+	public void setProjectBoardNo(int projectBoardNo) {
+		this.projectBoardNo = projectBoardNo;
 	}
-	public int getProjectboardno() {
-		return projectboardno;
-	}
-	public void setProjectboardno(int projectboardno) {
-		this.projectboardno = projectboardno;
-	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getProjectno() {
-		return projectno;
+
+	public int getProjectNo() {
+		return projectNo;
 	}
-	public void setProjectno(int projectno) {
-		this.projectno = projectno;
+
+	public void setProjectNo(int projectNo) {
+		this.projectNo = projectNo;
 	}
-	public String getPosition() {
-		return position;
+
+	public String getProjectBoardContents() {
+		return projectBoardContents;
 	}
-	public void setPosition(String position) {
-		this.position = position;
+
+	public void setProjectBoardContents(String projectBoardContents) {
+		this.projectBoardContents = projectBoardContents;
 	}
-	public String getProjectboardcontents() {
-		return projectboardcontents;
+
+	public Date getProjectBoardDate() {
+		return projectBoardDate;
 	}
-	public void setProjectboardcontents(String projectboardcontents) {
-		this.projectboardcontents = projectboardcontents;
+
+	public void setProjectBoardDate(Date projectBoardDate) {
+		this.projectBoardDate = projectBoardDate;
 	}
-	public Date getProjectboarddate() {
-		return projectboarddate;
-	}
-	public void setProjectboarddate(Date projectboarddate) {
-		this.projectboarddate = projectboarddate;
-	}
+
 	public int getStep() {
 		return step;
 	}
+
 	public void setStep(int step) {
 		this.step = step;
 	}
+
 	public int getDepth() {
 		return depth;
 	}
+
 	public void setDepth(int depth) {
 		this.depth = depth;
 	}
+
 	public int getRef() {
 		return ref;
 	}
+
 	public void setRef(int ref) {
 		this.ref = ref;
 	}
+
+	public MemberVO getMember() {
+		return Member;
+	}
+
+	public void setMember(MemberVO member) {
+		Member = member;
+	}
+
 	@Override
 	public String toString() {
-		return "ProjectBoardVO [projectboardno=" + projectboardno + ", email=" + email + ", projectno=" + projectno
-				+ ", position=" + position + ", projectboardcontents=" + projectboardcontents + ", projectboarddate="
-				+ projectboarddate + ", step=" + step + ", depth=" + depth + ", ref=" + ref + ", Member=" + Member
-				+ "]";
+		return "ProjectBoardVO [projectBoardNo=" + projectBoardNo + ", email=" + email + ", projectNo=" + projectNo
+				+ ", projectBoardContents=" + projectBoardContents + ", projectBoardDate=" + projectBoardDate
+				+ ", step=" + step + ", depth=" + depth + ", ref=" + ref + ", Member=" + Member + "]";
 	}
 	
 	
 	
-	
-
 }

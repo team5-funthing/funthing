@@ -17,9 +17,8 @@
     <script src="${pageContext.request.contextPath}/resources/user/js/jquery.slicknav.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/user/js/jquery.magnific-popup.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/user/js/plugins.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/user/js/gijgo.min.js"></script>
     
-    <!--contact js-->
+    <!--contact js -->
     <script src="${pageContext.request.contextPath}/resources/user/js/contact.js"></script>
     <script src="${pageContext.request.contextPath}/resources/user/js/jquery.ajaxchimp.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/user/js/jquery.form.js"></script>
@@ -28,8 +27,8 @@
 
     <script src="${pageContext.request.contextPath}/resources/user/js/main.js"></script>
     
-    <!-- CKEditor5 -->
-    <script src="${pageContext.request.contextPath}/resources/common/ckeditor5/build/ckeditor.js"></script>
+    
+   
     
     
     

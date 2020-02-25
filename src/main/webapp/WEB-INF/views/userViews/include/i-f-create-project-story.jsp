@@ -6,15 +6,156 @@
 <div class="p-2 bd-highlight">
 	<span>소개 컨텐츠 [영상]</span>
 
+	<!-- ProjectVideo Youtube 영상 올리기 -->
 	<div class="input-group mb-3">
-		<div class="form-group">
 		
-		<!-- 	<label for="exampleFormControlFile1">소개 컨텐츠를 선택하세요.(영상)</label> 
-			<input type="file" name="projectVideo" class="form-control-file select-project-image" id="exampleFormControlFile1"> -->
-		</div>
+		<c:choose>
+			<c:when test="${writingProject.projectIntroduceVideo eq null || writingProject.projectIntroduceVideo eq ''}">
+			
+				<input type="text" id="urlVideo" class="form-control" placeholder="소개 영상으로 올리려는 영상 URL 주소를 입력하세요." aria-label="소개 영상으로 올리려는 영상 URL 주소를 입력하세요." aria-describedby="urlBtn">
+				<div class="input-group-append urlBtn-registry">
+				  <button class="btn btn-outline-secondary" type="button" id="urlBtn">등록</button>
+				</div>
+				<div class="m-4">
+					<div id="toAppendIframeDiv" class="form-group"></div>
+				</div>
+				<input type="hidden" id="projectIntroduceVideoInput" name="projectIntroduceVideo">
+			</c:when>
+			
+			<c:when test="${writingProject.projectIntroduceVideo ne null || writingProject.projectIntroduceVideo ne ''}">
+				
+				<input type="text" id="urlVideo" value="${writingProject.projectIntroduceVideo }" disabled  class="form-control" placeholder="소개 영상으로 올리려는 영상 URL 주소를 입력하세요." aria-label="소개 영상으로 올리려는 영상 URL 주소를 입력하세요." aria-describedby="urlBtn">
+				<div class="input-group-append urlBtn-registry">
+				  <button class="btn btn-outline-secondary" type="button" id="urlBtn" disabled>등록</button>
+				</div>
+				
+				
+				
+				<div class='input-group-append urlBtn-remove'>
+					<a class='btn fas fa-times fa-2x' type='button' id='urlBtn'></a>
+				</div>
+				<div class="m-4">
+					<div id="toAppendIframeDiv" class="form-group">
+						${writingProject.projectIntroduceVideo }
+					</div>
+					<input type="hidden" id="projectIntroduceVideoInput"   name="projectIntroduceVideo" value="${writingProject.projectIntroduceVideo }">
+				</div>
+			
+			</c:when>
+		</c:choose>
 	</div>
 	
+	<script>
+		$(document).on("click","#urlBtn",function(){
+			
+			var sourceCode = $('#urlVideo').val();
+       		
+       		function replaceAll(sourceCode, oldChar, newChar){
+       			return sourceCode.split(oldChar).join(newChar);
+       		}
+       	
+       		sourceCode = replaceAll(sourceCode, '\"', "\'");
+       		console.log(sourceCode);
+       		
+       		if(sourceCode != ""){
+       			$("#toAppendIframeDiv").append(sourceCode);
+       			$("#projectIntroduceVideoInput").attr("value", sourceCode);
+       			
+       			var removeUrlBtn = "<div class='input-group-append urlBtn-remove'><a class='btn fas fa-times fa-2x' type='button' id='urlBtn'></a></div>";
+       			
+       			$(".urlBtn-registry").after(removeUrlBtn);
+       			$("#urlBtn").attr("disabled", true);
+       			$("#urlVideo").attr("disabled", true);
+       			
+       			$("iframe").attr("width", "640");
+        		$("iframe").attr("height", "360");
+       			
+       		}
+       	});
+       	
+		
+       	$(document).on("click",".urlBtn-remove",function(){
+       		$("#urlVideo").attr("value", "");
+       		$("#projectIntroduceVideoInput").removeAttr("value");
+       		$("#urlBtn").attr("disabled", false);
+   			$("#urlVideo").attr("disabled", false);
+   			$("#toAppendIframeDiv").empty();
+   			$("div").remove(".urlBtn-remove"); // X 버튼 지우기
+       	 });
+       	
+
+    </script>
+	
+		또는
+	
+	<!-- projectIntroduceImage -->
+	<c:choose>
+		<c:when test="${projectIntroduceImageList eq null}">
+			<input type="file" name="projectIntroduceImageUpload"
+				class="form-control-file select-project-image"
+				id="projectIntroduceImage">
+                <hr>
+                
+	            <ul id="projectIntroduceImageUl">
+					<li id="projectIntroduceImageLi">
+						<div class="select_introduce_img m-3">
+							<img style="width: 200px; height: auto;" src="${projectIntroduceImage.projectIntroduceImage }" />
+						</div>
+					</li>
+				</ul>
+                
+                <div class="select_introduce_img"><img src="" /></div>
+                
+	            <script>
+	            	
+	            	// 일단 1. 버튼 눌렸을시
+	            	// <div class="select_introduce_img"><img src="" /></div> 코드 추가되게 하기
+	            	$(document).on("change","#projectIntroduceImage",function(){
+	            		alert("감지감지");
+	            		
+		            	$("#projectIntroduceImageUl").append("<div class='select_introduce_img'><img src='' /></div>");
+		            	
+		            	// 여기서부터 손보기
+		            	
+		           		if(this.files && this.files[0]){
+		           			var reader = new FileReader;
+		            		$("#projectIntroduceImageLi").append(
+		            				"<li id='keyword" + no + "' class='btn-lg btn-bd-keyword d-none d-lg-inline-block m-1' onclick='$('li').remove('#keyword" + no + "')'>" + '#' + toAddKeyword + "<input type='hidden' name='keywords' value='" + '#' + toAddKeyword + "'></li>");
+		    				no++
+		           			reader.onload = function(data){
+		           				$(".select_introduce_img img").attr("src", data.target.result).width(500);
+		           			}
+		           			reader.readAsDataURL(this.files[0]);
+		           		}
+	            	});
+	            	
+			    </script>
+			    	
+		</c:when>
+		
+		<c:when test="${projectIntroduceImageList ne null}">
+			<input type="file" name="projectIntroduceImageUpload" 
+					class="form-control-file select-project-image"
+					id="projectIntroduceImage">
+			<ul id="projectIntroduceImageUl">
+	
+				<c:forEach var="projectIntroduceImage" items="${projectIntroduceImageList }" varStatus="step">
+				
+					<input type="hidden" name="projectIntroduceImageUpload" value="${projectIntroduceImage.projectIntroduceImage }">
+					
+					<li id="projectIntroduceImageLi" value="">
+						<div class="select_introduce_img m-3">
+							<img style="width: 200px; height: auto;" src="${projectIntroduceImage.projectIntroduceImage }" />
+						</div>
+					</li>
+					
+				</c:forEach>
+				
+			</ul>
+		</c:when>
+	</c:choose>
 </div>
+
 <div class="p-2 bd-highlight">
 	<span>프로젝트 요약</span>
 	<div class="form-group">
@@ -52,39 +193,30 @@
 
 	<span>프로젝트 스토리*</span>
 	
-	<textarea class="mt-1" name="projectStory" class="form-control" id="editor" rows="10">
-		<h2>TEST 글이에요.</h2>
-		<p>
-			This may be the first time you hear about this made-up disorder but
-			it actually isn’t so far from the truth. Even the studies that were conducted almost half a century show that
-			<strong>the language you speak has more effects on you than you realise</strong>.
-		</p>
-		<p>
-			One of the very first experiments conducted on this topic dates back to 1964.
-			<a href="https://www.researchgate.net/publication/9440038_Language_and_TAT_content_in_bilinguals">In the experiment</a>
-			designed by linguist Ervin-Tripp who is an authority expert in psycholinguistic and sociolinguistic studies,
-			adults who are bilingual in English in French were showed series of pictures and were asked to create 3-minute stories.
-			In the end participants emphasized drastically different dynamics for stories in English and French.
-		</p>
-		<p>
-			Another ground-breaking experiment which included bilingual Japanese women married to American men in San Francisco were
-			asked to complete sentences. The goal of the experiment was to investigate whether or not human feelings and thoughts
-			are expressed differently in <strong>different language mindsets</strong>.
-			<Here>is a sample from the the experiment:</Here>
-		</p>
-		<p>
-			More recent <a href="https://books.google.pl/books?id=1LMhWGHGkRUC">studies</a> show, the language a person speaks affects
-			their cognition, behaviour, emotions and hence <strong>their personality</strong>.
-			This shouldn’t come as a surprise
-			<a href="https://en.wikipedia.org/wiki/Lateralization_of_brain_function">since we already know</a> that different regions
-			of the brain become more active depending on the person’s activity at hand. Since structure, information and especially
-			<strong>the culture</strong> of languages varies substantially and the language a person speaks is an essential element of daily life.
-		</p>
-	</textarea>
+	<c:choose>
+		<c:when test="${writingProject.projectStory eq null }">
+			<textarea class="mt-1" name="projectStory" class="form-control" id="editor" rows="20">
+			</textarea>
+		</c:when>
+		<c:when test="${writingProject.projectStory ne null }">
+			<textarea class="mt-1" name="projectStory" class="form-control" id="editor" rows="20">${writingProject.projectStory}</textarea>
+		</c:when>
+	</c:choose>
+	
+	
 
 </div>
 
-<script src="${pageContext.request.contextPath}/resources/common/js/ckeditor.js"></script>
+<script>
+	
+	
+	$(function(){
+		
+		CKEDITOR.replace('editor')
+		
+	});
+	
+</script>
 
 
 

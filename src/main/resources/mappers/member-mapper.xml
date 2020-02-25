@@ -16,16 +16,29 @@
 	</insert>
    
 	<insert id="insertMember" parameterType="member">
-      INSERT INTO MEMBER (EMAIL,PASSWORD,NAME)
+      INSERT INTO member (EMAIL,PASSWORD,NAME)
       VALUES(#{email},#{password},#{name})
    </insert>
    
    <insert id="saveImage" parameterType="member">
-   	UPDATE MEMBER 
+   	UPDATE member 
    	SET myImage = #{myImage} 
    	WHERE email = #{email}
    
    </insert>
+   
+   
+   <update id="updateMember" parameterType="member">
+   	UPDATE member
+   	SET (password = #{password}, phone=#{phone}, introduce=#{introduce})
+   	WHERE email=#{email}
+   
+   </update>
+   
+   <delete id="deleteMember" parameterType="member">
+   DELETE member
+   WHERE email=#{email}
+   </delete>
 <!-- 
 	<resultMap type="#modelname" id="YourResultSet">
 		<id property="param1" column="columnname1" />

@@ -16,7 +16,7 @@ public class GetProjectServiceImpl implements GetProjectService {
 	@Override
 	public ProjectVO getProject(ProjectVO vo) {
 		
-		return projectDAO.getProejct(vo);
+		return projectDAO.getProject(vo);
 	}
 
 }

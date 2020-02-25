@@ -53,7 +53,7 @@
 
 	<update id="updateNotice" parameterType="notice">
 		UPDATE NOTICE 
-		SET NOTICETITLE = #{noticeTitle}, NOTICECONTENT = #{noticeContent} WHERE noticeNo = #{noticeNo}
+		SET NOTICETITLE = 'Y', NOTICECONTENT = #{noticeContent} WHERE noticeNo = #{noticeNo}
 	</update>
 
 	<delete id="deleteNotice" parameterType="int">

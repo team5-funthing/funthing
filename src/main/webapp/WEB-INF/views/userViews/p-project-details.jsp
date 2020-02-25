@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!doctype html>
 
-<html class="no-js" lang="zxx">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<!doctype html>
+<html class="no-js">
 
 <head>
 
-<jsp:include page="./include/i-head-setting.jsp" />
+	<jsp:include page="./include/i-head-setting.jsp" />
 
 </head>
 
@@ -21,14 +23,14 @@
 		<div class="w-100">
 			<article class="row d-flex justify-content-center">
 				<aside id="project-main-img" class="col-7">
-					<a href="#"><img class="project-main"
-						src="${pageContext.request.contextPath}/resources/user/img/test/5.jpg"></a>
+					<img class="project-main" src="img/test/5.jpg">
 				</aside>
 				<aside id="project-details-info"
 					class="col-5 align-items-start d-flex flex-column bd-highlight">
 
 					<div class="p-2 bd-highlight">
 						<div class="h4">모인 금액</div>
+						
 						<div class="h2" style="color: #000000">
 							500,000원[모인금액]
 							<div class="h5" style="color: #000000">50% [달성율]</div>
@@ -51,7 +53,7 @@
 							class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2"
 							href="#">좋아요</a> <a
 							class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2"
-							href="#">문의하기</a> <a
+							href="showInsertwAskMessage.udo?projectNo=${vo.projectNo }">문의하기</a> <a
 							class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2"
 							href="#">공유하기</a>
 
@@ -63,13 +65,12 @@
 			<hr>
 
 			<div class="w-75">
-
 				<article>
 					<div class="row">
 						<div class="col-lg-10 posts-list">
 							<div class="single-project-details">
 								<div class="feature-img">
-									<img class="img-fluid" src="img/test/1.jpg" alt="">
+									<img class="img-fluid" src="#" alt="">
 								</div>
 								<div class="blog_details">
 									<h2>여기에 상세 내용들 어떻게 올릴지 정해야한다.</h2>
@@ -128,53 +129,13 @@
 										<li class="mr-1"><a href="#"><i class="fa fa-behance"></i></a></li>
 									</ul>
 								</div>
-								<div class="navigation-area">
-									<div class="row">
-										<div
-											class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-centl-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
-											<div class="thumb">
-												<a href="#"> <img class="img-fluid"
-													src="img/post/preview.png" alt="">
-												</a>
-											</div>
-											<div class="arrow">
-												<a href="#"> <span class="lnr text-white ti-arrow-left"></span>
-												</a>
-											</div>
-											<div class="detials">
-												<p>이전 프로젝트</p>
-												<a href="#">
-													<div class="h4">[프로젝트 제목]</div>
-												</a>
-											</div>
-										</div>
-										<div
-											class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
-											<div class="detials">
-												<p>다음 프로젝트</p>
-												<a href="#">
-													<div class="h4">[프로젝트 제목]</div>
-												</a>
-											</div>
-											<div class="arrow">
-												<a href="#"> <span class="lnr text-white ti-arrow-right"></span>
-												</a>
-											</div>
-											<div class="thumb">
-												<a href="#"> <img class="img-fluid"
-													src="img/post/next.png" alt="">
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>
 							</div>
 							<div class="project-author">
 								<div class="media align-items-center">
 									<img src="img/project/author.png" alt="">
 									<div class="media-body">
 										<a href="#">
-											<div class="h4">???</div>
+											<h4></h4>
 										</a>
 										<p>Second divided from form fish beast made. Every of seas
 											all gathered use saying you're, he our dominion twon Second
@@ -182,125 +143,162 @@
 									</div>
 								</div>
 							</div>
-							<div class="comments-area">
-								<div class="h4">리뷰 게시판</div>
-								<div class="comment-list">
-									<div class="single-comment justify-content-between d-flex">
-										<div class="user justify-content-between d-flex">
-											<div class="thumb">
-												<img src="img/comment/comment_1.png" alt="">
-											</div>
-											<div class="desc">
-												<p class="comment">Multiply sea night grass fourth day
-													sea lesser rule open subdue female fill which them Blessed,
-													give fill lesser bearing multiply sea night grass fourth
-													day sea lesser</p>
-												<div class="d-flex justify-content-between">
-													<div class="d-flex align-items-center">
-														<h5>
-															<a href="#">Emilly Blunt</a>
-														</h5>
-														<p class="date">December 4, 2017 at 3:12 pm</p>
-													</div>
-													<div class="reply-btn">
-														<a href="#" class="btn-reply text-uppercase">답변</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="comment-list">
-									<div class="single-comment justify-content-between d-flex">
-										<div class="user justify-content-between d-flex">
-											<div class="thumb">
-												<img src="img/comment/comment_2.png" alt="">
-											</div>
-											<div class="desc">
-												<p class="comment">Multiply sea night grass fourth day
-													sea lesser rule open subdue female fill which them Blessed,
-													give fill lesser bearing multiply sea night grass fourth
-													day sea lesser</p>
-												<div class="d-flex justify-content-between">
-													<div class="d-flex align-items-center">
-														<h5>
-															<a href="#">Emilly Blunt</a>
-														</h5>
-														<p class="date">December 4, 2017 at 3:12 pm</p>
-													</div>
-													<div class="reply-btn">
-														<a href="#" class="btn-reply text-uppercase">reply</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="comment-list">
-									<div class="single-comment justify-content-between d-flex">
-										<div class="user justify-content-between d-flex">
-											<div class="thumb">
-												<img src="img/comment/comment_3.png" alt="">
-											</div>
-											<div class="desc">
-												<p class="comment">Multiply sea night grass fourth day
-													sea lesser rule open subdue female fill which them Blessed,
-													give fill lesser bearing multiply sea night grass fourth
-													day sea lesser</p>
-												<div class="d-flex justify-content-between">
-													<div class="d-flex align-items-center">
-														<h5>
-															<a href="#">Emilly Blunt</a>
-														</h5>
-														<p class="date">December 4, 2017 at 3:12 pm</p>
-													</div>
-													<div class="reply-btn">
-														<a href="#" class="btn-reply text-uppercase">reply</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+							
+							<!-- projectBoard form 시작 -->
 							<div class="comment-form">
-								<div class="h4">Leave a Reply</div>
-								<form class="form-contact comment_form" action="#"
-									id="commentForm">
+								<h4>리뷰 게시판 글 남기기</h4>
+								
+								<form class="form-contact comment_form" action="insertProjectBoard.udo" 
+												id="commentForm" method="post">
 									<div class="row">
 										<div class="col-12">
 											<div class="form-group">
-												<textarea class="form-control w-100" name="comment"
-													id="comment" cols="30" rows="9" placeholder="Write Comment"></textarea>
+												<textarea class="form-control w-100" name="projectBoardContents" 
+													id="projectBoardContents" cols="30" rows="9"></textarea>
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
-												<input class="form-control" name="name" id="name"
-													type="text" placeholder="Name">
+												<input class="form-control" name="name" id="name" type="text" 
+													value="${sessionScope.memberSessionName}">
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
-												<input class="form-control" name="email" id="email"
-													type="email" placeholder="Email">
-											</div>
-										</div>
-										<div class="col-12">
-											<div class="form-group">
-												<input class="form-control" name="website" id="website"
-													type="text" placeholder="Website">
+		                                    <input class="form-control" name="email" id="email" type="email" 
+		                                       value="${sessionScope.memberSessionEmail}">
 											</div>
 										</div>
 									</div>
 									<div class="form-group">
-										<button type="submit"
-											class="button button-contactForm btn_1 boxed-btn">Send
-											Message</button>
+										<button type="submit" 
+											class="button button-contactForm btn_1 boxed-btn">글 남기기</button>
 									</div>
 								</form>
 							</div>
+							<!-- projectBoard form 끝 -->
+							
+							
+							<!-- proejctBoardList 시작 -->
+							<div class="comments-area">
+								<h4>리뷰 게시판</h4>
+								
+								<!-- projectBoard 시작 -->
+								<c:forEach var="b1" items="${getProjectBoard}">
+									<c:if test="${b1.step eq 0}"> 
+										
+										<div class="comment-list">
+											<div class="single-comment justify-content-between d-flex">
+												<div class="user justify-content-between d-flex">
+													<div class="thumb">
+														<img src="${pageContext.request.contextPath}/resources/user/img/comment/comment_1.png" alt="">
+													</div>
+													<div class="desc" style="width: 600px;">
+														<p class="comment">
+															${b1.projectBoardContents}
+														</p>
+														<div class="d-flex justify-content-between">
+															<div class="d-flex align-items-center">
+																<h5>
+																	<a href="#">${b1.member.name }</a>
+																</h5>
+																<p class="date">${b1.projectBoardDate}</p>
+															</div>
+															<c:choose>
+																<c:when
+																	test="${ b1.email eq sessionScope.memberSessionEmail }">
+
+																	<div class="reply-btn">
+																		<a type="submit" href="getProjectBoard.udo?projectBoardNo=${b1.projectBoardNo }"
+																			class="button button-contactForm btn_1 boxed-btn pt-1 pl-2 pr-2 pb-0">
+																			수정 </a> 
+																		<a type="submit" href="deleteProjectBoard.udo?projectBoardNo=${b1.projectBoardNo }"
+																			class="button button-contactForm btn_1 boxed-btn pt-1 pl-2 pr-2 pb-0">
+																			삭제 </a>
+
+																	</div>
+
+																</c:when>
+
+
+																<c:when
+																	test="${sessionScope.memberSessionEmail eq 'shn807@naver.com' }">
+
+																		<div class="reply-btn">
+																			<a type="submit" href="replyBoard.udo?projectBoardNo=${b1.projectBoardNo }"
+																				class="button button-contactForm btn_1 boxed-btn pt-1 pl-3 pr-3 pb-1">
+																				Reply </a>
+																		</div>
+																	</c:when>
+															</c:choose>
+														</div>
+														
+														<!-- projectBoard Reply 시작 -->
+														<c:forEach var="b2" items="${getProjectBoard}">
+															<c:if test="${b1.ref eq b2.ref && b1.step ne b2.step}">
+																<div class="d-flex justify-content-around mt-3">
+							                                       <div class="d-flex align-items-center">
+							                                          <div class="single-comment justify-content-between d-flex">
+							                                             <div class="user justify-content-between d-flex p-3"
+							                                                style="background-color: whitesmoke;">
+							                                                <div class="thumb">
+							                                                   <img src="${pageContext.request.contextPath}/resources/user/img/comment/comment_2.png" alt="">
+							                                                </div>
+							                                                <div class="desc" style="width: 500px;">
+							                                                    <p class="comment">
+							                                                   		${b2.projectBoardContents}
+							                                                    </p>
+							                                                    <div class="d-flex justify-content-between">
+							                                                       <div class="d-flex align-items-center">
+							                                                          <h5>
+							                                                             <a href="#">${b2.member.name}</a>
+							                                                          </h5>
+							                                                          <p class="date">${b2.projectBoardDate}</p>
+							                                                       </div>
+							                                                       <c:if test="${ b2.email eq sessionScope.memberSessionEmail }">
+							                                                       	<form action="getProjectBoardReply.udo" method="post">
+																						<div class="reply-btn">
+																							<input type="submit" 
+																							class="button button-contactForm btn_1 boxed-btn pt-1 pl-2 pr-2 pb-0" value="수정">
+																								 <input type="submit" formaction="deleteProjectBoardReply.udo"
+																								class="button button-contactForm btn_1 boxed-btn pt-1 pl-2 pr-2 pb-0" value="삭제"> 
+																								<input type="hidden" name="step" id="step" value="${b2.step}"> 
+																								<input type="hidden" name="ref" id="ref" value="${b2.ref}">
+
+																								</div>
+																						</form>
+																					</c:if>
+																					</div>
+							                                                </div>
+							                                             </div>
+							                                          </div>
+							                                       </div>
+							                                       <div class="d-flex align-items-center">
+							                                       </div>
+							                                    </div>
+							                                 
+							                            	</c:if>
+					                                    </c:forEach>
+														<!-- projectBoard Reply 끝 -->
+														
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- projectBoard 끝 -->
+										
+									</c:if>
+								</c:forEach>
+							</div>
+							<!-- proejctBoardList 끝 -->
+							
+							
+							
+							
 						</div>
+						<!-- 프로젝트 디테일 페이지 스토리 및 게시글 끝 [왼쪽] -->
+
+						<!-- 리워드 추가되는 부분 시작 -->
 						<div class="col-2">
 							<!-- 리워드 품목 들어가기 -->
 							<div class="card mb-3" style="width: 18rem;">
@@ -324,17 +322,15 @@
 								</div>
 							</div>
 						</div>
-					</div>
+						<!-- 리워드 반복 끝-->
 
+
+
+					</div>
 				</article>
-				<hr>
 			</div>
 		</div>
 	</section>
-
-
-
-
 
 	<!-- footer -->
 	<footer class="footer"> </footer>

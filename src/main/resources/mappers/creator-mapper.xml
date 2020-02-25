@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CreatorDAO">
+
+	<select id="getCreatorList" parameterType="creator" resultType="creator">
+		SELECT * FROM Creator
+	</select>
+	
+	<select id="getCreator" parameterType="creator" resultType="creator">
+		SELECT * FROM Creator WHERE creator = #{creator}
+	</select>
+	
+	<select id="getCreatorEmail" parameterType="creator" resultType="creator">
+		SELECT * FROM Creator WHERE email = #{email}
+	</select>
+	
+	<delete id="deleteCreator" parameterType="creator">
+		DELETE FROM Creator WHERE creator = #{creator}
+	</delete>
+
+	<update id="updateCreator" parameterType="creator">
+		UPDATE Creator 
+		SET makerPhone=#{makerPhone}, businessNumber=#{businessNumber}, 
+		businessAddress=#{businessAddress}, businessFileLink=#{businessFileLink}, lv=#{lv}
+		WHERE creator = #{creator}
+	</update>
+	
+	<insert id="insertCreator" parameterType="creator">
+		INSERT INTO Creator (creator, email, makerPhone, businessNumber, businessAddress, businessFileLink, lv)
+		VALUES(#{creator}, #{email}, #{makerPhone}, #{businessNumber}, #{businessAddress}, #{businessFileLink}, #{lv})
+	</insert>
+
+</mapper>

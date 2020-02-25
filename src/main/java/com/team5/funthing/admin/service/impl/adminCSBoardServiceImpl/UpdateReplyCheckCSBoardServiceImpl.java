@@ -15,7 +15,7 @@ public class UpdateReplyCheckCSBoardServiceImpl implements UpdateReplyCheckCSBoa
 	
 	@Override
 	public void updateReplyCheckCSBoard(CSBoardVO vo) {
-		
+	
 		adminCSBoardDAO.updateReplyCheckCSBoard(vo);
 	}
 

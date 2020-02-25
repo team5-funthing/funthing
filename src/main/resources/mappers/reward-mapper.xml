@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="RewardDAO">
+
+	<select id="getRewardList" parameterType="reward" resultType="reward">
+		SELECT * FROM reward WHERE projectNo =#{projectNo}
+	</select>
+	
+	<select id="getReward" parameterType="reward" resultType="reward">
+		SELECT * FROM reward WHERE rewardNo = #{rewardNo}
+	</select>
+	
+	<insert id="insertReward" parameterType="reward">
+		<selectKey keyProperty="rewardNo" resultType="int" order="BEFORE">
+			select REWARD_SEQ.nextval FROM DUAL
+		</selectKey>
+		INSERT INTO reward(rewardNo, projectNo, rewardName, rewardOption, rewardContent, rewardAmount, rewardPrice)
+				VALUES(#{rewardNo},#{projectNo},#{rewardName},#{rewardOption},#{rewardContent},#{rewardAmount},#{rewardPrice})
+	</insert>
+
+	<update id="updateReward" parameterType="reward">
+		UPDATE reward 
+		SET rewardName=#{rewardName}, rewardOption=#{rewardOption}, rewardContent=#{rewardContent}, rewardAmount=#{rewardAmount}, rewardPrice=#{rewardPrice}
+		WHERE rewardNo=#{rewardNo}
+	</update>
+	
+	<delete id="deleteReward" parameterType="reward">
+		DELETE FROM reward WHERE rewardNo=#{rewardNo} AND projectNo=#{projectNo}
+	</delete>
+
+</mapper>

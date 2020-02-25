@@ -11,7 +11,7 @@
 
 
 <head>
-
+	<!-- jquery.js파일 있음 -->
 	<jsp:include page="./include/i-head-setting.jsp" />
 
 </head>
@@ -24,6 +24,7 @@
     <c:if test="${writingProject.projectNo ne -1 }">
     	<script>
     		alert("글 상태 : ${writingProject.writeStatus }  projectNo : ${writingProject.projectNo}");
+    		
     	</script>
     </c:if>
     
@@ -117,15 +118,12 @@
 	    </c:when>
 	    	    <c:when test="${writingProject.writeStatus eq 'n'.charAt(0) }">
 	    	<script>
-	    	
-		   		  $(function() {
-		   			    $("#inputCompleteBtn")
-		   			      	.click(function() {
-		   			    	  	alert("작성완료 클릭!"); 
-		   			    	})
-		   			    	
-		   			      	.prop("disabled", true);
-		   			});
+		   		$(function() {
+	   			    $("#inputCompleteBtn").click(function() {
+	   			    	  	alert("작성완료 클릭!"); 
+	   			   	})
+	   			   	.prop("disabled", true);
+		   		});
 	    	</script>
 	    </c:when>
     </c:choose>

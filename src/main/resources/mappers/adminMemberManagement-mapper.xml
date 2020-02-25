@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AdminMemberManagementDAO">
+
+	<!-- 회원 목록 보기 
+	<select id="getMemberList" resultType="member" parameterType="member">
+		SELECT * FROM member
+	</select>
+	
+ 
+	회원 상세보기 
+	<select id="getMemeber" resultType="member" parameterType="member">
+		SELECT * FROM member WHERE email = ${email}
+	</select>
+	-->
+	
+	 
+	<!-- 창작자는 adminCreator-Mapper.xml에 리스트랑 상세보기 기능 구현 되어있음 -->
+	<!-- 창작자 회원등급 변경 -->
+	<update id="updateMakerMemberGrade" parameterType="creator">
+		UPDATE creator SET lv = #{lv} WHERE email = #{email}
+	</update>
+	
+	<!-- 조인문 파라미터,리절트 타입 설정 -->
+	
+
+	
+	<resultMap type="creator" id="creator">
+		<result column="creator" property="creator" />
+		<result column="email" property="email" />
+		<result column="makerPhone" property="makerPhone" />
+		<result column="businessSelect" property="businessSelect" />
+		<result column="businessNumber" property="businessNumber" />
+		<result column="businessAddress" property="businessAddress" />
+		<result column="businessFileLink" property="businessFileLink" />
+		<result column="lv" property="lv" />
+	</resultMap>
+	
+		<resultMap type="member" id="member">
+		<result column="email" property="email" />
+		<result column="password" property="password" />
+		<result column="name" property="name" />
+		<result column="phone" property="phone" />
+		<result column="introduce" property="introduce" />
+		<result column="myImage" property="myImage" />
+		<result column="report" property="report" />
+		<result column="position" property="position" />
+		<collection property="creator" resultMap="creator"></collection>
+	</resultMap>
+	 
+	<!-- 조인문 member + makermember -->
+	<select id="getMemberJoinMaker" resultMap="member" parameterType="member">
+	select member.*, creator.* from member full outer join creator on member.email = creator.email
+	</select>
+	
+	<!-- 조인문 member + makermember -->
+	<select id="getMemberJoinMakerDetail" resultMap="member" parameterType="member">
+	select member.*, creator.* from (select * from member where email = #{email}) member left outer join creator on member.email = creator.email
+	</select>
+	
+</mapper>
