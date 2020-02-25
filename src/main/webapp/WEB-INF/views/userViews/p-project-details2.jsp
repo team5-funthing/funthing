@@ -8,7 +8,7 @@
 
 <head>
 
-	<jsp:include page="./include/i-head-setting.jsp" />
+<jsp:include page="./include/i-head-setting.jsp" />
 
 </head>
 
@@ -23,14 +23,13 @@
 		<div class="w-100">
 			<article class="row d-flex justify-content-center">
 				<aside id="project-main-img" class="col-7">
-					<img class="project-main" src="img/test/5.jpg">
+					<img class="project-main" src="img/test/5.jpg"></a>
 				</aside>
 				<aside id="project-details-info"
 					class="col-5 align-items-start d-flex flex-column bd-highlight">
 
 					<div class="p-2 bd-highlight">
 						<div class="h4">모인 금액</div>
-						
 						<div class="h2" style="color: #000000">
 							500,000원[모인금액]
 							<div class="h5" style="color: #000000">50% [달성율]</div>
@@ -65,6 +64,7 @@
 			<hr>
 
 			<div class="w-75">
+
 				<article>
 					<div class="row">
 						<div class="col-lg-10 posts-list">
@@ -128,6 +128,46 @@
 												class="fa fa-dribbble"></i></a></li>
 										<li class="mr-1"><a href="#"><i class="fa fa-behance"></i></a></li>
 									</ul>
+								</div>
+								<div class="navigation-area">
+									<div class="row">
+										<div
+											class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-centl-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
+											<div class="thumb">
+												<a href="#"> <img class="img-fluid"
+													src="img/post/preview.png" alt="">
+												</a>
+											</div>
+											<div class="arrow">
+												<a href="#"> <span class="lnr text-white ti-arrow-left"></span>
+												</a>
+											</div>
+											<div class="detials">
+												<p>이전 프로젝트</p>
+												<a href="#">
+													<h4>[프로젝트 제목]</h4>
+												</a>
+											</div>
+										</div>
+										<div
+											class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
+											<div class="detials">
+												<p>다음 프로젝트</p>
+												<a href="#">
+													<h4>[프로젝트 제목]</h4>
+												</a>
+											</div>
+											<div class="arrow">
+												<a href="#"> <span class="lnr text-white ti-arrow-right"></span>
+												</a>
+											</div>
+											<div class="thumb">
+												<a href="#"> <img class="img-fluid"
+													src="img/post/next.png" alt="">
+												</a>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 							<div class="project-author">
@@ -329,7 +369,6 @@
 					</div>
 				</article>
 			</div>
-		</div>
 	</section>
 
 	<!-- footer -->

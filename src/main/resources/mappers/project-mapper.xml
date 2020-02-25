@@ -85,8 +85,8 @@
 			 SELECT project_seq.currval FROM dual
 		</selectKey>
 				
-		INSERT INTO project(projectno, creator, email, projectTitle, goalMoney, category, projectSubTitle, projectSummary, projectcaution, projectIntroduceVideo, projectStory, status, startdate, enddate, writestatus)
-		VALUES (project_seq.nextval, #{creator}, #{email}, #{projectTitle}, #{goalMoney}, #{category}, #{projectSubTitle}, #{projectSummary}, #{projectIntroduceVideo}, #{projectStory}, #{projectCaution}, #{status}, #{startDate}, #{endDate}, #{writeStatus})
+		INSERT INTO project(projectno, creator, email, projectTitle, goalMoney, category, projectSubTitle, projectSummary, projectcaution, projectIntroduceVideo, projectStory,writestatus)
+		VALUES (project_seq.nextval, #{creator}, #{email}, #{projectTitle}, #{goalMoney}, #{category}, #{projectSubTitle}, #{projectSummary}, #{projectIntroduceVideo}, #{projectStory}, #{projectCaution}, #{writeStatus})
 		
 	</insert>
 
@@ -101,7 +101,12 @@
 	
 	<update id="updateProject" parameterType="project">
 		UPDATE project
-		SET creator = #{creator}, projectTitle = #{projectTitle},  goalMoney = #{goalMoney}, projectMainImage = #{projectMainImage}, category = #{category}, projectsubtitle = #{projectSubTitle}, projectsummary = #{projectSummary}, projectcaution = #{projectCaution}, projectIntroduceVideo = #{projectIntroduceVideo}, projectStory = #{projectStory}, status = #{status}, informationagree = #{informationAgree}, startDate = #{startDate}, endDate = #{endDate}, writestatus = #{writeStatus} 																																									  
+		<if test = " endDate != null">
+			SET creator = #{creator}, projectTitle = #{projectTitle},  goalMoney = #{goalMoney}, projectMainImage = #{projectMainImage}, category = #{category}, projectsubtitle = #{projectSubTitle}, projectsummary = #{projectSummary}, projectcaution = #{projectCaution}, projectIntroduceVideo = #{projectIntroduceVideo}, projectStory = #{projectStory}, status = #{status}, informationagree = #{informationAgree}, endDate = #{endDate}, writestatus = #{writeStatus} 																																									  
+		</if>
+		<if test = "endDate == null">
+			SET creator = #{creator}, projectTitle = #{projectTitle},  goalMoney = #{goalMoney}, projectMainImage = #{projectMainImage}, category = #{category}, projectsubtitle = #{projectSubTitle}, projectsummary = #{projectSummary}, projectcaution = #{projectCaution}, projectIntroduceVideo = #{projectIntroduceVideo}, projectStory = #{projectStory}, status = #{status}, informationagree = #{informationAgree}, writestatus = #{writeStatus} 																																									  
+		</if>
 		WHERE projectNo = #{projectNo}
 	</update>
 	
