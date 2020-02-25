@@ -153,7 +153,7 @@ public class ProjectController {
 	
 
 	@RequestMapping(value="/getWritingProject.udo", method = RequestMethod.GET)
-	public String getProject(@RequestParam int currentProjectNo, @RequestParam String msg, Model model) {
+	public String getProject(@RequestParam int currentProjectNo, @RequestParam(required = false)String msg, Model model) {
 		
 		projectVO.setProjectNo(currentProjectNo);
 		projectIntroduceImageVO.setProjectNo(currentProjectNo);
@@ -163,10 +163,10 @@ public class ProjectController {
 		List<ProjectIntroduceImageVO> projectIntroduceImageList = getProjectIntroduceImageListService.getProjectIntroduceImageList(projectIntroduceImageVO);
 		List<ProjectKeywordVO> projectKeywordList = getProjectKeywordList(projectVO);
 		
-		if(projectIntroduceImageList != null) {
+		if(!projectIntroduceImageList.isEmpty()) {
 			model.addAttribute("projectIntroduceImageList", projectIntroduceImageList);
 		}
-		if(projectKeywordList != null) {
+		if(!projectKeywordList.isEmpty()) {
 			model.addAttribute("addedKeywordList", projectKeywordList);
 		}
 		
@@ -245,6 +245,7 @@ public class ProjectController {
 		
 		
 		projectIntroduceImageUploader(projectIntroduceImageUploadList, projectIntroduceImageVO, ProjectNo);
+		
 		projectMainImageUploader(projectMainImageUpload, pvo);
 
 		
@@ -253,13 +254,21 @@ public class ProjectController {
 			deleteProjectKeyword(pvo); // 기존 프로젝트에 있던 키워드들 삭제
 			insertProjectKeyword(toAddKeywords, pvo.getProjectNo());//DB에 프로젝트와 연결되는 키워드를 추가 하는 메서드
 		}
-		pvo.setWriteStatus(writingInputCheck(pvo)); // 입력해야하는 작성부분 체크
+		
+		
+		char checkResult = inputCompleteCheck(pvo);
+		pvo.setWriteStatus(checkResult); // 입력해야하는 작성부분 체크
 		updateProjectService.updateProject(pvo);
 		
 
+		System.out.println("checkResult : " + checkResult);
+		if(checkResult == 'y') {
+			redirectAttributes.addAttribute("msg", "작성이 완료 되었습니다.");
+		}else {
+			redirectAttributes.addAttribute("msg", "저장 되었습니다");
+		}
 		
 		redirectAttributes.addAttribute("currentProjectNo", pvo.getProjectNo());
-		redirectAttributes.addAttribute("msg", "저장 되었습니다");
 		
 		return "redirect:getWritingProject.udo";
 		
@@ -270,7 +279,8 @@ public class ProjectController {
 	
 	@RequestMapping(value = "/showPreviewProject.udo", method = RequestMethod.POST)
 	public String showPreviewProject(ProjectVO pvo, Model model) throws Exception { // 프로젝트 임시저장 시 실행되는 메서드
-		System.out.println("뭐가 문제죠?");
+		
+		pvo = getProjectService.getProject(pvo);
 		int projectNo = pvo.getProjectNo();
 		
 		projectKeywordVO.setProjectNo(projectNo);
@@ -286,12 +296,9 @@ public class ProjectController {
 		model.addAttribute("previewProjectKeywordList", projectKeywordList);
 		model.addAttribute("previewProject", pvo);
 		
-		return "p-project-details2";
+		return "p-project-details-preview";
 
 	}
-	
-	
-	
 	
 	
 	public void insertKeyword(List<String> toAddKeywords, KeywordVO kvo) {
@@ -355,9 +362,6 @@ public class ProjectController {
 	
 	//=================== 기타 메서드 =================================
 
-	
-	
-	
 	public void projectIntroduceImageUploader(List<MultipartFile> toDoUploadList, ProjectIntroduceImageVO vo, int ProjectNo) throws Exception {
 			
 		List<String>toRemoveFilePath = new ArrayList<String>();
@@ -394,7 +398,7 @@ public class ProjectController {
 		List<String> toRemoveFilePath = new ArrayList<String>();
 
 				
-		if(!toDoUploadList.isEmpty()) { // 업로드 시킨 파일이 이미 존재하는 경우 파일 선택을 다시 안한 경우에 나올 수 있는 상황 처리  
+		if(!toDoUploadList.get(0).isEmpty()) { // 업로드 시킨 파일이 이미 존재하는 경우 파일 선택을 다시 안한 경우에 나올 수 있는 상황 처리  
 			toRemoveFilePath.add(vo.getProjectMainImage()); //제거될 파일경로를 vo객체에서 가져오기
 			String voName = vo.getClass().getSimpleName();
 			List<String> toSettingPath = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);
@@ -409,33 +413,35 @@ public class ProjectController {
 	}
 	
 	
-	
-	public char writingInputCheck(ProjectVO vo) {
+	// 구현 OK - 수정 요구
+	public char inputCompleteCheck(ProjectVO vo) { //임시 저장된 프로젝트 빈칸 체크
+		if(		vo.getProjectNo() == -1 ||
+				vo.getCreator() == null || vo.getCreator().equals("") ||
+				vo.getEmail() == null || vo.getEmail().equals("") ||
+				
+				vo.getGoalMoney() == 0 ||
+				vo.getProjectMainImage() == null || vo.getProjectMainImage().equals("") ||
+				vo.getProjectTitle() == null || vo.getProjectTitle().equals("") ||
+				vo.getProjectSubTitle() == null || vo.getProjectSubTitle().equals("") ||
+				vo.getCategory() == null || vo.getCategory().equals("") ||
+//				vo.getStartDate() == null ||
+				vo.getEndDate() == null ||
 
-		boolean result = nullCheck(vo);
+				vo.getProjectSummary() == null || vo.getProjectSummary().equals("") ||
+//				vo.getProjectCaution() == null || vo.getProjectCaution().equals("") ||
+				vo.getProjectIntroduceVideo() == null || vo.getProjectIntroduceVideo().equals("") || 
+				vo.getProjectStory() == null || vo.getProjectStory().equals("")
+//				vo.getInformationAgree() == 'n'
+				//리워드 체크 추가 해야한다.
+				
+		){
+			
+			return 'n';
 
-		if(result) {
-			return 'y';
 		}
-		return 'n';
-	}
-	public boolean nullCheck(ProjectVO project) { //임시 저장된 프로젝트 빈칸 체크
-		// 추후에 이미지, 홍보 영상, 동의  등 체크 변수에 추가해야한다. 
-		if(
-				project.getGoalMoney() == 0 ||
-				project.getProjectTitle() == null || project.getProjectTitle() == "" || 
-				project.getProjectSubTitle() == null || project.getProjectSubTitle() == "" ||
-//				project.getProjectStory() == null || project.getProjectStory() == "" ||
-				project.getProjectSummary() == null || project.getProjectSummary() == "" 
-				) 
-		{
-			return false;
-
-		}
-		else {
-			return true;
-
-		}
+		
+		
+		return 'y';
 	}
 	
 	
