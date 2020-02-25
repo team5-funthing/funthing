@@ -96,12 +96,10 @@
 																					d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
 																			<polyline points="22,6 12,13 2,6" /></svg>
 																		</div>
-
-																		<div class="h3">현재 만든 프로젝트가 없습니다</div>
-																		<div class="h5">프로젝트 페이지에서 '프로젝트올리기' 로 프로젝트를 생성
-																			할 수 있습니다.</div>
-
-																	</div>
+																<div class="h3">현재 프로젝트에 대한 '문의 메시지'가 없습니다</div>
+																<div class="h5">고객님의 프로젝트에 문의 메시지가 오면 확인할 수
+																	있습니다.</div>
+															</div>
 																</div>
 																<div class="col"></div>
 															</div>
@@ -131,7 +129,7 @@
 
 								<!-- 보낸 메세지 있을 경우 -->
 								<c:choose>
-									<c:when test="${getMessageList ne null }">
+									<c:when test="${not empty getMessageList}">
 										<table id="myTable" class="display">
 											<thead>
 												<tr>
@@ -156,7 +154,7 @@
 
 												</c:forEach>
 												</c:when>
-												<c:when test="${getMessageList eq null }">
+												<c:when test="${empty getMessageList }">
 
 													<div class="row">
 														<div class="col"></div>

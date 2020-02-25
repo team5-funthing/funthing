@@ -15,14 +15,12 @@ import com.team5.funthing.user.model.vo.CreatorVO;
 import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.model.vo.ProjectAskMessageVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
-
 import com.team5.funthing.user.service.projectAskMessageService.GetChoiceProjectAskMessageService;
 import com.team5.funthing.user.service.projectAskMessageService.GetEntireProjectAskMessageListService;
 import com.team5.funthing.user.service.projectAskMessageService.GetEntireProjectMakerAskMessageListService;
 import com.team5.funthing.user.service.projectAskMessageService.GetMakerMemberCreatorService;
 import com.team5.funthing.user.service.projectAskMessageService.InsertProjectAskContentsService;
 import com.team5.funthing.user.service.projectAskMessageService.UpdateProjectAskReplyContentsStatusService;
-import com.team5.funthing.user.service.projectBoardService.GetChoiceProjectBoardService;
 import com.team5.funthing.user.service.projectService.GetProjectService;
 
 @Controller
@@ -95,32 +93,24 @@ public class ProjectAskMessageController {
 			List<ProjectAskMessageVO>getEntireMakerMessageList = getEntireProjectMakerAskMessageListService.getEntireProjectMakerAskMessageList(vo2);
 			model.addAttribute("messagelist", getEntireMakerMessageList);
 			
-			
+//			2.내가 보낸 문의글 확인하기
 			vo2.setEmail((String)session.getAttribute("memberSessionEmail"));
-			if(getEntireProjectAskMessageListService.getEntireProjectAskMessageList(vo2) != null) { //내가 보낸 문의글이있을때 
+			List<ProjectAskMessageVO> getEntireProjectAskMessageList = getEntireProjectAskMessageListService.getEntireProjectAskMessageList(vo2);
+			model.addAttribute("getMessageList",getEntireProjectAskMessageList);
 				
-				System.out.println("메이커이면서 문의글이 있씁니다.");
-				List<ProjectAskMessageVO> getEntireProjectAskMessageList = getEntireProjectAskMessageListService.getEntireProjectAskMessageList(vo2);
-				model.addAttribute("getMessageList",getEntireProjectAskMessageList);
-				
-				
-			}
-			
+
 			return "p-message-check"; //메세지 리스트로 
 			
 		}else { //메이커가 아닐때 
 			
 			System.out.println("메이커가 아닙니다.");
 				
+//			내가 보낸 문의글 확인하기
 			vo2.setEmail((String)session.getAttribute("memberSessionEmail"));
-			if(getEntireProjectAskMessageListService.getEntireProjectAskMessageList(vo2) != null) { //내가 보낸 문의글이있을때 
-				
-				System.out.println("메이커는 아니지만 문의글이 있씁니다.");
-				List<ProjectAskMessageVO> getEntireProjectAskMessageList = getEntireProjectAskMessageListService.getEntireProjectAskMessageList(vo2);
-				model.addAttribute("getMessageList",getEntireProjectAskMessageList);
-				
-				
-			}
+			List<ProjectAskMessageVO> getEntireProjectAskMessageList = getEntireProjectAskMessageListService.getEntireProjectAskMessageList(vo2);
+			model.addAttribute("getMessageList",getEntireProjectAskMessageList);
+			
+			
 			return "p-message-check"; 
 		}
 	}
@@ -155,15 +145,7 @@ public class ProjectAskMessageController {
 		
 		vo2.setEmail((String)session.getAttribute("memberSessionEmail"));
 		
-//		MemberVO getMakerMember = getMakerMemberCreatorService.getMakerMemberCreator(vo2); 
-//		vo3.setCreator(getMakerMember.getCreator().getCreator());	
-//		model.addAttribute("vo3",vo3);
-		
-		
-		
-		
-		
-		
+	
 		return "f-projectAsk-message-reply"; //크리에이터가 답변다는 곳
 
 			
