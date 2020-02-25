@@ -29,6 +29,7 @@
 					class="col-5 align-items-start d-flex flex-column bd-highlight">
 
 					<div class="p-2 bd-highlight">
+				
 						<div class="h4">모인 금액</div>
 						
 						<div class="h2" style="color: #000000">

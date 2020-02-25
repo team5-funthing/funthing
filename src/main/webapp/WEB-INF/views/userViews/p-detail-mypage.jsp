@@ -102,12 +102,21 @@
 		                                       <div class="thumbnail-wrap">
 		                                          <div class="thumbnail ">
 		                                             <div class="centered">
+		                                             	<!-- 현재는 프로젝트 미리보기 페이지만 이동 가능한 상태-->
 		                                             	<c:choose>
 		                                             		<c:when test="${myProject.projectMainImage eq '' }">
-		                                             			<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+		                                             			<a href="showPreviewProject.udo?projectNo=${myProject.projectNo}">
+		                                             				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
+		                                             					class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+		                                             			</a>
 		                                             		</c:when>
 		                                             		<c:when test="${myProject.projectMainImage ne '' }">
-		                                             			<img src="${myProject.projectMainImage }" class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+		                                             			<form id="previewForm" action="showPreviewProject.udo" method="POST">
+			                                             			<a href="#" onclick="document.getElementById('previewForm').submit()">
+			                                             				<input type="hidden" name="projectNo" value="${myProject.projectNo}">
+			                                             				<img src="${myProject.projectMainImage }" class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+			                                             			</a>
+		                                             			</form>
 		                                             		</c:when>
 		                                             	</c:choose>   
 		                                        		
@@ -132,7 +141,7 @@
 		                                       </div>
 		
 		                                       <div class="card-footer">
-		                                          <a href="showPreviewProject.udo">스튜디오 가기</a>
+		                                          <a href="getWritingProject.udo?currentProjectNo=${myProject.projectNo }">수정하기</a>
 		                                       </div>
 		                                    </div>
 		                                 </div>

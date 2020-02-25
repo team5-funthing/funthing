@@ -15,24 +15,35 @@
 <body>
 
 	<jsp:include page="./include/i-popupover-mypage.jsp" />
-	<jsp:include page="./include/i-header.jsp" />
+	<jsp:include page="./include/i-header-projectPreview.jsp" />
 
 
 	<section class="container">
 
 		<div class="w-100">
 			<article class="row d-flex justify-content-center">
-				<aside id="project-main-img" class="col-7">
-					<img class="project-main" src="img/test/5.jpg"></a>
+				<aside id="project-main-img" class="col-8">
+				
+					<c:if test="${previewProject ne null }">
+						${previewProject.projectIntroduceVideo }"
+					</c:if>
 				</aside>
 				<aside id="project-details-info"
-					class="col-5 align-items-start d-flex flex-column bd-highlight">
-
+					class="col-4 align-items-start d-flex flex-column bd-highlight">
+					
+					
 					<div class="p-2 bd-highlight">
 						<div class="h4">모인 금액</div>
 						<div class="h2" style="color: #000000">
-							500,000원[모인금액]
-							<div class="h5" style="color: #000000">50% [달성율]</div>
+						
+							<c:if test="${previewProject ne null }">
+								${previewProject.fundingMoney }원
+							</c:if> 
+							<div class="h5" style="color: #000000">
+								<c:if test="${previewProject ne null }">
+									[퍼센트 수치]
+								</c:if> 
+							</div>
 						</div>
 					</div>
 					<div class="p-2 bd-highlight">
@@ -73,114 +84,18 @@
 									<img class="img-fluid" src="#" alt="">
 								</div>
 								<div class="blog_details">
-									<h2>여기에 상세 내용들 어떻게 올릴지 정해야한다.</h2>
+									<h3>${previewProject.projectSubTitle }</h3>
 									<ul class="project-info-link mt-3 mb-4">
-										<li><a href="#"><i class="fa fa-user"></i> 카테고리</a></li>
-										<li><a href="#"><i class="fa fa-comments"></i> 03
-												리뷰/문의</a></li>
+										<li><a href="#"><i class="fa fa-user"></i> ${previewProject.category }</a></li>
+										<li><a href="#"><i class="fa fa-comments"></i> previewProjectsupporters
+												후원한사람들</a></li>
 									</ul>
-									<p class="excert">MCSE boot camps have its supporters and
-										its detractors. Some people do not understand why you should
-										have to spend money on boot camp when you can get the MCSE
-										study materials yourself at a fraction of the camp price.
-										However, who has the willpower</p>
-									<p>MCSE boot camps have its supporters and its detractors.
-										Some people do not understand why you should have to spend
-										money on boot camp when you can get the MCSE study materials
-										yourself at a fraction of the camp price. However, who has the
-										willpower to actually sit through a self-imposed MCSE
-										training. who has the willpower to actually</p>
-									<div class="quote-wrapper">
-										<div class="quotes">MCSE boot camps have its supporters
-											and its detractors. Some people do not understand why you
-											should have to spend money on boot camp when you can get the
-											MCSE study materials yourself at a fraction of the camp
-											price. However, who has the willpower to actually sit through
-											a self-imposed MCSE training.</div>
-									</div>
-									<p>MCSE boot camps have its supporters and its detractors.
-										Some people do not understand why you should have to spend
-										money on boot camp when you can get the MCSE study materials
-										yourself at a fraction of the camp price. However, who has the
-										willpower</p>
-									<p>MCSE boot camps have its supporters and its detractors.
-										Some people do not understand why you should have to spend
-										money on boot camp when you can get the MCSE study materials
-										yourself at a fraction of the camp price. However, who has the
-										willpower to actually sit through a self-imposed MCSE
-										training. who has the willpower to actually</p>
-								</div>
-							</div>
-							<div class="navigation-top">
-								<div class="d-sm-flex justify-content-between text-center">
-									<p class="like-info">
-										<span class="align-middle"><i class="fa fa-heart"></i></span>
-										Lily and 4 people like this
-									</p>
-									<div class="col-sm-4 text-center my-2 my-sm-0">
-										<!-- <p class="comment-count"><span class="align-middle"><i class="fa fa-comment"></i></span> 06 Comments</p> -->
-									</div>
-									<ul class="social-icons row">
-										<li class="mr-1"><a href="#"><i
-												class="fa fa-facebook-f"></i></a></li>
-										<li class="mr-1"><a href="#"><i class="fa fa-twitter"></i></a></li>
-										<li class="mr-1"><a href="#"><i
-												class="fa fa-dribbble"></i></a></li>
-										<li class="mr-1"><a href="#"><i class="fa fa-behance"></i></a></li>
-									</ul>
-								</div>
-								<div class="navigation-area">
-									<div class="row">
-										<div
-											class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-centl-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
-											<div class="thumb">
-												<a href="#"> <img class="img-fluid"
-													src="img/post/preview.png" alt="">
-												</a>
-											</div>
-											<div class="arrow">
-												<a href="#"> <span class="lnr text-white ti-arrow-left"></span>
-												</a>
-											</div>
-											<div class="detials">
-												<p>이전 프로젝트</p>
-												<a href="#">
-													<h4>[프로젝트 제목]</h4>
-												</a>
-											</div>
-										</div>
-										<div
-											class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
-											<div class="detials">
-												<p>다음 프로젝트</p>
-												<a href="#">
-													<h4>[프로젝트 제목]</h4>
-												</a>
-											</div>
-											<div class="arrow">
-												<a href="#"> <span class="lnr text-white ti-arrow-right"></span>
-												</a>
-											</div>
-											<div class="thumb">
-												<a href="#"> <img class="img-fluid"
-													src="img/post/next.png" alt="">
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="project-author">
-								<div class="media align-items-center">
-									<img src="img/project/author.png" alt="">
-									<div class="media-body">
-										<a href="#">
-											<h4></h4>
-										</a>
-										<p>Second divided from form fish beast made. Every of seas
-											all gathered use saying you're, he our dominion twon Second
-											divided from</p>
-									</div>
+									<c:if test="${previewProject ne null }">
+										
+										${previewProject.projectStory}
+									
+									</c:if> 
+									
 								</div>
 							</div>
 							
@@ -364,11 +279,10 @@
 						</div>
 						<!-- 리워드 반복 끝-->
 
-
-
 					</div>
 				</article>
 			</div>
+		</div>
 	</section>
 
 	<!-- footer -->
