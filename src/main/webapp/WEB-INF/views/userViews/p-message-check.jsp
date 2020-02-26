@@ -18,6 +18,7 @@
 	<jsp:include page="./include/i-header.jsp" />
 
 	<!-- ------------------ -->
+	
 
 	<section class="main-wrapper pt-xl-5 ">
 
@@ -27,7 +28,7 @@
 				<div class="row">
 					<div class="col"></div>
 					<div class="col-10">
-
+					
 						<div class="d-flex justify-content-start mb-3">
 							<h3>메시지 확인</h3>
 						</div>
@@ -55,10 +56,13 @@
 								id="nav-created-prj-questions" role="tabpanel"
 								aria-labelledby="nav-created-prj-questions-tab">
 								<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-									<li class="nav-item"><c:choose>
+									<li class="nav-item">
+										<c:choose>
 											<c:when test="${vo2.creator ne null }">
+											
+											
 												<table id="myTable" class="display">
-													<thead>
+		                                            <thead>
 														<tr>
 															<th>창작자</th>
 															<th>작성자</th>
@@ -66,57 +70,56 @@
 															<th>작성날짜</th>
 															<th>답변여부</th>
 														</tr>
-													</thead>
-													<tbody>
-
+		                                            </thead>
+		                                            <tbody>
 														<c:forEach var="messagelist" items="${messagelist}">
 															<tr>
 																<td>${vo2.creator}</td>
 																<td>${messagelist.email }</td>
 																<td><a
-																	href="getChoiceProjectAskMessageC.udo?projectAskNo=${messagelist.projectAskNo }">${messagelist.projectAskContentsTitle}</td>
+																	href="getChoiceProjectAskMessageC.udo?projectAskNo=${messagelist.projectAskNo }">
+																		${messagelist.projectAskContentsTitle} </a></td>
 																<td>${messagelist.projectAskDate}</td>
 																<td>${messagelist.projectAskReplyStatus}</td>
 															</tr>
-
 														</c:forEach>
-														</c:when>
-														<c:when test="${vo2.creator eq null }">
-															<div class="row">
-																<div class="col"></div>
-																<div class="col-8 d-flex justify-content-center ">
-																	<div class="pt-5 pb-5 ">
-																		<div>
-																			<svg xmlns="http://www.w3.org/2000/svg" width="60"
-																				height="60" viewBox="0 0 24 24" fill="none"
-																				stroke="currentColor" stroke-width="1.5"
-																				stroke-linecap="round" stroke-linejoin="round"
-																				class="feather feather-mail">
-																			<path
-																					d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-																			<polyline points="22,6 12,13 2,6" /></svg>
-																		</div>
-																<div class="h3">현재 프로젝트에 대한 '문의 메시지'가 없습니다</div>
-																<div class="h5">고객님의 프로젝트에 문의 메시지가 오면 확인할 수
-																	있습니다.</div>
-															</div>
-																</div>
-																<div class="col"></div>
-															</div>
-														</c:when>
-														</c:choose>
-													</tbody>
-												</table>
+		                                            </tbody>
+		                                        </table>
+		                                        
+		                                        <script>
+		                                            $(document).ready( function () {
+		                                                $('#myTable').DataTable();
+		                                            } );
+		                                        </script>		
+	                                        
+											</c:when>
 
-												<script>
-													$(document)
-															.ready(
-																	function() {
-																		$(
-																				'#myTable')
-																				.DataTable();
-																	});
-												</script></li>
+
+											<c:when test="${vo2.creator eq null }">
+												<div class="row">
+													<div class="col"></div>
+													<div class="col-8 d-flex justify-content-center ">
+														<div class="pt-5 pb-5 ">
+															<div>
+																<svg xmlns="http://www.w3.org/2000/svg" width="60"
+																	height="60" viewBox="0 0 24 24" fill="none"
+																	stroke="currentColor" stroke-width="1.5"
+																	stroke-linecap="round" stroke-linejoin="round"
+																	class="feather feather-mail">
+																				<path
+																		d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+																				<polyline points="22,6 12,13 2,6" />
+																			</svg>
+															</div>
+															<div class="h3">현재 프로젝트에 대한 '문의 메시지'가 없습니다</div>
+															<div class="h5">고객님의 프로젝트에 문의 메시지가 오면 확인할 수있습니다.</div>
+														</div>
+													</div>
+													<div class="col"></div>
+												</div>
+											</c:when>
+										</c:choose> 
+									</li>
 								</ul>
 							</div>
 
@@ -131,7 +134,7 @@
 								<c:choose>
 									<c:when test="${not empty getMessageList}">
 										<table id="myTable" class="display">
-											<thead>
+                                            <thead>
 												<tr>
 													<th>창작자</th>
 													<th>작성자</th>
@@ -139,61 +142,55 @@
 													<th>작성날짜</th>
 													<th>답변여부</th>
 												</tr>
-											</thead>
-											<tbody>
-
+                                            </thead>
+                                            <tbody>
 												<c:forEach var="getMessageList" items="${getMessageList}">
 													<tr>
 														<td>${getMessageList.creator}</td>
 														<td>${getMessageList.email }</td>
 														<td><a
-															href="getChoiceProjectAskMessage.udo?projectAskNo=${getMessageList.projectAskNo }">${getMessageList.projectAskContentsTitle}</td>
+															href="getChoiceProjectAskMessage.udo?projectAskNo=${getMessageList.projectAskNo }">
+																${getMessageList.projectAskContentsTitle} </a></td>
 														<td>${getMessageList.projectAskDate}</td>
 														<td>${getMessageList.projectAskReplyStatus}</td>
 													</tr>
-
 												</c:forEach>
-												</c:when>
-												<c:when test="${empty getMessageList }">
+                                            </tbody>
+                                        </table>
+                                        
+                                        <script>
+                                            $(document).ready( function () {
+                                                $('#myTable').DataTable();
+                                            } );
+                                        </script>										
+								
+									</c:when>
+									<c:when test="${empty getMessageList }">
 
-													<div class="row">
-														<div class="col"></div>
-														<div class="col-8 d-flex justify-content-center ">
-															<div class="pt-5 pb-5 ">
-																<div>
-																	<svg xmlns="http://www.w3.org/2000/svg" width="60"
-																		height="60" viewBox="0 0 24 24" fill="none"
-																		stroke="currentColor" stroke-width="1.5"
-																		stroke-linecap="round" stroke-linejoin="round"
-																		class="feather feather-mail">
-													<path
-																			d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-													<polyline points="22,6 12,13 2,6" /></svg>
-																</div>
-																<div class="h3">보낸 메시지가 없습니다</div>
-																<div class="h5">프로젝트 페이지에서 '문의하기' 버튼을 눌러 메시지를 보낼 수
-																	있습니다.</div>
-															</div>
-														</div>
-														<div class="col"></div>
+										<div class="row">
+											<div class="col"></div>
+											<div class="col-8 d-flex justify-content-center ">
+												<div class="pt-5 pb-5 ">
+													<div>
+														<svg xmlns="http://www.w3.org/2000/svg" width="60"
+															height="60" viewBox="0 0 24 24" fill="none"
+															stroke="currentColor" stroke-width="1.5"
+															stroke-linecap="round" stroke-linejoin="round"
+															class="feather feather-mail">
+														<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+														<polyline points="22,6 12,13 2,6" /></svg>
 													</div>
-
-
-
-
-
-												</c:when>
-												</c:choose>
-											</tbody>
-										</table>
-
-
-										</li>
-										</ul>
+													<div class="h3">보낸 메시지가 없습니다</div>
+													<div class="h5">프로젝트 페이지에서 '문의하기' 버튼을 눌러 메시지를 보낼 수
+														있습니다.</div>
+												</div>
+											</div>
+											<div class="col"></div>
+										</div>
+									</c:when>
+								</c:choose>
 							</div>
-
 						</div>
-
 					</div>
 					<div class="col"></div>
 				</div>

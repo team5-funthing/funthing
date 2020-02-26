@@ -102,8 +102,6 @@
 		                                 <div class="project">
 		                                 	<aside class="row ml-1">
 		                                 	
-		                                 		
-		                                 		
 		                                 		<c:choose>
 		                                 			<c:when test="${myProject.funding eq 'n'.charAt(0) }"> <!-- 펀징 진행 확인 -->
 		                                 			
@@ -112,22 +110,22 @@
 				                                 				
 					                                 			<c:choose>
 						                                 			<c:when test="${myProject.writeStatus eq 'n'.charAt(0) }"> <!-- 작성 완료 확인 -->
-						                                 				<h6><a href="javascript: return(0);" class="badge badge-info m-1">작성중</a></h6>	
+						                                 				<h5><a href="javascript: return(0);" class="badge badge-info m-1">작성중</a></h5>	
 						                                 			</c:when>
 						                                 			<c:when test="${myProject.writeStatus eq 'y'.charAt(0) }">
-					                                 					<h6><a href="javascript: return(0);" class="badge badge-dark m-1">미제출</a></h6>
-						                                 				<h6><a href="javascript: return(0);" class="badge badge-success m-1">작성완료</a></h6>
+					                                 					<h5><a href="javascript: return(0);" class="badge badge-dark m-1">미제출</a></h5>
+						                                 				<h5><a href="javascript: return(0);" class="badge badge-success m-1">작성완료</a></h5>
 						                                 			</c:when>
 					                                 			</c:choose>		
 				                                 			</c:when>                              			
 				                                 			<c:when test="${myProject.status eq 'w'.charAt(0) }">
-				                                 				<h6><a href="javascript: return(0);" class="badge badge-light m-1">심사중</a></h6>
+				                                 				<h5><a href="javascript: return(0);" class="badge badge-light m-1">심사중</a></h5>
 				                                 			</c:when>
 				                                 			<c:when test="${myProject.status eq 'm'.charAt(0) }">
-					                                 			<h6><a href="javascript: return(0);" class="badge badge-warning m-1">수정 필요</a></h6>
+					                                 			<h5><a href="javascript: return(0);" class="badge badge-warning m-1">수정 필요</a></h5>
 				                                 			</c:when>
 				                                 			<c:when test="${myProject.status eq 'f'.charAt(0) }">
-					                                 			<h6><a href="javascript: return(0);" class="badge badge-danger m-1">승인 실패</a></h6>
+					                                 			<h5><a href="javascript: return(0);" class="badge badge-danger m-1">승인 실패</a></h5>
 				                                 			</c:when>
 
 			                                 			</c:choose>
@@ -138,7 +136,7 @@
 		                                 			
 		                                 			<c:when test="${myProject.funding eq 'y'.charAt(0) }">
 		                                 			
-		                                 				<h6><a href="javascript: return(0);" class="badge badge-primary m-1">펀딩중</a></h6>
+		                                 				<h5><a href="javascript: return(0);" class="badge badge-primary m-1">펀딩중</a></h5>
 		                                 			
 		                                 			</c:when>
 		                                 		</c:choose>
@@ -449,8 +447,7 @@
    
    
    
-    <!-- 카드 시작 -->
-          
+    				<!-- 카드 시작 -->
                      <div class="tab-pane fade" id="nav-report-prj-list"
                         role="tabpane" aria-labelledby="nav-report-prj-list-tab">
 

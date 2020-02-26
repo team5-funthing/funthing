@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!doctype html>
 
-<html class="no-js" lang="zxx">
+<html class="no-js">
 
 <!--  X 뜨는거 신경쓰지 마시길  -->
 

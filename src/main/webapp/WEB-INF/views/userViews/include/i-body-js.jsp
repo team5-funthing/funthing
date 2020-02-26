@@ -27,7 +27,8 @@
 
     <script src="${pageContext.request.contextPath}/resources/user/js/main.js"></script>
     
-    
+    <!-- 데이터 테이블-->
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
    
     
     

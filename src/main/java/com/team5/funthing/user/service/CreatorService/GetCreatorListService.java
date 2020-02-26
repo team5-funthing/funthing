@@ -1,4 +1,4 @@
-package com.team5.funthing.user.service.CreatorService;
+package com.team5.funthing.user.service.creatorService;
 
 import java.util.List;
 

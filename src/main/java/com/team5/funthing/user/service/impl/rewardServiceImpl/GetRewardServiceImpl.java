@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.team5.funthing.user.model.dao.RewardDAO;
 import com.team5.funthing.user.model.vo.RewardVO;
-import com.team5.funthing.user.service.RewardService.GetRewardService;
+import com.team5.funthing.user.service.rewardService.GetRewardService;
 
 @Service
 public class GetRewardServiceImpl implements GetRewardService {

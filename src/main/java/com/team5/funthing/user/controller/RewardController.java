@@ -7,18 +7,18 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMapping;	
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.model.vo.RewardVO;
-import com.team5.funthing.user.service.RewardService.DeleteRewardService;
-import com.team5.funthing.user.service.RewardService.GetRewardListService;
-import com.team5.funthing.user.service.RewardService.GetRewardService;
-import com.team5.funthing.user.service.RewardService.InsertRewardService;
-import com.team5.funthing.user.service.RewardService.UpdateRewardService;
+import com.team5.funthing.user.service.rewardService.DeleteRewardService;
+import com.team5.funthing.user.service.rewardService.GetRewardListService;
+import com.team5.funthing.user.service.rewardService.GetRewardService;
+import com.team5.funthing.user.service.rewardService.InsertRewardService;
+import com.team5.funthing.user.service.rewardService.UpdateRewardService;
 
 @Controller
 public class RewardController {

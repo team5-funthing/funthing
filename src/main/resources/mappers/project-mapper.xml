@@ -3,6 +3,16 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ProjectDAO">
+	
+	<select id="getAllFundingProjectList" resultType="project">
+		
+			<!-- 일단 test로 n으로 시작 -->
+			SELECT *
+			FROM project
+			WHERE funding = 'n'
+	</select>
+
+
 
 	<select id="getProjectListByEmail" parameterType="project" resultType="project">
 	
@@ -11,21 +21,6 @@
 		WHERE email = #{email}
 		
 	</select>
-	
-<!-- 
-	<resultMap type="#modelname" id="YourResultSet">
-		<id property="param1" column="columnname1" />
-		<result property="param2" column="columnname2" />
-		<result property="param3" column="columnname3" />
-	</resultMap>
-
-
-	<select id="getProjectList" resultMap="YourResultSet">
-		
-	</select>
-	
--->
-
 
  	<resultMap type="projectIntroduceImage" id="projectIntroduceImage">
 		<result column="projectIntroduceImageNo" property="projectIntroduceImageNo" />

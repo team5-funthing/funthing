@@ -42,6 +42,10 @@ public class ProjectDAO {
 		return sqlSessionTemplate.selectList("getProjectListByEmail",vo);
 	}
 	
+	public List<ProjectVO> getAllFundingProjectList(){
+		return sqlSessionTemplate.selectList("getAllFundingProjectList");
+	}
+	
 	
 	
 	

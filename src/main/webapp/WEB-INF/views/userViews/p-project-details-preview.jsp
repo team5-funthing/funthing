@@ -21,13 +21,47 @@
 	<section class="container">
 
 		<div class="w-100">
+			<div class="row d-flex justify-content-center">
+				<div class="row d-flex align-content-between flex-wrap mt-5">
+					<div class="col-xl-12 d-flex bd-highlight mb-1">
+						<ul id="addedKeywords">
+							<c:set var="tag" value="#" />
+							<c:set var="keywordId" value="keyword" />
+
+							<c:choose>
+								<c:when test="${previewProjectKeywordList eq null }">
+								</c:when>
+								<c:when test="${previewProjectKeywordList ne null }">
+									<c:forEach var="previewProjectKeyword"
+										items="${previewProjectKeywordList }" varStatus="step">
+										<li id="${keywordId }${step.count}"
+											class="btn-sm btn-bd-keyword d-none d-lg-inline-block m-1">
+											<a href="javascript:void(0);" class="addedKeyword">${previewProjectKeyword.keyword }</a>
+										</li>
+									</c:forEach>
+								</c:when>
+							</c:choose>
+						</ul>
+						<script>
+					         $(function (){
+					        	 $(".addedKeyword").removeAttr("href")
+					      
+						     });
+						</script>
+					</div>
+				</div>
+			</div>
+
 			<article class="row d-flex justify-content-center">
+
+
 				<aside id="project-main-img" class="col-8">
 				
 					<c:if test="${previewProject ne null }">
 						${previewProject.projectIntroduceVideo }"
 					</c:if>
 				</aside>
+				
 				<aside id="project-details-info"
 					class="col-4 align-items-start d-flex flex-column bd-highlight">
 					
