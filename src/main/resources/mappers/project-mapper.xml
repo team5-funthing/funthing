@@ -3,6 +3,16 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ProjectDAO">
+	
+	<select id="getAllFundingProjectList" resultType="project">
+		
+			<!-- 일단 test로 n으로 시작 -->
+			SELECT *
+			FROM project
+			WHERE funding = 'n'
+	</select>
+
+
 
 	<select id="getProjectListByEmail" parameterType="project" resultType="project">
 	
@@ -11,21 +21,6 @@
 		WHERE email = #{email}
 		
 	</select>
-	
-<!-- 
-	<resultMap type="#modelname" id="YourResultSet">
-		<id property="param1" column="columnname1" />
-		<result property="param2" column="columnname2" />
-		<result property="param3" column="columnname3" />
-	</resultMap>
-
-
-	<select id="getProjectList" resultMap="YourResultSet">
-		
-	</select>
-	
--->
-
 
  	<resultMap type="projectIntroduceImage" id="projectIntroduceImage">
 		<result column="projectIntroduceImageNo" property="projectIntroduceImageNo" />
@@ -85,8 +80,8 @@
 			 SELECT project_seq.currval FROM dual
 		</selectKey>
 				
-		INSERT INTO project(projectno, creator, email, projectTitle, goalMoney, category, projectSubTitle, projectSummary, projectcaution, projectIntroduceVideo, projectStory, status, startdate, enddate, writestatus)
-		VALUES (project_seq.nextval, #{creator}, #{email}, #{projectTitle}, #{goalMoney}, #{category}, #{projectSubTitle}, #{projectSummary}, #{projectIntroduceVideo}, #{projectStory}, #{projectCaution}, #{status}, #{startDate}, #{endDate}, #{writeStatus})
+		INSERT INTO project(projectno, creator, email, projectTitle, goalMoney, category, projectSubTitle, projectSummary, projectcaution, projectIntroduceVideo, projectStory,writestatus)
+		VALUES (project_seq.nextval, #{creator}, #{email}, #{projectTitle}, #{goalMoney}, #{category}, #{projectSubTitle}, #{projectSummary}, #{projectIntroduceVideo}, #{projectStory}, #{projectCaution}, #{writeStatus})
 		
 	</insert>
 
@@ -101,14 +96,19 @@
 	
 	<update id="updateProject" parameterType="project">
 		UPDATE project
-		SET creator = #{creator}, projectTitle = #{projectTitle},  goalMoney = #{goalMoney}, projectMainImage = #{projectMainImage}, category = #{category}, projectsubtitle = #{projectSubTitle}, projectsummary = #{projectSummary}, projectcaution = #{projectCaution}, projectIntroduceVideo = #{projectIntroduceVideo}, projectStory = #{projectStory}, status = #{status}, informationagree = #{informationAgree}, startDate = #{startDate}, endDate = #{endDate}, writestatus = #{writeStatus} 																																									  
+		<if test = " endDate != null">
+			SET creator = #{creator}, projectTitle = #{projectTitle},  goalMoney = #{goalMoney}, projectMainImage = #{projectMainImage}, category = #{category}, projectsubtitle = #{projectSubTitle}, projectsummary = #{projectSummary}, projectcaution = #{projectCaution}, projectIntroduceVideo = #{projectIntroduceVideo}, projectStory = #{projectStory}, status = #{status}, informationagree = #{informationAgree}, endDate = #{endDate}, writestatus = #{writeStatus} 																																									  
+		</if>
+		<if test = "endDate == null">
+			SET creator = #{creator}, projectTitle = #{projectTitle},  goalMoney = #{goalMoney}, projectMainImage = #{projectMainImage}, category = #{category}, projectsubtitle = #{projectSubTitle}, projectsummary = #{projectSummary}, projectcaution = #{projectCaution}, projectIntroduceVideo = #{projectIntroduceVideo}, projectStory = #{projectStory}, status = #{status}, informationagree = #{informationAgree}, writestatus = #{writeStatus} 																																									  
+		</if>
 		WHERE projectNo = #{projectNo}
 	</update>
 	
 
-	<delete id="deleteSomething" parameterType="int">
-		DELETE FROM tablename1 WHERE
-		columnname1 = #{param1}
+	<delete id="deleteProject" parameterType="project">
+		DELETE FROM project WHERE
+		projectNo = #{projectNo}
 	</delete>
 
 

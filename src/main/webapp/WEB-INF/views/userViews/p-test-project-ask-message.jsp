@@ -31,7 +31,7 @@
 				<td colspan="2">
 							<input  type="submit" value="문의하기"></input>
 			</tr>
-		
+		</table>
 	</form>
 	
 

@@ -1,7 +1,6 @@
 package com.team5.funthing.user.model.vo;
 
-import java.util.Date;
-import java.util.List;
+import java.sql.Date;
 
 import org.springframework.stereotype.Component;
 
@@ -27,8 +26,8 @@ public class ProjectVO {
 	private String projectTitle = "";
 	private String projectSubTitle = "";
 	private String category=""; 
-	private Date startDate = new Date(); 
-	private Date endDate = new Date(); 
+	private Date startDate;
+	private Date endDate; 
 	
 //	프로젝트 소개 멤버
 	private String projectSummary="";
@@ -39,14 +38,26 @@ public class ProjectVO {
 
 
 //  기타 멤버
-	private char status = 'w'; 
-	private char writeStatus = 'n';
-	
+	private char writeStatus = 'n'; // 작성 완료된 
+	private char status = 'n'; // 상태 여부 - n: 심사 미제출, w : wating[대기중], p : pass[심사 통과], f : fail[실패], m : modify[수정 요구]
+	private String statusMessage = "";
+	private char funding = 'n'; // 펀딩진행중 여부
+
 //  sql문에 적용 안된 멤버
 	private int fundingMoney; 
 	private String supporters; 
 	private char informationAgree = 'n'; 
 	
+	
+	
+	
+	
+	public char getFunding() {
+		return funding;
+	}
+	public void setFunding(char funding) {
+		this.funding = funding;
+	}
 	public Integer getProjectNo() {
 		return projectNo;
 	}
@@ -119,12 +130,6 @@ public class ProjectVO {
 	public void setProjectCaution(String projectCaution) {
 		this.projectCaution = projectCaution;
 	}
-//	public List<String> getProjectIntroduceImage() {
-//		return projectIntroduceImage;
-//	}
-//	public void setProjectIntroduceImage(List<String> projectIntroduceImage) {
-//		this.projectIntroduceImage = projectIntroduceImage;
-//	}
 	public String getProjectIntroduceVideo() {
 		return projectIntroduceVideo;
 	}

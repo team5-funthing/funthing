@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 
 <html class="no-js">
@@ -33,21 +34,15 @@
                               </div>
                               <div class="desc">
                                  <p class="comment">
-                                    Multiply sea night grass fourth day sea lesser rule open subdue female fill which
-                                    them
-                                    Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                                    Multiply sea night grass fourth day sea lesser rule open subdue female fill which
-                                    them
-                                    Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                                    Multiply sea night grass fourth day sea lesser rule open subdue female fill which
-                                    them
+                                    ${choiceProjectAskMessage.projectAskContents }
                                  </p>
                                  <div class="d-flex justify-content-between">
                                     <div class="d-flex align-items-center">
                                        <h5>
-                                          <a href="#">송하늘</a>
+                                          <a href="#">${choiceProjectAskMessage.email}
+                                          </a>
                                        </h5>
-                                       <p class="date">December 4, 2017 at 3:12 pm </p>
+                                       <p class="date">${choiceProjectAskMessage.projectAskDate} </p>
                                     </div>
                                  </div>
                                  <div class="d-flex justify-content-around mt-3">
@@ -55,33 +50,49 @@
                               </div>
                            </div>
                         </div>
+                        
                      </div>
+                     
+                        <form class="form-contact comment_form" action="updateProjectAskReplyContentsStatus.udo" id="commentForm" method="post">
    
-                     <form class="form-contact comment_form" action="#" id="commentForm">
                         <div class="row d-flex align-items-center">
-                           <div class="col-sm-6">
-                              <div class="form-group">
-                                 <input class="form-control" name="name" id="name" type="text" placeholder="창작자명">
+                         
+                         <div class="col-12">
+                           <div class="form-group">
+                              <input class="form-control" name="projectAskReplyContentsTitle" id="projectAskReplyContentsTitle" 
+                              type="text"  placeholder="Title" value="${choiceProjectAskMessage.projectAskReplyContentsTitle}">
+                              
+                              <input type="hidden" name="projectAskNo" value="${choiceProjectAskMessage.projectAskNo }">
+                              
                               </div>
-                           </div>
-                           <div class="col-sm-6">
-                              <div class="form-group">
-                                 <input class="form-control" name="email" id="email" type="email" placeholder="Email">
-                              </div>
-                           </div>
                         </div>
+                         
                         <div class="col-12">
                            <div class="form-group">
-                              <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
-                                 placeholder="Write Comment"></textarea>
+                              <textarea class="form-control w-100" name="projectAskReplyContents" id="projectAskReplyContents" cols="30" rows="9"
+                                 placeholder="Write Comment">${choiceProjectAskMessage.projectAskReplyContents}</textarea>
                            </div>
                         </div>
+                         <div class="col-sm-6">
+                              <div class="form-group">
+                                 <input class="form-control" name="creator" id="creator" type="text" value="${choiceProjectAskMessage.creator }" placeholder="창작자명">
+                              </div>
+                           </div>
+                          
+                        </div>
+                        
                   </div>
-                  <div class="form-group">
-                     <button type="submit" class="button button-contactForm btn_1 boxed-btn"> 작성하기</button>
-                     <button type="submit" class="button button-contactForm btn_1 boxed-btn"> 취소하기</button>
+                 
+                  </form>
+                  
+				<!-- 계속 나와야 하는 버튼  -->                  
+                  <form class="form-group" action="showDetailMyPage.udo" method="get">
+                  <div class="form-group"> 
+                  <input type="submit" class="button button-contactForm btn_1 boxed-btn" value="목록으로 돌아가기 "> 
                   </div>
                   </form>
+                  
+                  
                </div>
             </article>
             <hr>

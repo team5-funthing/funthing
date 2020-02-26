@@ -8,7 +8,7 @@ import com.team5.funthing.user.model.vo.MemberVO;
 
 @Repository
 public class MemberDAO {
-   
+
    @Autowired
    private SqlSessionTemplate sqlSessionTemplate;
    
@@ -18,19 +18,29 @@ public class MemberDAO {
    }
    
    public void insertSocialMember(MemberVO vo) {
-      System.out.println("insertSocialMember ½ÇÇà");
+      System.out.println("insertSocialMember Â½Ã‡Ã‡Ã ");
       System.out.println(vo.toString());
       sqlSessionTemplate.insert("MemberDAO.insertSocialMember",vo);
    }
    
       
       public void insertMember (MemberVO vo) {
-            System.out.println("insertMember ½ÇÇà");
+            System.out.println("insertMember Â½Ã‡Ã‡Ã ");
             sqlSessionTemplate.insert("MemberDAO.insertMember", vo);
          }
    
       public void saveImage(MemberVO vo) {
-         System.out.println("saveImage ½ÇÇà");
+         System.out.println("saveImage Â½Ã‡Ã‡Ã ");
          sqlSessionTemplate.insert("MemberDAO.saveImage",vo);
+      }
+      
+      public void updateMember(MemberVO vo) {
+    	  System.out.println("updateMember Â½Ã‡Ã‡Ã  ");
+    	  sqlSessionTemplate.update("MemberDAO.updateMember",vo);
+      }
+      
+      public void deleteMember(MemberVO vo) {
+    	  System.out.println("deleteMember Â½Ã‡Ã‡Ã ");
+    	  sqlSessionTemplate.delete("MemberDAO.deleteMember", vo);
       }
 }

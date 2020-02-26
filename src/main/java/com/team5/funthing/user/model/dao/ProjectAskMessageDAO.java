@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.team5.funthing.user.model.vo.CreatorVO;
 import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.model.vo.ProjectAskMessageVO;
 import com.team5.funthing.user.model.vo.ProjectBoardVO;
@@ -55,7 +56,13 @@ public class ProjectAskMessageDAO {
 		
 		return getEntireProjectMakerAskMessageList;
 	}
-	
+
+	public List<ProjectAskMessageVO> getProjectAskMessage(ProjectAskMessageVO vo) {
+		System.out.println("where조건절 없이 projectAskMessage테이블 모두가져오기");
+		return projectAskMessageSqlSessionTemplate.selectList("projectAskMessageDAO.getProjectAskMessage",vo);
+	}
+
+
 
 	
 	

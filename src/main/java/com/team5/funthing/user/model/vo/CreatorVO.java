@@ -1,64 +1,107 @@
 package com.team5.funthing.user.model.vo;
 
 public class CreatorVO {
-
+	
+    private int creatorNo;
 	private String creator;
 	private String email;
+	private String creatorProfileImage;
 	private String makerPhone;
 	private String businessNumber;
 	private String businessAddress;
 	private String businessFileLink;
-	private String lv;					//¸ÞÀÌÄ¿ÀÇ µî±Þ
+	private String lv;			
+	
+	private ProjectAskMessageVO projectAskMessage;
+
+	public int getCreatorNo() {
+		return creatorNo;
+	}
+
+	public void setCreatorNo(int creatorNo) {
+		this.creatorNo = creatorNo;
+	}
 
 	public String getCreator() {
 		return creator;
 	}
+
 	public void setCreator(String creator) {
 		this.creator = creator;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public String getCreatorProfileImage() {
+		return creatorProfileImage;
+	}
+
+	public void setCreatorProfileImage(String creatorProfileImage) {
+		this.creatorProfileImage = creatorProfileImage;
+	}
+
 	public String getMakerPhone() {
 		return makerPhone;
 	}
+
 	public void setMakerPhone(String makerPhone) {
 		this.makerPhone = makerPhone;
 	}
+
 	public String getBusinessNumber() {
 		return businessNumber;
 	}
+
 	public void setBusinessNumber(String businessNumber) {
 		this.businessNumber = businessNumber;
 	}
+
 	public String getBusinessAddress() {
 		return businessAddress;
 	}
+
 	public void setBusinessAddress(String businessAddress) {
 		this.businessAddress = businessAddress;
 	}
+
 	public String getBusinessFileLink() {
 		return businessFileLink;
 	}
+
 	public void setBusinessFileLink(String businessFileLink) {
 		this.businessFileLink = businessFileLink;
 	}
+
 	public String getLv() {
 		return lv;
 	}
+
 	public void setLv(String lv) {
 		this.lv = lv;
 	}
 
-	
+	public ProjectAskMessageVO getProjectAskMessage() {
+		return projectAskMessage;
+	}
+
+	public void setProjectAskMessage(ProjectAskMessageVO projectAskMessage) {
+		this.projectAskMessage = projectAskMessage;
+	}
+
 	@Override
 	public String toString() {
-		return "UserMakerMemberVO [creator=" + creator + ", email=" + email + ", makerPhone=" + makerPhone
-				+ ", businessNumber=" + businessNumber + ", businessAddress=" + businessAddress + ", businessFileLink="
-				+ businessFileLink + ", lv=" + lv + "]";
+		return "CreatorVO [creatorNo=" + creatorNo + ", creator=" + creator + ", email=" + email
+				+ ", creatorProfileImage=" + creatorProfileImage + ", makerPhone=" + makerPhone + ", businessNumber="
+				+ businessNumber + ", businessAddress=" + businessAddress + ", businessFileLink=" + businessFileLink
+				+ ", lv=" + lv + ", projectAskMessage=" + projectAskMessage + "]";
 	}
-		
+	
+	
+
 }

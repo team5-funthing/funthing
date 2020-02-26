@@ -2,11 +2,14 @@ package com.team5.funthing.user.model.vo;
 
 import java.sql.Date;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ProjectBoardVO {
 
 	private int projectBoardNo = -1;
 	private String email;
-	private int projectNo = 325;
+	private int projectNo;
 	private String projectBoardContents;
 	private Date projectBoardDate;
 	private int step;

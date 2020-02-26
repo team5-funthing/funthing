@@ -1,4 +1,4 @@
-package com.team5.funthing.user.service.impl.CreatorServiceImpl;
+package com.team5.funthing.user.service.impl.creatorServiceImpl;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.team5.funthing.user.model.dao.CreatorDAO;
 import com.team5.funthing.user.model.vo.CreatorVO;
-import com.team5.funthing.user.service.CreatorService.GetCreatorListService;
+import com.team5.funthing.user.service.creatorService.GetCreatorListService;
 
 @Service
 public class GetCreatorListServiceImpl implements GetCreatorListService {
