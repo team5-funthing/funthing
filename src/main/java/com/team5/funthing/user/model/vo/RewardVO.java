@@ -12,9 +12,16 @@ public class RewardVO {
 	private String rewardOption;
 	private int shippingFee;
 	private int rewardAmount;
+	private String shippingNeed;
 	
 	private List<RewardOptionVO> rewardOptionList;
 	
+	public String getShippingNeed() {
+		return shippingNeed;
+	}
+	public void setShippingNeed(String shippingNeed) {
+		this.shippingNeed = shippingNeed;
+	}
 	public int getRewardPrice() {
 		return rewardPrice;
 	}
@@ -73,10 +80,9 @@ public class RewardVO {
 	public String toString() {
 		return "RewardVO [rewardPrice=" + rewardPrice + ", rewardNo=" + rewardNo + ", projectNo=" + projectNo
 				+ ", rewardName=" + rewardName + ", rewardContent=" + rewardContent + ", rewardOption=" + rewardOption
-				+ ", shippingFee=" + shippingFee + ", rewardAmount=" + rewardAmount + ", rewardOptionList="
-				+ rewardOptionList + "]";
+				+ ", shippingFee=" + shippingFee + ", rewardAmount=" + rewardAmount + ", shippingNeed=" + shippingNeed
+				+ ", rewardOptionList=" + rewardOptionList + "]";
 	}
-
 
 	
 }

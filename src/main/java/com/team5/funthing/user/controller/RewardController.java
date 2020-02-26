@@ -76,12 +76,9 @@ public class RewardController {
 		projectvo.setProjectNo(projectNo);
 		vo.setProjectNo(projectNo);
 		
-		System.out.println(vo.toString());
-		
 		insertRewardService.insertReward(vo);
 		System.out.println(vo.getRewardNo());
 		
-		System.out.println(rewardOptionValues.size());
 		if(vo.getRewardOption().equals("선택 옵션")) {
 			if(!(rewardOptionValues==null)) {
 				for(int i=0;i<rewardOptionValues.size();i++) {
@@ -142,12 +139,17 @@ public class RewardController {
 		pvo.setWriteStatus('n');
 		
 		System.out.println(rewardOptionNos);
+		System.out.println(rewardOptionValues.size());
+		System.out.println(rewardOptionKeys);
 		System.out.println("수정전 입력된 값 : " +  rovo.toString());
 		
 		for(int i=0;i<rewardOptionNos.size();i++) {
-			rovo.setRewardOptionKey("");
-			rovo.setRewardOptionValue(rewardOptionValues.get(i));
+			if(rewardOptionKeys==null) rovo.setRewardOptionKey("");
+			else rovo.setRewardOptionKey(rewardOptionKeys.get(i));
+			System.out.println(rewardOptionKeys.get(i));
+			System.out.println(rewardOptionValues.get(i));
 			rovo.setRewardOptionNo(rewardOptionNos.get(i));
+			rovo.setRewardOptionValue(rewardOptionValues.get(i));
 			updateRewardOptionService.updateRewardOption(rovo);
 		}
 		
