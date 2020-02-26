@@ -2,15 +2,12 @@ package com.team5.funthing.user.controller;
 
 import java.beans.PropertyEditorSupport;
 import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -36,7 +33,6 @@ import com.team5.funthing.user.service.projectIntroduceImageService.InsertProjec
 import com.team5.funthing.user.service.projectKeywordService.DeleteProjectKeywordService;
 import com.team5.funthing.user.service.projectKeywordService.GetProjectKeywordListService;
 import com.team5.funthing.user.service.projectKeywordService.InsertProjectKeywordService;
-import com.team5.funthing.user.service.projectService.CreateProjectService;
 import com.team5.funthing.user.service.projectService.DeleteProjectService;
 import com.team5.funthing.user.service.projectService.GetProjectListByEmailService;
 import com.team5.funthing.user.service.projectService.GetProjectService;
@@ -57,16 +53,13 @@ public class ProjectController {
 // ===================== 주요 필수 서비스 주입 ==============
 	
 	@Autowired
-	private CreateProjectService createProjectService;
-	@Autowired
 	private InsertProjectService insertProjectService;
 	@Autowired
 	private UpdateProjectService updateProjectService;
 	@Autowired
 	private DeleteProjectService deleteProjectService;
 	@Autowired
-	private GetProjectService getProjectService;
-	
+	private GetProjectService getProjectService;	
 	@Autowired 
 	private GetProjectListByEmailService getProjectListByEmailService;
 
@@ -159,7 +152,6 @@ public class ProjectController {
 		projectIntroduceImageVO.setProjectNo(currentProjectNo);
 		
 		projectVO = getProjectService.getProject(projectVO);
-		System.out.println("redirect: pvo : " + projectVO.toString());
 		List<ProjectIntroduceImageVO> projectIntroduceImageList = getProjectIntroduceImageListService.getProjectIntroduceImageList(projectIntroduceImageVO);
 		List<ProjectKeywordVO> projectKeywordList = getProjectKeywordList(projectVO);
 		
@@ -186,12 +178,7 @@ public class ProjectController {
 		vo.setEmail(loginEmail);
 		
 		List<ProjectVO> getProjectList = getProjectListByEmailService.getProjectListByEmail(vo);
-		if(getProjectList != null) {
-			System.out.println("========getProjectList=============");
-			for(ProjectVO getProject : getProjectList) {
-				System.out.println(getProject.toString());
-			}
-			System.out.println("===================================");
+		if(!getProjectList.isEmpty()) {
 			model.addAttribute("getProjectList", getProjectList);
 		}
 		model.addAttribute("basicProjectSetting", vo);
@@ -225,7 +212,15 @@ public class ProjectController {
 
 		return "f-create-project";
 	} // 프로젝트 작성 시작할때 메서드 
-
+	
+	@RequestMapping(value = "deleteProject.udo", method = RequestMethod.GET)
+	public String deleteProject(@RequestParam int currentProjectNo) {
+		
+		projectVO.setProjectNo(currentProjectNo);
+		deleteProjectService.deleteProject(projectVO);
+		
+		return "redirect:mypage.udo";
+	}
 	
 	
 	@RequestMapping(value = "/saveInputWritingProject.udo", method = RequestMethod.POST)
@@ -260,8 +255,6 @@ public class ProjectController {
 		pvo.setWriteStatus(checkResult); // 입력해야하는 작성부분 체크
 		updateProjectService.updateProject(pvo);
 		
-
-		System.out.println("checkResult : " + checkResult);
 		if(checkResult == 'y') {
 			redirectAttributes.addAttribute("msg", "작성이 완료 되었습니다.");
 		}else {
@@ -279,7 +272,7 @@ public class ProjectController {
 	
 	@RequestMapping(value = "/showPreviewProject.udo", method = RequestMethod.POST)
 	public String showPreviewProject(ProjectVO pvo, Model model) throws Exception { // 프로젝트 임시저장 시 실행되는 메서드
-		
+		System.out.println("pvo.getProjectNo :" + pvo.getProjectNo());
 		pvo = getProjectService.getProject(pvo);
 		int projectNo = pvo.getProjectNo();
 		
@@ -324,6 +317,10 @@ public class ProjectController {
 		}
 		
 	}
+	
+	
+	
+	
 	public void insertProjectKeyword(List<String> toAddKeywords, int currentProjectNo) {
 		
 		projectKeywordVO.setProjectNo(currentProjectNo);
@@ -334,11 +331,7 @@ public class ProjectController {
 		}
 	}
 	public List<ProjectKeywordVO> getProjectKeywordList(ProjectVO pvo){
-		
-		if(projectKeywordVO == null) {
-			System.out.println("projectKeywordVO Null");
-			return null;
-		}
+
 		projectKeywordVO.setProjectNo(pvo.getProjectNo());
 		
 		List<ProjectKeywordVO> projectKeywordList = getProjectKeywordListService.getProjectKeywordList(projectKeywordVO);
@@ -381,10 +374,8 @@ public class ProjectController {
 			
 			if(tmpUploadList != null) {
 				for(String toInsertImage : tmpUploadList) {
-					System.out.println("toInsertImage : " + toInsertImage);
 					projectIntroduceImageVO.setProjectIntroduceImage(toInsertImage);
-					
-					
+
 					insertProjectIntroduceImageService.insertProjectIntroduceImage(projectIntroduceImageVO);
 				} // 소개 이미지 경로 DB에 추가
 			}else {
@@ -403,17 +394,15 @@ public class ProjectController {
 			String voName = vo.getClass().getSimpleName();
 			List<String> toSettingPath = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);
 			if(toSettingPath == null) return;
-			
-			int cnt = 1;
+
 			for(String toInsertImage : toSettingPath) {
-				System.out.println("cnt : " + cnt++);
 				vo.setProjectMainImage(toInsertImage);
 			}
 		}
 	}
 	
 	
-	// 구현 OK - 수정 요구
+	// 구현 OK - 수정 요구됨
 	public char inputCompleteCheck(ProjectVO vo) { //임시 저장된 프로젝트 빈칸 체크
 		if(		vo.getProjectNo() == -1 ||
 				vo.getCreator() == null || vo.getCreator().equals("") ||

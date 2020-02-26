@@ -111,9 +111,9 @@
 	</update>
 	
 
-	<delete id="deleteSomething" parameterType="int">
-		DELETE FROM tablename1 WHERE
-		columnname1 = #{param1}
+	<delete id="deleteProject" parameterType="project">
+		DELETE FROM project WHERE
+		projectNo = #{projectNo}
 	</delete>
 
 

@@ -29,6 +29,7 @@ public class ProjectDAO {
 	}
 	
 	public void deleteProject(ProjectVO vo) {
+		sqlSessionTemplate.delete("deleteProject", vo);
 		
 	}
 	
