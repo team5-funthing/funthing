@@ -42,10 +42,11 @@ public class MemberController {
 	@Autowired
 	private InsertImageService insertImageService;
 
-	@RequestMapping("member.udo")
-	public String showindex() {
-		return "p-index";
-	}
+//	«œ¥√¿Ã∞° ∞°¡Æ∞©¥œ¥Ÿ. 
+//	@RequestMapping("member.udo") 
+//	public String showindex() {
+//		return "p-index";
+//	}
 
 	@RequestMapping(value="socialLogin.udo",method=RequestMethod.GET)
 	public String socialLogin() {   
