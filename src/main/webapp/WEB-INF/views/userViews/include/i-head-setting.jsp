@@ -40,6 +40,8 @@
     <script src="${pageContext.request.contextPath}/resources/user/js/i18n/datepicker.ko.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/datepicker.min.css">
   	
+  	<!-- 데이터 테이블-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     
     <script>
     

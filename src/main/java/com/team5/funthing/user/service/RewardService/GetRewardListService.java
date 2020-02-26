@@ -1,4 +1,4 @@
-package com.team5.funthing.user.service.RewardService;
+package com.team5.funthing.user.service.rewardService;
 
 import java.util.List;
 

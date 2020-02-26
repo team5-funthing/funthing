@@ -39,9 +39,10 @@ public class ProjectVO {
 
 //  기타 멤버
 	private char writeStatus = 'n'; // 작성 완료된 
-	private char status = 'n'; // 상태 여부 - n: 심사 미제출, w : wating[대기중], f : fail[실패], m : modify[수정 요구]
+	private char status = 'n'; // 상태 여부 - n: 심사 미제출, w : wating[대기중], p : pass[심사 통과], f : fail[실패], m : modify[수정 요구]
+	private String statusMessage = "";
 	private char funding = 'n'; // 펀딩진행중 여부
-	
+
 //  sql문에 적용 안된 멤버
 	private int fundingMoney; 
 	private String supporters; 
