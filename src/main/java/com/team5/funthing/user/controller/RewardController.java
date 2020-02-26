@@ -9,16 +9,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team5.funthing.user.model.vo.ProjectVO;
+import com.team5.funthing.user.model.vo.RewardOptionVO;
 import com.team5.funthing.user.model.vo.RewardVO;
 import com.team5.funthing.user.service.RewardService.DeleteRewardService;
 import com.team5.funthing.user.service.RewardService.GetRewardListService;
 import com.team5.funthing.user.service.RewardService.GetRewardService;
 import com.team5.funthing.user.service.RewardService.InsertRewardService;
 import com.team5.funthing.user.service.RewardService.UpdateRewardService;
+import com.team5.funthing.user.service.rewardOptionService.DeleteRewardOptionService;
+import com.team5.funthing.user.service.rewardOptionService.GetRewardOptionListService;
+import com.team5.funthing.user.service.rewardOptionService.InsertRewardOptionService;
+import com.team5.funthing.user.service.rewardOptionService.UpdateRewardOptionService;
 
 @Controller
 public class RewardController {
@@ -33,16 +39,24 @@ public class RewardController {
 	UpdateRewardService updateRewardService;
 	@Autowired
 	DeleteRewardService deleteRewardService;
+	@Autowired
+	GetRewardOptionListService getRewardOptionListSerivce;
+	@Autowired
+	InsertRewardOptionService insertRewardOptionService;
+	@Autowired
+	UpdateRewardOptionService updateRewardOptionService;
+	@Autowired
+	DeleteRewardOptionService deleteRewardOptionSerivice;
 	
 	@RequestMapping("showReward.udo")
 	public String showRewardList(RewardVO vo,Model model,HttpServletRequest request) {
-		
+		//=============================프로젝트 번호 세팅부분=======================
 		int projectNo = Integer.parseInt(request.getParameter("projectNo"));
 		
 		ProjectVO pvo = new ProjectVO();	
 		pvo.setProjectNo(projectNo);
 		pvo.setWriteStatus('n');
-
+		//=============================객체 전송 부분=============================
 		model.addAttribute("projectNo", projectNo);
 		model.addAttribute("writingProject",pvo);
 		List<RewardVO> rewardList = getRewardListService.getRewardList(vo);
@@ -52,16 +66,39 @@ public class RewardController {
 	}
 	
 	@RequestMapping(value= "insertReward.udo", method=RequestMethod.POST)
-	public String insertReward(RewardVO vo, Model model,HttpServletRequest request) {
+	public String insertReward(	RewardVO vo, RewardOptionVO rovo, 
+								@RequestParam(value="rewardoptionkey", required=false, defaultValue="") List<String> rewardOptionKeys, 
+								@RequestParam(value="rewardoptionvalue", required=false) List<String> rewardOptionValues,
+								Model model,HttpServletRequest request) {
 		
 		int projectNo = Integer.parseInt(request.getParameter("projectNo"));
-		
 		ProjectVO projectvo = new ProjectVO();
 		projectvo.setProjectNo(projectNo);
 		vo.setProjectNo(projectNo);
 		
-		insertRewardService.insertReward(vo);
+		System.out.println(vo.toString());
 		
+		insertRewardService.insertReward(vo);
+		System.out.println(vo.getRewardNo());
+		
+		System.out.println(rewardOptionValues.size());
+		if(vo.getRewardOption().equals("선택 옵션")) {
+			if(!(rewardOptionValues==null)) {
+				for(int i=0;i<rewardOptionValues.size();i++) {
+					rovo.setRewardNo(vo.getRewardNo());
+					System.out.println(rovo.getRewardOptionKey());
+					rovo.setRewardOptionKey(rewardOptionKeys.get(i));
+					System.out.println(rovo.getRewardOptionValue());
+					rovo.setRewardOptionValue(rewardOptionValues.get(i));
+					insertRewardOptionService.insertRewardOption(rovo);
+				}
+			}
+		}else if(vo.getRewardOption().equals("직접 입력 옵션")){
+			rovo.setRewardNo(vo.getRewardNo());
+			rovo.setRewardOptionKey("");
+			rovo.setRewardOptionValue(rewardOptionValues.get(0));
+			insertRewardOptionService.insertRewardOption(rovo);
+		}
 		List<RewardVO> rewardList = getRewardListService.getRewardList(vo);
 		model.addAttribute("writingProject", projectvo);
 		model.addAttribute("projectNo", projectNo);
@@ -70,16 +107,16 @@ public class RewardController {
 	}
 	
 	@RequestMapping(value="deleteReward.udo")
-	public String deleteReward(RewardVO vo, Model model,HttpServletRequest request) {
+	public String deleteReward(RewardVO vo,RewardOptionVO rovo, Model model,HttpServletRequest request) {
 
 		int projectNo = Integer.parseInt(request.getParameter("projectNo"));
 
 		ProjectVO pvo = new ProjectVO();
-		
 		pvo.setProjectNo(projectNo);
 		pvo.setWriteStatus('n');
 		
-		vo.setProjectNo(projectNo);;
+		vo.setProjectNo(projectNo);
+		deleteRewardOptionSerivice.deleteRewardOption(rovo);
 		deleteRewardService.deleteReward(vo);
 		
 		model.addAttribute("projectNo", projectNo);
@@ -92,21 +129,31 @@ public class RewardController {
 	}
 	
 	@RequestMapping(value="updateReward.udo")
-	public String updateReward(RewardVO vo, Model model,HttpServletRequest request) {
-		
-		System.out.println("수정 처리전 값 형태 : " + vo.toString());
+	public String updateReward(	RewardVO vo,RewardOptionVO rovo,
+								@RequestParam(value="rewardoptionkey", required=false) List<String> rewardOptionKeys, 
+								@RequestParam(value="rewardoptionvalue") List<String> rewardOptionValues,
+								@RequestParam(value="rewardOptionNo") List<Integer> rewardOptionNos,
+								Model model,HttpServletRequest request) {
 		
 		int projectNo = Integer.parseInt(request.getParameter("projectNo"));
-		
+
 		ProjectVO pvo = new ProjectVO();
 		pvo.setProjectNo(projectNo);
 		pvo.setWriteStatus('n');
-
+		
+		System.out.println(rewardOptionNos);
+		System.out.println("수정전 입력된 값 : " +  rovo.toString());
+		
+		for(int i=0;i<rewardOptionNos.size();i++) {
+			rovo.setRewardOptionKey("");
+			rovo.setRewardOptionValue(rewardOptionValues.get(i));
+			rovo.setRewardOptionNo(rewardOptionNos.get(i));
+			updateRewardOptionService.updateRewardOption(rovo);
+		}
+		
 		updateRewardService.updateReward(vo);
-		System.out.println("수정 된 번호 열 : " + vo.getRewardNo());
-		System.out.println("수정 완료");
+		
 		List<RewardVO> rewardList = getRewardListService.getRewardList(vo);
-		System.out.println(rewardList.toString());
 		model.addAttribute("projectNo", projectNo);
 		model.addAttribute("writingProject",pvo);
 		model.addAttribute("rewardList", rewardList);
@@ -116,18 +163,22 @@ public class RewardController {
 	}
 	
 	@RequestMapping(value="/getReward.udo" , method=RequestMethod.POST)
-	public String getReward(String indexData, RewardVO vo, Model model) throws JsonProcessingException {
-		System.out.println(indexData);
+	public String getReward(String indexData,RewardOptionVO rovo, RewardVO vo, Model model) throws JsonProcessingException {
 		
 		//ajax로 받아온 값을 정수로 변환
 		int index = Integer.parseInt(indexData);
 		vo.setRewardNo(index);
+		rovo.setRewardNo(index);
 		
 		//리워딩 넘버만 받아온 객체를 사용하여 객체의 정보를 받아온다.
 		RewardVO modify = getRewardService.getReward(vo);
-
+		List<RewardOptionVO> rewardOptionList = getRewardOptionListSerivce.getRewardOptionList(rovo);
+		System.out.println(rovo.toString());
+		modify.setRewardOptionList(rewardOptionList);
+		
 		ObjectMapper mapper = new ObjectMapper();
 		String modifyToJson = mapper.writeValueAsString(modify);
+		System.out.println("리워드 불러오기 결과 : " + modifyToJson);
 
 		model.addAttribute("modifyRewardToJSON", modifyToJson);
 		return "/ajax/getReward";

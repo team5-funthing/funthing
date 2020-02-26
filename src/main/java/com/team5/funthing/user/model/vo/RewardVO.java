@@ -10,16 +10,11 @@ public class RewardVO {
 	private String rewardName;
 	private String rewardContent;
 	private String rewardOption;
-	//private List<String> rewardOption;
 	private int shippingFee;
 	private int rewardAmount;
 	
-	public int getShippingFee() {
-		return shippingFee;
-	}
-	public void setShippingFee(int shippingFee) {
-		this.shippingFee = shippingFee;
-	}
+	private List<RewardOptionVO> rewardOptionList;
+	
 	public int getRewardPrice() {
 		return rewardPrice;
 	}
@@ -44,24 +39,23 @@ public class RewardVO {
 	public void setRewardName(String rewardName) {
 		this.rewardName = rewardName;
 	}
-	
+	public String getRewardContent() {
+		return rewardContent;
+	}
+	public void setRewardContent(String rewardContent) {
+		this.rewardContent = rewardContent;
+	}
 	public String getRewardOption() {
 		return rewardOption;
 	}
 	public void setRewardOption(String rewardOption) {
 		this.rewardOption = rewardOption;
 	}
-	//	public List<String> getRewardOption() {
-//		return rewardOption;
-//	}
-//	public void setRewardOption(List<String> rewardOption) {
-//		this.rewardOption = rewardOption;
-//	}
-	public String getRewardContent() {
-		return rewardContent;
+	public int getShippingFee() {
+		return shippingFee;
 	}
-	public void setRewardContent(String rewardContent) {
-		this.rewardContent = rewardContent;
+	public void setShippingFee(int shippingFee) {
+		this.shippingFee = shippingFee;
 	}
 	public int getRewardAmount() {
 		return rewardAmount;
@@ -69,12 +63,20 @@ public class RewardVO {
 	public void setRewardAmount(int rewardAmount) {
 		this.rewardAmount = rewardAmount;
 	}
+	public List<RewardOptionVO> getRewardOptionList() {
+		return rewardOptionList;
+	}
+	public void setRewardOptionList(List<RewardOptionVO> rewardOptionList) {
+		this.rewardOptionList = rewardOptionList;
+	}
 	@Override
 	public String toString() {
 		return "RewardVO [rewardPrice=" + rewardPrice + ", rewardNo=" + rewardNo + ", projectNo=" + projectNo
 				+ ", rewardName=" + rewardName + ", rewardContent=" + rewardContent + ", rewardOption=" + rewardOption
-				+ ", shippingFee=" + shippingFee + ", rewardAmount=" + rewardAmount + "]";
+				+ ", shippingFee=" + shippingFee + ", rewardAmount=" + rewardAmount + ", rewardOptionList="
+				+ rewardOptionList + "]";
 	}
-	
+
+
 	
 }
