@@ -18,6 +18,7 @@ import com.team5.funthing.user.service.memberActivityService.DeleteMemberActivit
 import com.team5.funthing.user.service.memberActivityService.GetMemberActivityListService;
 import com.team5.funthing.user.service.memberActivityService.InsertMemberActivityService;
 import com.team5.funthing.user.service.memberActivityService.UpdateMemberActivityService;
+
 import com.team5.funthing.user.service.projectService.GetProjectService;
 import com.team5.funthing.user.service.projectService.GetProjectListByEmailService;
 
@@ -38,9 +39,11 @@ public class MemberActivityController {
 	GetProjectService getProjectService;
 
 
+
 	@RequestMapping(value="mypage.udo",method=RequestMethod.GET)
 	public String myPage(HttpSession session,MemberActivityVO vo,ProjectVO vo1,Model model, MemberVO vo2) {
 		System.out.println(":"+session.getAttribute("memberSessionEmail"));
+
 		myProjectList(vo1, model, session);
 		myLikeProjectList(session, vo, vo1, model);
 		myReportProjectList(session, vo, vo1, model);
@@ -58,7 +61,9 @@ public class MemberActivityController {
 //	=============================================================================
 	public void myProjectList(ProjectVO vo,Model model,HttpSession session) {
 		vo.setEmail((String)session.getAttribute("memberSessionEmail"));
+
 		System.out.println("myprojectVO email :"+vo.getEmail());
+
         System.out.println(getProjectServiceByEmailService.getProjectListByEmail(vo).toString());
 		model.addAttribute("myProjectList",getProjectServiceByEmailService.getProjectListByEmail(vo));
 	}
