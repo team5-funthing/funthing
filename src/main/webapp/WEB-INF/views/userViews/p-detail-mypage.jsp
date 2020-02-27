@@ -25,9 +25,9 @@
                <div class="col-12">
                   <div class="d-flex justify-content-start mb-3">
                      <div id="detail-mypage-profile-img" style="background: #BDBDBD;">
-                        <img class="profile" src="#">
+                        <img class="profile" src="${sessionScope.memberSession.myImage }">
                      </div>
-                     <div class="h2 login-id align-self-center ml-4">${sessionScope.memberSessionName} </div>
+                     <div class="h2 login-id align-self-center ml-4">${sessionScope.memberSession.name} </div>
                   </div>
 
                   <div class="d-flex justify-content-start mb-3">
@@ -40,7 +40,7 @@
                         <a
                            class="btn btn-lg btn-detail-mypage d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
                            href="showDetailMyPage.udo">메세지</a>
-                       <input type="hidden" name="email" value="${sessionScope.memberSessionEmail}">
+                       <input type="hidden" name="email" value="${sessionScope.memberSession.email}">
                        
                     
                      

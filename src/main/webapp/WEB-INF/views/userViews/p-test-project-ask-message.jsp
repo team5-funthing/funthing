@@ -16,8 +16,8 @@
 			</tr>
 			<tr>
 				<td>이름</td>
-				<td>${sessionScope.memberSessionName }</td>
-				<input type="hidden" name="email" value="${sessionScope.memberSessionEmail }"  >
+				<td>${sessionScope.memberSession.name }</td>
+				<input type="hidden" name="email" value="${sessionScope.memberSession.email }"  >
 			</tr>
 			<tr>
 				<td>제목</td>

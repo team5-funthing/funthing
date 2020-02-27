@@ -40,7 +40,7 @@ public class MemberActivityController {
 
 	@RequestMapping(value="mypage.udo",method=RequestMethod.GET)
 	public String myPage(HttpSession session,MemberActivityVO vo,ProjectVO vo1,Model model, MemberVO vo2) {
-		System.out.println(":"+session.getAttribute("memberSessionEmail"));
+		System.out.println(":"+session.getAttribute("memberSession").toString());
 		myProjectList(vo1, model, session);
 		myLikeProjectList(session, vo, vo1, model);
 		myReportProjectList(session, vo, vo1, model);
@@ -57,7 +57,8 @@ public class MemberActivityController {
 	
 //	=============================================================================
 	public void myProjectList(ProjectVO vo,Model model,HttpSession session) {
-		vo.setEmail((String)session.getAttribute("memberSessionEmail"));
+		MemberVO vo2 = (MemberVO) session.getAttribute("memberSession");
+		vo.setEmail(vo2.getEmail());
 		System.out.println("myprojectVO email :"+vo.getEmail());
         System.out.println(getProjectServiceByEmailService.getProjectListByEmail(vo).toString());
 		model.addAttribute("myProjectList",getProjectServiceByEmailService.getProjectListByEmail(vo));
@@ -66,7 +67,8 @@ public class MemberActivityController {
 
 	public void myLikeProjectList(HttpSession session,MemberActivityVO vo,ProjectVO vo1,Model model) {
 		List<ProjectVO> projectLikeList = new Vector<ProjectVO>();
-		vo.setEmail((String)session.getAttribute("memberSessionEmail"));
+		MemberVO vo2 = (MemberVO) session.getAttribute("memberSession");
+		vo.setEmail(vo2.getEmail());
 		for(MemberActivityVO list:getMemberActivityService.getLikeProjectnoList(vo)) {
 			vo1.setProjectNo(list.getprojectno());
 			projectLikeList.add(getProjectService.getProject(vo1));
@@ -76,7 +78,8 @@ public class MemberActivityController {
 
 	public void myReportProjectList(HttpSession session,MemberActivityVO vo,ProjectVO vo1,Model model) {
 		List<ProjectVO> projectReportList = new Vector<ProjectVO>();
-		vo.setEmail((String)session.getAttribute("memberSessionEmail"));
+		MemberVO vo2 = (MemberVO) session.getAttribute("memberSession");
+		vo.setEmail(vo2.getEmail());
 		for(MemberActivityVO list:getMemberActivityService.getReportProjectnoList(vo)) {
 			vo1.setProjectNo(list.getprojectno());
 			projectReportList.add(getProjectService.getProject(vo1));
@@ -86,7 +89,8 @@ public class MemberActivityController {
 
 	public void myReservationProjectList(HttpSession session,MemberActivityVO vo,ProjectVO vo1,Model model) {
 		List<ProjectVO> projectReservationList = new Vector<ProjectVO>();
-		vo.setEmail((String)session.getAttribute("memberSessionEmail"));
+		MemberVO vo2 = (MemberVO) session.getAttribute("memberSession");
+		vo.setEmail(vo2.getEmail());
 		for(MemberActivityVO list:getMemberActivityService.getReservationProjectnoList(vo)) {
 			vo1.setProjectNo(list.getprojectno());
 			projectReservationList.add(getProjectService.getProject(vo1));
