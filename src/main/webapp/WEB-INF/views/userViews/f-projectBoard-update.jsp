@@ -18,40 +18,45 @@
 	<!-- ------------------ -->
 	
 	<!-- projectBoard form 시작 -->
-							<div class="commentupdete-form">
-								<h4>리뷰 게시판 글 수정하기</h4>
-								
-								<form class="form-contact commentupdete-form" action="updateProjectBoard.udo" 
-												id="commentForm" method="post">
-									<div class="row">
-										<div class="col-12">
-											<div class="form-group">
-												<textarea class="form-control w-100" name="projectBoardContents" 
-													id="projectBoardContents" cols="30" rows="9">${vo.projectBoardContents}</textarea>
-											</div>
-										</div>
-										<div class="col-sm-6">
-											<div class="form-group">
-												<input class="form-control" name="name" id="name" type="text" 
-													value="${sessionScope.memberSessionName}">
-												<input type="hidden" name="projectBoardNo" id="projectBoardNo" value="${vo.projectBoardNo}">
-					
-											</div>
-										</div>
-										<div class="col-sm-6">
-											<div class="form-group">
-		                                    <input class="form-control" name="email" id="email" type="email" 
-		                                       value="${sessionScope.memberSessionEmail}">
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<button type="submit" 
-											class="button button-contactForm btn_1 boxed-btn">글 수정하기</button>
-									</div>
-								</form>
+	<hr>
+	<section class="container d-flex justify-content-center mt-5">
+		<div class="w-50">
+			<div class="commentupdete-form">
+				<h4>리뷰 게시판 글 수정하기</h4>
+				
+				<form class="form-contact commentupdete-form" action="updateProjectBoard.udo" 
+								id="commentForm" method="post">
+					<input type="hidden" name="projectNo" value="${vo.projectNo }">
+					<div class="row">
+						<div class="col-12">
+							<div class="form-group">
+								<textarea class="form-control w-100" name="projectBoardContents" 
+									id="projectBoardContents" cols="30" rows="9" >${vo.projectBoardContents}</textarea>
 							</div>
-							<!-- projectBoard form 끝 -->
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<input class="form-control" name="name" id="name" type="text" 
+									value="${sessionScope.memberSessionName}">
+								<input type="hidden" name="projectBoardNo" id="projectBoardNo" value="${vo.projectBoardNo}">
+		
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+		                                <input class="form-control" name="email" id="email" type="email" 
+		                                   value="${sessionScope.memberSessionEmail}">
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="button button-contactForm btn_1 boxed-btn">글 수정하기</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</section>
+	<!-- projectBoard form 끝 -->
 	
 	<!-- -------------------- -->
 

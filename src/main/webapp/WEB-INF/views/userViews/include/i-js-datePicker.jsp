@@ -13,8 +13,7 @@
 	        $(inst.el).trigger('change');
 	    }
 	});
-	
-	endDate.selectDate(new Date($('#endDate').val()));
+
 	
 	
 	

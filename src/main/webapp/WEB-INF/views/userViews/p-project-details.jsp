@@ -2,13 +2,13 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!doctype html>
 <html class="no-js">
 
 <head>
 
-	<jsp:include page="./include/i-head-setting.jsp" />
+<jsp:include page="./include/i-head-setting.jsp" />
 
 </head>
 
@@ -21,20 +21,61 @@
 	<section class="container">
 
 		<div class="w-100">
+		
+			<div class="row d-flex justify-content-center">
+				<div class="row d-flex align-content-between flex-wrap mt-5">
+					<div class="col-xl-12 d-flex bd-highlight mb-1">
+						<ul id="addedKeywords">
+							<c:set var="tag" value="#" />
+							<c:set var="keywordId" value="keyword" />
+							<c:choose>
+								<c:when test="${projectKeywordList eq null }">
+								</c:when>
+								<c:when test="${projectKeywordList ne null }">
+									<c:forEach var="projectKeyword"
+										items="${projectKeywordList }" varStatus="step">
+										<li id="${keywordId }${step.count}"
+											class="btn-sm btn-bd-keyword d-none d-lg-inline-block m-1">
+											<a href="javascript:void(0);" class="addedKeyword">${projectKeyword.keyword }</a>
+										</li>
+									</c:forEach>
+								</c:when>
+							</c:choose>
+						</ul>
+						<script>
+					         $(function (){
+					        	 $(".addedKeyword").removeAttr("href")
+					      
+						     });
+						</script>
+					</div>
+				</div>
+			</div>
+		
 			<article class="row d-flex justify-content-center">
-				<aside id="project-main-img" class="col-7">
-					<img class="project-main" src="img/test/5.jpg">
-				</aside>
-				<aside id="project-details-info"
-					class="col-5 align-items-start d-flex flex-column bd-highlight">
-
-					<div class="p-2 bd-highlight">
+				<aside id="project-main-img" class="col-8">
 				
+					<c:if test="${project ne null }">
+						${project.projectIntroduceVideo }"
+					</c:if>
+				</aside>
+				
+				<aside id="project-details-info"
+					class="col-4 align-items-start d-flex flex-column bd-highlight">
+					
+					
+					<div class="p-2 bd-highlight">
 						<div class="h4">모인 금액</div>
-						
 						<div class="h2" style="color: #000000">
-							500,000원[모인금액]
-							<div class="h5" style="color: #000000">50% [달성율]</div>
+						
+							<c:if test="${project ne null }">
+								${project.fundingMoney }원
+							</c:if> 
+							<div class="h5" style="color: #000000">
+								<c:if test="${project ne null }">
+									[퍼센트 수치]
+								</c:if> 
+							</div>
 						</div>
 					</div>
 					<div class="p-2 bd-highlight">
@@ -47,14 +88,14 @@
 					<div class="p-2 bd-highlight mt-auto ml-0">
 						<a
 							class="btn btn-lg btn-spon-prj d-none d-lg-inline-block pr-5 pl-5 mb-2"
-							href="#">프로젝트 밀어주기</a>
+							href="">프로젝트 밀어주기</a>
 					</div>
 					<div class="row d-flex justify-content-around m-0 ">
 						<a
 							class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2"
 							href="#">좋아요</a> <a
 							class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2"
-							href="showInsertwAskMessage.udo?projectNo=${vo.projectNo }">문의하기</a> <a
+							href="showInsertwAskMessage.udo?projectNo=${project.projectNo }">문의하기</a> <a
 							class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2"
 							href="#">공유하기</a>
 
@@ -66,6 +107,7 @@
 			<hr>
 
 			<div class="w-75">
+
 				<article>
 					<div class="row">
 						<div class="col-lg-10 posts-list">
@@ -74,74 +116,18 @@
 									<img class="img-fluid" src="#" alt="">
 								</div>
 								<div class="blog_details">
-									<h2>여기에 상세 내용들 어떻게 올릴지 정해야한다.</h2>
+									<h3>${project.projectSubTitle }</h3>
 									<ul class="project-info-link mt-3 mb-4">
-										<li><a href="#"><i class="fa fa-user"></i> 카테고리</a></li>
-										<li><a href="#"><i class="fa fa-comments"></i> 03
-												리뷰/문의</a></li>
+										<li><a href="#"><i class="fa fa-user"></i> ${project.category }</a></li>
+										<li><a href="#"><i class="fa fa-comments"></i> projectSupporters
+												후원한사람들</a></li>
 									</ul>
-									<p class="excert">MCSE boot camps have its supporters and
-										its detractors. Some people do not understand why you should
-										have to spend money on boot camp when you can get the MCSE
-										study materials yourself at a fraction of the camp price.
-										However, who has the willpower</p>
-									<p>MCSE boot camps have its supporters and its detractors.
-										Some people do not understand why you should have to spend
-										money on boot camp when you can get the MCSE study materials
-										yourself at a fraction of the camp price. However, who has the
-										willpower to actually sit through a self-imposed MCSE
-										training. who has the willpower to actually</p>
-									<div class="quote-wrapper">
-										<div class="quotes">MCSE boot camps have its supporters
-											and its detractors. Some people do not understand why you
-											should have to spend money on boot camp when you can get the
-											MCSE study materials yourself at a fraction of the camp
-											price. However, who has the willpower to actually sit through
-											a self-imposed MCSE training.</div>
-									</div>
-									<p>MCSE boot camps have its supporters and its detractors.
-										Some people do not understand why you should have to spend
-										money on boot camp when you can get the MCSE study materials
-										yourself at a fraction of the camp price. However, who has the
-										willpower</p>
-									<p>MCSE boot camps have its supporters and its detractors.
-										Some people do not understand why you should have to spend
-										money on boot camp when you can get the MCSE study materials
-										yourself at a fraction of the camp price. However, who has the
-										willpower to actually sit through a self-imposed MCSE
-										training. who has the willpower to actually</p>
-								</div>
-							</div>
-							<div class="navigation-top">
-								<div class="d-sm-flex justify-content-between text-center">
-									<p class="like-info">
-										<span class="align-middle"><i class="fa fa-heart"></i></span>
-										Lily and 4 people like this
-									</p>
-									<div class="col-sm-4 text-center my-2 my-sm-0">
-										<!-- <p class="comment-count"><span class="align-middle"><i class="fa fa-comment"></i></span> 06 Comments</p> -->
-									</div>
-									<ul class="social-icons row">
-										<li class="mr-1"><a href="#"><i
-												class="fa fa-facebook-f"></i></a></li>
-										<li class="mr-1"><a href="#"><i class="fa fa-twitter"></i></a></li>
-										<li class="mr-1"><a href="#"><i
-												class="fa fa-dribbble"></i></a></li>
-										<li class="mr-1"><a href="#"><i class="fa fa-behance"></i></a></li>
-									</ul>
-								</div>
-							</div>
-							<div class="project-author">
-								<div class="media align-items-center">
-									<img src="img/project/author.png" alt="">
-									<div class="media-body">
-										<a href="#">
-											<h4></h4>
-										</a>
-										<p>Second divided from form fish beast made. Every of seas
-											all gathered use saying you're, he our dominion twon Second
-											divided from</p>
-									</div>
+									<c:if test="${project ne null }">
+										
+										${project.projectStory}
+									
+									</c:if> 
+									
 								</div>
 							</div>
 							
@@ -151,6 +137,7 @@
 								
 								<form class="form-contact comment_form" action="insertProjectBoard.udo" 
 												id="commentForm" method="post">
+									<input type="hidden" name="projectNo" value="${project.projectNo}">
 									<div class="row">
 										<div class="col-12">
 											<div class="form-group">
@@ -179,13 +166,12 @@
 							</div>
 							<!-- projectBoard form 끝 -->
 							
-							
 							<!-- proejctBoardList 시작 -->
 							<div class="comments-area">
 								<h4>리뷰 게시판</h4>
 								
 								<!-- projectBoard 시작 -->
-								<c:forEach var="b1" items="${getProjectBoard}">
+								<c:forEach var="b1" items="${getProjectBoardList}">
 									<c:if test="${b1.step eq 0}"> 
 										
 										<div class="comment-list">
@@ -210,10 +196,10 @@
 																	test="${ b1.email eq sessionScope.memberSessionEmail }">
 
 																	<div class="reply-btn">
-																		<a type="submit" href="getProjectBoard.udo?projectBoardNo=${b1.projectBoardNo }"
+																		<a href="getProjectBoard.udo?projectNo=${b1.projectNo }&projectBoardNo=${b1.projectBoardNo }"
 																			class="button button-contactForm btn_1 boxed-btn pt-1 pl-2 pr-2 pb-0">
 																			수정 </a> 
-																		<a type="submit" href="deleteProjectBoard.udo?projectBoardNo=${b1.projectBoardNo }"
+																		<a href="deleteProjectBoard.udo?projectNo=${b1.projectNo }&projectBoardNo=${b1.projectBoardNo }"
 																			class="button button-contactForm btn_1 boxed-btn pt-1 pl-2 pr-2 pb-0">
 																			삭제 </a>
 
@@ -223,10 +209,10 @@
 
 
 																<c:when
-																	test="${sessionScope.memberSessionEmail eq 'shn807@naver.com' }">
+																	test="${sessionScope.memberSessionEmail eq project.email }">
 
 																		<div class="reply-btn">
-																			<a type="submit" href="replyBoard.udo?projectBoardNo=${b1.projectBoardNo }"
+																			<a type="submit" href="replyBoard.udo?projectNo=${b1.projectNo }&projectBoardNo=${b1.projectBoardNo }"
 																				class="button button-contactForm btn_1 boxed-btn pt-1 pl-3 pr-3 pb-1">
 																				Reply </a>
 																		</div>
@@ -252,7 +238,7 @@
 							                                                    <div class="d-flex justify-content-between">
 							                                                       <div class="d-flex align-items-center">
 							                                                          <h5>
-							                                                             <a href="#">${b2.member.name}</a>
+							                                                             <a href="javaScript: retrun(0);">${b2.member.name}</a>
 							                                                          </h5>
 							                                                          <p class="date">${b2.projectBoardDate}</p>
 							                                                       </div>
@@ -325,8 +311,6 @@
 						</div>
 						<!-- 리워드 반복 끝-->
 
-
-
 					</div>
 				</article>
 			</div>
@@ -342,3 +326,10 @@
 
 </body>
 </html>
+
+
+
+
+
+
+

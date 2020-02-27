@@ -15,12 +15,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProjectVO {
 	
-//	ÇÁ·ÎÁ§Æ® ±âº»¼³Á¤ ¸â¹ö
+//	å ì™ì˜™å ì™ì˜™å ì™ì˜™íŠ¸ å ì©ë³¸å ì™ì˜™å ì™ì˜™ å ì™ì˜™å 
 	private Integer projectNo = -1; 
 	private String creator = ""; 
 	private String email = "";
 	
-//	ÇÁ·ÎÁ§Æ® ¼³Á¤ ¸â¹ö
+//	å ì™ì˜™å ì™ì˜™å ì™ì˜™íŠ¸ å ì™ì˜™å ì™ì˜™ å ì™ì˜™å 
 	private int goalMoney; 
 	private String projectMainImage = "";
 	private String projectTitle = "";
@@ -29,7 +29,7 @@ public class ProjectVO {
 	private Date startDate;
 	private Date endDate; 
 	
-//	ÇÁ·ÎÁ§Æ® ¼Ò°³ ¸â¹ö
+//	å ì™ì˜™å ì™ì˜™å ì™ì˜™íŠ¸ å ìŒ€ê³¤ì˜™ å ì™ì˜™å 
 	private String projectSummary="";
 	private String projectCaution="";
 //	private List<String> projectIntroduceImage;
@@ -37,17 +37,20 @@ public class ProjectVO {
 	private String projectStory="";
 
 
-//  ±âÅ¸ ¸â¹ö
-	private char writeStatus = 'n'; // ÀÛ¼º ¿Ï·áµÈ 
-	private char status = 'n'; // »óÅÂ ¿©ºÎ - n: ½É»ç ¹ÌÁ¦Ãâ, w : wating[´ë±âÁß], f : fail[½ÇÆĞ], m : modify[¼öÁ¤ ¿ä±¸]
-	private char funding = 'n'; // ÆİµùÁøÇàÁß ¿©ºÎ
-	
-//  sql¹®¿¡ Àû¿ë ¾ÈµÈ ¸â¹ö
+
+//  ê¸°íƒ€ ë©¤ë²„
+	private char writeStatus = 'n'; // ì‘ì„± ì™„ë£Œëœ 
+	private char status = 'n'; // ìƒíƒœ ì—¬ë¶€ - n: ì‹¬ì‚¬ ë¯¸ì œì¶œ, w : wating[ëŒ€ê¸°ì¤‘], p : pass[ì‹¬ì‚¬ í†µê³¼], f : fail[ì‹¤íŒ¨], m : modify[ìˆ˜ì • ìš”êµ¬]
+	private String statusReplyMessage = "";
+	private char funding = 'n'; // í€ë”©ì§„í–‰ì¤‘ ì—¬ë¶€
+
+//  sqlë¬¸ì— ì ìš© ì•ˆëœ ë©¤ë²„
+
 	private int fundingMoney; 
 	private String supporters; 
 	private char informationAgree = 'n'; 
 	
-//	sql¹® Á¶ÀÎ½Ã ÇÊ¿äÇÑ VO
+//	sqlï¿½ï¿½ ï¿½ï¿½Î½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ VO
 	private MemberActivityVO memberActivity;
 	
 	
@@ -180,6 +183,12 @@ public class ProjectVO {
 	public void setWriteStatus(char writeStatus) {
 		this.writeStatus = writeStatus;
 	}
+	public String getStatusReplyMessage() {
+		return statusReplyMessage;
+	}
+	public void setStatusReplyMessage(String statusReplyMessage) {
+		this.statusReplyMessage = statusReplyMessage;
+	}
 	@Override
 	public String toString() {
 		return "ProjectVO [projectNo=" + projectNo + ", creator=" + creator + ", email=" + email + ", goalMoney="
@@ -190,8 +199,11 @@ public class ProjectVO {
 				+ ", writeStatus=" + writeStatus + ", status=" + status + ", funding=" + funding + ", fundingMoney="
 				+ fundingMoney + ", supporters=" + supporters + ", informationAgree=" + informationAgree
 				+ ", memberActivity=" + memberActivity + "]";
+
 	}
 
+	
+	
 	
 	
 	
