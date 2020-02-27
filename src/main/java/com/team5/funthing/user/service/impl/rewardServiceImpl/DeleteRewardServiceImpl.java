@@ -7,6 +7,7 @@ import com.team5.funthing.user.model.dao.RewardDAO;
 import com.team5.funthing.user.model.vo.RewardVO;
 import com.team5.funthing.user.service.rewardService.DeleteRewardService;
 
+
 @Service
 public class DeleteRewardServiceImpl implements DeleteRewardService {
 

@@ -73,5 +73,6 @@
  
  		<mapper resource="mappers/adminReport-mapper.xml"/>
  		<mapper resource="mappers/adminMemberManagement-mapper.xml"/>
+ 		<mapper resource="mappers/adminProjectCheck-mapper.xml" />
 	</mappers>
 </configuration>
