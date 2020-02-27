@@ -85,12 +85,18 @@
 						$("input[name=shippingFee]").val(rewardVO.shippingFee);
 						$("input[name=rewardAmount]").val(rewardVO.rewardAmount);
 						$("input[name=rewardNo]").val(rewardVO.rewardNo);
+						$("select[name=rewardDay]").val(rewardVO.rewardDay).prop("selected",true);
+						$("select[name=rewardMonth]").val(rewardVO.rewardMonth).prop("selected",true);
 
 						$("#appendTag").empty();
 						$("#appendBtn").empty();
 						$("#appendBtn").append(appendAddBtn);
 						//입력시에 설정한 선택 옵션들을 보여주는 부분이다.
-						if(rewardVO.rewardOption=='선택 옵션'){
+						if(rewardVO.rewardOption=='옵션 없음'){
+							$("#addOptionIndex").empty();
+							$("#appendTag").empty();
+							$("#appendBtn").empty();
+						}else if(rewardVO.rewardOption=='선택 옵션'){
 							$("#addOptionIndex").empty();
 							$("#appendTag").empty();
 							$("#appendBtn").empty();
@@ -150,14 +156,14 @@
 					$(".aa").hide();
 				}
 			});
-
+			
 		});
 		
 		
 	</script>
    <!-- ${writingProject.projectNo}를 문자열에서 숫자로 형변환 -->
    <form action="insertReward.udo" method="post" id="reward-popup" class="white-popup-block mfp-hide">
-   		<input type="hidden" name="projectNo" value="${projectNo}">
+   		<input type="text" name="projectNo" value="${writingProject.projectNo}">
 
        	<div class="addReward_popup_box">
            <div class="popup_inner">
@@ -259,27 +265,27 @@
                    <div class="row p-3">
                         <div class="col-4" style="font-weight: bold; color: darkslateblue">발송시작일</div>
                         <div class="col-4 pr-1">
-                           <select class="rewardSendDate" name="category" class="custom-select">
-                               <option selected="selected">연도/월</option>
-                               <option value=""></option>
-                               <option value=""></option>
-                               <option value=""></option>
+                           <select class="rewardSendDate" name="rewardMonth" class="custom-select">
+                               <option selected="selected">월별 선택</option>
+                               <c:forEach var="i" begin="1" end="12" step="1">
+                               		<option value="${i}월">${i} 월</option>
+                               </c:forEach>
                            </select>
                        </div>
                        <div class="col-4">
 
-                           <select class="rewardSendTime" name="category" class="custom-select">
-                               <option selected="selected">시기</option>
-                               <option value=""></option>
-                               <option value=""></option>
-                               <option value=""></option>
+                           <select class="rewardSendTime" name="rewardDay" class="custom-select">
+                               <option selected="selected">일자 선택</option>
+                               <c:forEach var="i" begin="1" end="31" step="1">
+                               		<option value="${i}일">${i} 일</option>
+                               </c:forEach>
                            </select>
 
                        </div>
                    </div>
                    <div class="row d-flex justify-content-end">
                    	   <div>
-                           <input type="submit" formaction="updateReward.udo" value="수정" >
+                           <input type="submit" formaction="updateReward.udo?projectNo=${projectNo}" value="수정">
                        </div>
                        <div>
                            <a id="cancleBtn" class="btn btn-lg btn-report-cancel d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
