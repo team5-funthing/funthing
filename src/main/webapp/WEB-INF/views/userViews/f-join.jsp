@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
+	pageEncoding="UTF-8"%>
+
 <!doctype html>
 
 <html class="no-js" lang="zxx">
@@ -8,110 +8,190 @@
 
 <head>
 
-	<jsp:include page="./include/i-head-setting.jsp"/>
-	
+<jsp:include page="./include/i-head-setting.jsp" />
+
 </head>
 
 <body>
 
-    <jsp:include page="./include/i-popupover-mypage.jsp"/>
-    <jsp:include page="./include/i-header.jsp"/>
-    
-    <!-- 회원가입 양식 start -->
-    <div class="wrap">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                </div>
-                <div class="col">
-                    <div class="col align-self-center">
-                        <form action="successjoin.udo" method="post">
-                            <div class="mt-10">
-                                <h2>회원가입</h2>
-                            </div>
-                            <div class="mt-10">
-                                <h5>이름</h5>
-                                <input type="text" name="name" placeholder="이름" onfocus="this.placeholder = ''"
-                                    onblur="this.placeholder = '이름'" required class="single-input">
-                            </div>
-                            <div class="mt-10">
-                                <h5>이메일 입력</h5>
-                                <input type="email" id="email" name="email" placeholder="이메일 입력" onfocus="this.placeholder = ''"
-                                    onblur="this.placeholder = '이메일 입력'" required class="single-input">
-                            </div>
-                            <div class="mt-10">
-                             <a class="btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
-                                    href="javascript:popup()">인증번호 보내기</a>
-                                <input type="text" name="emailCheck" placeholder="인증번호를 입력하세요"
-                                    onfocus="this.placeholder = ''" onblur="this.placeholder = '인증번호를 입력하세요'"
-                                    required class="single-input">
-                            </div>
-                           
+	<jsp:include page="./include/i-popupover-mypage.jsp" />
+	<jsp:include page="./include/i-header.jsp" />
+
+	<!-- 회원가입 양식 start -->
+	<div class="wrap">
+		<div class="container">
+			<div class="row">
+				<div class="col"></div>
+				<div class="col">
+					<div class="col align-self-center">
+						<form action="successjoin.udo" method="post" name="memberForm">
+							<div class="mt-10">
+								<h2>회원가입</h2>
+							</div>
+							<div class="mt-10">
+								<h5>이름</h5>
+								<input type="text" name="name" id="name" placeholder="이름"
+									onfocus="this.placeholder = ''"
+									onblur="this.placeholder = '이름'" class="single-input">
+							</div>
+							<div class="mt-10">
+								<h5>이메일 입력</h5>
+								<input type="email" id="email" name="email" placeholder="이메일 입력"
+									onfocus="this.placeholder = ''"
+									onblur="this.placeholder = '이메일 입력'" required
+									class="single-input"> <a
+									class="btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
+									href="javascript:duplicateCheck()">이메일 중복확인</a> <input
+									type="hidden" name="email2" id="email2">
+							</div>
+							<div class="mt-10">
+								<a
+									class="btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
+									href="javascript:popup()">인증번호 보내기</a> <input type="text"
+									name="emailCheck" placeholder="인증번호를 입력하세요"
+									onfocus="this.placeholder = ''"
+									onblur="this.placeholder = '인증번호를 입력하세요'" required
+									class="single-input">
+							</div>
+
 							<script
 								src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 							<script>
 								
-							function popup() {
-					
-									 var email = document.getElementById('email').value;
-									window.open("certification.udo?email="
-											+ email, "인증번호가 발송되었습니다.",
-											"width=50,height=10");
-									
-									window.open("http://localhost:8080/funthing/emailCheck.udo");
-								
-
-								}
 							</script>
-							<input id="sessionCode" type="hidden" value="<%=session.getAttribute("certificationCode")%>">
-                            <div class="mt-10">
-                                <h5>비밀번호</h5>
-                                <input type="password" name="password" placeholder="비밀번호를 입력하세요"
-                                    onfocus="this.placeholder = ''" onblur="this.placeholder = '비밀번호를 입력하세요'" required
-                                    class="single-input">
-                            </div>
-                            <div class="mt-10">
-                                <input type="password" name="passwordCheck" placeholder="비밀번호를 입력하세요"
-                                    onfocus="this.placeholder = ''" onblur="this.placeholder = '비밀번호를 입력하세요'" required
-                                    class="single-input">
-                            </div>
-                            <div class="col-xl-12 mt-10">
-                                <input type="submit" onclick="" class="boxed-btn3" value="완료">
-                            </div>
-                            <div class="mt-10">
-                                <a class="btn btn-registry-way d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
-                                    href="joinselect.udo">뒤로가기</a>
-                            </div>
-                            <hr>
-                        </form>
-                          <script>                                    
-                                       /// 입력된 값과 세션에 저장된 인증값 비교해서 비밀번호 변경페이지 이동 처리.
-                                       function changePassword(){    
-                                    	if(document.getElementById('sessionCode').value == document.getElementById('certification').value){
-                                    		alert("성공");
-                                    		location.href = "#";                                    		
-                                    	}else{
-                                    		document.getElementById('certification').value = "";
-                                    		document.getElementById('certification').focus();
-                                    		alert("인증번호가 틀렸습니다. 다시 입력해주세요.");                                    		
-                                    	}
-                                       }
-                                       
-                                       // changePassword() 종료                                        
-                                    </script>
-                    </div>
-                </div>
-                <div class="col">
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- 회원가입 폼 end -->
-  
-    <jsp:include page="./include/i-popup-login.jsp"></jsp:include>
+							<input id="sessionCode" type="hidden" name="sessionCode" value="">
+							<div class="mt-10">
+								<h5>비밀번호</h5>
+								<input type="password" name="password"
+									placeholder="비밀번호를 입력하세요 (8자 이상)"
+									onfocus="this.placeholder = ''"
+									onblur="this.placeholder = '비밀번호를 입력하세요 (8자 이상)'" required
+									class="single-input">
+							</div>
+							<div class="mt-10">
+								<input type="password" name="passwordCheck"
+									placeholder="비밀번호를 입력하세요 (8자 이상)"
+									onfocus="this.placeholder = ''"
+									onblur="this.placeholder = '비밀번호를 입력하세요 (8자 이상)'" required
+									class="single-input">
+							</div>
+							<div class="col-xl-12 mt-10">
+								<input
+									class="btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
+									type="button" onclick="joindo()" value="완료">
+							</div>
+							<div class="mt-10">
+								<a
+									class="btn btn-registry-way d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
+									href="joinselect.udo">뒤로가기</a>
+							</div>
+							<hr>
+						</form>
+
+					</div>
+				</div>
+				<div class="col"></div>
+			</div>
+		</div>
+	</div>
+	<!-- 회원가입 폼 end -->
+
+	<jsp:include page="./include/i-popup-login.jsp"></jsp:include>
 	<jsp:include page="./include/i-popup-search.jsp"></jsp:include>
-    <jsp:include page="./include/i-body-js.jsp"></jsp:include>
-    
+	<jsp:include page="./include/i-body-js.jsp"></jsp:include>
+	<script>
+		var mform = document.memberForm;
+		var checking = false;
+		var loginData = {
+			"email" : document.getElementById("email2").value,
+			"password" : document.getElementById("password").value,
+			"name" : mfrom.name.value
+		};
+
+		function duplicateCheck() {
+			alert("중복확인 실행");
+			var typedEmail = {
+				"typedEmail" : document.getElementById("email").value
+			};
+
+			$.ajax({
+				type : "GET",
+				url : "emailCheck.udo",
+				data : typedEmail,
+				success : function(data) {
+					if (data == '1') {
+						alert("사용 가능한 이메일 입니다.");
+						document.getElementById('email').disabled = true;
+						checking = true;
+					} else {
+						document.getElementById('email').value = "";
+						alert("이미 가입된 메일 입니다.");
+					}
+				},
+				error : function() {
+					alert("연결에 문제가 있습니다. 인터넷 환경을 확인 후 다시 시도해 주세요.")
+				}
+			});
+		}
+
+		function popup() {
+
+			var emailData = {
+				"email" : document.getElementById('email').value
+			};
+			$.ajax({
+				type : "GET",
+				url : "certification.udo",
+				data : emailData,
+				success : function(data) {
+					alert("인증코드가 이메일로 발송되었습니다!");
+					document.getElementById("sessionCode").value = data;
+				},
+				error : function() {
+					alert("연결에 문제가 있습니다. 인터넷 환경을 확인 후 다시 시도해 주세요.")
+				}
+			});
+		}
+
+		function joindo() {
+			var mform = document.memberForm;
+			if (checking) {
+				if (mform.emailCheck.value == mform.sessionCode.value
+						&& mform.emailCheck.value.length >= 10) {
+					if (mform.password.value == mform.passwordCheck.value
+							&& mform.password.value.length >= 8) {
+						var loginData = {"email" : document.getElementById("email").value,
+								"password" : document.getElementById("password").value,
+								"name": document.getElementById("name").value};
+						  $.ajax({ type:"POST",
+						     url:"successjoin.udo",
+						     data:loginData,
+						     success:function(data){   
+						        if(data=='1'){
+						    		alert("회원가입에 성공했습니다");
+						       		location.href="member.udo";	
+						        }else{
+						           alert("입력되지 않은 필수정보가 있습니다. 다시 확인해 주세요");
+						        }
+						     },error:function(){
+						        alert("연결에 문제가 있습니다. 인터넷 환경을 확인 후 다시 시도해 주세요.");
+						     }
+						 });
+					} else {
+						alert("입력된 비밀번호가 다르거나 비밀번호를 8자 이상으로 입력해 주세요");
+					}
+				} else {
+
+					alert("입력된 인증번호가 다릅니다.");
+				}
+
+			} else {
+				
+				alert("이메일 중복확인을 먼저 해 주세오.");
+			}
+
+		}
+	</script>
 </body>
 
 </html>
