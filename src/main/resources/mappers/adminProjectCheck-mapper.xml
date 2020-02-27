@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AdminProjectCheckDAO">
+
+<!-- 심사 프로젝트 목록 보기 -->
+<select id="getProjectCheckList" resultType="project" parameterType="project">
+select * from project where status = 'w' OR status = 'f' OR status = 'm'
+</select>
+
+<!-- 심사 프로젝트 상세 보기 -->
+<select id="getProjectCheck" resultType="project" parameterType="project">
+select * from project where projectNo =#{projectNo}
+</select>
+
+<!-- 심사 프로젝트 거부 or보류 사유 저장 -->
+<update id="updateStatusReplyMessage" parameterType="project">
+update project set statusReplyMessage = #{statusReplyMessage} where projectNo = #{projectNo}
+</update>
+
+<!-- 심사 프로젝트 승인 -->
+<update id="updateProjectCheckApproval" parameterType="project">
+update project set startDate = SYSDATE, status = 'p', funding = 'y' where projectNo = #{projectNo}
+</update>
+
+<!-- 심사 프로젝트 거부 -->
+<update id="updateProjectCheckDeny" parameterType="project">
+update project set status = 'f' where projectNo = #{projectNo}
+</update>
+
+<!--  심사 프로젝트 보류 -->
+<update id="updateProjectCheckDefer" parameterType="project">
+update project set status = 'm' where projectNo = #{projectNo}
+</update>
+
+
+
+	
+	
+</mapper>

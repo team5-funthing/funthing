@@ -16,12 +16,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProjectVO {
 	
-//	ÇÁ·ÎÁ§Æ® ±âº»¼³Á¤ ¸â¹ö
+//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½âº»ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	private Integer projectNo = -1; 
 	private String creator = ""; 
 	private String email = "";
 	
-//	ÇÁ·ÎÁ§Æ® ¼³Á¤ ¸â¹ö
+//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	private int goalMoney; 
 	private String projectMainImage = "";
 	private String projectTitle = "";
@@ -30,7 +30,7 @@ public class ProjectVO {
 	private Date startDate = new Date(); 
 	private Date endDate = new Date(); 
 	
-//	ÇÁ·ÎÁ§Æ® ¼Ò°³ ¸â¹ö
+//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ò°ï¿½ ï¿½ï¿½ï¿½
 	private String projectSummary="";
 	private String projectCaution="";
 //	private List<String> projectIntroduceImage;
@@ -38,11 +38,12 @@ public class ProjectVO {
 	private String projectStory="";
 
 
-//  ±âÅ¸ ¸â¹ö
+//  ï¿½ï¿½Å¸ ï¿½ï¿½ï¿½
 	private char status = 'w'; 
 	private char writeStatus = 'n';
+	private String statusReplyMessage ="";
 	
-//  sql¹®¿¡ Àû¿ë ¾ÈµÈ ¸â¹ö
+//  sqlï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Èµï¿½ ï¿½ï¿½ï¿½
 	private int fundingMoney; 
 	private String supporters; 
 	private char informationAgree = 'n'; 
@@ -167,17 +168,25 @@ public class ProjectVO {
 	public void setWriteStatus(char writeStatus) {
 		this.writeStatus = writeStatus;
 	}
+	public String getStatusReplyMessage() {
+		return statusReplyMessage;
+	}
+	public void setStatusReplyMessage(String statusReplyMessage) {
+		this.statusReplyMessage = statusReplyMessage;
+	}
 	@Override
 	public String toString() {
 		return "ProjectVO [projectNo=" + projectNo + ", creator=" + creator + ", email=" + email + ", goalMoney="
 				+ goalMoney + ", projectMainImage=" + projectMainImage + ", projectTitle=" + projectTitle
 				+ ", projectSubTitle=" + projectSubTitle + ", category=" + category + ", startDate=" + startDate
 				+ ", endDate=" + endDate + ", projectSummary=" + projectSummary + ", projectCaution=" + projectCaution
-				+ ", projectIntroduceVideo="
-				+ projectIntroduceVideo + ", projectStory=" + projectStory + ", supporters=" + supporters
-				+ ", fundingMoney=" + fundingMoney + ", status=" + status + ", informationAgree=" + informationAgree
-				+ ", writeStatus=" + writeStatus + "]";
+				+ ", projectIntroduceVideo=" + projectIntroduceVideo + ", projectStory=" + projectStory + ", status="
+				+ status + ", writeStatus=" + writeStatus + ", statusReplyMessage=" + statusReplyMessage
+				+ ", fundingMoney=" + fundingMoney + ", supporters=" + supporters + ", informationAgree="
+				+ informationAgree + "]";
 	}
+	
+	
 	
 	
 	

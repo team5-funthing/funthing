@@ -42,7 +42,6 @@ public class AdminCSBoardController {
 	public ModelAndView selectEntireAdminCSBoardList(CSBoardVO vo){
 
 		csBoardList = getAdminCSBoardListService.getCSBoardList(vo);
-	
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("csBoardList",csBoardList);
@@ -60,7 +59,6 @@ public class AdminCSBoardController {
 		updateReplyCheckCSBoardService.updateReplyCheckCSBoard(cvo);
 
 		sendMailUtil.sendMail(avo.getAdminCSTitle(), avo.getAdminCSContent(),cvo.getEmail());
-
 		
 		return "redirect:getAdminCSBoardList.ado"; 
 	}
@@ -70,7 +68,6 @@ public class AdminCSBoardController {
 	public ModelAndView selectCSBoard(CSBoardVO vo,HttpServletRequest request){
 		int CSID=Integer.parseInt(request.getParameter("CSID"));
 		vo.setCSID(CSID);
-
 		
 		getCSBoard = getCSBoardService.getCSBoard(vo);
 		
