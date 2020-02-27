@@ -74,6 +74,7 @@ public class RewardController {
 								Model model,HttpServletRequest request) {
 		
 		int projectNo = Integer.parseInt(request.getParameter("projectNo"));
+		System.out.println(projectNo);
 		ProjectVO projectvo = new ProjectVO();
 		projectvo.setProjectNo(projectNo);
 		vo.setProjectNo(projectNo);
@@ -129,9 +130,9 @@ public class RewardController {
 	
 	@RequestMapping(value="updateReward.udo")
 	public String updateReward(	RewardVO vo,RewardOptionVO rovo,
-								@RequestParam(value="rewardoptionkey", required=false) List<String> rewardOptionKeys, 
-								@RequestParam(value="rewardoptionvalue") List<String> rewardOptionValues,
-								@RequestParam(value="rewardOptionNo") List<Integer> rewardOptionNos,
+								@RequestParam(name="rewardoptionkey", required=false) List<String> rewardOptionKeys, 
+								@RequestParam(name="rewardoptionvalue", required=false) List<String> rewardOptionValues,
+								@RequestParam(name="rewardOptionNo", required=false) List<Integer> rewardOptionNos,
 								Model model,HttpServletRequest request) {
 		
 		int projectNo = Integer.parseInt(request.getParameter("projectNo"));
@@ -141,20 +142,21 @@ public class RewardController {
 		pvo.setWriteStatus('n');
 		
 		System.out.println(rewardOptionNos);
-		System.out.println(rewardOptionValues.size());
+		System.out.println(rewardOptionValues);
 		System.out.println(rewardOptionKeys);
 		System.out.println("수정전 입력된 값 : " +  rovo.toString());
 		
-		for(int i=0;i<rewardOptionNos.size();i++) {
-			if(rewardOptionKeys==null) rovo.setRewardOptionKey("");
-			else rovo.setRewardOptionKey(rewardOptionKeys.get(i));
-			System.out.println(rewardOptionKeys.get(i));
-			System.out.println(rewardOptionValues.get(i));
-			rovo.setRewardOptionNo(rewardOptionNos.get(i));
-			rovo.setRewardOptionValue(rewardOptionValues.get(i));
-			updateRewardOptionService.updateRewardOption(rovo);
+		if(rewardOptionNos!=null) {
+			for(int i=0;i<rewardOptionNos.size();i++) {
+				if(rewardOptionKeys==null) rovo.setRewardOptionKey("");
+				else rovo.setRewardOptionKey(rewardOptionKeys.get(i));
+				rovo.setRewardOptionNo(rewardOptionNos.get(i));
+				rovo.setRewardOptionValue(rewardOptionValues.get(i));
+				System.out.println(rovo.toString());
+				updateRewardOptionService.updateRewardOption(rovo);
+			}
 		}
-		
+		System.out.println(vo.toString());
 		updateRewardService.updateReward(vo);
 		
 		List<RewardVO> rewardList = getRewardListService.getRewardList(vo);
