@@ -35,7 +35,7 @@ public class HomeController {
 		//진행중인 프로젝트 
 		
 		
-		return "p--";
+		return "p-index";
 	}
 
 }
