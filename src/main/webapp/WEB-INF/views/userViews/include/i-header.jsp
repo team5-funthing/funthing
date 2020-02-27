@@ -12,9 +12,9 @@
 						<div class="main-menu d-none d-lg-block align-items-center">
 							<nav>
 								<ul id="navigation" class="d-flex mt-3">
-									<li><a href="#">프로젝트 보기 <i class="ti-angle-down"></i></a>
+									<li><a href="javaScript: return(0);">프로젝트 보기 <i class="ti-angle-down"></i></a>
 										<ul class="submenu">
-											<li><a href="show-projects.html">모든 프로젝트</a></li>
+											<li><a href="getAllFundingProjectList.udo">모든 프로젝트</a></li>
 											<li><a href="#">리워드 프로젝트</a></li>
 											<li><a href="#">후원 프로젝트</a></li>
 											<hr>
@@ -28,7 +28,7 @@
 									<li><a href="#">더 보기 <i class="ti-angle-down"></i></a>
 										<ul class="submenu">
 											<li><a href="#"></a></li>
-											<li><a href="#">공지</a></li>
+											<li><a href="selectEntireNoticeList.udo">공지</a></li>
 											<li><a href="#">알림</a></li>
 											<li><a href="#">이벤트</a></li>
 										</ul>

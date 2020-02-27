@@ -15,8 +15,7 @@ public class UpdateProjectKeywordServiceImpl implements UpdateProjectKeywordServ
 	
 	@Override
 	public void updateProjectKeywordService(ProjectKeywordVO vo) {
-		// TODO Auto-generated method stub
-
+		projectKeywordDAO.updateProjectKeyword(vo);
 	}
 
 }

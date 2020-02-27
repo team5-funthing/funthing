@@ -1,9 +1,11 @@
 package com.team5.funthing.user.model.vo;
 
 public class CreatorVO {
-
+	
+    private int creatorNo;
 	private String creator;
 	private String email;
+	private String creatorProfileImage;
 	private String makerPhone;
 	private String businessNumber;
 	private String businessAddress;
@@ -11,6 +13,14 @@ public class CreatorVO {
 	private String lv;			
 	
 	private ProjectAskMessageVO projectAskMessage;
+
+	public int getCreatorNo() {
+		return creatorNo;
+	}
+
+	public void setCreatorNo(int creatorNo) {
+		this.creatorNo = creatorNo;
+	}
 
 	public String getCreator() {
 		return creator;
@@ -26,6 +36,14 @@ public class CreatorVO {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getCreatorProfileImage() {
+		return creatorProfileImage;
+	}
+
+	public void setCreatorProfileImage(String creatorProfileImage) {
+		this.creatorProfileImage = creatorProfileImage;
 	}
 
 	public String getMakerPhone() {
@@ -78,13 +96,12 @@ public class CreatorVO {
 
 	@Override
 	public String toString() {
-		return "CreatorVO [creator=" + creator + ", email=" + email + ", makerPhone=" + makerPhone + ", businessNumber="
+		return "CreatorVO [creatorNo=" + creatorNo + ", creator=" + creator + ", email=" + email
+				+ ", creatorProfileImage=" + creatorProfileImage + ", makerPhone=" + makerPhone + ", businessNumber="
 				+ businessNumber + ", businessAddress=" + businessAddress + ", businessFileLink=" + businessFileLink
 				+ ", lv=" + lv + ", projectAskMessage=" + projectAskMessage + "]";
 	}
 	
 	
-	
 
-	
 }

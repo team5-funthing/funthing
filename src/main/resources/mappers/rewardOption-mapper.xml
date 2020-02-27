@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="RewardOptionDAO">
+
+	<delete id="deleteRewardOption" parameterType="rewardOption">
+		DELETE FROM rewardOption WHERE rewardNo=#{rewardNo}
+	</delete>
+
+	<insert id="insertRewardOption" parameterType="rewardOption">
+		<selectKey keyProperty="rewardOptionNo" resultType="int" order="BEFORE">
+			SELECT rewardOption_SEQ.nextval FROM DUAL
+		</selectKey>
+		INSERT INTO rewardOption(rewardOptionNo, rewardNo, rewardOptionKey, rewardOptionValue)
+		VALUES(#{rewardOptionNo}, #{rewardNo}, #{rewardOptionKey}, #{rewardOptionValue})
+	</insert>
+
+	<update id="updateRewardOption" parameterType="rewardOption">
+		UPDATE rewardOption 
+		SET rewardOptionKey=#{rewardOptionKey}, rewardOptionValue=#{rewardOptionValue}
+		WHERE rewardOptionNo = #{rewardOptionNo} AND rewardNo = #{rewardNo}
+	</update>
+
+	<select id="getRewardOptionList" parameterType="rewardOption" resultType="rewardOption">
+		SELECT * FROM rewardOption WHERE rewardNo = #{rewardNo}
+	</select>
+	
+</mapper>

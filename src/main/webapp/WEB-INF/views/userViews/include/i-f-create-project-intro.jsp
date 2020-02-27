@@ -12,12 +12,14 @@
 			<div class="col-4">
 				<c:choose>
 					<c:when test="${writingProject.goalMoney eq null}">
-						<input type="text" name="goalMoney" value="0" placeholder="펀딩 목표 금액을 입력하세요."
+						<input type="text" id="goalMoney" name="goalMoney" value="0" placeholder="펀딩 목표 금액을 입력하세요."
 							onfocus="this.placeholder = ''"
-							onblur="this.placeholder = '펀딩 목표 금액을 입력하세요.'" class="single-input">
+							onblur="this.placeholder = '펀딩 목표 금액을 입력하세요.'" 
+							class="single-input">
+						<div id="goalMoneyCheck"></div>
 					</c:when>
 					<c:when test="${writingProject.goalMoney ne null}">
-						<input type="text" name="goalMoney"
+						<input type="text" id="goalMoney" name="goalMoney"
 							value="${writingProject.goalMoney }" placeholder="펀딩 목표 금액을 입력하세요."
 							onfocus="this.placeholder = ''"
 							onblur="this.placeholder = '펀딩 목표 금액을 입력하세요.'" class="single-input">
@@ -27,9 +29,32 @@
 			<div class="col-8">
 				<div class="h6">원</div>
 			</div>
-		</div>
+			
+			
+			<script>
+			
+			
+				//goalMoney
+				var replaceNotInt = /[^0-9]/gi;
 	
+				$(document).ready(function(){
+					$("#goalMoney").on("focusout", function(){
+						var x = $(this).val();
+						if(x.length > 0){
+							if(x.match(replaceNotInt)){
+								x = x.replace(replaceNotInt, "");
+							}
+							$(this).val(x);
+						}
+					}).on("keyup", function(){
+						$(this).val($(this).val().replace(replaceNotInt, ""));
+					});
+				});
+			</script>
+			
+		</div>
 	</div>
+	
 	<div class="p-2 bd-highlight">
 		<span>프로젝트 제목</span>
 		<c:choose>
@@ -122,7 +147,7 @@
 			<c:choose>
 				<c:when test="${writingProject.endDate eq null }">
 					<div class="col-xl-6">
-			            <input type="text" name="endDate" id="endDate" class="datepicker-here" data-language='ko' data-position='right top'>
+			            <input type="text" name="endDate" id="endDate" class="datepicker-here" data-language='ko' data-position='right top' required>
 			            <i class="far fa-calendar-alt"></i>
 			            <p id="afterSelectDate"></p>				
 	        		</div>
@@ -132,7 +157,7 @@
 						
 						<fmt:formatDate var="getEndDate" pattern="yyyy-MM-dd" value="${writingProject.endDate }" />
 						
-			            <input type="text" id="endDate" class="datepicker-here" data-language='ko' data-position='right top'>
+						<input type="text" id="endDate" class="datepicker-here" data-language='ko' data-position='right top'>
 						<p id="afterSelectDate">
 							펀딩 결제일 &nbsp;
 							<strong><span style="color: #2980b9">${writingProject.endDate }</span></strong>

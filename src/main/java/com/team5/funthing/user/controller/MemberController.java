@@ -62,7 +62,7 @@ public class MemberController {
       System.out.println("socialLoginSuccess.udo ");
      System.out.println(vo.toString());
       if(getMemberService.getMember(vo) != null) { 
-    	  System.out.println("¤·¤·");
+   
             model.addAttribute("result","1");
             session.setAttribute("memberSession", vo);	 
          }else {
@@ -156,14 +156,8 @@ public class MemberController {
       return "ajax/certificationCodeCallback";
    }
 
-   @RequestMapping(value="test.udo")
-   public String tst() {
-      String afk=null;
-        if(afk==null) {
-           System.out.println("");
-        }
-      return "testing";
-   }
+//
+
 
    @RequestMapping(value="imageUpload.udo",method=RequestMethod.GET)
    public String imageUpload() {

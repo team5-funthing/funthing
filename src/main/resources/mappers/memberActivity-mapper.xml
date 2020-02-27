@@ -14,7 +14,7 @@
 
 	<select id="projectReportCount" parameterType="memberActivity"
 		resultType="_int">
-		SELECT COUNT (reportcoun)t
+		SELECT COUNT (reportcoun)
 		FROM memberactivity
 		WHERE (reportcount='y' AND projectno = #{projectno})
 
