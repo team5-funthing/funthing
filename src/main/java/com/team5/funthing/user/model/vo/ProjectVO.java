@@ -47,10 +47,19 @@ public class ProjectVO {
 	private String supporters; 
 	private char informationAgree = 'n'; 
 	
+//	sql문 조인시 필요한 VO
+	private MemberActivityVO memberActivity;
 	
 	
 	
 	
+	
+	public MemberActivityVO getMemberActivity() {
+		return memberActivity;
+	}
+	public void setMemberActivity(MemberActivityVO memberActivity) {
+		this.memberActivity = memberActivity;
+	}
 	public char getFunding() {
 		return funding;
 	}
@@ -177,11 +186,13 @@ public class ProjectVO {
 				+ goalMoney + ", projectMainImage=" + projectMainImage + ", projectTitle=" + projectTitle
 				+ ", projectSubTitle=" + projectSubTitle + ", category=" + category + ", startDate=" + startDate
 				+ ", endDate=" + endDate + ", projectSummary=" + projectSummary + ", projectCaution=" + projectCaution
-				+ ", projectIntroduceVideo="
-				+ projectIntroduceVideo + ", projectStory=" + projectStory + ", supporters=" + supporters
-				+ ", fundingMoney=" + fundingMoney + ", status=" + status + ", informationAgree=" + informationAgree
-				+ ", writeStatus=" + writeStatus + "]";
+				+ ", projectIntroduceVideo=" + projectIntroduceVideo + ", projectStory=" + projectStory
+				+ ", writeStatus=" + writeStatus + ", status=" + status + ", funding=" + funding + ", fundingMoney="
+				+ fundingMoney + ", supporters=" + supporters + ", informationAgree=" + informationAgree
+				+ ", memberActivity=" + memberActivity + "]";
 	}
+
+	
 	
 	
 	

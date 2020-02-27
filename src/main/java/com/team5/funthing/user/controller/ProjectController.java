@@ -359,7 +359,7 @@ public class ProjectController {
 			
 		List<String>toRemoveFilePath = new ArrayList<String>();
 		
-		if(!toDoUploadList.isEmpty()){ //프로젝트 소개 이미지 기존업로드 제거 및 새 업로드, DB 추가 작업 메서드
+		if(toDoUploadList.get(0) != null){ //프로젝트 소개 이미지 기존업로드 제거 및 새 업로드, DB 추가 작업 메서드
 			vo.setProjectNo(ProjectNo);
 			String voName = vo.getClass().getSimpleName();
 			
@@ -389,7 +389,7 @@ public class ProjectController {
 		List<String> toRemoveFilePath = new ArrayList<String>();
 
 				
-		if(!toDoUploadList.get(0).isEmpty()) { // 업로드 시킨 파일이 이미 존재하는 경우 파일 선택을 다시 안한 경우에 나올 수 있는 상황 처리  
+		if(toDoUploadList.get(0) != null) { // 업로드 시킨 파일이 이미 존재하는 경우 파일 선택을 다시 안한 경우에 나올 수 있는 상황 처리  
 			toRemoveFilePath.add(vo.getProjectMainImage()); //제거될 파일경로를 vo객체에서 가져오기
 			String voName = vo.getClass().getSimpleName();
 			List<String> toSettingPath = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);

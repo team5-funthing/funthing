@@ -9,9 +9,134 @@
 	(select projectNO ,count(*) from projectBoard GROUP BY projectNO ) ORDER BY projectNo DESC
 	</select>
 	
-	<select id="getProjectProgress" resultType="project" parameterType="project">
-		select * from (select * from project where funding='n') project 
-		where <![CDATA[ ROWNUM  <= 5 ]]> 
+	<!-- 진행중인 프로젝트 가져오기  -->
+	<select id="getProjectProgressList" resultType="project" parameterType="project">
+		<![CDATA[ 
+		select * from (select * from project where funding='y') project 
+		where ROWNUM  <= 4 ]]> 
 	</select>
+	<!-- 2번째 -->
+	<select id="getProjectProgressList2" resultType="project" parameterType="project">
+		<![CDATA[  
+		select * from (select rownum as rnum, project.* from project where funding='y') project 
+		where rnum >= 5 and rnum <=8]]> 
+	</select>
+	<!-- 3번째  -->
+	<select id="getProjectProgressList3" resultType="project" parameterType="project">
+		 <![CDATA[
+		 select * from (select rownum as rnum, project.* from project where funding='y') project 
+		where rnum >= 9 and rnum <=12 ]]>
+	</select>
+	
+	
+	
+	<!-- 진행중이면서! 좋아요수 많은 프로젝트 가져오기  (조인문)-->
+	<resultMap type="memberActivity" id="memberActivity">
+		<result column="projectNo" property="projectNo" />
+		<result column="likeCount" property="likeCount" />
+	</resultMap>
+
+	<resultMap type="project" id="project">
+	
+		<result column="projectNo" property="projectNo" />
+		<result column="creator" property="creator"/>
+		<result column="email" property="email" />
+	
+		<result column="goalMoney" property="goalMoney" />
+		<result column="projectMainImage" property="projectMainImage" />
+		<result column="projectTitle" property="projectTitle" />
+		<result column="projectSubTitle" property="projectSubTitle" />
+		<result column="category" property="category" />
+		<result column="startDate" property="startDate"/>
+		<result column="endDate" property="endDate" />
+		
+		<result column="projectSummary" property="projectSummary" />
+		<result column="projectCaution" property="projectCaution" />
+		<result column="projectIntroduceVideo" property="projectIntroduceVideo" />
+		<result column="projectStory" property="projectStory" />
+		
+		<result column="supporters" property="supporters" />
+		<result column="fundingMoney" property="fundingMoney" />
+		<result column="status" property="status" />
+		<result column="informationAgree" property="informationAgree" />
+		<result column="writeStatus" property="writeStatus" />
+		<result column="funding" property="funding" />
+
+		<collection property="memberActivity" resultMap="memberActivity"></collection>
+	</resultMap>
+	
+	<select id="getLikeCountList" resultType="project" parameterType="project">
+	<![CDATA[select project.*, memberActivity.cnt
+	from project join(
+    SELECT projectNo, likecount, COUNT (*) as cnt
+    FROM memberactivity
+    where likecount = 'y' 
+    GROUP by projectNo, likecount order by cnt desc)
+	memberActivity on memberActivity.projectNo = project.projectNo and project.funding='y'and rownum <=4]]>
+	</select>
+	
+	<!-- 2번째 -->
+	<select id="getLikeCountList2" resultType="project" parameterType="project">
+	<![CDATA[
+	SELECT * FROM
+		(select rownum as rnum, project.*, memberActivity.cnt
+		from project join
+			(SELECT projectNo, likecount, COUNT (*) as cnt
+			FROM memberactivity where likecount = 'y' GROUP by projectNo, likecount order by cnt desc)
+		memberActivity on memberActivity.projectNo = project.projectNo and project.funding='y')
+	WHERE rnum >=5 and rnum <=8
+	]]>
+	</select>
+
+	<!-- 3번째 -->
+	<select id="getLikeCountList3" resultType="project" parameterType="project">
+	<![CDATA[
+	SELECT * FROM
+		(select rownum as rnum, project.*, memberActivity.cnt
+		from project join
+			(SELECT projectNo, likecount, COUNT (*) as cnt
+			FROM memberactivity where likecount = 'y' GROUP by projectNo, likecount order by cnt desc)
+		memberActivity on memberActivity.projectNo = project.projectNo and project.funding='y')
+	WHERE rnum >=9 and rnum <=12
+	]]>
+	</select>
+	
+	
+	<!-- 성공임박 퍼센트로 구한거 가져오기 -->
+	
+	<select id="getMoneyPercentList" resultType="project" parameterType="project">
+	<![CDATA[
+	select * from
+    (select rownum as rnum, projectNo,creator,fundingMoney,goalMoney,projectTitle,projectSubTitle,projectMainImage, pe from 
+    (select projectNo,creator,fundingMoney,goalMoney,projectTitle,projectSubTitle,projectMainImage,round(nvl(fundingMoney/decode(goalMoney,0,null,goalMoney),0)*100) as pe 
+	from project where funding='y' order by pe desc))
+    where rnum <= 4 
+    ]]>
+    </select>
+    
+    <!-- 2번째 -->
+    
+    <select id="getMoneyPercentList2" resultType="project" parameterType="project">
+	<![CDATA[
+	select * from
+    (select rownum as rnum, projectNo,creator,fundingMoney,goalMoney,projectTitle,projectSubTitle,projectMainImage, pe from 
+    (select projectNo,creator,fundingMoney,goalMoney,projectTitle,projectSubTitle,projectMainImage,round(nvl(fundingMoney/decode(goalMoney,0,null,goalMoney),0)*100) as pe 
+	from project where funding='y' order by pe desc))
+    where rnum >= 5 and rnum <=8 
+    ]]>
+    </select>
+    
+    <!-- 3번째 -->
+    
+    <select id="getMoneyPercentList3" resultType="project" parameterType="project">
+	<![CDATA[
+	select * from
+    (select rownum as rnum, projectNo,creator,fundingMoney,goalMoney,projectTitle,projectSubTitle,projectMainImage, pe from 
+    (select projectNo,creator,fundingMoney,goalMoney,projectTitle,projectSubTitle,projectMainImage,round(nvl(fundingMoney/decode(goalMoney,0,null,goalMoney),0)*100) as pe 
+	from project where funding='y' order by pe desc))
+    where rnum >= 9 and rnum <=12 
+    ]]>
+    </select>
+    
 	
 </mapper>
