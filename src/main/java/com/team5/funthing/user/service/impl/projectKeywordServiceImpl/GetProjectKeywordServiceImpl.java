@@ -15,7 +15,7 @@ public class GetProjectKeywordServiceImpl implements GetProjectKeywordService {
 	
 	@Override
 	public ProjectKeywordVO getProjectKeyword(ProjectKeywordVO vo) {
-		// TODO Auto-generated method stub
+		projectKeywordDAO.getProjectKeyword(vo);
 		return null;
 	}
 

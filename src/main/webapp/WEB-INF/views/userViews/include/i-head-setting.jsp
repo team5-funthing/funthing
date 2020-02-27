@@ -20,7 +20,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/themify-icons.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/nice-select.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/flaticon.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/gijgo.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/animate.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/slicknav.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/style.css">
@@ -29,14 +28,21 @@
 
     <!-- Include jQuery and the jquery.gpopover plugin -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <!-- <script src="${pageContext.request.contextPath}/resources/user/js/vendor/jquery-1.12.4.min.js"></script> -->
+    
     <script src="${pageContext.request.contextPath}/resources/user/js/jquery.gpopover.js"></script>
     <script src="https://kit.fontawesome.com/7a424ad03a.js" crossorigin="anonymous"></script>
     
    <!-- CKEditor4 -->
     <script src="${pageContext.request.contextPath}/resources/common/ckeditor/ckeditor.js"></script>
     
-  
+    <!-- DatePicker -->
+    <script src="${pageContext.request.contextPath}/resources/user/js/datepicker.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/i18n/datepicker.ko.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/datepicker.min.css">
+  	
+  	<!-- 데이터 테이블-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    
     <script>
     
     

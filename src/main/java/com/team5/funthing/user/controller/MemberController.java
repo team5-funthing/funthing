@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -32,11 +31,9 @@ public class MemberController {
 
 	@Autowired
 	private SendMailUtil sendMailUtil;
-
 	@Autowired
 	private GetMemberService getMemberService;
-
-
+	
 	@Autowired
 	private InsertMemberService insertMemberService;
 	@Autowired
@@ -44,41 +41,45 @@ public class MemberController {
 	@Autowired
 	private InsertImageService insertImageService;
 
-	@RequestMapping("*.udo")
-	public String showindex() {
-		return "p-index";
-	}
+//	하늘이가 가져갑니다. 
+//	@RequestMapping("member.udo") 
+//	public String showindex() {
+//		return "p-index";
+//	}
 
 	@RequestMapping(value="socialLogin.udo",method=RequestMethod.GET)
 	public String socialLogin() {   
 		return "f-socialjoin";
 	}
+	
 	@RequestMapping(value="socialLoginSuccess.udo",method=RequestMethod.POST)
 	public void socialLoginSuccess(HttpServletRequest request,HttpSession session,MemberVO vo,HttpServletResponse response) throws IOException {   
-		System.out.println("socialLoginSuccess.udo ");
-
+		System.out.println("socialLoginSuccess.udo");
+		System.out.println("소셜 로그인 했음");
 		if(getMemberService.getMember(vo) != null) { 
 			if(getMemberService.getMember(vo).getPassword().equals(request.getParameter("password"))) { 
-			
+
 				session.setAttribute("memberSessionEmail", getMemberService.getMember(vo).getEmail());
 				System.out.println(""+session.getAttribute("memberSessionEmail"));
 				session.setAttribute("memberSessionName", getMemberService.getMember(vo).getName());
-				if(session.getAttribute("myprifile")!=null) {
+				if(session.getAttribute("myprofile")!=null) {
 					session.setAttribute("myprofile", getMemberService.getMember(vo).getMyImage()); 
-				    }
-
-					response.sendRedirect("member.udo");
-				}else {
-					response.sendRedirect("findpw.udo");
 				}
-		
+
+				response.sendRedirect("member.udo");
+				
+			}else {
+				response.sendRedirect("findpw.udo");
 			}
+
 		}
+	}
+
 
 
 	@RequestMapping(value="getMember.udo", method=RequestMethod.POST) 
 	public void getMember(MemberVO vo, HttpServletRequest request,HttpSession session,HttpServletResponse response) throws IOException {
-
+		System.out.println("일반 로그인 했음");
 		if(getMemberService.getMember(vo) != null) { 
 			if(getMemberService.getMember(vo).getPassword().equals(request.getParameter("password"))) { 
 				if(request.getParameter("confirm-switch") != null) {
@@ -96,7 +97,7 @@ public class MemberController {
 				}
 				session.setAttribute("memberSessionEmail", getMemberService.getMember(vo).getEmail());
 				session.setAttribute("memberSessionName", getMemberService.getMember(vo).getName());
-			    if(session.getAttribute("myprifile")!=null) {
+			    if(session.getAttribute("myprofile")!=null) {
 				session.setAttribute("myprofile", getMemberService.getMember(vo).getMyImage()); 
 			    }
 
@@ -111,6 +112,7 @@ public class MemberController {
 
 	@RequestMapping(value="joinselect.udo" ,method=RequestMethod.GET)
 	public String login(HttpSession session) {
+		
 		if(session.getAttribute("certificationCode")!=null) {
 			session.removeAttribute("certificationCode");
 		}

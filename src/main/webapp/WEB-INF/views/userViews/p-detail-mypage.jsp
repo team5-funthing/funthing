@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core" %>
+
 <!doctype html>
 
 <html class="no-js">
@@ -25,7 +26,7 @@
                <div class="col-12">
                   <div class="d-flex justify-content-start mb-3">
                      <div id="detail-mypage-profile-img" style="background: #BDBDBD;">
-                        <img class="profile" src="${pageContext.request.contextPath}/resources/user/img/test/2.jpg">
+                        <img class="profile" src="#">
                      </div>
                      <div class="h2 login-id align-self-center ml-4">${sessionScope.memberSessionName} </div>
                   </div>
@@ -39,9 +40,11 @@
                      <div class="d-inline-flex p-2 bd-highlight">
                         <a
                            class="btn btn-lg btn-detail-mypage d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
-                           href="showMyPageMessage.udo?email=${sessionScope.memberSessionEmail }?creator=${memberVO.creator}">메세지</a>
+                           href="showDetailMyPage.udo">메세지</a>
                        <input type="hidden" name="email" value="${sessionScope.memberSessionEmail}">
-                       <input type="hidden" name="creator" value="${memberVO.creator}">
+                       
+                    
+                     
                            
                      </div>
                      <div class="d-inline-flex p-2 bd-highlight">
@@ -88,59 +91,126 @@
                      <!-- 카드 시작 -->
                      <div class="tab-pane fade show active " id="nav-created-prj-list"
                         role="tabpane" aria-labelledby="nav-created-prj-list-tab">
-
+						
                         <div class="container">
                            <section class="tiles">
+                           
                               <!----------------만든 프로젝트 양식 -------------------->
                               <c:if test="${not empty myProjectList }">
-                              <c:forEach var="project1" items="${myProjectList }">
-                              <article>
-                                 <div class="project">
-                                    <div class="card">
-                                       <div class="thumbnail-wrap">
-                                          <div class="thumbnail ">
-                                             <div class="centered">
-                                                 <%/*  <img src="${myProjectList.projectMainImage}"
-                                                   class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">  */ %>
-                                        <!-- 테스트용 -->            <img src="${pageContext.request.contextPath}/resources/user/img/test/2.jpg"
-                                                   class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
-                                             </div>
-                                          </div>
-                                       </div>
+	                              <c:forEach var="myProject" items="${myProjectList }" varStatus="step" >
+		                              <article>
+		                                 <div class="project">
+		                                 	<aside class="row ml-1">
+		                                 	
+		                                 		<c:choose>
+		                                 			<c:when test="${myProject.funding eq 'n'.charAt(0) }"> <!-- 펀징 진행 확인 -->
+		                                 			
+			                                 			<c:choose>
+				                                 			<c:when test="${myProject.status eq 'n'.charAt(0) }">  <!-- 제출 및 심사 확인 -->
+				                                 				
+					                                 			<c:choose>
+						                                 			<c:when test="${myProject.writeStatus eq 'n'.charAt(0) }"> <!-- 작성 완료 확인 -->
+						                                 				<h5><a href="javascript: return(0);" class="badge badge-info m-1">작성중</a></h5>	
+						                                 			</c:when>
+						                                 			<c:when test="${myProject.writeStatus eq 'y'.charAt(0) }">
+					                                 					<h5><a href="javascript: return(0);" class="badge badge-dark m-1">미제출</a></h5>
+						                                 				<h5><a href="javascript: return(0);" class="badge badge-success m-1">작성완료</a></h5>
+						                                 			</c:when>
+					                                 			</c:choose>		
+				                                 			</c:when>                              			
+				                                 			<c:when test="${myProject.status eq 'w'.charAt(0) }">
+				                                 				<h5><a href="javascript: return(0);" class="badge badge-light m-1">심사중</a></h5>
+				                                 			</c:when>
+				                                 			<c:when test="${myProject.status eq 'm'.charAt(0) }">
+					                                 			<h5><a href="javascript: return(0);" class="badge badge-warning m-1">수정 필요</a></h5>
+				                                 			</c:when>
+				                                 			<c:when test="${myProject.status eq 'f'.charAt(0) }">
+					                                 			<h5><a href="javascript: return(0);" class="badge badge-danger m-1">승인 실패</a></h5>
+				                                 			</c:when>
 
-                                       <div class="card-body">
-                                          <h5 class="card-title">${project1.projectTitle }</h5>
-                                          <ul>
-                                             <li>요약 설명 : ${project1.projectSummary }</li>
-                                             <li>목표 금액 : ${project1.goalMoney }</li>
-                                             <li>기간 :${project.startDate } ~ ${project.endDate }</li>
-                                          </ul>
-
-                                          <p>현재 후원받은 금액 : ${project1.fundingMoney }원   ${(project.fundingMoney div project1.goalMoney)*100 }%</p>
-                                          <div class="progress">
-                                             <div class="progress-bar color-7" role="progressbar"
-                                                style="width: 50%" aria-valuenow="30" aria-valuemin="0"
-                                                aria-valuemax="100"></div>
-                                          </div>
-                                       </div>
-
-                                       <div class="card-footer">
-                                          <a href="showPreviewProject.udo">스튜디오 가기</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </article>
-                              </c:forEach>
+			                                 			</c:choose>
+		                                 			
+		                                 				
+		                                 			
+		                                 			</c:when>
+		                                 			
+		                                 			<c:when test="${myProject.funding eq 'y'.charAt(0) }">
+		                                 			
+		                                 				<h5><a href="javascript: return(0);" class="badge badge-primary m-1">펀딩중</a></h5>
+		                                 			
+		                                 			</c:when>
+		                                 		</c:choose>
+			                                 	
+		                                 	</aside>
+		                                    <div class="card">
+		                                       <div class="thumbnail-wrap">
+		                                          <div class="thumbnail ">
+		                                             <div class="centered">
+		                                             	<form id="previewForm${step.count }" action="showPreviewProject.udo?projectNo=${myProject.projectNo}" method="POST">
+		                                             		<a href="#" onclick="document.getElementById('previewForm${step.count }').submit()">
+		                                             			<c:choose>
+				                                             		<c:when test="${myProject.projectMainImage eq '' }">
+				                                             				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
+				                                             					class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+				                                             		</c:when>
+				                                             		<c:when test="${myProject.projectMainImage ne '' }">
+				                                             			<img src="${myProject.projectMainImage }" class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+				                                             		</c:when>
+		                                             			</c:choose>  
+		                                             		</a>
+		                                             	</form>
+		                                             </div>
+		                                          </div>
+		                                       </div>
+		
+		                                       <div class="card-body">
+		                                          <h5 class="card-title">${myProject.projectTitle }</h5>
+		                                          <ul>
+		                                             <li>요약 설명 : ${myProject.projectSummary }</li>
+		                                             <li>목표 금액 : ${myProject.goalMoney }</li>
+		                                             <li>기간 :${project.startDate } ~ ${project.endDate }</li>
+		                                          </ul>
+		
+		                                          <p>현재 후원받은 금액 : ${myProject.fundingMoney }원   ${(project.fundingMoney div myProject.goalMoney)*100 }%</p>
+		                                          <div class="progress">
+		                                             <div class="progress-bar color-7" role="progressbar"
+		                                                style="width: 50%" aria-valuenow="30" aria-valuemin="0"
+		                                                aria-valuemax="100"></div>
+		                                          </div>
+		                                       </div>
+		                                       <div class="card-footer">
+		                                          <a href="getWritingProject.udo?currentProjectNo=${myProject.projectNo }">수정</a>
+		                                          <a href="deleteProject.udo?currentProjectNo=${myProject.projectNo }">삭제</a>
+		                                       </div>
+		                                    </div>
+		                                 </div>
+		                              </article>
+	                              </c:forEach>
                               </c:if>
-                           
                               <!-- 추가적으로 목록들 생길 시 JSTL로 반복 추가-->
                            </section>
-                              <br>
-                              <br>
-                              <br>
-                             <c:if test="${empty myProjectList }">
-                              	<b><h2>내가 등록한 프로젝트가 없쪙!</h2></b>
-                              </c:if>
+                           <c:if test="${empty myProjectList }">
+                                <div class="row">
+                                    <div class="col">
+                                    </div>
+                                    <div class="col-8 d-flex justify-content-center ">
+                                        <div class="pt-5 pb-5 ">
+                                            <div >
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                            </div>
+                                            <div class="h3">보낸 메시지가 없습니다</div>
+                                            <div class="h5">
+
+					                                                프로젝트 페이지에서 '문의하기' 버튼을 눌러
+					                                                메시지를 보낼 수 있습니다.
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                    </div>
+                                </div>
+                           </c:if>
                         </div>
                      </div>
                <!--  카드모듈 끝    그대로 가져다  id 값만 변경해서 써 일단. -->
@@ -194,11 +264,27 @@
                            
                             <!-- 추가적으로 목록들 생길 시 JSTL로 반복 추가-->
                            </section>
-  							 <br>
-                              <br>
-                              <br>
                               <c:if test="${empty projectList }">
-                              	<b><h2>내가 후원한 프로젝트가 없쪙!</h2></b>
+                                <div class="row">
+                                    <div class="col">
+                                    </div>
+                                    <div class="col-8 d-flex justify-content-center ">
+                                        <div class="pt-5 pb-5 ">
+                                            <div >
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                            </div>
+                                            <div class="h3">보낸 메시지가 없습니다</div>
+                                            <div class="h5">
+
+					                                                프로젝트 페이지에서 '문의하기' 버튼을 눌러
+					                                                메시지를 보낼 수 있습니다.
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                    </div>
+                                </div>
                               </c:if>
 
                         </div>
@@ -208,7 +294,7 @@
                         aria-labelledby="nav-like-prj-list-tab">
                         <div class="container">
                            <section class="tiles">
-                                  <!----------------만든 프로젝트 양식 -------------------->
+                           
                               <c:if test="${not empty projectLikeList }">
                               <c:forEach var="project3" items="${projectLikeList }">
                               <article>
@@ -252,26 +338,33 @@
                          
                            <!-- 추가적으로 목록들 생길 시 JSTL로 반복 추가-->
                            </section>
-   							  <br>
-                              <br>
-                              <br>
                               <c:if test="${empty projectLikeList }">
-                              	<b><h2>내가 신고한 프로젝트가 없쪙!</h2></b>
-                              </c:if>
+                                <div class="row">
+                                    <div class="col">
+                                    </div>
+                                    <div class="col-8 d-flex justify-content-center ">
+                                        <div class="pt-5 pb-5 ">
+                                            <div >
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                            </div>
+                                            <div class="h3">보낸 메시지가 없습니다</div>
+                                            <div class="h5">
 
+					                                                프로젝트 페이지에서 '문의하기' 버튼을 눌러
+					                                                메시지를 보낼 수 있습니다.
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                    </div>
+                                </div>
+                              </c:if>
                         </div>
- 
                      </div>
   
   
-  
-  
-  
-  
-  
-  
-   
-    <!-- 카드 시작 -->
+    				<!-- 카드 시작 -->
           
                      <div class="tab-pane fade" id="nav-reserved-prj-list"
                         role="tabpane" aria-labelledby="nav-reserved-prj-list-tab">
@@ -322,11 +415,27 @@
                           
                               <!-- 추가적으로 목록들 생길 시 JSTL로 반복 추가-->
                            </section>
-                               <br>
-                              <br>
-                              <br>
                                <c:if test="${empty projectReservationList }">
-                              	<b><h2>내가 알람신청한 관심 프로젝트가 없쪙!</h2></b>
+                                <div class="row">
+                                    <div class="col">
+                                    </div>
+                                    <div class="col-8 d-flex justify-content-center ">
+                                        <div class="pt-5 pb-5 ">
+                                            <div >
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                            </div>
+                                            <div class="h3">보낸 메시지가 없습니다</div>
+                                            <div class="h5">
+
+					                                                프로젝트 페이지에서 '문의하기' 버튼을 눌러
+					                                                메시지를 보낼 수 있습니다.
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                    </div>
+                                </div>
                               </c:if> 
                         </div>
                      </div>
@@ -338,8 +447,7 @@
    
    
    
-    <!-- 카드 시작 -->
-          
+    				<!-- 카드 시작 -->
                      <div class="tab-pane fade" id="nav-report-prj-list"
                         role="tabpane" aria-labelledby="nav-report-prj-list-tab">
 
@@ -389,23 +497,32 @@
                           
                               <!-- 추가적으로 목록들 생길 시 JSTL로 반복 추가-->
                            </section>
-                               <br>
-                              <br>
-                              <br>
                                <c:if test="${empty projectReportList }">
-                              	<b><h2>내가 신고한  프로젝트가 없쪙!</h2></b>
+                                <div class="row">
+                                    <div class="col">
+                                    </div>
+                                    <div class="col-8 d-flex justify-content-center ">
+                                        <div class="pt-5 pb-5 ">
+                                            <div >
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                            </div>
+                                            <div class="h3">보낸 메시지가 없습니다</div>
+                                            <div class="h5">
+
+					                                                프로젝트 페이지에서 '문의하기' 버튼을 눌러
+					                                                메시지를 보낼 수 있습니다.
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                    </div>
+                                </div>
                               </c:if> 
                         </div>
                      </div>
                <!--  카드모듈 끝    그대로 가져다  id 값만 변경해서 써 일단. -->
-   
-   
-   
-   
-   
-   
-   
-   
+               
                   </div>
                </div>
 
@@ -414,6 +531,7 @@
       </div>
    </section>
 
+   <jsp:include page="./include/i-footer.jsp"></jsp:include>
    <jsp:include page="./include/i-popup-login.jsp"></jsp:include>
    <jsp:include page="./include/i-popup-search.jsp"></jsp:include>
    <jsp:include page="./include/i-body-js.jsp"></jsp:include>

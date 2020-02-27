@@ -31,6 +31,12 @@
 	
 	</select>
 	
+	<!-- projectAskMessage테이블 전체리스트 가져오기 -->
+	<select id="getProjectAskMessage" resultType="projectAskMessage" parameterType="projectAskMessage">
+		SELECT * FROM projectAskMessage 
+	
+	</select>
+	
 	<!-- 멤버테이블과 메이커멤버테이블을 조인하여 메이커(창작자명) 가져오기 -->
 	
 	<resultMap type="creator" id="creator">
@@ -45,7 +51,7 @@
 	</resultMap>
  	
  	<select id="getMakerMemberCreator" parameterType="member"  resultMap="member">
-		select creator.creator, member.name, member.email from member join creator on creator.email = #{email} and member.email= #{email}
+		select creator.creator,member.name, member.email from member join creator on creator.email = #{email} and member.email= #{email}
 	</select>
 	
 	<!-- 메이커 관련 전체 문의글 가져오기 -->
@@ -54,6 +60,7 @@
 	
 	</select>
 	
+
 	
 	
  </mapper>
