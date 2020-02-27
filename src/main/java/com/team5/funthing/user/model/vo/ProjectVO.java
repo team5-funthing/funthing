@@ -50,10 +50,19 @@ public class ProjectVO {
 	private String supporters; 
 	private char informationAgree = 'n'; 
 	
+//	sql�� ��ν� �ʿ��� VO
+	private MemberActivityVO memberActivity;
 	
 	
 	
 	
+	
+	public MemberActivityVO getMemberActivity() {
+		return memberActivity;
+	}
+	public void setMemberActivity(MemberActivityVO memberActivity) {
+		this.memberActivity = memberActivity;
+	}
 	public char getFunding() {
 		return funding;
 	}
@@ -186,11 +195,14 @@ public class ProjectVO {
 				+ goalMoney + ", projectMainImage=" + projectMainImage + ", projectTitle=" + projectTitle
 				+ ", projectSubTitle=" + projectSubTitle + ", category=" + category + ", startDate=" + startDate
 				+ ", endDate=" + endDate + ", projectSummary=" + projectSummary + ", projectCaution=" + projectCaution
-				+ ", projectIntroduceVideo=" + projectIntroduceVideo + ", projectStory=" + projectStory + ", status="
-				+ status + ", writeStatus=" + writeStatus + ", statusReplyMessage=" + statusReplyMessage
-				+ ", fundingMoney=" + fundingMoney + ", supporters=" + supporters + ", informationAgree="
-				+ informationAgree + "]";
+				+ ", projectIntroduceVideo=" + projectIntroduceVideo + ", projectStory=" + projectStory
+				+ ", writeStatus=" + writeStatus + ", status=" + status + ", funding=" + funding + ", fundingMoney="
+				+ fundingMoney + ", supporters=" + supporters + ", informationAgree=" + informationAgree
+				+ ", memberActivity=" + memberActivity + "]";
+
 	}
+
+	
 	
 	
 	
