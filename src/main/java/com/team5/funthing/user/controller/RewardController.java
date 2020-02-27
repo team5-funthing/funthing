@@ -16,49 +16,49 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.model.vo.RewardOptionVO;
 import com.team5.funthing.user.model.vo.RewardVO;
-
-import com.team5.funthing.user.service.RewardService.DeleteRewardService;
-import com.team5.funthing.user.service.RewardService.GetRewardListService;
-import com.team5.funthing.user.service.RewardService.GetRewardService;
-import com.team5.funthing.user.service.RewardService.InsertRewardService;
-import com.team5.funthing.user.service.RewardService.UpdateRewardService;
+	
 import com.team5.funthing.user.service.rewardOptionService.DeleteRewardOptionService;
 import com.team5.funthing.user.service.rewardOptionService.GetRewardOptionListService;
 import com.team5.funthing.user.service.rewardOptionService.InsertRewardOptionService;
 import com.team5.funthing.user.service.rewardOptionService.UpdateRewardOptionService;
+import com.team5.funthing.user.service.rewardService.DeleteRewardService;
+import com.team5.funthing.user.service.rewardService.GetRewardListService;
+import com.team5.funthing.user.service.rewardService.GetRewardService;
+import com.team5.funthing.user.service.rewardService.InsertRewardService;
+import com.team5.funthing.user.service.rewardService.UpdateRewardService;
 
 
 @Controller
 public class RewardController {
 	
 	@Autowired
-	GetRewardListService getRewardListService;
+	private GetRewardListService getRewardListService;
 	@Autowired
-	GetRewardService getRewardService;
+	private GetRewardService getRewardService;
 	@Autowired
-	InsertRewardService insertRewardService;
+	private InsertRewardService insertRewardService;
 	@Autowired
-	UpdateRewardService updateRewardService;
+	private UpdateRewardService updateRewardService;
 	@Autowired
-	DeleteRewardService deleteRewardService;
+	private DeleteRewardService deleteRewardService;
 	@Autowired
-	GetRewardOptionListService getRewardOptionListSerivce;
+	private GetRewardOptionListService getRewardOptionListSerivce;
 	@Autowired
-	InsertRewardOptionService insertRewardOptionService;
+	private InsertRewardOptionService insertRewardOptionService;
 	@Autowired
-	UpdateRewardOptionService updateRewardOptionService;
+	private UpdateRewardOptionService updateRewardOptionService;
 	@Autowired
-	DeleteRewardOptionService deleteRewardOptionSerivice;
+	private DeleteRewardOptionService deleteRewardOptionSerivice;
 	
 	@RequestMapping("showReward.udo")
 	public String showRewardList(RewardVO vo,Model model,HttpServletRequest request) {
-		//=============================ÌîÑÎ°úÏ†ùÌä∏ Î≤àÌò∏ ÏÑ∏ÌåÖÎ∂ÄÎ∂Ñ=======================
+		//=============================«¡∑Œ¡ß∆Æ π¯»£ ºº∆√∫Œ∫–=======================
 		int projectNo = Integer.parseInt(request.getParameter("projectNo"));
 		
 		ProjectVO pvo = new ProjectVO();	
 		pvo.setProjectNo(projectNo);
 		pvo.setWriteStatus('n');
-		//=============================Í∞ùÏ≤¥ Ï†ÑÏÜ° Î∂ÄÎ∂Ñ=============================
+		//=============================∞¥√º ¿¸º€ ∫Œ∫–=============================
 		model.addAttribute("projectNo", projectNo);
 		model.addAttribute("writingProject",pvo);
 		List<RewardVO> rewardList = getRewardListService.getRewardList(vo);
@@ -81,7 +81,7 @@ public class RewardController {
 		insertRewardService.insertReward(vo);
 		System.out.println(vo.getRewardNo());
 		
-		if(vo.getRewardOption().equals("ÏÑ†ÌÉù ÏòµÏÖò")) {
+		if(vo.getRewardOption().equals("º±≈√ ø…º«")) {
 			if(!(rewardOptionValues==null)) {
 				for(int i=0;i<rewardOptionValues.size();i++) {
 					rovo.setRewardNo(vo.getRewardNo());
@@ -92,7 +92,7 @@ public class RewardController {
 					insertRewardOptionService.insertRewardOption(rovo);
 				}
 			}
-		}else if(vo.getRewardOption().equals("ÏßÅÏ†ë ÏûÖÎ†• ÏòµÏÖò")){
+		}else if(vo.getRewardOption().equals("¡˜¡¢ ¿‘∑¬ ø…º«")){
 			rovo.setRewardNo(vo.getRewardNo());
 			rovo.setRewardOptionKey("");
 			rovo.setRewardOptionValue(rewardOptionValues.get(0));
@@ -143,7 +143,7 @@ public class RewardController {
 		System.out.println(rewardOptionNos);
 		System.out.println(rewardOptionValues.size());
 		System.out.println(rewardOptionKeys);
-		System.out.println("ÏàòÏ†ïÏ†Ñ ÏûÖÎ†•Îêú Í∞í : " +  rovo.toString());
+		System.out.println("ºˆ¡§¿¸ ¿‘∑¬µ» ∞™ : " +  rovo.toString());
 		
 		for(int i=0;i<rewardOptionNos.size();i++) {
 			if(rewardOptionKeys==null) rovo.setRewardOptionKey("");
@@ -169,12 +169,12 @@ public class RewardController {
 	@RequestMapping(value="/getReward.udo" , method=RequestMethod.POST)
 	public String getReward(String indexData,RewardOptionVO rovo, RewardVO vo, Model model) throws JsonProcessingException {
 		
-		//ajaxÎ°ú Î∞õÏïÑÏò® Í∞íÏùÑ Ï†ïÏàòÎ°ú Î≥ÄÌôò
+		//ajax∑Œ πﬁæ∆ø¬ ∞™¿ª ¡§ºˆ∑Œ ∫Ø»Ø
 		int index = Integer.parseInt(indexData);
 		vo.setRewardNo(index);
 		rovo.setRewardNo(index);
 		
-		//Î¶¨ÏõåÎî© ÎÑòÎ≤ÑÎßå Î∞õÏïÑÏò® Í∞ùÏ≤¥Î•º ÏÇ¨Ïö©ÌïòÏó¨ Í∞ùÏ≤¥Ïùò Ï†ïÎ≥¥Î•º Î∞õÏïÑÏò®Îã§.
+		//∏Æøˆµ˘ ≥—πˆ∏∏ πﬁæ∆ø¬ ∞¥√º∏¶ ªÁøÎ«œø© ∞¥√º¿« ¡§∫∏∏¶ πﬁæ∆ø¬¥Ÿ.
 		RewardVO modify = getRewardService.getReward(vo);
 		List<RewardOptionVO> rewardOptionList = getRewardOptionListSerivce.getRewardOptionList(rovo);
 		System.out.println(rovo.toString());
@@ -182,10 +182,11 @@ public class RewardController {
 		
 		ObjectMapper mapper = new ObjectMapper();
 		String modifyToJson = mapper.writeValueAsString(modify);
-		System.out.println("Î¶¨ÏõåÎìú Î∂àÎü¨Ïò§Í∏∞ Í≤∞Í≥º : " + modifyToJson);
+		System.out.println("∏ÆøˆµÂ ∫“∑Øø¿±‚ ∞·∞˙ : " + modifyToJson);
 
 		model.addAttribute("modifyRewardToJSON", modifyToJson);
 		return "/ajax/getReward";
 	}
 	
 }
+	
