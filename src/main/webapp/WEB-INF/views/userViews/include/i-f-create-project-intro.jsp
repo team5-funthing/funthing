@@ -157,7 +157,7 @@
 						
 						<fmt:formatDate var="getEndDate" pattern="yyyy-MM-dd" value="${writingProject.endDate }" />
 						
-			            <input type="text" id="endDate" class="datepicker-here" data-language='ko' data-position='right top'>
+						<input type="text" id="endDate" class="datepicker-here" data-language='ko' data-position='right top'>
 						<p id="afterSelectDate">
 							펀딩 결제일 &nbsp;
 							<strong><span style="color: #2980b9">${writingProject.endDate }</span></strong>

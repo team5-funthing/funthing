@@ -152,7 +152,8 @@
 	            </div>
 	        </div>
 	    </form>
-	    <script>
+    
+	  <script>
 
 		//프로젝트 시작 시 나오는 폼
 		$(document).ready(function () {

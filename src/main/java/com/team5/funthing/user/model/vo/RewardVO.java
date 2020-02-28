@@ -16,9 +16,23 @@ public class RewardVO {
 	private int shippingFee;
 	private int rewardAmount;
 	private String shippingNeed;
+	private String rewardMonth;
+	private String rewardDay;
 	
 	private List<RewardOptionVO> rewardOptionList;
 	
+	public String getRewardMonth() {
+		return rewardMonth;
+	}
+	public void setRewardMonth(String rewardMonth) {
+		this.rewardMonth = rewardMonth;
+	}
+	public String getRewardDay() {
+		return rewardDay;
+	}
+	public void setRewardDay(String rewardDay) {
+		this.rewardDay = rewardDay;
+	}
 	public String getShippingNeed() {
 		return shippingNeed;
 	}
@@ -84,8 +98,10 @@ public class RewardVO {
 		return "RewardVO [rewardPrice=" + rewardPrice + ", rewardNo=" + rewardNo + ", projectNo=" + projectNo
 				+ ", rewardName=" + rewardName + ", rewardContent=" + rewardContent + ", rewardOption=" + rewardOption
 				+ ", shippingFee=" + shippingFee + ", rewardAmount=" + rewardAmount + ", shippingNeed=" + shippingNeed
-				+ ", rewardOptionList=" + rewardOptionList + "]";
+				+ ", rewardMonth=" + rewardMonth + ", rewardDay=" + rewardDay + ", rewardOptionList=" + rewardOptionList
+				+ "]";
 	}
-
+	
+	
 	
 }
