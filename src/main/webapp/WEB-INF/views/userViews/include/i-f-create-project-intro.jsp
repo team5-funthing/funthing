@@ -163,7 +163,6 @@
 							<strong><span style="color: #2980b9">${writingProject.endDate }</span></strong>
 							펀딩이 성공 종료 된 후 결제가 +4 영업일 동안 진행됩니다.<br /> 정산금 지급예정일 보름에서 정산은 최대
 							한달&nbsp;이내에 시작될 예정이며, 정산금 지급까지는 종료일 기준 최대 +20 영업일이 소요됩니다.&nbsp;
-							<input type="text" name="endDate" value="${getEndDate }">
 						</p>
 					</div>
 				</c:when>

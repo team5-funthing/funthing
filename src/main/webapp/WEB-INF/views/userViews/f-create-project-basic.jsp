@@ -27,26 +27,103 @@
 				
 				<div class="col">
 					<div class="col align-self-center">
-						<form action="insertProject.udo" id="inputProjectBasicSetting" method="post">
+						<form action="insertProject.udo" id="inputProjectBasicSetting" method="post" enctype="multipart/form-data">
 							<div class="h2 col align-self-center mt-10">프로젝트 기본 설정</div>
+							
+							<c:choose>
+								<c:when test="${empty getCreatorList}">
+								</c:when>
+								
+								<c:when test="${not empty getCreatorList}">
+									이미 만든 창작자 정보 가져오기<br>
+									<c:forEach var="creatorList" items="${getCreatorList }">
+										${creatorList.creator }
+									</c:forEach>
+								</c:when>
+								
+							</c:choose>
+							
 							<div class="mt-30">
 								<h5>창작자 | 업체명 *</h5>
 								<input name="creator" class="form-control form-control-lg" type="text"
 									placeholder="창작자 또는 업체명을 입력하세요." onfocus="this.placeholder = ''"
-									onblur="this.placeholder = '창작자 또는 업체명을 입력하세요.'" required
-									class="single-input">
+									onblur="this.placeholder = '창작자 또는 업체명을 입력하세요.'" 
+									class="single-input" required>
 							</div>
 							<div class="mt-30">
 								<h5>이메일</h5>
 								<input name="email" class="form-control form-control-lg" type="text"
 									value="${basicProjectSetting.email }" class="single-input">
 							</div>
+							
+							<div class="mt-30">
+								<h5>창작자 프로필 사진</h5>
+								<div class="input-group mt-2 mb-3">
+								    <div class="form-group">
+								   		<label for="creatorProfile">프로필에 사용할 사진을 선택해주세요.</label>
+								    	<input type="file" id="creatorProfile" name="creatorUploadImage" class="form-control-file">
+								    </div>
+									<div class="creator_select_img"><img src="" /></div>
+								</div>
+								<script>
+					            	$("#creatorProfile").change(function(){
+					            		if(this.files && this.files[0]){
+					            			var reader = new FileReader;
+					            			reader.onload = function(data){
+					            				$(".creator_select_img img").attr("src", data.target.result).width(200);
+					            			}
+					            			reader.readAsDataURL(this.files[0]);
+					            		}
+					            	})
+								</script>
+							</div>
+							<div class="mt-30">
+								<h5>문의 전화번호*</h5>
+								<input name="makerPhone" class="form-control form-control-lg" type="text"
+									class="single-input" required>
+							</div>
+							<div class="mt-30">
+								<h5>사업자번호</h5>
+								<input name="businessNumber" class="form-control form-control-lg" type="text"
+									class="single-input">
+							</div>
+							<div class="mt-30">
+								<h5>소재지</h5>
+								<input name="businessAddress" class="form-control form-control-lg" type="text"
+									class="single-input">
+							</div>					
+							<div class="mt-30">
+								<h5>통장 사본*</h5>
+								<div class="input-group mt-2 mb-3">
+								    <div class="form-group">
+								   		<label for="creatorProfile">프로필에 사용할 사진을 선택해주세요.</label>
+								    	<input type="file" id="businessUpload" name="businessUploadFile" class="form-control-file">
+								    </div>
+									<div class="business_select_img"><img src="" /></div>
+								</div>
+								<script>
+					            	$("#businessUpload").change(function(){
+					            		if(this.files && this.files[0]){
+					            			var reader = new FileReader;
+					            			reader.onload = function(data){
+					            				$(".business_select_img img").attr("src", data.target.result).width(400);
+					            			}
+					            			reader.readAsDataURL(this.files[0]);
+					            		}
+					            	})
+								</script>
+							</div>								
+							
 							<hr>
-							<div class="col-xl-12 mt-10">
-								<a class="btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
-									href="#" onclick="document.getElementById('inputProjectBasicSetting').submit();">시작하기</a> 
-								<a class="btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
-									href="#" >뒤로가기</a>
+							<div class="row mt-1 d-flex justify-content-center mb-5">
+								<div class="col-xl-5">
+									<a class="btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
+										href="javaScript:return(0);" onclick="document.getElementById('inputProjectBasicSetting').submit();">시작하기</a> 
+								</div>
+								<div class="col-xl-5"> 
+									<a class="btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
+										href="javaScript:return(0);" >뒤로가기</a>
+								</div>
 							</div>
 						</form>
 					</div>
@@ -75,10 +152,7 @@
 	            </div>
 	        </div>
 	    </form>
-		
-	</c:if>	
-	
-	<script>
+	    <script>
 
 		//프로젝트 시작 시 나오는 폼
 		$(document).ready(function () {
@@ -98,12 +172,14 @@
 			});
 		});	
 	</script>
+		
+	</c:if>	
+	
+	
 
 
 
-	<!-- footer -->
-	<footer class="footer"> </footer>
-
+	<jsp:include page="./include/i-footer.jsp"></jsp:include>
 	<jsp:include page="./include/i-popup-login.jsp"></jsp:include>
 	<jsp:include page="./include/i-popup-search.jsp"></jsp:include>
 	<jsp:include page="./include/i-body-js.jsp"></jsp:include>

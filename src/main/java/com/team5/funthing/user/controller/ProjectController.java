@@ -27,6 +27,7 @@ import com.team5.funthing.user.model.vo.ProjectKeywordVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.model.vo.RewardVO;
 import com.team5.funthing.user.model.vo.ProjectIntroduceImageVO;
+import com.team5.funthing.user.service.creatorService.GetCreatorListService;
 import com.team5.funthing.user.service.creatorService.InsertCreatorService;
 import com.team5.funthing.user.service.keywordService.GetKeywordListService;
 import com.team5.funthing.user.service.keywordService.InsertKeywordService;
@@ -102,6 +103,8 @@ public class ProjectController {
 	// Creator Service
 	@Autowired
 	private InsertCreatorService insertCreatorService;
+	@Autowired
+	private GetCreatorListService getCreatorListService;
 
 	
 	
@@ -136,8 +139,6 @@ public class ProjectController {
             
 			@Override
             public void setAsText(String text) throws IllegalArgumentException {
-                // "text" 파라미터는 클라이언트가 보낸 데이터이다.
-                // 이렇게 문자열로 보낸 데이터는 java.sql.Date 객체로 바꿔야 한다.
                 this.setValue(Date.valueOf(text));
             }
         });
@@ -196,17 +197,27 @@ public class ProjectController {
 	}
 
 	@RequestMapping(value="/showCreateProjectBasicForm.udo", method = RequestMethod.GET)
-	public String showCreateProjectBasicForm(HttpSession session, ProjectVO vo, Model model) {
+	public String showCreateProjectBasicForm(	HttpSession session, 
+												ProjectVO pvo,
+												CreatorVO cvo, 
+												Model model) {
 
 		session.removeAttribute("updatingProject");
-		String loginEmail = (String)session.getAttribute("memberSessionEmail");
-		vo.setEmail(loginEmail);
 		
-		List<ProjectVO> getProjectList = getProjectListByEmailService.getProjectListByEmail(vo);
+		String loginEmail = (String)session.getAttribute("memberSessionEmail");
+		pvo.setEmail(loginEmail);
+		cvo.setEmail(loginEmail);
+		
+		List<CreatorVO> getCreatorList = getCreatorListService.getCreatorList(cvo);
+		if(!getCreatorList.isEmpty()) {
+			model.addAttribute("getCreatorList", getCreatorList);
+		}
+		
+		List<ProjectVO> getProjectList = getProjectListByEmailService.getProjectListByEmail(pvo);
 		if(!getProjectList.isEmpty()) {
 			model.addAttribute("getProjectList", getProjectList);
 		}
-		model.addAttribute("basicProjectSetting", vo);
+		model.addAttribute("basicProjectSetting", pvo);
 		
 		return "f-create-project-basic"; // 프로젝트 작성 폼
 	} // 프로젝트 만들기 시작 페이지에서 수행
@@ -214,7 +225,12 @@ public class ProjectController {
 	
 	//리워드 등록시에 목록을 추가하는 메서드 추가해야한다()
 	@RequestMapping(value = "/insertProject.udo", method = RequestMethod.POST)
-	public String insertProject(HttpSession session, ProjectVO vo, CreatorVO cvo, Model model) {
+	public String insertProject(	@RequestParam(name = "creatorUploadImage", required = false)List<MultipartFile> creatorUploadImage,
+									@RequestParam(name = "businessUploadFile", required = false)List<MultipartFile> businessUploadFile,
+									HttpSession session, 
+									ProjectVO pvo, 
+									CreatorVO cvo, 
+									Model model) throws Exception {
 
 		// 프로젝트 제작 첫 시작시에만 시작
 		ProjectVO checkVO = (ProjectVO)session.getAttribute("updatingProject");
@@ -222,15 +238,17 @@ public class ProjectController {
 
 		// 새로고침을 할 경우에 반복적으로 requestMapping 작업이 수행되는 부분을 방지하기 위한 코드
 		if(checkVO == null) {
-			vo = insertProjectService.insertProject(vo);
-//			cvo = insertCreatorService.insertCreator(cvo);
-			session.setAttribute("updatingProject", vo);
+			pvo = insertProjectService.insertProject(pvo);
+			creatorProfileImageUploader(creatorUploadImage, cvo);
+			creatorBusinessfileUploader(businessUploadFile, cvo);
+			insertCreatorService.insertCreator(cvo);
+			session.setAttribute("updatingProject", pvo);
 		}
 		else {
-			vo = checkVO;
+			pvo = checkVO;
 		}
-		model.addAttribute("writingProject", vo);
-		model.addAttribute("projectNo", vo.getProjectNo());
+		model.addAttribute("writingCreator");
+		model.addAttribute("writingProject", pvo);
 
 		return "f-create-project";
 	} // 프로젝트 작성 시작할때 메서드 

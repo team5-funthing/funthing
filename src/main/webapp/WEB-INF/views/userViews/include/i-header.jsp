@@ -40,7 +40,7 @@
 
 					<div class="col-xl-2 col-lg-2 d-flex align-items-center justify-content-center">
 						<div class="logo-img ">
-							<a href="/funthing"> <!-- 홈으로 가능 매핑 바꿔줘야함 -->
+							<a href="index.udo"> <!-- 홈으로 가능 매핑 바꿔줘야함 -->
 								<h2 class="logo">FUN THING</h2>
 							</a>
 						</div>

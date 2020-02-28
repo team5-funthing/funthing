@@ -13,9 +13,6 @@
 	        $(inst.el).trigger('change');
 	    }
 	});
-	
-	endDate.selectDate(new Date($('#endDate').val()));
-	
-	
+	//endDate.selectDate(new Date($('#endDate').val()));
 	
 </script>
