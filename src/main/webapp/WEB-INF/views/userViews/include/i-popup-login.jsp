@@ -56,28 +56,27 @@
                     </div>
 
                     <hr/>
-
-                    <div class="col-xl-12 mt-10 kakao_login_btn-wrapper" id="naver_id_login">
-                        <%-- <a class="naver_login_btn" id="naver_id_login href="#">
-                            <img class="landscape" src="${pageContext.request.contextPath}/resources/user/img/apiBtn/naverLoginBtn/네이버 아이디로 로그인_완성형_White.PNG"/>
-                        </a> --%>
+					<div class="col-xl-12 mt-10 naver_login_btn-wrapper">
+                    	<a href="javaScript: return(0);" class="naver_id_login" id="naver_id_login" style="width: 300px; height: 50px;"></a>
                     </div>
-                 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-						<script type="text/javascript">
-							var naver_id_login = new naver_id_login(
-									"T6JggIUb0xG2LBu9Q7Pf", "http://localhost:8080/funthing/socialLogin.udo");
-							var state = naver_id_login.getUniqState();		
-							naver_id_login.setButton("green",3,60);
-							naver_id_login.setDomain("http://localhost:8080/funthing");
-							naver_id_login.setState(state);
-							naver_id_login.init_naver_id_login();
-						</script> 
+                    
+                 	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+					<script type="text/javascript">
+						var naver_id_login = new naver_id_login(
+								"T6JggIUb0xG2LBu9Q7Pf", "http://localhost:8080/funthing/socialLogin.udo");
+						var state = naver_id_login.getUniqState();		
+						naver_id_login.setButton("green",3,60);
+						naver_id_login.setDomain("http://localhost:8080/funthing");
+						naver_id_login.setState(state);
+						naver_id_login.init_naver_id_login();
+					</script> 
 						
-                    <div class="col-xl-12 mt-10 kakao_login_btn-wrapper">
+                    <div class="col-xl-12 kakao_login_btn-wrapper mt-3">
                         <a class="kakao_login_btn" href="javascript:loginWithKakao()">
                             <img class="landscape" src="${pageContext.request.contextPath}/resources/user/img/apiBtn/kakaoLoginBtn/kakao_account_login_btn_large_wide.png"/>
                         </a>
                     </div>
+                    
                     <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 					<script type='text/javascript'>
 							

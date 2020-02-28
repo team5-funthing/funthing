@@ -6,7 +6,44 @@
             <div class="popup_inner">
                 <aside class="single_sidebar_widget search_widget">
                     <form action="#">
-                        인기태그 : #내눈깔 #하늘vs정호 #직배송 #귱
+						<div class="row d-flex justify-content-center">
+							<div class="row d-flex align-content-between flex-wrap mt-5">
+								<div class="col-xl-12 d-flex bd-highlight mb-1">
+									<ul id="addedKeywords">
+										<c:set var="tag" value="#" />
+										<c:set var="keywordId" value="keyword" />
+			
+										<c:choose>
+											<c:when test="${previewProjectKeywordList eq null }">
+											</c:when>
+											<c:when test="${previewProjectKeywordList ne null }">
+											
+												<c:forEach var="previewProjectKeyword"
+													items="${previewProjectKeywordList }" varStatus="step">
+													<li id="${keywordId }${step.count}"
+														class="btn-sm btn-bd-keyword d-none d-lg-inline-block m-1">
+														<a href="javascript:void(0);" class="addedKeyword">${previewProjectKeyword.keyword }</a>
+													</li>
+												</c:forEach>
+												
+											</c:when>
+										</c:choose>
+									</ul>
+									
+									<script>
+								         $(function (){
+								        	 $(".addedKeyword").removeAttr("href")
+								      
+									     });
+									</script>
+									
+								</div>
+							</div>
+						</div>
+
+                    
+
+                    
                         <div class="form-group">
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" placeholder='찾으시는 프로젝트가 있으신가요?'
@@ -19,44 +56,7 @@
                             <div class="row">
                                 <aside class="single_sidebar_widget post_category_widget">
                                     <h4 class="widget_title">인기 검색어</h4>
-                                    <ul class="list cat-list">
-                                        <li>
-                                            <a href="#" class="d-flex">
-                                                <p>Resaurant food</p>
-                                                <p>(37)</p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="d-flex">
-                                                <p>Travel news</p>
-                                                <p>(10)</p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="d-flex">
-                                                <p>Modern technology</p>
-                                                <p>(03)</p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="d-flex">
-                                                <p>Product</p>
-                                                <p>(11)</p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="d-flex">
-                                                <p>Inspiration</p>
-                                                <p>(21)</p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="d-flex">
-                                                <p>Health Care</p>
-                                                <p>(21)</p>
-                                            </a>
-                                        </li>
-                                    </ul>
+   
                                 </aside>
                                 <aside class="single_sidebar_widget tag_cloud_widget">
                                     <h4 class="widget_title">Tag Clouds</h4>

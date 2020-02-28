@@ -188,7 +188,7 @@
 		
 		CKEDITOR.replace('editor');
 		
-	});
+	})
 	
 </script>
 
