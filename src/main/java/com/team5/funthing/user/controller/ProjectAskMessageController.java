@@ -42,7 +42,9 @@ public class ProjectAskMessageController {
    @Autowired
    private GetProjectService getProjectService;
    
-
+   @Autowired
+   private MemberVO memberVO;
+   
    
    @RequestMapping(value="showInsertwAskMessage.udo", method = RequestMethod.GET)
 
@@ -80,37 +82,37 @@ public class ProjectAskMessageController {
    
    @RequestMapping(value="showDetailMyPage.udo",method = RequestMethod.GET)
    public String showDetailMyPage(MemberVO vo, ProjectAskMessageVO vo2, Model model, HttpSession session) { 
+	   
+	  memberVO = (MemberVO)session.getAttribute("memberSession");
+	  vo.setEmail(memberVO.getEmail());
 
-      vo.setEmail((String)session.getAttribute("memberSessionEmail"));
       
       if(getMakerMemberCreatorService.getMakerMemberCreator(vo) != null) { //메이커 일때
 
-//         1.creator인지 확인하기 
+//       1.creator인지 확인하기 
          MemberVO getMakerMember = getMakerMemberCreatorService.getMakerMemberCreator(vo); 
-         model.addAttribute("getMakerMember",getMakerMember);
+         model.addAttribute("getMakerMember", getMakerMember);
          
-         System.out.println("뭐가찍히니 찍혀야돼"+getMakerMember);
+         System.out.println("뭐가찍히니 찍혀야돼" + getMakerMember);
          vo2.setCreator(getMakerMember.getCreator().getCreator());
          model.addAttribute("vo2",vo2);
    
          List<ProjectAskMessageVO>getEntireMakerMessageList = getEntireProjectMakerAskMessageListService.getEntireProjectMakerAskMessageList(vo2);
          model.addAttribute("messagelist", getEntireMakerMessageList);
          
+       
 //         2.내가 보낸 문의글 확인하기
-         vo2.setEmail((String)session.getAttribute("memberSessionEmail"));
+         vo2.setEmail(vo.getEmail());
          List<ProjectAskMessageVO> getEntireProjectAskMessageList = getEntireProjectAskMessageListService.getEntireProjectAskMessageList(vo2);
          model.addAttribute("getMessageList",getEntireProjectAskMessageList);
             
-
          return "p-message-check"; //메세지 리스트로 
-
          
       }else { //메이커가 아닐때 
          
-
          System.out.println("메이커가 아닙니다.");
             
-//         내가 보낸 문의글 확인하기
+//       내가 보낸 문의글 확인하기
          vo2.setEmail((String)session.getAttribute("memberSessionEmail"));
          List<ProjectAskMessageVO> getEntireProjectAskMessageList = getEntireProjectAskMessageListService.getEntireProjectAskMessageList(vo2);
          model.addAttribute("getMessageList",getEntireProjectAskMessageList);
@@ -131,7 +133,8 @@ public class ProjectAskMessageController {
       ProjectAskMessageVO getChoiceProjectAskMessage = getChoiceProjectAskMessageService.getChoiceProjectAskMessage(vo); 
       model.addAttribute("choiceProjectAskMessage", getChoiceProjectAskMessage);
       
-      vo2.setEmail((String)session.getAttribute("memberSessionEmail"));
+      vo2 = (MemberVO)session.getAttribute("memberSession");
+      
       MemberVO getMakerMember = getMakerMemberCreatorService.getMakerMemberCreator(vo2); 
       vo3.setCreator(getMakerMember.getCreator().getCreator());
       model.addAttribute("vo3",vo3);
@@ -143,16 +146,11 @@ public class ProjectAskMessageController {
 
    //크리에이터 아닌 일반회원이 보는 메세지 상세페이지
    @RequestMapping(value="getChoiceProjectAskMessage.udo", method = RequestMethod.GET) //문의번호 물고 들어오기 
-   public String getChoiceProjectAskMessage(ProjectAskMessageVO vo, MemberVO vo2, CreatorVO vo3, Model model, HttpSession session) { //리스트중 선택한 문의메세지 상세페이지로 이동
+   public String getChoiceProjectAskMessage(ProjectAskMessageVO vo, Model model) { //리스트중 선택한 문의메세지 상세페이지로 이동
       
-      
-
       ProjectAskMessageVO getChoiceProjectAskMessage = getChoiceProjectAskMessageService.getChoiceProjectAskMessage(vo); 
       model.addAttribute("choiceProjectAskMessage", getChoiceProjectAskMessage);
-      
-      vo2.setEmail((String)session.getAttribute("memberSessionEmail"));
-      
-   
+
       return "f-projectAsk-message-reply"; //크리에이터가 답변다는 곳
 
 
@@ -160,7 +158,6 @@ public class ProjectAskMessageController {
    }
    
    @RequestMapping(value="updateProjectAskReplyContentsStatus.udo", method = RequestMethod.POST)
-
    public String updateProjectAskReplyContentsStatus(ProjectAskMessageVO vo) { //답변을 달면 수정으로 들어간다
       
       updateProjectAskReplyContentsStatusService.updateProjectAskReplyContentsStatus(vo);

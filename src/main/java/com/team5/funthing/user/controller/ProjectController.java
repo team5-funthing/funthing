@@ -22,11 +22,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.team5.funthing.common.utils.uploadUtils.UploadUtil;
 import com.team5.funthing.user.model.vo.CreatorVO;
 import com.team5.funthing.user.model.vo.KeywordVO;
+import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.model.vo.ProjectBoardVO;
 import com.team5.funthing.user.model.vo.ProjectIntroduceImageVO;
 import com.team5.funthing.user.model.vo.ProjectKeywordVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.model.vo.RewardVO;
+
+import com.team5.funthing.user.service.creatorService.GetCreatorListService;
+
 import com.team5.funthing.user.service.creatorService.InsertCreatorService;
 import com.team5.funthing.user.service.keywordService.GetKeywordListService;
 import com.team5.funthing.user.service.keywordService.InsertKeywordService;
@@ -92,9 +96,7 @@ public class ProjectController {
 	private InsertProjectIntroduceImageService insertProjectIntroduceImageService;
 	@Autowired
 	private GetProjectIntroduceImageListService getProjectIntroduceImageListService;
-	@Autowired
-	private GetRewardListService getRewardListService;
-	
+
 	// ProjectBoard Service
 	@Autowired
 	private GetEntireProjectBoardListService getEntireProjectBoardListService;
@@ -102,11 +104,17 @@ public class ProjectController {
 	// Creator Service
 	@Autowired
 	private InsertCreatorService insertCreatorService;
+	@Autowired
+	private GetCreatorListService getCreatorListService;
 
-	
+	// Reward Service
+	@Autowired
+	private GetRewardListService getRewardListService;
 	
 // ===================== VO 주입 =====================
 	
+	@Autowired
+	private MemberVO memberVO;
 	@Autowired
 	private ProjectVO projectVO;
 	@Autowired
@@ -136,8 +144,6 @@ public class ProjectController {
             
 			@Override
             public void setAsText(String text) throws IllegalArgumentException {
-                // "text" 파라미터는 클라이언트가 보낸 데이터이다.
-                // 이렇게 문자열로 보낸 데이터는 java.sql.Date 객체로 바꿔야 한다.
                 this.setValue(Date.valueOf(text));
             }
         });
@@ -161,19 +167,22 @@ public class ProjectController {
 	
 	@RequestMapping(value="/showStartProjectPage.udo", method = RequestMethod.GET)
 	public String startProject(HttpSession session, Model model) {
-		String loginEmail = (String)session.getAttribute("memberSessionEmail");
-		if(loginEmail == null) {
+		
+		memberVO = (MemberVO)session.getAttribute("memberSession");
+		if(memberVO == null) {
 			model.addAttribute("msg", "로그인 후 이용 가능합니다.");
 			return "p-index";
 		}
-		model.addAttribute("loginEmail", loginEmail); 
+		model.addAttribute("loginEmail", memberVO.getEmail()); 
 		return "p-start-project"; // 시작하기 페이지로 이동하자
 	} // 로그인 시에만 프로젝트 만들기 접근 가능하도록 하기위해 세션에 저장된 값 확인 후 페이지 이동.
 	
 	
 
 	@RequestMapping(value="/getWritingProject.udo", method = RequestMethod.GET)
-	public String getProject(@RequestParam int currentProjectNo, @RequestParam(required = false)String msg, Model model) {
+	public String getProject(	@RequestParam int currentProjectNo, 
+								@RequestParam(required = false)String msg, 
+								Model model) {
 		
 		projectVO.setProjectNo(currentProjectNo);
 		projectIntroduceImageVO.setProjectNo(currentProjectNo);
@@ -182,11 +191,17 @@ public class ProjectController {
 		List<ProjectIntroduceImageVO> projectIntroduceImageList = getProjectIntroduceImageListService.getProjectIntroduceImageList(projectIntroduceImageVO);
 		List<ProjectKeywordVO> projectKeywordList = getProjectKeywordList(projectVO);
 		
+		rewardVO.setProjectNo(currentProjectNo);
+		List<RewardVO> getRewardList = getRewardListService.getRewardList(rewardVO);
+		
 		if(!projectIntroduceImageList.isEmpty()) {
 			model.addAttribute("projectIntroduceImageList", projectIntroduceImageList);
 		}
 		if(!projectKeywordList.isEmpty()) {
 			model.addAttribute("addedKeywordList", projectKeywordList);
+		}
+		if(!getRewardList.isEmpty()) {
+			model.addAttribute("rewardList", getRewardList);
 		}
 		
 		model.addAttribute("msg", msg);
@@ -196,17 +211,27 @@ public class ProjectController {
 	}
 
 	@RequestMapping(value="/showCreateProjectBasicForm.udo", method = RequestMethod.GET)
-	public String showCreateProjectBasicForm(HttpSession session, ProjectVO vo, Model model) {
+	public String showCreateProjectBasicForm(	HttpSession session, 
+												ProjectVO pvo,
+												CreatorVO cvo, 
+												Model model) {
 
 		session.removeAttribute("updatingProject");
-		String loginEmail = (String)session.getAttribute("memberSessionEmail");
-		vo.setEmail(loginEmail);
 		
-		List<ProjectVO> getProjectList = getProjectListByEmailService.getProjectListByEmail(vo);
+		memberVO = (MemberVO)session.getAttribute("memberSession");
+		pvo.setEmail(memberVO.getEmail());
+		cvo.setEmail(memberVO.getEmail());
+		
+		List<CreatorVO> getCreatorList = getCreatorListService.getCreatorList(cvo);
+		if(!getCreatorList.isEmpty()) {
+			model.addAttribute("getCreatorList", getCreatorList);
+		}
+		
+		List<ProjectVO> getProjectList = getProjectListByEmailService.getProjectListByEmail(pvo);
 		if(!getProjectList.isEmpty()) {
 			model.addAttribute("getProjectList", getProjectList);
 		}
-		model.addAttribute("basicProjectSetting", vo);
+		model.addAttribute("basicProjectSetting", pvo);
 		
 		return "f-create-project-basic"; // 프로젝트 작성 폼
 	} // 프로젝트 만들기 시작 페이지에서 수행
@@ -214,7 +239,12 @@ public class ProjectController {
 	
 	//리워드 등록시에 목록을 추가하는 메서드 추가해야한다()
 	@RequestMapping(value = "/insertProject.udo", method = RequestMethod.POST)
-	public String insertProject(HttpSession session, ProjectVO vo, CreatorVO cvo, Model model) {
+	public String insertProject(	@RequestParam(name = "creatorUploadImage", required = false)List<MultipartFile> creatorUploadImage,
+									@RequestParam(name = "businessUploadFile", required = false)List<MultipartFile> businessUploadFile,
+									HttpSession session, 
+									ProjectVO pvo, 
+									CreatorVO cvo, 
+									Model model) throws Exception {
 
 		// 프로젝트 제작 첫 시작시에만 시작
 		ProjectVO checkVO = (ProjectVO)session.getAttribute("updatingProject");
@@ -222,15 +252,17 @@ public class ProjectController {
 
 		// 새로고침을 할 경우에 반복적으로 requestMapping 작업이 수행되는 부분을 방지하기 위한 코드
 		if(checkVO == null) {
-			vo = insertProjectService.insertProject(vo);
-//			cvo = insertCreatorService.insertCreator(cvo);
-			session.setAttribute("updatingProject", vo);
+			pvo = insertProjectService.insertProject(pvo);
+			creatorProfileImageUploader(creatorUploadImage, cvo);
+			creatorBusinessfileUploader(businessUploadFile, cvo);
+			insertCreatorService.insertCreator(cvo);
+			session.setAttribute("updatingProject", pvo);
 		}
 		else {
-			vo = checkVO;
+			pvo = checkVO;
 		}
-		model.addAttribute("writingProject", vo);
-		model.addAttribute("projectNo", vo.getProjectNo());
+		model.addAttribute("writingCreator");
+		model.addAttribute("writingProject", pvo);
 
 		return "f-create-project";
 	} // 프로젝트 작성 시작할때 메서드 
@@ -329,6 +361,11 @@ public class ProjectController {
 		
 		rewardVO.setProjectNo(projectNo);
 		List<RewardVO> rewardList = getRewardListService.getRewardList(rewardVO);
+		
+		
+		
+		
+		
 		model.addAttribute("rewardList", rewardList);
 		model.addAttribute("projectIntroduceImageList", projectIntroduceImageList);
 		model.addAttribute("previewProjectKeywordList", projectKeywordList);

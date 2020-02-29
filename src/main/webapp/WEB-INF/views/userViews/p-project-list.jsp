@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 
 <html class="no-js">
@@ -138,16 +139,21 @@
 	                            <li>by ${fundingProject.creator }</li>
 	                        </ul>
 	                        <div class="mt-10">
-	                            <div class="percentage">
-	                                <p>${fundingProject.fundingMoney }원 [%수치] </p>
-	                                
-	                                <div class="progress">
-	                                    <div class="progress-bar color-7" role="progressbar" style="width: 50%"
-	                                        aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-	                                </div>
-	                                
-	                            </div>
-	                        </div>
+								<div class="percentage">
+									<fmt:formatNumber type="number" var="progressPercent"
+										value="${(fundingProject.fundingMoney / fundingProject.goalMoney)*100}"
+										pattern=".00" />
+									<fmt:formatNumber type="number" var="progress"
+										maxFractionDigits="3" value="${fundingProject.fundingMoney}" />
+									<p>${progress}원${progressPercent}%진행중</p>
+
+									<div class="progress">
+										<div class="progress-bar color-7" role="progressbar"
+											style="width: ${progressPercent}%" aria-valuenow="30"
+											aria-valuemin="0" aria-valuemax="100"></div>
+									</div>
+								</div>
+							</div>
 	                    </div>
 	                </article>
                 </c:forEach>
