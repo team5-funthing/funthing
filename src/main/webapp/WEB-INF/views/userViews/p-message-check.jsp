@@ -17,8 +17,7 @@
 	<jsp:include page="./include/i-popupover-mypage.jsp" />
 	<jsp:include page="./include/i-header.jsp" />
 
-	<!-- ------------------ -->
-	
+
 
 	<section class="main-wrapper pt-xl-5 ">
 
@@ -202,7 +201,6 @@
 	</section>
 
 
-	<!-- -------------------- -->
 
 	<!-- footer -->
 	<footer class="footer"> </footer>
