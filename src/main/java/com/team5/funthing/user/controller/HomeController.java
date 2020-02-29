@@ -42,14 +42,14 @@ public class HomeController {
 		model.addAttribute("getProject",getProject);
 		
 		//2.진행중인 프로젝트 
-		List<ProjectVO> progeressList = getProjectProgressListService.getProjectProgressList(vo2); //2. 진행중인 프로젝트 가져오기
-		model.addAttribute("progeressList",progeressList);
+		List<ProjectVO> progressList = getProjectProgressListService.getProjectProgressList(vo2); //2. 진행중인 프로젝트 가져오기
+		model.addAttribute("progressList", progressList);
 			//2번째 슬라이드
-			List<ProjectVO> progeressList2 = getProjectProgressListService.getProjectProgressList2(vo2); //2. 진행중인 프로젝트 가져오기
-			model.addAttribute("progeressList2",progeressList2);
+			List<ProjectVO> progressList2 = getProjectProgressListService.getProjectProgressList2(vo2); //2. 진행중인 프로젝트 가져오기
+			model.addAttribute("progressList2",progressList2);
 			//3번째 슬라이드
-			List<ProjectVO> progeressList3 = getProjectProgressListService.getProjectProgressList3(vo2); //2. 진행중인 프로젝트 가져오기
-			model.addAttribute("progeressList3",progeressList3);
+			List<ProjectVO> progressList3 = getProjectProgressListService.getProjectProgressList3(vo2); //2. 진행중인 프로젝트 가져오기
+			model.addAttribute("progressList3", progressList3);
 			
 		//3.인기프로젝트
 		List<ProjectVO> likeCountList = getLikeCountListService.getLikeCountList(vo2);
