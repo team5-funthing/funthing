@@ -6,13 +6,18 @@
            <div class="container">
                <div>
                    <div>
+                    <form action="saveimage.udo" method="post" enctype="multipart/form-data">
                        <div class="row d-flex justify-content-between ml-2 mr-2 mt-4 pb-4">
+                       		<label for="image" >
                            <div id="profile-img" style="background: #BDBDBD;">
-     
-                             <a href="imageUpload.udo">  <img class="profile" src="${sessionScope.memberSession.myImage }"></a>
+                       		<input  type="file"  id="image" name="imgname" accept="image/*" style="display: none; ">
+                              <img class="profile" src="${sessionScope.memberSession.myImage }">
                            </div>
+                           </label>
+                           <div><input type="submit" value="저장" class="genric-btn success small"></div>
                            <div>${sessionScope.memberSession.name} 님 환영합니다.</div>
                        </div>
+                       </form>
                    </div>
                    <div>
                        <div class="d-flex justify-content-around bd-highlight">

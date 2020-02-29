@@ -3,10 +3,12 @@ package com.team5.funthing.user.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,21 +35,38 @@ public class MemberController2 {
 	@Autowired
 	UploadUtil upload;
 	
-	
-	@RequestMapping(value = "updateMember.udo",method= RequestMethod.GET)
-		public String updateProfile(MemberVO vo,HttpSession session) {
-		MemberVO vo2 = (MemberVO) session.getAttribute("memberSession");
-		vo.setEmail(vo2.getEmail());
-		updateMemberService.updateMember(vo);
+	@RequestMapping("deleteMember.udo")
+	public String deleteMember(MemberVO vo,HttpSession session) {
+		deleteMemberService.deleteMember(vo);
+		Cookie cookieid = new Cookie("funthingCookieId",null);
+		cookieid.setMaxAge(0);  /// kill the cookie 
+		Cookie cookiepw = new Cookie("funthingCookiePw",null);
+		cookiepw.setMaxAge(0); /// kill the cookie
+		session.invalidate();
 		return "p-index";
 	}
 	
-	
-	@RequestMapping(value="deleteCheckMember.udo",method=RequestMethod.GET)
-	public String deleteMember(MemberVO vo,HttpSession session) {
-		
-		return "삭제 확인(아이디 패스워드입력요구) 페이지로 이동.";
+	@RequestMapping(value = "updateMember.udo",method= RequestMethod.GET)
+		public String updateProfile(MemberVO vo,HttpSession session) {
+		System.out.println(vo);
+		updateMemberService.updateMember(vo);
+		session.setAttribute("memberSession", vo);
+		return "p-index";
 	}
+	
+	@RequestMapping(value="updateCheck.udo",method=RequestMethod.POST)
+	public String pwCheck(String pw,Model model,MemberVO vo,HttpSession session){
+		System.out.println("pw :"+pw);
+		MemberVO vo2 = (MemberVO) session.getAttribute("memberSession");
+		vo.setEmail(vo2.getEmail());
+		if(getMemberService.getMember(vo).getPassword().equals(pw)) {
+			model.addAttribute("result","1");
+		}else {
+			model.addAttribute("result","2");
+		}
+		return "callback";
+	}
+
 	
 	   @RequestMapping(value="saveimage.udo",method=RequestMethod.POST)
 	   public String saveImage(@RequestParam(name ="imgname",required=false) List<MultipartFile> uploadFile,MemberVO vo,HttpSession session) throws Exception {
@@ -76,7 +95,13 @@ public class MemberController2 {
 	   }
 
 	
-	
+//
+	   
+	   
+	   
+	   
+	   
+	   
 	public void memberImageUploader(List<MultipartFile> toDoUploadList, MemberVO vo) throws Exception {
 		
 		List<String> toRemoveFilePath = new ArrayList<String>();
