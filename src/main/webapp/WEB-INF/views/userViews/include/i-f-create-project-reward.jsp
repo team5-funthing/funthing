@@ -29,7 +29,7 @@
 								<h6 class="rewardname">${addedReward.rewardName}</h6>
 								<p class="rewardContent">${addedReward.rewardContent}</p>
 								<a href="#reward-popup" class="popup-with-form editReward">편집</a>
-								<a href="deleteReward.udo?projectNo=${projectNo}&rewardNo=${addedReward.rewardNo}">삭제</a>
+								<a href="deleteReward.udo?projectNo=${writingProject.projectNo}&rewardNo=${addedReward.rewardNo}">삭제</a>
 							</div>
 						</div>
 					</li>

@@ -163,7 +163,8 @@
 	</script>
    <!-- ${writingProject.projectNo}를 문자열에서 숫자로 형변환 -->
    <form action="insertReward.udo" method="post" id="reward-popup" class="white-popup-block mfp-hide">
-   		<input type="text" name="projectNo" value="${writingProject.projectNo}">
+   		
+   		<input type="hidden" name="projectNo" value="${writingProject.projectNo}">
 
        	<div class="addReward_popup_box">
            <div class="popup_inner">
@@ -289,11 +290,11 @@
                        </div>
                        <div>
                            <a id="cancleBtn" class="btn btn-lg btn-report-cancel d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
-                               href="showReward.udo?projectNo=${projectNo}" >취소</a>
+                               href="javaScript:return(0);" >취소</a>
                        </div>
                        <div>
                            <a class="btn btn-lg btn-report-submit d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
-                               href="#" onclick="document.getElementById('reward-popup').submit();">등록하기</a>
+                               href="javaScript: return(0);" onclick="document.getElementById('reward-popup').submit();">등록하기</a>
                        </div>
                    </div>
                </div>   

@@ -290,26 +290,21 @@
 						<!-- 리워드 추가되는 부분 시작 -->
 						<div class="col-2">
 							<!-- 리워드 품목 들어가기 -->
-							<div class="card mb-3" style="width: 18rem;">
-								<div class="card-body">
-									<h5 class="card-title">리워드 제목1 [마감임박]</h5>
-									<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-									<p class="card-text">Some quick example text to build on
-										the card title and make up the bulk of the card's content.</p>
-									<a href="#" class="card-link">선택하기</a>
+							<c:forEach var="reward" items="${rewardList }">
+								<div class="card mb-3" style="width: 18rem;">
+									<div class="card-body">
+										<h5 class="card-title">${reward.rewardPrice }</h5>
+										<h6 class="card-subtitle mb-2 text-muted">${reward.rewardName }</h6>
+										<p class="card-text">${reward.rewardContent }</p>
+										<p class="card-text">${reward.shippingNeed }</p>
+										<p class="card-text">${reward.rewardMonth }월  ${reward.rewardDay } 배송예정</p>
+										<c:forEach var="option" items="${reward.rewardOptionList }">
+											<p class="card-text">${option.rewardOptionKey } | ${option.rewardOptionValue }</p>
+										</c:forEach>
+										<a href="javaScript: return(0);" class="card-link">${reward.rewardAmount }개 남음</a>
+									</div>
 								</div>
-							</div>
-							<!-- 품목 1개 end-->
-
-							<div class="card" style="width: 18rem;">
-								<div class="card-body">
-									<h5 class="card-title">리워드 제목2 [마감] : 마감 시 비활성화</h5>
-									<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-									<p class="card-text">Some quick example text to build on
-										the card title and make up the bulk of the card's content.</p>
-									<a href="#" class="card-link">선택하기</a>
-								</div>
-							</div>
+							</c:forEach>
 						</div>
 						<!-- 리워드 반복 끝-->
 

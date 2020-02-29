@@ -96,9 +96,7 @@ public class ProjectController {
 	private InsertProjectIntroduceImageService insertProjectIntroduceImageService;
 	@Autowired
 	private GetProjectIntroduceImageListService getProjectIntroduceImageListService;
-	@Autowired
-	private GetRewardListService getRewardListService;
-	
+
 	// ProjectBoard Service
 	@Autowired
 	private GetEntireProjectBoardListService getEntireProjectBoardListService;
@@ -109,7 +107,9 @@ public class ProjectController {
 	@Autowired
 	private GetCreatorListService getCreatorListService;
 
-	
+	// Reward Service
+	@Autowired
+	private GetRewardListService getRewardListService;
 	
 // ===================== VO 주입 =====================
 	
@@ -127,7 +127,6 @@ public class ProjectController {
 	private RewardVO rewardVO;
 	@Autowired
 	private ProjectBoardVO projectBoardVO;
-	
 	
 	
 // ===================== 유틸 주입 =====================
@@ -181,7 +180,9 @@ public class ProjectController {
 	
 
 	@RequestMapping(value="/getWritingProject.udo", method = RequestMethod.GET)
-	public String getProject(@RequestParam int currentProjectNo, @RequestParam(required = false)String msg, Model model) {
+	public String getProject(	@RequestParam int currentProjectNo, 
+								@RequestParam(required = false)String msg, 
+								Model model) {
 		
 		projectVO.setProjectNo(currentProjectNo);
 		projectIntroduceImageVO.setProjectNo(currentProjectNo);
@@ -190,11 +191,17 @@ public class ProjectController {
 		List<ProjectIntroduceImageVO> projectIntroduceImageList = getProjectIntroduceImageListService.getProjectIntroduceImageList(projectIntroduceImageVO);
 		List<ProjectKeywordVO> projectKeywordList = getProjectKeywordList(projectVO);
 		
+		rewardVO.setProjectNo(currentProjectNo);
+		List<RewardVO> getRewardList = getRewardListService.getRewardList(rewardVO);
+		
 		if(!projectIntroduceImageList.isEmpty()) {
 			model.addAttribute("projectIntroduceImageList", projectIntroduceImageList);
 		}
 		if(!projectKeywordList.isEmpty()) {
 			model.addAttribute("addedKeywordList", projectKeywordList);
+		}
+		if(!getRewardList.isEmpty()) {
+			model.addAttribute("rewardList", getRewardList);
 		}
 		
 		model.addAttribute("msg", msg);
@@ -354,6 +361,11 @@ public class ProjectController {
 		
 		rewardVO.setProjectNo(projectNo);
 		List<RewardVO> rewardList = getRewardListService.getRewardList(rewardVO);
+		
+		
+		
+		
+		
 		model.addAttribute("rewardList", rewardList);
 		model.addAttribute("projectIntroduceImageList", projectIntroduceImageList);
 		model.addAttribute("previewProjectKeywordList", projectKeywordList);
