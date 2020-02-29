@@ -118,6 +118,7 @@
 													<div class="col"></div>
 												</div>
 											</c:when>
+											
 										</c:choose> 
 									</li>
 								</ul>
@@ -133,7 +134,7 @@
 								<!-- 보낸 메세지 있을 경우 -->
 								<c:choose>
 									<c:when test="${not empty getMessageList}">
-										<table id="myTable" class="display">
+										<table id="myTable2" class="display">
                                             <thead>
 												<tr>
 													<th>창작자</th>
@@ -160,11 +161,12 @@
                                         
                                         <script>
                                             $(document).ready( function () {
-                                                $('#myTable').DataTable();
+                                                $('#myTable2').DataTable();
                                             } );
-                                        </script>										
-								
+                                        </script>
+                                        
 									</c:when>
+									
 									<c:when test="${empty getMessageList }">
 
 										<div class="row">
@@ -188,6 +190,7 @@
 											<div class="col"></div>
 										</div>
 									</c:when>
+									
 								</c:choose>
 							</div>
 						</div>

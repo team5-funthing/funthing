@@ -148,13 +148,13 @@
 										<div class="col-sm-6">
 											<div class="form-group">
 												<input class="form-control" name="name" id="name" type="text" 
-													value="${sessionScope.memberSessionName}">
+													value="${sessionScope.memberSession.name}">
 											</div>
 										</div>
 										<div class="col-sm-6">
 											<div class="form-group">
 		                                    <input class="form-control" name="email" id="email" type="email" 
-		                                       value="${sessionScope.memberSessionEmail}">
+		                                       value="${sessionScope.memberSession.email}">
 											</div>
 										</div>
 									</div>
@@ -193,7 +193,7 @@
 															</div>
 															<c:choose>
 																<c:when
-																	test="${ b1.email eq sessionScope.memberSessionEmail }">
+																	test="${ b1.email eq sessionScope.memberSession.email }">
 
 																	<div class="reply-btn">
 																		<a href="getProjectBoard.udo?projectNo=${b1.projectNo }&projectBoardNo=${b1.projectBoardNo }"
@@ -209,7 +209,7 @@
 
 
 																<c:when
-																	test="${sessionScope.memberSessionEmail eq project.email }">
+																	test="${sessionScope.memberSession.email eq project.email }">
 
 																		<div class="reply-btn">
 																			<a type="submit" href="replyBoard.udo?projectNo=${b1.projectNo }&projectBoardNo=${b1.projectBoardNo }"
@@ -242,7 +242,7 @@
 							                                                          </h5>
 							                                                          <p class="date">${b2.projectBoardDate}</p>
 							                                                       </div>
-							                                                       <c:if test="${ b2.email eq sessionScope.memberSessionEmail }">
+							                                                       <c:if test="${ b2.email eq sessionScope.memberSession.email }">
 							                                                       	<form action="getProjectBoardReply.udo" method="post">
 																						<div class="reply-btn">
 																							<input type="submit" 
@@ -285,32 +285,25 @@
 						</div>
 						<!-- 프로젝트 디테일 페이지 스토리 및 게시글 끝 [왼쪽] -->
 
-						<!-- 리워드 추가되는 부분 시작 -->
 						<div class="col-2">
-							<!-- 리워드 품목 들어가기 -->
-							<div class="card mb-3" style="width: 18rem;">
-								<div class="card-body">
-									<h5 class="card-title">리워드 제목1 [마감임박]</h5>
-									<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-									<p class="card-text">Some quick example text to build on
-										the card title and make up the bulk of the card's content.</p>
-									<a href="#" class="card-link">선택하기</a>
+							<!-- 리워드 추가되는 부분 시작 -->
+							<c:forEach var="reward" items="${rewardList }">
+								<div class="card mb-3" style="width: 18rem;">
+									<div class="card-body">
+										<h5 class="card-title">${reward.rewardPrice }</h5>
+										<h6 class="card-subtitle mb-2 text-muted">${reward.rewardName }</h6>
+										<p class="card-text">${reward.rewardContent }</p>
+										<p class="card-text">${reward.shippingNeed }</p>
+										<p class="card-text">${reward.rewardMonth }월  ${reward.rewardDay } 배송예정</p>
+										<c:forEach var="option" items="${reward.rewardOptionList }">
+											<p class="card-text">${option.rewardOptionKey } | ${option.rewardOptionValue }</p>
+										</c:forEach>
+										<a href="javaScript: return(0);" class="card-link">${reward.rewardAmount }개 남음</a>
+									</div>
 								</div>
-							</div>
-							<!-- 품목 1개 end-->
-
-							<div class="card" style="width: 18rem;">
-								<div class="card-body">
-									<h5 class="card-title">리워드 제목2 [마감] : 마감 시 비활성화</h5>
-									<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-									<p class="card-text">Some quick example text to build on
-										the card title and make up the bulk of the card's content.</p>
-									<a href="#" class="card-link">선택하기</a>
-								</div>
-							</div>
+							</c:forEach>
+							<!-- 리워드 반복 끝-->
 						</div>
-						<!-- 리워드 반복 끝-->
-
 					</div>
 				</article>
 			</div>

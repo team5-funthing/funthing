@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -49,34 +50,32 @@ public class RewardController {
 	@Autowired
 	private DeleteRewardOptionService deleteRewardOptionSerivice;
 	
-	@RequestMapping("showReward.udo")
-	public String showRewardList(RewardVO vo,Model model,HttpServletRequest request) {
-		//=============================프로젝트 번호 세팅부분=======================
-		int projectNo = Integer.parseInt(request.getParameter("projectNo"));
-		
-		ProjectVO pvo = new ProjectVO();	
-		pvo.setProjectNo(projectNo);
-		pvo.setWriteStatus('n');
-		//=============================객체 전송 부분=============================
-		model.addAttribute("projectNo", projectNo);
-		model.addAttribute("writingProject",pvo);
-		List<RewardVO> rewardList = getRewardListService.getRewardList(vo);
-
-		model.addAttribute("rewardList", rewardList);
-		return "f-create-project";
-	}
+//	@RequestMapping("showReward.udo")
+//	public String showRewardList(RewardVO vo, Model model,HttpServletRequest request) {
+//		//=============================프로젝트 번호 세팅부분=======================
+//		int projectNo = Integer.parseInt(request.getParameter("projectNo"));
+//		
+//		ProjectVO pvo = new ProjectVO();	
+//		pvo.setProjectNo(projectNo);
+//		pvo.setWriteStatus('n');
+//		//=============================객체 전송 부분=============================
+//		model.addAttribute("projectNo", projectNo);
+//		model.addAttribute("writingProject",pvo);
+//		List<RewardVO> rewardList = getRewardListService.getRewardList(vo);
+//
+//		model.addAttribute("rewardList", rewardList);
+//		return "f-create-project";
+//	}
 	
 	@RequestMapping(value= "insertReward.udo", method=RequestMethod.POST)
-	public String insertReward(	RewardVO vo, RewardOptionVO rovo, 
+	public String insertReward(	RedirectAttributes redirecAttributes,
+								RewardVO vo, 
+								RewardOptionVO rovo, 
 								@RequestParam(value="rewardoptionkey", required=false, defaultValue="") List<String> rewardOptionKeys, 
-								@RequestParam(value="rewardoptionvalue", required=false) List<String> rewardOptionValues,
-								Model model,HttpServletRequest request) {
+								@RequestParam(value="rewardoptionvalue", required=false) List<String> rewardOptionValues) {
 		
-		int projectNo = Integer.parseInt(request.getParameter("projectNo"));
-		System.out.println(projectNo);
-		ProjectVO projectvo = new ProjectVO();
-		projectvo.setProjectNo(projectNo);
-		vo.setProjectNo(projectNo);
+		int currentProjectNo = vo.getProjectNo();
+		System.out.println("insertReward - currentProjectNo : " + currentProjectNo);
 		
 		insertRewardService.insertReward(vo);
 		System.out.println(vo.getRewardNo());
@@ -98,47 +97,39 @@ public class RewardController {
 			rovo.setRewardOptionValue(rewardOptionValues.get(0));
 			insertRewardOptionService.insertRewardOption(rovo);
 		}
-		List<RewardVO> rewardList = getRewardListService.getRewardList(vo);
-		model.addAttribute("writingProject", projectvo);
-		model.addAttribute("projectNo", projectNo);
-		model.addAttribute("rewardList", rewardList);
-		return "f-create-project";
+		
+		redirecAttributes.addAttribute("currentProjectNo", currentProjectNo);
+		
+		return "redirect:getWritingProject.udo";
 	}
 	
 	@RequestMapping(value="deleteReward.udo")
-	public String deleteReward(RewardVO vo,RewardOptionVO rovo, Model model,HttpServletRequest request) {
+	public String deleteReward(	RedirectAttributes redirecAttributes,
+								RewardVO vo,
+								RewardOptionVO rovo) {
 
-		int projectNo = Integer.parseInt(request.getParameter("projectNo"));
+		int currentProjectNo = vo.getProjectNo();
+		System.out.println("deleteReward - currentProjectNo : " + currentProjectNo);
 
-		ProjectVO pvo = new ProjectVO();
-		pvo.setProjectNo(projectNo);
-		pvo.setWriteStatus('n');
-		
-		vo.setProjectNo(projectNo);
 		deleteRewardOptionSerivice.deleteRewardOption(rovo);
 		deleteRewardService.deleteReward(vo);
 		
-		model.addAttribute("projectNo", projectNo);
-		model.addAttribute("writingProject",pvo);
-		List<RewardVO> rewardList = getRewardListService.getRewardList(vo);
-		System.out.println(rewardList.toString());
-		model.addAttribute("rewardList", rewardList);
+		redirecAttributes.addAttribute("currentProjectNo", currentProjectNo);		
 		
-		return "f-create-project";
+		return "redirect:getWritingProject.udo";
 	}
 	
 	@RequestMapping(value="updateReward.udo")
-	public String updateReward(	RewardVO vo,RewardOptionVO rovo,
+	public String updateReward(	RedirectAttributes redirecAttributes,
+								RewardVO vo,
+								RewardOptionVO rovo,
 								@RequestParam(name="rewardoptionkey", required=false) List<String> rewardOptionKeys, 
 								@RequestParam(name="rewardoptionvalue", required=false) List<String> rewardOptionValues,
-								@RequestParam(name="rewardOptionNo", required=false) List<Integer> rewardOptionNos,
-								Model model,HttpServletRequest request) {
+								@RequestParam(name="rewardOptionNo", required=false) List<Integer> rewardOptionNos) {
 		
-		int projectNo = Integer.parseInt(request.getParameter("projectNo"));
+		int currentProjectNo = vo.getProjectNo();
+		System.out.println("updateReward - currentProjectNo : " + currentProjectNo);
 
-		ProjectVO pvo = new ProjectVO();
-		pvo.setProjectNo(projectNo);
-		pvo.setWriteStatus('n');
 		
 		System.out.println(rewardOptionNos);
 		System.out.println(rewardOptionValues);
@@ -158,12 +149,9 @@ public class RewardController {
 		System.out.println(vo.toString());
 		updateRewardService.updateReward(vo);
 		
-		List<RewardVO> rewardList = getRewardListService.getRewardList(vo);
-		model.addAttribute("projectNo", projectNo);
-		model.addAttribute("writingProject",pvo);
-		model.addAttribute("rewardList", rewardList);
+		redirecAttributes.addAttribute("currentProjectNo", currentProjectNo);
 		
-		return "f-create-project";
+		return "redirect:getWritingProject.udo";
 		
 	}
 	

@@ -77,10 +77,7 @@
 		<div>
 			<div class="h3 pt-5 d-flex justify-content-between">
 				<a href="#">주목할 만한 프로젝트<i class="fas fa-chevron-right"></i></a>
-				<div>
-					<i class="fas fa-chevron-left mr-5"></i> <i
-						class="fas fa-chevron-right mr-5"></i>
-				</div>
+
 			</div>
 			<section class="tiles pt-0 mt-0">
 
@@ -123,40 +120,71 @@
 		</div>
 
 		<div>
+				<a class="carousel-control-prev" href="#progressList2Controls"
+					role="button" data-slide="prev"> <span
+					class="carousel-control-prev-icon" style="background-color: black;" aria-hidden="true"></span> <span
+					class="sr-only">Previous</span>
+				</a> 
+				<a class="carousel-control-next" href="#progressList2Controls"
+					role="button" data-slide="next"> <span
+					class="carousel-control-next-icon" style="background-color: black;" aria-hidden="true"></span> <span
+					class="sr-only">Next</span>
+				</a>
+		
+		
 			<div class="h3 pt-5 d-flex justify-content-between">
 				<a href="#">진행중인 기획전 <i class="fas fa-chevron-right"></i></a>
+				
+				
+				<div>
+					<i class="fas fa-chevron-left mr-5"></i> 
+					<i class="fas fa-chevron-right mr-5"></i>
+				</div>
+				
+
 
 			</div>
 			<!-- 1번째 페이지 시작 -->
-			<div id="progeressListControls" class="carousel slide"
+			<div id="progressListControls" class="carousel slide"
 				data-ride="carousel">
 				<div class="carousel-inner">
 					<div class="carousel-item active">
 						<section class="tiles pt-0 mt-0">
-							<c:forEach var="progeressList" items="${progeressList}">
+							<c:forEach var="progressList" items="${progressList}" varStatus="step">
 								<article>
 									<div class="project">
 										<div class="thumbnail-wrap">
 											<div class="thumbnail">
 												<div class="centered">
-													<img src="${progeressList.projectMainImage}"
-														class="card-img-top landscape"
-														alt="이미지를 찾지 못했습니다.">
+													<form id="projecImage${step.count }" action="projectDetails.udo" method="GET">
+													    <input type="hidden" name="projectNo" value="${progressList.projectNo}">
+			                                       		<a href="#" onclick="document.getElementById('projecImage${step.count }').submit()">
+			                                       			<c:choose>
+				                                         		<c:when test="${progressList.projectMainImage eq '' }">
+				                                         				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
+				                                         					class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+				                                         		</c:when>
+				                                         		<c:when test="${progressList.projectMainImage ne '' }">
+				                                         			<img src="${progressList.projectMainImage }" class="card-img-top landscape" alt="이미지를 찾지 못했습니다.">
+				                                         		</c:when>
+			                                       			</c:choose>  
+			                                       		</a>
+			                                        </form>
 												</div>
 											</div>
 										</div>
-										<h5>타이틀${progeressList.projectTitle}</h5>
+										<h5>${progressList.projectTitle}</h5>
 										<ul>
-											<li>서브타이틀${progeressList.projectSubTitle}</li>
+											<li>${progressList.projectSubTitle}</li>
 
 										</ul>
 										<div class="mt-10">
 											<div class="percentage">
 												<fmt:formatNumber type="number" var="progressPercent"
-													value="${(progeressList.fundingMoney / progeressList.goalMoney)*100}"
+													value="${(progressList.fundingMoney / progressList.goalMoney)*100}"
 													pattern=".00" />
 												<fmt:formatNumber type="number" var="progress"
-													maxFractionDigits="3" value="${progeressList.fundingMoney}" />
+													maxFractionDigits="3" value="${progressList.fundingMoney}" />
 												<p>${progress}원${progressPercent}%진행중</p>
 
 												<div class="progress">
@@ -172,82 +200,51 @@
 							</c:forEach>
 						</section>
 					</div>
+					
+					
 					<!-- 2번째 페이지 시작 -->
 					<div class="carousel-item">
 						<section class="tiles pt-0 mt-0">
-							<c:forEach var="progeressList2" items="${progeressList2}">
+							<c:forEach var="progressList2" items="${progressList2}" varStatus="step">
 								<article>
 									<div class="project">
 										<div class="thumbnail-wrap">
 											<div class="thumbnail">
 												<div class="centered">
-													<img src="${progeressList2.projectMainImage}"
-														class="card-img-top landscape"
-														alt="이미지를 찾지 못했습니다.">
+													<form id="projecImage${step.count }" action="projectDetails.udo" method="GET">
+													    <input type="hidden" name="projectNo" value="${progressList2.projectNo}">
+			                                       		<a href="#" onclick="document.getElementById('projecImage${step.count }').submit()">
+			                                       			<c:choose>
+				                                         		<c:when test="${progressList2.projectMainImage eq '' }">
+				                                         				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
+				                                         					class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+				                                         		</c:when>
+				                                         		<c:when test="${progressList2.projectMainImage ne '' }">
+				                                         			<img src="${progressList2.projectMainImage }" class="card-img-top landscape" alt="이미지를 찾지 못했습니다.">
+				                                         		</c:when>
+			                                       			</c:choose>  
+			                                       		</a>
+			                                        </form>
 												</div>
 											</div>
 										</div>
-										<h5>타이틀${progeressList2.projectTitle}</h5>
+										<h5>${progressList2.projectTitle}</h5>
 										<ul>
-											<li>서브타이틀${progeressList2.projectSubTitle}</li>
+											<li>${progressList2.projectSubTitle}</li>
 
 										</ul>
 										<div class="mt-10">
 											<div class="percentage">
-												<fmt:formatNumber type="number" var="progressPercent2"
-													value="${(progeressList2.fundingMoney / progeressList2.goalMoney)*100}"
+												<fmt:formatNumber type="number" var="progressPercent"
+													value="${(progressList2.fundingMoney / progressList2.goalMoney)*100}"
 													pattern=".00" />
-												<fmt:formatNumber type="number" var="progress2"
-													maxFractionDigits="3"
-													value="${progeressList2.fundingMoney}" />
-												<p>${progress2}원${progressPercent2}%진행중</p>
+												<fmt:formatNumber type="number" var="progress"
+													maxFractionDigits="3" value="${progressList2.fundingMoney}" />
+												<p>${progress}원${progressPercent}%진행중</p>
 
 												<div class="progress">
 													<div class="progress-bar color-7" role="progressbar"
-														style="width: ${progressPercent2}%" aria-valuenow="30"
-														aria-valuemin="0" aria-valuemax="100"></div>
-												</div>
-											</div>
-										</div>
-									</div>
-
-								</article>
-							</c:forEach>
-						</section>
-					</div>
-					<!-- 3번째 페이지 시작 -->
-					<div class="carousel-item">
-						<section class="tiles pt-0 mt-0">
-							<c:forEach var="progeressList3" items="${progeressList3}">
-								<article>
-									<div class="project">
-										<div class="thumbnail-wrap">
-											<div class="thumbnail">
-												<div class="centered">
-													<img src="${progeressList3.projectMainImage}"
-														class="card-img-top landscape"
-														alt="이미지를 찾지 못했습니다.">
-												</div>
-											</div>
-										</div>
-										<h5>타이틀${progeressList3.projectTitle}</h5>
-										<ul>
-											<li>서브타이틀${progeressList3.projectSubTitle}</li>
-
-										</ul>
-										<div class="mt-10">
-											<div class="percentage">
-												<fmt:formatNumber type="number" var="progressPercent3"
-													value="${(progeressList3.fundingMoney / progeressList3.goalMoney)*100}"
-													pattern=".00" />
-												<fmt:formatNumber type="number" var="progress3"
-													maxFractionDigits="3"
-													value="${progeressList3.fundingMoney}" />
-												<p>${progress3}원${progressPercent3}%진행중</p>
-
-												<div class="progress">
-													<div class="progress-bar color-7" role="progressbar"
-														style="width: ${progressPercent3}%" aria-valuenow="30"
+														style="width: ${progressPercent}%" aria-valuenow="30"
 														aria-valuemin="0" aria-valuemax="100"></div>
 												</div>
 											</div>
@@ -260,11 +257,12 @@
 					</div>
 
 
-					<a class="carousel-control-prev" href="#progeressListControls"
+					<a class="carousel-control-prev" href="#progressListControls"
 						role="button" data-slide="prev"> <span
 						class="carousel-control-prev-icon" style="background-color: black;" aria-hidden="true"></span> <span
 						class="sr-only">Previous</span>
-					</a> <a class="carousel-control-next" href="#progeressListControls"
+					</a> 
+					<a class="carousel-control-next" href="#progressListControls"
 						role="button" data-slide="next"> <span
 						class="carousel-control-next-icon" style="background-color: black;" aria-hidden="true"></span> <span
 						class="sr-only">Next</span>
@@ -290,39 +288,52 @@
 				<div class="carousel-inner">
 					<div class="carousel-item active">
 						<section class="tiles pt-0 mt-0">
-							<c:forEach var="likeCountList" items="${likeCountList}">
+							<c:forEach var="likeCount" items="${likeCountList}" varStatus="step">
 								<article>
 									<div class="project">
 										<div class="thumbnail-wrap">
 											<div class="thumbnail">
 												<div class="centered">
-													<img src="${likeCountList.projectMainImage}"
-														class="card-img-top landscape" alt="이미지를 찾지 못했습니다.">
+													<form id="projecImage${step.count }" action="projectDetails.udo" method="GET">
+													    <input type="hidden" name="projectNo" value="${likeCount.projectNo}">
+			                                       		<a href="#" onclick="document.getElementById('projecImage${step.count }').submit()">
+			                                       			<c:choose>
+				                                         		<c:when test="${likeCount.projectMainImage eq '' }">
+				                                         				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
+				                                         					class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+				                                         		</c:when>
+				                                         		<c:when test="${likeCount.projectMainImage ne '' }">
+				                                         			<img src="${likeCount.projectMainImage }" class="card-img-top landscape" alt="이미지를 찾지 못했습니다.">
+				                                         		</c:when>
+			                                       			</c:choose>  
+			                                       		</a>
+			                                        </form>
 												</div>
 											</div>
 										</div>
-										<h5>타이틀${likeCountList.projectTitle}</h5>
+										<h5>${likeCount.projectTitle}</h5>
 										<ul>
-											<li>서브타이틀${likeCountList.projectSubTitle}</li>
+											<li>${likeCount.projectSubTitle}</li>
 
 										</ul>
 										<div class="mt-10">
 											<div class="percentage">
-												<fmt:formatNumber type="number" var="likeCountPercent"
-													value="${(likeCountList.fundingMoney / likeCountList.goalMoney)*100}"
+												<fmt:formatNumber type="number" var="progressPercent"
+													value="${(likeCount.fundingMoney / likeCount.goalMoney)*100}"
 													pattern=".00" />
-												<fmt:formatNumber type="number" var="likeCount"
-													maxFractionDigits="3" value="${likeCountList.fundingMoney}" />
-												<p>${likeCount}원${likeCountPercent}%진행중</p>
+												<fmt:formatNumber type="number" var="progress"
+													maxFractionDigits="3" value="${likeCount.fundingMoney}" />
+												<p>${progress}원${progressPercent}%진행중</p>
 
 												<div class="progress">
 													<div class="progress-bar color-7" role="progressbar"
-														style="width: ${likeCountPercent}%" aria-valuenow="30"
+														style="width: ${progressPercent}%" aria-valuenow="30"
 														aria-valuemin="0" aria-valuemax="100"></div>
 												</div>
 											</div>
 										</div>
 									</div>
+
 								</article>
 							</c:forEach>
 						</section>
@@ -330,40 +341,52 @@
 					<!-- 2번째 슬라이드 -->
 					<div class="carousel-item">
 						<section class="tiles pt-0 mt-0">
-							<c:forEach var="likeCountList2" items="${likeCountList2}">
+							<c:forEach var="likeCount2" items="${likeCountList2}" varStatus="step">
 								<article>
 									<div class="project">
 										<div class="thumbnail-wrap">
 											<div class="thumbnail">
 												<div class="centered">
-													<img src="${likeCountList2.projectMainImage}"
-														class="card-img-top landscape" alt="이미지를 찾지 못했습니다.">
+													<form id="projecImage${step.count }" action="projectDetails.udo" method="GET">
+													    <input type="hidden" name="projectNo" value="${likeCount2.projectNo}">
+			                                       		<a href="#" onclick="document.getElementById('projecImage${step.count }').submit()">
+			                                       			<c:choose>
+				                                         		<c:when test="${likeCount2.projectMainImage eq '' }">
+				                                         				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
+				                                         					class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+				                                         		</c:when>
+				                                         		<c:when test="${likeCount2.projectMainImage ne '' }">
+				                                         			<img src="${likeCount2.projectMainImage }" class="card-img-top landscape" alt="이미지를 찾지 못했습니다.">
+				                                         		</c:when>
+			                                       			</c:choose>  
+			                                       		</a>
+			                                        </form>
 												</div>
 											</div>
 										</div>
-										<h5>타이틀${likeCountList2.projectTitle}</h5>
+										<h5>${likeCount2.projectTitle}</h5>
 										<ul>
-											<li>서브타이틀${likeCountList2.projectSubTitle}</li>
+											<li>${likeCount2.projectSubTitle}</li>
 
 										</ul>
 										<div class="mt-10">
 											<div class="percentage">
-												<fmt:formatNumber type="number" var="likeCountPercent2"
-													value="${(likeCountList2.fundingMoney / likeCountList2.goalMoney)*100}"
+												<fmt:formatNumber type="number" var="progressPercent"
+													value="${(likeCount2.fundingMoney / likeCount2.goalMoney)*100}"
 													pattern=".00" />
-												<fmt:formatNumber type="number" var="likeCount2"
-													maxFractionDigits="3"
-													value="${likeCountList2.fundingMoney}" />
-												<p>${likeCount2}원${likeCountPercent2}%진행중</p>
+												<fmt:formatNumber type="number" var="progress"
+													maxFractionDigits="3" value="${likeCount2.fundingMoney}" />
+												<p>${progress}원${progressPercent}%진행중</p>
 
 												<div class="progress">
 													<div class="progress-bar color-7" role="progressbar"
-														style="width: ${likeCountPercent2}%" aria-valuenow="30"
+														style="width: ${progressPercent}%" aria-valuenow="30"
 														aria-valuemin="0" aria-valuemax="100"></div>
 												</div>
 											</div>
 										</div>
 									</div>
+
 								</article>
 							</c:forEach>
 						</section>
@@ -371,35 +394,46 @@
 					<!-- 3번째 슬라이드 -->
 					<div class="carousel-item">
 						<section class="tiles pt-0 mt-0">
-							<c:forEach var="likeCountList3" items="${likeCountList3}">
+							<c:forEach var="likeCount3" items="${likeCountList3}" varStatus="step">
 								<article>
 									<div class="project">
 										<div class="thumbnail-wrap">
 											<div class="thumbnail">
 												<div class="centered">
-													<img src="${likeCountList3.projectMainImage}"
-														class="card-img-top landscape" alt="이미지를 찾지 못했습니다.">
+													<form id="projecImage${step.count }" action="projectDetails.udo" method="GET">
+													    <input type="hidden" name="projectNo" value="${likeCount3.projectNo}">
+			                                       		<a href="#" onclick="document.getElementById('projecImage${step.count }').submit()">
+			                                       			<c:choose>
+				                                         		<c:when test="${likeCount3.projectMainImage eq '' }">
+				                                         				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
+				                                         					class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+				                                         		</c:when>
+				                                         		<c:when test="${likeCount3.projectMainImage ne '' }">
+				                                         			<img src="${likeCount3.projectMainImage }" class="card-img-top landscape" alt="이미지를 찾지 못했습니다.">
+				                                         		</c:when>
+			                                       			</c:choose>  
+			                                       		</a>
+			                                        </form>
 												</div>
 											</div>
 										</div>
-										<h5>타이틀${likeCountList3.projectTitle}</h5>
+										<h5>${likeCount3.projectTitle}</h5>
 										<ul>
-											<li>서브타이틀${likeCountList3.projectSubTitle}</li>
+											<li>${likeCount3.projectSubTitle}</li>
 
 										</ul>
 										<div class="mt-10">
 											<div class="percentage">
-												<fmt:formatNumber type="number" var="likeCountPercent3"
-													value="${(likeCountList3.fundingMoney / likeCountList3.goalMoney)*100}"
+												<fmt:formatNumber type="number" var="progressPercent"
+													value="${(likeCount3.fundingMoney / likeCount3.goalMoney)*100}"
 													pattern=".00" />
-												<fmt:formatNumber type="number" var="likeCount3"
-													maxFractionDigits="3"
-													value="${likeCountList3.fundingMoney}" />
-												<p>${likeCount3}원${likeCountPercent3}%진행중</p>
+												<fmt:formatNumber type="number" var="progress"
+													maxFractionDigits="3" value="${likeCount3.fundingMoney}" />
+												<p>${progress}원${progressPercent}%진행중</p>
 
 												<div class="progress">
 													<div class="progress-bar color-7" role="progressbar"
-														style="width: ${likeCountPercent3}%" aria-valuenow="30"
+														style="width: ${progressPercent}%" aria-valuenow="30"
 														aria-valuemin="0" aria-valuemax="100"></div>
 												</div>
 											</div>
@@ -439,35 +473,46 @@
 				<div class="carousel-inner">
 					<div class="carousel-item active">
 						<section class="tiles pt-0 mt-0">
-							<c:forEach var="moneyPercentList" items="${moneyPercentList}">
+							<c:forEach var="moneyPercentList" items="${moneyPercentList}" varStatus="step">
 								<article>
 									<div class="project">
 										<div class="thumbnail-wrap">
 											<div class="thumbnail">
 												<div class="centered">
-													<img src="${moneyPercentList.projectMainImage}"
-														class="card-img-top landscape" alt="이미지를 찾지 못했습니다.">
+													<form id="projecImage${step.count }" action="projectDetails.udo" method="GET">
+													    <input type="hidden" name="projectNo" value="${moneyPercentList.projectNo}">
+			                                       		<a href="#" onclick="document.getElementById('projecImage${step.count }').submit()">
+			                                       			<c:choose>
+				                                         		<c:when test="${moneyPercentList.projectMainImage eq '' }">
+				                                         				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
+				                                         					class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+				                                         		</c:when>
+				                                         		<c:when test="${moneyPercentList.projectMainImage ne '' }">
+				                                         			<img src="${moneyPercentList.projectMainImage }" class="card-img-top landscape" alt="이미지를 찾지 못했습니다.">
+				                                         		</c:when>
+			                                       			</c:choose>  
+			                                       		</a>
+			                                        </form>
 												</div>
 											</div>
 										</div>
-										<h5>타이틀${moneyPercentList.projectTitle}</h5>
+										<h5>${moneyPercentList.projectTitle}</h5>
 										<ul>
-											<li>서브타이틀${moneyPercentList.projectSubTitle}</li>
+											<li>${moneyPercentList.projectSubTitle}</li>
 
 										</ul>
 										<div class="mt-10">
 											<div class="percentage">
-
-												<fmt:formatNumber type="number" var="fundingMoneypercent"
+												<fmt:formatNumber type="number" var="progressPercent"
 													value="${(moneyPercentList.fundingMoney / moneyPercentList.goalMoney)*100}"
 													pattern=".00" />
-												<fmt:formatNumber type="number" var="fundingMoney"
-													maxFractionDigits="3"
-													value="${moneyPercentList.fundingMoney}" />
-												<p>${fundingMoney}원${fundingMoneypercent}%진행중</p>
+												<fmt:formatNumber type="number" var="progress"
+													maxFractionDigits="3" value="${moneyPercentList.fundingMoney}" />
+												<p>${progress}원${progressPercent}%진행중</p>
+
 												<div class="progress">
 													<div class="progress-bar color-7" role="progressbar"
-														style="width: ${fundingMoneypercent}%" aria-valuenow="30"
+														style="width: ${progressPercent}%" aria-valuenow="30"
 														aria-valuemin="0" aria-valuemax="100"></div>
 												</div>
 											</div>
@@ -481,35 +526,46 @@
 
 					<div class="carousel-item">
 						<section class="tiles pt-0 mt-0">
-							<c:forEach var="moneyPercentList2" items="${moneyPercentList2}">
+							<c:forEach var="moneyPercentList2" items="${moneyPercentList2}" varStatus="step">
 								<article>
 									<div class="project">
 										<div class="thumbnail-wrap">
 											<div class="thumbnail">
 												<div class="centered">
-													<img src="${moneyPercentList2.projectMainImage}"
-														class="card-img-top landscape" alt="이미지를 찾지 못했습니다.">
+													<form id="projecImage${step.count }" action="projectDetails.udo" method="GET">
+													    <input type="hidden" name="projectNo" value="${moneyPercentList2.projectNo}">
+			                                       		<a href="#" onclick="document.getElementById('projecImage${step.count }').submit()">
+			                                       			<c:choose>
+				                                         		<c:when test="${moneyPercentList2.projectMainImage eq '' }">
+				                                         				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
+				                                         					class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+				                                         		</c:when>
+				                                         		<c:when test="${moneyPercentList2.projectMainImage ne '' }">
+				                                         			<img src="${moneyPercentList2.projectMainImage }" class="card-img-top landscape" alt="이미지를 찾지 못했습니다.">
+				                                         		</c:when>
+			                                       			</c:choose>  
+			                                       		</a>
+			                                        </form>
 												</div>
 											</div>
 										</div>
-										<h5>타이틀${moneyPercentList2.projectTitle}</h5>
+										<h5>${moneyPercentList2.projectTitle}</h5>
 										<ul>
-											<li>서브타이틀${moneyPercentList2.projectSubTitle}</li>
+											<li>${moneyPercentList2.projectSubTitle}</li>
 
 										</ul>
 										<div class="mt-10">
 											<div class="percentage">
-
-												<fmt:formatNumber type="number" var="fundingMoneypercent2"
+												<fmt:formatNumber type="number" var="progressPercent"
 													value="${(moneyPercentList2.fundingMoney / moneyPercentList2.goalMoney)*100}"
 													pattern=".00" />
-												<fmt:formatNumber type="number" var="fundingMoney2"
-													maxFractionDigits="3"
-													value="${moneyPercentList2.fundingMoney}" />
-												<p>${fundingMoney2}원${fundingMoneypercent2}%진행중</p>
+												<fmt:formatNumber type="number" var="progress"
+													maxFractionDigits="3" value="${moneyPercentList2.fundingMoney}" />
+												<p>${progress}원${progressPercent}%진행중</p>
+
 												<div class="progress">
 													<div class="progress-bar color-7" role="progressbar"
-														style="width: ${fundingMoneypercent2}%" aria-valuenow="30"
+														style="width: ${progressPercent}%" aria-valuenow="30"
 														aria-valuemin="0" aria-valuemax="100"></div>
 												</div>
 											</div>
@@ -523,35 +579,46 @@
 
 					<div class="carousel-item">
 						<section class="tiles pt-0 mt-0">
-							<c:forEach var="moneyPercentList3" items="${moneyPercentList3}">
+							<c:forEach var="moneyPercentList3" items="${moneyPercentList3}" varStatus="step">
 								<article>
 									<div class="project">
 										<div class="thumbnail-wrap">
 											<div class="thumbnail">
 												<div class="centered">
-													<img src="${moneyPercentList3.projectMainImage}"
-														class="card-img-top landscape" alt="이미지를 찾지 못했습니다.">
+													<form id="projecImage${step.count }" action="projectDetails.udo" method="GET">
+													    <input type="hidden" name="projectNo" value="${moneyPercentList3.projectNo}">
+			                                       		<a href="#" onclick="document.getElementById('projecImage${step.count }').submit()">
+			                                       			<c:choose>
+				                                         		<c:when test="${moneyPercentList3.projectMainImage eq '' }">
+				                                         				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
+				                                         					class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+				                                         		</c:when>
+				                                         		<c:when test="${moneyPercentList3.projectMainImage ne '' }">
+				                                         			<img src="${moneyPercentList3.projectMainImage }" class="card-img-top landscape" alt="이미지를 찾지 못했습니다.">
+				                                         		</c:when>
+			                                       			</c:choose>  
+			                                       		</a>
+			                                        </form>
 												</div>
 											</div>
 										</div>
-										<h5>타이틀${moneyPercentList3.projectTitle}</h5>
+										<h5>${moneyPercentList3.projectTitle}</h5>
 										<ul>
-											<li>서브타이틀${moneyPercentList3.projectSubTitle}</li>
+											<li>${moneyPercentList3.projectSubTitle}</li>
 
 										</ul>
 										<div class="mt-10">
 											<div class="percentage">
-
-												<fmt:formatNumber type="number" var="fundingMoneypercent3"
+												<fmt:formatNumber type="number" var="progressPercent"
 													value="${(moneyPercentList3.fundingMoney / moneyPercentList3.goalMoney)*100}"
 													pattern=".00" />
-												<fmt:formatNumber type="number" var="fundingMoney3"
-													maxFractionDigits="3"
-													value="${moneyPercentList3.fundingMoney}" />
-												<p>${fundingMoney3}원${fundingMoneypercent3}%진행중</p>
+												<fmt:formatNumber type="number" var="progress"
+													maxFractionDigits="3" value="${moneyPercentList3.fundingMoney}" />
+												<p>${progress}원${progressPercent}%진행중</p>
+
 												<div class="progress">
 													<div class="progress-bar color-7" role="progressbar"
-														style="width: ${fundingMoneypercent3}%" aria-valuenow="30"
+														style="width: ${progressPercent}%" aria-valuenow="30"
 														aria-valuemin="0" aria-valuemax="100"></div>
 												</div>
 											</div>
