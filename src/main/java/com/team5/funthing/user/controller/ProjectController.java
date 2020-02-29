@@ -2,15 +2,12 @@ package com.team5.funthing.user.controller;
 
 import java.beans.PropertyEditorSupport;
 import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -23,25 +20,33 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team5.funthing.common.utils.uploadUtils.UploadUtil;
+import com.team5.funthing.user.model.vo.CreatorVO;
 import com.team5.funthing.user.model.vo.KeywordVO;
+import com.team5.funthing.user.model.vo.MemberVO;
+import com.team5.funthing.user.model.vo.ProjectBoardVO;
+import com.team5.funthing.user.model.vo.ProjectIntroduceImageVO;
 import com.team5.funthing.user.model.vo.ProjectKeywordVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.model.vo.RewardVO;
-import com.team5.funthing.user.model.vo.ProjectIntroduceImageVO;
-import com.team5.funthing.user.service.RewardService.GetRewardListService;
+
+import com.team5.funthing.user.service.creatorService.GetCreatorListService;
+
+import com.team5.funthing.user.service.creatorService.InsertCreatorService;
 import com.team5.funthing.user.service.keywordService.GetKeywordListService;
 import com.team5.funthing.user.service.keywordService.InsertKeywordService;
+import com.team5.funthing.user.service.projectBoardService.GetEntireProjectBoardListService;
 import com.team5.funthing.user.service.projectIntroduceImageService.GetProjectIntroduceImageListService;
 import com.team5.funthing.user.service.projectIntroduceImageService.InsertProjectIntroduceImageService;
 import com.team5.funthing.user.service.projectKeywordService.DeleteProjectKeywordService;
 import com.team5.funthing.user.service.projectKeywordService.GetProjectKeywordListService;
 import com.team5.funthing.user.service.projectKeywordService.InsertProjectKeywordService;
-import com.team5.funthing.user.service.projectService.CreateProjectService;
 import com.team5.funthing.user.service.projectService.DeleteProjectService;
+import com.team5.funthing.user.service.projectService.GetAllFundingProjectListService;
 import com.team5.funthing.user.service.projectService.GetProjectListByEmailService;
 import com.team5.funthing.user.service.projectService.GetProjectService;
 import com.team5.funthing.user.service.projectService.InsertProjectService;
 import com.team5.funthing.user.service.projectService.UpdateProjectService;
+import com.team5.funthing.user.service.rewardService.GetRewardListService;
 
 
 /**
@@ -54,10 +59,8 @@ import com.team5.funthing.user.service.projectService.UpdateProjectService;
 @SessionAttributes("project")
 public class ProjectController {
 
-// ===================== 주요 필수 서비스 주입 ==============
+// ===================== 서비스 주입 ==============
 	
-	@Autowired
-	private CreateProjectService createProjectService;
 	@Autowired
 	private InsertProjectService insertProjectService;
 	@Autowired
@@ -65,13 +68,12 @@ public class ProjectController {
 	@Autowired
 	private DeleteProjectService deleteProjectService;
 	@Autowired
-	private GetProjectService getProjectService;
-	
+	private GetProjectService getProjectService;	
 	@Autowired 
 	private GetProjectListByEmailService getProjectListByEmailService;
+	@Autowired
+	private GetAllFundingProjectListService getAllFundingProjectListService;
 
-	
-// ===================== 부 서비스 주입 ================	
 
 	// Keyword Service
 	@Autowired
@@ -94,12 +96,25 @@ public class ProjectController {
 	private InsertProjectIntroduceImageService insertProjectIntroduceImageService;
 	@Autowired
 	private GetProjectIntroduceImageListService getProjectIntroduceImageListService;
+
+	// ProjectBoard Service
+	@Autowired
+	private GetEntireProjectBoardListService getEntireProjectBoardListService;
+	
+	// Creator Service
+	@Autowired
+	private InsertCreatorService insertCreatorService;
+	@Autowired
+	private GetCreatorListService getCreatorListService;
+
+	// Reward Service
 	@Autowired
 	private GetRewardListService getRewardListService;
 	
-	
 // ===================== VO 주입 =====================
 	
+	@Autowired
+	private MemberVO memberVO;
 	@Autowired
 	private ProjectVO projectVO;
 	@Autowired
@@ -110,6 +125,8 @@ public class ProjectController {
 	private ProjectIntroduceImageVO projectIntroduceImageVO;
 	@Autowired
 	private RewardVO rewardVO;
+	@Autowired
+	private ProjectBoardVO projectBoardVO;
 	
 	
 // ===================== 유틸 주입 =====================
@@ -127,8 +144,6 @@ public class ProjectController {
             
 			@Override
             public void setAsText(String text) throws IllegalArgumentException {
-                // "text" 파라미터는 클라이언트가 보낸 데이터이다.
-                // 이렇게 문자열로 보낸 데이터는 java.sql.Date 객체로 바꿔야 한다.
                 this.setValue(Date.valueOf(text));
             }
         });
@@ -139,35 +154,54 @@ public class ProjectController {
 	
 // ===================== 메서드 =======================	
 	
+	@RequestMapping(value="getAllFundingProjectList.udo", method = RequestMethod.GET)
+	public String getAllFundingProjectList(Model model) {
+		
+		List<ProjectVO> getAllFundingProjectList = getAllFundingProjectListService.getAllFundingProjectList();
+		model.addAttribute("getAllFundingProjectList", getAllFundingProjectList);
+		
+		return "p-project-list";
+	}
+	
+	
+	
 	@RequestMapping(value="/showStartProjectPage.udo", method = RequestMethod.GET)
 	public String startProject(HttpSession session, Model model) {
-		String loginEmail = (String)session.getAttribute("memberSessionEmail");
-		if(loginEmail == null) {
+		
+		memberVO = (MemberVO)session.getAttribute("memberSession");
+		if(memberVO == null) {
 			model.addAttribute("msg", "로그인 후 이용 가능합니다.");
 			return "p-index";
 		}
-		model.addAttribute("loginEmail", loginEmail); 
+		model.addAttribute("loginEmail", memberVO.getEmail()); 
 		return "p-start-project"; // 시작하기 페이지로 이동하자
 	} // 로그인 시에만 프로젝트 만들기 접근 가능하도록 하기위해 세션에 저장된 값 확인 후 페이지 이동.
 	
 	
 
 	@RequestMapping(value="/getWritingProject.udo", method = RequestMethod.GET)
-	public String getProject(@RequestParam int currentProjectNo, @RequestParam String msg, Model model) {
+	public String getProject(	@RequestParam int currentProjectNo, 
+								@RequestParam(required = false)String msg, 
+								Model model) {
 		
 		projectVO.setProjectNo(currentProjectNo);
 		projectIntroduceImageVO.setProjectNo(currentProjectNo);
 		
 		projectVO = getProjectService.getProject(projectVO);
-		System.out.println("redirect: pvo : " + projectVO.toString());
 		List<ProjectIntroduceImageVO> projectIntroduceImageList = getProjectIntroduceImageListService.getProjectIntroduceImageList(projectIntroduceImageVO);
 		List<ProjectKeywordVO> projectKeywordList = getProjectKeywordList(projectVO);
 		
-		if(projectIntroduceImageList != null) {
+		rewardVO.setProjectNo(currentProjectNo);
+		List<RewardVO> getRewardList = getRewardListService.getRewardList(rewardVO);
+		
+		if(!projectIntroduceImageList.isEmpty()) {
 			model.addAttribute("projectIntroduceImageList", projectIntroduceImageList);
 		}
-		if(projectKeywordList != null) {
+		if(!projectKeywordList.isEmpty()) {
 			model.addAttribute("addedKeywordList", projectKeywordList);
+		}
+		if(!getRewardList.isEmpty()) {
+			model.addAttribute("rewardList", getRewardList);
 		}
 		
 		model.addAttribute("msg", msg);
@@ -175,38 +209,42 @@ public class ProjectController {
 		
 		return "f-create-project";
 	}
-	
-	
-	
+
 	@RequestMapping(value="/showCreateProjectBasicForm.udo", method = RequestMethod.GET)
-	public String showCreateProjectBasicForm(HttpSession session, ProjectVO vo, Model model) {
+	public String showCreateProjectBasicForm(	HttpSession session, 
+												ProjectVO pvo,
+												CreatorVO cvo, 
+												Model model) {
 
 		session.removeAttribute("updatingProject");
-		String loginEmail = (String)session.getAttribute("memberSessionEmail");
-		vo.setEmail(loginEmail);
 		
-		List<ProjectVO> getProjectList = getProjectListByEmailService.getProjectListByEmail(vo);
-		if(getProjectList != null) {
-			System.out.println("========getProjectList=============");
-			for(ProjectVO getProject : getProjectList) {
-				System.out.println(getProject.toString());
-			}
-			System.out.println("===================================");
+		memberVO = (MemberVO)session.getAttribute("memberSession");
+		pvo.setEmail(memberVO.getEmail());
+		cvo.setEmail(memberVO.getEmail());
+		
+		List<CreatorVO> getCreatorList = getCreatorListService.getCreatorList(cvo);
+		if(!getCreatorList.isEmpty()) {
+			model.addAttribute("getCreatorList", getCreatorList);
+		}
+		
+		List<ProjectVO> getProjectList = getProjectListByEmailService.getProjectListByEmail(pvo);
+		if(!getProjectList.isEmpty()) {
 			model.addAttribute("getProjectList", getProjectList);
 		}
-		model.addAttribute("basicProjectSetting", vo);
+		model.addAttribute("basicProjectSetting", pvo);
 		
 		return "f-create-project-basic"; // 프로젝트 작성 폼
 	} // 프로젝트 만들기 시작 페이지에서 수행
 	
 	
-  
-	
-	
-	
-	//리워드 등록시에 목록을 추가하는 메서드 입력()
+	//리워드 등록시에 목록을 추가하는 메서드 추가해야한다()
 	@RequestMapping(value = "/insertProject.udo", method = RequestMethod.POST)
-	public String insertProject(HttpSession session, ProjectVO vo, Model model) {
+	public String insertProject(	@RequestParam(name = "creatorUploadImage", required = false)List<MultipartFile> creatorUploadImage,
+									@RequestParam(name = "businessUploadFile", required = false)List<MultipartFile> businessUploadFile,
+									HttpSession session, 
+									ProjectVO pvo, 
+									CreatorVO cvo, 
+									Model model) throws Exception {
 
 		// 프로젝트 제작 첫 시작시에만 시작
 		ProjectVO checkVO = (ProjectVO)session.getAttribute("updatingProject");
@@ -214,25 +252,39 @@ public class ProjectController {
 
 		// 새로고침을 할 경우에 반복적으로 requestMapping 작업이 수행되는 부분을 방지하기 위한 코드
 		if(checkVO == null) {
-			vo = insertProjectService.insertProject(vo);
-			session.setAttribute("updatingProject", vo);
+			pvo = insertProjectService.insertProject(pvo);
+			creatorProfileImageUploader(creatorUploadImage, cvo);
+			creatorBusinessfileUploader(businessUploadFile, cvo);
+			insertCreatorService.insertCreator(cvo);
+			session.setAttribute("updatingProject", pvo);
 		}
 		else {
-			vo = checkVO;
+			pvo = checkVO;
 		}
-		model.addAttribute("writingProject", vo);
-		model.addAttribute("projectNo", vo.getProjectNo());
+		model.addAttribute("writingCreator");
+		model.addAttribute("writingProject", pvo);
 
 		return "f-create-project";
 	} // 프로젝트 작성 시작할때 메서드 
-
+	
+	@RequestMapping(value = "deleteProject.udo", method = RequestMethod.GET)
+	public String deleteProject(@RequestParam int currentProjectNo) {
+		
+		projectVO.setProjectNo(currentProjectNo);
+		deleteProjectService.deleteProject(projectVO);
+		
+		return "redirect:mypage.udo";
+	}
 	
 	
 	@RequestMapping(value = "/saveInputWritingProject.udo", method = RequestMethod.POST)
 	public String updateProject(	@RequestParam(name = "uploadImage", required = false)List<MultipartFile> projectMainImageUpload,
 									@RequestParam(name = "projectIntroduceImageUpload", required = false)List<MultipartFile> projectIntroduceImageUploadList,
 									@RequestParam(name = "keywords", required = false)List<String> toAddKeywords,
+//									@RequestParam(name = "creatorUploadImage", required = false)List<MultipartFile> creatorUploadImage,
+//									@RequestParam(name = "businessUploadFile", required = false)List<MultipartFile> businessUploadFile,
 									ProjectVO pvo,
+//									CreatorVO cvo,
 									RedirectAttributes redirectAttributes,
 									Model model) throws Exception { // 프로젝트 임시저장 시 실행되는 메서드
 
@@ -240,37 +292,65 @@ public class ProjectController {
 		int ProjectNo = pvo.getProjectNo();
 		
 		System.out.println("-------------임시저장 실행----------------");
-		System.out.println(pvo.toString());
+//		System.out.println(cvo.toString());
 		System.out.println("--------------------------------------");
 		
 		
 		projectIntroduceImageUploader(projectIntroduceImageUploadList, projectIntroduceImageVO, ProjectNo);
 		projectMainImageUploader(projectMainImageUpload, pvo);
-
+//		creatorProfileImageUploader(creatorUploadImage, cvo);
+//		creatorBusinessfileUploader(businessUploadFile, cvo);
+		
+		
+		
 		
 		if(toAddKeywords != null) {
 			insertKeyword(toAddKeywords, keywordVO); //DB에 새로운 키워드 추가 메서드
 			deleteProjectKeyword(pvo); // 기존 프로젝트에 있던 키워드들 삭제
 			insertProjectKeyword(toAddKeywords, pvo.getProjectNo());//DB에 프로젝트와 연결되는 키워드를 추가 하는 메서드
 		}
-		pvo.setWriteStatus(writingInputCheck(pvo)); // 입력해야하는 작성부분 체크
+		
+		
+		char checkResult = inputCompleteCheck(pvo);
+		pvo.setWriteStatus(checkResult); // 입력해야하는 작성부분 체크
 		updateProjectService.updateProject(pvo);
 		
-
+		if(checkResult == 'y') {
+			redirectAttributes.addAttribute("msg", "작성이 완료 되었습니다.");
+		}else {
+			redirectAttributes.addAttribute("msg", "저장 되었습니다");
+		}
 		
 		redirectAttributes.addAttribute("currentProjectNo", pvo.getProjectNo());
-		redirectAttributes.addAttribute("msg", "저장 되었습니다");
 		
 		return "redirect:getWritingProject.udo";
 		
 		
 	}
 
+	@RequestMapping(value="projectDetailsFromProjectBoard.udo", method = RequestMethod.GET)
+	public String showProjectDetails(	@RequestParam int currentProjectNo,
+										ProjectVO pvo, Model model) { // 이미지클릭시 프로젝트 상세 페이지로 이동
+		
+		System.out.println("currentProjectNo : " + currentProjectNo);
+		pvo.setProjectNo(currentProjectNo);
+		getProjectDetails(pvo, model);
+		
+		return "p-project-details"; //프로젝트 상세페이지
+	}
+	
+	@RequestMapping(value="projectDetails.udo", method = RequestMethod.GET)
+	public String showProjectDetails(ProjectVO pvo, Model model) { // 이미지클릭시 프로젝트 상세 페이지로 이동
 
+		getProjectDetails(pvo, model);
+		return "p-project-details"; //프로젝트 상세페이지
+	}
+	
+	
 	
 	@RequestMapping(value = "/showPreviewProject.udo", method = RequestMethod.POST)
 	public String showPreviewProject(ProjectVO pvo, Model model) throws Exception { // 프로젝트 임시저장 시 실행되는 메서드
-		System.out.println("뭐가 문제죠?");
+		pvo = getProjectService.getProject(pvo);
 		int projectNo = pvo.getProjectNo();
 		
 		projectKeywordVO.setProjectNo(projectNo);
@@ -281,18 +361,19 @@ public class ProjectController {
 		
 		rewardVO.setProjectNo(projectNo);
 		List<RewardVO> rewardList = getRewardListService.getRewardList(rewardVO);
+		
+		
+		
+		
+		
 		model.addAttribute("rewardList", rewardList);
 		model.addAttribute("projectIntroduceImageList", projectIntroduceImageList);
 		model.addAttribute("previewProjectKeywordList", projectKeywordList);
 		model.addAttribute("previewProject", pvo);
 		
-		return "p-project-details2";
+		return "p-project-details-preview";
 
 	}
-	
-	
-	
-	
 	
 	public void insertKeyword(List<String> toAddKeywords, KeywordVO kvo) {
 
@@ -317,6 +398,7 @@ public class ProjectController {
 		}
 		
 	}
+	
 	public void insertProjectKeyword(List<String> toAddKeywords, int currentProjectNo) {
 		
 		projectKeywordVO.setProjectNo(currentProjectNo);
@@ -327,11 +409,7 @@ public class ProjectController {
 		}
 	}
 	public List<ProjectKeywordVO> getProjectKeywordList(ProjectVO pvo){
-		
-		if(projectKeywordVO == null) {
-			System.out.println("projectKeywordVO Null");
-			return null;
-		}
+
 		projectKeywordVO.setProjectNo(pvo.getProjectNo());
 		
 		List<ProjectKeywordVO> projectKeywordList = getProjectKeywordListService.getProjectKeywordList(projectKeywordVO);
@@ -355,14 +433,11 @@ public class ProjectController {
 	
 	//=================== 기타 메서드 =================================
 
-	
-	
-	
 	public void projectIntroduceImageUploader(List<MultipartFile> toDoUploadList, ProjectIntroduceImageVO vo, int ProjectNo) throws Exception {
-			
+		
 		List<String>toRemoveFilePath = new ArrayList<String>();
 		
-		if(!toDoUploadList.isEmpty()){ //프로젝트 소개 이미지 기존업로드 제거 및 새 업로드, DB 추가 작업 메서드
+		if(toDoUploadList.get(0) != null){ //프로젝트 소개 이미지 기존업로드 제거 및 새 업로드, DB 추가 작업 메서드
 			vo.setProjectNo(ProjectNo);
 			String voName = vo.getClass().getSimpleName();
 			
@@ -377,10 +452,8 @@ public class ProjectController {
 			
 			if(tmpUploadList != null) {
 				for(String toInsertImage : tmpUploadList) {
-					System.out.println("toInsertImage : " + toInsertImage);
 					projectIntroduceImageVO.setProjectIntroduceImage(toInsertImage);
-					
-					
+
 					insertProjectIntroduceImageService.insertProjectIntroduceImage(projectIntroduceImageVO);
 				} // 소개 이미지 경로 DB에 추가
 			}else {
@@ -394,50 +467,108 @@ public class ProjectController {
 		List<String> toRemoveFilePath = new ArrayList<String>();
 
 				
-		if(!toDoUploadList.isEmpty()) { // 업로드 시킨 파일이 이미 존재하는 경우 파일 선택을 다시 안한 경우에 나올 수 있는 상황 처리  
+		if(toDoUploadList.get(0) != null) { // 업로드 시킨 파일이 이미 존재하는 경우 파일 선택을 다시 안한 경우에 나올 수 있는 상황 처리  
 			toRemoveFilePath.add(vo.getProjectMainImage()); //제거될 파일경로를 vo객체에서 가져오기
 			String voName = vo.getClass().getSimpleName();
 			List<String> toSettingPath = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);
 			if(toSettingPath == null) return;
-			
-			int cnt = 1;
+
 			for(String toInsertImage : toSettingPath) {
-				System.out.println("cnt : " + cnt++);
 				vo.setProjectMainImage(toInsertImage);
 			}
 		}
 	}
-	
-	
-	
-	public char writingInputCheck(ProjectVO vo) {
+	public void creatorProfileImageUploader(List<MultipartFile> toDoUploadList, CreatorVO cvo) throws Exception{
+		
+		List<String> toRemoveFilePath = new ArrayList<String>();
 
-		boolean result = nullCheck(vo);
+		
+		if(!toDoUploadList.get(0).isEmpty()) { // 업로드 시킨 파일이 이미 존재하는 경우 파일 선택을 다시 안한 경우에 나올 수 있는 상황 처리  
+			toRemoveFilePath.add(cvo.getCreatorProfileImage()); //제거될 파일경로를 vo객체에서 가져오기
+			String voName = cvo.getClass().getSimpleName();
+			List<String> toSettingPath = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);
+			if(toSettingPath == null) return;
 
-		if(result) {
-			return 'y';
+			for(String toInsertImage : toSettingPath) {
+				cvo.setCreatorProfileImage(toInsertImage);
+			}
 		}
-		return 'n';
+		
 	}
-	public boolean nullCheck(ProjectVO project) { //임시 저장된 프로젝트 빈칸 체크
-		// 추후에 이미지, 홍보 영상, 동의  등 체크 변수에 추가해야한다. 
-		if(
-				project.getGoalMoney() == 0 ||
-				project.getProjectTitle() == null || project.getProjectTitle() == "" || 
-				project.getProjectSubTitle() == null || project.getProjectSubTitle() == "" ||
-//				project.getProjectStory() == null || project.getProjectStory() == "" ||
-				project.getProjectSummary() == null || project.getProjectSummary() == "" 
-				) 
-		{
-			return false;
+	public void creatorBusinessfileUploader(List<MultipartFile> toDoUploadList, CreatorVO cvo) throws Exception{
+		
+		List<String> toRemoveFilePath = new ArrayList<String>();
 
-		}
-		else {
-			return true;
+		if(!toDoUploadList.get(0).isEmpty()) { // 업로드 시킨 파일이 이미 존재하는 경우 파일 선택을 다시 안한 경우에 나올 수 있는 상황 처리  
+			toRemoveFilePath.add(cvo.getBusinessFileLink()); //제거될 파일경로를 vo객체에서 가져오기
+			String voName = "creatorBusinessFiles";
+			List<String> toSettingPath = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);
+			if(toSettingPath == null) return;
 
+			for(String toInsertImage : toSettingPath) {
+				cvo.setBusinessFileLink(toInsertImage);
+			}
 		}
 	}
 	
+	// 구현 OK - 수정 요구됨
+	public char inputCompleteCheck(ProjectVO vo) { //임시 저장된 프로젝트 빈칸 체크
+		if(		vo.getProjectNo() == -1 ||
+				vo.getCreator() == null || vo.getCreator().equals("") ||
+				vo.getEmail() == null || vo.getEmail().equals("") ||
+				
+				vo.getGoalMoney() == 0 ||
+				vo.getProjectMainImage() == null || vo.getProjectMainImage().equals("") ||
+				vo.getProjectTitle() == null || vo.getProjectTitle().equals("") ||
+				vo.getProjectSubTitle() == null || vo.getProjectSubTitle().equals("") ||
+				vo.getCategory() == null || vo.getCategory().equals("") ||
+//				vo.getStartDate() == null ||
+				vo.getEndDate() == null ||
+
+				vo.getProjectSummary() == null || vo.getProjectSummary().equals("") ||
+//				vo.getProjectCaution() == null || vo.getProjectCaution().equals("") ||
+				vo.getProjectIntroduceVideo() == null || vo.getProjectIntroduceVideo().equals("") || 
+				vo.getProjectStory() == null || vo.getProjectStory().equals("")
+//				vo.getInformationAgree() == 'n'
+				//리워드 체크 추가 해야한다.
+				
+		){
+			
+			return 'n';
+
+		}
+		
+		
+		return 'y';
+	}
+	
+	
+	public void getProjectDetails(ProjectVO pvo, Model model) {
+		
+		pvo = getProjectService.getProject(pvo);
+		int projectNo = pvo.getProjectNo();
+		
+		projectBoardVO.setProjectNo(projectNo);
+		List<ProjectBoardVO> getProjectBoardList = getEntireProjectBoardListService.getEntireProjectBoardList(projectBoardVO);
+
+		projectKeywordVO.setProjectNo(projectNo);
+		List<ProjectKeywordVO> projectKeywordList = getProjectKeywordListService.getProjectKeywordList(projectKeywordVO);
+		
+		projectIntroduceImageVO.setProjectNo(projectNo);
+		List<ProjectIntroduceImageVO>projectIntroduceImageList = getProjectIntroduceImageListService.getProjectIntroduceImageList(projectIntroduceImageVO);
+		
+		rewardVO.setProjectNo(projectNo);
+		List<RewardVO> rewardList = getRewardListService.getRewardList(rewardVO);
+		
+		
+		model.addAttribute("rewardList", rewardList);
+		model.addAttribute("getProjectBoardList", getProjectBoardList); //전체목록리스트 이름이랑 같이 조인해서 가져오기
+		model.addAttribute("projectIntroduceImageList", projectIntroduceImageList);
+		model.addAttribute("projectKeywordList", projectKeywordList);
+		model.addAttribute("project", pvo);
+		
+		
+	}
 	
 }
 

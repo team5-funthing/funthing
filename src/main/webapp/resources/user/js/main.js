@@ -362,4 +362,90 @@ $("#select-checkbox").on("click", function() {
   }
 });
 
+// 소개컨텐츠 동영상 링크 업로드 부분
+$(document).on("click","#urlBtn",function(){
+
+	var sourceCode = $('#urlVideo').val();
+
+	function replaceAll(sourceCode, oldChar, newChar){
+		return sourceCode.split(oldChar).join(newChar);
+	}
+
+	sourceCode = replaceAll(sourceCode, '\"', "\'");
+	console.log(sourceCode);
+
+	if(sourceCode != ""){
+		$("#toAppendIframeDiv").append(sourceCode);
+		$("#projectIntroduceVideoInput").attr("value", sourceCode);
+
+		var removeUrlBtn = "<div class='input-group-append urlBtn-remove'><a class='btn fas fa-times fa-2x' type='button' id='urlBtn'></a></div>";
+
+		$(".urlBtn-registry").after(removeUrlBtn);
+		$("#urlBtn").attr("disabled", true);
+		$("#urlVideo").attr("disabled", true);
+
+		$("iframe").attr("width", "640");
+		$("iframe").attr("height", "360");
+
+	}
+});
+
+
+$(document).on("click",".urlBtn-remove",function(){
+	$("#urlVideo").attr("value", "");
+	$("#projectIntroduceVideoInput").removeAttr("value");
+	$("#urlBtn").attr("disabled", false);
+	$("#urlVideo").attr("disabled", false);
+	$("#toAppendIframeDiv").empty();
+	$("div").remove(".urlBtn-remove"); // X 버튼 지우기
+});
+
+
+
+
+
+////goalMoney
+//var replaceNotInt = /[^0-9]/gi;
+//
+//$(document).ready(function(){
+//	$("#goalMoney").on("focusout", function(){
+//		var x = $(this).val();
+//		if(x.length > 0){
+//			if(x.match(replaceNotInt)){
+//				x = x.replace(replaceNotInt, "");
+//			}
+//			$(this).val(x);
+//		}
+//	}).on("keyup", function(){
+//		$(this).val($(this).val().replace(replaceNotInt, ""));
+//	});
+//});
+
+
+//var goalMoney = $('#goalMoney').val();
+//if($.isNumeric(goalMoney)){
+//	alert('숫자만 입력해주세요');
+//	$('#test').val('');
+//}
+//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

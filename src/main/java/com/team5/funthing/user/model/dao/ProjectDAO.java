@@ -29,6 +29,7 @@ public class ProjectDAO {
 	}
 	
 	public void deleteProject(ProjectVO vo) {
+		sqlSessionTemplate.delete("deleteProject", vo);
 		
 	}
 	
@@ -39,6 +40,10 @@ public class ProjectDAO {
 	
 	public List<ProjectVO> getProjectListByEmail(ProjectVO vo){
 		return sqlSessionTemplate.selectList("getProjectListByEmail",vo);
+	}
+	
+	public List<ProjectVO> getAllFundingProjectList(){
+		return sqlSessionTemplate.selectList("getAllFundingProjectList");
 	}
 	
 	

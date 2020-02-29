@@ -28,8 +28,8 @@
 	</update>
 	
 	<insert id="insertCreator" parameterType="creator">
-		INSERT INTO Creator (creator, email, makerPhone, businessNumber, businessAddress, businessFileLink, lv)
-		VALUES(#{creator}, #{email}, #{makerPhone}, #{businessNumber}, #{businessAddress}, #{businessFileLink}, #{lv})
+		INSERT INTO Creator (creator, email, makerPhone, businessNumber, businessAddress, businessFileLink)
+		VALUES(#{creator}, #{email}, #{makerPhone}, #{businessNumber}, #{businessAddress}, #{businessFileLink} )
 	</insert>
 
 </mapper>

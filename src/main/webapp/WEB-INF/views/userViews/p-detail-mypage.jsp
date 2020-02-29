@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core" %>
+
 <!doctype html>
 
 <html class="no-js">
@@ -25,9 +26,9 @@
                <div class="col-12">
                   <div class="d-flex justify-content-start mb-3">
                      <div id="detail-mypage-profile-img" style="background: #BDBDBD;">
-                        <img class="profile" src="#">
+                        <img class="profile" src="${sessionScope.memberSession.myImage }">
                      </div>
-                     <div class="h2 login-id align-self-center ml-4">${sessionScope.memberSessionName} </div>
+                     <div class="h2 login-id align-self-center ml-4">${sessionScope.memberSession.name} </div>
                   </div>
 
                   <div class="d-flex justify-content-start mb-3">
@@ -40,7 +41,7 @@
                         <a
                            class="btn btn-lg btn-detail-mypage d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
                            href="showDetailMyPage.udo">메세지</a>
-                       <input type="hidden" name="email" value="${sessionScope.memberSessionEmail}">
+                       <input type="hidden" name="email" value="${sessionScope.memberSession.email}">
                        
                     
                      
@@ -90,27 +91,74 @@
                      <!-- 카드 시작 -->
                      <div class="tab-pane fade show active " id="nav-created-prj-list"
                         role="tabpane" aria-labelledby="nav-created-prj-list-tab">
-
+						
                         <div class="container">
                            <section class="tiles">
+                           
                               <!----------------만든 프로젝트 양식 -------------------->
                               <c:if test="${not empty myProjectList }">
-	                              <c:forEach var="myProject" items="${myProjectList }">
+	                              <c:forEach var="myProject" items="${myProjectList }" varStatus="step" >
 		                              <article>
 		                                 <div class="project">
+		                                 	<aside class="row ml-1">
+		                                 	
+		                                 		<c:choose>
+		                                 			<c:when test="${myProject.funding eq 'n'.charAt(0) }"> <!-- 펀징 진행 확인 -->
+		                                 			
+			                                 			<c:choose>
+				                                 			<c:when test="${myProject.status eq 'n'.charAt(0) }">  <!-- 제출 및 심사 확인 -->
+				                                 				
+					                                 			<c:choose>
+						                                 			<c:when test="${myProject.writeStatus eq 'n'.charAt(0) }"> <!-- 작성 완료 확인 -->
+						                                 				<h5><a href="javascript: return(0);" class="badge badge-info m-1">작성중</a></h5>	
+						                                 			</c:when>
+						                                 			<c:when test="${myProject.writeStatus eq 'y'.charAt(0) }">
+					                                 					<h5><a href="javascript: return(0);" class="badge badge-dark m-1">미제출</a></h5>
+						                                 				<h5><a href="javascript: return(0);" class="badge badge-success m-1">작성완료</a></h5>
+						                                 			</c:when>
+					                                 			</c:choose>		
+				                                 			</c:when>                              			
+				                                 			<c:when test="${myProject.status eq 'w'.charAt(0) }">
+				                                 				<h5><a href="javascript: return(0);" class="badge badge-light m-1">심사중</a></h5>
+				                                 			</c:when>
+				                                 			<c:when test="${myProject.status eq 'm'.charAt(0) }">
+					                                 			<h5><a href="javascript: return(0);" class="badge badge-warning m-1">수정 필요</a></h5>
+				                                 			</c:when>
+				                                 			<c:when test="${myProject.status eq 'f'.charAt(0) }">
+					                                 			<h5><a href="javascript: return(0);" class="badge badge-danger m-1">승인 실패</a></h5>
+				                                 			</c:when>
+
+			                                 			</c:choose>
+		                                 			
+		                                 				
+		                                 			
+		                                 			</c:when>
+		                                 			
+		                                 			<c:when test="${myProject.funding eq 'y'.charAt(0) }">
+		                                 			
+		                                 				<h5><a href="javascript: return(0);" class="badge badge-primary m-1">펀딩중</a></h5>
+		                                 			
+		                                 			</c:when>
+		                                 		</c:choose>
+			                                 	
+		                                 	</aside>
 		                                    <div class="card">
 		                                       <div class="thumbnail-wrap">
 		                                          <div class="thumbnail ">
 		                                             <div class="centered">
-		                                             	<c:choose>
-		                                             		<c:when test="${myProject.projectMainImage eq '' }">
-		                                             			<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
-		                                             		</c:when>
-		                                             		<c:when test="${myProject.projectMainImage ne '' }">
-		                                             			<img src="${myProject.projectMainImage }" class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
-		                                             		</c:when>
-		                                             	</c:choose>   
-		                                        		
+		                                             	<form id="previewForm${step.count }" action="showPreviewProject.udo?projectNo=${myProject.projectNo}" method="POST">
+		                                             		<a href="#" onclick="document.getElementById('previewForm${step.count }').submit()">
+		                                             			<c:choose>
+				                                             		<c:when test="${myProject.projectMainImage eq '' }">
+				                                             				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
+				                                             					class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+				                                             		</c:when>
+				                                             		<c:when test="${myProject.projectMainImage ne '' }">
+				                                             			<img src="${myProject.projectMainImage }" class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+				                                             		</c:when>
+		                                             			</c:choose>  
+		                                             		</a>
+		                                             	</form>
 		                                             </div>
 		                                          </div>
 		                                       </div>
@@ -130,9 +178,9 @@
 		                                                aria-valuemax="100"></div>
 		                                          </div>
 		                                       </div>
-		
 		                                       <div class="card-footer">
-		                                          <a href="showPreviewProject.udo">스튜디오 가기</a>
+		                                          <a href="getWritingProject.udo?currentProjectNo=${myProject.projectNo }">수정</a>
+		                                          <a href="deleteProject.udo?currentProjectNo=${myProject.projectNo }">삭제</a>
 		                                       </div>
 		                                    </div>
 		                                 </div>
@@ -399,8 +447,7 @@
    
    
    
-    <!-- 카드 시작 -->
-          
+    				<!-- 카드 시작 -->
                      <div class="tab-pane fade" id="nav-report-prj-list"
                         role="tabpane" aria-labelledby="nav-report-prj-list-tab">
 

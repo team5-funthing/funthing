@@ -9,12 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.team5.funthing.admin.model.vo.AdminNoticeBoardVO;
 import com.team5.funthing.admin.service.adminNoticeBoardService.GetAdminNoticeBoardListService;
+import com.team5.funthing.admin.service.adminProjectCheckService.GetProjectCheckListService;
+import com.team5.funthing.user.model.vo.ProjectVO;
 
 @Controller
 public class AdminHomeController {
 
 	@Autowired
 	GetAdminNoticeBoardListService getAdminNoticeBoardListService;
+	@Autowired
+	GetProjectCheckListService getProjectCheckListService;
 	
 	@RequestMapping("adminIndex.ado")
 	public String showIndex() {
@@ -38,7 +42,7 @@ public class AdminHomeController {
 	
 	@RequestMapping("customerService.ado")
 	public String showCustomerServiceBoard() {
-		return "b-customerService";
+		return "redirect:getAdminCSBoardList.ado";
 	}
 	
 	@RequestMapping("termsOfService.ado")
@@ -59,4 +63,15 @@ public class AdminHomeController {
 		return "f-info-processing-input";
 	}
 
+	@RequestMapping("getProjectCheckList.ado")
+	public String getProjectCheckList(ProjectVO vo,Model model) {
+		
+		List<ProjectVO> projectCheckList = getProjectCheckListService.getProjectCheckList(vo);
+		System.out.println(projectCheckList.toString());
+		
+		model.addAttribute("projectCheckList",projectCheckList);
+		return "b-project-check-list";
+	}
+	
+	
 }

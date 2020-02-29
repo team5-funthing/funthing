@@ -16,8 +16,8 @@
 			</tr>
 			<tr>
 				<td>이름</td>
-				<td>${sessionScope.memberSessionName }</td>
-				<input type="hidden" name="email" value="${sessionScope.memberSessionEmail }"  >
+				<td>${sessionScope.memberSession.name }</td>
+				<input type="hidden" name="email" value="${sessionScope.memberSession.email }"  >
 			</tr>
 			<tr>
 				<td>제목</td>
@@ -31,7 +31,7 @@
 				<td colspan="2">
 							<input  type="submit" value="문의하기"></input>
 			</tr>
-		
+		</table>
 	</form>
 	
 
