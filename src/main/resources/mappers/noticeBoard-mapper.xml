@@ -2,11 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="NoticeDAO">
-
-	<!-- <select id="getSomething" parameterType="int" resultType="#package.#modelname">
-		
-	</select> -->
+<mapper namespace="NoticeBoardDAO">
 
 	<!-- <resultMap type="#modelname" id="YourResultSet">
 		<id property="param1" column="columnname1" />
@@ -14,11 +10,11 @@
 		<result property="param3" column="columnname3" />
 	</resultMap> -->
 	
-	<select id="selectNoticeCount" resultType="int">
+	<!-- <select id="selectNoticeCount" resultType="int">
 		select count(*) as noticecount from notice
-	</select>
+	</select> -->
 	
-	<select id="selectSearchNoticeList" resultType="notice" parameterType="notice">
+	<select id="getSearchNoticeBoardList" resultType="noticeBoard" parameterType="noticeBoard">
 		SELECT * 
 		FROM notice 
 		WHERE 1=1
@@ -30,33 +26,29 @@
 		</if>
 	</select>
 	
-	<select id="selectEventNoticeList" resultType="notice" parameterType="notice">
-		SELECT * FROM notice WHERE noticeCategory = #{noticeCategory}
+	<select id="getNoticeBoardList" resultType="noticeBoard" parameterType="noticeBoard">
+		SELECT * FROM notice order by noticeNo desc
 	</select>
 	
-	<select id="selectNoticeList" resultType="notice" parameterType="notice">
-		SELECT * FROM notice WHERE noticeCategory = #{noticeCategory}
-	</select>
-	
-	<select id="selectEntireNoticeList" resultType="notice" parameterType="notice">
-		SELECT * FROM notice ORDER BY noticeNo desc
+	<select id="getRealNoticeBoardList" parameterType="String" resultType="noticeBoard">
+		SELECT * FROM notice WHERE noticeCategory = #{noticeCategory} ORDER BY noticeNo desc
 	</select>
 
-	<select id="selectNotice" resultType="notice" parameterType="notice">
+	<select id="getNoticeBoard" resultType="noticeBoard" parameterType="noticeBoard">
 		SELECT * FROM notice WHERE noticeNo = #{noticeNo}
 	</select>
 
-	<insert id="insertNotice" parameterType="notice">
+	<insert id="insertNoticeBoard" parameterType="noticeBoard">
 		INSERT INTO NOTICE(noticeNo, adminId, noticeTitle, noticeContents, NoticeDate) 
 		VALUES(notice_seq.nextval, #{adminId}, #{noticeTitle}, #{noticeContent}, #{noticeDate})
 	</insert>
 
-	<update id="updateNotice" parameterType="notice">
+	<update id="updateNoticeBoard" parameterType="noticeBoard">
 		UPDATE NOTICE 
 		SET NOTICETITLE = 'Y', NOTICECONTENT = #{noticeContent} WHERE noticeNo = #{noticeNo}
 	</update>
 
-	<delete id="deleteNotice" parameterType="int">
+	<delete id="deleteNoticeBoard" parameterType="noticeBoard">
 		DELETE FROM NOTICE WHERE noticeNo = #{noticeNO}
 	</delete>
 

@@ -28,7 +28,7 @@
 									<li><a href="#">더 보기 <i class="ti-angle-down"></i></a>
 										<ul class="submenu">
 											<li><a href="#"></a></li>
-											<li><a href="selectEntireNoticeList.udo">공지</a></li>
+											<li><a href="getNoticeBoardList.udo">공지</a></li>
 											<li><a href="#">알림</a></li>
 											<li><a href="#">이벤트</a></li>
 										</ul>
