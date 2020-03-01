@@ -16,8 +16,7 @@
 
 	<jsp:include page="./include/i-popupover-mypage.jsp" />
 	<jsp:include page="./include/i-header.jsp" />
-
-
+	
 	<section class="container">
 
 		<div class="w-100">
@@ -86,9 +85,12 @@
 						</div>
 					</div>
 					<div class="p-2 bd-highlight mt-auto ml-0">
-						<a
-							class="btn btn-lg btn-spon-prj d-none d-lg-inline-block pr-5 pl-5 mb-2"
-							href="">프로젝트 밀어주기</a>
+						<form id="supportProject" action="supportProject.udo" method="post">
+							<input type="hidden" name="projectNo" value="${project.projectNo }">
+							<a class="btn btn-lg btn-spon-prj d-none d-lg-inline-block pr-5 pl-5 mb-2"
+								href="javaScript: return(0);" onclick="document.getElementById('supportProject').submit();">
+								프로젝트 밀어주기</a>
+						</form>
 					</div>
 					<div class="row d-flex justify-content-around m-0 ">
 						<a
