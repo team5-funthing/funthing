@@ -2,7 +2,7 @@ package com.team5.funthing.user.model.vo;
 
 import java.sql.Date;
 
-public class NoticeVO {
+public class NoticeBoardVO {
 
 	private int noticeNo;
 	private String adminId;
