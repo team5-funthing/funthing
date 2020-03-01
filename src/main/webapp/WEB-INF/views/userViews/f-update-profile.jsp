@@ -196,7 +196,7 @@ function updateMember(){
 			if (data == '1') {
 				if(document.getElementById("password").value==document.getElementById("passwordcheck").value){
 					if(document.getElementById("password").value.length >= 8){
-						if(!document.getElementById("phone").value.test("-")){
+						if(!document.getElementById("phone").value.test("-") || document.getElementById("phone").value==null ){
 							document.updateForm.submit();
 						}else{
 							alert("전화번호를 입력하실 때  '-'을 제외하고 입력해 주세요.")

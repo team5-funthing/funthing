@@ -9,5 +9,13 @@
 		VALUES(CSBoard_seq.nextval, #{email}, #{csTitle}, #{csContent})
 	</insert>
 	
-
+	<select id="getUserCSBoardList" parameterType="csboard" resultType="csboard">
+		SELECT * FROM csboard 
+		WHERE email = #{email}
+	</select>
+	
+	<select id="getUserCSBoard" parameterType="csboard" resultType="csboard">
+		SELECT * FROM csboard 
+		WHERE csid = #{csid}
+	</select>
 </mapper>
