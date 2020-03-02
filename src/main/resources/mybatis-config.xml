@@ -29,7 +29,8 @@
 		<typeAlias type="com.team5.funthing.user.model.vo.DeliveryAddressVO" alias="deliveryAddress"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.ReportVO" alias="report"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.ProjectAskMessageVO" alias="projectAskMessage"/>
-
+		
+	
 		<!-- user : admin -->
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminCSBoardVO" alias="adminCSBoard"/>
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminNoticeBoardVO" alias="adminNoticeBoard"/>
@@ -58,6 +59,8 @@
 		<mapper resource="mappers/reward-mapper.xml"/>
 		<mapper resource="mappers/rewardOption-mapper.xml"/>
 		<mapper resource="mappers/creator-mapper.xml"/>
+		
+		
 		
 
 		<mapper resource="mappers/csboard-mapper.xml" />

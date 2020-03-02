@@ -45,6 +45,14 @@ public class ProjectDAO {
 	public List<ProjectVO> getAllFundingProjectList(){
 		return sqlSessionTemplate.selectList("getAllFundingProjectList");
 	}
+
+//===================================카테고리 검색==========================================
+
+	public List<ProjectVO> getShowCategorySubList(ProjectVO vo) {
+		return sqlSessionTemplate.selectList("getShowCategorySubList",vo);
+	}
+
+	
 	
 	
 	
