@@ -20,7 +20,7 @@ public class DeliveryAddressDAO {
 		sqlSessionTemplate.update("DeliveryAddressDAO.updateDeliveryAddress",vo);
 	}
 	
-	public DeliveryAddressVO gettDeliveryAddress(DeliveryAddressVO vo) {
+	public DeliveryAddressVO getDeliveryAddress(DeliveryAddressVO vo) {
 		return sqlSessionTemplate.selectOne("DelieveryAddressDAO.getDeliveryAddress", vo);
 	}
 }

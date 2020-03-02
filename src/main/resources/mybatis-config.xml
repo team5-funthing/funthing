@@ -12,7 +12,7 @@
 		<typeAlias type="com.team5.funthing.user.model.vo.ProjectKeywordVO" alias="projectKeyword"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.KeywordVO" alias="keyword"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.MemberVO" alias="member"/>
-		<typeAlias type="com.team5.funthing.user.model.vo.NoticeVO" alias="notice"/>
+		<typeAlias type="com.team5.funthing.user.model.vo.NoticeBoardVO" alias="noticeBoard"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.BoardVO" alias="board"/>
 
         <typeAlias type="com.team5.funthing.user.model.vo.MemberActivityVO" alias="memberActivity"/>   
@@ -20,8 +20,12 @@
 		<typeAlias type="com.team5.funthing.user.model.vo.ProjectBoardVO" alias="projectboard"/>
 
 		<typeAlias type="com.team5.funthing.user.model.vo.ProjectAccountInformationVO" alias="projectAccountInformation"/>
+		
 		<typeAlias type="com.team5.funthing.user.model.vo.RewardVO" alias="reward"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.RewardOptionVO" alias="rewardOption"/>
+		<typeAlias type="com.team5.funthing.user.model.vo.RewardSelectionVO" alias="rewardSelection"/>
+		
+		
 		<typeAlias type="com.team5.funthing.user.model.vo.CreatorVO" alias="creator"/>
 
 
@@ -29,7 +33,8 @@
 		<typeAlias type="com.team5.funthing.user.model.vo.DeliveryAddressVO" alias="deliveryAddress"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.ReportVO" alias="report"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.ProjectAskMessageVO" alias="projectAskMessage"/>
-
+		
+	
 		<!-- user : admin -->
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminCSBoardVO" alias="adminCSBoard"/>
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminNoticeBoardVO" alias="adminNoticeBoard"/>
@@ -45,7 +50,7 @@
 		<mapper resource="mappers/projectKeyword-mapper.xml"/>
 		<mapper resource="mappers/keyword-mapper.xml"/>
 		<mapper resource="mappers/member-mapper.xml" />
-		<mapper resource="mappers/notice-mapper.xml" />
+		<mapper resource="mappers/noticeBoard-mapper.xml" />
 		<mapper resource="mappers/project-mapper.xml" />
 		<mapper resource="mappers/board-mapper.xml" />
 
@@ -55,9 +60,14 @@
 		<mapper resource="mappers/projectboard-mapper.xml" />
 
 		<mapper resource="mappers/projectAccountInformation-mapper.xml"/>
+		
 		<mapper resource="mappers/reward-mapper.xml"/>
 		<mapper resource="mappers/rewardOption-mapper.xml"/>
+		<mapper resource="mappers/rewardSelection-mapper.xml"/>
+		
 		<mapper resource="mappers/creator-mapper.xml"/>
+		
+		
 		
 
 		<mapper resource="mappers/csboard-mapper.xml" />

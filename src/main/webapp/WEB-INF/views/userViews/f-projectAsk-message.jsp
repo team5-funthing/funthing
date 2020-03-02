@@ -44,8 +44,8 @@
                                     <div class="d-flex align-items-center">
                                        <h5>
                                           	작성자 
-                                          <a href="#" name="name">${sessionScope.memberSessionName }</a>
-                                          <input type="hidden" name="email" value="${sessionScope.memberSessionEmail}">
+                                          <a href="#" name="name">${sessionScope.memberSession.name }</a>
+                                          <input type="hidden" name="email" value="${sessionScope.memberSession.email}">
                                           <input type="hidden" name="creator" value="${vo.creator}">
                                           
                                        </h5>
@@ -71,9 +71,11 @@
                            <button type="submit" class="button button-contactForm btn_1 boxed-btn"> 작성하기</button>
                            <button type="submit" formaction="projectDetails.udo" class="button button-contactForm btn_1 boxed-btn"> 취소하기</button>
                         </div>
+                        
+                        
                      </form>
                   </div>
-                       
+                   
             </article>
 
             <hr>

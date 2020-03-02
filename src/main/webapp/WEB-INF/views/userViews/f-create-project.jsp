@@ -28,6 +28,14 @@
     	</script>
     </c:if>
     
+    <c:if test="${msg ne null }">
+    	<script>
+    		alert("${msg }");
+    		
+    	</script>
+    </c:if>
+    
+    
 	<section class="main-wrapper pt-xl-5 pb-5 ">
 		<div class="main-content">
 
@@ -59,8 +67,28 @@
 											href="#v-pills-settings" role="tab" aria-controls="v-pills-settings"
 											aria-selected="false">리워드 설계</a>
 											
-										<button type="submit" class="btn btn-secondary btn-lg btn-block mt-5">저장하기</button>
-										<button id="inputCompleteBtn" class="btn btn-secondary btn-lg btn-block" >작성완료</button>
+										<button type="submit" id="inputSaveBtn" class="btn btn-secondary btn-lg btn-block mt-5">저장하기</button>
+										<button type="submit" id="inputCompleteBtn" class="btn btn-secondary btn-lg btn-block" formaction="requestCheckProject.udo" >
+											
+											<c:choose>
+												<c:when test="${writingProject.status eq 'w'.charAt(0) }">
+													심사중
+												</c:when>
+												<c:when test="${writingProject.status eq 'm'.charAt(0) }">
+													수정완료
+												</c:when>
+												<c:when test="${writingProject.status eq 'p'.charAt(0) }">
+													심사통과
+												</c:when>
+												<c:when test="${writingProject.status eq 'f'.charAt(0) }">
+													거부
+												</c:when>
+												<c:otherwise>
+													작성완료
+												</c:otherwise>
+											</c:choose>	
+										
+										</button>
 										<button type="submit" class="btn btn-secondary btn-lg btn-block mt-5" formaction="showPreviewProject.udo">미리보기</button>
 									</div>
 								</div>
@@ -103,31 +131,54 @@
 	<jsp:include page="./include/i-body-js.jsp"></jsp:include>
 	<jsp:include page="./include/i-js-datePicker.jsp"></jsp:include>
 	
-	<c:choose>
-	    <c:when test="${writingProject.writeStatus eq 'y'.charAt(0) }">
+	
+	    <c:if test="${writingProject.writeStatus eq 'y'.charAt(0)  }">
 	    	<script>
-		   		  $(function() {
-		   			    $("#inputCompleteBtn")
-		   			      	.click(function() {
-		   			    	  	alert("작성완료 클릭!"); 
-		   			    	})
-		   			    	
-		   			      	.prop("disabled", false);
-		   			});
+			  $(function() {
+				    $("#inputCompleteBtn")
+				      	.click(function() {
+				    	})
+				      	.prop("disabled", false);
+				});
+			  
+			  $(function() {
+				    $("#inputSaveBtn")
+				      	.click(function() {
+				    	})
+				      	.prop("disabled", true);
+				});
 	    	</script>
-	    </c:when>
-	    	    <c:when test="${writingProject.writeStatus eq 'n'.charAt(0) }">
+	    	
+	    	<script>
+				$(document).on("change keyup", 'input:text', function(){
+					  
+					  $("#inputSaveBtn")
+				    	.click(function() {
+				  	})
+				    	.prop("disabled", false);
+					  
+					  $(function() {
+						    $("#inputCompleteBtn")
+						      	.click(function() {
+						    	})
+						      	.prop("disabled", true);
+						});
+				
+				});
+			</script>
+		</c:if>
+	   	<c:if test="${	writingProject.writeStatus eq 'n'.charAt(0) || 
+	   						writingProject.status eq 'w'.charAt(0) ||
+	   						writingProject.status eq 'f'.charAt(0) ||
+	   						writingProject.status eq 'p'.charAt(0) }">
 	    	<script>
 		   		$(function() {
 	   			    $("#inputCompleteBtn").click(function() {
-	   			    	  	alert("작성완료 클릭!"); 
 	   			   	})
 	   			   	.prop("disabled", true);
 		   		});
 	    	</script>
-	    </c:when>
-    </c:choose>
-    
+	    </c:if>
 
 
 

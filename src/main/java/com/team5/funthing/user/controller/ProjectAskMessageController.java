@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.team5.funthing.user.model.vo.CSBoardVO;
 import com.team5.funthing.user.model.vo.CreatorVO;
 import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.model.vo.ProjectAskMessageVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
+import com.team5.funthing.user.service.csboardService.GetUserCSBoardListService;
 import com.team5.funthing.user.service.projectAskMessageService.GetChoiceProjectAskMessageService;
 import com.team5.funthing.user.service.projectAskMessageService.GetEntireProjectAskMessageListService;
 import com.team5.funthing.user.service.projectAskMessageService.GetEntireProjectMakerAskMessageListService;
@@ -41,6 +43,10 @@ public class ProjectAskMessageController {
    private GetEntireProjectMakerAskMessageListService getEntireProjectMakerAskMessageListService;
    @Autowired
    private GetProjectService getProjectService;
+   
+   
+   @Autowired
+   private GetUserCSBoardListService getCSBoardListService;
    
    @Autowired
    private MemberVO memberVO;
@@ -81,7 +87,7 @@ public class ProjectAskMessageController {
    
    
    @RequestMapping(value="showDetailMyPage.udo",method = RequestMethod.GET)
-   public String showDetailMyPage(MemberVO vo, ProjectAskMessageVO vo2, Model model, HttpSession session) { 
+   public String showDetailMyPage(MemberVO vo, ProjectAskMessageVO vo2,CSBoardVO vo3, Model model, HttpSession session) { 
 	   
 	  memberVO = (MemberVO)session.getAttribute("memberSession");
 	  vo.setEmail(memberVO.getEmail());
@@ -106,6 +112,15 @@ public class ProjectAskMessageController {
          List<ProjectAskMessageVO> getEntireProjectAskMessageList = getEntireProjectAskMessageListService.getEntireProjectAskMessageList(vo2);
          model.addAttribute("getMessageList",getEntireProjectAskMessageList);
             
+         
+         
+       /// 3. 관리자에게 문의하기 
+         vo3.setEmail(memberVO.getEmail());
+         System.out.println("vo3 : "+ vo3);
+         List<CSBoardVO> csboardList = getCSBoardListService.getCSBoardList(vo3);
+         model.addAttribute("askAdminList",csboardList);
+         
+         
          return "p-message-check"; //메세지 리스트로 
          
       }else { //메이커가 아닐때 
@@ -113,11 +128,16 @@ public class ProjectAskMessageController {
          System.out.println("메이커가 아닙니다.");
             
 //       내가 보낸 문의글 확인하기
-         vo2.setEmail((String)session.getAttribute("memberSessionEmail"));
+         vo2.setEmail(memberVO.getEmail());
          List<ProjectAskMessageVO> getEntireProjectAskMessageList = getEntireProjectAskMessageListService.getEntireProjectAskMessageList(vo2);
          model.addAttribute("getMessageList",getEntireProjectAskMessageList);
          
 
+         //    관리자에게 문의하기 
+         vo3.setEmail(memberVO.getEmail());
+         System.out.println("vo3 : "+ vo3);
+         List<CSBoardVO> csboardList = getCSBoardListService.getCSBoardList(vo3);
+         model.addAttribute("askAdminList",csboardList);
          
          return "p-message-check"; 
       }

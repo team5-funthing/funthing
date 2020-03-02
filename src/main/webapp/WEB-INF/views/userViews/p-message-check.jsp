@@ -17,8 +17,7 @@
 	<jsp:include page="./include/i-popupover-mypage.jsp" />
 	<jsp:include page="./include/i-header.jsp" />
 
-	<!-- ------------------ -->
-	
+
 
 	<section class="main-wrapper pt-xl-5 ">
 
@@ -45,6 +44,11 @@
 										href="#nav-sponsored-prj-questions" role="tab"
 										aria-controls="nav-sponsored-prj-questions"
 										aria-selected="false">문의/후원 프로젝트</a>
+										<a class="nav-item nav-link"
+										id="nav-askadmin-tab" data-toggle="tab"
+										href="#nav-askadmin" role="tab"
+										aria-controls="nav-askadmin"
+										aria-selected="false">관리자에게 문의하기</a>
 								</div>
 							</nav>
 						</div>
@@ -193,6 +197,78 @@
 									
 								</c:choose>
 							</div>
+							
+							
+							
+						<!--     관리자에게 문의하기          ㅇㅇㅇㅇㅇㅇ -->
+							<div class="tab-pane fade" id="nav-askadmin"
+								role="tabpanel"
+								aria-labelledby="nav-askadmin-tab">
+
+
+								<!-- 보낸 메세지 있을 경우 -->
+								<c:choose>
+									<c:when test="${not empty askAdminList}">
+										<table id="myTable3" class="display">
+                                            <thead>
+												<tr>
+													<th>작성자 이메일</th>
+													<th style="width: 250px">메시지 제목</th>
+													<th>작성날짜</th>
+													<th>답변여부</th>
+												</tr>
+                                            </thead>
+                                            <tbody>
+												<c:forEach var="askAdminList" items="${askAdminList}">
+													<tr>
+														<td>${askAdminList.email}</td>
+														<td><a
+															href="CSWrite.udo?csid=${askAdminList.csid }">
+																${askAdminList.csTitle} </a></td>
+														<td>${askAdminList.csRegdate}</td>
+														<td>${askAdminList.replyProgress}</td>
+													</tr>
+												</c:forEach>
+                                            </tbody>
+                                        </table>
+                                        
+                                        <script>
+                                            $(document).ready( function () {
+                                                $('#myTable3').DataTable();
+                                            } );
+                                        </script>
+                                        
+									</c:when>
+									
+									<c:when test="${empty askAdminList }">
+
+										<div class="row">
+											<div class="col"></div>
+											<div class="col-8 d-flex justify-content-center ">
+												<div class="pt-5 pb-5 ">
+													<div>
+														<svg xmlns="http://www.w3.org/2000/svg" width="60"
+															height="60" viewBox="0 0 24 24" fill="none"
+															stroke="currentColor" stroke-width="1.5"
+															stroke-linecap="round" stroke-linejoin="round"
+															class="feather feather-mail">
+														<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+														<polyline points="22,6 12,13 2,6" /></svg>
+													</div>
+													<div class="h3">문의한 내용이 없습니다</div>
+													<div class="h5">홈페이지 하단에서  관리자에게 문의하기를 눌러 홈페이지 이용관련한 문의를 할 수 있습니다. </div>
+												</div>
+											</div>
+											<div class="col"></div>
+										</div>
+									</c:when>
+									
+								</c:choose>
+							</div>
+							
+							
+							
+							
 						</div>
 					</div>
 					<div class="col"></div>
@@ -202,7 +278,6 @@
 	</section>
 
 
-	<!-- -------------------- -->
 
 	<!-- footer -->
 	<footer class="footer"> </footer>

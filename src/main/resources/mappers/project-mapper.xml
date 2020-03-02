@@ -110,6 +110,103 @@
 		DELETE FROM project WHERE
 		projectNo = #{projectNo}
 	</delete>
+	
+	
+	<!-- 카테고리 -->
+	<!-- 내가 카테고리 모두 선택한거 들어가는 sql문 -->
+	<!-- 내가 카테고리중 카테고리중 한개라도 선택안했을때 where에 카테고리만 빼논 sql문 -->
+	<select id="getShowCategorySubList" parameterType="project" resultType="project">
+		
+		select * from project 
+		where 
+		<choose>
+		
+			<when test="category.equals('no') and funding == 'z' and fundingMoney == 1 and percent == 1">
+				 funding = 'y'
+			</when>
+		
+		
+			<when test="category.equals('no') and funding == 'z' and fundingMoney == 1">
+				round(nvl(fundingMoney/decode(goalMoney,0,null,goalMoney),0)*100)<![CDATA[ >= ]]> #{percent} and 
+				round(nvl(fundingMoney/decode(goalMoney,0,null,goalMoney),0)*100) <![CDATA[ < ]]> #{percent}+25
+			</when>
+			<when test="funding == 'z' and fundingMoney == 1 and percent == 1">
+				 category = #{category}
+			</when>
+			<when test="category.equals('no') and fundingMoney == 1 and percent == 1">
+				 funding = #{funding}
+			</when>
+			<when test="category.equals('no') and funding == 'z' and percent == 1">
+				 fundingMoney <![CDATA[ >= ]]> #{fundingMoney} and fundingMoney <![CDATA[ < ]]> #{fundingMoney}+ 5000000
+			</when>
+		
+			
+		
+		
+			<when test="category.equals('no') and funding == 'z'">
+				round(nvl(fundingMoney/decode(goalMoney,0,null,goalMoney),0)*100)<![CDATA[ >= ]]> #{percent} and 
+				round(nvl(fundingMoney/decode(goalMoney,0,null,goalMoney),0)*100) <![CDATA[ < ]]> #{percent}+25 and 
+				fundingMoney <![CDATA[ >= ]]> #{fundingMoney} and fundingMoney <![CDATA[ < ]]> #{fundingMoney}+ 5000000
+			</when>
+			<when test="category.equals('no') and fundingMoney == 1">
+				funding = #{funding} and
+				round(nvl(fundingMoney/decode(goalMoney,0,null,goalMoney),0)*100)<![CDATA[ >= ]]> #{percent} and 
+				round(nvl(fundingMoney/decode(goalMoney,0,null,goalMoney),0)*100) <![CDATA[ < ]]> #{percent}+25 
+			</when>
+			<when test="category.equals('no') and percent == 1">
+				funding = #{funding} and
+				fundingMoney <![CDATA[ >= ]]> #{fundingMoney} and fundingMoney <![CDATA[ < ]]> #{fundingMoney}+ 5000000				
+			</when>
+			<when test="funding == 'z' and fundingMoney == 1">
+				category = #{category} and
+				round(nvl(fundingMoney/decode(goalMoney,0,null,goalMoney),0)*100)<![CDATA[ >= ]]> #{percent} and 
+				round(nvl(fundingMoney/decode(goalMoney,0,null,goalMoney),0)*100) <![CDATA[ < ]]> #{percent}+25 
+			</when>
+			<when test="funding == 'z' and percent == 1">
+				category = #{category} and
+				fundingMoney <![CDATA[ >= ]]> #{fundingMoney} and fundingMoney <![CDATA[ < ]]> #{fundingMoney}+ 5000000
+			</when>
+			<when test="fundingMoney == 1 and percent == 1">
+				category = #{category} and funding = #{funding}
+			</when>
+			
+			
+			
+			<when test="category.equals('no')">
+				funding = #{funding} and 
+				round(nvl(fundingMoney/decode(goalMoney,0,null,goalMoney),0)*100)<![CDATA[ >= ]]>#{percent} and 
+				round(nvl(fundingMoney/decode(goalMoney,0,null,goalMoney),0)*100)<![CDATA[ < ]]>#{percent}+25 and 
+				fundingMoney<![CDATA[ >= ]]>#{fundingMoney} and fundingMoney <![CDATA[ < ]]> #{fundingMoney}+ 5000000
+			</when>
+			<when test="funding == 'z'">
+				category = #{category} and
+				round(nvl(fundingMoney/decode(goalMoney,0,null,goalMoney),0)*100)<![CDATA[ >= ]]> #{percent} and 
+				round(nvl(fundingMoney/decode(goalMoney,0,null,goalMoney),0)*100) <![CDATA[ < ]]> #{percent}+25 and 
+				fundingMoney <![CDATA[ >= ]]> #{fundingMoney} and fundingMoney <![CDATA[ < ]]> #{fundingMoney}+ 5000000
+			</when>
+			<when test="fundingMoney == 1 ">
+				category = #{category} and funding = #{funding} and 
+				round(nvl(fundingMoney/decode(goalMoney,0,null,goalMoney),0)*100) <![CDATA[ >= ]]> #{percent} and 
+				round(nvl(fundingMoney/decode(goalMoney,0,null,goalMoney),0)*100) <![CDATA[ < ]]> #{percent}+25 
+			</when>
+			<when test="percent == 1 ">
+				category = #{category} and funding = #{funding} and 
+				fundingMoney <![CDATA[ >= ]]> #{fundingMoney} and fundingMoney <![CDATA[ < ]]> #{fundingMoney}+ 5000000
+			</when>
+			
+			
+			<otherwise>
+				category = #{category} and funding = #{funding} and 
+				round(nvl(fundingMoney/decode(goalMoney,0,null,goalMoney),0)*100) <![CDATA[ >= ]]> #{percent} and 
+				round(nvl(fundingMoney/decode(goalMoney,0,null,goalMoney),0)*100) <![CDATA[ < ]]> #{percent}+25 and 
+				fundingMoney <![CDATA[ >= ]]> #{fundingMoney} and fundingMoney <![CDATA[ < ]]> #{fundingMoney}+ 5000000
+			</otherwise>
+			
 
+		</choose>
+		
+	</select>
+	
+	
 
 </mapper>

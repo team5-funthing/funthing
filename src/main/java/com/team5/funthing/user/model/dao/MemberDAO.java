@@ -13,7 +13,7 @@ public class MemberDAO {
    private SqlSessionTemplate sqlSessionTemplate;
    
    public MemberVO getMember(MemberVO vo) {
-      System.out.println("getMember ");
+      System.out.println("getMember ½ÇÇà");
       return sqlSessionTemplate.selectOne("MemberDAO.getMember", vo);
    }
    
