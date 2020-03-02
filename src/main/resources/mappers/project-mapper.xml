@@ -111,5 +111,4 @@
 		projectNo = #{projectNo}
 	</delete>
 
-
 </mapper>

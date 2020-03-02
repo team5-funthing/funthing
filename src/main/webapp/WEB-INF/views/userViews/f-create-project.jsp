@@ -106,14 +106,14 @@
 	<c:choose>
 	    <c:when test="${writingProject.writeStatus eq 'y'.charAt(0) }">
 	    	<script>
-		   		  $(function() {
-		   			    $("#inputCompleteBtn")
-		   			      	.click(function() {
-		   			    	  	alert("작성완료 클릭!"); 
-		   			    	})
-		   			    	
-		   			      	.prop("disabled", false);
-		   			});
+			  $(function() {
+				    $("#inputCompleteBtn")
+				      	.click(function() {
+				    	  	alert("작성완료 클릭!"); 
+				    	})
+				    	
+				      	.prop("disabled", false);
+				});
 	    	</script>
 	    </c:when>
 	    	    <c:when test="${writingProject.writeStatus eq 'n'.charAt(0) }">

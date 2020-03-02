@@ -5,7 +5,6 @@
 
 <html class="no-js">
 
-
 <head>
 
 	<jsp:include page="./include/i-head-setting.jsp"/>
@@ -16,6 +15,15 @@
   	
     <jsp:include page="./include/i-popupover-mypage.jsp"/>
     <jsp:include page="./include/i-header.jsp"/>
+    
+    
+    <c:if test="${ msg ne null }">
+    	<script>
+    		alert("${msg }");
+    	</script>
+    </c:if>
+    
+    
 
 	<section id="select-reward" class="container">
         <article class="back-story">
@@ -80,64 +88,263 @@
         
         <article class="pb-5">
        		<c:forEach var="reward" items="${getRewardList }" varStatus="cnt">
+       		
        			
-       			<form id="reward${cnt.count }" action="addSelectReword.udo" method="POST">
+       			<form id="reward${cnt.count }" name="reward${cnt.count }" action="addSelectReword.udo" method="POST">
        			
-		            <div class="card wd-100 mb-2">
+		            <div id="reward-cardBox${cnt.count }" class="card wd-100 mb-2 ">
 		            
 		            	<input type="hidden" name="rewardNo" value="${reward.rewardNo }">
 						<input type="hidden" name="email" value="${sessionScope.memberSession.email }">
-						<input type="hidden" name="paymentAmount" value="${reward.rewardPrice}">
-						<input type="hidden" name="shippingFee" value="${reward.shippingFee }"> 
-		
+						<input type="hidden" name="paymentAmount" value="${reward.rewardPrice }">
+						<input type="hidden" name="shippingFee" value="${reward.shippingFee }">
+						
+						
 		                <!-- 리워드 선택 박스 1 [ 리워드 품목 등록 수 만큼 반복 ]-->
 		                <!-- !!! 선택 체크박스 클릭시 수량 및 옵션항목이 나오는 부분에 대한 문제점 처리 해야한다 -->
 		                <div class="row no-gutters">
+		                    <div class="col-md-auto align-self-start mt-5 mr-4">
+		                        <div class="select-checkbox">
+		                            <input type="checkbox" id="select-reward${cnt.count }">
+		                            <label for="select-reward${cnt.count }" class="select-reward"></label>
+		                        </div>
+		                    </div>      
 		                    <div class="card-body">
 		                        <aside>
 		                            <h6 class="card-title">${reward.rewardPrice }원 펀딩합니다.</h6>
 		                            <p class="card-text">${reward.rewardName }</p>
-		
 		                            <p class="card-text">${reward.rewardContent }</p>
 		
 		                            <p class="card-text to-add-place">배송비 ${reward.shippingFee }원 | 예상 배송일 추가안내</p>
 		                            
-		                            <div class="row">
-		                                <div class="col-2 to-remove-tag mt-2">
-		                                    <p class="card-text m-auto">수량 [${reward.rewardAmount }개 남음]</p>
-		                                    <div class="row align-items-md-center mb-4">
-		                                        <a href="javaScript: return(0);"> <i class="fas fa-minus ml-3"></i></a>
-		                                        <input class="form-control ml-2 mr-2" style="width:50px;" type="text" name="orderAmount" placeholder="">
-		                                        <a href="javaScript: return(0);"> <i class="fas fa-plus"></i></a>
-		                                    </div>
-		                                </div>
-		                                
-		                                <div class="col-2 to-remove-tag mt-2">
-		                                    <p class="card-text m-auto">옵션</p>
-		                                    <select class="custom-select" style="width: 300px;">
-		                                        <option selected>선택하세요</option>
-		                                        <c:forEach var="option" items="${reward.rewardOptionList }" varStatus="opCnt">
-		                                        	<option name="rewardOptionValue" value="${option.rewardOptionValue }">${option.rewardOptionKey } : ${option.rewardOptionValue }</option>
-		                                        </c:forEach>
-		                                    </select>
-		                                </div>
-		                            </div>
-		                            <div class="row justify-content-end">
-							            <div class="d-inline-flex p-2 bd-highlight">
-							                <a href="javaScript: return(0);" onclick="document.ElementById('reward${cnt.count }')" class="btn btn-primary"> 추가하기 </a>
-							            </div>
+		                            <div id="checkTrue${cnt.count }" class="row">
 		                            </div>
 		                        </aside>
 		                    </div>
 		                </div>
-		                
 		            </div>
 	           	</form>
+	           	
+                <script>
+                
+	                jQuery.fn.serializeObject = function() { 
+	                    var obj = null; 
+	                    try { 
+	                        if(this[0].tagName && this[0].tagName.toUpperCase() == "FORM" ) { 
+	                            var arr = this.serializeArray(); 
+	                            if(arr){ obj = {}; 
+	                            jQuery.each(arr, function() { 
+	                                obj[this.name] = this.value; }); 
+	                            } 
+	                        } 
+	                    }catch(e) { 
+	                        alert(e.message); 
+	                    }finally {} 
+	                    return obj; 
+	                }
+                
+                	$(document).on("click", "input[id=select-reward${cnt.count }]", function(){
+                		
+                		if($("#select-reward${cnt.count }").is(":checked")){
+                			
+                			$("#reward-cardBox${cnt.count }").css('background-color', '#d9e6f2');
+                			
+                			$("#checkTrue${cnt.count }").append("<div class='col-2 to-remove-tag mt-2'>"
+                						+"<p class='card-text m-auto'>수량 [${reward.rewardAmount }개 남음]</p>"
+		                            +"<div class='row align-items-md-center mb-4'>"
+		                               +"<a id='minus${cnt.count }' href='#'> <i class='fas fa-minus ml-3'></i></a>"
+		                                +"<input class='form-control ml-2 mr-2' style='width:50px;' value='1' id='orderAmount${cnt.count }' type='text' name='orderAmount' placeholder=''>"
+		                                +"<a id='plus${cnt.count }' href='#'> <i class='fas fa-plus'></i></a>"
+		                            +"</div>" 
+		                        +"</div>"
+		                        +"<div id='selectBox${cnt.count }' class='col-2 to-remove-tag mt-2'>"
+		                            +"<p class='card-text m-auto'>옵션</p>"
+		                            +"<select id='rewardOptionSelectBox'  class='custom-select' >" //name='rewardOptionValue'
+		                                +"<c:forEach var='option' items='${reward.rewardOptionList }' varStatus='opCnt'>"
+		                                	+"<option value='${option.rewardOptionValue }'> ${option.rewardOptionKey } : ${option.rewardOptionValue }</option>"
+		                                +"</c:forEach>"
+		                            +"</select>"
+		                        +"</div>");
+		                        
+                		}else{
+                			$("#reward-cardBox${cnt.count }").css('background-color', '');
+                			$("#checkTrue${cnt.count }").empty();
+                		}
+                		
+                	});	
+                	
+	                $(document).on("click", "a[id='plus${cnt.count }']", function(e){
+	                	e.preventDefault();
+	                	var currentVal = parseInt($('#orderAmount${cnt.count }').val());
+	                	$('#orderAmount${cnt.count }').val(++currentVal);
+	                });
+	                
+	                $(document).on("click", "a[id='minus${cnt.count }']", function(e){
+	                	
+	                	e.preventDefault();
+	               
+	                	var currentVal = parseInt($('#orderAmount${cnt.count }').val());
+	                	if(currentVal > 1){
+	                		$('#orderAmount${cnt.count }').val(--currentVal);
+	                	}
+	                });
+	                
+					$(document).on("change", "input[id='orderAmount${cnt.count }']", function(){
+						
+						var elements = $('#selectBox${cnt.count }').children();
+						var elementsLength = elements.length-1;
+						
+						var currentVal = parseInt($('#orderAmount${cnt.count }').val());
+						
+						if(currentVal == elementsLength){}
+						else if(currentVal > elementsLength) {
+							for(i = elementsLength ; i < currentVal; i++){
+								$('#selectBox${cnt.count }').append("<select id='rewardOptionSelectBox${cnt.count }' name='rewardOptionValue' class='custom-select mt-1' >"
+												                        +"<c:forEach var='option' items='${reward.rewardOptionList }' varStatus='opCnt'>"
+												                        	+"<option value='${option.rewardOptionValue }'> ${option.rewardOptionKey } : ${option.rewardOptionValue }</option>"
+												                        +"</c:forEach>"
+												                    +"</select>");
+							}
+						}else{
+							for(i = elementsLength; i > currentVal; i--){
+								$('#selectBox${cnt.count }').children().last().remove();
+							}
+						}
+	                });
+	                
+                	$(document).on("click", "input[id='select-reward${cnt.count }']", function(){
+                		
+                		var jsonData = $("form[name='reward${cnt.count }']").serializeObject();
+                		
+                		if($("#select-reward${cnt.count }").is(":checked")){
+                			
+                			$.ajax({
+       						    url: "addSelectReward.udo",
+       						    type: "post",
+       						    data: JSON.stringify(jsonData),
+       						    contentType: "application/json",
+       						    success: function(data) {
+       						    	
+       								var rewardSelection = JSON.parse(data);
+       								
+       								var paymentAmount = 0;
+         							$.each(rewardSelection, function(index, value ){
+         								
+       									//$('#selectedCompleteReward').append("<input type='text' name='rewardNo' value='" + ${rewardSelection.rewardNo } +"'>"
+    							   		//									+"<input type='text' name='email' value='" + ${rewardSelection.email } +"'>"
+    							   		//									+"<input type='text' name='paymentAmount' value='" + rewardSelection.paymentAmount +"'>"
+    							   		//									+"<input type='text' name='orderAmount' value='" + rewardSelection.orderAmount +"'>"
+    							   		//									+"<input type='text' name='shippingFee' value='" + rewardSelection.shippingFee +"'>");
+       									
+         								paymentAmount += value.paymentAmount;
+
+         							});
+         							$('#totalAmount').empty();
+         							$('#totalAmount').append("총 " + paymentAmount + "원을 후원합니다.");
+       						    },
+       						    error: function(errorThrown) {
+       						        alert(errorThrown.statusText);
+       						    }
+        					});	                			
+                			
+                			
+                		}else{
+                			
+                			$.ajax({
+    						    url: "removeSelectReward.udo",
+    						    type: "post",
+    						    data:  JSON.stringify(jsonData),
+    						    contentType: "application/json",
+    						    success: function(data) {
+    						    	
+       								var rewardSelection = JSON.parse(data);
+       								
+       								var paymentAmount = 0;
+         							$.each(rewardSelection, function(index, value ){
+         								
+       									//$('#selectedCompleteReward').append("<input type='text' name='rewardNo' value='" + ${rewardSelection.rewardNo } +"'>"
+    							   		//									+"<input type='text' name='email' value='" + ${rewardSelection.email } +"'>"
+    							   		//									+"<input type='text' name='paymentAmount' value='" + rewardSelection.paymentAmount +"'>"
+    							   		//									+"<input type='text' name='orderAmount' value='" + rewardSelection.orderAmount +"'>"
+    							   		//									+"<input type='text' name='shippingFee' value='" + rewardSelection.shippingFee +"'>");
+       									
+       									paymentAmount += value.paymentAmount;
+         							});
+         							
+         							$('#totalAmount').empty();
+         							$('#totalAmount').append("총 " + paymentAmount + "원을 후원합니다.");
+         							
+    						    },
+    						    error: function(errorThrown) {
+    						    	alert(errorThrown.statusText);
+    						    }
+    						});		
+                			
+                		}
+                		
+                	});
+                	
+                	
+                	$(document).on("change", "input[id='orderAmount${cnt.count }']", function(){
+                		
+                		var jsonData = $("form[name='reward${cnt.count }']").serializeObject();
+                		
+	               			$.ajax({
+	   						    url: "addSelectReward.udo",
+	   						    type: "post",
+	   						    data: JSON.stringify(jsonData),
+	   						    contentType: "application/json",
+	   						    success: function(data) {
+	   						    	
+	   								var rewardSelection = JSON.parse(data);
+	   								
+	   								
+	   								var paymentAmount = 0;
+	     							$.each(rewardSelection, function(index, value ){
+	     								
+	   									//$('#selectedCompleteReward').append("<input type='text' name='rewardNo' value='" + ${rewardSelection.rewardNo } +"'>"
+								   		//									+"<input type='text' name='email' value='" + ${rewardSelection.email } +"'>"
+								   		//									+"<input type='text' name='paymentAmount' value='" + rewardSelection.paymentAmount +"'>"
+								   		//									+"<input type='text' name='orderAmount' value='" + rewardSelection.orderAmount +"'>"
+								   		//									+"<input type='text' name='shippingFee' value='" + rewardSelection.shippingFee +"'>");
+	   									
+	   									paymentAmount += value.paymentAmount;
+		
+	     							});
+	     							
+	     							$('#totalAmount').empty();
+	     							$('#totalAmount').append("총 " + paymentAmount + "원을 후원합니다.");
+	   						    },
+	   						    error: function(errorThrown) {
+	   						        alert(errorThrown.statusText);
+	   						    }
+    					});		
+              
+                	});
+                	
+                </script>
+                
+				<script>
+					$(document).ready(function(){		
+						$("#rewardOptionSelectBox").val("${selectedRewardOption.rewardOptionValue }").prop("selected", true);
+					});
+				</script>                   
+                
+                
             </c:forEach>
+            
+
+            
+            
         </article> 
         
+		<form id="selectedCompleteReward" action="" method="POST">
+		
+		
+		</form>
         
-	<!-- --------------------------------------------------- -->
+        
+		<!-- --------------------------------------------------- -->
 	
         <article class="">
             <div class="row">
@@ -184,18 +391,18 @@
             </div>
         </article>
 		
-		<h3> 총금액 : </h3>
+		<h4> 총금액 : </h4> <div id="totalAmount" class="h4"></div>
 
         <article class="p-5 d-flex justify-content-end">
             <div class="d-inline-flex p-2 bd-highlight">
-                <a href="javaScript: return(0);" class="btn btn-primary"> 다음 단계로 <i class="fas fa-angle-right"></i> </a>
+            	<form id="paymentReservationForm" action="insertselectedReward.udo" method="post">
+            		<input type="hidden" name="projectNo" value="${projectNoOfRewardList }">
+                	<a href="javaScript: return(0);" onclick="document.getElementById('paymentReservationForm').submit();" class="btn btn-primary"> 다음 단계로 <i class="fas fa-angle-right"></i></a>
+                </form>
             </div>
         </article>
         
     </section>	
-	
-
-
 
     <!-- footer -->
     <footer class="footer">

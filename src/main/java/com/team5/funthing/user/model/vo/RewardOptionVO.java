@@ -34,11 +34,12 @@ public class RewardOptionVO {
 	public void setRewardOptionValue(String rewardOptionValue) {
 		this.rewardOptionValue = rewardOptionValue;
 	}
-	
 	@Override
 	public String toString() {
 		return "RewardOptionVO [rewardOptionNo=" + rewardOptionNo + ", rewardNo=" + rewardNo + ", rewardOptionKey="
 				+ rewardOptionKey + ", rewardOptionValue=" + rewardOptionValue + "]";
 	}
+
+	
 	
 }

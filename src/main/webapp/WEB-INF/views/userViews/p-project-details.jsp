@@ -85,7 +85,7 @@
 						</div>
 					</div>
 					<div class="p-2 bd-highlight mt-auto ml-0">
-						<form id="supportProject" action="supportProject.udo" method="post">
+						<form id="supportProject" action="supportProject.udo" method="GET">
 							<input type="hidden" name="projectNo" value="${project.projectNo }">
 							<a class="btn btn-lg btn-spon-prj d-none d-lg-inline-block pr-5 pl-5 mb-2"
 								href="javaScript: return(0);" onclick="document.getElementById('supportProject').submit();">
@@ -179,8 +179,8 @@
 										<div class="comment-list">
 											<div class="single-comment justify-content-between d-flex">
 												<div class="user justify-content-between d-flex">
-													<div class="thumb">
-														<img src="${pageContext.request.contextPath}/resources/user/img/comment/comment_1.png" alt="">
+													<div id="projectBoard-profile" class="thumb">
+														<img class="profile" src="${b1.member.myImage }">
 													</div>
 													<div class="desc" style="width: 600px;">
 														<p class="comment">
@@ -189,7 +189,7 @@
 														<div class="d-flex justify-content-between">
 															<div class="d-flex align-items-center">
 																<h5>
-																	<a href="#">${b1.member.name }</a>
+																	<a href="javaScript:return(0);">${b1.member.name }</a>
 																</h5>
 																<p class="date">${b1.projectBoardDate}</p>
 															</div>
