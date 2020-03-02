@@ -20,8 +20,12 @@
 		<typeAlias type="com.team5.funthing.user.model.vo.ProjectBoardVO" alias="projectboard"/>
 
 		<typeAlias type="com.team5.funthing.user.model.vo.ProjectAccountInformationVO" alias="projectAccountInformation"/>
+		
 		<typeAlias type="com.team5.funthing.user.model.vo.RewardVO" alias="reward"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.RewardOptionVO" alias="rewardOption"/>
+		<typeAlias type="com.team5.funthing.user.model.vo.RewardSelectionVO" alias="rewardSelection"/>
+		
+		
 		<typeAlias type="com.team5.funthing.user.model.vo.CreatorVO" alias="creator"/>
 
 
@@ -55,8 +59,11 @@
 		<mapper resource="mappers/projectboard-mapper.xml" />
 
 		<mapper resource="mappers/projectAccountInformation-mapper.xml"/>
+		
 		<mapper resource="mappers/reward-mapper.xml"/>
 		<mapper resource="mappers/rewardOption-mapper.xml"/>
+		<mapper resource="mappers/rewardSelection-mapper.xml"/>
+		
 		<mapper resource="mappers/creator-mapper.xml"/>
 		
 

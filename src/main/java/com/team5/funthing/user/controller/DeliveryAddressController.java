@@ -26,14 +26,6 @@ public class DeliveryAddressController {
 	   @Autowired
 	   private MemberVO memberVo;
 	   
-	   
-	   @RequestMapping(value="paymentReservation.udo", method = RequestMethod.GET)
-	   public String paymentReservation(ProjectVO vo) {
-		   
-		   return "sample/f-payment-reservation";
-	   }
-	   
-	   
 	   @RequestMapping(value="insertDeliveryAddress.udo",method =RequestMethod.GET)
 	   public String insertDeliveryAddress(DeliveryAddressVO vo,HttpSession session) {
 		   memberVo = (MemberVO)session.getAttribute("memberSession");
