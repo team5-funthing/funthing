@@ -19,7 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team5.funthing.user.model.vo.DeliveryAddressVO;
-import com.team5.funthing.user.model.vo.MemberVO;
+import com.team5.funthing.user.model.vo.PaymentReserveVO;
 import com.team5.funthing.user.model.vo.RewardOptionVO;
 import com.team5.funthing.user.model.vo.RewardSelectionVO;
 import com.team5.funthing.user.model.vo.RewardVO;
@@ -186,6 +186,18 @@ public class SupportProjectController {
 		return "redirect:paymentReservation.udo";
 	}
 	
+	@RequestMapping(value = "", method = RequestMethod.POST)
+	public String paymentReserve(	PaymentReserveVO prvo,
+									DeliveryAddressVO davo) {
+		
+		
+		
+		
+		return null;
+	}
+	
+	
+	
 	
 	
 	
@@ -216,6 +228,7 @@ public class SupportProjectController {
 		
 		return orderNo;
 	}
+	
 	
 	
 	
