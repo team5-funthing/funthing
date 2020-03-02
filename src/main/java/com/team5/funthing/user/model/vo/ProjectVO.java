@@ -15,12 +15,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProjectVO {
 	
-//	�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�듃 �뜝�뜦蹂멨뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝
 	private Integer projectNo = -1; 
 	private String creator = ""; 
 	private String email = "";
 	
-//	�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�듃 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝
 	private int goalMoney; 
 	private String projectMainImage = "";
 	private String projectTitle = "";
@@ -28,8 +26,6 @@ public class ProjectVO {
 	private String category=""; 
 	private Date startDate;
 	private Date endDate; 
-	
-//	�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�듃 �뜝��怨ㅼ삕 �뜝�룞�삕�뜝
 	private String projectSummary="";
 	private String projectCaution="";
 //	private List<String> projectIntroduceImage;
@@ -38,22 +34,17 @@ public class ProjectVO {
 
 
 
-//  湲고� 硫ㅻ쾭
-	private char writeStatus = 'n'; // �옉�꽦 �셿猷뚮맂 
-	private char status = 'n'; // �긽�깭 �뿬遺� - n: �떖�궗 誘몄젣異�, w : wating[��湲곗쨷], p : pass[�떖�궗 �넻怨�], f : fail[�떎�뙣], m : modify[�닔�젙 �슂援�]
+	private char writeStatus = 'n'; 
+	private char status = 'n'; // n: �ɻ��û ��, w : wating[�ɻ���], p : pass[���], f : fail[����], m : modify[������û]
 	private String statusReplyMessage = "";
-	private char funding = 'n'; // ���뵫吏꾪뻾以� �뿬遺�
-
-//  sql臾몄뿉 �쟻�슜 �븞�맂 硫ㅻ쾭
+	private char funding = 'n'; 
 
 	private int fundingMoney ; 
 	private String supporters; 
 	private char informationAgree = 'n'; 
-	
-//	DB에는 없는 자료
+
 	private int percent;
 	
-//	sql占쏙옙 占쏙옙館占� 占십울옙占쏙옙 VO
 	private MemberActivityVO memberActivity;
 	
 	

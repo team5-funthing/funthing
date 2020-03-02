@@ -87,9 +87,10 @@
 
         
         <article class="pb-5">
+        
+        
        		<c:forEach var="reward" items="${getRewardList }" varStatus="cnt">
-       		
-       			
+
        			<form id="reward${cnt.count }" name="reward${cnt.count }" action="addSelectReword.udo" method="POST">
        			
 		            <div id="reward-cardBox${cnt.count }" class="card wd-100 mb-2 ">
@@ -223,7 +224,7 @@
        						    type: "post",
        						    data: JSON.stringify(jsonData),
        						    contentType: "application/json",
-       						    success: function(data) {
+       						    success: function(data) { 
        						    	
        								var rewardSelection = JSON.parse(data);
        								
