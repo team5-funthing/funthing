@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 
@@ -93,40 +94,37 @@
             <!-- 여기에 들어갈거-->
 
            <!-- editor -->
-           <div class="card">
-            <div class="p-20">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title m-b-0" style="padding-bottom: 2%;">약관 입력</h5>
-                        <!-- Create the editor container -->
-                    
-                        
+				<div class="card">
+					<div class="p-20">
+						<div class="row">
+							<div class="col-12">
+								<div class="card">
+									<div class="card-body">
+										<h5 class="card-title m-b-0" style="padding-bottom: 2%;">약관
+											입력</h5>
+										<!-- Create the editor container -->
+										<form id="tosForm" method = "get" action="insertTos.ado">
+											<div><h1>${tos.tosTitle}</h1></div>
+											제목 : <input type="text" name="tosTitle" value="${tos.tosTitle}">
+											<input type="hidden" name="no" value="${tos.tosNo}">
+											<textarea name="editor1" rows="7" cols="50">${tos.tosContent}</textarea>
+											<div align="center" style="padding-top: 15px;">
+											<c:if test="${tos.tosNo ne null }">
+												<input type="submit" formaction="updateTos.ado" value="수정">
+											</c:if>
+												<input type="submit" value="입력">
+												<input type="submit" formaction="deleteTos.ado" value="삭제">
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
 
-
-                        <div id="editor" style="height: 300px;">
-                            <p></p>
-                            <p><strong></strong> </p>
-                            <p>
-                                <br>
-                            </p>
-                        </div>
-                        <div align="center" style="padding-top: 15px;">
-                            <input type="button" value="입력" >
-                            <a href="C:\Users\pjh\Desktop\5jo\matrix-admin-master\index.html"><input type="button" value="취소" ></a>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-            
-                <!-- ============================================================== -->
+				<!-- ============================================================== -->
                 <!-- End Container fluid  -->
                 <!-- ============================================================== -->
                 <!-- ============================================================== -->
@@ -184,6 +182,7 @@
     <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/jquery-minicolors/jquery.minicolors.min.js"></script>
     <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/quill/dist/quill.min.js"></script>
+    <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
     <script>
         //***********************************//
         // For select 2
@@ -226,6 +225,9 @@
             theme: 'snow'
         });
 
+    </script>
+    <script>
+           CKEDITOR.replace( 'editor1' );
     </script>
 </body>
 

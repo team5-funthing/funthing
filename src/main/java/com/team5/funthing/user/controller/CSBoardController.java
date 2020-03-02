@@ -33,7 +33,7 @@ public class CSBoardController {
 			
 		}else {
 			int csid = Integer.parseInt(request.getParameter("csid"));
-			vo.setCsid(csid);
+			vo.setCSID(csid);
 			model.addAttribute("askForAdmin",getCSBoardService.getCSBoard(vo));
 			
 			return "f-CSWrite";

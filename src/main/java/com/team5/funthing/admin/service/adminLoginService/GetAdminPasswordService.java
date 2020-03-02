@@ -4,7 +4,7 @@ import com.team5.funthing.admin.model.vo.AdminMemberVO;
 
 public interface GetAdminPasswordService {
 
-	public AdminMemberVO getAdminPassword(AdminMemberVO vo);
+	public String getAdminPassword(AdminMemberVO vo);
 	
 	
 }

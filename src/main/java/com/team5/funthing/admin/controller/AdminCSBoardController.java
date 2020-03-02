@@ -42,7 +42,8 @@ public class AdminCSBoardController {
 	public ModelAndView selectEntireAdminCSBoardList(CSBoardVO vo){
 
 		csBoardList = getAdminCSBoardListService.getCSBoardList(vo);
-
+		System.out.println(csBoardList.toString());
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("csBoardList",csBoardList);
 		mav.setViewName("b-customerService");
@@ -67,7 +68,7 @@ public class AdminCSBoardController {
 	@RequestMapping("getCSBoard.ado")
 	public ModelAndView selectCSBoard(CSBoardVO vo,HttpServletRequest request){
 		int CSID=Integer.parseInt(request.getParameter("CSID"));
-		vo.setCsid(CSID);
+		vo.setCSID(CSID);
 		
 		getCSBoard = getCSBoardService.getCSBoard(vo);
 		

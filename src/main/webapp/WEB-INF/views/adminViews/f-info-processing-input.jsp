@@ -106,13 +106,7 @@
 
 
 
-                        <div id="editor" style="height: 300px;">
-                            <p></p>
-                            <p><strong></strong> </p>
-                            <p>
-                                <br>
-                            </p>
-                        </div>
+                        <textarea name="editor1" rows = "7" cols = "50"></textarea>
                         <div align="center" style="padding-top: 15px;">
                             <input type="button" value="입력" >
                             <a href="C:\Users\pjh\Desktop\5jo\matrix-admin-master\index.html"><input type="button" value="취소" ></a>
@@ -184,6 +178,7 @@
     <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/jquery-minicolors/jquery.minicolors.min.js"></script>
     <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/quill/dist/quill.min.js"></script>
+    <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
     <script>
         //***********************************//
         // For select 2
@@ -226,6 +221,9 @@
             theme: 'snow'
         });
 
+    </script>
+    <script>
+           CKEDITOR.replace( 'editor1' );
     </script>
 </body>
 
