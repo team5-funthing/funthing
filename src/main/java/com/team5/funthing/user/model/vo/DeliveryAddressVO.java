@@ -2,18 +2,26 @@ package com.team5.funthing.user.model.vo;
 
 public class DeliveryAddressVO {
 
-	
+	private int deliveryAddressNo;
+	private String deliveryAddressName;
 	private String email;
 	private String zipcode;
-	private String address1;
-	private String address2;
+	private String roadAddress;
+	private String detailedAddress;
+	private String shippingNote;
 	
-	@Override
-	public String toString() {
-		return "DeleiveryAddressVO [email=" + email + ", zipcode=" + zipcode + ", address1=" + address1 + ", address2="
-				+ address2 + "]";
+	public int getDeliveryAddressNo() {
+		return deliveryAddressNo;
 	}
-	
+	public void setDeliveryAddressNo(int deliveryAddressNo) {
+		this.deliveryAddressNo = deliveryAddressNo;
+	}
+	public String getDeliveryAddressName() {
+		return deliveryAddressName;
+	}
+	public void setDeliveryAddressName(String deliveryAddressName) {
+		this.deliveryAddressName = deliveryAddressName;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -26,18 +34,31 @@ public class DeliveryAddressVO {
 	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
-	public String getAddress1() {
-		return address1;
+	public String getRoadAddress() {
+		return roadAddress;
 	}
-	public void setAddress1(String address1) {
-		this.address1 = address1;
+	public void setRoadAddress(String roadAddress) {
+		this.roadAddress = roadAddress;
 	}
-	public String getAddress2() {
-		return address2;
+	public String getDetailedAddress() {
+		return detailedAddress;
 	}
-	public void setAddress2(String address2) {
-		this.address2 = address2;
+	public void setDetailedAddress(String detailedAddress) {
+		this.detailedAddress = detailedAddress;
 	}
+	public String getShippingNote() {
+		return shippingNote;
+	}
+	public void setShippingNote(String shippingNote) {
+		this.shippingNote = shippingNote;
+	}
+	@Override
+	public String toString() {
+		return "DeliveryAddressVO [deliveryAddressNo=" + deliveryAddressNo + ", deliveryAddressName="
+				+ deliveryAddressName + ", email=" + email + ", zipcode=" + zipcode + ", roadAddress=" + roadAddress
+				+ ", detailedAddress=" + detailedAddress + ", shippingNote=" + shippingNote + "]";
+	}
+	
 	
 	
 }

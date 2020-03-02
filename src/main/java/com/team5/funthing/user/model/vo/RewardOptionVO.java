@@ -1,5 +1,8 @@
 package com.team5.funthing.user.model.vo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class RewardOptionVO {
 	
 	private Integer rewardOptionNo;
@@ -31,11 +34,12 @@ public class RewardOptionVO {
 	public void setRewardOptionValue(String rewardOptionValue) {
 		this.rewardOptionValue = rewardOptionValue;
 	}
-	
 	@Override
 	public String toString() {
 		return "RewardOptionVO [rewardOptionNo=" + rewardOptionNo + ", rewardNo=" + rewardNo + ", rewardOptionKey="
 				+ rewardOptionKey + ", rewardOptionValue=" + rewardOptionValue + "]";
 	}
+
+	
 	
 }

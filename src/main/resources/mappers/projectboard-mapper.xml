@@ -50,6 +50,7 @@
  	<resultMap type="Member" id="Member">
 		<result column="email" property="email" />
 		<result column="name" property="name" />
+		<result column="myImage" property="myImage" />
 	</resultMap>
 
 	<resultMap type="projectBoard" id="projectBoard">
@@ -65,7 +66,7 @@
 	</resultMap>
 	
  	<select id="getEntireProjectBoardList" parameterType="projectBoard"  resultMap="projectBoard">
-		select member.name, projectboard.* from(select * from projectboard where projectNo = ${projectNo} order by ref desc, step asc ) projectboard join member on member.email = projectboard.email
+		select member.*, projectboard.* from(select * from projectboard where projectNo = ${projectNo} order by ref desc, step asc ) projectboard join member on member.email = projectboard.email
 	</select>
 	
 	

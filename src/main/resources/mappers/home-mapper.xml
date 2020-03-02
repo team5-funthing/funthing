@@ -65,6 +65,17 @@
 		<collection property="memberActivity" resultMap="memberActivity"></collection>
 	</resultMap>
 	
+	<select id="getAllLikeCountList" resultType="project" parameterType="project">
+	<![CDATA[select project.*, memberActivity.cnt
+	from project join(
+    SELECT projectNo, likecount, COUNT (*) as cnt
+    FROM memberactivity
+    where likecount = 'y' 
+    GROUP by projectNo, likecount order by cnt desc)
+	memberActivity on memberActivity.projectNo = project.projectNo and project.funding='y'and rownum <=20]]>
+	</select>
+	
+	<!-- 1번째 -->
 	<select id="getLikeCountList" resultType="project" parameterType="project">
 	<![CDATA[select project.*, memberActivity.cnt
 	from project join(
@@ -138,5 +149,51 @@
     ]]>
     </select>
     
+    <!-- 마감임박 구한거 가져오기 -->
+    
+    <select id="getAllDeadLineList" resultType="project" parameterType="project">
+	<![CDATA[
+	select * from
+    (select projectNo,creator,fundingMoney,goalMoney,projectTitle,projectSubTitle,projectMainImage ,rownum as rnum from 
+    (select * from project where funding='y' order by enddate asc))
+    where rnum <= 20
+    ]]>
+    </select>
+    
+    <select id="getDeadLineList" resultType="project" parameterType="project">
+	<![CDATA[
+	select * from
+    (select projectNo,creator,fundingMoney,goalMoney,projectTitle,projectSubTitle,projectMainImage ,rownum as rnum from 
+    (select * from project where funding='y' order by enddate asc))
+    where rnum <= 4
+    ]]>
+    </select>
+    
+     <!-- 2번째 -->   
+    <select id="getDeadLineList2" resultType="project" parameterType="project">
+	<![CDATA[
+	select * from
+    (select projectNo,creator,fundingMoney,goalMoney,projectTitle,projectSubTitle,projectMainImage ,rownum as rnum from 
+    (select * from project where funding='y' order by enddate asc))
+    where rnum >= 5 and rnum <=8 
+    ]]>
+    </select>
+    
+     <!-- 3번째 -->   
+    <select id="getDeadLineList3" resultType="project" parameterType="project">
+	<![CDATA[
+	select * from
+    (select projectNo,creator,fundingMoney,goalMoney,projectTitle,projectSubTitle,projectMainImage ,rownum as rnum from 
+    (select * from project where funding='y' order by enddate asc))
+    where rnum >= 9 and rnum <=12 
+    ]]>
+    </select>
+    
+    
+    <!-- 신규프로젝트 구한거 가져오기 -->
+    <select id="getAllNewProjectList" resultType="project" parameterType="project">
+	select * from project 
+	where funding = 'y' and rownum <![CDATA[<=]]> 20 order by startdate desc
+    </select>
 	
 </mapper>
