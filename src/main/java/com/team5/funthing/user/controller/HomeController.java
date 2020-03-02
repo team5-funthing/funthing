@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.team5.funthing.user.model.vo.ProjectBoardVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.service.homeService.GetAttentionProjectService;
+import com.team5.funthing.user.service.homeService.GetDeadLineListService;
 import com.team5.funthing.user.service.homeService.GetLikeCountListService;
 import com.team5.funthing.user.service.homeService.GetMoneyPercentListService;
 import com.team5.funthing.user.service.homeService.GetProjectProgressListService;
@@ -29,6 +30,8 @@ public class HomeController {
 	private GetLikeCountListService getLikeCountListService;
 	@Autowired
 	private GetMoneyPercentListService getMoneyPercentListService;
+	@Autowired
+	private GetDeadLineListService getDeadLineListService;
 	
 	@RequestMapping("*.udo") 
 	public String showindex(ProjectBoardVO vo, ProjectVO vo2, Model model) { //맨처음 메인페이지 들어오는
@@ -71,6 +74,20 @@ public class HomeController {
 			//3번째 슬라이드
 			List<ProjectVO> moneyPercentList3 = getMoneyPercentListService.getMoneyPercentList3(vo2);
 			model.addAttribute("moneyPercentList3",moneyPercentList3);
+		
+		//5.마감임박프로젝트
+		List<ProjectVO> deadLineList = getDeadLineListService.getDeadLineList(vo2);
+		model.addAttribute("deadLineList",deadLineList);
+		
+			//2번째 슬라이드
+			List<ProjectVO> deadLineList2 = getDeadLineListService.getDeadLineList2(vo2);
+			model.addAttribute("deadLineList2",deadLineList2);
+			//3번째 슬라이드
+			List<ProjectVO> deadLineList3 = getDeadLineListService.getDeadLineList3(vo2);
+			model.addAttribute("deadLineList3",deadLineList3);
+		
+			
+			
 		
 		return "p-index";
 	}

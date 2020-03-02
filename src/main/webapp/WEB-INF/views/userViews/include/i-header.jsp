@@ -18,9 +18,9 @@
 											<li><a href="#">리워드 프로젝트</a></li>
 											<li><a href="#">후원 프로젝트</a></li>
 											<hr>
-											<li><a href="#">인기 프로젝트</a></li>
-											<li><a href="#">마감임박 프로젝트</a></li>
-											<li><a href="#">신규 프로젝트</a></li>
+											<li><a href="getAllLikeCountList.udo">인기 프로젝트</a></li>
+											<li><a href="getDeadLineList.udo">마감임박 프로젝트</a></li>
+											<li><a href="getAllNewProjectList.udo">신규 프로젝트</a></li>
 											<hr>
 											<li><a href="#">기획전 보러가기</a></li>
 										</ul>

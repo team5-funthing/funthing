@@ -15,12 +15,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProjectVO {
 	
-//	占쏙옙占쏙옙占쏙옙트 占썩본占쏙옙占쏙옙 占쏙옙占
+//	�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�듃 �뜝�뜦蹂멨뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝
 	private Integer projectNo = -1; 
 	private String creator = ""; 
 	private String email = "";
 	
-//	占쏙옙占쏙옙占쏙옙트 占쏙옙占쏙옙 占쏙옙占
+//	�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�듃 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝
 	private int goalMoney; 
 	private String projectMainImage = "";
 	private String projectTitle = "";
@@ -29,7 +29,7 @@ public class ProjectVO {
 	private Date startDate;
 	private Date endDate; 
 	
-//	占쏙옙占쏙옙占쏙옙트 占쌀곤옙 占쏙옙占
+//	�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�듃 �뜝��怨ㅼ삕 �뜝�룞�삕�뜝
 	private String projectSummary="";
 	private String projectCaution="";
 //	private List<String> projectIntroduceImage;
@@ -38,19 +38,22 @@ public class ProjectVO {
 
 
 
-//  기타 멤버
-	private char writeStatus = 'n'; // 작성 완료된 
-	private char status = 'n'; // 상태 여부 - n: 심사 미제출, w : wating[대기중], p : pass[심사 통과], f : fail[실패], m : modify[수정 요구]
+//  湲고� 硫ㅻ쾭
+	private char writeStatus = 'n'; // �옉�꽦 �셿猷뚮맂 
+	private char status = 'n'; // �긽�깭 �뿬遺� - n: �떖�궗 誘몄젣異�, w : wating[��湲곗쨷], p : pass[�떖�궗 �넻怨�], f : fail[�떎�뙣], m : modify[�닔�젙 �슂援�]
 	private String statusReplyMessage = "";
-	private char funding = 'n'; // 펀딩진행중 여부
+	private char funding = 'n'; // ���뵫吏꾪뻾以� �뿬遺�
 
-//  sql문에 적용 안된 멤버
+//  sql臾몄뿉 �쟻�슜 �븞�맂 硫ㅻ쾭
 
-	private int fundingMoney; 
+	private int fundingMoney ; 
 	private String supporters; 
 	private char informationAgree = 'n'; 
 	
-//	sql�� ��ν� �ʿ��� VO
+//	DB에는 없는 자료
+	private int percent;
+	
+//	sql占쏙옙 占쏙옙館占� 占십울옙占쏙옙 VO
 	private MemberActivityVO memberActivity;
 	
 	
@@ -189,6 +192,12 @@ public class ProjectVO {
 	public void setStatusReplyMessage(String statusReplyMessage) {
 		this.statusReplyMessage = statusReplyMessage;
 	}
+	public int getPercent() {
+		return percent;
+	}
+	public void setPercent(int percent) {
+		this.percent = percent;
+	}
 	@Override
 	public String toString() {
 		return "ProjectVO [projectNo=" + projectNo + ", creator=" + creator + ", email=" + email + ", goalMoney="
@@ -196,11 +205,12 @@ public class ProjectVO {
 				+ ", projectSubTitle=" + projectSubTitle + ", category=" + category + ", startDate=" + startDate
 				+ ", endDate=" + endDate + ", projectSummary=" + projectSummary + ", projectCaution=" + projectCaution
 				+ ", projectIntroduceVideo=" + projectIntroduceVideo + ", projectStory=" + projectStory
-				+ ", writeStatus=" + writeStatus + ", status=" + status + ", funding=" + funding + ", fundingMoney="
-				+ fundingMoney + ", supporters=" + supporters + ", informationAgree=" + informationAgree
-				+ ", memberActivity=" + memberActivity + "]";
-
+				+ ", writeStatus=" + writeStatus + ", status=" + status + ", statusReplyMessage=" + statusReplyMessage
+				+ ", funding=" + funding + ", fundingMoney=" + fundingMoney + ", supporters=" + supporters
+				+ ", informationAgree=" + informationAgree + ", percent=" + percent + ", memberActivity="
+				+ memberActivity + "]";
 	}
+	
 
 	
 	
