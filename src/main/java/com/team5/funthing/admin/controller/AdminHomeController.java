@@ -11,6 +11,8 @@ import com.team5.funthing.admin.model.vo.AdminNoticeBoardVO;
 import com.team5.funthing.admin.service.adminNoticeBoardService.GetAdminNoticeBoardListService;
 import com.team5.funthing.admin.service.adminProjectCheckService.GetProjectCheckListService;
 import com.team5.funthing.user.model.vo.ProjectVO;
+import com.team5.funthing.user.model.vo.TosVO;
+import com.team5.funthing.user.service.TosService.GetTosListService;
 
 @Controller
 public class AdminHomeController {
@@ -19,6 +21,8 @@ public class AdminHomeController {
 	GetAdminNoticeBoardListService getAdminNoticeBoardListService;
 	@Autowired
 	GetProjectCheckListService getProjectCheckListService;
+	@Autowired
+	GetTosListService getTosListService;
 	
 	@RequestMapping("adminIndex.ado")
 	public String showIndex() {
@@ -46,8 +50,11 @@ public class AdminHomeController {
 	}
 	
 	@RequestMapping("termsOfService.ado")
-	public String showTermsOfService() {
-		return "f-clause-input";
+	public String showTermsOfService(TosVO vo, Model model) {
+		List<TosVO> getTosList = getTosListService.getTosList(vo);
+		
+		model.addAttribute("TosList", getTosList);
+		return "b-tos-list";
 	}
 	
 	@RequestMapping("adminNoticeInput.ado")

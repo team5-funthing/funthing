@@ -104,7 +104,7 @@
                         <div style="padding-bottom: 5px;" >
                             <label style="padding-right: 5px;"> 제목 </label>
                             <input type="text" size="50%" name = "noticeTitle" value="${vo.noticeTitle}">
-                   			<input type="hidden" name="noticeNo" value="${vo.noticeNo }">
+                   			<input type="hidden" name="no" value="${vo.noticeNo }">
                             <select name="noticeCategory">
                                 <option value="공지" <c:if test="${vo.noticeCategory eq '공지'}">selected</c:if>>공지</option>
                                 <option value="이벤트"<c:if test="${vo.noticeCategory eq '이벤트'}">selected</c:if>>이벤트</option>

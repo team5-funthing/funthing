@@ -43,7 +43,7 @@
                         <li class="sidebar-item"> 
                        		<a class="sidebar-link waves-effect waves-dark sidebar-link" href="termsOfService.ado" aria-expanded="false">
                                 <i class="mdi mdi-feather"></i>
-                                    <span class="hide-menu">약관입력 </span>
+                                    <span class="hide-menu">약관관리 </span>
                             </a>
                         </li>
                         <li class="sidebar-item"> 
