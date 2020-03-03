@@ -78,10 +78,9 @@
 									<div class="col align-self-center">
 										<div>							
 											 <input type="button"  class="genric-btn success medium" style="width: 110px;"	onclick="clickedBtn()" value="저장" />
-										<!--<input type="submit"  class="genric-btn success medium" style="width: 110px;" value="저장" />-->
 										</div>
 										<div class="mt-2">
-											<input type="button" formaction="deleteimage.udo"
+											<input type="submit" formaction="deleteimage.udo"
 												class="genric-btn success medium" style="width: 110px;"
 												value="삭제">
 										</div>
@@ -95,6 +94,8 @@
 					<hr>
 
 			 		     <script>
+			 		    
+			 		     
 			 		    $("#image2").change(function(){
 		            		if(this.files && this.files[0]){
 		            			var reader = new FileReader;

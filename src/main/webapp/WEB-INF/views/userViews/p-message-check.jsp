@@ -35,20 +35,14 @@
 						<div class="d-flex justify-content-start">
 							<nav>
 								<div class="nav nav-tabs" id="nav-tab" role="tablist">
-									<a class="nav-item nav-link active"
-										id="nav-created-prj-questions-tab" data-toggle="tab"
-										href="#nav-created-prj-questions" role="tab"
-										aria-controls="nav-created-prj-questions" aria-selected="true">만든
-										프로젝트</a> <a class="nav-item nav-link"
-										id="nav-sponsored-prj-questions-tab" data-toggle="tab"
-										href="#nav-sponsored-prj-questions" role="tab"
-										aria-controls="nav-sponsored-prj-questions"
-										aria-selected="false">문의/후원 프로젝트</a>
-										<a class="nav-item nav-link"
-										id="nav-askadmin-tab" data-toggle="tab"
-										href="#nav-askadmin" role="tab"
-										aria-controls="nav-askadmin"
-										aria-selected="false">관리자에게 문의하기</a>
+									<a class="nav-item nav-link active"	id="nav-created-prj-questions-tab" data-toggle="tab"	href="#nav-created-prj-questions"
+									 role="tab"	aria-controls="nav-created-prj-questions" aria-selected="true">만든프로젝트</a> 
+									 
+									<a class="nav-item nav-link" id="nav-sponsored-prj-questions-tab" data-toggle="tab" href="#nav-sponsored-prj-questions" role="tab"
+										aria-controls="nav-sponsored-prj-questions" aria-selected="false">문의/후원 프로젝트</a>
+										
+									<a class="nav-item nav-link" id="nav-askadmin-tab" data-toggle="tab" href="#nav-askadmin" role="tab"
+										aria-controls="nav-askadmin" aria-selected="false">관리자에게 문의하기</a>
 								</div>
 							</nav>
 						</div>
