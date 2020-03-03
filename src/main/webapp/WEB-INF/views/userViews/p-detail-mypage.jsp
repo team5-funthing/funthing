@@ -26,7 +26,7 @@
                <div class="col-12">
                   <div class="d-flex justify-content-start mb-3">
                      <div id="detail-mypage-profile-img" style="background: #BDBDBD;">
-                        <img class="profile" src="${sessionScope.memberSession.myImage }">
+                        <img id="gogoimage3" class="profile" src="${sessionScope.memberSession.myImage }">
                      </div>
                      <div class="h2 login-id align-self-center ml-4">${sessionScope.memberSession.name} </div>
                   </div>

@@ -26,7 +26,7 @@
 	
 	        <div class="d-none d-lg-block pl-3 pr-3">
 	            <a type="button" href="#" id="mypage-btn" data-popover="popover-mypage-menu">
-	                <img class="profile" src="${sessionScope.memberSession.myImage }"></a>
+	                <img id="gogoimage2" class="profile" src="${sessionScope.memberSession.myImage }"></a>
 	        </div>
 	    </div>
 	</div>
