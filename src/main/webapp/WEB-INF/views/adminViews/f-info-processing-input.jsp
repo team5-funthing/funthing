@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 
@@ -100,27 +101,26 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title m-b-0"></h5>
-                        <!-- Create the editor container -->
-                    
-                        
-
-
-
-                        <textarea name="editor1" rows = "7" cols = "50"></textarea>
-                        <div align="center" style="padding-top: 15px;">
-                            <input type="button" value="입력" >
-                            <a href="C:\Users\pjh\Desktop\5jo\matrix-admin-master\index.html"><input type="button" value="취소" ></a>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-            
-                <!-- ============================================================== -->
+                                	<form action="insertPersonalInfoProcessing.ado" method="post">
+                        			<!-- Create the editor container -->
+                        			제목 :  <input type="text" name="infoTitle" value="${personalInfoProcessing.infoTitle}">
+                        			<input type="text" name="no" value="${personalInfoProcessing.infoNo}">
+                        			<textarea name="editor1" rows = "7" cols = "50">${personalInfoProcessing.infoContent}</textarea>
+			                        <div align="center" style="padding-top: 15px;">
+			                        <c:if test="${personalInfoProcessing.infoNo ne null}">
+			                        	<input type="submit" formaction="updatePersonalInfoProcessing.ado" value="수정">
+			                        </c:if>
+			                            <input type="submit" value="입력" >
+			                            <a href="deletePersonalInfoProcessing.ado?infoNo=${personalInfoProcessing.infoNo}"><input type="button" value="삭제"></a>
+			                        </div>
+			                        </form>
+                    			</div>
+                			</div>
+            			</div>
+        			</div>
+    			</div>
+			</div>
+		    <!-- ============================================================== -->
                 <!-- End Container fluid  -->
                 <!-- ============================================================== -->
                 <!-- ============================================================== -->

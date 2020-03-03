@@ -8,11 +8,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.team5.funthing.admin.model.vo.AdminNoticeBoardVO;
+import com.team5.funthing.admin.model.vo.AdminPersonalInfoProcessingVO;
 import com.team5.funthing.admin.service.adminNoticeBoardService.GetAdminNoticeBoardListService;
 import com.team5.funthing.admin.service.adminProjectCheckService.GetProjectCheckListService;
 import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.model.vo.TosVO;
 import com.team5.funthing.user.service.TosService.GetTosListService;
+import com.team5.funthing.user.service.personalInfoProcessingService.GetPersonalInfoProcessingListService;
 
 @Controller
 public class AdminHomeController {
@@ -23,6 +25,8 @@ public class AdminHomeController {
 	GetProjectCheckListService getProjectCheckListService;
 	@Autowired
 	GetTosListService getTosListService;
+	@Autowired
+	GetPersonalInfoProcessingListService getPersonalInfoProcessingListService;
 	
 	@RequestMapping("adminIndex.ado")
 	public String showIndex() {
@@ -66,8 +70,11 @@ public class AdminHomeController {
 	}
 	
 	@RequestMapping("infoProcessingInput.ado")
-	public String showInputInfoProcessing() {
-		return "f-info-processing-input";
+	public String showInputInfoProcessing(AdminPersonalInfoProcessingVO vo, Model model) {
+		
+		model.addAttribute("PersonalInfoProcessing", getPersonalInfoProcessingListService.getPersonalInfoProcessingList(vo));
+		
+		return "b-personalInfoProcessing-list";
 	}
 
 	@RequestMapping("getProjectCheckList.ado")
