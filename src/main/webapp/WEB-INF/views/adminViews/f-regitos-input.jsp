@@ -54,7 +54,7 @@
         <!-- ============================================================== -->
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
-        <jsp:include page="include/i-left-sidebar.jsp"/>
+       	<jsp:include page="include/i-left-sidebar.jsp"/>
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
@@ -68,7 +68,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">공지 글</h4>
+                        <h4 class="page-title">회원가입 약관 입력</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
@@ -91,64 +91,46 @@
 
 
 
-           <!-- editor -->
-           <div class="card">
+            <!-- 여기에 들어갈거-->
+
+            <!-- editor -->
+            <div class="card">
             <div class="p-20">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title m-b-0" style="padding:20px;">공지사항</h4>
-                        <!-- Create the editor container -->
-                   	<form action="insertAdminNoticeBoard.ado">
-                        <div style="padding-bottom: 5px;" >
-                            <label style="padding-right: 5px;"> 제목 </label>
-                            <input type="text" size="50%" name = "noticeTitle" value="${vo.noticeTitle}">
-                   			<input type="hidden" name="no" value="${vo.noticeNo }">
-                            <select name="noticeCategory">
-                                <option value="공지" <c:if test="${vo.noticeCategory eq '공지'}">selected</c:if>>공지</option>
-                                <option value="이벤트"<c:if test="${vo.noticeCategory eq '이벤트'}">selected</c:if>>이벤트</option>
-                            </select>
-                        </div>                       
-                        <textarea name="editor1" rows = "7" cols = "50">${vo.noticeContents}</textarea>
-                        <!-- <div id="editor" style="height: 300px;">
-                            <p></p>
-                            <p><strong></strong> </p>
-                            <p>
-                                <br>
-                            </p>
-                        </div> -->
-                        <div align="center" style="padding-top: 15px;">
-
-							<c:if test="${vo.noticeNo ne null}">
-								<input type="submit" formaction="updateAdminNoticeBoard.ado" value="수정">							
-							</c:if>
-							<c:if test="${vo.noticeNo eq null}">                 		
-                           		 <input type="submit" value="등록" >
-                            </c:if>
-                            <input type="submit" formaction="deleteAdminNoticeBoard.ado" value="삭제">
-                            <a href="adminNoticeInput.ado"><input type="button" value="뒤로" ></a>
-                        </div>
-					</form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-        
-
-
-
-
-                <!-- ============================================================== -->
+                                <h5 class="card-title m-b-0"></h5>
+                                <div><h1>${RegisterTos.registerTosTitle}</h1></div>
+                                	<form action="insertRegisterTos.ado" method="post">
+                        			<!-- Create the editor container -->
+                        			제목 :  <input type="text" name="registerTosTitle" value="${RegisterTos.registerTosTitle}">
+                        			<input type="hidden" name="no" value="${RegisterTos.registerNo}">
+                        			<textarea name="editor1" rows = "7" cols = "50">${RegisterTos.registerTosContent}</textarea>
+			                        <div align="center" style="padding-top: 15px;">
+			                        <c:if test="${RegisterTos.registerNo ne null}">
+			                        	<input type="submit" formaction="updateRegisterTos.ado" value="수정">
+			                        </c:if>
+			                        <c:if test="${RegisterTos.registerNo eq null}">
+			                            <input type="submit" value="입력" >
+			                        </c:if>
+			                            <input type="submit" formaction="deleteRegisterTos.ado" value="삭제">
+			                        </div>
+			                        </form>
+                    			</div>
+                			</div>
+            			</div>
+        			</div>
+    			</div>
+			</div>
+		    <!-- ============================================================== -->
                 <!-- End Container fluid  -->
                 <!-- ============================================================== -->
                 <!-- ============================================================== -->
                 <!-- footer -->
                 <!-- ============================================================== -->
                 <jsp:include page="include/i-footer.jsp"/>
+            </div>
                 <!-- ============================================================== -->
                 <!-- End footer -->
                 <!-- ============================================================== -->
@@ -157,7 +139,6 @@
             <!-- End Page wrapper  -->
             <!-- ============================================================== -->
         </div>
-    </div>
         <!-- ============================================================== -->
         <!-- End Wrapper -->
         <!-- ============================================================== -->
@@ -200,7 +181,6 @@
     <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/jquery-minicolors/jquery.minicolors.min.js"></script>
     <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/quill/dist/quill.min.js"></script>
-    <!-- CKEditor 전용 라이브러리 -->
     <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
     <script>
         //***********************************//

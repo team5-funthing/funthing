@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminRegisterTosDAO">
+
+	<select id="getRegisterTosList" resultType="registerTos">
+		SELECT * FROM registerTos
+	</select>
+	
+	<select id="getRegisterTos" parameterType="registerTos" resultType="registerTos">
+		SELECT * FROM registerTos WHERE registerNo=#{registerNo}	
+	</select>
+	
+	<insert id="insertRegisterTos" parameterType="registerTos">
+		INSERT INTO registerTos
+		VALUES(registerTos_seq.nextval,#{registerTosTitle},#{registerTosContent})
+	</insert>
+	
+	<update id="updateRegisterTos" parameterType="registerTos">
+		UPDATE registerTos
+		SET registerTosTitle=#{registerTosTitle}, registerTosContent=#{registerTosContent}
+		WHERE registerNo = #{registerNo}
+	</update>
+	
+	<delete id="deleteRegisterTos" parameterType="registerTos">
+		DELETE FROM registerTos WHERE registerNo = #{registerNo}
+	</delete>
+
+</mapper>
