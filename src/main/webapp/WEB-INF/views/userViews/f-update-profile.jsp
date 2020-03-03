@@ -62,25 +62,23 @@
 					<div class="d-flex justify-content-start mt-5">
 						<div class="col-3 mr-4">프로필 사진 </div>
 						<div class="col-10">
-							<form id="imageupload" action="saveimage2.udo" method="post"
-								enctype="multipart/form-data">
+							 
 								<div class="row">
+								<form action="saveimage2.udo" method="post" enctype="multipart/form-data">
+								     
+								     
 									<div class="col-5 align-self-center">
-										<label for="image"> 
-										<input type="file" name="imgname" accept="image/*" 	id="image" style="display: none; "  />
-											<div id="detail-mypage-profile-img" class="">
-												<img class="profile"
-													src="${sessionScope.memberSession.myImage }">
+										<label for="image2"> 
+										<div id="detail-mypage-profile-img" class="">
+										     <input  type="file"  id="image2" name="imgname" accept="image/*" style="display: none; ">
+                                  	<img class="profile"		src="${sessionScope.memberSession.myImage }">
 											</div>
 										</label>
 									</div>
 									<div class="col align-self-center">
-										<div>
-											<label for="imageButton">
-											<input type="submit"  
-												class="genric-btn success medium" style="width: 110px;"
-												value="저장" />
-											</label>
+										<div>							
+											<input type="submit"  class="genric-btn success medium" style="width: 110px;"	value="저장" />
+										
 										</div>
 										<div class="mt-2">
 											<input type="button" formaction=""
@@ -89,8 +87,9 @@
 										</div>
 							
 									</div>
+									</form>
 								</div>
-							</form>
+							
 						</div>
 					</div>
 					<hr>
