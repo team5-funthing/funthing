@@ -40,6 +40,7 @@
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminNoticeBoardVO" alias="adminNoticeBoard"/>
 
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminMemberVO" alias="adminMember"/>
+		<typeAlias type="com.team5.funthing.admin.model.vo.AdminPersonalInfoProcessingVO" alias="personalinfo"/>
     
 	</typeAliases>
   
@@ -85,5 +86,6 @@
  		<mapper resource="mappers/adminReport-mapper.xml"/>
  		<mapper resource="mappers/adminMemberManagement-mapper.xml"/>
  		<mapper resource="mappers/adminProjectCheck-mapper.xml" />
+ 		<mapper resource="mappers/personalinfoprocessing-mapper.xml"/>
 	</mappers>
 </configuration>

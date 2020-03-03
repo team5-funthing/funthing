@@ -7,13 +7,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.team5.funthing.admin.model.vo.AdminPersonalInfoProcessingVO;
 import com.team5.funthing.user.model.vo.ProjectBoardVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
+import com.team5.funthing.user.model.vo.TosVO;
+import com.team5.funthing.user.service.TosService.GetTosListService;
 import com.team5.funthing.user.service.homeService.GetAttentionProjectService;
 import com.team5.funthing.user.service.homeService.GetDeadLineListService;
 import com.team5.funthing.user.service.homeService.GetLikeCountListService;
 import com.team5.funthing.user.service.homeService.GetMoneyPercentListService;
 import com.team5.funthing.user.service.homeService.GetProjectProgressListService;
+import com.team5.funthing.user.service.personalInfoProcessingService.GetPersonalInfoProcessingListService;
 import com.team5.funthing.user.service.projectService.GetProjectService;
 
 @Controller
@@ -32,6 +36,13 @@ public class HomeController {
 	private GetMoneyPercentListService getMoneyPercentListService;
 	@Autowired
 	private GetDeadLineListService getDeadLineListService;
+	
+	//=====================약관,개인정보처리방침 관련 서비스=========================
+	
+	@Autowired
+	private GetTosListService getTosListService;
+	@Autowired
+	private GetPersonalInfoProcessingListService getPersonalInfoProcessingListService;
 	
 	@RequestMapping("*.udo") 
 	public String showindex(ProjectBoardVO vo, ProjectVO vo2, Model model) { //맨처음 메인페이지 들어오는
@@ -91,5 +102,14 @@ public class HomeController {
 		
 		return "p-index";
 	}
+	
+	@RequestMapping("TosAndPolicy.udo")
+	public String showTosAndPolicyPage(TosVO tvo, AdminPersonalInfoProcessingVO pvo, Model model) {
+		
+		model.addAttribute("getTosList", getTosListService.getTosList(tvo));
+		model.addAttribute("getPersonalInfoProcessing", getPersonalInfoProcessingListService.getPersonalInfoProcessingList(pvo));
+		return "tosAndPolicy";
+	}
+	
 
 }

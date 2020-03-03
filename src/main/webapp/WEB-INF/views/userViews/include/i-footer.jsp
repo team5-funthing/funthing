@@ -29,6 +29,7 @@
 								<li><a href="#">공지</a></li>
 								<li><a href="#">이벤트</a></li>
 								<li><a href="CSWrite.udo">관리자에게 문의하기</a></li>
+								<li><a href="TosAndPolicy.udo">정책 및 약관</a></li>
 							</ul>
 						</div>
 					</div>
