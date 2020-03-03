@@ -55,11 +55,18 @@ public class ProjectVO {
 	
 //	sql占쏙옙 占쏙옙館占� 占십울옙占쏙옙 VO
 	private MemberActivityVO memberActivity;
+	private SearchKeywordVO searchKeyword;
 	
 	
 	
 	
 	
+	public SearchKeywordVO getSearchKeyword() {
+		return searchKeyword;
+	}
+	public void setSearchKeyword(SearchKeywordVO searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
 	public MemberActivityVO getMemberActivity() {
 		return memberActivity;
 	}
@@ -210,6 +217,10 @@ public class ProjectVO {
 				+ ", informationAgree=" + informationAgree + ", percent=" + percent + ", memberActivity="
 				+ memberActivity + "]";
 	}
+	
+	
+
+
 	
 
 	

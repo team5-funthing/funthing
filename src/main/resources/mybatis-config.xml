@@ -27,7 +27,7 @@
 		
 		
 		<typeAlias type="com.team5.funthing.user.model.vo.CreatorVO" alias="creator"/>
-
+		<typeAlias type="com.team5.funthing.user.model.vo.SearchKeywordVO" alias="SearchKeyword"/>
 
 		<typeAlias type="com.team5.funthing.user.model.vo.CSBoardVO" alias="csboard"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.DeliveryAddressVO" alias="deliveryAddress"/>
@@ -66,6 +66,7 @@
 		<mapper resource="mappers/rewardSelection-mapper.xml"/>
 		
 		<mapper resource="mappers/creator-mapper.xml"/>
+		<mapper resource="mappers/searchKeyword-mapper.xml"/>
 		
 		
 		
