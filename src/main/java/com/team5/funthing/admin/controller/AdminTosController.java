@@ -43,7 +43,7 @@ public class AdminTosController {
 		return "f-clause-input";
 	}
 	
-	@RequestMapping("updateTos.ado")
+	@RequestMapping(value="updateTos.ado", method=RequestMethod.POST)
 	public String updateTos(TosVO vo, Model model, HttpServletRequest request) {
 		
 		int tosNo = Integer.parseInt(request.getParameter("no"));
@@ -57,7 +57,7 @@ public class AdminTosController {
 		return "b-tos-list";
 	}
 	
-	@RequestMapping("insertTos.ado")
+	@RequestMapping(value="insertTos.ado", method=RequestMethod.POST)
 	public String insertTos(TosVO vo, Model model, HttpServletRequest request) {
 		
 		String tosContent = request.getParameter("editor1");
@@ -70,7 +70,7 @@ public class AdminTosController {
 		return "b-tos-list";
 	}
 	
-	@RequestMapping("deleteTos.ado")
+	@RequestMapping(value="deleteTos.ado", method=RequestMethod.POST)
 	public String deleteTos(TosVO vo, Model model, HttpServletRequest request) {
 		int tosNo = Integer.parseInt(request.getParameter("no"));
 		vo.setTosNo(tosNo);

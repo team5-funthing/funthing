@@ -103,7 +103,7 @@
 										<h5 class="card-title m-b-0" style="padding-bottom: 2%;">약관
 											입력</h5>
 										<!-- Create the editor container -->
-										<form id="tosForm" method = "get" action="insertTos.ado">
+										<form id="tosForm" method = "post" action="insertTos.ado">
 											<div><h1>${tos.tosTitle}</h1></div>
 											제목 : <input type="text" name="tosTitle" value="${tos.tosTitle}">
 											<input type="hidden" name="no" value="${tos.tosNo}">

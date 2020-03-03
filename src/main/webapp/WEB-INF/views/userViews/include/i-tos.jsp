@@ -7,13 +7,13 @@ funthing 리워드 서비스의 이용과 관련하여 필요한 사항을 규�
 
 <ul id="toslist">
 <c:forEach var="tos" items="${getTosList}">
-	<li><a>${tos.tosTitle}</a></li>
+	<li><a href="#tosNo${tos.tosNo}">${tos.tosTitle}</a></li>
 </c:forEach>
 </ul>
 
 <hr>
 <c:forEach var="tos" items="${getTosList}">
-<div class="tosNo">
+<div id="tosNo${tos.tosNo}">
 	<h3>${tos.tosTitle}</h3>
 	<div>${tos.tosContent}</div>
 </div>
