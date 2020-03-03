@@ -46,11 +46,18 @@ public class ProjectVO {
 	private int percent;
 	
 	private MemberActivityVO memberActivity;
+	private SearchKeywordVO searchKeyword;
 	
 	
 	
 	
 	
+	public SearchKeywordVO getSearchKeyword() {
+		return searchKeyword;
+	}
+	public void setSearchKeyword(SearchKeywordVO searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
 	public MemberActivityVO getMemberActivity() {
 		return memberActivity;
 	}
@@ -201,6 +208,10 @@ public class ProjectVO {
 				+ ", informationAgree=" + informationAgree + ", percent=" + percent + ", memberActivity="
 				+ memberActivity + "]";
 	}
+	
+	
+
+
 	
 
 	
