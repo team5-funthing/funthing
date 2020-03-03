@@ -85,8 +85,8 @@
 	<update id="updateMemberActivity"
 		parameterType="memberActivity">
 		UPDATE memberActivity
-		SET (likeCount=#{likeCount}, reprotCount=#{reportCount} ,
-		reservationCount=#{reservationCount})
+		SET likeCount=#{likeCount}, reprotCount=#{reportCount} ,
+		reservationCount=#{reservationCount}
 		WHERE (email=#{email} AND projectno=${projectno})
 	</update>
 
