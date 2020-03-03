@@ -6,18 +6,55 @@
            <div class="container">
                <div>
                    <div>
-                    <form action="saveimage.udo" method="post" enctype="multipart/form-data">
+                    <form id="imgform" action="saveimage.udo" method="post" enctype="multipart/form-data">
                        <div class="row d-flex justify-content-between ml-2 mr-2 mt-4 pb-4">
                        		<label for="image" >
                            <div id="profile-img" style="background: #BDBDBD;">
                        		<input  type="file"  id="image" name="imgname" accept="image/*" style="display: none; ">
-                              <img class="profile" src="${sessionScope.memberSession.myImage }">
+                              <img id="gogoimage" class="profile" src="${sessionScope.memberSession.myImage }">
                            </div>
                            </label>
-                           <div><input type="submit" value="저장" class="genric-btn success small"></div>
+                           <div><input type="button" onclick="clickedBtn()" value="저장" class="genric-btn success small"></div>
                            <div>${sessionScope.memberSession.name} 님 환영합니다.</div>
                        </div>
                        </form>
+                    <script>
+                    	$("#image").change(function(){
+                    		if(this==$('#image')[0]){	}
+                    		
+	            		if(this.files && this.files[0]){
+	            			var reader = new FileReader;
+	            			reader.onload = function(data){
+	            				$("#gogoimage").attr("src", data.target.result);
+	            				$("#gogoimage2").attr("src", data.target.result);
+	            				$("#gogoimage3").attr("src", data.target.result);
+	            			}
+	            			reader.readAsDataURL(this.files[0]);
+	            		}
+	            	}) 
+	            	
+					  function clickedBtn(){
+						    
+                       var form = new FormData(document.getElementById("imgform"));
+                       $.ajax({
+                    	   url:"saveimage.udo",
+                    	   data:form,
+                    	   type:"POST",
+                    	   cache:false,
+                    	   processData:false,
+                    	   contentType:false,
+                    	   success:function(data){
+                        	if(data=="1"){
+                        		alert("이미지가 저장되었습니다.");
+                        	}
+                    	   },
+                    	   error : function() {
+                   			alert("연결에 문제가 있습니다. 인터넷 환경을 확인 후 다시 시도해 주세요.");
+                   		}
+                       });
+					  }
+                       </script> 
+                       
                    </div>
                    <div>
                        <div class="d-flex justify-content-around bd-highlight">

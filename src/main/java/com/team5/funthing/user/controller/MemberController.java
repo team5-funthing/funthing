@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -23,6 +24,7 @@ import com.team5.funthing.user.service.memberService.GetMemberService;
 import com.team5.funthing.user.service.memberService.InsertImageService;
 import com.team5.funthing.user.service.memberService.InsertMemberService;
 import com.team5.funthing.user.service.memberService.InsertSocialMemberService;
+import com.team5.funthing.user.service.memberService.UpdateMemberService;
 
 @Controller
 @SessionAttributes("member")
@@ -44,6 +46,8 @@ public class MemberController {
 	private InsertSocialMemberService insertSocialMemberService;
 	@Autowired
 	private InsertImageService insertImageService;
+	@Autowired
+	private UpdateMemberService updateMemberService;
 	@Autowired
 	private UploadUtil upload;
 
@@ -144,7 +148,7 @@ public class MemberController {
 		try {
 			vo.setEmail(email);
 			String certificationCode = sendMailUtil.createCertificationCode(50);
-			sendMailUtil.sendMail("[Funthing] ", " : ["+certificationCode+"]", vo.getEmail());   
+			sendMailUtil.sendMail("[Funthing] 인증코드 입니다.", "인증코드 : ["+certificationCode+"]", vo.getEmail());   
 			model.addAttribute("certificationCode",certificationCode);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -152,8 +156,30 @@ public class MemberController {
 		return "ajax/certificationCodeCallback";
 	}
 
-	//
-
+    @RequestMapping(value="pwSuccess.udo",method=RequestMethod.POST)
+    @ResponseBody
+    public String updatePw(MemberVO vo,String email) {
+    	String result = "2";
+    	try {
+			vo.setEmail(email);
+			System.out.println(vo.toString());
+			if(getMemberService.getMember(vo)!=null) {
+				System.out.println(getMemberService.getMember(vo).toString());
+			String password = sendMailUtil.createCertificationCode(50);
+			sendMailUtil.sendMail("[Funthing] 임의로 생성된 비밀번호 입니다.", "발송된 비밀번호로 로그인을 하시고 꼭 "
+					+ "마이페이지 - 회원정보수정 에서 비밀번호를 변경하여 이용에 불편함이 없으시길 바랍니다. "
+					+ "비밀번호 : ["+password+"]", vo.getEmail());
+			MemberVO vo2 = getMemberService.getMember(vo);
+			vo2.setPassword(password);
+			System.out.println(vo2.toString());
+			updateMemberService.updateMember(vo2);
+			result="1";
+			}
+    	}catch(Exception e) {
+			e.printStackTrace();
+		}
+    	return result;
+    }
 
 	@RequestMapping(value="imageUpload.udo",method=RequestMethod.GET)
 	public String imageUpload() {

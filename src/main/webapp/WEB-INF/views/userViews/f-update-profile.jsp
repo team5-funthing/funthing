@@ -62,39 +62,74 @@
 					<div class="d-flex justify-content-start mt-5">
 						<div class="col-3 mr-4">프로필 사진 </div>
 						<div class="col-10">
-							<form id="imageupload" action="saveimage2.udo" method="post"
-								enctype="multipart/form-data">
+							 
 								<div class="row">
+								<form id="saveimage" action="saveimage2.udo" method="post" enctype="multipart/form-data">
+								     
+								         
 									<div class="col-5 align-self-center">
-										<label for="image"> 
-										<input type="file" name="imgname" accept="image/*" 	id="image" style="display: none; "  />
-											<div id="detail-mypage-profile-img" class="">
-												<img class="profile"
-													src="${sessionScope.memberSession.myImage }">
+										<label for="image2"> 
+										<div id="detail-mypage-profile-img" class="">
+										      <input  type="file"  id="image2" name="imgname" accept="image/*" style="display: none; "> 
+                                  	<img class="profile"	id="gogoimage4"	src="${sessionScope.memberSession.myImage }">
 											</div>
 										</label>
 									</div>
 									<div class="col align-self-center">
-										<div>
-											<label for="imageButton">
-											<input type="submit"  
-												class="genric-btn success medium" style="width: 110px;"
-												value="저장" />
-											</label>
+										<div>							
+											 <input type="button"  class="genric-btn success medium" style="width: 110px;"	onclick="clickedBtn()" value="저장" />
 										</div>
 										<div class="mt-2">
-											<input type="button" formaction=""
+											<input type="submit" formaction="deleteimage.udo"
 												class="genric-btn success medium" style="width: 110px;"
 												value="삭제">
 										</div>
 							
 									</div>
+									</form>
 								</div>
-							</form>
+							
 						</div>
 					</div>
 					<hr>
+
+			 		     <script>
+			 		    
+			 		     
+			 		    $("#image2").change(function(){
+		            		if(this.files && this.files[0]){
+		            			var reader = new FileReader;
+		            			reader.onload = function(data){
+		            				$("#gogoimage4").attr("src", data.target.result);
+		            				$("#gogoimage").attr("src", data.target.result);
+		            				$("#gogoimage2").attr("src", data.target.result);
+		            			}
+		            			 reader.readAsDataURL(this.files[0]); 
+		            		}
+		            	}) 
+		            	  
+			 		     
+			 		     
+			 		     
+					  function clickedBtn(){
 					
+                       var form = new FormData(document.getElementById("saveimage"));
+                       $.ajax({
+                    	   url:"saveimage.udo",
+                    	   data:form,
+                    	   type:"POST",
+                    	   cache:false,
+                    	   processData:false,
+                    	   contentType:false,
+                    	   success:function(data){
+                    		 alert("프로필 이미지가 변경됐습니다.");
+                    	   },
+                    	   error : function() {
+                   			alert("연결에 문제가 있습니다. 인터넷 환경을 확인 후 다시 시도해 주세요.");
+                   		}
+                       });
+					  }
+                       </script> 
 					<form id ="updateForm">
 					<div class="form-row">
 							<div class="col-md-4 mb-3">
@@ -147,7 +182,7 @@
 							<div class="mt-10">
 								<input type="button" value="취소"
 									class="btn btn-registry-way-cancel d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
-									onclick="mypage.udo">
+									onclick="cancel()">
 							</div>
 							<div class="mt-10">
 								<button
@@ -165,6 +200,10 @@
 	</div>
 <script>
 	
+function cancel(){
+	location.href="mypage.udo";
+}	
+	
 function delMember(){
 	var pwData = {"pw":document.getElementById("nowPassword").value};
   $.ajax({
@@ -180,7 +219,7 @@ function delMember(){
 			}
 		},
 		error : function() {
-			alert("연결에 문제가 있습니다. 인터넷 환경을 확인 후 다시 시도해 주세요.")
+			alert("연결에 문제가 있습니다. 인터넷 환경을 확인 후 다시 시도해 주세요.");
 		}
 	  
   });
@@ -199,7 +238,7 @@ function updateMember(){
 						if(!document.getElementById("phone").value.test("-") || document.getElementById("phone").value==null ){
 							document.updateForm.submit();
 						}else{
-							alert("전화번호를 입력하실 때  '-'을 제외하고 입력해 주세요.")
+							alert("전화번호를 입력하실 때  '-'을 제외하고 입력해 주세요.");
 						}
 					}else{
 						alert("비밀번호는 8자리 이상 입력해 주세요.");
@@ -213,7 +252,7 @@ function updateMember(){
 			}
 		},
 		error : function() {
-			alert("연결에 문제가 있습니다. 인터넷 환경을 확인 후 다시 시도해 주세요.")
+			alert("연결에 문제가 있습니다. 인터넷 환경을 확인 후 다시 시도해 주세요.");
 		}
 	  
   });
