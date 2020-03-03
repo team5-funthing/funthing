@@ -181,7 +181,7 @@
 							<div class="mt-10">
 								<input type="button" value="취소"
 									class="btn btn-registry-way-cancel d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
-									onclick="mypage.udo">
+									onclick="cancel()">
 							</div>
 							<div class="mt-10">
 								<button
@@ -198,6 +198,10 @@
 
 	</div>
 <script>
+	
+function cancel(){
+	location.href="mypage.udo";
+}	
 	
 function delMember(){
 	var pwData = {"pw":document.getElementById("nowPassword").value};

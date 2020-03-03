@@ -86,8 +86,7 @@ public class MemberController2 {
 		   vo.setEmail(vo2.getEmail());
 	       memberImageUploader(uploadFile, vo);
 	        insertImageService.insertImage(vo);
-	        getMemberService.getMember(vo);
-	        session.setAttribute("memberSession", vo);
+	        session.setAttribute("memberSession", getMemberService.getMember(vo));
 	        
 	      return "1";
 	   }
@@ -100,8 +99,7 @@ public class MemberController2 {
 		   vo.setEmail(vo2.getEmail());
 	       memberImageUploader(uploadFile, vo);
 	        insertImageService.insertImage(vo);
-	        getMemberService.getMember(vo);
-	        session.setAttribute("memberSession", vo);
+	        session.setAttribute("memberSession", getMemberService.getMember(vo));
 	        
 	        return "f-update-profile";
 	   }
