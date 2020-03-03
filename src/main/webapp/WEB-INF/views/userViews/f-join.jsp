@@ -9,7 +9,77 @@
 <head>
 
 <jsp:include page="./include/i-head-setting.jsp" />
+<style>
+.showThing{
+	margin-bottom:40px;
+}
+.agree{
+	text-align:center;
+	position: relative;
+  	background: #FFF;
+  	padding: 20px;
+  	width:auto;
+  	height:500px;
+  	max-width: 500px;
+  	margin: 10px auto;
+}
+.ItemShow{float:right;margin:5px;}
+.ItemName{float:left;margin-left:15px;}
+a{text-decoration:none;}
+</style>
+<script>
+$(document).ready(function(){
+	$("#registerTos1").hide();
+	$("#inputRegisterTos").hide();
+	$("#inputPersonalInfo").hide();
+	$('.tosAgree').magnificPopup({
+		type:'inline',
+		midClick:true
+	});
+	$("#registerTos").click(function(){
+		$("#registerTos1").toggle("slow");
+		$.ajax({
+			type:"post",
+			url:"abd.udo",
+			success:function(){
+				
+			},
+			error:function(){
+				
+			}
+		});
+	});
+	$("#serviceTos").click(function(){
+		$("#inputRegisterTos").toggle("slow");
+		$.ajax({
+			type:"post",
+			url:"getServiceTos.udo",
+			success:function(data){
+				$("#inputRegisterTos").html(data);
+			},
+			error:function(){
+				alert("실패");
+			}
+		});
+	});
+	$("#PersonalInfo").click(function(){
+		$("#inputPersonalInfo").toggle("slow");
+		$.ajax({
+			type:"post",
+			url:"getPersonalInfo.udo",
+			success:function(data){
+				$("#inputPersonalInfo").html(data);
+			},
+			error:function(){
+				alert("실패");
+			}
+		});
+	});
+});
+</script>
+<style>
 
+</style>
 </head>
 
 <body>
@@ -28,6 +98,40 @@
 							<div class="mt-10">
 								<h2>회원가입</h2>
 							</div>
+							<div id="loginTos">
+								<!-- href 값 : popup을 띄울 영역에 대한 값 -->
+								<!-- class 속성 : javascript의 이벤트 처리 -->
+								<a href="#showTosAgree" class="tosAgree">약관동의</a>
+							</div>
+							<!-- 약관 동의 팝업 시작 -->
+							<!-- class 속성 : css처리 부분, 팝업으로 보일 부분이므로 감추어야 한다. -->
+							<div id="showTosAgree" class="agree mfp-hide">
+								<div class="showThing"><input type="checkbox" value="약관 동의" name="agree"> 서비스 이용약관 동의(필수)</div><br>
+								<div class="showThing">
+									<span class="ItemName">회원가입 약관</span>
+									<span class="ItemShow"><a id="registerTos">내용 보기</a></span>
+								</div>
+								<div style="overflow:auto;height:150px;" id="registerTos1">
+								</div>
+								<br>
+								<div class="showThing">
+									<span class="ItemName">리워드 서비스 이용약관</span>
+									<span class="ItemShow"><a id="serviceTos">내용 보기</a></span>
+									<div id="rewardTos"></div>
+								</div>
+								<div style="overflow:auto;height:150px;" id="inputRegisterTos">
+								</div>
+								<br>
+								<div class="showThing">
+									<span class="ItemName">리워드 서비스 개인정보취급방침</span>
+									<span class="ItemShow"><a id="PersonalInfo">내용 보기</a></span>
+									<div id="rewardPersonalInfo"></div>
+								</div>
+								<div style="overflow:auto;height:150px;" id="inputPersonalInfo">
+								</div>
+								<br>
+							</div>
+							<!-- 약관 동의 팝업 종료 -->
 							<div class="mt-10">
 								<h5>이름</h5>
 								<input type="text" name="name" id="name" placeholder="이름"

@@ -93,18 +93,19 @@
 
             <!-- 여기에 들어갈거-->
 
-           <!-- editor -->
-           <div class="card">
+            <!-- editor -->
+            <div class="card">
             <div class="p-20">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title m-b-0"></h5>
+                                <div><h1>${personalInfoProcessing.infoTitle}</h1></div>
                                 	<form action="insertPersonalInfoProcessing.ado" method="post">
                         			<!-- Create the editor container -->
                         			제목 :  <input type="text" name="infoTitle" value="${personalInfoProcessing.infoTitle}">
-                        			<input type="text" name="no" value="${personalInfoProcessing.infoNo}">
+                        			<input type="hidden" name="no" value="${personalInfoProcessing.infoNo}">
                         			<textarea name="editor1" rows = "7" cols = "50">${personalInfoProcessing.infoContent}</textarea>
 			                        <div align="center" style="padding-top: 15px;">
 			                        <c:if test="${personalInfoProcessing.infoNo ne null}">

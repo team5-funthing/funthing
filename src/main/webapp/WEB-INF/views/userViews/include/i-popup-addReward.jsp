@@ -135,9 +135,6 @@
 							return;
 						});
 						
-					},
-					error:function(){
-						alert('실패');
 					}
 				});
 			});

@@ -95,8 +95,7 @@
                                         <thead>
                                             <tr>
                                                 <th style="width: 120px;" >처리방침 번호</th>
-                                                <th style="width: 200px;">처리방침 제목</th>
-                                                <th>처리방침 내용</th>          
+                                                <th style="width: 200px;">처리방침 제목</th>         
                                             </tr>
                                         </thead>
                                         <tbody>                        
@@ -104,7 +103,6 @@
                                         <tr>
                                         	<td>${list.infoNo}</td>
                                         	<td><a href="getPersonalInfoProcessing.ado?infoNo=${list.infoNo}">${list.infoTitle}</a></td>
-                                        	<td>${list.infoContent}</td>
                                         </tr>
                                         </c:forEach>
                                         </tbody>

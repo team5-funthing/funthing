@@ -8,12 +8,12 @@ funthing은 이용자들의 개인정보를 소중히 다루고 있습니다.
 
 <ul>
 <c:forEach var="policyTitle" items="${getPersonalInfoProcessing}">
-<li><a>${policyTitle.infoTitle}</a></li>
+<li><a href="#policyNo${policyTitle.infoNo}">${policyTitle.infoTitle}</a></li>
 </c:forEach>
 </ul>
 <hr>
 <c:forEach var="policy" items="${getPersonalInfoProcessing}">
-<div class="policyNo">
+<div id="policyNo${policy.infoNo}">
 	<h3>${policy.infoTitle}</h3>
 	<div>${policy.infoContent}</div>
 </div>
