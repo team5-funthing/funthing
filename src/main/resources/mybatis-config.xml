@@ -41,6 +41,7 @@
 
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminMemberVO" alias="adminMember"/>
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminPersonalInfoProcessingVO" alias="personalinfo"/>
+    	<typeAlias type="com.team5.funthing.admin.model.vo.AdminRegisterTosVO" alias="registerTos"/>
     
 	</typeAliases>
   
@@ -87,5 +88,6 @@
  		<mapper resource="mappers/adminMemberManagement-mapper.xml"/>
  		<mapper resource="mappers/adminProjectCheck-mapper.xml" />
  		<mapper resource="mappers/personalinfoprocessing-mapper.xml"/>
+ 		<mapper resource="mappers/registerTos-mapper.xml"/>
 	</mappers>
 </configuration>

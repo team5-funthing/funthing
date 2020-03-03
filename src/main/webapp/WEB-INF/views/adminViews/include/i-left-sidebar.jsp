@@ -57,7 +57,12 @@
                                 <i class="mdi mdi-account-card-details"></i>
                                 <span class="hide-menu">개인정보 처리방침 관리 </span>
                             </a>
-
+                        </li>
+                        <li class="sidebar-item"> 
+                        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="registerTos.ado" aria-expanded="false">
+                                <i class="mdi mdi-account-card-details"></i>
+                                <span class="hide-menu">회원가입약관 관리 </span>
+                            </a>
                         </li>
                         <li class="sidebar-item"> 
                         	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="getProjectCheckList.ado" aria-expanded="false">

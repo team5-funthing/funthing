@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.team5.funthing.admin.model.vo.AdminNoticeBoardVO;
 import com.team5.funthing.admin.model.vo.AdminPersonalInfoProcessingVO;
+import com.team5.funthing.admin.model.vo.AdminRegisterTosVO;
 import com.team5.funthing.admin.service.adminNoticeBoardService.GetAdminNoticeBoardListService;
 import com.team5.funthing.admin.service.adminProjectCheckService.GetProjectCheckListService;
+import com.team5.funthing.admin.service.adminRegisterTosService.GetRegisterTosListService;
 import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.model.vo.TosVO;
 import com.team5.funthing.user.service.TosService.GetTosListService;
@@ -27,6 +29,8 @@ public class AdminHomeController {
 	GetTosListService getTosListService;
 	@Autowired
 	GetPersonalInfoProcessingListService getPersonalInfoProcessingListService;
+	@Autowired
+	GetRegisterTosListService getRegisterTosListService;
 	
 	@RequestMapping("adminIndex.ado")
 	public String showIndex() {
@@ -75,6 +79,14 @@ public class AdminHomeController {
 		model.addAttribute("PersonalInfoProcessing", getPersonalInfoProcessingListService.getPersonalInfoProcessingList(vo));
 		
 		return "b-personalInfoProcessing-list";
+	}
+	
+	@RequestMapping("registerTos.ado")
+	public String showRegisterTos(AdminRegisterTosVO vo, Model model) {
+		
+		model.addAttribute("RegisterTosList", getRegisterTosListService.getRegisterTosList(vo));
+		
+		return "b-regitos-list";
 	}
 
 	@RequestMapping("getProjectCheckList.ado")
