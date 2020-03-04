@@ -148,10 +148,7 @@ public class ProjectController {
             }
         });
 	}
-	
-	
-	
-	
+
 // ===================== 메서드 =======================	
 	
 	@RequestMapping(value="getAllFundingProjectList.udo", method = RequestMethod.GET)
@@ -162,8 +159,6 @@ public class ProjectController {
 		
 		return "p-project-list";
 	}
-	
-	
 	
 	@RequestMapping(value="/showStartProjectPage.udo", method = RequestMethod.GET)
 	public String startProject(HttpSession session, Model model) {
@@ -177,8 +172,6 @@ public class ProjectController {
 		return "p-start-project"; // 시작하기 페이지로 이동하자
 	} // 로그인 시에만 프로젝트 만들기 접근 가능하도록 하기위해 세션에 저장된 값 확인 후 페이지 이동.
 	
-	
-
 	@RequestMapping(value="/getWritingProject.udo", method = RequestMethod.GET)
 	public String getProject(	@RequestParam int currentProjectNo, 
 								@RequestParam(required = false)String msg, 
@@ -236,7 +229,6 @@ public class ProjectController {
 		return "f-create-project-basic"; // 프로젝트 작성 폼
 	} // 프로젝트 만들기 시작 페이지에서 수행
 	
-	
 	//리워드 등록시에 목록을 추가하는 메서드 추가해야한다()
 	@RequestMapping(value = "/insertProject.udo", method = RequestMethod.POST)
 	public String insertProject(	@RequestParam(name = "creatorUploadImage", required = false)List<MultipartFile> creatorUploadImage,
@@ -275,7 +267,6 @@ public class ProjectController {
 		
 		return "redirect:mypage.udo";
 	}
-	
 	
 	@RequestMapping(value = "/saveInputWritingProject.udo", method = RequestMethod.POST)
 	public String updateProject(	@RequestParam(name = "uploadImage", required = false)List<MultipartFile> projectMainImageUpload,
@@ -342,7 +333,6 @@ public class ProjectController {
 		return "redirect:getWritingProject.udo";
 	}
 	
-
 	@RequestMapping(value="projectDetailsFromProjectBoard.udo", method = RequestMethod.GET)
 	public String showProjectDetails(	@RequestParam int currentProjectNo,
 										ProjectVO pvo, Model model) { // 이미지클릭시 프로젝트 상세 페이지로 이동

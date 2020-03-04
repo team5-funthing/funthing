@@ -5,20 +5,10 @@
 <mapper namespace="RewardSelectionDAO">
 
 	<insert id="insertRewardSelection" parameterType="rewardSelection">
+	
+			INSERT INTO rewardselection(selectrewardno, orderNo, rewardNo, paymentAmount, orderAmount, shippingFee)
+			VALUES (rewardselection_seq.nextval, #{orderNo }, #{rewardNo }, #{paymentAmount}, #{orderAmount}, #{shippingFee})
 
-		<selectKey keyProperty="orderNo" resultType="int" order="AFTER">
-			 SELECT orderno_seq.currval FROM dual
-		</selectKey>
-		
-		<if test="orderNo == 0">
-			INSERT INTO rewardselection(selectrewardno, orderNo, rewardNo, paymentAmount, orderAmount, shippingFee)
-			VALUES (rewardselection_seq.nextval, orderno_seq.nextval, #{rewardNo}, #{paymentAmount}, #{orderAmount}, #{shippingFee})
-		</if>
-		<if test="orderNo != 0">
-			INSERT INTO rewardselection(selectrewardno, orderNo, rewardNo, paymentAmount, orderAmount, shippingFee)
-			VALUES (rewardselection_seq.nextval, #{orderNo}, #{rewardNo}, #{paymentAmount}, #{orderAmount}, #{shippingFee})
-		</if>
-		
 	</insert>
 	
 	<select id="getRewardSelectionList" parameterType="rewardSelection" resultType="rewardSelection">
@@ -63,7 +53,7 @@
 		FROM rewardselection
 		LEFT OUTER JOIN reward
 		ON rewardselection.rewardNo = reward.rewardNo
-		WHERE rewardselection.orderNo = #{orderNo}
+		<!-- WHERE rewardselection.orderNo = #{orderNo} -->
 	
 	</select>
 	

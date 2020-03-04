@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 
 <html class="no-js">
@@ -18,43 +20,46 @@
 	<!-- ------------------ -->
 	
 	<section id="select-reward" class="container w-50">
-        <article class="back-story">
-            <i class="fas fa-chevron-left"></i>
-            <a href="#">메인으로 돌아가기</a>
-        </article>
-        <article class="select-order">
+		<form id="goProjectPage" action="projectDetailsFromProjectBoard.udo" method="GET">
+		    <article class="back-story">
+		            <i class="fas fa-chevron-left"></i>
+		            <input type="hidden" name="currentProjectNo" value="${projectNo }">
+		            <a href="javaScript: return(0);" onclick="document.getElementById('goProjectPage').submit()" >프로젝트로 돌아가기</a>
+	        </article>
+	    </form>    
+		<article class="select-order">
             <div class="row d-flex justify-content-center ml-2 mr-2 mt-4 pb-4">
-                <div class="order-circle d-flex d-flex justify-content-center " style="background: whitesmoke; border-style:dotted; border-color: gray; border-width: 3px;">
-                    <div class="d-inline-flex p-2 bd-highlight align-self-center h5 p-3" style="color: #000000;" >
+                <div class="order-circle d-flex d-flex justify-content-center " style="background: whitesmoke; border-style:dotted; border-color: whitesmoke; border-width: 3px;">
+                    <div class="d-inline-flex p-2 bd-highlight align-self-center h5 p-0" style="color: #000000;" >
                         리워드<br>
                         선택
                     </div>
                 </div>
                 <div class="d-flex align-items-center">
-                    <i class="fas fa-ellipsis-h" style="color:gray;"></i>
-                    <i class="fas fa-ellipsis-h" style="color:gray;"></i>
-                    <i class="fas fa-ellipsis-h" style="color:gray;"></i>
-                    <i class="fas fa-ellipsis-h" style="color:gray;"></i>
-                    <i class="fas fa-ellipsis-h" style="color:gray;"></i>
-                    <i class="fas fa-ellipsis-h" style="color:gray;"></i>
-                    <i class="fas fa-ellipsis-h" style="color:gray;"></i>
+                    <i class="fas fa-ellipsis-h" style="color:whitesmoke;"></i>
+                    <i class="fas fa-ellipsis-h" style="color:whitesmoke;"></i>
+                    <i class="fas fa-ellipsis-h" style="color:whitesmoke;"></i>
+                    <i class="fas fa-ellipsis-h" style="color:whitesmoke;"></i>
+                    <i class="fas fa-ellipsis-h" style="color:whitesmoke;"></i>
+                    <i class="fas fa-ellipsis-h" style="color:whitesmoke;"></i>
+                    <i class="fas fa-ellipsis-h" style="color:whitesmoke;"></i>
                 </div>
-                <div class="order-circle d-flex d-flex justify-content-center " style="background: whitesmoke; border-style:dotted; border-color: gray; border-width: 3px;">
+                <div class="order-circle d-flex d-flex justify-content-center " style="background: whitesmoke; border-style:dotted; border-color: whitesmoke; border-width: 3px;">
                     <div class="d-inline-flex p-2 bd-highlight align-self-center h5 p-0" style="color: #000000;" >
                         결제 예약
                     </div>
                 </div>
                 <div class="d-flex align-items-center">
-                    <i class="fas fa-ellipsis-h" style="color:gray;"></i>
-                    <i class="fas fa-ellipsis-h" style="color:gray;"></i>
-                    <i class="fas fa-ellipsis-h" style="color:gray;"></i>
-                    <i class="fas fa-ellipsis-h" style="color:gray;"></i>
-                    <i class="fas fa-ellipsis-h" style="color:gray;"></i>
-                    <i class="fas fa-ellipsis-h" style="color:gray;"></i>
-                    <i class="fas fa-ellipsis-h" style="color:gray;"></i>
+                    <i class="fas fa-ellipsis-h" style="color:whitesmoke;"></i>
+                    <i class="fas fa-ellipsis-h" style="color:whitesmoke;"></i>
+                    <i class="fas fa-ellipsis-h" style="color:whitesmoke;"></i>
+                    <i class="fas fa-ellipsis-h" style="color:whitesmoke;"></i>
+                    <i class="fas fa-ellipsis-h" style="color:whitesmoke;"></i>
+                    <i class="fas fa-ellipsis-h" style="color:whitesmoke;"></i>
+                    <i class="fas fa-ellipsis-h" style="color:whitesmoke;"></i>
                 </div>
                 <div class="order-circle d-flex d-flex justify-content-center " style="background: #009DFF;">
-                    <div class="d-inline-flex p-2 bd-highlight align-self-center h5 p-0" style="color: whitesmoke;" >
+                    <div class="d-inline-flex p-2 bd-highlight align-self-center h5 p-3" style="color: whitesmoke;" >
                         결제 확인
                     </div>
                 </div>
@@ -67,17 +72,25 @@
 
             <div class="card mb-3" style="border: 0px">
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-8">
-                            <h5 class="card-title">[결제한 리워드 품목 이름]</h5>
-                            <p class="card-text">리워드 제품 품목 설명</p>
-                            <p class="card-text">옵션: [선택]</p>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-end">
-                        <p class="card-text mr-3" style="font-weight: bold;">수량:1개[수량]</p>
-                        <p class="card-text" style="font-weight: bold;">25,000원[수량에 따른 금액]</p>
-                    </div>
+                
+					<c:set var="totalAmount" value="0"/>
+					<c:set var="shippingFee" value="0"/>
+					
+					<c:forEach var="rewardSelection" items="${rewardSelectionJoinList}" varStatus="cnt">
+						<c:set var="totalAmount" value="${ totalAmount + rewardSelection.paymentAmount }"/>
+						<div class="row">
+							<div class="col-8">
+								<h5 class="card-title">${rewardSelection.reward.rewardName }</h5>
+								<p class="card-text">${rewardSelection.reward.rewardContent }</p>
+								<p class="card-text">옵션: </p>
+							</div>
+						</div>
+						<div class="d-flex justify-content-end">
+							<p class="card-text mr-3" style="font-weight: bold;">수량:${rewardSelection.orderAmount }개</p>
+							<p class="card-text" style="font-weight: bold;">${rewardSelection.paymentAmount }원</p>
+						</div>
+						<hr>
+					</c:forEach>
                     <hr>
 
                     <div class="d-flex justify-content-between">

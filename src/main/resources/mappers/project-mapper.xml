@@ -9,7 +9,7 @@
 			<!-- 일단 test로 n으로 시작 -->
 			SELECT *
 			FROM project
-			WHERE funding = 'n'
+			WHERE funding = 'y'
 	</select>
 
 

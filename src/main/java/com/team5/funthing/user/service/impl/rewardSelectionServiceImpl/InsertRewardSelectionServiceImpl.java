@@ -14,8 +14,8 @@ public class InsertRewardSelectionServiceImpl implements InsertRewardSelectionSe
 	private RewardSelectionDAO rewardSelectionDAO;
 	
 	@Override
-	public RewardSelectionVO insertRewardSelection(RewardSelectionVO vo) {
-		return rewardSelectionDAO.insertRewardSelection(vo);
+	public void insertRewardSelection(RewardSelectionVO vo) {
+		rewardSelectionDAO.insertRewardSelection(vo);
 	}
 
 }

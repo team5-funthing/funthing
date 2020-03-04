@@ -36,9 +36,9 @@ public class ShowProjectListController {
 		System.out.println(vo.toString());
 		
 	
-			System.out.println("카테고리 기본값 아무것도 설정안했을때 보여주기 ");
-			List<ProjectVO> getAllFundingProjectList = getShowCategorySubListService.getShowCategorySubList(vo);
-			model.addAttribute("getAllFundingProjectList", getAllFundingProjectList);
+		System.out.println("카테고리 기본값 아무것도 설정안했을때 보여주기 ");
+		List<ProjectVO> getAllFundingProjectList = getShowCategorySubListService.getShowCategorySubList(vo);
+		model.addAttribute("getAllFundingProjectList", getAllFundingProjectList);
 			
 		
 		
