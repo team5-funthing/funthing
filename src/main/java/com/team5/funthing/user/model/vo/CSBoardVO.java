@@ -15,7 +15,7 @@ public class CSBoardVO {
 		return csid;
 	}
 	public void setcsid(int csid) {
-		csid = csid;
+		this.csid = csid;
 	}
 	public String getEmail() {
 		return email;
