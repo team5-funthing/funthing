@@ -115,8 +115,8 @@
                             <tbody>
                             	<c:forEach var="list" items="${csBoardList}">
                                 <tr>
-                                    <td>${list.CSID}</td>
-                                    <td><a href="http://localhost:8080/funthing/getCSBoard.ado?CSID=${list.CSID}">${list.csTitle}</a></td>
+                                    <td>${list.csid}</td>
+                                    <td><a href="http://localhost:8080/funthing/getCSBoard.ado?csid=${list.csid}">${list.csTitle}</a></td>
                                     <td>${list.email}</td>
                                     <td>${list.replyProgress}</td>
 
