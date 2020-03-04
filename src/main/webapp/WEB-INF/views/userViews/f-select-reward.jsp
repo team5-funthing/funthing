@@ -30,40 +30,40 @@
             <i class="fas fa-chevron-left"></i>
             <a href="javaScript: history.go(-1);">스토리로 돌아가기</a>
         </article>
-        <article class="select-order">
+		<article class="select-order">
             <div class="row d-flex justify-content-center ml-2 mr-2 mt-4 pb-4">
-                <div class="order-circle d-flex d-flex justify-content-center " style="background: #009DFF; border-width: 3px;">
+                <div class="order-circle d-flex d-flex justify-content-center " style="background: #009DFF;">
                     <div class="d-inline-flex p-2 bd-highlight align-self-center h5 p-3" style="color: whitesmoke;" >
-                        	리워드<br>
-                        	선택
+                        리워드<br>
+                        선택
                     </div>
                 </div>
                 <div class="d-flex align-items-center">
-                    <i class="fas fa-ellipsis-h" style="color: whitesmoke;"></i>
-                    <i class="fas fa-ellipsis-h" style="color: whitesmoke;"></i>
-                    <i class="fas fa-ellipsis-h" style="color: whitesmoke;"></i>
-                    <i class="fas fa-ellipsis-h" style="color: whitesmoke;"></i>
-                    <i class="fas fa-ellipsis-h" style="color: whitesmoke;"></i>
-                    <i class="fas fa-ellipsis-h" style="color: whitesmoke;"></i>
-                    <i class="fas fa-ellipsis-h" style="color: whitesmoke;"></i>
+                    <i class="fas fa-ellipsis-h" style="color:whitesmoke;"></i>
+                    <i class="fas fa-ellipsis-h" style="color:whitesmoke;"></i>
+                    <i class="fas fa-ellipsis-h" style="color:whitesmoke;"></i>
+                    <i class="fas fa-ellipsis-h" style="color:whitesmoke;"></i>
+                    <i class="fas fa-ellipsis-h" style="color:whitesmoke;"></i>
+                    <i class="fas fa-ellipsis-h" style="color:whitesmoke;"></i>
+                    <i class="fas fa-ellipsis-h" style="color:whitesmoke;"></i>
                 </div>
                 <div class="order-circle d-flex d-flex justify-content-center " style="background: whitesmoke; border-style:dotted; border-color: whitesmoke; border-width: 3px;">
                     <div class="d-inline-flex p-2 bd-highlight align-self-center h5 p-0" style="color: #000000;" >
-                        	결제 예약
+                        결제 예약
                     </div>
                 </div>
                 <div class="d-flex align-items-center">
-                    <i class="fas fa-ellipsis-h" style="color: whitesmoke;"></i>
-                    <i class="fas fa-ellipsis-h" style="color: whitesmoke;"></i>
-                    <i class="fas fa-ellipsis-h" style="color: whitesmoke;"></i>
-                    <i class="fas fa-ellipsis-h" style="color: whitesmoke;"></i>
-                    <i class="fas fa-ellipsis-h" style="color: whitesmoke;"></i>
-                    <i class="fas fa-ellipsis-h" style="color: whitesmoke;"></i>
-                    <i class="fas fa-ellipsis-h" style="color: whitesmoke;"></i>
+                    <i class="fas fa-ellipsis-h" style="color:whitesmoke;"></i>
+                    <i class="fas fa-ellipsis-h" style="color:whitesmoke;"></i>
+                    <i class="fas fa-ellipsis-h" style="color:whitesmoke;"></i>
+                    <i class="fas fa-ellipsis-h" style="color:whitesmoke;"></i>
+                    <i class="fas fa-ellipsis-h" style="color:whitesmoke;"></i>
+                    <i class="fas fa-ellipsis-h" style="color:whitesmoke;"></i>
+                    <i class="fas fa-ellipsis-h" style="color:whitesmoke;"></i>
                 </div>
-                <div class="order-circle d-flex d-flex justify-content-center " style="background: whitesmoke;">
+                <div class="order-circle d-flex d-flex justify-content-center " style="background: whitesmoke; border-style:dotted; border-color: whitesmoke; border-width: 3px;">
                     <div class="d-inline-flex p-2 bd-highlight align-self-center h5 p-0" style="color: #000000;" >
-                        	결제 확인
+                        결제 확인
                     </div>
                 </div>
             </div>
@@ -90,7 +90,6 @@
         
         
        		<c:forEach var="reward" items="${getRewardList }" varStatus="cnt">
-
        			<form id="reward${cnt.count }" name="reward${cnt.count }" action="addSelectReword.udo" method="POST">
        			
 		            <div id="reward-cardBox${cnt.count }" class="card wd-100 mb-2 ">
@@ -415,3 +414,68 @@
     
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+<script>
+
+	jQuery.fn.serializeObject = function() {
+		var obj = null;
+		try {
+			if (this[0].tagName && this[0].tagName.toUpperCase() == "FORM") {
+				var arr = this.serializeArray();
+				if (arr) {
+					obj = {};
+					jQuery.each(arr, function() {
+						obj[this.name] = this.value;
+					});
+				}
+			}
+		} catch (e) {
+			alert(e.message);
+		} finally {
+		}
+		return obj;
+	}
+
+	$(document).on("change", "input[id='orderAmount${cnt.count }']",function() {
+
+		var jsonData = $("form[name='reward${cnt.count }']").serializeObject();
+
+		$.ajax({
+			url : "addSelectReward.udo",
+			type : "post",
+			data : JSON.stringify(jsonData),
+			contentType : "application/json",
+			success : function(data) {
+				alert("성공");
+			},
+			error : function(errorThrown) {
+				alert(errorThrown.statusText);
+			}
+		});
+
+	});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

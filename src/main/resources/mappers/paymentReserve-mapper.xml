@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PaymentReserveDAO">
+
+	<insert id="insertPaymentReserve" parameterType="paymentReserve">
+	
+		<selectKey keyProperty="orderNo" resultType="int" order="AFTER">
+			SELECT orderno_seq.currval FROM dual
+		</selectKey>
+	
+		INSERT INTO paymentReserve (orderNo, email, paymentReserveDate, paymentOption, applyNo, deliveryAddressNo)
+		VALUES (orderno_seq.nextval, #{email }, sysdate, #{paymentOption }, #{applyNo }, #{deliveryAddressNo })
+	
+	</insert>
+	
+	<update id="updatePaymentReserve" parameterType="paymentReserve">
+	
+		<selectKey keyProperty="orderNo" resultType="int" order="AFTER">
+			SELECT orderno_seq.currval FROM dual
+		</selectKey>
+	
+		
+	</update>
+
+</mapper>

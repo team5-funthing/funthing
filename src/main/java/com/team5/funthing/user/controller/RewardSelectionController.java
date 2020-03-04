@@ -14,37 +14,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.team5.funthing.user.model.vo.DeliveryAddressVO;
-import com.team5.funthing.user.model.vo.PaymentReserveVO;
 import com.team5.funthing.user.model.vo.RewardOptionVO;
 import com.team5.funthing.user.model.vo.RewardSelectionVO;
 import com.team5.funthing.user.model.vo.RewardVO;
 import com.team5.funthing.user.service.rewardOptionService.GetRewardOptionListService;
-import com.team5.funthing.user.service.rewardSelectionService.GetRewardSelectionJoinListService;
-import com.team5.funthing.user.service.rewardSelectionService.InsertRewardSelectionService;
 import com.team5.funthing.user.service.rewardService.GetRewardListService;
 
 @Controller
 @SessionAttributes("reward")
-public class SupportProjectController {
+public class RewardSelectionController {
 
 	@Autowired
 	private GetRewardListService getRewardListService;
 	@Autowired
 	private GetRewardOptionListService getRewardOptionListService;
-	@Autowired
-	private InsertRewardSelectionService insertRewardSelectionService;
-	@Autowired
-	private GetRewardSelectionJoinListService getRewardSelectionJoinListService;
 	
 	@Autowired
 	private RewardOptionVO rewardOptionVO;
-	@Autowired
-	private RewardSelectionVO rewardSelectionVO;
 	
 	
 	@RequestMapping(value="/supportProject.udo", method= RequestMethod.GET)
@@ -69,26 +58,6 @@ public class SupportProjectController {
 		model.addAttribute("projectNoOfRewardList", rvo.getProjectNo());
 		return "f-select-reward";
 	}
-	
-	@RequestMapping(value = "/paymentReservation.udo", method= RequestMethod.GET)
-	public String paymentReservation(	@RequestParam int orderNo,
-										Model model,
-										RewardVO rvo,
-										DeliveryAddressVO davo) {
-		
-		rewardSelectionVO.setOrderNo(orderNo);
-		List<RewardSelectionVO> getRewardSelectionJoinList =  getRewardSelectionJoinListService.getRewardSelectionJoinList(rewardSelectionVO);
-
-		for(RewardSelectionVO rs : getRewardSelectionJoinList) {
-			System.out.println(rs.toString());
-		}
-		
-		
-		model.addAttribute("rewardSelectionJoinList", getRewardSelectionJoinList);
-		
-		return "f-payment-reservation";
-	}
-	
 	
 	@RequestMapping(value = "/addSelectReward.udo", method = RequestMethod.POST)
 	@ResponseBody
@@ -167,39 +136,6 @@ public class SupportProjectController {
 		return selectionRewardToJSON;		
 	}
 	
-	@RequestMapping(value = "/insertselectedReward.udo", method= RequestMethod.POST)
-	public String insertselectedReward(	@RequestParam int projectNo,
-										RedirectAttributes redirectAttributes,
-										HttpSession session) {
-		
-		List<RewardSelectionVO> selectedRewardList = (List<RewardSelectionVO>)session.getAttribute("selectedRewardList");
-		
-		if(selectedRewardList == null || selectedRewardList.isEmpty()) {
-			redirectAttributes.addAttribute("msg", "리워드를 선택해주세요.");
-			redirectAttributes.addAttribute("projectNo", projectNo);
-			
-			return "redirect:supportProject.udo";
-		}
-		int orderNo = insertRewardSelection(selectedRewardList);
-		redirectAttributes.addAttribute("orderNo", orderNo);
-		
-		return "redirect:paymentReservation.udo";
-	}
-	
-	@RequestMapping(value = "", method = RequestMethod.POST)
-	public String paymentReserve(	PaymentReserveVO prvo,
-									DeliveryAddressVO davo) {
-		
-		
-		
-		
-		return null;
-	}
-	
-	
-	
-	
-	
 	
 	public void setRewardOption(List<RewardVO> getRewardList){
 		
@@ -208,30 +144,6 @@ public class SupportProjectController {
 			reward.setRewardOptionList(getRewardOptionListService.getRewardOptionList(rewardOptionVO));
 		}
 	}
-	public int insertRewardSelection(List<RewardSelectionVO> selectedRewardList) {
-		int orderNo = 0;
-		// 선택한 리워드들 rewardSelection 에 insert
-		for(int i = 0; i < selectedRewardList.size(); i++) {
-			
-			if(i == 0 ) {
-				rewardSelectionVO = insertRewardSelectionService.insertRewardSelection(selectedRewardList.get(0));
-				orderNo = rewardSelectionVO.getOrderNo();
-				System.out.println("처음으로 insert 했을때 생성했던 orderNo : " + orderNo);
-				for(int n = 1; n < selectedRewardList.size(); n++) {
-					selectedRewardList.get(n).setOrderNo(orderNo);
-				}
-			}else {
-				rewardSelectionVO = insertRewardSelectionService.insertRewardSelection(selectedRewardList.get(i));
-			}
-			
-		}
-		
-		return orderNo;
-	}
-	
-	
-	
-	
 	
 	
 	

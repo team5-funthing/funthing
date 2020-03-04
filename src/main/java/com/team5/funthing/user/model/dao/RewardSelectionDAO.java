@@ -14,10 +14,8 @@ public class RewardSelectionDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
-	public RewardSelectionVO insertRewardSelection(RewardSelectionVO vo) {
-		
+	public void insertRewardSelection(RewardSelectionVO vo) {
 		sqlSessionTemplate.insert("insertRewardSelection", vo);
-		return vo;
 	}
 	
 	public List<RewardSelectionVO> getRewardSelectionList(RewardSelectionVO vo){
