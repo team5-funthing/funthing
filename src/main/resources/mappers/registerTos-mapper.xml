@@ -5,7 +5,7 @@
 <mapper namespace="AdminRegisterTosDAO">
 
 	<select id="getRegisterTosList" resultType="registerTos">
-		SELECT * FROM registerTos
+		SELECT * FROM registerTos ORDER BY registerNo asc
 	</select>
 	
 	<select id="getRegisterTos" parameterType="registerTos" resultType="registerTos">

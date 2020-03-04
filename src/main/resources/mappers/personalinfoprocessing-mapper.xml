@@ -5,7 +5,7 @@
 <mapper namespace="PersonalInfoProcessingDAO">
 
 	<select id="getPersonalInfoProcessingList" resultType="personalinfo">
-		SELECT * FROM personalInfo
+		SELECT * FROM personalInfo order by infoNo asc
 	</select>
 
 	<select id="getPersonalInfoProcessing" parameterType="personalinfo" resultType="personalinfo">
