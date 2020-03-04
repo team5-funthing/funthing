@@ -9,6 +9,95 @@
 
 	<jsp:include page="./include/i-head-setting.jsp"/>
   
+  
+<style>
+table{
+	border-collapse: collapse;
+	width: 550px;
+	margin:10px auto;
+}
+table, tr, td{
+	border: gray 1px solid;
+}
+.explaneReward{
+	text-align: left;
+	color:black;
+}
+.checkBox{
+	float:left;
+	margin:5px 0 0 8px;
+}
+#confirmButton{
+	background-color: black;
+	border: none;
+	color: white;
+	padding: 14px 270px;
+	text-align: center;
+	text-decoration:none;
+}
+#warning-popup{
+	padding: 40px 10px 10px 10px;
+}
+.white-popup {
+  position: relative;
+  background: #FFF;
+  padding: 40px;
+  width: 650px;
+  margin: 20px auto;
+  text-align: center;
+}
+</style>  
+<script>
+function checkboxFunction(){
+	var explane1 = document.getElementById('explane1');
+	var explane2 = document.getElementById('explane2');
+	var explane3 = document.getElementById('explane3');
+	
+	if((explane1.checked==true)&&(explane2.checked==true)&&(explane3.checked==true)){
+		$("#confirmButton").show();
+		$("#confirmButton").attr("disabled",false);
+	}else{
+		$("#confirmButton").hide();
+		$("#confirmButton").attr("disabled",true);
+	}
+}
+
+$(document).ready(function(){
+	$("#confirmButton").hide();
+	$("#confirmButton").attr("disabled",true);
+	$("#getDetailPolicy").hide();
+	
+	$.magnificPopup.open({
+		items:[
+			{
+				src:"#warning-popup",
+				type:'inline'
+			}
+		],
+		closeOnBgClick:false,
+		showCloseBtn:false,
+		closeBtnInside:false
+	});
+	
+	$("#detailPolicy").click(function(){
+		$("#getDetailPolicy").toggle("slow");
+		$.ajax({
+			type:"post",
+			url:"getServiceTos.udo",
+			success:function(data){
+				$("#getDetailPolicy").html(data);
+			},
+			error:function(){
+				alert('실패');
+			}
+		});
+	});
+	
+	$('#confirmButton').on( "click", function() {
+		  $.magnificPopup.close();
+		});
+});
+</script>
 </head>
 
 <body>
@@ -22,9 +111,79 @@
     		alert("${msg }");
     	</script>
     </c:if>
-    
-    
-
+    <!-- 팝업 시작 -->
+    <div id="warning-popup" class="mfp-hide white-popup">
+    	<div style="color:black;"><h3>잠깐! 결제하기가 아닌 펀딩하기인 이유를 확인하고,펀딩하세요.</h3></div>
+    	<div>
+    		<form action="#">
+    			<table>
+    				<tr>
+    					<td>
+    						<label class="checkBox">
+    							<input type="checkbox" id="explane1" onclick="checkboxFunction()">
+    							펀딩한 리워드는 새롭게 준비하고 있는 제품 · 서비스입니다.
+    						</label>
+    					</td>
+    				</tr>
+    				<tr>
+    					<td>
+    						<div class="explaneReward">
+    							펀딩 후, 리워드를 제작 · 준비하는 크라우드펀딩 특성상, 품질 이슈가 발생할 수 있습니다.<br>
+    							리워드 품질 이슈 발생 시 펀딩 안내 - 상세 정책을 꼭 확인해주세요.
+		    				</div>	
+    					</td>
+    				</tr>
+    				<tr>
+    					<td>
+    						<a id="detailPolicy">프로젝트 상세 정책</a>
+    						<div id="getDetailPolicy" style="overflow:auto;height:130px;"></div>
+    					</td>
+    				</tr>
+    			</table>
+    			<table>
+    				<tr>
+    					<td>
+    						<label class="checkBox">
+    							<input type="checkbox" id="explane2" onclick="checkboxFunction()">  						
+    							바로 결제되지 않으며, 펀딩 종료 후에는 결제를 취소할 수 없습니다.
+       						</label>
+    					</td>
+    				</tr>
+    				<tr>
+    					<td>
+    						<div class="explaneReward">
+    							펀딩이 동료되고 목표금액이 달성될경우 결제가 진행됩니다.<br>
+    							펀딩 종료 이후에는 메이커의 프로젝트 수행을 위해 결제 취소가 불가합니다.
+    						</div>
+    					</td>
+    				</tr>
+    			</table>
+    			<table>
+    				<tr>
+    					<td>
+    						<label class="checkBox">
+    							<input type="checkbox" id="explane3" onclick="checkboxFunction()">
+    							펀딩한 리워드는 즉시 배송되지 않습니다.
+    						</label>
+    					</td>
+    				</tr>
+    				<tr>
+    					<td>
+    						<div class="explaneReward">
+    							메이커가 약속한 리워드 발송 시작일을 확인했나요? 메이커는 펀딩이 성공해야 리워드 제작 · 준비를 진행합니다.<br>
+    							리워드 펀딩 특성상 발송이 지연되거나 불가할 수 있으니, 펀딩 안내 - 상세 정책을 꼭 확인해주세요.
+    						</div>
+    					</td>
+    				</tr>
+    			</table>
+    		</form>
+    	</div>
+    	<div>
+    		<button id="confirmButton">확인</button>
+    	</div>
+    </div>
+	<!-- 팝업 종료 -->
+	
 	<section id="select-reward" class="container">
         <article class="back-story">
             <i class="fas fa-chevron-left"></i>
