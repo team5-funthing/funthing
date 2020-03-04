@@ -67,7 +67,7 @@ public class AdminCSBoardController {
 	
 	@RequestMapping("getCSBoard.ado")
 	public ModelAndView selectCSBoard(CSBoardVO vo,HttpServletRequest request){
-		int CSID=Integer.parseInt(request.getParameter("CSID"));
+		int CSID=Integer.parseInt(request.getParameter("csid"));
 		vo.setcsid(CSID);
 		
 		getCSBoard = getCSBoardService.getCSBoard(vo);
