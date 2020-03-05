@@ -15,13 +15,68 @@
 	
 	</insert>
 	
-	<update id="updatePaymentReserve" parameterType="paymentReserve">
+	<select id="getAllPaymentReserveList" parameterType="paymentReserve">
 	
-		<selectKey keyProperty="orderNo" resultType="int" order="AFTER">
-			SELECT orderno_seq.currval FROM dual
-		</selectKey>
+		SELECT * 
+		FROM paymentReserve
 	
+	</select>
+	
+	
+ 	<resultMap type="reward" id="reward">
+	
+		<result column="rewardPrice" 	property="rewardPrice" />
+		<result column="projectNo" 		property="projectNo" />
+		<result column="rewardName" 	property="rewardName" />
+		<result column="rewardContent" 	property="rewardContent" />
+		<result column="rewardOption" 	property="rewardOption" />
+		<result column="shippingNeed" 	property="shippingNeed" />
+		<result column="rewardMonth" 	property="rewardMonth" />
+		<result column="rewardDay" 		property="rewardDay" />
 		
-	</update>
+	</resultMap>
+	
+	<resultMap type="rewardSelection" id="rewardSelection">
+	
+		<result column="selectRewardNo" property="selectRewardNo" />
+		<result column="orderNo" 		property="orderNo"/>
+		<result column="rewardNo" 		property="rewardNo" />
+		<result column="paymentAmount" 	property="paymentAmount" />
+		<result column="orderAmount" 	property="orderAmount"/>
+		<result column="shippingFee" 	property="shippingFee" />
+		
+		<collection property="reward" 	resultMap="reward" />
+		
+	</resultMap>
+	
+	<resultMap type="paymentReserve" id="paymentReserve">
+	
+		<result column="orderNo" 			property="orderNo" />
+		<result column="email" 				property="email"/>
+		<result column="paymentReserveDate" property="paymentReserveDate" />
+		<result column="paymentOption" 		property="paymentOption" />
+		<result column="applyNo" 			property="applyNo"/>
+		<result column="paymentStatus" 		property="paymentStatus" />
+		<result column="deliveryAddressNo" 	property="deliveryAddressNo" />
+		
+		<collection property="RewardSelectionList" resultMap="rewardSelection" />
+	
+	</resultMap>
+	
+	<select id="getPaymentReserve" parameterType="paymentReserve" resultMap="paymentReserve">
+	
+		SELECT paymentReserve.*, rewardselection.*, reward.*
+		FROM paymentReserve
+		INNER JOIN rewardselection
+		ON paymentReserve.orderNo = rewardselection.orderNo
+		LEFT OUTER JOIN reward
+		ON rewardselection.rewardNo = reward.rewardNo
+		WHERE paymentReserve.orderNo = #{orderNo }
+	
+	</select>
+	
+	
+	
+	
 
 </mapper>

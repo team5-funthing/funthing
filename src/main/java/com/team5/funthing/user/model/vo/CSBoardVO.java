@@ -11,11 +11,12 @@ public class CSBoardVO {
 	private Date csRegdate;
 	private char replyProgress;
 	
-	public int getcsid() {
+
+	public int getCsid() {
 		return csid;
 	}
-	public void setcsid(int csid) {
-		csid = csid;
+	public void setCsid(int csid) {
+		this.csid = csid;
 	}
 	public String getEmail() {
 		return email;

@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team5.funthing.user.model.vo.DeliveryAddressVO;
+import com.team5.funthing.user.model.vo.FundingAdditionsVO;
 import com.team5.funthing.user.model.vo.PaymentReserveVO;
 import com.team5.funthing.user.model.vo.RewardSelectionVO;
 import com.team5.funthing.user.model.vo.RewardVO;
-import com.team5.funthing.user.service.deliveryService.InsertDeliveryAddressService;
+import com.team5.funthing.user.service.deliveryService.GetDeliveryAddressService;
+import com.team5.funthing.user.service.paymentReserveService.GetPaymentReserveService;
 import com.team5.funthing.user.service.paymentReserveService.InsertPaymentReserveService;
-import com.team5.funthing.user.service.rewardSelectionService.InsertRewardSelectionService;
 import com.team5.funthing.user.service.rewardService.GetRewardService;
 
 @Controller
@@ -27,23 +28,21 @@ import com.team5.funthing.user.service.rewardService.GetRewardService;
 public class PaymentReservationController {
 	
 	@Autowired
-	private InsertRewardSelectionService insertRewardSelectionService;
-	
-	@Autowired
-	private RewardSelectionVO rewardSelectionVO;
-	
-	@Autowired
-	private InsertDeliveryAddressService insertDeliveryAddressService;
-	@Autowired
 	private InsertPaymentReserveService insertPaymentReserveService;
-	
-	
 	@Autowired
 	private GetRewardService getRewardService;
+	@Autowired
+	private GetPaymentReserveService getPaymentReserveService;
+	@Autowired
+	private GetDeliveryAddressService getDeliveryAddressService;
+	
+	
+	
 	
 	@RequestMapping(value = "/insertselectedReward.udo", method= RequestMethod.POST)
 	public String insertselectedReward(	@RequestParam int projectNo,
 										RedirectAttributes redirectAttributes,
+										FundingAdditionsVO favo,
 										HttpSession session) {
 		
 		List<RewardSelectionVO> selectedRewardList = (List<RewardSelectionVO>)session.getAttribute("selectedRewardList");
@@ -55,16 +54,9 @@ public class PaymentReservationController {
 			return "redirect:supportProject.udo";
 		}
 		
+		session.setAttribute("fundingAdditions", favo);
 
 		return "redirect:paymentReservation.udo";
-	}
-	
-	public void insertRewardSelection(List<RewardSelectionVO> selectedRewardList, int orderNo) {
-		// 선택한 리워드들 rewardSelection 에 insert
-		for(RewardSelectionVO rs : selectedRewardList) {
-			rs.setOrderNo(orderNo);
-			insertRewardSelectionService.insertRewardSelection(rs);
-		}
 	}
 	
 	@RequestMapping(value = "/paymentReservation.udo", method= RequestMethod.GET)
@@ -75,17 +67,12 @@ public class PaymentReservationController {
 		List<RewardSelectionVO> selectedRewardList = (List<RewardSelectionVO>)session.getAttribute("selectedRewardList");
 
 		for(RewardSelectionVO rs : selectedRewardList) {
-			System.out.println("1 : " + rs.toString());
 			
 			getRewardService.getReward(rvo);
 			rvo.setRewardNo(rs.getRewardNo());
 			rvo = getRewardService.getReward(rvo);
 			rs.setReward(rvo);
 			
-		}
-		
-		for(RewardSelectionVO rs : selectedRewardList) {
-			System.out.println("2 : " + rs.toString());
 		}
 		
 		model.addAttribute("rewardSelectionJoinList", selectedRewardList);
@@ -100,17 +87,12 @@ public class PaymentReservationController {
 									DeliveryAddressVO davo) {
 		
 		List<RewardSelectionVO> selectedRewardList = (List<RewardSelectionVO>)session.getAttribute("selectedRewardList");
-		
 		int projectNo = selectedRewardList.get(0).getReward().getProjectNo();
 		
-		davo = insertDeliveryAddressService.insertDeliveryAddress(davo);
-		prvo.setDeliveryAddressNo(davo.getDeliveryAddressNo());
-		prvo = insertPaymentReserveService.insertPaymentReserve(prvo);
-		
+		prvo = insertPaymentReserveService.insertPaymentReserve(prvo, davo, selectedRewardList);
 		int orderNo = prvo.getOrderNo();
-
-		insertRewardSelection(selectedRewardList, orderNo);
 		
+		session.removeAttribute("selectedRewardList");
 		
 		redirectAttributes.addAttribute("orderNo", orderNo);
 		redirectAttributes.addAttribute("projectNo", projectNo);
@@ -119,16 +101,20 @@ public class PaymentReservationController {
 	}
 	
 	
-	
 	@RequestMapping(value = "/paymentResult.udo", method = RequestMethod.GET)
 	public String paymentReserve(	@RequestParam int orderNo,
 									@RequestParam int projectNo,
+									PaymentReserveVO prvo,
+									DeliveryAddressVO davo,
 									Model model) {
 		
-		
-		
-		
-		System.out.println("결제 완료 페이지 들어갑니다.");
+		prvo.setOrderNo(orderNo);
+		prvo = getPaymentReserveService.getPaymentReserve(prvo);
+		davo.setDeliveryAddressNo(prvo.getDeliveryAddressNo());
+		davo = getDeliveryAddressService.getDeliveryAddress(davo);
+
+		model.addAttribute("deliveryAddress", davo);
+		model.addAttribute("paymentReserve", prvo);
 		model.addAttribute("projectNo", projectNo);
 		
 		return "p-payment-result";
