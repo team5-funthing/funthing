@@ -13,7 +13,9 @@ public class PaymentReserveVO {
 	private String paymentStatus;
 	private int deliveryAddressNo;
 	
-	private List<RewardSelectionVO> RewardSelection;
+	private FundingAdditionsVO fundingAdditions;
+	
+	private List<RewardSelectionVO> RewardSelectionList;
 
 	public int getOrderNo() {
 		return orderNo;
@@ -71,23 +73,34 @@ public class PaymentReserveVO {
 		this.deliveryAddressNo = deliveryAddressNo;
 	}
 
-	public List<RewardSelectionVO> getRewardSelection() {
-		return RewardSelection;
+	public FundingAdditionsVO getFundingAdditions() {
+		return fundingAdditions;
 	}
 
-	public void setRewardSelection(List<RewardSelectionVO> rewardSelection) {
-		RewardSelection = rewardSelection;
+	public void setFundingAdditions(FundingAdditionsVO fundingAdditions) {
+		this.fundingAdditions = fundingAdditions;
+	}
+
+	public List<RewardSelectionVO> getRewardSelectionList() {
+		return RewardSelectionList;
+	}
+
+	public void setRewardSelectionList(List<RewardSelectionVO> rewardSelectionList) {
+		RewardSelectionList = rewardSelectionList;
 	}
 
 	@Override
 	public String toString() {
 		return "PaymentReserveVO [orderNo=" + orderNo + ", email=" + email + ", paymentReserveDate="
 				+ paymentReserveDate + ", paymentOption=" + paymentOption + ", applyNo=" + applyNo + ", paymentStatus="
-				+ paymentStatus + ", deliveryAddressNo=" + deliveryAddressNo + ", RewardSelection=" + RewardSelection
-				+ "]";
+				+ paymentStatus + ", deliveryAddressNo=" + deliveryAddressNo + ", fundingAdditions=" + fundingAdditions
+				+ ", RewardSelectionList=" + RewardSelectionList + "]";
 	}
-		
 
 	
 	
+
+
+	
+		
 }

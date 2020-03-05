@@ -73,7 +73,7 @@
 				<div class="card mb-3" style="border: 0px">
 					<div class="card-body">
 						
-						<c:set var="totalAmount" value="0"/>
+						<c:set var="totalAmount" value="${fundingAdditions.additionalFundingMoney }"/>
 						<c:set var="shippingFee" value="0"/>
 						
 						<c:forEach var="rewardSelection" items="${rewardSelectionJoinList}" varStatus="cnt">
@@ -82,7 +82,13 @@
 								<div class="col-8">
 									<h5 class="card-title">${rewardSelection.reward.rewardName }</h5>
 									<p class="card-text">${rewardSelection.reward.rewardContent }</p>
-									<p class="card-text">옵션: </p>
+									<p class="card-text">옵션: <br>
+									
+									<c:forEach var="option" items="${rewardSelection.rewardOptionValueList}">
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${option }<br>
+									</c:forEach>
+									
+									</p>
 								</div>
 							</div>
 							<div class="d-flex justify-content-end">
@@ -94,8 +100,35 @@
 	
 						<div class="d-flex justify-content-between">
 							<div class="p-2 bd-highlight">추가 펀딩금액</div>
-							<div class="p-2 bd-highlight">0원</div>
+							<div class="p-2 bd-highlight">${fundingAdditions.additionalFundingMoney }원</div>
 						</div>
+						<div class="d-flex justify-content-between">
+							<div class="p-2 bd-highlight">이름 비공개</div>
+							<div class="p-2 bd-highlight">
+								<c:choose>
+									<c:when test="${fundingAdditions.privateName eq null }">
+										비공개
+									</c:when>
+									<c:otherwise>
+										공개
+									</c:otherwise>
+								</c:choose>
+							</div>
+						</div>
+						<div class="d-flex justify-content-between">
+							<div class="p-2 bd-highlight">펀딩금액 비공개</div>
+							<div class="p-2 bd-highlight">
+								<c:choose>
+									<c:when test="${fundingAdditions.privateFundingMoney eq null }">
+										비공개
+									</c:when>
+									<c:otherwise>
+										공개
+									</c:otherwise>
+								</c:choose>
+							</div>
+						</div>
+						<hr>
 	
 						<div class="d-flex justify-content-between">
 							<div class="p-2 bd-highlight">배송비</div>

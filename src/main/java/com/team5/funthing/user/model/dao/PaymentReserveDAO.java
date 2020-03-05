@@ -17,5 +17,8 @@ public class PaymentReserveDAO {
 		return vo;
 	}
 	
+	public PaymentReserveVO getPaymentReserve(PaymentReserveVO vo) {
+		return sqlsessionTemplate.selectOne("getPaymentReserve", vo);
+	}
 	
 }

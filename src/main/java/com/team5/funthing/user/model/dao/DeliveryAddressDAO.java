@@ -22,6 +22,6 @@ public class DeliveryAddressDAO {
 	}
 	
 	public DeliveryAddressVO getDeliveryAddress(DeliveryAddressVO vo) {
-		return sqlSessionTemplate.selectOne("DelieveryAddressDAO.getDeliveryAddress", vo);
+		return sqlSessionTemplate.selectOne("getDeliveryAddress", vo);
 	}
 }

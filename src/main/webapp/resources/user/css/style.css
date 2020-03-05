@@ -1855,6 +1855,19 @@ h3 {
     padding: 60px 40px
 }
 
+.search_popup_box {
+    background: #ffffff;
+    display: inline-block;
+    z-index: 9;
+    width: 640px;
+ 	height: 640px;
+    padding: 60px 40px;
+}
+
+#suggestList a {
+	color: gray;
+}
+
 .addReward_popup_box {
     background: #ffffff;
     display: inline-block;
@@ -4663,6 +4676,17 @@ dl {
     border-color: #e5cf80;
     background-color: #ffffff;
 }
+
+a.btn-search{
+	
+	width: 100%;
+}
+
+a.btn-search:hover {
+    text-decoration: none;
+}
+
+
 
 /* #009DFF */
 

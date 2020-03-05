@@ -6,7 +6,7 @@
 	<properties resource="db.properties" />
 	
 	<typeAliases>
-		<typeAlias type="com.team5.funthing.user.model.vo.PaymentReserveVO" alias="paymentReserve"/>
+		
 		<typeAlias type="com.team5.funthing.user.model.vo.ProjectIntroduceImageVO" alias="projectIntroduceImage"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.ProjectVO" alias="project"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.ProjectKeywordVO" alias="projectKeyword"/>
@@ -24,6 +24,7 @@
 		<typeAlias type="com.team5.funthing.user.model.vo.RewardVO" alias="reward"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.RewardOptionVO" alias="rewardOption"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.RewardSelectionVO" alias="rewardSelection"/>
+		<typeAlias type="com.team5.funthing.user.model.vo.PaymentReserveVO" alias="paymentReserve"/>
 		
 		
 		<typeAlias type="com.team5.funthing.user.model.vo.CreatorVO" alias="creator"/>
@@ -47,7 +48,8 @@
   
   
 	<mappers>
-	
+		
+		<mapper resource="mappers/deliveryAddress-mapper.xml"/>
 		<mapper resource="mappers/paymentReserve-mapper.xml"/>
  		<mapper resource="mappers/projectIntroduceImage-mapper.xml"/>
 		<mapper resource="mappers/projectKeyword-mapper.xml"/>

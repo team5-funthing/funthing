@@ -1,6 +1,10 @@
 package com.team5.funthing.user.model.vo;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * 
@@ -18,6 +22,8 @@ public class RewardSelectionVO {
 	private int paymentAmount; // 지불가격?
 	private int orderAmount; // 주문 양
 	private int shippingFee;
+	
+	private List<String> rewardOptionValueList;
 	
 	private RewardVO reward;
 	
@@ -63,13 +69,19 @@ public class RewardSelectionVO {
 	public void setReward(RewardVO reward) {
 		this.reward = reward;
 	}
+	public List<String> getRewardOptionValueList() {
+		return rewardOptionValueList;
+	}
+	public void setRewardOptionValueList(List<String> rewardOptionValueList) {
+		this.rewardOptionValueList = rewardOptionValueList;
+	}
 	@Override
 	public String toString() {
 		return "RewardSelectionVO [selectRewardNo=" + selectRewardNo + ", orderNo=" + orderNo + ", rewardNo=" + rewardNo
 				+ ", paymentAmount=" + paymentAmount + ", orderAmount=" + orderAmount + ", shippingFee=" + shippingFee
-				+ ", reward=" + reward + "]";
+				+ ", rewardOptionValueList=" + rewardOptionValueList + ", reward=" + reward + "]";
 	}
-	
+
 	
 	
 	
