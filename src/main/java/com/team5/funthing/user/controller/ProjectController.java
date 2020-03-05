@@ -325,8 +325,9 @@ public class ProjectController {
 		
 		pvo = getProjectService.getProject(pvo);
 		pvo.setStatus('w');
+		System.out.println("수정전의 프로젝트 상태 : " + pvo.toString());
 		updateProjectService.updateProject(pvo);
-		System.out.println(pvo.toString());
+		System.out.println("수정후의 프로젝트 상태 : " + pvo.toString());
 		
 		redirectAttributes.addAttribute("msg", "심사요청을 완료하였습니다.");
 		redirectAttributes.addAttribute("currentProjectNo", pvo.getProjectNo());

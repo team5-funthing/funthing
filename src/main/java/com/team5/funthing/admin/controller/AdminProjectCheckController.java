@@ -13,6 +13,7 @@ import com.team5.funthing.admin.service.adminProjectCheckService.UpdateProjectCh
 import com.team5.funthing.admin.service.adminProjectCheckService.UpdateProjectCheckDenyService;
 import com.team5.funthing.admin.service.adminProjectCheckService.UpdateStatusReplyMessageService;
 import com.team5.funthing.user.model.vo.ProjectVO;
+import com.team5.funthing.user.service.projectService.UpdateProjectService;
 
 @Controller
 public class AdminProjectCheckController {
@@ -27,11 +28,18 @@ public class AdminProjectCheckController {
 	UpdateProjectCheckDeferService updateProjectCheckDeferService;
 	@Autowired
 	UpdateStatusReplyMessageService updateStatusReplyMessageService;
+
 	
 	@RequestMapping("getProjectCheck.ado")
 	public String getProjectCheck(ProjectVO vo,Model model) {
 		
 		ProjectVO projectCheck = getProjectCheckService.getProjectCheck(vo);
+		
+		String videoTag = projectCheck.getProjectIntroduceVideo();
+		String modifyVideoTag = videoTag.replace(videoTag.substring(15, 18),"520").replace(videoTag.substring(28, 31), "310");
+		projectCheck.setProjectIntroduceVideo(modifyVideoTag);
+		
+		System.out.println(projectCheck.toString());
 		
 		model.addAttribute("projectCheck",projectCheck);
 		return "b-project-check-detail";

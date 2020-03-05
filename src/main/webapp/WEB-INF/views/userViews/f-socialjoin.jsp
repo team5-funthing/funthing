@@ -36,8 +36,8 @@
 								<input type="email" id="email" name="email" placeholder="이메일 입력"
 									value="" onfocus="this.placeholder = ''"
 									onblur="this.placeholder = '이메일 입력'" required
-									class="single-input"> <input type="hidden"
-									name="email2" id="email2">
+									class="single-input"> 
+									<input type="hidden" name="email2" id="email2">
 							</div>
 							<div class="col-xl-12 mt-10">
 								<button type="button" onclick="duplicateCheck()"
@@ -69,7 +69,7 @@
                                     }
 
                                 	function join(){
-                                		var loginData  ={"email":document.getElementById("email2").value,"password":document.getElementById("password").value,"name":document.getElementById("name").value}; 
+                                		var loginData  ={"email":document.getElementById("email").value,"password":document.getElementById("password").value,"name":document.getElementById("name").value}; 
                                         
                                 		if(checking){
                                 		 $.ajax({ type:"POST",
@@ -118,7 +118,7 @@
 									value="" onfocus="this.placeholder = ''"
 									onblur="this.placeholder = '이름'" required class="single-input">
 							</div>
-							<input type="hidden" id="password" name="password" value="">
+							<input type="password" id="password" name="password" value="">
 
 
 							<div class="col-xl-12 mt-10">

@@ -5,27 +5,64 @@
 
 <!-- 심사 프로젝트 목록 보기 -->
 <select id="getProjectCheckList" resultType="project" parameterType="project">
-select * from project where status = 'w' OR status = 'f' OR status = 'm'
+	select * from project where status = 'w' OR status = 'f' OR status = 'm'
 </select>
 
+<!-- 심사 프로젝트 상세 중 리워드 목록까지 보기 위한 resultMap -->
+<resultMap type="reward" id="reward">
+	<result column="rewardNo" property="rewardNo"/>
+	<result column="rewardName" property="rewardName"/>
+	<result column="rewardOption" property="rewardOption"/>
+	<result column="rewardContent" property="rewardContent"/>
+	<result column="rewardAmount" property="rewardAmount"/>
+	<result column="rewardPrice" property="rewardPrice"/>
+	<result column="shippingFee" property="shippingFee"/>
+	<result column="shippingNeed" property="shippingNeed"/>
+	<result column="rewardMonth" property="rewardMonth"/>
+	<result column="rewardDay" property="rewardDay"/>
+</resultMap>
+
+<resultMap type="project" id="project">
+	<result column="projectNo" property="projectNo"/>
+	<result column="email" property="email"/>
+	<result column="creator" property="creator"/>
+	<result column="projectTitle" property="projectTitle"/>
+	<result column="goalmoney" property="goalMoney"/>
+	<result column="projectMainImage" property="projectMainImage"/>
+	<result column="category" property="category"/>
+	<result column="projectSubTitle" property="projectSubTitle"/>
+	<result column="projectSummary" property="projectSummary"/>
+	<result column="projectIntroduceVideo" property="projectIntroduceVideo"/>
+	<result column="projectStory" property="projectStory"/>
+	<result column="fundingMoney" property="fundingMoney"/>
+	<result column="status" property="status"/>
+	<result column="informationAgree" property="informationAgree"/>
+	<result column="startDate" property="startDate"/>
+	<result column="endDate" property="endDate"/>
+	<result column="writeStatus" property="writeStatus"/>
+	<result column="funding" property="funding"/>
+	<result column="statusReplyMessage" property="statusReplyMessate"/>
+	<collection property="reward" resultMap="reward"/>
+</resultMap>
+
 <!-- 심사 프로젝트 상세 보기 -->
-<select id="getProjectCheck" resultType="project" parameterType="project">
-select * from project where projectNo =#{projectNo}
+<select id="getProjectCheck" resultMap="project" parameterType="project">
+	select * from project join reward using(projectNo) where projectNo =#{projectNo}
 </select>
 
 <!-- 심사 프로젝트 거부 or보류 사유 저장 -->
 <update id="updateStatusReplyMessage" parameterType="project">
-update project set statusReplyMessage = #{statusReplyMessage} where projectNo = #{projectNo}
+	update project set statusReplyMessage = #{statusReplyMessage} where projectNo = #{projectNo}
 </update>
 
 <!-- 심사 프로젝트 승인 -->
 <update id="updateProjectCheckApproval" parameterType="project">
-update project set startDate = SYSDATE, status = 'p', funding = 'y' where projectNo = #{projectNo}
+	update project set startDate = SYSDATE, status = 'p', funding = 'y' where projectNo = #{projectNo}
 </update>
 
 <!-- 심사 프로젝트 거부 -->
 <update id="updateProjectCheckDeny" parameterType="project">
-update project set status = 'f' where projectNo = #{projectNo}
+	update project set status = 'f' where projectNo = #{projectNo}
 </update>
 
 <!--  심사 프로젝트 보류 -->
