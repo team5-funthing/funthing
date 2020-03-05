@@ -69,7 +69,7 @@ public class AdminCSBoardController {
 	public ModelAndView selectCSBoard(CSBoardVO vo,HttpServletRequest request){
 		int CSID=Integer.parseInt(request.getParameter("CSID"));
 		vo.setCsid(CSID);
-		
+    
 		getCSBoard = getCSBoardService.getCSBoard(vo);
 		
 		ModelAndView mav = new ModelAndView();

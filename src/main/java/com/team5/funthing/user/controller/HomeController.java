@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.team5.funthing.admin.model.vo.AdminPersonalInfoProcessingVO;
+import com.team5.funthing.admin.model.vo.AdminRegisterTosVO;
+import com.team5.funthing.admin.service.adminRegisterTosService.GetRegisterTosListService;
 import com.team5.funthing.user.model.vo.ProjectBoardVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.model.vo.TosVO;
@@ -43,6 +45,8 @@ public class HomeController {
 	private GetTosListService getTosListService;
 	@Autowired
 	private GetPersonalInfoProcessingListService getPersonalInfoProcessingListService;
+	@Autowired
+	private GetRegisterTosListService getRegisterTosListService;
 	
 	@RequestMapping("*.udo") 
 	public String showindex(ProjectBoardVO vo, ProjectVO vo2, Model model) { //맨처음 메인페이지 들어오는
@@ -104,11 +108,13 @@ public class HomeController {
 	}
 	
 	@RequestMapping("TosAndPolicy.udo")
-	public String showTosAndPolicyPage(TosVO tvo, AdminPersonalInfoProcessingVO pvo, Model model) {
+	public String showTosAndPolicyPage(AdminRegisterTosVO rtvo, TosVO tvo, AdminPersonalInfoProcessingVO pvo, Model model) {
 		
 		model.addAttribute("getTosList", getTosListService.getTosList(tvo));
 		model.addAttribute("getPersonalInfoProcessing", getPersonalInfoProcessingListService.getPersonalInfoProcessingList(pvo));
-		return "tosAndPolicy";
+		model.addAttribute("getRegisterTosList",getRegisterTosListService.getRegisterTosList(rtvo));
+		
+		return "p-tosAndPolicy";
 	}
 	
 

@@ -33,12 +33,14 @@
 						<h3 class="mb-4"></h3>
 						<form action="saveInputWritingProject.udo" id="tempStorageForm" method="POST" enctype="multipart/form-data">
 					<!-- <form action="insertProject.udo" id="tempStorageForm" method="POST" enctype="multi/form-data"> -->
-							<input type="hidden" name="projectNo" value="${writingProject.projectNo }">
 							<div class="row">
 								<div class="col-3">
 									<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
 										aria-orientation="vertical">
-										<a class="nav-link active" id="project-basic-tab" data-toggle="pill"
+										<a class="nav-link active" id="register-tos-tab" data-toggle="pill"
+											href="#register-tos" role="tab" aria-controls="register-tos"
+											aria-selected="true">회원가입약관</a>
+										<a class="nav-link" id="project-basic-tab" data-toggle="pill"
 											href="#project-basic" role="tab" aria-controls="project-basic"
 											aria-selected="true">이용약관</a>
 										<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill"
@@ -52,7 +54,11 @@
 								<div class="col-9">
 
 									<div class="tab-content" id="v-pills-tabContent">
-										<div class="tab-pane fade show active" id="project-basic" role="tabpanel"
+										<div class="tab-pane fade show active" id="register-tos" role="tabpanel"
+											aria-labelledby="v-pills-profile-tab">
+											<jsp:include page="./include/i-registerTos.jsp" />
+										</div>
+										<div class="tab-pane fade" id="project-basic" role="tabpanel"
 											aria-labelledby="project-basic-tab">
 											<jsp:include page="./include/i-tos.jsp" />
 										</div>

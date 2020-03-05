@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.team5.funthing.admin.model.vo.AdminPersonalInfoProcessingVO;
+import com.team5.funthing.admin.model.vo.AdminRegisterTosVO;
+import com.team5.funthing.admin.service.adminRegisterTosService.GetRegisterTosListService;
 import com.team5.funthing.user.model.vo.TosVO;
 import com.team5.funthing.user.service.TosService.GetTosListService;
 import com.team5.funthing.user.service.personalInfoProcessingService.GetPersonalInfoProcessingListService;
@@ -20,10 +22,15 @@ public class TosController {
 	private GetTosListService getTosListService;
 	@Autowired
 	private GetPersonalInfoProcessingListService getPersonalInfoProcessingListService;
+	@Autowired
+	private GetRegisterTosListService getRegisterTosListService;
 	
 	@RequestMapping("getRegisterTos.udo")
-	public void getTosListInRegister() {
+	public String getTosListInRegister(AdminRegisterTosVO vo, Model model) {
 		
+		model.addAttribute("RegisterTosList", getRegisterTosListService.getRegisterTosList(vo));
+		
+		return "/ajax/getRegisterTosListInRegister";
 	}
 	
 	@RequestMapping(value="getServiceTos.udo", method=RequestMethod.POST)
@@ -39,7 +46,6 @@ public class TosController {
 	public String getPersonalInfoListInRegister(AdminPersonalInfoProcessingVO vo, Model model) {
 		
 		List<AdminPersonalInfoProcessingVO> getPersonalInfoList = getPersonalInfoProcessingListService.getPersonalInfoProcessingList(vo);
-		System.out.println(getPersonalInfoList.toString());
 		model.addAttribute("ProcessingList", getPersonalInfoList);
 		
 		return "/ajax/getProcessingListInRegister";
