@@ -35,76 +35,42 @@
 						</form>
 					</div>
 
-					<!-- 
-                    <div>
-                       <div class="d-flex justify-content-around bd-highlight">
-                           <div class="p-2 bd-highlight">
-                               <div class="d-flex flex-column bd-highlight ">
-                                   <div class="p-2 bd-highlight">
-                                       <div class="justify-content-center">
-                                           <div class="p-2 bd-highlight">
-                                               <i class="fas fa-shapes fa-3x"></i>
-                                           </div>
-                                           <div class="p-2 bd-highlight">
-                                               <a href="show-filteredProjects.html">
-                                                   <div class="h6">창작한</div>
-                                               </a>
-                                           </div>
-                                       </div>
-                                   </div>
-                               </div>
-                           </div>
-                           <div class="p-2 bd-highlight">
-                               <div class="d-flex flex-column bd-highlight ">
-                                   <div class="p-2 bd-highlight">
-                                       <div class="justify-content-center">
-                                           <div class="p-2 bd-highlight">
-                                               <i class="fas fa-hand-holding-usd fa-3x"></i>
-                                           </div>
-                                           <div class="p-2 bd-highlight">
-                                               <a href="show-filteredProjects.html">
-                                                   <div class="h6">후원한</div>
-                                               </a>
-                                           </div>
-                                       </div>
-                                   </div>
-                               </div>
-                           </div>
-                           <div class="p-2 bd-highlight">
-                               <div class="d-flex flex-column bd-highlight">
-                                   <div class="p-2 bd-highlight">
-                                       <div class="justify-content-center">
-                                           <div class="p-2 bd-highlight">
-                                               <i class="far fa-surprise fa-3x"></i>
-                                           </div>
-                                           <div class="p-2 bd-highlight">
-                                               <a href="show-filteredProjects.html">
-                                                   <div class="h6">반응한</div>
-                                               </a>
-                                           </div>
-                                       </div>
-                                   </div>
-                               </div>
-                           </div>
-                           <div class="p-2 bd-highlight">
-                               <div class="d-flex flex-column bd-highlight ">
-                                   <div class="p-2 bd-highlight">
-                                       <div class="justify-content-center">
-                                           <div class="p-2 bd-highlight">
-                                               <i class="fas fa-heart fa-3x"></i>
-                                           </div>
-                                           <div class="p-2 bd-highlight">
-                                               <a href="show-filteredProjects.html">
-                                                   <div class="h6">좋아한[미구현]</div>
-                                               </a>
-                                           </div>
-                                       </div>
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-                   -->
+					<script>
+                        $("#image").change(function(){
+                            if(this==$('#image')[0]){    }
+                            
+                        if(this.files && this.files[0]){
+                            var reader = new FileReader;
+                            reader.onload = function(data){
+                                $("#gogoimage").attr("src", data.target.result);
+                                $("#gogoimage2").attr("src", data.target.result);
+                                $("#gogoimage3").attr("src", data.target.result);
+                            }
+                            reader.readAsDataURL(this.files[0]);
+                        }
+                    }) 
+                    
+                      function clickedBtn(){
+                            
+                       var form = new FormData(document.getElementById("imgform"));
+                       $.ajax({
+                           url:"saveimage.udo",
+                           data:form,
+                           type:"POST",
+                           cache:false,
+                           processData:false,
+                           contentType:false,
+                           success:function(data){
+                            if(data=="1"){
+                                alert("이미지가 저장되었습니다.");
+                            }
+                           },
+                           error : function() {
+                               alert("연결에 문제가 있습니다. 인터넷 환경을 확인 후 다시 시도해 주세요.");
+                           }
+                       });
+                      }
+                       </script> 
                    <div class="d-flex flex-column bd-highlight mb-3">
                        <ul class="list-group list-group-flush">
                            <li class="list-group-item"><a href="mypage.udo">

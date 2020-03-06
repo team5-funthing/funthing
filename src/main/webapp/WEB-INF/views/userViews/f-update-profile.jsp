@@ -25,6 +25,7 @@
    <jsp:include page="./include/i-header.jsp" />
 
 <script>
+
         $(function () {
 
 
@@ -92,9 +93,14 @@
 						</div>
 					</div>
 					<hr>
-
+<input type="hidden" id="ok123" value="${ok }">
 			 		     <script>
-			 		    
+			 		    $(document).ready(function(){
+			 		   var ok=	document.getElementById("ok123").value;
+			 		   if(ok==1){
+			 			alert('회원정보 가 수정되었습니다.');
+			 		   }
+			 		   });
 			 		     
 			 		    $("#image2").change(function(){
 		            		if(this.files && this.files[0]){
@@ -130,7 +136,7 @@
                        });
 					  }
                        </script> 
-					<form id ="updateForm">
+					<form id ="updateForm" name="updateForm" action = "updateMember.udo" method="post">
 					<div class="form-row">
 							<div class="col-md-4 mb-3">
 								<label for="validationDefault01">현재 비밀번호</label> <input

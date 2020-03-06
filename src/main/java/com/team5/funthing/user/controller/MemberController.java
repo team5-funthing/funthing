@@ -81,18 +81,21 @@ public class MemberController {
 
 		if(getMemberService.getMember(vo) != null) { 
 			if(getMemberService.getMember(vo).getPassword().equals(request.getParameter("password"))) { 
-				if(request.getParameter("confirm-switch") != null) {
+				System.out.println("°ª :"+request.getParameter("confirm-switch"));
+				if(request.getParameter("confirm-switch")==null) {
+					Cookie cookieid = new Cookie("funthingCookieId",null);
+					cookieid.setMaxAge(0);  /// kill the cookie 
+					Cookie cookiepw = new Cookie("funthingCookiePw",null);
+					cookiepw.setMaxAge(0); /// kill the cookie
+					response.addCookie(cookieid);
+					response.addCookie(cookiepw);
+				}else {
 					Cookie cookieid = new Cookie("funthingCookieId",vo.getEmail());
 					cookieid.setMaxAge(60*60*24*30);  /// cookie's life setting 30 days 
 					Cookie cookiepw = new Cookie("funthingCookiePw",vo.getPassword());
 					cookiepw.setMaxAge(60*60*24*30); /// cookie's life setting 30 days 
 					response.addCookie(cookieid);
 					response.addCookie(cookiepw);
-				}else {
-					Cookie cookieid = new Cookie("funthingCookieId",null);
-					cookieid.setMaxAge(0);  /// kill the cookie 
-					Cookie cookiepw = new Cookie("funthingCookiePw",null);
-					cookiepw.setMaxAge(0); /// kill the cookie
 				}
 				session.setAttribute("memberSession", getMemberService.getMember(vo));
 				avo.setReceiveId(vo.getEmail());
@@ -202,7 +205,7 @@ public class MemberController {
 	@RequestMapping(value="logout.udo",method=RequestMethod.GET)
 	public String logOut(HttpSession session) {
 		session.invalidate();
-		return "p-index";
+		return "redirect:index.udo";
 	}    
 
 
