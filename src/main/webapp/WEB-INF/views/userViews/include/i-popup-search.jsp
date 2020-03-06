@@ -2,6 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<!-- 검색 폼 -->
+	
+	<div id="skytest">
+		
+	</div>
+	
+	
 	<form action="getSearchKeywordList.udo" method="GET" id="search-popup"
 		class="white-popup-block mfp-hide">
 		<div class="search_popup_box">

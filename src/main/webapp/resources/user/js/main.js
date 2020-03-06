@@ -530,11 +530,18 @@ $(document).on("click", '#search', function(){
 			$("#keywordFiveList").empty();
 
 			for (var i = 0; i <5; i++) {
-
-				$("#keywordFiveList").append("<li><a class='btn btn-outline-secondary btn-search d-none d-inline-block ml-2 mb-1 clickKeyword' href='getClickKeywordList.udo?searchKeywordStr=" + fiveList[i].keyword + "'>" + fiveList[i].keyword + "</a></li>");
+				var elId = "test" + i;
+				var aId = "a" + i;
+				console.log(elId)
+				$("#keywordFiveList").append("<li><a onclick='' id='#"+aId+"' class='btn btn-outline-secondary btn-search d-none d-inline-block ml-2 mb-1 clickKeyword' href='#'>" + fiveList[i].keyword + "</a></li>");
 				
+				$("#skytest").append("<form action='getClickKeywordList.udo' method='GET' id= '"+ elId +"'>"
+									+"<input type='hidden' name='searchKeywordStr' value='" + fiveList[i].keyword + "' "
+									+"</form>");
+				
+				$("#keywordFiveList").children("#"+aId+"").attr("onclick", "document.getElementById('"+elId+"')");
 			}
-
+			
 		},
 
 
@@ -544,14 +551,6 @@ $(document).on("click", '#search', function(){
 	});
 
 });
-
-
-$(document).on("click", '.clickKeyword', function(){
-	
-	$(this).trigger("click");
-	
-});
-
 
 
 

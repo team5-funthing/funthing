@@ -71,6 +71,7 @@
 						      <option value=0>0원~500만원미만</option>
 						      <option value=5000000>500만원~1000만원미만</option>
 						      <option value=10000000>1000만원~1500만원미만</option>
+						      <option value=15000000>1500만원이상</option>
 						    </select>
                                 
                                 
@@ -85,6 +86,7 @@
 						      <option value="25">26%~50%</option>
 						      <option value="50">51%~75%</option>
 						      <option value="75">76%~100%</option>
+						      
 						    </select>
 						    
                             </div><!-- /btn-group -->
