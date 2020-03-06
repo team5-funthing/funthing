@@ -208,5 +208,24 @@
 	</select>
 	
 	
+	<update id="updateProjectFundingMoney" parameterType="project">
+	
+		UPDATE project SET fundingMoney = fundingMoney + #{fundingMoney }
+		WHERE projectNo = #{projectNo }
+	
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 </mapper>

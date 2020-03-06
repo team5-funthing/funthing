@@ -73,16 +73,22 @@
             <div class="card mb-3" style="border: 0px">
                 <div class="card-body">
                 
-					<c:set var="totalAmount" value="0"/>
+					<c:set var="totalAmount" value="${paymentReserve.additionalFundingMoney }"/>
 					<c:set var="shippingFee" value="0"/>
 					
-					<c:forEach var="rewardSelection" items="${paymentReserve.rewardSelectionList}" varStatus="cnt">
+					<c:forEach var="rewardSelection" items="${paymentReserve.rewardSelectionList }" varStatus="cnt">
 						<c:set var="totalAmount" value="${ totalAmount + rewardSelection.paymentAmount }"/>
 						<div class="row">
 							<div class="col-8">
 								<h5 class="card-title">${rewardSelection.reward.rewardName }</h5>
 								<p class="card-text">${rewardSelection.reward.rewardContent }</p>
-								<p class="card-text">옵션: </p>
+								<p class="card-text">옵션: <br>
+								
+								<c:forEach var="option" items="${rewardSelection.rewardOptionValueList}">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${option }<br>
+								</c:forEach>
+								
+								</p>
 							</div>
 						</div>
 						<div class="d-flex justify-content-end">
@@ -92,15 +98,20 @@
 						<hr>
 					</c:forEach>
                     <hr>
+                    
 
                     <div class="d-flex justify-content-between">
                         <div class="p-2 bd-highlight"> 추가 펀딩금액</div>
-                        <div class="p-2 bd-highlight"> 0원</div>
+                        <div class="p-2 bd-highlight"> ${paymentReserve.additionalFundingMoney }원</div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div class="p-2 bd-highlight"> 총 펀딩금액 [리워드 + 추가 펀딩금액]</div>
+                        <div class="p-2 bd-highlight"> ${totalAmount }원</div>
                     </div>
 
                     <div class="d-flex justify-content-between">
                         <div class="p-2 bd-highlight"> 배송비</div>
-                        <div class="p-2 bd-highlight"> 0원</div>
+                        <div class="p-2 bd-highlight">  ${paymentReserve.shippingFee }원</div>
                     </div>
                     <hr>
 
@@ -127,7 +138,7 @@
                     <hr>
                     <div class="d-flex justify-content-end">
                         <div class="p-2 bd-highlight h3"> 총 결제 금액</div>
-                        <div class="p-2 bd-highlight h3"> ${totalAmount } 원</div>
+                        <div class="p-2 bd-highlight h3"> ${totalAmount + paymentReserve.shippingFee } 원</div>
                     </div>
                 </div>
             </div>

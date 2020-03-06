@@ -37,6 +37,10 @@ public class ProjectDAO {
 		return sqlSessionTemplate.selectOne("getProject", vo);
 	}
 	
+	public void updateProjectFundingMoney(ProjectVO vo) {
+		sqlSessionTemplate.selectOne("updateProjectFundingMoney", vo);
+	}
+	
 	
 	public List<ProjectVO> getProjectListByEmail(ProjectVO vo){
 		return sqlSessionTemplate.selectList("getProjectListByEmail",vo);

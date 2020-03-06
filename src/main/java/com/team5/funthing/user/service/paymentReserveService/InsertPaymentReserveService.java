@@ -8,6 +8,6 @@ import com.team5.funthing.user.model.vo.RewardSelectionVO;
 
 public interface InsertPaymentReserveService {
 	
-	public PaymentReserveVO insertPaymentReserve(PaymentReserveVO prvo, DeliveryAddressVO davo, List<RewardSelectionVO> selectedRewardList);
+	public PaymentReserveVO insertPaymentReserve(PaymentReserveVO prvo, DeliveryAddressVO davo, List<RewardSelectionVO> selectedRewardList, int projectNo);
 	
 }

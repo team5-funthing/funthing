@@ -7,6 +7,7 @@
 	
 	<typeAliases>
 		
+		<typeAlias type="com.team5.funthing.user.model.vo.RewardOptionValueListVO" alias="rewardOptionValueList"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.ProjectIntroduceImageVO" alias="projectIntroduceImage"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.ProjectVO" alias="project"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.ProjectKeywordVO" alias="projectKeyword"/>
