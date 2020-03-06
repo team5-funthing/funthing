@@ -48,56 +48,57 @@ table, tr, td{
 }
 </style>  
 <script>
-function checkboxFunction(){
-	var explane1 = document.getElementById('explane1');
-	var explane2 = document.getElementById('explane2');
-	var explane3 = document.getElementById('explane3');
+	function checkboxFunction(){
+		var explane1 = document.getElementById('explane1');
+		var explane2 = document.getElementById('explane2');
+		var explane3 = document.getElementById('explane3');
+		
+		if((explane1.checked==true)&&(explane2.checked==true)&&(explane3.checked==true)){
+			$("#confirmButton").show();
+			$("#confirmButton").attr("disabled",false);
+		}else{
+			$("#confirmButton").hide();
+			$("#confirmButton").attr("disabled",true);
+		}
+	}
 	
-	if((explane1.checked==true)&&(explane2.checked==true)&&(explane3.checked==true)){
-		$("#confirmButton").show();
-		$("#confirmButton").attr("disabled",false);
-	}else{
+	$(document).ready(function(){
 		$("#confirmButton").hide();
 		$("#confirmButton").attr("disabled",true);
-	}
-}
-
-$(document).ready(function(){
-	$("#confirmButton").hide();
-	$("#confirmButton").attr("disabled",true);
-	$("#getDetailPolicy").hide();
-	
-	$.magnificPopup.open({
-		items:[
-			{
-				src:"#warning-popup",
-				type:'inline'
-			}
-		],
-		closeOnBgClick:false,
-		showCloseBtn:false,
-		closeBtnInside:false
-	});
-	
-	$("#detailPolicy").click(function(){
-		$("#getDetailPolicy").toggle("slow");
-		$.ajax({
-			type:"post",
-			url:"getServiceTos.udo",
-			success:function(data){
-				$("#getDetailPolicy").html(data);
-			},
-			error:function(){
-				alert('실패');
-			}
+		$("#getDetailPolicy").hide();
+		
+		$.magnificPopup.open({
+			items:[
+				{
+					src:"#warning-popup",
+					type:'inline'
+				}
+			],
+			closeOnBgClick:false,
+			showCloseBtn:false,
+			closeBtnInside:false
 		});
-	});
-	
-	$('#confirmButton').on( "click", function() {
-		  $.magnificPopup.close();
+		
+		$("#detailPolicy").click(function(){
+			$("#getDetailPolicy").toggle("slow");
+			$.ajax({
+				type:"post",
+				url:"getServiceTos.udo",
+				success:function(data){
+					$("#getDetailPolicy").html(data);
+				},
+				error:function(){
+					alert('실패');
+				}
+			});
 		});
-});
+		
+		$('#confirmButton').on( "click", function() {
+			  $.magnificPopup.close();
+			});
+	});
 </script>
+
 </head>
 
 <body>
@@ -255,8 +256,6 @@ $(document).ready(function(){
 
         
         <article class="pb-5">
-        
-        
        		<c:forEach var="reward" items="${getRewardList }" varStatus="cnt">
        			
        			<form id="reward${cnt.count }" name="reward${cnt.count }" action="addSelectReword.udo" method="POST">
@@ -266,7 +265,6 @@ $(document).ready(function(){
 		            	<input type="hidden" name="rewardNo" value="${reward.rewardNo }">
 						<input type="hidden" name="email" value="${sessionScope.memberSession.email }">
 						<input type="hidden" name="paymentAmount" value="${reward.rewardPrice }">
-						<input type="hidden" name="shippingFee" value="${reward.shippingFee }">
 						<input type='hidden' name='rewardOptionValueList' value=''>
 						
 		                <!-- 리워드 선택 박스 1 [ 리워드 품목 등록 수 만큼 반복 ]-->
@@ -284,7 +282,7 @@ $(document).ready(function(){
 		                            <p class="card-text">${reward.rewardName }</p>
 		                            <p class="card-text">${reward.rewardContent }</p>
 		
-		                            <p class="card-text to-add-place">배송비 ${reward.shippingFee }원 | 예상 배송일 추가안내</p>
+		                            
 		                            
 		                            <div id="checkTrue${cnt.count }" class="row">
 		                            </div>
@@ -405,11 +403,10 @@ $(document).ready(function(){
                         			$("#checkTrue${cnt.count }").empty();
                         			
          							$('#totalAmount').empty();
-         							$('#totalAmount').append("총 " + paymentAmount + "원을 후원합니다.");
+         							$('#totalAmount').append( paymentAmount + "원을 후원합니다.(배송비 제외)");
          							
     						    },
     						    error: function(errorThrown) {
-    						    	alert("여기서 에러입니까");
     						    	alert(errorThrown.statusText);
     						    }
     						});		
@@ -439,7 +436,7 @@ $(document).ready(function(){
      							});
      							
      							$('#totalAmount').empty();
-     							$('#totalAmount').append("총 " + paymentAmount + "원을 후원합니다.");
+     							$('#totalAmount').append( paymentAmount + "원을 후원합니다.(배송비 제외)");
    						    },
    						    error: function(errorThrown) {
    						        alert(errorThrown.statusText);
@@ -504,6 +501,35 @@ $(document).ready(function(){
 		<!-- --------------------------------------------------- -->
 		<form id="paymentReservationForm" action="insertselectedReward.udo" method="post">
 			<input type="hidden" name="projectNo" value="${projectNoOfRewardList }">
+			
+			<article>  
+	            <div class="row">
+	                <div class="col-3">
+	                    <div class="h5">배송비</div>
+	                </div>
+	                <div class="col-9">
+                    	<c:choose>
+                    		<c:when test="${getRewardList[0].shippingFee ne 0 }">
+                    			<p>수량과 지역에 따라 배송비가 달라질 수 있습니다.</p>
+                    			<div class="row">
+                    				<input type="text" name="shippingFee" 
+                    						value="${getRewardList[0].shippingFee }" 
+                    						class="form-control ml-2 mr-2" 
+                    						style="width:200px;" readonly>
+                    				<span>원</span>
+                    			</div>
+                    		</c:when>
+                    		<c:otherwise>
+                    			<div class="row">
+                    				<span>배송이 필요없는 리워드 펀딩입니다.</span>
+                    			</div>
+                    		</c:otherwise>
+                    	</c:choose>  
+	                </div>
+	            </div>
+	        </article>
+			<hr>
+			
 	        <article>  
 	            <div class="row">
 	                <div class="col-3">
@@ -512,7 +538,7 @@ $(document).ready(function(){
 	                <div class="col-9">
 	                    <p>후원금을 더하여 펀딩할 수 있습니다. 추가 후원금을 입력하시겠습니까?</p>
 	                    <div class="row">
-	                        <input type="text" name="additionalFundingMoney" class="form-control ml-2 mr-2" style="width:200px;" placeholder="0">
+	                        <input type="text" name="additionalFundingMoney" value="0" class="form-control ml-2 mr-2" style="width:200px;" placeholder="0">
 	                        <span>원을 추가로 후원합니다.</span>
 	                    </div>
 	                </div>
@@ -549,7 +575,19 @@ $(document).ready(function(){
 	            </div>
 	        </article>
 			<hr>
-			<h4> 총금액 : </h4> <div id="totalAmount" class="h4"></div>
+			
+			<div class="row">
+	                <div class="col-3">
+	                    <div class="h4" style="color:black;">펀딩 금액 : </div>
+	                </div>
+	                <div class="col-9">
+                    	<div class="row">
+                        	<div id="totalAmount" class="h4">
+                        </div>
+                    </div>
+                </div>
+            </div>
+			
 	
 	        <article class="p-5 d-flex justify-content-end">
 	            <div class="d-inline-flex p-2 bd-highlight">
@@ -560,10 +598,8 @@ $(document).ready(function(){
         </form>
     </section>	
 
-    <!-- footer -->
-    <footer class="footer">
-    </footer>
-    
+
+    <jsp:include page="./include/i-footer.jsp"></jsp:include>
     <jsp:include page="./include/i-popup-login.jsp"></jsp:include>
 	<jsp:include page="./include/i-popup-search.jsp"></jsp:include>
     <jsp:include page="./include/i-body-js.jsp"></jsp:include>

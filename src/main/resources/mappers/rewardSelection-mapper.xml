@@ -4,10 +4,23 @@
 
 <mapper namespace="RewardSelectionDAO">
 
-	<insert id="insertRewardSelection" parameterType="rewardSelection">
+
+	<insert id="insertRewardSelectionList" parameterType="rewardOptionValueList">
+		
+		INSERT INTO rewardOptionValueList(selectRewardNo, rewardOptionValue)
+		VALUES (#{selectRewardNo }, #{rewardOptionValue })
 	
-			INSERT INTO rewardselection(selectrewardno, orderNo, rewardNo, paymentAmount, orderAmount, shippingFee)
-			VALUES (rewardselection_seq.nextval, #{orderNo }, #{rewardNo }, #{paymentAmount}, #{orderAmount}, #{shippingFee})
+	</insert>
+
+
+	<insert id="insertRewardSelection" parameterType="rewardSelection">
+		
+		<selectKey keyProperty="selectRewardNo" resultType="int" order="AFTER">
+			SELECT rewardselection_seq.currval FROM dual
+		</selectKey>
+		
+		INSERT INTO rewardselection(selectrewardno, orderNo, rewardNo, paymentAmount, orderAmount)
+		VALUES (rewardselection_seq.nextval, #{orderNo }, #{rewardNo }, #{paymentAmount}, #{orderAmount})
 
 	</insert>
 	
@@ -41,7 +54,6 @@
 		<result column="rewardNo" property="rewardNo" />
 		<result column="paymentAmount" property="paymentAmount" />
 		<result column="orderAmount" property="orderAmount"/>
-		<result column="shippingFee" property="shippingFee" />
 		
 		<collection property="reward" resultMap="reward" />
 		
@@ -56,6 +68,17 @@
 		<!-- WHERE rewardselection.orderNo = #{orderNo} -->
 	
 	</select>
+	
+	
+	<update id="updateRewardAmount" parameterType="rewardSelection">
+		
+		UPDATE reward SET rewardAmount = rewardAmount - #{orderAmount } where rewardNo = #{rewardNo }
+	
+	</update>
+	
+	
+	
+	
 	
 
 </mapper>
