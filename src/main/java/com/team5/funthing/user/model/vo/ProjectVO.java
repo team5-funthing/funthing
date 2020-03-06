@@ -4,6 +4,8 @@ import java.sql.Date;
 
 import org.springframework.stereotype.Component;
 
+import com.team5.funthing.admin.model.vo.AdminUserMainProjectVO;
+
 /**
  * 
  * @author bummit
@@ -54,9 +56,14 @@ public class ProjectVO {
 	private MemberActivityVO memberActivity;
 	
 	
+
 	
 	
 	
+	
+	
+	
+
 	public MemberActivityVO getMemberActivity() {
 		return memberActivity;
 	}

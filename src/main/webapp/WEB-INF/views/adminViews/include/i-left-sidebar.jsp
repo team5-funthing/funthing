@@ -64,9 +64,19 @@
                                 <i class="mdi mdi-account-card-details"></i>
                                 <span class="hide-menu">심사하기 </span>
                             </a>
-
                         </li>
-                        
+                        <li class="sidebar-item">
+                        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="userMainImageChangeForm.ado" aria-expanded="false">
+                                <i class="mdi mdi-account-card-details"></i>
+                                <span class="hide-menu">유저 메인 이미지 </span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item"> 
+                        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="getFocusProjectList.ado" aria-expanded="false">
+                                <i class="mdi mdi-account-card-details"></i>
+                                <span class="hide-menu">유저 메인 프로젝트 설정 </span>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->

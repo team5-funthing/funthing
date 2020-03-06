@@ -8,9 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.team5.funthing.admin.model.vo.AdminNoticeBoardVO;
+import com.team5.funthing.admin.model.vo.AdminUserMainImageChangeVO;
 import com.team5.funthing.admin.service.adminNoticeBoardService.GetAdminNoticeBoardListService;
 import com.team5.funthing.admin.service.adminProjectCheckService.GetProjectCheckListService;
 import com.team5.funthing.user.model.vo.ProjectVO;
+import com.team5.funthing.user.service.projectService.GetAllFundingProjectListService;
+import com.team5.funthing.user.service.userMainImageChangeService.GetUserMainImageChangeListService;
 
 @Controller
 public class AdminHomeController {
@@ -19,6 +22,10 @@ public class AdminHomeController {
 	GetAdminNoticeBoardListService getAdminNoticeBoardListService;
 	@Autowired
 	GetProjectCheckListService getProjectCheckListService;
+	@Autowired 
+	GetUserMainImageChangeListService getUserMainImageChangeListService;
+	@Autowired
+	GetAllFundingProjectListService getAllFundingProjectListService;
 	
 	@RequestMapping("adminIndex.ado")
 	public String showIndex() {
@@ -72,6 +79,18 @@ public class AdminHomeController {
 		model.addAttribute("projectCheckList",projectCheckList);
 		return "b-project-check-list";
 	}
+	
+	@RequestMapping("userMainImageChangeForm.ado")
+	public String userMainImageForm(AdminUserMainImageChangeVO vo, Model model) {
+		List<AdminUserMainImageChangeVO> getUserMainImageChangeList =getUserMainImageChangeListService.getUserMainImageChangeList(vo);
+		
+		model.addAttribute("getUserMainImageChangeList",getUserMainImageChangeList);
+		return "f-usermainimage-input";
+	}
+	
+
+	
+	
 	
 	
 }
