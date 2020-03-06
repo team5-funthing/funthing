@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<!-- 검색 폼 -->
-	<form action="#" method="POST" id="search-popup"
+	<form action="getSearchKeywordList.udo" method="GET" id="search-popup"
 		class="white-popup-block mfp-hide">
 		<div class="search_popup_box">
 			<div class="popup_inner ">
@@ -61,22 +61,9 @@
 							<div class="col-2">
 							</div>
 							<div class="col-11">
-								<ul class="list-group list-group-flush flex-column bd-highlight">
-									<li><a
-										class="btn btn-outline-secondary btn-search d-none d-inline-block ml-2 mb-1"
-										href="javaScript:return(0);">11테스트1</a></li>
-									<li><a
-										class="btn btn-outline-secondary btn-search d-none d-inline-block ml-2 mb-1"
-										href="javaScript:return(0);">232테스트2</a></li>
-									<li><a
-										class="btn btn-outline-secondary btn-search d-none d-inline-block ml-2 mb-1"
-										href="javaScript:return(0);">테스트32424</a></li>
-									<li><a
-										class="btn btn-outline-secondary btn-search d-none d-inline-block ml-2 mb-1"
-										href="javaScript:return(0);">테스트44353</a></li>
-									<li><a
-										class="btn btn-outline-secondary btn-search d-none d-inline-block ml-2 mb-1"
-										href="javaScript:return(0);">테스트534545</a></li>
+								<ul id="keywordFiveList" class="list-group list-group-flush flex-column bd-highlight">
+										
+								
 								</ul>
 							</div>
 						</div>
