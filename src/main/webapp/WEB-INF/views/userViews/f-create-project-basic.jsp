@@ -32,13 +32,20 @@
 							
 							<c:choose>
 								<c:when test="${empty getCreatorList}">
+									
 								</c:when>
 								
 								<c:when test="${not empty getCreatorList}">
-									이미 만든 창작자 정보 가져오기<br>
-									<c:forEach var="creatorList" items="${getCreatorList }">
-										${creatorList.creator }
-									</c:forEach>
+								
+									<div class="form-group">
+									    <label for="existCreator"><h5>창작자 | 업체명 *</h5></label>
+									    <select class="form-control" id="existCreator">
+										    <c:forEach var="creatorList" items="${getCreatorList }">
+												<option>${creatorList.creator }</option>
+											</c:forEach>
+									    </select>
+									</div>
+									
 								</c:when>
 								
 							</c:choose>

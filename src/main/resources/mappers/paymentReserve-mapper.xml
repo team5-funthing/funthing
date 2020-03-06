@@ -91,6 +91,19 @@
 	
 	</select>
 	
+	<select id="getPaymentReserveListByEmail" parameterType="paymentReserve" resultMap="paymentReserve">
+	
+		SELECT paymentReserve.*, rewardselection.*, reward.*
+		FROM paymentReserve
+		INNER JOIN ((rewardselection
+		LEFT OUTER JOIN reward
+		ON rewardselection.rewardNo = reward.rewardNo)
+		LEFT OUTER JOIN RewardOptionValueList
+		ON rewardselection.selectRewardNo = RewardOptionValueList.selectRewardNo)
+		ON paymentReserve.orderNo = rewardselection.orderNo
+		WHERE paymentReserve.email = #{email}
+	
+	</select>
 	
 	
 	

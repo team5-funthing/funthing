@@ -13,35 +13,38 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.team5.funthing.user.model.vo.MemberActivityVO;
 import com.team5.funthing.user.model.vo.MemberVO;
+import com.team5.funthing.user.model.vo.PaymentReserveVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.service.memberActivityService.DeleteMemberActivityService;
 import com.team5.funthing.user.service.memberActivityService.GetMemberActivityListService;
 import com.team5.funthing.user.service.memberActivityService.InsertMemberActivityService;
 import com.team5.funthing.user.service.memberActivityService.UpdateMemberActivityService;
-
-import com.team5.funthing.user.service.projectService.GetProjectService;
+import com.team5.funthing.user.service.paymentReserveService.GetPaymentReserveService;
 import com.team5.funthing.user.service.projectService.GetProjectListByEmailService;
-
+import com.team5.funthing.user.service.projectService.GetProjectService;
+	
 @Controller
 public class MemberActivityController {
 
 	@Autowired
-	DeleteMemberActivityService deleteMemberActivityService;
+	private DeleteMemberActivityService deleteMemberActivityService;
 	@Autowired
-	GetMemberActivityListService getMemberActivityService;
+	private GetMemberActivityListService getMemberActivityService;
 	@Autowired
-	InsertMemberActivityService insertMemberActivityService;
+	private InsertMemberActivityService insertMemberActivityService;
 	@Autowired
-	UpdateMemberActivityService updateMemberActivityService;
+	private UpdateMemberActivityService updateMemberActivityService;
 	@Autowired
-	GetProjectListByEmailService getProjectServiceByEmailService;
+	private GetProjectListByEmailService getProjectServiceByEmailService;
 	@Autowired
-	GetProjectService getProjectService;
+	private GetProjectService getProjectService;
+	@Autowired
+	private GetPaymentReserveService getPaymentReserveService;
 
 
 
 	@RequestMapping(value="mypage.udo",method=RequestMethod.GET)
-	public String myPage(HttpSession session,MemberActivityVO vo,ProjectVO vo1,Model model, MemberVO vo2) {
+	public String myPage(HttpSession session, MemberActivityVO vo, ProjectVO vo1, Model model, MemberVO vo2) {
 		
 		System.out.println(":"+session.getAttribute("memberSession").toString());
 		myProjectList(vo1, model, session);
@@ -102,4 +105,37 @@ public class MemberActivityController {
 		}
 		model.addAttribute("projectReservationList",projectReservationList);
 	}
+	
+	@RequestMapping(value = "paymentReservationCheckList.udo", method = RequestMethod.POST )
+	public String myPaymentReservationCheckList(Model model, PaymentReserveVO prvo) {
+		
+		System.out.println("결제내역 보기 이동");
+		
+		
+		prvo = getPaymentReserveService.getPaymentReserve(prvo);
+		
+		
+		
+		return "p-payment-reservation-check";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

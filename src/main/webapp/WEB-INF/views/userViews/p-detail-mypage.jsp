@@ -47,9 +47,11 @@
                      </div>
                      
                      <div class="d-inline-flex p-2 bd-highlight">
-                        <a
-                           class="btn btn-lg btn-detail-mypage d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
-                           href="#">결제내역 확인</a>
+                     
+                        <a href="javaScript: return(0);" onclick="document.getElementById('paymentReservationCheckListForm').submit()"
+                           class="btn btn-lg btn-detail-mypage d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3">
+                           	결제내역 확인
+                           </a>
                      </div>
                      
                      
