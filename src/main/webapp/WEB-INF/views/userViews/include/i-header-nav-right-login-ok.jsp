@@ -11,14 +11,14 @@
 	            <a class="popup-with-form" href="#search-popup" id="search"><span
 	                    class="fa fa-search fa-2x pr-1"></span></a>
 	        </div>
-	
+
 			<div class="dropdown">
 				<a class="dropdown-toggle" data-toggle="dropdown">
 					<i class="far fa-bell fa-2x pr-1"></i>
 				</a>
 				<ul class="dropdown-menu">
-					<c:forEach var="alarmList" items="${memberAlarmList}">
-						<li>${alarmList.alarmType}</li>
+					<c:forEach var="alarmList" items="${sessionScope.memberAlarmList}">
+						<li><a href="alarmPaging.udo?alarmNo=${alarmList.alarmNo}&alarmType=${alarmList.alarmType}">${alarmList.alarmType}</a></li>
 					</c:forEach>
 				</ul>
 			</div>

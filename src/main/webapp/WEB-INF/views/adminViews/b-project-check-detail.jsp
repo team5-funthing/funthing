@@ -199,10 +199,13 @@
 																				<textarea rows="10" cols="70" name="statusReplyMessage" placeholder="거부/보류 사유 기재하는 곳"></textarea>
 																			</div>
 																			<input type="hidden" name="fm" id="pn" value="">
+																			<input type="hidden" name="projectTitle" value="${projectCheck.projectTitle }">
 																			<input type="hidden" name="projectNo" value="${projectCheck.projectNo}"> 
+																			<input type="hidden" name="email" value="${projectCheck.email}">
 																			<input type="submit" value="승인"> 
-																			<a href="javaScript: return(0);" onclick="document.getElementById('statusReplyMessageform').submit()"><input
-																				type="button" value="거부"></a>
+																			<input type="submit" formaction="updateProjectCheckDeny.ado" value="거부">
+																			<!-- <a href="javaScript: return(0);" onclick="document.getElementById('statusReplyMessageform').submit()">
+																			<input type="button" value="거부"></a> -->
 																			<!-- 보류 버튼 아직 미완료 상태 -->
 																			<a href="#"><input type="button" value="보류(미완임)"></a>
 																			<a href="http://localhost:8080/funthing/getProjectCheckList.ado">

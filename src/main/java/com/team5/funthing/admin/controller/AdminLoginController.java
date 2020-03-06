@@ -28,6 +28,7 @@ public class AdminLoginController {
 	@RequestMapping("LoginCheck.ado")
 	public String LoginCheck(AdminMemberVO vo,AlarmVO avo,HttpSession session,Model model) {
 		String getPassword = null;
+		System.out.println("로그인 시작");
 		if(getAdminPasswordService.getAdminPassword(vo)==null) {
 			model.addAttribute("loginResult", "등록되지 않은 회원입니다.");
 		}else {
