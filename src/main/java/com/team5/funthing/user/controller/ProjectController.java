@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team5.funthing.common.utils.uploadUtils.UploadUtil;
+import com.team5.funthing.user.model.vo.AlarmVO;
 import com.team5.funthing.user.model.vo.CreatorVO;
 import com.team5.funthing.user.model.vo.KeywordVO;
 import com.team5.funthing.user.model.vo.MemberVO;
@@ -28,9 +29,8 @@ import com.team5.funthing.user.model.vo.ProjectIntroduceImageVO;
 import com.team5.funthing.user.model.vo.ProjectKeywordVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.model.vo.RewardVO;
-
+import com.team5.funthing.user.service.AlarmService.InsertProjectJudgeRequestAlarmService;
 import com.team5.funthing.user.service.creatorService.GetCreatorListService;
-
 import com.team5.funthing.user.service.creatorService.InsertCreatorService;
 import com.team5.funthing.user.service.keywordService.GetKeywordListService;
 import com.team5.funthing.user.service.keywordService.InsertKeywordService;
@@ -110,6 +110,10 @@ public class ProjectController {
 	// Reward Service
 	@Autowired
 	private GetRewardListService getRewardListService;
+	
+	// Alarm Service
+	@Autowired
+	private InsertProjectJudgeRequestAlarmService insertProjectJudgeRequestAlarmService;
 	
 // ===================== VO 주입 =====================
 	
@@ -320,7 +324,7 @@ public class ProjectController {
 	}
 
 	@RequestMapping(value = "requestCheckProject.udo", method = RequestMethod.POST)
-	public String requestCheckProject(	ProjectVO pvo, 
+	public String requestCheckProject(	ProjectVO pvo, AlarmVO avo, 
 										RedirectAttributes redirectAttributes) {
 		
 		pvo = getProjectService.getProject(pvo);
@@ -328,6 +332,17 @@ public class ProjectController {
 		System.out.println("수정전의 프로젝트 상태 : " + pvo.toString());
 		updateProjectService.updateProject(pvo);
 		System.out.println("수정후의 프로젝트 상태 : " + pvo.toString());
+		
+		//////////////////////////////////////////////////////////////
+		System.out.println(pvo.getEmail());
+		System.out.println(pvo.getProjectNo());
+		System.out.println(pvo.getProjectTitle());
+		avo.setAlarmType("프로젝트 심사요청");
+		avo.setReceiveId("admin@funthing.com");
+		avo.setReadConfirm('n');
+		avo.setProjectNo(pvo.getProjectNo());
+		System.out.println(avo.toString());
+		insertProjectJudgeRequestAlarmService.insertProjectJudgeRequestAlarm(avo);
 		
 		redirectAttributes.addAttribute("msg", "심사요청을 완료하였습니다.");
 		redirectAttributes.addAttribute("currentProjectNo", pvo.getProjectNo());

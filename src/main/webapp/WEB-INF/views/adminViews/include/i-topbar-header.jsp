@@ -90,9 +90,6 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <ul>
-                                	<c:if test="${adminAlarmList eq '[]'}">
-                                		<li>알림이 없습니다.</li>
-                                	</c:if>
                                 	<c:forEach var="alarmList" items="${adminAlarmList}">
 	                                	<li>${alarmList.alarmType}</li>
                                 	</c:forEach>

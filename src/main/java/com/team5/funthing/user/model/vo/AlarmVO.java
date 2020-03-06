@@ -8,7 +8,15 @@ public class AlarmVO {
 	private String receiveId;
 	private String alarmMessage;
 	private char readConfirm;
+	private int projectNo;
 	
+
+	public int getProjectNo() {
+		return projectNo;
+	}
+	public void setProjectNo(int projectNo) {
+		this.projectNo = projectNo;
+	}
 	public int getAlarmNo() {
 		return alarmNo;
 	}
@@ -49,7 +57,8 @@ public class AlarmVO {
 	@Override
 	public String toString() {
 		return "AlarmVO [alarmNo=" + alarmNo + ", alarmType=" + alarmType + ", detailAlarmType=" + detailAlarmType
-				+ ", receiveId=" + receiveId + ", alarmMessage=" + alarmMessage + ", readConfirm=" + readConfirm + "]";
+				+ ", receiveId=" + receiveId + ", alarmMessage=" + alarmMessage + ", readConfirm=" + readConfirm
+				+ ", projectNo=" + projectNo + "]";
 	}
 	
 }
