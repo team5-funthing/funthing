@@ -91,7 +91,7 @@ public class SearchKeywordController {
 	
 	@RequestMapping(value="getClickKeywordList.udo", method = RequestMethod.GET)
 	public String getClickKeywordList(@RequestParam(value="searchKeywordStr", required = false)String searchKeyword,
-										ProjectVO vo, Model model, KeywordVO vo2) {
+										ProjectVO vo, Model model) {
 		System.out.println("searchKeyword :" + searchKeyword);
 		updateKeywordCountService.updateKeywordCount(searchKeyword);
 		List<ProjectVO> getAllFundingProjectList = getSearchKeywordByKeywordService.getSearchKeywordByKeyword(searchKeyword);

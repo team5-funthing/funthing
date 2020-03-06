@@ -153,7 +153,7 @@
 								<h4>리뷰 게시판 글 남기기</h4>
 								
 								<form class="form-contact comment_form" action="insertProjectBoard.udo" 
-												id="commentForm" method="post">
+												id="commentForm" method="get">
 									<input type="hidden" name="projectNo" value="${project.projectNo}">
 									<div class="row">
 										<div class="col-12">
@@ -238,7 +238,7 @@
 														</div>
 														
 														<!-- projectBoard Reply 시작 -->
-														<c:forEach var="b2" items="${getProjectBoard}">
+														<c:forEach var="b2" items="${getProjectBoardList}">
 															<c:if test="${b1.ref eq b2.ref && b1.step ne b2.step}">
 																<div class="d-flex justify-content-around mt-3">
 							                                       <div class="d-flex align-items-center">
@@ -260,7 +260,7 @@
 							                                                          <p class="date">${b2.projectBoardDate}</p>
 							                                                       </div>
 							                                                       <c:if test="${ b2.email eq sessionScope.memberSession.email }">
-							                                                       	<form action="getProjectBoardReply.udo" method="post">
+							                                                       	<form action="getProjectBoardReply.udo" method="get">
 																						<div class="reply-btn">
 																							<input type="submit" 
 																							class="button button-contactForm btn_1 boxed-btn pt-1 pl-2 pr-2 pb-0" value="수정">
@@ -268,6 +268,8 @@
 																								class="button button-contactForm btn_1 boxed-btn pt-1 pl-2 pr-2 pb-0" value="삭제"> 
 																								<input type="hidden" name="step" id="step" value="${b2.step}"> 
 																								<input type="hidden" name="ref" id="ref" value="${b2.ref}">
+																								<input type="hidden" name="projectNo" id="projectNo" value="${b2.projectNo}">
+																								
 
 																								</div>
 																						</form>

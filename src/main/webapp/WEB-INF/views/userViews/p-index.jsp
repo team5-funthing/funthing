@@ -506,7 +506,7 @@
 
 		<div>
 			<div class="h3 pt-5 d-flex justify-content-between">
-				<a href="javaScript: return(0);">성공 임박 프로젝트<i class="fas fa-chevron-right"></i></a>
+				<a href="getAllMoneyPercentList.udo">성공 임박 프로젝트<i class="fas fa-chevron-right"></i></a>
 			</div>
 
 
@@ -689,7 +689,7 @@
 
 		<div>
 			<div class="h3 pt-5 d-flex justify-content-between">
-				<a href="javaScript: return(0);">마감 임박 프로젝트<i class="fas fa-chevron-right"></i></a>
+				<a href="getDeadLineList.udo">마감 임박 프로젝트<i class="fas fa-chevron-right"></i></a>
 			</div>
 
 

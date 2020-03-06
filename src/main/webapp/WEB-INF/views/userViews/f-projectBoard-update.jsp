@@ -25,7 +25,7 @@
 				<h4>리뷰 게시판 글 수정하기</h4>
 				
 				<form class="form-contact commentupdete-form" action="updateProjectBoard.udo" 
-								id="commentForm" method="post">
+								id="commentForm" method="get">
 					<input type="hidden" name="projectNo" value="${vo.projectNo }">
 					<div class="row">
 						<div class="col-12">
@@ -37,7 +37,7 @@
 						<div class="col-sm-6">
 							<div class="form-group">
 								<input class="form-control" name="name" id="name" type="text" 
-									value="${sessionScope.memberSessionName}">
+									value="${sessionScope.memberSession.name}">
 								<input type="hidden" name="projectBoardNo" id="projectBoardNo" value="${vo.projectBoardNo}">
 		
 							</div>
@@ -45,7 +45,7 @@
 						<div class="col-sm-6">
 							<div class="form-group">
 		                                <input class="form-control" name="email" id="email" type="email" 
-		                                   value="${sessionScope.memberSessionEmail}">
+		                                   value="${sessionScope.memberSession.email}">
 							</div>
 						</div>
 					</div>
