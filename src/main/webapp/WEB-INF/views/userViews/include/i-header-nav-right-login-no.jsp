@@ -7,7 +7,7 @@
 	    <div class="nav_right">
 	
 	        <div class="search_icon ">
-	            <a class="popup-with-form" href="#search-popup"><span
+	            <a class="popup-with-form" href="#search-popup" id="search"><span
 	                    class="fa fa-search fa-2x pr-1"></span></a>
 	        </div>
 	
@@ -16,3 +16,4 @@
 	        </div>
 	    </div>
 	</div>
+	

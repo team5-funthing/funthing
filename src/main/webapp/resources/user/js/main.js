@@ -440,6 +440,7 @@ $.fn.serializeObject = function() {
 }
 
 
+
 function findPostcode() {
 	new daum.Postcode(
 		{
@@ -513,8 +514,43 @@ function findPostcode() {
 	}).open();
 }
 
+$(document).on("click", '#search', function(){
 
 
+	$.ajax({
+		url : "getKeywordFiveList.udo",
+		type : "get",
+		contentType : "application/json",
+
+
+		success : function(data) {
+
+			var fiveList = JSON.parse(data);
+
+			$("#keywordFiveList").empty();
+
+			for (var i = 0; i <5; i++) {
+
+				$("#keywordFiveList").append("<li><a class='btn btn-outline-secondary btn-search d-none d-inline-block ml-2 mb-1 clickKeyword' href='getClickKeywordList.udo?searchKeywordStr=" + fiveList[i].keyword + "'>" + fiveList[i].keyword + "</a></li>");
+				
+			}
+
+		},
+
+
+		error : function(errorThrown) {
+			alert(errorThrown.statusText);
+		}
+	});
+
+});
+
+
+$(document).on("click", '.clickKeyword', function(){
+	
+	$(this).trigger("click");
+	
+});
 
 
 

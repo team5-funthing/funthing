@@ -35,7 +35,7 @@ public class ProjectVO {
 
 
 	private char writeStatus = 'n'; 
-	private char status = 'n'; // n: ½É»ç¿äÃ» Àü, w : wating[½É»çÁß], p : pass[Åë°ú], f : fail[½ÇÆÐ], m : modify[¼öÁ¤¿äÃ»]
+	private char status = 'n'; // n: ï¿½É»ï¿½ï¿½Ã» ï¿½ï¿½, w : wating[ï¿½É»ï¿½ï¿½ï¿½], p : pass[ï¿½ï¿½ï¿½], f : fail[ï¿½ï¿½ï¿½ï¿½], m : modify[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»]
 	private String statusReplyMessage = "";
 	private char funding = 'n'; 
 
@@ -46,18 +46,13 @@ public class ProjectVO {
 	private int percent;
 	
 	private MemberActivityVO memberActivity;
-	private SearchKeywordVO searchKeyword;
+	private ProjectKeywordVO projectKeyword;
 	
 	
 	
 	
 	
-	public SearchKeywordVO getSearchKeyword() {
-		return searchKeyword;
-	}
-	public void setSearchKeyword(SearchKeywordVO searchKeyword) {
-		this.searchKeyword = searchKeyword;
-	}
+
 	public MemberActivityVO getMemberActivity() {
 		return memberActivity;
 	}
@@ -196,6 +191,12 @@ public class ProjectVO {
 	public void setPercent(int percent) {
 		this.percent = percent;
 	}
+	public ProjectKeywordVO getProjectKeyword() {
+		return projectKeyword;
+	}
+	public void setProjectKeyword(ProjectKeywordVO projectKeyword) {
+		this.projectKeyword = projectKeyword;
+	}
 	@Override
 	public String toString() {
 		return "ProjectVO [projectNo=" + projectNo + ", creator=" + creator + ", email=" + email + ", goalMoney="
@@ -206,8 +207,9 @@ public class ProjectVO {
 				+ ", writeStatus=" + writeStatus + ", status=" + status + ", statusReplyMessage=" + statusReplyMessage
 				+ ", funding=" + funding + ", fundingMoney=" + fundingMoney + ", supporters=" + supporters
 				+ ", informationAgree=" + informationAgree + ", percent=" + percent + ", memberActivity="
-				+ memberActivity + "]";
+				+ memberActivity + ", projectKeyword=" + projectKeyword + "]";
 	}
+	
 	
 	
 
