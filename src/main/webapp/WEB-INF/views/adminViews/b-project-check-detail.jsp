@@ -122,11 +122,8 @@
 										<h5 class="card-title m-b-0">심사 프로젝트 목록</h5>
 										<div class="table-responsive">
 
-
 											<!-- 중간 내용 들어가는 부분 -->
-
 											<section class="container">
-
 												<div class="w-100">
 													<div>
 														업체명
@@ -136,9 +133,7 @@
 														<aside id="project-main-img" class="col-7">
 															<div>${projectCheck.projectIntroduceVideo}</div>
 														</aside>
-														<aside id="project-details-info"
-															class="col-5 align-items-start d-flex flex-column bd-highlight">
-
+														<aside id="project-details-info" class="col-5 align-items-start d-flex flex-column bd-highlight">
 															<div class="p-2 bd-highlight">
 																<div class="h4">목표 금액</div>
 																<div class="h2" style="color: #000000">
@@ -166,16 +161,11 @@
 																	href="#">문의하기</a> <a
 																	class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2"
 																	href="#">공유하기</a>
-
 															</div>
-
 														</aside>
 													</article>
-
 													<hr>
-
 													<div class="w-75">
-
 														<article>
 															<div class="row">
 																<div class="col-lg-10 posts-list">
@@ -192,117 +182,31 @@
 																			<div>${projectCheck.projectStory}</div>
 																		</div>
 																	</div>
-																	<div class="navigation-top">
-																		<div
-																			class="d-sm-flex justify-content-between text-center">
-																			<p class="like-info">
-																				<span class="align-middle"><i
-																					class="fa fa-heart"></i></span> Lily and 4 people like
-																				this
-																			</p>
-																			<div class="col-sm-4 text-center my-2 my-sm-0">
-																				<!-- <p class="comment-count"><span class="align-middle"><i class="fa fa-comment"></i></span> 06 Comments</p> -->
-																			</div>
-																			<ul class="social-icons row">
-																				<li class="mr-1"><a href="#"><i
-																						class="fa fa-facebook-f"></i></a></li>
-																				<li class="mr-1"><a href="#"><i
-																						class="fa fa-twitter"></i></a></li>
-																				<li class="mr-1"><a href="#"><i
-																						class="fa fa-dribbble"></i></a></li>
-																				<li class="mr-1"><a href="#"><i
-																						class="fa fa-behance"></i></a></li>
-																			</ul>
-																		</div>
-																		<div class="navigation-area">
-																			<div class="row">
-																				<div
-																					class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-centl-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
-																					<div class="thumb">
-																						<a href="#"> <img class="img-fluid"
-																							src="img/project_check/preview.png" alt="">
-																						</a>
-																					</div>
-																					<div class="arrow">
-																						<a href="#"> <span
-																							class="lnr text-white ti-arrow-left"></span>
-																						</a>
-																					</div>
-																					<div class="detials">
-																						<p>이전 프로젝트</p>
-																						<a href="#">
-																							<h4>[프로젝트 제목]</h4>
-																						</a>
-																					</div>
-																				</div>
-																				<div
-																					class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
-																					<div class="detials">
-																						<p>다음 프로젝트</p>
-																						<a href="#">
-																							<h4>[프로젝트 제목]</h4>
-																						</a>
-																					</div>
-																					<div class="arrow">
-																						<a href="#"> <span
-																							class="lnr text-white ti-arrow-right"></span>
-																						</a>
-																					</div>
-																					<div class="thumb">
-																						<a href="#"> <img class="img-fluid"
-																							src="img/project_check/next.png" alt="">
-																						</a>
-																					</div>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
 																	<div class="project-author">
 																		<div class="media align-items-center">
 																			<img src="img/project_check/author.png" alt="">
 																			<div class="media-body">
 																				<a href="#">
 																					<h4></h4>
-																				</a>
-																				<p>Second divided from form fish beast made.
-																					Every of seas all gathered use saying you're, he
-																					our dominion twon Second divided from</p>
+																				</a>	
 																			</div>
 																		</div>
 																	</div>
 																	<hr>
-
-																	<div align="center">
-																		<!-- 	<form id="statusReplyMessageform" action="updateProjectCheckDeny.ado" method="POST">
-		<div style="width:500px;">
-			<textarea rows="9" cols="100" name="statusReplyMessage" placeholder="거부/보류 사유 기재하는 곳" ></textarea>
-		</div>	
-			<input type="hidden" name="projectNo" value="${projectCheck.projectNo}">
-			<input type="hidden" name="fm" id="pn" value="">
-		</form> -->
-																	</div>
-
-
-																	<form action="updateProjectCheckApproval.ado"
-																		method="POST">
+																	<form action="updateProjectCheckApproval.ado" method="POST">
 																		<div align="center">
 																			<div style="width: 500px;">
-																				<textarea rows="10" cols="70"
-																					name="statusReplyMessage"
-																					placeholder="거부/보류 사유 기재하는 곳"></textarea>
+																				<textarea rows="10" cols="70" name="statusReplyMessage" placeholder="거부/보류 사유 기재하는 곳"></textarea>
 																			</div>
 																			<input type="hidden" name="fm" id="pn" value="">
-																			<input type="hidden" name="projectNo"
-																				value="${projectCheck.projectNo}"> <input
-																				type="submit" value="승인"> <a
-																				href="javaScript: return(0);"
-																				onclick="document.getElementById('statusReplyMessageform').submit()"><input
+																			<input type="hidden" name="projectNo" value="${projectCheck.projectNo}"> 
+																			<input type="submit" value="승인"> 
+																			<a href="javaScript: return(0);" onclick="document.getElementById('statusReplyMessageform').submit()"><input
 																				type="button" value="거부"></a>
 																			<!-- 보류 버튼 아직 미완료 상태 -->
 																			<a href="#"><input type="button" value="보류(미완임)"></a>
-																			<a
-																				href="http://localhost:8080/funthing/getProjectCheckList.ado"><input
-																				type="button" value="뒤로"></a>
+																			<a href="http://localhost:8080/funthing/getProjectCheckList.ado">
+																			<input type="button" value="뒤로"></a>
 
 																		</div>
 																	</form>
@@ -447,20 +351,97 @@
 																				<h5 class="card-title">${rewards.rewardPrice}</h5>
 																				<h6 class="card-subtitle mb-2 text-muted">${rewards.rewardName}</h6>
 																				<p class="card-text">${rewards.rewardContent}</p>
-																				<a href="#rewardPopup" class="openRewardPopup"
-																					class="card-link">선택하기</a>
+																				<a href="#rewardPopup" class="openRewardPopup card-link"
+																					id="${rewards.rewardNo}">선택하기</a>
 																			</div>
 																		</div>
 																	</c:forEach>
 																</div>
 																<!-- 리워드 반복 끝-->
-
+																	
+																<script>
+																	$(document).ready(function() {
+																		$(".openRewardPopup").magnificPopup({
+																					src : "#rewardPopup",
+																					type : 'inline'																						
+																		});
+													
+																		$("a.card-link").click(function(){
+																			var index = { indexData : $(this).attr('id')};
+																			$.ajax({
+																				type:"post",
+																				url:"getReward.udo",
+																				data:index,
+																				success:function(data){
+																					console.log(data);
+																					var rewardObject = JSON.parse(data);
+																					for(var key in rewardObject){
+																						console.log('key : ' + key + ', value : ' + rewardObject[key]);
+																					}
+																					$("input[name='rewardPrice']").val(rewardObject.rewardPrice);
+																					$("input[name='rewardName']").val(rewardObject.rewardName);
+																					$("textarea[name='rewardContent']").val(rewardObject.rewardContent);
+																					$("#categorySelectBox").val(rewardObject.rewardOption).prop("selected",true);
+																					$("input[name='shippingFee']").val(rewardObject.shippingFee);
+																					$("input[name='rewardAmount']").val(rewardObject.rewardAmount);
+																					$("select[name='rewardDay']").val(rewardObject.rewardDay).prop("selected",true);
+																					$("select[name='rewardMonth']").val(rewardObject.rewardMonth).prop("selected",true);
+																					
+																					$("#appendTag").empty();
+																					$("#appendBtn").empty();
+																			
+																					//입력시에 설정한 선택 옵션들을 보여주는 부분이다.
+																					if(rewardObject.rewardOption=='옵션 없음'){
+																						$("#addOptionIndex").empty();
+																						$("#appendTag").empty();
+																						$("#appendBtn").empty();
+																					}else if(rewardObject.rewardOption=='선택 옵션'){
+																						$("#addOptionIndex").empty();
+																						$("#appendTag").empty();
+																						$("#appendBtn").empty();
+																						console.log(rewardObject.rewardOptionList.length);
+																						for(var i = 0;i<rewardObject.rewardOptionList.length;i++){
+																							$("#addOptionIndex").append("<input type='hidden' id='rewardOptionNum"+i+"' name='rewardOptionNo' size='3px' readonly>");
+																							$("#appendTag").append("<br> 항목  : <input type='text' id='optionkey"+i+"' name='rewardoptionkey' size='4px'>&nbsp;&nbsp;&nbsp; 값 : <input type='text' id='optionvalue"+i+"' name='rewardoptionvalue' size='4px'>");
+																							$("#rewardOptionNum"+i+"").val(rewardObject.rewardOptionList[i].rewardOptionNo);
+																							$("#optionkey"+i+"").val(rewardObject.rewardOptionList[i].rewardOptionKey);
+																							$("#optionvalue"+i+"").val(rewardObject.rewardOptionList[i].rewardOptionValue);
+																						}
+																					}else if(rewardObject.rewardOption=='직접 입력 옵션'){
+																						$("#appendTag").empty();
+																						$("#appendBtn").empty();
+																						$("#addOptionIndex").empty();
+																						$("#appendTag").append("<textarea name='rewardoptionvalue' rows='4' cols='40'></textarea>");
+																						$("#addOptionIndex").append("<input type='hidden' id='rewardOptionNum' name='rewardOptionNo' size='3px' readonly>");
+																						$("#rewardOptionNum").val(rewardObject.rewardOptionList[0].rewardOptionNo);
+																						$("textarea[name=rewardoptionvalue]").val(rewardObject.rewardOptionList[0].rewardOptionValue);
+																					}
+																					
+																					//입력당시의 '배송조건'에 대한 입력값을 입력폼에 설정해주는 부분이다.
+																					if(rewardObject.shippingNeed=="배송 필요"){
+																						$("#primary-radio1").prop("checked", true);
+																						$("input[name=shippingFee]").show();
+																						$("input[name=shippingFee]").removeAttr("disabled");
+																						$(".aa").show();
+																					}else if(rewardObject.shippingNeed=="배송 불필요"){
+																						$("#primary-radio3").prop("checked", true);
+																						$("input[name=shippingFee]").hide();
+																						$("input[name=shippingFee]").attr("disabled",true);
+																						$(".aa").hide();
+																					}
+																				},
+																				error:function(){
+																					console.log('뭔가 안나옴');
+																				}
+																			});
+																		});
+																	});
+																</script>
 
 
 																<!-- 리워드 항목 팝업 시작 -->
 																<div id="rewardPopup" class="mfp-hide popup-design">
 																	<form>
-																		<input type="hidden" name="projectNo" value="${writingProject.projectNo}">
 																		<div class="addReward_popup_box">
 																			<div class="popup_inner">
 																				<div class="container">
@@ -526,7 +507,7 @@
 																									<label for="formGroupExampleInput">배송료</label>
 																								</div>
 																								<!-- String인 shippingFee를 number로 바꾸어주는 코드 -->
-																								<div class="col-7 p-1">
+																								<div class="col-7 p-1 aa">
 																									<input type="text" name="shippingFee" class="form-control">
 																								</div>
 																								<div class="col-2 aa">원</div>
@@ -582,14 +563,6 @@
 													</div>
 												</div>
 											</section>
-											<script>
-												$(document).ready(function() {
-													$(".openRewardPopup").magnificPopup({
-														src : "#rewardPopup",
-														type : 'inline'
-													});
-												});
-											</script>
 										</div>
 									</div>
 								</div>

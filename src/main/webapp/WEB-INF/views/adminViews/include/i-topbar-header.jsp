@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
@@ -84,13 +85,18 @@
                         <!-- Comment -->
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-bell font-24"></i>
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+                            <i class="mdi mdi-bell font-24"></i>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">항목1</a>
-                                <a class="dropdown-item" href="#">항목2</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">항목3</a>
+                                <ul>
+                                	<c:if test="${adminAlarmList eq '[]'}">
+                                		<li>알림이 없습니다.</li>
+                                	</c:if>
+                                	<c:forEach var="alarmList" items="${adminAlarmList}">
+	                                	<li>${alarmList.alarmType}</li>
+                                	</c:forEach>
+                                </ul>
                             </div>
                         </li>
                         <!-- ============================================================== -->

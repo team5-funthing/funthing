@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.team5.funthing.common.utils.SendMailUtil;
 import com.team5.funthing.common.utils.uploadUtils.UploadUtil;
+import com.team5.funthing.user.model.vo.AlarmVO;
 import com.team5.funthing.user.model.vo.MemberVO;
+import com.team5.funthing.user.service.AlarmService.GetNewestAlarmListService;
 import com.team5.funthing.user.service.memberService.GetMemberService;
 import com.team5.funthing.user.service.memberService.InsertImageService;
 import com.team5.funthing.user.service.memberService.InsertMemberService;
@@ -39,6 +41,8 @@ public class MemberController {
 	@Autowired
 	private GetMemberService getMemberService;
 
+	@Autowired
+	private GetNewestAlarmListService getNewestAlarmListService;
 
 	@Autowired
 	private InsertMemberService insertMemberService;
@@ -58,11 +62,11 @@ public class MemberController {
 		return "f-socialjoin";
 	}
 	@RequestMapping(value="socialLoginSuccess.udo",method=RequestMethod.POST)
-	public String socialLoginSuccess(HttpServletRequest request,HttpSession session,MemberVO vo,Model model) throws IOException {   
+	public String socialLoginSuccess(HttpServletRequest request,HttpSession session, MemberVO vo, Model model) throws IOException {   
 		System.out.println("socialLoginSuccess.udo ");
 		System.out.println(vo.toString());
 		if(getMemberService.getMember(vo) != null) { 
-
+			
 			model.addAttribute("result","1");
 			session.setAttribute("memberSession", vo);	 
 		}else {
@@ -73,7 +77,7 @@ public class MemberController {
 
 
 	@RequestMapping(value="getMember.udo", method=RequestMethod.POST) 
-	public void getMember(MemberVO vo, HttpServletRequest request,HttpSession session,HttpServletResponse response) throws IOException {
+	public String getMember(MemberVO vo, AlarmVO avo, Model model, HttpServletRequest request,HttpSession session,HttpServletResponse response) throws IOException {
 
 		if(getMemberService.getMember(vo) != null) { 
 			if(getMemberService.getMember(vo).getPassword().equals(request.getParameter("password"))) { 
@@ -91,14 +95,20 @@ public class MemberController {
 					cookiepw.setMaxAge(0); /// kill the cookie
 				}
 				session.setAttribute("memberSession", getMemberService.getMember(vo));
-
-				response.sendRedirect("member.udo");
-
+				avo.setReceiveId(vo.getEmail());
+				avo.setReadConfirm('n');
+				model.addAttribute("memberAlarmList", getNewestAlarmListService.getNewestAlarmList(avo));
+				System.out.println( getNewestAlarmListService.getNewestAlarmList(avo));
+				//response.sendRedirect("member.udo");
+				return "forward:member.udo";
 			}else {
-				response.sendRedirect("findpw.udo");
+				//response.sendRedirect("findpw.udo");
+				model.addAttribute("memberAlarmList", "");
 			}
-
+			
+			model.addAttribute("memberAlarmList", "");
 		}
+		return "forward:findpw.udo";
 	}
 
 	@RequestMapping(value="joinselect.udo" ,method=RequestMethod.GET)
@@ -213,14 +223,5 @@ public class MemberController {
 	public String updateProfile() {
 		return "f-update-profile";
 	}
-
-
-
-
-
-
-
-
-
 
 }

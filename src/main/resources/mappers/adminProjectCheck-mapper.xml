@@ -41,7 +41,6 @@
 	<result column="endDate" property="endDate"/>
 	<result column="writeStatus" property="writeStatus"/>
 	<result column="funding" property="funding"/>
-	<result column="statusReplyMessage" property="statusReplyMessate"/>
 	<collection property="reward" resultMap="reward"/>
 </resultMap>
 

@@ -47,7 +47,7 @@ public class AdminProjectCheckController {
 	
 	@RequestMapping("updateProjectCheckApproval.ado")
 	public String updateProjectCheckApproval(ProjectVO vo,Model model) {
-		
+	
 		updateProjectCheckApprovalService.updateProjectCheckApproval(vo);
 		vo.setStatusReplyMessage("");
 		updateStatusReplyMessageService.updateStatusReplyMessage(vo);

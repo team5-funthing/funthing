@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
     <!-- header nav right 위치에 들어가면 됨  -->
     
@@ -13,12 +13,21 @@
 	            </a>
 	        </div>
 	
-	
-	        <div class="pl-3">
-	            <a class="popup-with-form" href="#">
-	                <i class="far fa-bell fa-2x pr-1"></i>
-	            </a>
-	        </div>
+			<div class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown">
+					<i class="far fa-bell fa-2x pr-1"></i>
+				</a>
+				<ul class="dropdown-menu">
+					<c:forEach var="alarmList" items="${memberAlarmList}">
+						<li>${alarmList.alarmType}</li>
+					</c:forEach>
+				</ul>
+			</div>
+			<script>
+				$(document).ready(function(){
+  					$(".dropdown-toggle").dropdown();
+				});
+			</script>
 	
 	        <div class="pl-3">
 	            <i class="far fa-envelope fa-2x pr-2"></i>
