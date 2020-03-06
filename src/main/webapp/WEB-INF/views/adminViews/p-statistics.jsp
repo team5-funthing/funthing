@@ -181,7 +181,7 @@
 
 						<div class="tab-pane  p-20" id="home2" role="tabpanel">
 							<div class="p-20">
-								<div class="row" style="height:400px" >
+								<div class="row" style="height:600px" >
 									<div class="col-12" >
 										<div  class="card">
 											<div  class="card-body">
@@ -258,6 +258,7 @@
 									</div>
 									
 <script>
+    var tx = 2;
 	var ctx = document.getElementById('myChart').getContext('2d');
 	var myDoughnutChart = new Chart(ctx, {
 	    type: 'doughnut',
@@ -275,7 +276,7 @@
 	  	responsive: true
 	  }
 	});
-
+if(tx==2){
 		Chart.pluginService.register({
 		  beforeDraw: function(chart) {
 		    var width = chart.chart.width,
@@ -297,6 +298,7 @@
 		    ctx.save();
 		  }
 		});
+}	
 </script>
 
 

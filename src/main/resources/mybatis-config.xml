@@ -48,7 +48,7 @@
     	<typeAlias type="com.team5.funthing.admin.model.vo.AdminRegisterTosVO" alias="registerTos"/>
     	<typeAlias type="com.team5.funthing.admin.model.vo.AdminUserMainImageChangeVO" alias="adminUserMainImageChange"/>
     	<typeAlias type="com.team5.funthing.admin.model.vo.AdminUserMainProjectVO" alias="adminUserMainProject"/>
-
+		<typeAlias type="com.team5.funthing.admin.model.vo.AdminStatisticsVO" alias="adminStatistics"/>
 	</typeAliases>
   
   
