@@ -115,7 +115,7 @@
                             <tbody>
                             	<c:forEach var="list" items="${projectCheckList}">
                                 <tr>
-                                    <td><a href="http://localhost:8080/funthing/getProjectCheck.ado?projectNo=${list.projectNo}">${list.projectTitle}</a></td>
+                                    <td><a href="getProjectCheck.ado?projectNo=${list.projectNo}">${list.projectTitle}</a></td>
                                     <td>${list.creator}</a></td>
                                     <td>${list.category}</td>
                                     <td>${list.goalMoney}</td>

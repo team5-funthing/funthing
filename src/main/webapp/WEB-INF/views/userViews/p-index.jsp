@@ -24,50 +24,51 @@
 	</c:if>
 
 	<!-- slider_area_start -->
-	<div class="slider_area">
-		<div class="slider_active owl-carousel">
-			<div
-				class="single_slider d-flex align-items-center justify-content-center slider_bg_1">
-				<div class="container">
-					<div class="row">
-						<div class="col-xl-12">
-							<div class="slider_text text-center"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div
-				class="single_slider  d-flex align-items-center justify-content-center slider_bg_2">
-				<div class="container">
-					<div class="row">
-						<div class="col-xl-12">
-							<div class="slider_text text-center"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div
-				class="single_slider d-flex align-items-center justify-content-center slider_bg_1">
-				<div class="container">
-					<div class="row">
-						<div class="col-xl-12">
-							<div class="slider_text text-center"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div
-				class="single_slider  d-flex align-items-center justify-content-center slider_bg_2">
-				<div class="container">
-					<div class="row">
-						<div class="col-xl-12">
-							<div class="slider_text text-center"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	<div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+ 
+
+  
+  <c:forEach var="mainImageList" items="${getUserMainImageChangeList}">
+  
+	<c:if test="${null ne mainImageList.imageName }">
+	<c:if test="${mainImageList.imageNo eq 1 }">
+    <input type="button" value="${mainImageList.imageNo}">
+    
+   <div class="carousel-item active" data-interval="500">
+      <img src="${pageContext.request.contextPath}/resources/user/img/main/${mainImageList.imageName}" class="d-block w-100" alt="...">
+   </div>
+   
+	 </c:if>
+	 </c:if>
+ 
+  <c:if test="${null ne mainImageList.imageName }">
+  <c:if test="${mainImageList.imageNo ne 1 }">
+  <input type="button" value="${mainImageList.imageName}">
+  
+    <div class="carousel-item" data-interval="500">
+      <img src="${pageContext.request.contextPath}/resources/user/img/main/${mainImageList.imageName}" class="d-block w-100" alt="...">
+    </div>
+    
+  </c:if>
+  </c:if>
+  
+   </c:forEach>
+    
+ 
+ 	
+    
+  </div>
+  
+  <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
 	<!-- slider_area_end -->
 
 

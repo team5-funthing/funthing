@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.team5.funthing.admin.model.vo.AdminUserMainProjectVO;
+
 /**
  * 
  * @author bummit
@@ -50,6 +52,7 @@ public class ProjectVO {
 	private SearchKeywordVO searchKeyword;
 	private List<RewardVO> reward;
 	
+
 	public List<RewardVO> getReward() {
 		return reward;
 	}
@@ -62,6 +65,7 @@ public class ProjectVO {
 	public void setSearchKeyword(SearchKeywordVO searchKeyword) {
 		this.searchKeyword = searchKeyword;
 	}
+
 	public MemberActivityVO getMemberActivity() {
 		return memberActivity;
 	}

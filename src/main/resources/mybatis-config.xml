@@ -43,9 +43,12 @@
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminNoticeBoardVO" alias="adminNoticeBoard"/>
 
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminMemberVO" alias="adminMember"/>
+
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminPersonalInfoProcessingVO" alias="personalinfo"/>
     	<typeAlias type="com.team5.funthing.admin.model.vo.AdminRegisterTosVO" alias="registerTos"/>
-    
+    	<typeAlias type="com.team5.funthing.admin.model.vo.AdminUserMainImageChangeVO" alias="adminUserMainImageChange"/>
+    	<typeAlias type="com.team5.funthing.admin.model.vo.AdminUserMainProjectVO" alias="adminUserMainProject"/>
+
 	</typeAliases>
   
   
@@ -81,8 +84,11 @@
 		<mapper resource="mappers/report-mapper.xml" />
 		<mapper resource="mappers/projectAskMessage-mapper.xml"/>
 		<mapper resource="mappers/home-mapper.xml"/>
+
+		<mapper resource="mappers/userMainImageChange-mapper.xml"/>
  		<mapper resource="mappers/tos-mapper.xml"/>
  		<mapper resource="mappers/alarm-mapper.xml"/>
+
 
 		<!-- user : admin -->
 		<mapper resource="mappers/adminCSBoard-mapper.xml" />
@@ -92,7 +98,12 @@
  		<mapper resource="mappers/adminReport-mapper.xml"/>
  		<mapper resource="mappers/adminMemberManagement-mapper.xml"/>
  		<mapper resource="mappers/adminProjectCheck-mapper.xml" />
+
+ 		<mapper resource="mappers/adminUserMainImageChange-mapper.xml" />
+ 		<mapper resource="mappers/adminUserMainProject-mapper.xml" />
+
  		<mapper resource="mappers/personalinfoprocessing-mapper.xml"/>
  		<mapper resource="mappers/registerTos-mapper.xml"/>
+
 	</mappers>
 </configuration>

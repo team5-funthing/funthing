@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminUserMainProjectDAO">
+
+	<insert id="insertFocusProject" parameterType="project">
+		insert into focusproject values(#{projectNo})
+	</insert>
+	
+	<select id="getFocusProjectList" resultType="adminUserMainProject" parameterType="project">
+		select * from focusproject order by projectNo asc
+	</select>
+	
+	<delete id="deleteFocusProject" parameterType="project">
+		delete focusproject where projectNo = #{projectNo}
+	</delete>
+	
+	<select id="getFocusProject" resultType="adminUserMainProject" parameterType="project">
+		select * from focusproject where projectNo = #{projectNo}
+	</select>
+	
+	<!-- 
+	<resultMap type="adminUserMainProject" id="adminUserMainProject">
+		<result column="projectNo" property="projectNo" />
+	</resultMap>
+	
+	<resultMap type="project" id="project">
+		<result column="projectNo" property="projectNo" />
+		<result column="creator" property="creator" />
+		<result column="email" property="email" />
+		<result column="projectTitle" property="projectTitle" />
+		<result column="goalMoney" property="goalMoney" />
+		<result column="projectMainImage" property="projectMainImage" />
+		<result column="category" property="category" />
+		<result column="projectSubTitle" property="projectSubTitle" />
+		<result column="projectSummary" property="projectSummary" />
+		<result column="projectCaution" property="projectCaution" />
+		<result column="projectIntroduceVideo" property="projectIntroduceVideo" />
+		<result column="projectStory" property="projectStory" />
+		<result column="supporters" property="supporters" />
+		<result column="informationAgree" property="informationAgree" />
+		<result column="projectStory" property="projectStory" />
+		<result column="startDate" property="startDate" />
+		<result column="endDate" property="endDate" />
+		<result column="writeStatus" property="writeStatus" />
+		<result column="funding" property="funding" />
+		<result column="statusReplyMessage" property="statusReplyMessage" />
+		<collection property="adminUserMainProject" resultMap="adminUserMainProject"></collection>
+	</resultMap>
+	
+	 -->
+	
+	<select id="getUserMainProjectList" resultType="project" parameterType="adminUserMainProject">
+		SELECT * FROM project WHERE NOT EXISTS(SELECT 1 FROM focusproject WHERE project.projectNo = focusproject.projectNo)
+	</select>
+	
+	
+	
+</mapper>
