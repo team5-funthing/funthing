@@ -60,10 +60,7 @@ public class AdminHomeController {
 		return "b-member-list";
 	}
 	
-	@RequestMapping("statisticsManagement.ado")
-	public String showStatisticsManagement() {
-		return "p-statistics";
-	}
+	
 	
 	@RequestMapping("customerService.ado")
 	public String showCustomerServiceBoard() {

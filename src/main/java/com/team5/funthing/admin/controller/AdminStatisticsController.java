@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class AdminStatisticsController {
 
-	
-	@RequestMapping("test.ado")
-	public String testing() {
-		return "test";
+	@RequestMapping("statisticsManagement.ado")
+	public String showStatisticsManagement() {
+		return "p-statistics";
 	}
+
 }
