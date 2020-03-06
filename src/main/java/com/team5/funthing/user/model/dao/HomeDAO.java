@@ -104,6 +104,13 @@ public class HomeDAO {
 	}
 
 	
+//	========================상단바 성공임박 프로젝트클릭시 =================================
+	public List<ProjectVO> getAllMoneyPercentList(ProjectVO vo) {
+		System.out.println("성공임박프로젝트 가져오기(기준:성공률기준으로 20개 가져오기)");
+		return sqlSessionTemplate.selectList("HomeDAO.getAllMoneyPercentList",vo);
+	}
+
+	
 
 	
 

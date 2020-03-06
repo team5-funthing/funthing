@@ -553,6 +553,7 @@ public class ProjectController {
 	}
 	
 	
+	
 	public void getProjectDetails(ProjectVO pvo, Model model) {
 		
 		pvo = getProjectService.getProject(pvo);

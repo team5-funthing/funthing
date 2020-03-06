@@ -52,7 +52,7 @@
 
 							<form class="form-contact comment_form"
 								action="insertReplyProjectBoard.udo" id="commentForm"
-								method="post">
+								method="get">
 
 								<div class="row d-flex align-items-center">
 									<div class="col-sm-6">
@@ -61,6 +61,8 @@
 												value="${sessionScope.memberSession.name }"
 												placeholder="창작자명"> <input type="hidden" name="ref"
 												value="${vo.projectBoardNo}">
+												<input type="hidden" name="projectNo"
+												value="${vo.projectNo}">
 										</div>
 									</div>
 									<div class="col-sm-6">

@@ -115,6 +115,18 @@
 	
 	<!-- 성공임박 퍼센트로 구한거 가져오기 -->
 	
+	<select id="getAllMoneyPercentList" resultType="project" parameterType="project">
+	<![CDATA[
+	select * from
+    (select rownum as rnum, projectNo,creator,fundingMoney,goalMoney,projectTitle,projectSubTitle,projectMainImage, pe from 
+    (select projectNo,creator,fundingMoney,goalMoney,projectTitle,projectSubTitle,projectMainImage,round(nvl(fundingMoney/decode(goalMoney,0,null,goalMoney),0)*100) as pe 
+	from project where funding='y' order by pe desc))
+    where rnum <= 20 
+    ]]>
+    </select>
+    
+    <!-- 1번째 -->
+	
 	<select id="getMoneyPercentList" resultType="project" parameterType="project">
 	<![CDATA[
 	select * from
