@@ -48,14 +48,15 @@ public class MemberController2 {
 		return "p-index";
 	}
 	
-	@RequestMapping(value = "updateMember.udo",method= RequestMethod.GET)
-		public String updateProfile(MemberVO vo,HttpSession session) {
+	@RequestMapping(value = "updateMember.udo",method= RequestMethod.POST)
+		public String updateProfile(MemberVO vo,HttpSession session,Model model) {
 		System.out.println(vo.toString());
 		MemberVO vo2 = (MemberVO) session.getAttribute("memberSession");
 		vo.setEmail(vo2.getEmail());
 		updateMemberService.updateMember(vo);
 		session.setAttribute("memberSession", vo);
-		return "p-index";
+		model.addAttribute("ok","1");
+		return "f-update-profile";
 	}
 	
 	@RequestMapping(value="updateCheck.udo",method=RequestMethod.POST)
@@ -68,12 +69,12 @@ public class MemberController2 {
 		System.out.println("getMemberService.getMember(vo) :"+vo.toString());
 		if(getMemberService.getMember(vo).getPassword().equals(pw)) {
 			model.addAttribute("result","1");
-			System.out.println(vo.getPassword());
+			System.out.println("리턴으로 1감");
 		}else {
 			model.addAttribute("result","2");
 			System.out.println(vo.getPassword());
 		}
-		return "callback";
+		return "ajax/callback";
 	}
 
 	
