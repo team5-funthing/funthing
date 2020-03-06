@@ -1,6 +1,7 @@
 package com.team5.funthing.user.model.vo;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 
@@ -46,13 +47,21 @@ public class ProjectVO {
 	private int percent;
 	
 	private MemberActivityVO memberActivity;
-	private ProjectKeywordVO projectKeyword;
+	private SearchKeywordVO searchKeyword;
+	private List<RewardVO> reward;
 	
-	
-	
-	
-	
-
+	public List<RewardVO> getReward() {
+		return reward;
+	}
+	public void setReward(List<RewardVO> reward) {
+		this.reward = reward;
+	}
+	public SearchKeywordVO getSearchKeyword() {
+		return searchKeyword;
+	}
+	public void setSearchKeyword(SearchKeywordVO searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
 	public MemberActivityVO getMemberActivity() {
 		return memberActivity;
 	}
@@ -207,19 +216,21 @@ public class ProjectVO {
 				+ ", writeStatus=" + writeStatus + ", status=" + status + ", statusReplyMessage=" + statusReplyMessage
 				+ ", funding=" + funding + ", fundingMoney=" + fundingMoney + ", supporters=" + supporters
 				+ ", informationAgree=" + informationAgree + ", percent=" + percent + ", memberActivity="
-				+ memberActivity + ", projectKeyword=" + projectKeyword + "]";
+
+				+ memberActivity + ", searchKeyword=" + searchKeyword + ", reward=" + reward + ", getSearchKeyword()="
+				+ getSearchKeyword() + ", getMemberActivity()=" + getMemberActivity() + ", getFunding()=" + getFunding()
+				+ ", getProjectNo()=" + getProjectNo() + ", getCreator()=" + getCreator() + ", getEmail()=" + getEmail()
+				+ ", getGoalMoney()=" + getGoalMoney() + ", getProjectMainImage()=" + getProjectMainImage()
+				+ ", getProjectTitle()=" + getProjectTitle() + ", getProjectSubTitle()=" + getProjectSubTitle()
+				+ ", getCategory()=" + getCategory() + ", getStartDate()=" + getStartDate() + ", getEndDate()="
+				+ getEndDate() + ", getProjectSummary()=" + getProjectSummary() + ", getProjectCaution()="
+				+ getProjectCaution() + ", getProjectIntroduceVideo()=" + getProjectIntroduceVideo()
+				+ ", getProjectStory()=" + getProjectStory() + ", getSupporters()=" + getSupporters()
+				+ ", getFundingMoney()=" + getFundingMoney() + ", getStatus()=" + getStatus()
+				+ ", getInformationAgree()=" + getInformationAgree() + ", getWriteStatus()=" + getWriteStatus()
+				+ ", getStatusReplyMessage()=" + getStatusReplyMessage() + ", getPercent()=" + getPercent()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
 	}
-	
-	
-	
-
-
-	
-
-	
-	
-	
-	
-	
 	
 }

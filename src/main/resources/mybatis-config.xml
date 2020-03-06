@@ -36,6 +36,7 @@
 		<typeAlias type="com.team5.funthing.user.model.vo.ReportVO" alias="report"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.ProjectAskMessageVO" alias="projectAskMessage"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.TosVO" alias="tos"/>
+		<typeAlias type="com.team5.funthing.user.model.vo.AlarmVO" alias="alarm"/>
 
 		<!-- user : admin -->
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminCSBoardVO" alias="adminCSBoard"/>
@@ -74,8 +75,6 @@
 		<mapper resource="mappers/creator-mapper.xml"/>
 		<mapper resource="mappers/searchKeyword-mapper.xml"/>
 		
-		
-		
 
 		<mapper resource="mappers/csboard-mapper.xml" />
 		<mapper resource="mappers/deliveryAddress-mapper.xml"/>
@@ -83,6 +82,7 @@
 		<mapper resource="mappers/projectAskMessage-mapper.xml"/>
 		<mapper resource="mappers/home-mapper.xml"/>
  		<mapper resource="mappers/tos-mapper.xml"/>
+ 		<mapper resource="mappers/alarm-mapper.xml"/>
 
 		<!-- user : admin -->
 		<mapper resource="mappers/adminCSBoard-mapper.xml" />

@@ -9,12 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.team5.funthing.admin.model.vo.AdminMemberVO;
 import com.team5.funthing.admin.service.adminLoginService.GetAdminPasswordService;
+import com.team5.funthing.user.model.vo.AlarmVO;
+import com.team5.funthing.user.service.AlarmService.GetNewestAlarmListService;
 
 @Controller
 public class AdminLoginController {
 
 	@Autowired
 	private GetAdminPasswordService getAdminPasswordService;
+	@Autowired
+	private GetNewestAlarmListService getNewestAlarmListService;
 	
 	@RequestMapping("adminLogin.ado")
 	public String showLoginPage() {
@@ -22,13 +26,17 @@ public class AdminLoginController {
 	}
 	
 	@RequestMapping("LoginCheck.ado")
-	public String LoginCheck(AdminMemberVO vo,HttpSession session,Model model) {
+	public String LoginCheck(AdminMemberVO vo,AlarmVO avo,HttpSession session,Model model) {
 		String getPassword = null;
 		if(getAdminPasswordService.getAdminPassword(vo)==null) {
 			model.addAttribute("loginResult", "등록되지 않은 회원입니다.");
 		}else {
 			getPassword = getAdminPasswordService.getAdminPassword(vo);
 			if(getPassword.equals(vo.getAdminPassword())) {
+				avo.setReceiveId(vo.getAdminId());
+				avo.setReadConfirm('n');
+				System.out.println(getNewestAlarmListService.getNewestAlarmList(avo).toString());
+				model.addAttribute("adminAlarmList", getNewestAlarmListService.getNewestAlarmList(avo));
 				session.setAttribute("adminSessionEmail", vo.getAdminId());
 				return "p-index";
 			}else {

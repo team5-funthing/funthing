@@ -135,10 +135,7 @@
 	    <c:if test="${writingProject.writeStatus eq 'y'.charAt(0)  }">
 	    	<script>
 			  $(function() {
-				    $("#inputCompleteBtn")
-				      	.click(function() {
-				    	})
-				      	.prop("disabled", false);
+				    $("#inputCompleteBtn").click(function() {}).prop("disabled", false);
 				});
 			  
 			  $(function() {
