@@ -22,7 +22,7 @@
 	
 	<select id="getDeliveryAddress" parameterType="deliveryAddress" resultType="deliveryAddress">
 		SELECT * FROM deliveryAddress
-		WHERE email=#{email}
+		WHERE deliveryAddressNo = #{deliveryAddressNo}
 	</select>
 
 </mapper>

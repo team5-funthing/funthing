@@ -114,7 +114,7 @@ public class ProjectAskMessageController {
             
          
          
-       /// 3. 관리자에게 문의하기 
+       // 3. 관리자에게 문의하기 
          vo3.setEmail(memberVO.getEmail());
          System.out.println("vo3 : "+ vo3);
          List<CSBoardVO> csboardList = getCSBoardListService.getCSBoardList(vo3);

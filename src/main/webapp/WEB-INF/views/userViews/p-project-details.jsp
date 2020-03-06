@@ -3,6 +3,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
 <!doctype html>
 <html class="no-js">
 
@@ -62,25 +64,38 @@
 				<aside id="project-details-info"
 					class="col-4 align-items-start d-flex flex-column bd-highlight">
 					
+					<fmt:formatNumber type="number" var="progressPercent"
+										value="${(project.fundingMoney / project.goalMoney)*100}"
+										pattern=".00" />
+					<fmt:formatNumber type="number" var="progress"
+						maxFractionDigits="3" value="${project.fundingMoney}" />
+					
 					
 					<div class="p-2 bd-highlight">
 						<div class="h4">모인 금액</div>
 						<div class="h2" style="color: #000000">
-						
-							<c:if test="${project ne null }">
-								${project.fundingMoney }원
-							</c:if> 
+								${progress} 원
+							
 							<div class="h5" style="color: #000000">
-								<c:if test="${project ne null }">
-									[퍼센트 수치]
-								</c:if> 
+								${progressPercent}% 달성중
 							</div>
 						</div>
 					</div>
+					<div class="progress">
+						<div class="progress-bar color-7" role="progressbar"
+							style="width: ${progressPercent}%" aria-valuenow="30"
+							aria-valuemin="0" aria-valuemax="100"></div>
+					</div>
+					
+					<jsp:useBean id="now" class="java.util.Date" />
+					<fmt:formatDate var="today" value="${now}" pattern="yyyyMMdd" />
+					<fmt:formatDate var="endDate" value="${project.endDate}" pattern="yyyyMMdd" />
+
+					
 					<div class="p-2 bd-highlight">
 						<div class="h4">남은 날짜</div>
 						<div class="h2" style="color: #000000">
-							[날짜 들어오기]
+							${endDate - today } 일
 							<div class="h5" style="color: #000000"></div>
 						</div>
 					</div>

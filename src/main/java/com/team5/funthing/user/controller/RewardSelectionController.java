@@ -79,20 +79,24 @@ public class RewardSelectionController {
 		
 		for(int i = 0; i < selectedRewardList.size(); i++) {
 			
-			System.out.println("1 : " + selectedRewardList.get(i).getRewardNo() + ", 2 : " + rsvo.getRewardNo());
+			if(selectedRewardList.get(i).getRewardOptionValueList().get(0).trim() == "") {
+				selectedRewardList.get(i).getRewardOptionValueList().remove(0);
+			}
 			
 			if(selectedRewardList.get(i).getRewardNo() == rsvo.getRewardNo()) {
 				selectedRewardList.remove(i);
 			}
 		}
-		
 		selectedRewardList.add(rsvo);
 		
-		System.out.println("----------------체크 했거나 수량을 늘렸을 때----------------------");
-		for(RewardSelectionVO selectedReward: selectedRewardList) {
-			System.out.println(selectedReward.toString());
+		
+		for(int i = 0; i < selectedRewardList.size(); i++) {
+			
+			if(selectedRewardList.get(i).getRewardOptionValueList().get(0).trim() == "") {
+				selectedRewardList.get(i).getRewardOptionValueList().remove(0);
+			}
 		}
-		System.out.println("--------------------------------------------------------------");
+
 		
 		ObjectMapper mapper = new ObjectMapper();
 		
@@ -100,11 +104,12 @@ public class RewardSelectionController {
 		
 		return selectionRewardToJSON;		
 	}
+	
 	@RequestMapping(value = "/removeSelectReward.udo", method = RequestMethod.POST)
 	@ResponseBody
-	public String removeSelectReword(@RequestBody RewardSelectionVO rsvo,
-									HttpSession session,
-									Model model) throws JsonProcessingException {
+	public String removeSelectReword(	@RequestBody RewardSelectionVO rsvo,
+										HttpSession session,
+										Model model) throws JsonProcessingException {
 		
 		List<RewardSelectionVO> selectedRewardList = (List<RewardSelectionVO>)session.getAttribute("selectedRewardList");
 		
@@ -114,24 +119,13 @@ public class RewardSelectionController {
 		
 		for(int i = 0; i < selectedRewardList.size(); i++) {
 			
-			System.out.println("1 : " + selectedRewardList.get(i).getRewardNo() + ", 2 : " + rsvo.getRewardNo());
-			
 			if(selectedRewardList.get(i).getRewardNo() == rsvo.getRewardNo()) {
-				System.out.println("삭제 : " + selectedRewardList.get(i));
 				selectedRewardList.remove(i);
 			}
 		}
 		
-		System.out.println("----------------체크 해제 했거나 수량을 줄였을 때----------------------");
-		for(RewardSelectionVO selectedReward : selectedRewardList) {
-			System.out.println(selectedReward.toString());
-		}
-		System.out.println("--------------------------------------------------------------");
-		
 		ObjectMapper mapper = new ObjectMapper();
 		String selectionRewardToJSON = mapper.writeValueAsString(selectedRewardList);
-		
-		
 		
 		return selectionRewardToJSON;		
 	}

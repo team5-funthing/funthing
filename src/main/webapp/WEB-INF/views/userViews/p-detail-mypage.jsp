@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri ="http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 
 <html class="no-js">
@@ -147,37 +147,67 @@
 		                                       <div class="thumbnail-wrap">
 		                                          <div class="thumbnail ">
 		                                             <div class="centered">
-		                                             	<form id="previewForm${step.count }" action="showPreviewProject.udo?projectNo=${myProject.projectNo}" method="POST">
-		                                             		<a href="#" onclick="document.getElementById('previewForm${step.count }').submit()">
-		                                             			<c:choose>
-				                                             		<c:when test="${myProject.projectMainImage eq '' }">
-				                                             				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
-				                                             					class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
-				                                             		</c:when>
-				                                             		<c:when test="${myProject.projectMainImage ne '' }">
-				                                             			<img src="${myProject.projectMainImage }" class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
-				                                             		</c:when>
-		                                             			</c:choose>  
-		                                             		</a>
-		                                             	</form>
+	                                             		<c:choose>
+	                                             			<c:when test="${myProject.funding == 'y'.charAt(0) }">
+	                                             				
+	                                             				<form id="previewForm${step.count }" action="projectDetails.udo" method="GET">
+	                                             					<input type="hidden" name="projectNo" value="${myProject.projectNo}">
+		                                             				<a href="javaScript: return(0);" onclick="document.getElementById('previewForm${step.count }').submit()">
+				                                             			<c:choose>
+						                                             		<c:when test="${myProject.projectMainImage eq '' }">
+						                                             				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
+						                                             					class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+						                                             		</c:when>
+						                                             		<c:when test="${myProject.projectMainImage ne '' }">
+						                                             			<img src="${myProject.projectMainImage }" class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+						                                             		</c:when>
+				                                             			</c:choose>  
+			                                             			</a>
+				                                             	</form>
+	                                             			</c:when>
+	                                             			<c:otherwise>
+	                                             			
+	                                             				<form id="previewForm${step.count }" action="showPreviewProject.udo?projectNo=${myProject.projectNo}" method="POST">
+		                                             				<a href="javaScript: return(0);" onclick="document.getElementById('previewForm${step.count }').submit()">
+				                                             			<c:choose>
+						                                             		<c:when test="${myProject.projectMainImage eq '' }">
+						                                             				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
+						                                             					class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+						                                             		</c:when>
+						                                             		<c:when test="${myProject.projectMainImage ne '' }">
+						                                             			<img src="${myProject.projectMainImage }" class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+						                                             		</c:when>
+				                                             			</c:choose>  
+			                                             			</a>
+				                                             	</form>
+	                                             			</c:otherwise>
+	                                             		</c:choose>
 		                                             </div>
 		                                          </div>
 		                                       </div>
-		
+												
 		                                       <div class="card-body">
 		                                          <h5 class="card-title">${myProject.projectTitle }</h5>
 		                                          <ul>
-		                                             <li>요약 설명 : ${myProject.projectSummary }</li>
-		                                             <li>목표 금액 : ${myProject.goalMoney }</li>
-		                                             <li>기간 :${project.startDate } ~ ${project.endDate }</li>
+		                                             <li>${myProject.projectSummary }</li>
+		                                             <li>${myProject.goalMoney }</li>
+		                                             <li>${project.endDate }</li>
 		                                          </ul>
-		
-		                                          <p>현재 후원받은 금액 : ${myProject.fundingMoney }원   ${(project.fundingMoney div myProject.goalMoney)*100 }%</p>
-		                                          <div class="progress">
-		                                             <div class="progress-bar color-7" role="progressbar"
-		                                                style="width: 50%" aria-valuenow="30" aria-valuemin="0"
-		                                                aria-valuemax="100"></div>
-		                                          </div>
+													${myProject.projectNo}
+		                                          <div class="percentage">
+														<fmt:formatNumber type="number" var="progressPercent"
+															value="${(myProject.fundingMoney / myProject.goalMoney)*100}"
+															pattern=".00" />
+														<fmt:formatNumber type="number" var="progress"
+															maxFractionDigits="3" value="${myProject.fundingMoney}" />
+														<p>${progress}원${progressPercent}%진행중</p>
+					
+														<div class="progress">
+															<div class="progress-bar color-7" role="progressbar"
+																style="width: ${progressPercent}%" aria-valuenow="30"
+																aria-valuemin="0" aria-valuemax="100"></div>
+														</div>
+													</div>
 		                                       </div>
 		                                       <div class="card-footer">
 		                                          <a href="getWritingProject.udo?currentProjectNo=${myProject.projectNo }">수정</a>
