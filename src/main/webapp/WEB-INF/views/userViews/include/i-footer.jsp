@@ -10,7 +10,7 @@
 						<div class="footer_widget">
 							<h3 class="footer_title">FUnThing 로그인하기</h3>
 							<p class="footer_text">회원이 아니신가요?</p>
-							<a href="#" class="line-button">회원가입 하러가기</a>
+							<a href="joinselect.udo" class="line-button">회원가입 하러가기</a>
 						</div>
 					</div>
 					<div class="col-xl-3 col-md-6 col-lg-3">
@@ -28,6 +28,8 @@
 								<li><a href="#">모든 프로젝트 보기</a></li>
 								<li><a href="#">공지</a></li>
 								<li><a href="#">이벤트</a></li>
+								<li><a href="CSWrite.udo">관리자에게 문의하기</a></li>
+								<li><a href="TosAndPolicy.udo">정책 및 약관</a></li>
 							</ul>
 						</div>
 					</div>

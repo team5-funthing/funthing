@@ -7,12 +7,13 @@
 	
 	<typeAliases>
 		
+		<typeAlias type="com.team5.funthing.user.model.vo.RewardOptionValueListVO" alias="rewardOptionValueList"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.ProjectIntroduceImageVO" alias="projectIntroduceImage"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.ProjectVO" alias="project"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.ProjectKeywordVO" alias="projectKeyword"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.KeywordVO" alias="keyword"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.MemberVO" alias="member"/>
-		<typeAlias type="com.team5.funthing.user.model.vo.NoticeVO" alias="notice"/>
+		<typeAlias type="com.team5.funthing.user.model.vo.NoticeBoardVO" alias="noticeBoard"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.BoardVO" alias="board"/>
 
         <typeAlias type="com.team5.funthing.user.model.vo.MemberActivityVO" alias="memberActivity"/>   
@@ -20,33 +21,46 @@
 		<typeAlias type="com.team5.funthing.user.model.vo.ProjectBoardVO" alias="projectboard"/>
 
 		<typeAlias type="com.team5.funthing.user.model.vo.ProjectAccountInformationVO" alias="projectAccountInformation"/>
+		
 		<typeAlias type="com.team5.funthing.user.model.vo.RewardVO" alias="reward"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.RewardOptionVO" alias="rewardOption"/>
+		<typeAlias type="com.team5.funthing.user.model.vo.RewardSelectionVO" alias="rewardSelection"/>
+		<typeAlias type="com.team5.funthing.user.model.vo.PaymentReserveVO" alias="paymentReserve"/>
+		
+		
 		<typeAlias type="com.team5.funthing.user.model.vo.CreatorVO" alias="creator"/>
-
+		<typeAlias type="com.team5.funthing.user.model.vo.SearchKeywordVO" alias="SearchKeyword"/>
 
 		<typeAlias type="com.team5.funthing.user.model.vo.CSBoardVO" alias="csboard"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.DeliveryAddressVO" alias="deliveryAddress"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.ReportVO" alias="report"/>
 		<typeAlias type="com.team5.funthing.user.model.vo.ProjectAskMessageVO" alias="projectAskMessage"/>
+		<typeAlias type="com.team5.funthing.user.model.vo.TosVO" alias="tos"/>
+		<typeAlias type="com.team5.funthing.user.model.vo.AlarmVO" alias="alarm"/>
 
 		<!-- user : admin -->
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminCSBoardVO" alias="adminCSBoard"/>
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminNoticeBoardVO" alias="adminNoticeBoard"/>
 
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminMemberVO" alias="adminMember"/>
-		<typeAlias type="com.team5.funthing.admin.model.vo.AdminUserMainImageChangeVO" alias="adminUserMainImageChange"/>
+
+		<typeAlias type="com.team5.funthing.admin.model.vo.AdminPersonalInfoProcessingVO" alias="personalinfo"/>
+    	<typeAlias type="com.team5.funthing.admin.model.vo.AdminRegisterTosVO" alias="registerTos"/>
+    	<typeAlias type="com.team5.funthing.admin.model.vo.AdminUserMainImageChangeVO" alias="adminUserMainImageChange"/>
     	<typeAlias type="com.team5.funthing.admin.model.vo.AdminUserMainProjectVO" alias="adminUserMainProject"/>
+
 	</typeAliases>
   
   
 	<mappers>
 		
+		<mapper resource="mappers/deliveryAddress-mapper.xml"/>
+		<mapper resource="mappers/paymentReserve-mapper.xml"/>
  		<mapper resource="mappers/projectIntroduceImage-mapper.xml"/>
 		<mapper resource="mappers/projectKeyword-mapper.xml"/>
 		<mapper resource="mappers/keyword-mapper.xml"/>
 		<mapper resource="mappers/member-mapper.xml" />
-		<mapper resource="mappers/notice-mapper.xml" />
+		<mapper resource="mappers/noticeBoard-mapper.xml" />
 		<mapper resource="mappers/project-mapper.xml" />
 		<mapper resource="mappers/board-mapper.xml" />
 
@@ -56,9 +70,13 @@
 		<mapper resource="mappers/projectboard-mapper.xml" />
 
 		<mapper resource="mappers/projectAccountInformation-mapper.xml"/>
+		
 		<mapper resource="mappers/reward-mapper.xml"/>
 		<mapper resource="mappers/rewardOption-mapper.xml"/>
+		<mapper resource="mappers/rewardSelection-mapper.xml"/>
+		
 		<mapper resource="mappers/creator-mapper.xml"/>
+		<mapper resource="mappers/searchKeyword-mapper.xml"/>
 		
 
 		<mapper resource="mappers/csboard-mapper.xml" />
@@ -66,9 +84,11 @@
 		<mapper resource="mappers/report-mapper.xml" />
 		<mapper resource="mappers/projectAskMessage-mapper.xml"/>
 		<mapper resource="mappers/home-mapper.xml"/>
+
 		<mapper resource="mappers/userMainImageChange-mapper.xml"/>
-		
-		
+ 		<mapper resource="mappers/tos-mapper.xml"/>
+ 		<mapper resource="mappers/alarm-mapper.xml"/>
+
 
 		<!-- user : admin -->
 		<mapper resource="mappers/adminCSBoard-mapper.xml" />
@@ -78,7 +98,12 @@
  		<mapper resource="mappers/adminReport-mapper.xml"/>
  		<mapper resource="mappers/adminMemberManagement-mapper.xml"/>
  		<mapper resource="mappers/adminProjectCheck-mapper.xml" />
+
  		<mapper resource="mappers/adminUserMainImageChange-mapper.xml" />
  		<mapper resource="mappers/adminUserMainProject-mapper.xml" />
+
+ 		<mapper resource="mappers/personalinfoprocessing-mapper.xml"/>
+ 		<mapper resource="mappers/registerTos-mapper.xml"/>
+
 	</mappers>
 </configuration>

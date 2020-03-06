@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NoticeBoardDAO">
+
+	<!-- <resultMap type="#modelname" id="YourResultSet">
+		<id property="param1" column="columnname1" />
+		<result property="param2" column="columnname2" />
+		<result property="param3" column="columnname3" />
+	</resultMap> -->
+	
+	<!-- <select id="selectNoticeCount" resultType="int">
+		select count(*) as noticecount from notice
+	</select> -->
+	
+	<select id="getSearchNoticeBoardList" resultType="noticeBoard" parameterType="noticeBoard">
+		SELECT * 
+		FROM notice 
+		WHERE 1=1
+		<if test="noticeSearchCondition=='title'">
+			AND noticeTitle LIKE '%' || #{noticeSearchContent} || '%' 
+		</if>
+		<if test="noticeSearchCondition=='content'">
+			AND noticeContents LIKE '%' || #{noticeSearchContent} || '%'
+		</if>
+	</select>
+	
+	<select id="getNoticeBoardList" resultType="noticeBoard" parameterType="noticeBoard">
+		SELECT * FROM notice order by noticeNo desc
+	</select>
+	
+	<select id="getRealNoticeBoardList" parameterType="String" resultType="noticeBoard">
+		SELECT * FROM notice WHERE noticeCategory = #{noticeCategory} ORDER BY noticeNo desc
+	</select>
+
+	<select id="getNoticeBoard" resultType="noticeBoard" parameterType="noticeBoard">
+		SELECT * FROM notice WHERE noticeNo = #{noticeNo}
+	</select>
+
+	<insert id="insertNoticeBoard" parameterType="noticeBoard">
+		INSERT INTO NOTICE(noticeNo, adminId, noticeTitle, noticeContents, NoticeDate) 
+		VALUES(notice_seq.nextval, #{adminId}, #{noticeTitle}, #{noticeContent}, #{noticeDate})
+	</insert>
+
+	<update id="updateNoticeBoard" parameterType="noticeBoard">
+		UPDATE NOTICE 
+		SET NOTICETITLE = 'Y', NOTICECONTENT = #{noticeContent} WHERE noticeNo = #{noticeNo}
+	</update>
+
+	<delete id="deleteNoticeBoard" parameterType="noticeBoard">
+		DELETE FROM NOTICE WHERE noticeNo = #{noticeNO}
+	</delete>
+
+</mapper>

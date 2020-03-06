@@ -10,17 +10,18 @@ import com.team5.funthing.user.model.vo.DeliveryAddressVO;
 public class DeliveryAddressDAO {
 
 	@Autowired
-	SqlSessionTemplate sqlSessionTemplate;
+	private SqlSessionTemplate sqlSessionTemplate;
 	
-	public void insertDeleveryAddress(DeliveryAddressVO vo) {
+	public DeliveryAddressVO insertDeleveryAddress(DeliveryAddressVO vo) {
 		sqlSessionTemplate.insert("DeliveryAddressDAO.insertDeliveryAddress",vo);
+		return vo;
 	}
 	
 	public void updateDeliveryAddress(DeliveryAddressVO vo) {
 		sqlSessionTemplate.update("DeliveryAddressDAO.updateDeliveryAddress",vo);
 	}
 	
-	public DeliveryAddressVO gettDeliveryAddress(DeliveryAddressVO vo) {
-		return sqlSessionTemplate.selectOne("DelieveryAddressDAO.getDeliveryAddress", vo);
+	public DeliveryAddressVO getDeliveryAddress(DeliveryAddressVO vo) {
+		return sqlSessionTemplate.selectOne("getDeliveryAddress", vo);
 	}
 }

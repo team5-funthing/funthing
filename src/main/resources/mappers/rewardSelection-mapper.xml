@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="RewardSelectionDAO">
+
+
+	<insert id="insertRewardSelectionList" parameterType="rewardOptionValueList">
+		
+		INSERT INTO rewardOptionValueList(selectRewardNo, rewardOptionValue)
+		VALUES (#{selectRewardNo }, #{rewardOptionValue })
+	
+	</insert>
+
+
+	<insert id="insertRewardSelection" parameterType="rewardSelection">
+		
+		<selectKey keyProperty="selectRewardNo" resultType="int" order="AFTER">
+			SELECT rewardselection_seq.currval FROM dual
+		</selectKey>
+		
+		INSERT INTO rewardselection(selectrewardno, orderNo, rewardNo, paymentAmount, orderAmount)
+		VALUES (rewardselection_seq.nextval, #{orderNo }, #{rewardNo }, #{paymentAmount}, #{orderAmount})
+
+	</insert>
+	
+	<select id="getRewardSelectionList" parameterType="rewardSelection" resultType="rewardSelection">
+		
+		SELECT *
+		FROM rewardSelection
+		WHERE orderNo = #{orderNo}
+	
+	</select>
+	
+	
+	<resultMap type="reward" id="reward">
+	
+		<result column="rewardPrice" property="rewardPrice" />
+		<result column="projectNo" property="projectNo" />
+		<result column="rewardName" property="rewardName" />
+		<result column="rewardContent" property="rewardContent" />
+		<result column="rewardOption" property="rewardOption" />
+		<result column="shippingNeed" property="shippingNeed" />
+		<result column="rewardMonth" property="rewardMonth" />
+		<result column="rewardDay" property="rewardDay" />
+		
+	</resultMap>
+
+
+	<resultMap type="rewardSelection" id="rewardSelection">
+	
+		<result column="selectRewardNo" property="selectRewardNo" />
+		<result column="orderNo" property="orderNo"/>
+		<result column="rewardNo" property="rewardNo" />
+		<result column="paymentAmount" property="paymentAmount" />
+		<result column="orderAmount" property="orderAmount"/>
+		
+		<collection property="reward" resultMap="reward" />
+		
+	</resultMap>
+	
+	<select id="getRewardSelectionJoinList" parameterType="rewardSelection" resultMap="rewardSelection">
+	
+		SELECT rewardselection.*, reward.*
+		FROM rewardselection
+		LEFT OUTER JOIN reward
+		ON rewardselection.rewardNo = reward.rewardNo
+		<!-- WHERE rewardselection.orderNo = #{orderNo} -->
+	
+	</select>
+	
+	
+	<update id="updateRewardAmount" parameterType="rewardSelection">
+		
+		UPDATE reward SET rewardAmount = rewardAmount - #{orderAmount } where rewardNo = #{rewardNo }
+	
+	</update>
+	
+	
+	
+	
+	
+
+</mapper>

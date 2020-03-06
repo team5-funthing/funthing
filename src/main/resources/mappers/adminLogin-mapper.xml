@@ -4,8 +4,8 @@
 
 <mapper namespace="AdminLoginDAO">
 
-	<select id="getAdminLoginPassword" parameterType="adminMember" resultType="adminMember">
-		<![CDATA[SELECT * FROM adminMember WHERE adminId = #{adminId}]]>
+	<select id="getAdminLoginPassword" parameterType="adminMember" resultType="String">
+		SELECT adminPassword FROM adminMember WHERE adminId = #{adminId}
 	</select>
 
 </mapper>

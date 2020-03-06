@@ -36,19 +36,13 @@
                                     class="single-input">
                          
                                     <a class="btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
-                                    href="javascript:popup()">인증번호 보내기</a>
+                                    href="javascript:certification()">인증번호 보내기</a>
 
-							
-								<input id="sessionCode" type="hidden" value="<%=session.getAttribute("certificationCode")%>">
-                                    <!-- 자바 팝업창 띄우기 메서드. -->
+							   <input id="sessionCode" type="hidden" name="sessionCode" value="">
+								     <!-- 자바 팝업창 띄우기 메서드. -->
 								<script
 									src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-								<script>                              
-                                     function popup(){                                      	
-                                    	 var email = document.getElementById('inputeamil').value;	 
-                                    	 window.open("certification.udo?email="+email,"인증번호가 발송되었습니다.","width=100,height=50");
-                                     }                                  
-                                    </script>
+							
 							</div>
                             <div class="mt-30">
                                 <h5>인증번호 입력</h5>
@@ -59,17 +53,34 @@
                                     
                             </div>
                             <hr>
-                            <div class="col-xl-12 mt-10">
+                            <div class="col-xl-12 mt-10" id="hideBtn" style="display:none">
                                 <a id="changepassword" class="btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
-                                    href="javascript:changePassword()">확 인</a>
+                                    href="javascript:changePassword()" >확 인</a>
                                     
                                     
                                     <script>                                    
                                        /// 입력된 값과 세션에 저장된 인증값 비교해서 비밀번호 변경페이지 이동 처리.
                                        function changePassword(){    
-                                    	if(document.getElementById('sessionCode').value == document.getElementById('certification').value){
-                                    		alert("성공");
-                                    		location.href = "#";                                    		
+                                    		var emailData = {
+                                    				"email" : document.getElementById('inputeamil').value
+                                    			};
+                                    	if(document.getElementById('sessionCode').value == document.getElementById('certification').value && document.getElementById('sessionCode').value != null ){
+                                    		$.ajax({
+                                    			type : "POST",
+                                    			url : "pwSuccess.udo",
+                                    			data : emailData,
+                                    			success : function(data) {
+                                    				if(data=="1"){
+                                                	alert("임의로 지정된 비밀번호를 메일로 보냈습니다. 마이페이지 - 회원정보 수정에서  비밀번호를 변경후 이용해 주세요");
+                                    				document.getElementById("sessionCode").value = data;
+                                    				}else{
+                                    					alert("가입되지 않은 메일입니다.");
+                                    				}
+                                    			},
+                                    			error : function() {
+                                    				alert("연결에 문제가 있습니다. 인터넷 환경을 확인 후 다시 시도해 주세요.")
+                                    			}
+                                    		});                              		
                                     	}else{
                                     		document.getElementById('certification').value = "";
                                     		document.getElementById('certification').focus();
@@ -77,6 +88,8 @@
                                     	}
                                        } // changePassword() 종료                                        
                                     </script>
+                                    </div>
+                               <div class="col-xl-12 mt-10">     
                                 <a class="btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
                                     href="find-id-pw-form.html">뒤로가기</a>
                             </div>
@@ -88,7 +101,26 @@
             </div>
         </div>
     </div>
-
+<script>
+function certification() {
+	var emailData = {
+		"email" : document.getElementById('inputeamil').value
+	};
+	$.ajax({
+		type : "GET",
+		url : "certification.udo",
+		data : emailData,
+		success : function(data) {
+			alert("인증코드가 이메일로 발송되었습니다!");
+			document.getElementById("sessionCode").value = data;
+			document.getElementById("hideBtn").style.display = "block";
+		},
+		error : function() {
+			alert("연결에 문제가 있습니다. 인터넷 환경을 확인 후 다시 시도해 주세요.")
+		}
+	});
+}
+</script>
 </body>
 
 </html>

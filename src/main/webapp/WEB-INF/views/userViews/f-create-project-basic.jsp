@@ -146,8 +146,7 @@
                     <p>작성 중인 프로젝트를 수정하거나 새로운 프로젝트를 시작할 수 있습니다.</p>
                     <div class="d-flex justify-content-around">
                         <a href="#" class="btn-lg btn-bd-purple d-none d-lg-inline-block m-1 popup-modal-dismiss">새로 만들기</a>
-                        <a href="#" onclick="document.getElementById('exist-writingProject-popup').submit();" 
-                        		class="btn-lg btn-bd-purple d-none d-lg-inline-block m-1">프로젝트 수정하기</a>
+                        <a href="#" onclick="document.getElementById('exist-writingProject-popup').submit();" class="btn-lg btn-bd-purple d-none d-lg-inline-block m-1">프로젝트 수정하기</a>
                     </div>
 	            </div>
 	        </div>

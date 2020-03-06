@@ -1,33 +1,58 @@
 package com.team5.funthing.user.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.team5.funthing.user.model.vo.CSBoardVO;
+import com.team5.funthing.user.model.vo.MemberVO;
+import com.team5.funthing.user.service.csboardService.GetUserCSBoardService;
 import com.team5.funthing.user.service.csboardService.InsertCSBoardService;
 
 @Controller
 public class CSBoardController {
-	
+
 	@Autowired
 	private InsertCSBoardService insertCSBoardService;
+
+	@Autowired
+	private GetUserCSBoardService getCSBoardService;
+
+
+	@RequestMapping(value="CSWrite.udo")   
+	public String userAskGo(HttpServletRequest request,Model model,CSBoardVO vo) {
+		System.out.println(request.getParameter("csid"));
+		///  ê²Œì‹œíŒì„ ë”°ë¡œ ë§Œë“¤ì§€ ì•Šê¸°ë¡œ í•´ì„œ,  ê´€ë¦¬ìë¬¸ì˜í•˜ê¸°ëŠ”  ê¸€ì“°ê¸° í˜ì´ì§€ì—   ì§‘ì–´ë„£ìŒ.
+		if(request.getParameter("csid")==null) {
+			return "f-CSWrite";
+			
+		}else {
+			int csid = Integer.parseInt(request.getParameter("csid"));
+			vo.setCsid(csid);
+			model.addAttribute("askForAdmin",getCSBoardService.getCSBoard(vo));
+			
+			return "f-CSWrite";
+		}
 		
-	@RequestMapping("cstest.udo")
-	public String cstest() {
-		//ÀÔ·Â ÆûÀ¸·Î ÀÌµ¿ÇÏ´Â ¸Ş¼Òµå
-	    return "p-csboard-input";
 	}
-	
-	
-	@RequestMapping("insertCSBoard.udo")
-	public String insertCSBoard(CSBoardVO vo) {
-		//Æû¿¡ ÀÔ·ÂÇÑ °ª DB¿¡ ³ÖÀº ÈÄ ´Ù½Ã ÆûÀ¸·Î ÀÌµ¿
+
+	@RequestMapping(value="insertCSBoard.udo",method=RequestMethod.POST)
+	public String insertCSBoard(CSBoardVO vo,HttpSession session) {
+		System.out.println(vo);
+	MemberVO vo2 =	(MemberVO)session.getAttribute("memberSession");
+		vo.setEmail(vo2.getEmail());
+		//í¼ì— ì…ë ¥í•œ ê°’ DBì— ë„£ì€ í›„ ë‹¤ì‹œ í¼ìœ¼ë¡œ ì´ë™
 		insertCSBoardService.insertCSBoard(vo);
-	    return "p-csboard-input";
+		return "f-CSWrite";
 	}
+
+
 	
-	
-	
+
+
 }

@@ -58,8 +58,10 @@ public class UploadUtilImpl implements UploadUtil {
 				
 				
 		//이미지 바꾸기 시에 수행 되는 메서드
-		if(toRemoveFilePath != null) {
+		if(toRemoveFilePath.get(0) != null) {
+			
 			for(String removePath : toRemoveFilePath) {
+				System.out.println("removePath : " + removePath);
 				remove(removePath, dirName);
 			}
 		}

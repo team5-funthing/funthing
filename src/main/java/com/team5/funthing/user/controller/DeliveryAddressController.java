@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.team5.funthing.user.model.vo.DeliveryAddressVO;
 import com.team5.funthing.user.model.vo.MemberVO;
-import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.service.deliveryService.GetDeliveryAddressService;
 import com.team5.funthing.user.service.deliveryService.InsertDeliveryAddressService;
 import com.team5.funthing.user.service.deliveryService.UpdateDeliveryAddressService;
@@ -25,14 +24,6 @@ public class DeliveryAddressController {
 	   private GetDeliveryAddressService getDeliveryAddressService;
 	   @Autowired
 	   private MemberVO memberVo;
-	   
-	   
-	   @RequestMapping(value="paymentReservation.udo", method = RequestMethod.GET)
-	   public String paymentReservation(ProjectVO vo) {
-		   
-		   return "sample/f-payment-reservation";
-	   }
-	   
 	   
 	   @RequestMapping(value="insertDeliveryAddress.udo",method =RequestMethod.GET)
 	   public String insertDeliveryAddress(DeliveryAddressVO vo,HttpSession session) {

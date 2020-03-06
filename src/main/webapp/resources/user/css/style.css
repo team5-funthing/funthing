@@ -1855,6 +1855,19 @@ h3 {
     padding: 60px 40px
 }
 
+.search_popup_box {
+    background: #ffffff;
+    display: inline-block;
+    z-index: 9;
+    width: 640px;
+ 	height: 640px;
+    padding: 60px 40px;
+}
+
+#suggestList a {
+	color: gray;
+}
+
 .addReward_popup_box {
     background: #ffffff;
     display: inline-block;
@@ -4664,6 +4677,17 @@ dl {
     background-color: #ffffff;
 }
 
+a.btn-search{
+	
+	width: 100%;
+}
+
+a.btn-search:hover {
+    text-decoration: none;
+}
+
+
+
 /* #009DFF */
 
 .btn-registry-way-submit {
@@ -5278,11 +5302,12 @@ img.landscape {
     height: 100%; 
 }
 
+#projectBoard-profile,
 #mypage-btn,
 #mypage-profile-btn {
 
-    width: 50px;
-    height: 50px; 
+    width: 70px;
+    height: 70px;
     border-radius: 70%;
     border: 0px;
     overflow: hidden;

@@ -4,21 +4,25 @@
 
 <mapper namespace="DeliveryAddressDAO">
     
-<insert id="insertDeliveryAddress" parameterType="deliveryAddress">
-INSERT INTO deliveryAddress (email,zipcode,address1,address2)
-VALUES (#{email},#{zipcode},#{address1},#{address2})
-</insert>
-
-<update id="updateDeliveryAddress" parameterType="deliveryAddress" >
-UPDATE deliveryAddress
-SET (zipcode=#{zipcode},address1=#{address1},address2=#{address2})
-WHERE email=#{email}
-</update>
-
-<select id="getDeliveryAddress" parameterType="deliveryAddress" resultType="deliveryAddress">
-SELECT * FROM deliveryAddress
-WHERE email=#{email}
-
-</select>
+	<insert id="insertDeliveryAddress" parameterType="deliveryAddress">
+	
+		<selectKey keyProperty="deliveryAddressNo" resultType="int" order="AFTER">
+			SELECT deliveryAddressNo_seq.currval FROM dual
+		</selectKey>
+	
+		INSERT INTO deliveryAddress (deliveryAddressNo, email, zipcode, roadAddress, detailedAddress, shippingNote)
+		VALUES (deliveryAddressNo_seq.nextval, #{email}, #{zipcode}, #{roadAddress}, #{detailedAddress}, #{shippingNote})
+	</insert>
+	
+	<update id="updateDeliveryAddress" parameterType="deliveryAddress" >
+		UPDATE deliveryAddress
+		SET (zipcode=#{zipcode},address1=#{address1},address2=#{address2})
+		WHERE email=#{email}
+	</update>
+	
+	<select id="getDeliveryAddress" parameterType="deliveryAddress" resultType="deliveryAddress">
+		SELECT * FROM deliveryAddress
+		WHERE deliveryAddressNo = #{deliveryAddressNo}
+	</select>
 
 </mapper>

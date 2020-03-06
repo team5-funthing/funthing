@@ -11,6 +11,7 @@ public class AdminCSBoardVO {
 	private Date adminCSRegdate;
 	
 	
+	
 	public int getCSID() {
 		return CSID;
 	}

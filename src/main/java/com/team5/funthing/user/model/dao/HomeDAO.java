@@ -66,6 +66,48 @@ public class HomeDAO {
 		System.out.println("성공임박 프로젝트 가져오기3번째(기준:%높은순으로)");
 		return sqlSessionTemplate.selectList("HomeDAO.getMoneyPercentList3",vo);
 	}
+	
+	// ========================5번째 마감임박 프로젝트 ========================
+	public List<ProjectVO> getDeadLineList(ProjectVO vo) {
+		System.out.println("마감임박 프로젝트 가져오기(기준:endDate 최신순으로)");
+		return sqlSessionTemplate.selectList("HomeDAO.getDeadLineList",vo);
+	}
+	public List<ProjectVO> getDeadLineList2(ProjectVO vo) {
+		System.out.println("마감임박 프로젝트 가져오기2번째(기준:endDate 최신순으로)");
+		return sqlSessionTemplate.selectList("HomeDAO.getDeadLineList2",vo);
+	}
+	public List<ProjectVO> getDeadLineList3(ProjectVO vo) {
+		System.out.println("마감임박 프로젝트 가져오기3번째(기준:endDate 최신순으로)");
+		return sqlSessionTemplate.selectList("HomeDAO.getDeadLineList3",vo);
+	}
+	
+	
+	// =======================상단바 인기프로젝트 클릭시============================
+
+	public List<ProjectVO> getAllLikeCountList(ProjectVO vo) {
+		System.out.println("인기 프로젝트 가져오기(기준:likecount 많은순으로 20개 가져오기 )");
+		return sqlSessionTemplate.selectList("HomeDAO.getAllLikeCountList",vo);
+	}
+
+	
+	// =======================상단바 마감임박 클릭시============================
+	public List<ProjectVO> getAllDeadLineList(ProjectVO vo) {
+		System.out.println("마감임박 프로젝트 가져오기(기준:endDate 최신순으로 20개 가져오기)");
+		return sqlSessionTemplate.selectList("HomeDAO.getAllDeadLineList",vo);
+	}
+	
+	//	=======================상단바 최신프로젝트 클릭시============================
+
+	public List<ProjectVO> getAllNewProjectList(ProjectVO vo) {
+		System.out.println("최신 프로젝트 가져오기(기준:startDate 최신순으로 20개 가져오기)");
+		return sqlSessionTemplate.selectList("HomeDAO.getAllNewProjectList",vo);
+	}
+
+	
+
+	
+
+	
 
 
 

@@ -148,10 +148,7 @@ public class ProjectController {
             }
         });
 	}
-	
-	
-	
-	
+
 // ===================== 메서드 =======================	
 	
 	@RequestMapping(value="getAllFundingProjectList.udo", method = RequestMethod.GET)
@@ -162,8 +159,6 @@ public class ProjectController {
 		
 		return "p-project-list";
 	}
-	
-	
 	
 	@RequestMapping(value="/showStartProjectPage.udo", method = RequestMethod.GET)
 	public String startProject(HttpSession session, Model model) {
@@ -177,8 +172,6 @@ public class ProjectController {
 		return "p-start-project"; // 시작하기 페이지로 이동하자
 	} // 로그인 시에만 프로젝트 만들기 접근 가능하도록 하기위해 세션에 저장된 값 확인 후 페이지 이동.
 	
-	
-
 	@RequestMapping(value="/getWritingProject.udo", method = RequestMethod.GET)
 	public String getProject(	@RequestParam int currentProjectNo, 
 								@RequestParam(required = false)String msg, 
@@ -236,7 +229,6 @@ public class ProjectController {
 		return "f-create-project-basic"; // 프로젝트 작성 폼
 	} // 프로젝트 만들기 시작 페이지에서 수행
 	
-	
 	//리워드 등록시에 목록을 추가하는 메서드 추가해야한다()
 	@RequestMapping(value = "/insertProject.udo", method = RequestMethod.POST)
 	public String insertProject(	@RequestParam(name = "creatorUploadImage", required = false)List<MultipartFile> creatorUploadImage,
@@ -275,7 +267,6 @@ public class ProjectController {
 		
 		return "redirect:mypage.udo";
 	}
-	
 	
 	@RequestMapping(value = "/saveInputWritingProject.udo", method = RequestMethod.POST)
 	public String updateProject(	@RequestParam(name = "uploadImage", required = false)List<MultipartFile> projectMainImageUpload,
@@ -328,6 +319,21 @@ public class ProjectController {
 		
 	}
 
+	@RequestMapping(value = "requestCheckProject.udo", method = RequestMethod.POST)
+	public String requestCheckProject(	ProjectVO pvo, 
+										RedirectAttributes redirectAttributes) {
+		
+		pvo = getProjectService.getProject(pvo);
+		pvo.setStatus('w');
+		System.out.println("수정전의 프로젝트 상태 : " + pvo.toString());
+		updateProjectService.updateProject(pvo);
+		System.out.println("수정후의 프로젝트 상태 : " + pvo.toString());
+		
+		redirectAttributes.addAttribute("msg", "심사요청을 완료하였습니다.");
+		redirectAttributes.addAttribute("currentProjectNo", pvo.getProjectNo());
+		return "redirect:getWritingProject.udo";
+	}
+	
 	@RequestMapping(value="projectDetailsFromProjectBoard.udo", method = RequestMethod.GET)
 	public String showProjectDetails(	@RequestParam int currentProjectNo,
 										ProjectVO pvo, Model model) { // 이미지클릭시 프로젝트 상세 페이지로 이동
@@ -431,13 +437,13 @@ public class ProjectController {
 		return deleteCount;
 	}
 	
-	//=================== 기타 메서드 =================================
+	//=================== 업로드 메서드 =================================
 
 	public void projectIntroduceImageUploader(List<MultipartFile> toDoUploadList, ProjectIntroduceImageVO vo, int ProjectNo) throws Exception {
 		
 		List<String>toRemoveFilePath = new ArrayList<String>();
 		
-		if(toDoUploadList.get(0) != null){ //프로젝트 소개 이미지 기존업로드 제거 및 새 업로드, DB 추가 작업 메서드
+		if(!toDoUploadList.get(0).isEmpty()){ //프로젝트 소개 이미지 기존업로드 제거 및 새 업로드, DB 추가 작업 메서드
 			vo.setProjectNo(ProjectNo);
 			String voName = vo.getClass().getSimpleName();
 			
@@ -466,8 +472,9 @@ public class ProjectController {
 		
 		List<String> toRemoveFilePath = new ArrayList<String>();
 
+
 				
-		if(toDoUploadList.get(0) != null) { // 업로드 시킨 파일이 이미 존재하는 경우 파일 선택을 다시 안한 경우에 나올 수 있는 상황 처리  
+		if(!toDoUploadList.get(0).isEmpty()) { // 업로드 시킨 파일이 이미 존재하는 경우 파일 선택을 다시 안한 경우에 나올 수 있는 상황 처리  
 			toRemoveFilePath.add(vo.getProjectMainImage()); //제거될 파일경로를 vo객체에서 가져오기
 			String voName = vo.getClass().getSimpleName();
 			List<String> toSettingPath = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);
@@ -513,6 +520,9 @@ public class ProjectController {
 	
 	// 구현 OK - 수정 요구됨
 	public char inputCompleteCheck(ProjectVO vo) { //임시 저장된 프로젝트 빈칸 체크
+		
+		System.out.println(vo.toString());
+		
 		if(		vo.getProjectNo() == -1 ||
 				vo.getCreator() == null || vo.getCreator().equals("") ||
 				vo.getEmail() == null || vo.getEmail().equals("") ||
@@ -569,6 +579,10 @@ public class ProjectController {
 		
 		
 	}
+	
+	
+	
+
 	
 }
 

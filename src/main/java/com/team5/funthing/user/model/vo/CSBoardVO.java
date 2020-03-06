@@ -4,19 +4,20 @@ import java.sql.Date;
 
 public class CSBoardVO {
 		
-	private int CSID;
+	private int csid;
 	private String email;
 	private String csTitle;
 	private String csContent;
 	private Date csRegdate;
 	private char replyProgress;
 	
-	
-	public int getCSID() {
-		return CSID;
+
+	public int getCsid() {
+		return csid;
 	}
-	public void setCSID(int cSID) {
-		CSID = cSID;
+	public void setCsid(int csid) {
+
+		this.csid = csid;
 	}
 	public String getEmail() {
 		return email;
@@ -50,8 +51,8 @@ public class CSBoardVO {
 	}
 	@Override
 	public String toString() {
-		return "customercenterVO [CSID=" + CSID + ", email=" + email + ", csTitle=" + csTitle + ", csContent="
-				+ csContent + ", csRegdate=" + csRegdate + ", replyProgress=" + replyProgress + "]";
+		return "CSBoardVO [csid=" + csid + ", email=" + email + ", csTitle=" + csTitle + ", csContent=" + csContent
+				+ ", csRegdate=" + csRegdate + ", replyProgress=" + replyProgress + "]";
 	}
 	
 	

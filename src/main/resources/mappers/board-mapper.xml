@@ -4,13 +4,11 @@
 
 <mapper namespace="BoardDAO">
 
-	<select id="selectBoardCount" resultType="int" parameterType="board">
+	<select id="getBoardCount" resultType="int">
 		select count(*) as noticecount from notice
 	</select>
 	
-
-	
-	<select id="selectBoardEachPage" resultType="notice" parameterType="board">
+	<select id="getBoardEachPageList" resultType="noticeBoard" parameterType="board">
 		<![CDATA[
 		SELECT * 
 		FROM (SELECT ROWNUM as rnum, noticeno, adminid, noticetitle, noticecontents, noticedate, noticecategory FROM (SELECT * FROM notice ORDER BY noticeno desc)) WHERE rnum <= #{noticeEndRow} AND rnum >= #{noticeStartRow}

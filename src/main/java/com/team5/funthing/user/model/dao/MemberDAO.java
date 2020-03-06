@@ -13,13 +13,12 @@ public class MemberDAO {
    private SqlSessionTemplate sqlSessionTemplate;
    
    public MemberVO getMember(MemberVO vo) {
-      System.out.println("getMember ");
+      System.out.println("getMember ½ÇÇà");
       return sqlSessionTemplate.selectOne("MemberDAO.getMember", vo);
    }
    
    public void insertSocialMember(MemberVO vo) {
       System.out.println("insertSocialMember Â½Ã‡Ã‡Ã ");
-      System.out.println(vo.toString());
       sqlSessionTemplate.insert("MemberDAO.insertSocialMember",vo);
    }
    

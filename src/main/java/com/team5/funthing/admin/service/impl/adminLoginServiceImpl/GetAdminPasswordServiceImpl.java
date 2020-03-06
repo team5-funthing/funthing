@@ -14,7 +14,7 @@ public class GetAdminPasswordServiceImpl implements GetAdminPasswordService {
 	private AdminLoginDAO adminLoginDAO;
 	
 	@Override
-	public AdminMemberVO getAdminPassword(AdminMemberVO vo) {
+	public String getAdminPassword(AdminMemberVO vo) {
 		return adminLoginDAO.getAdminPassword(vo);
 	}
 

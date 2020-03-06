@@ -16,7 +16,7 @@ public class GetDeliveryAddressServiceImpl implements GetDeliveryAddressService 
 	@Override
 	public DeliveryAddressVO getDeliveryAddress(DeliveryAddressVO vo) {
 		
-		return deliveryAddressDAO.gettDeliveryAddress(vo);
+		return deliveryAddressDAO.getDeliveryAddress(vo);
 	}
 
 }

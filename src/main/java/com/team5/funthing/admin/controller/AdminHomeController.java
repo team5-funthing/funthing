@@ -8,12 +8,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.team5.funthing.admin.model.vo.AdminNoticeBoardVO;
+
 import com.team5.funthing.admin.model.vo.AdminUserMainImageChangeVO;
+import com.team5.funthing.admin.model.vo.AdminPersonalInfoProcessingVO;
+import com.team5.funthing.admin.model.vo.AdminRegisterTosVO;
+
 import com.team5.funthing.admin.service.adminNoticeBoardService.GetAdminNoticeBoardListService;
 import com.team5.funthing.admin.service.adminProjectCheckService.GetProjectCheckListService;
+import com.team5.funthing.admin.service.adminRegisterTosService.GetRegisterTosListService;
 import com.team5.funthing.user.model.vo.ProjectVO;
+
 import com.team5.funthing.user.service.projectService.GetAllFundingProjectListService;
 import com.team5.funthing.user.service.userMainImageChangeService.GetUserMainImageChangeListService;
+import com.team5.funthing.user.model.vo.TosVO;
+import com.team5.funthing.user.service.TosService.GetTosListService;
+import com.team5.funthing.user.service.personalInfoProcessingService.GetPersonalInfoProcessingListService;
+
 
 @Controller
 public class AdminHomeController {
@@ -22,10 +32,18 @@ public class AdminHomeController {
 	GetAdminNoticeBoardListService getAdminNoticeBoardListService;
 	@Autowired
 	GetProjectCheckListService getProjectCheckListService;
+  
 	@Autowired 
 	GetUserMainImageChangeListService getUserMainImageChangeListService;
 	@Autowired
 	GetAllFundingProjectListService getAllFundingProjectListService;
+  
+	@Autowired
+	GetTosListService getTosListService;
+	@Autowired
+	GetPersonalInfoProcessingListService getPersonalInfoProcessingListService;
+	@Autowired
+	GetRegisterTosListService getRegisterTosListService;
 	
 	@RequestMapping("adminIndex.ado")
 	public String showIndex() {
@@ -53,8 +71,11 @@ public class AdminHomeController {
 	}
 	
 	@RequestMapping("termsOfService.ado")
-	public String showTermsOfService() {
-		return "f-clause-input";
+	public String showTermsOfService(TosVO vo, Model model) {
+		List<TosVO> getTosList = getTosListService.getTosList(vo);
+		
+		model.addAttribute("TosList", getTosList);
+		return "b-tos-list";
 	}
 	
 	@RequestMapping("adminNoticeInput.ado")
@@ -66,8 +87,19 @@ public class AdminHomeController {
 	}
 	
 	@RequestMapping("infoProcessingInput.ado")
-	public String showInputInfoProcessing() {
-		return "f-info-processing-input";
+	public String showInputInfoProcessing(AdminPersonalInfoProcessingVO vo, Model model) {
+		
+		model.addAttribute("PersonalInfoProcessing", getPersonalInfoProcessingListService.getPersonalInfoProcessingList(vo));
+		
+		return "b-personalInfoProcessing-list";
+	}
+	
+	@RequestMapping("registerTos.ado")
+	public String showRegisterTos(AdminRegisterTosVO vo, Model model) {
+		
+		model.addAttribute("RegisterTosList", getRegisterTosListService.getRegisterTosList(vo));
+		
+		return "b-regitos-list";
 	}
 
 	@RequestMapping("getProjectCheckList.ado")
