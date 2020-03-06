@@ -49,16 +49,15 @@ public class HomeController {
 	@Autowired
 	private GetMoneyPercentListService getMoneyPercentListService;
 	@Autowired
-
 	private GetUserMainImageChangeListService getUserMainImageChangeListService;
 	@Autowired
 	private GetFocusProjectListService getFocusProjectListService;
 	@Autowired
 	private GetAllFundingProjectListService getAllFundingProjectListService;
-
+	@Autowired
 	private GetDeadLineListService getDeadLineListService;
 	
-	//=====================약관,개인정보처리방침 관련 서비스=========================
+	//=====================�빟愿�,媛쒖씤�젙蹂댁쿂由щ갑移� 愿��젴 �꽌鍮꾩뒪=========================
 	
 	@Autowired
 	private GetTosListService getTosListService;
@@ -69,64 +68,67 @@ public class HomeController {
 
 	
 	@RequestMapping("*.udo") 
-	public String showindex(ProjectBoardVO vo, ProjectVO vo2,AdminUserMainImageChangeVO vo3, Model model) { //맨처음 메인페이지 들어오는
+	public String showindex(ProjectBoardVO vo, ProjectVO vo2,AdminUserMainImageChangeVO vo3, Model model) { //留⑥쿂�쓬 硫붿씤�럹�씠吏� �뱾�뼱�삤�뒗
 		
-		//1.주목할만한 프로젝트 (성공못함)
-		List<ProjectBoardVO> attentionProject = getAttentionProjectService.getAttentionProjectList(vo); //1.댓글 가장 많이 순서대로 가져오기 
+		//1.二쇰ぉ�븷留뚰븳 �봽濡쒖젥�듃 (�꽦怨듬せ�븿)
+		List<ProjectBoardVO> attentionProject = getAttentionProjectService.getAttentionProjectList(vo); //1.�뙎湲� 媛��옣 留롮씠 �닚�꽌��濡� 媛��졇�삤湲� 
 		model.addAttribute("attentionProject",attentionProject);
 		
 //		vo2.setProjectNo(Integer.parseInt(((ProjectBoardVO) getAttentionProjectService.getAttentionProjectList(vo)).getProjectNo());
-		ProjectVO getProject = getProjectService.getProject(vo2); //projectNo으로 가져오기 
+		ProjectVO getProject = getProjectService.getProject(vo2); //projectNo�쑝濡� 媛��졇�삤湲� 
 		model.addAttribute("getProject",getProject);
 		
-		//2.진행중인 프로젝트 
-		List<ProjectVO> progressList = getProjectProgressListService.getProjectProgressList(vo2); //2. 진행중인 프로젝트 가져오기
+		//2.吏꾪뻾以묒씤 �봽濡쒖젥�듃 
+		List<ProjectVO> progressList = getProjectProgressListService.getProjectProgressList(vo2); //2. 吏꾪뻾以묒씤 �봽濡쒖젥�듃 媛��졇�삤湲�
 		model.addAttribute("progressList", progressList);
-			//2번째 슬라이드
-			List<ProjectVO> progressList2 = getProjectProgressListService.getProjectProgressList2(vo2); //2. 진행중인 프로젝트 가져오기
+			//2踰덉㎏ �뒳�씪�씠�뱶
+			List<ProjectVO> progressList2 = getProjectProgressListService.getProjectProgressList2(vo2); //2. 吏꾪뻾以묒씤 �봽濡쒖젥�듃 媛��졇�삤湲�
 			model.addAttribute("progressList2",progressList2);
-			//3번째 슬라이드
-			List<ProjectVO> progressList3 = getProjectProgressListService.getProjectProgressList3(vo2); //2. 진행중인 프로젝트 가져오기
+			//3踰덉㎏ �뒳�씪�씠�뱶
+			List<ProjectVO> progressList3 = getProjectProgressListService.getProjectProgressList3(vo2); //2. 吏꾪뻾以묒씤 �봽濡쒖젥�듃 媛��졇�삤湲�
 			model.addAttribute("progressList3", progressList3);
 			
-		//3.인기프로젝트
+		//3.�씤湲고봽濡쒖젥�듃
 		List<ProjectVO> likeCountList = getLikeCountListService.getLikeCountList(vo2);
 		model.addAttribute("likeCountList",likeCountList);
-			//2번째 슬라이드 
+			//2踰덉㎏ �뒳�씪�씠�뱶 
 			List<ProjectVO> likeCountList2 = getLikeCountListService.getLikeCountList2(vo2);
 			model.addAttribute("likeCountList2",likeCountList2);
-			//3번째 슬라이드 
+			//3踰덉㎏ �뒳�씪�씠�뱶 
 			List<ProjectVO> likeCountList3 = getLikeCountListService.getLikeCountList3(vo2);
 			model.addAttribute("likeCountList3",likeCountList3);
 		
-		//4.성공임박프로젝트
+		//4.�꽦怨듭엫諛뺥봽濡쒖젥�듃
 		List<ProjectVO> moneyPercentList = getMoneyPercentListService.getMoneyPercentList(vo2);
 		model.addAttribute("moneyPercentList",moneyPercentList);
 		
-			//2번째 슬라이드
+			//2踰덉㎏ �뒳�씪�씠�뱶
 			List<ProjectVO> moneyPercentList2 = getMoneyPercentListService.getMoneyPercentList2(vo2);
 			model.addAttribute("moneyPercentList2",moneyPercentList2);
-			//3번째 슬라이드
+			//3踰덉㎏ �뒳�씪�씠�뱶
 			List<ProjectVO> moneyPercentList3 = getMoneyPercentListService.getMoneyPercentList3(vo2);
 			model.addAttribute("moneyPercentList3",moneyPercentList3);
 
 		
-		//5.마감임박프로젝트
+		//5.留덇컧�엫諛뺥봽濡쒖젥�듃
 		List<ProjectVO> deadLineList = getDeadLineListService.getDeadLineList(vo2);
 		model.addAttribute("deadLineList",deadLineList);
 		
-			//2번째 슬라이드
+			//2踰덉㎏ �뒳�씪�씠�뱶
 			List<ProjectVO> deadLineList2 = getDeadLineListService.getDeadLineList2(vo2);
 			model.addAttribute("deadLineList2",deadLineList2);
-			//3번째 슬라이드
+			//3踰덉㎏ �뒳�씪�씠�뱶
 			List<ProjectVO> deadLineList3 = getDeadLineListService.getDeadLineList3(vo2);
 			model.addAttribute("deadLineList3",deadLineList3);
     
-		//6.이미지	
+		//6.�씠誘몄�	
 			List<AdminUserMainImageChangeVO> getUserMainImageChangeList = getUserMainImageChangeListService.getUserMainImageChangeList(vo3);
 			model.addAttribute("getUserMainImageChangeList",getUserMainImageChangeList);
+		
 			
-		//7.주목프로젝트
+			
+			
+		//7.二쇰ぉ�봽濡쒖젥�듃
 		List<AdminUserMainProjectVO> focusList = getFocusProjectListService.getFocusProjectList(vo2);
 		List<ProjectVO> projectList = getAllFundingProjectListService.getAllFundingProjectList();
 		List<ProjectVO> userMainFocusList = new ArrayList<ProjectVO>();
@@ -159,3 +161,9 @@ public class HomeController {
 	
 
 }
+
+
+
+
+
+

@@ -22,63 +22,61 @@ import com.team5.funthing.user.model.vo.CSBoardVO;
 @Controller
 public class AdminCSBoardController {
 
-	@Autowired
-	private GetCSBoardListService  getAdminCSBoardListService;
-	@Autowired
-	private InsertAdminCSBoardService insertAdminCSBoardService;
-	@Autowired
-	private UpdateReplyCheckCSBoardService updateReplyCheckCSBoardService;
-	@Autowired
-	private GetCSBoardService getCSBoardService;
+   @Autowired
+   private GetCSBoardListService  getAdminCSBoardListService;
+   @Autowired
+   private InsertAdminCSBoardService insertAdminCSBoardService;
+   @Autowired
+   private UpdateReplyCheckCSBoardService updateReplyCheckCSBoardService;
+   @Autowired
+   private GetCSBoardService getCSBoardService;
 
-	@Autowired
-	private SendMailUtil sendMailUtil;
+   @Autowired
+   private SendMailUtil sendMailUtil;
 
-	private List<CSBoardVO> csBoardList;
-	private CSBoardVO getCSBoard;
-	
-	
-	@RequestMapping("getAdminCSBoardList.ado")
-	public ModelAndView selectEntireAdminCSBoardList(CSBoardVO vo){
+   private List<CSBoardVO> csBoardList;
+   private CSBoardVO getCSBoard;
+   
+   
+   @RequestMapping("getAdminCSBoardList.ado")
+   public ModelAndView selectEntireAdminCSBoardList(CSBoardVO vo){
 
-		csBoardList = getAdminCSBoardListService.getCSBoardList(vo);
-		System.out.println(csBoardList.toString());
-		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("csBoardList",csBoardList);
-		mav.setViewName("b-customerService");
-		return mav; 
-	}
+      csBoardList = getAdminCSBoardListService.getCSBoardList(vo);
+      System.out.println(csBoardList.toString());
+      
+      ModelAndView mav = new ModelAndView();
+      mav.addObject("csBoardList",csBoardList);
+      mav.setViewName("b-customerService");
+      return mav; 
+   }
   
-	@RequestMapping("insertAdminCSBoard.ado")
-	public String insertAdminCSBoard(AdminCSBoardVO avo,CSBoardVO cvo) throws UnsupportedEncodingException, MessagingException{
-		
-		avo.setAdminCSTitle("[���Ǵ亯]re:"+cvo.getCsTitle());	
-		avo.setAdminID("admin");
-		
-		insertAdminCSBoardService.insertAdminCSBoard(avo);
-		updateReplyCheckCSBoardService.updateReplyCheckCSBoard(cvo);
+   @RequestMapping("insertAdminCSBoard.ado")
+   public String insertAdminCSBoard(AdminCSBoardVO avo,CSBoardVO cvo) throws UnsupportedEncodingException, MessagingException{
+      
+      avo.setAdminCSTitle("[답변]re:"+cvo.getCsTitle());   
+      avo.setAdminID("admin");
+      
+      insertAdminCSBoardService.insertAdminCSBoard(avo);
+      updateReplyCheckCSBoardService.updateReplyCheckCSBoard(cvo);
 
-		sendMailUtil.sendMail(avo.getAdminCSTitle(), avo.getAdminCSContent(),cvo.getEmail());
-		
-		return "redirect:getAdminCSBoardList.ado"; 
-	}
+      sendMailUtil.sendMail(avo.getAdminCSTitle(), avo.getAdminCSContent(),cvo.getEmail());
+      
+      return "redirect:getAdminCSBoardList.ado"; 
+   }
 
-	
-	@RequestMapping("getCSBoard.ado")
-	public ModelAndView selectCSBoard(CSBoardVO vo,HttpServletRequest request){
-		int CSID=Integer.parseInt(request.getParameter("CSID"));
-		vo.setCsid(CSID);
-    
-		getCSBoard = getCSBoardService.getCSBoard(vo);
-		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("getCSBoard",getCSBoard);
-		mav.setViewName("p-customerService-detail");
-		return mav; 
-	}
-	
-	
-	
-	
+   
+   @RequestMapping("getCSBoard.ado")
+   public ModelAndView selectCSBoard(CSBoardVO vo){
+        
+      getCSBoard = getCSBoardService.getCSBoard(vo);
+      
+      ModelAndView mav = new ModelAndView();
+      mav.addObject("getCSBoard",getCSBoard);
+      mav.setViewName("p-customerService-detail");
+      return mav; 
+   }
+   
+   
+   
+   
 }
