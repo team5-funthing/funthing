@@ -36,7 +36,7 @@ public class ProjectVO {
 
 
 	private char writeStatus = 'n'; 
-	private char status = 'n'; // n: �ɻ��û ��, w : wating[�ɻ���], p : pass[���], f : fail[����], m : modify[������û]
+	private char status = 'n'; // n: 占심삼옙占시� 占쏙옙, w : wating[占심삼옙占쏙옙], p : pass[占쏙옙占�], f : fail[占쏙옙占쏙옙], m : modify[占쏙옙占쏙옙占쏙옙청]
 	private String statusReplyMessage = "";
 	private char funding = 'n'; 
 
@@ -200,12 +200,7 @@ public class ProjectVO {
 	public void setPercent(int percent) {
 		this.percent = percent;
 	}
-	public ProjectKeywordVO getProjectKeyword() {
-		return projectKeyword;
-	}
-	public void setProjectKeyword(ProjectKeywordVO projectKeyword) {
-		this.projectKeyword = projectKeyword;
-	}
+
 	@Override
 	public String toString() {
 		return "ProjectVO [projectNo=" + projectNo + ", creator=" + creator + ", email=" + email + ", goalMoney="
