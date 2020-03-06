@@ -113,10 +113,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            	<c:forEach var="list" items="${csBoardList}">
+                               <c:forEach var="list" items="${csBoardList}">
                                 <tr>
                                     <td>${list.csid}</td>
-                                    <td><a href="http://localhost:8080/funthing/getCSBoard.ado?csid=${list.csid}">${list.csTitle}</a></td>
+                                    <td><a href="getCSBoard.ado?csid=${list.csid}">${list.csTitle}</a></td>
                                     <td>${list.email}</td>
                                     <td>${list.replyProgress}</td>
 
