@@ -116,10 +116,5 @@ public class AdminHomeController {
 		model.addAttribute("getUserMainImageChangeList",getUserMainImageChangeList);
 		return "f-usermainimage-input";
 	}
-	
-
-	
-	
-	
-	
+		
 }

@@ -27,7 +27,7 @@ public class AlarmDAO {
 	}
 	
 	public List<AlarmVO> getNewestAlarmList(AlarmVO vo){
-		return sqlSessionTemplate.selectList("AlarmDAO.selectNewestAlarm", vo);
+		return sqlSessionTemplate.selectList("AlarmDAO.getNewestAlarmList", vo);
 	}
 	
 }

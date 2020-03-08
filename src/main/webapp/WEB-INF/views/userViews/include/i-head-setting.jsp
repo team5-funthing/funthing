@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/bootstrap.min.css">
 
     <!-- Include jQuery and the jquery.gpopover plugin -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     
     <script src="${pageContext.request.contextPath}/resources/user/js/jquery.gpopover.js"></script>
     <script src="https://kit.fontawesome.com/7a424ad03a.js" crossorigin="anonymous"></script>

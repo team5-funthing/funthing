@@ -7,28 +7,31 @@
 	
 	<!-- 심사결과(승인, 거부, 반려) 이벤트 발생시에 사용하는 쿼리 -->
 	<insert id="insertProjectJudgeResultAlarm" parameterType="alarm">		
-		INSERT INTO alarm(alarmNo, alarmType, deleteAlarmType, ReceiveId, alarmMessage, readConfirm) 
-		VALUES(alarm_seq.nextval,#{alarmType},#{deleteAlarmType},#{ReceiveId},#{alarmMessage},#{readConfirm});		
+		INSERT INTO alarm(alarmNo, alarmType, detailAlarmType, receiveId, alarmMessage, readConfirm, projectNo) 
+		VALUES(alarm_seq.nextval,#{alarmType},#{detailAlarmType},#{receiveId},#{alarmMessage,jdbcType=VARCHAR},#{readConfirm},#{projectNo})	
 	</insert>
 	
 	
 	<!-- user alarm -->
 	<!-- 프로젝트 등록 후 심사 요청시에 발생하는 쿼리 -->
 	<insert id="insertProjectJudgeRequestAlarm" parameterType="alarm">
-		INSERT INTO alarm(alarmNo, alarmType, deleteAlarmType, ReceiveId, alarmMessage, readConfirm) 
-		VALUES(alarm_seq.nextval,#{alarmType},#{deleteAlarmType},#{ReceiveId},#{alarmMessage},#{readConfirm});
+		INSERT INTO alarm(alarmNo, alarmType, detailAlarmType, receiveId, alarmMessage, readConfirm, projectNo) 
+		VALUES(alarm_seq.nextval,#{alarmType},#{detailAlarmType,jdbcType=VARCHAR},#{receiveId},#{alarmMessage,jdbcType=VARCHAR},#{readConfirm},#{projectNo})
 	</insert>
 
 	<!-- common alarm -->
 	<!-- 해당 알람을 확인 한 경우 -->
 	<update id="updateReadConfirmAlarm" parameterType="alarm">
+		<selectKey keyProperty="alarmType" resultType="String" order="AFTER">
+			select detailAlarmType from alarm where alarmNo=#{alarmNo}
+		</selectKey>
 		UPDATE alarm
 		SET readConfirm=#{readConfirm}
 		WHERE alarmNo = #{alarmNo}
 	</update>
 	
 	<!-- 읽지 않은 알람을 확인하는 쿼리 -->
-	<select id="selectNewestAlarm" parameterType="alarm" resultType="alarm">
+	<select id="getNewestAlarmList" parameterType="alarm" resultType="alarm">
 		SELECT * FROM alarm WHERE readConfirm=#{readConfirm} and receiveId=#{receiveId}
 	</select>
 	

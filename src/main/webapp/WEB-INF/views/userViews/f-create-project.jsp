@@ -149,10 +149,9 @@
 	    	<script>
 				$(document).on("change keyup", 'input:text', function(){
 					  
-					  $("#inputSaveBtn")
-				    	.click(function() {
-				  	})
-				    	.prop("disabled", false);
+					  $("#inputSaveBtn").click(function() {
+						  
+					  }).prop("disabled", false);
 					  
 					  $(function() {
 						    $("#inputCompleteBtn")
@@ -176,7 +175,6 @@
 		   		});
 	    	</script>
 	    </c:if>
-
 
 
 </body>

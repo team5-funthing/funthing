@@ -98,11 +98,6 @@ public class MemberController {
 					response.addCookie(cookiepw);
 				}
 				session.setAttribute("memberSession", getMemberService.getMember(vo));
-				avo.setReceiveId(vo.getEmail());
-				avo.setReadConfirm('n');
-				model.addAttribute("memberAlarmList", getNewestAlarmListService.getNewestAlarmList(avo));
-				System.out.println( getNewestAlarmListService.getNewestAlarmList(avo));
-				//response.sendRedirect("member.udo");
 				return "forward:member.udo";
 			}else {
 				//response.sendRedirect("findpw.udo");
