@@ -95,11 +95,6 @@ public class MemberController {
 					cookiepw.setMaxAge(0); /// kill the cookie
 				}
 				session.setAttribute("memberSession", getMemberService.getMember(vo));
-				avo.setReceiveId(vo.getEmail());
-				avo.setReadConfirm('n');
-				session.setAttribute("memberAlarmList", getNewestAlarmListService.getNewestAlarmList(avo));
-				System.out.println( getNewestAlarmListService.getNewestAlarmList(avo));
-				//response.sendRedirect("member.udo");
 				return "forward:member.udo";
 			}else {
 				//response.sendRedirect("findpw.udo");

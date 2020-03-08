@@ -202,12 +202,14 @@
 																			<input type="hidden" name="projectTitle" value="${projectCheck.projectTitle }">
 																			<input type="hidden" name="projectNo" value="${projectCheck.projectNo}"> 
 																			<input type="hidden" name="email" value="${projectCheck.email}">
-																			<input type="submit" value="승인"> 
+																			<c:if test="${projectCheck.status ne 'f'.charAt(0)}">
+																				<input type="submit" value="승인"> 
+																			</c:if>
 																			<input type="submit" formaction="updateProjectCheckDeny.ado" value="거부">
 																			<!-- <a href="javaScript: return(0);" onclick="document.getElementById('statusReplyMessageform').submit()">
 																			<input type="button" value="거부"></a> -->
 																			<!-- 보류 버튼 아직 미완료 상태 -->
-																			<a href="#"><input type="button" value="보류(미완임)"></a>
+																			<input type="submit" formaction="updateProjectCheckDefer.ado" value="보류">
 																			<a href="http://localhost:8080/funthing/getProjectCheckList.ado">
 																			<input type="button" value="뒤로"></a>
 

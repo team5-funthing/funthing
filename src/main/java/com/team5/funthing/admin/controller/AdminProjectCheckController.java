@@ -50,11 +50,13 @@ public class AdminProjectCheckController {
 	}
 	
 	@RequestMapping("updateProjectCheckApproval.ado")
-	public String updateProjectCheckApproval(ProjectVO vo,Model model) {
+	public String updateProjectCheckApproval(ProjectVO vo, AlarmVO avo, Model model) {
 	
-		updateProjectCheckApprovalService.updateProjectCheckApproval(vo);
+		updateProjectCheckApprovalService.updateProjectCheckApproval(vo);			//프로젝트의 상태를 변경
 		vo.setStatusReplyMessage("");
-		updateStatusReplyMessageService.updateStatusReplyMessage(vo);
+		updateStatusReplyMessageService.updateStatusReplyMessage(vo);				//사유 기재 상태를 변경
+		
+		insertProjectJudgeResultAlarm(vo,avo,"승인");
 		
 		return "redirect:getProjectCheckList.ado";
 
@@ -62,41 +64,41 @@ public class AdminProjectCheckController {
 	
 	//보낸후에 다시 그 페이지로 이동
 	@RequestMapping("updateProjectCheckDeny.ado")
-	public String updateProjectCheckDeny(ProjectVO vo, AlarmVO avo, Model model,HttpServletRequest request) {
+	public String updateProjectCheckDeny(ProjectVO vo, AlarmVO avo, Model model) {
 
 		updateProjectCheckDenyService.updateProjectCheckDeny(vo);
 		updateStatusReplyMessageService.updateStatusReplyMessage(vo);
 		
-		System.out.println(vo.getEmail());
-		System.out.println(vo.getStatusReplyMessage());
-		System.out.println(vo.getProjectTitle());
-		System.out.println(vo.getProjectNo());
-		
-		//알람을 보내기위해서 데이터를 db에 넣는 부분
-		avo.setAlarmType(vo.getProjectTitle() + " 심사결과");
-		avo.setDetailAlarmType("거부");
-		avo.setReceiveId(vo.getEmail());
-		avo.setReadConfirm('n');
-		avo.setAlarmMessage(vo.getStatusReplyMessage());
-		avo.setProjectNo(vo.getProjectNo());
-		
-		System.out.println("입력 avo 상태 : " + avo.toString());
-		insertProjectJudgeResultAlarmService.insertProjectJudgeResultAlarm(avo);
+		insertProjectJudgeResultAlarm(vo,avo,"거부");
 		
 		return "redirect:getProjectCheckList.ado";
 	}
 	
 	@RequestMapping("updateProjectCheckDefer.ado")
-	public String updateProjectCheckDefer(ProjectVO vo,Model model) {
+	public String updateProjectCheckDefer(ProjectVO vo, AlarmVO avo, Model model) {
 		
 		updateProjectCheckDeferService.updateProjectCheckDefer(vo);
+		insertProjectJudgeResultAlarm(vo,avo,"반려");
 		updateStatusReplyMessageService.updateStatusReplyMessage(vo);
-		ProjectVO projectCheck = getProjectCheckService.getProjectCheck(vo);
 		
-		model.addAttribute("projectCheck",projectCheck);
-		
-		return "b-project-check-detail";
+		return "redirect:getProjectCheckList.ado";
 	}	
+	
+	
+	//===============================================================================
+	
+	public void insertProjectJudgeResultAlarm(ProjectVO vo, AlarmVO avo, String state) {
+		//알람을 보내기위해서 데이터를 db에 넣는 부분
+		avo.setAlarmType(vo.getProjectTitle() + " 심사결과");
+		avo.setDetailAlarmType(state);
+		avo.setReceiveId(vo.getEmail());
+		avo.setReadConfirm('n');
+		avo.setAlarmMessage(vo.getStatusReplyMessage());
+		avo.setProjectNo(vo.getProjectNo());
+						
+		System.out.println("입력 avo 상태 : " + avo.toString());
+		insertProjectJudgeResultAlarmService.insertProjectJudgeResultAlarm(avo);
+	}
 	
 	
 }

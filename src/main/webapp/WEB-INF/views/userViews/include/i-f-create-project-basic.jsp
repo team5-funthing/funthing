@@ -14,6 +14,16 @@
 			<span>이메일</span> 
 			<input type="text" name="email" value="${writingProject.email }" class="single-input" readonly>
 		</div>
+		<div class="p-2 bd-highlight">
+			<c:if test="${writingProject.status eq 'm'.charAt(0)}">
+				<div>반려사유</div>
+				<div style="color:black;">${writingProject.statusReplyMessage}</div>
+			</c:if>
+			<c:if test="${writingProject.status eq 'f'.charAt(0)}">
+				<div>거부사유</div>
+				<div style="color:black;">${writingProject.statusReplyMessage}</div>
+			</c:if>
+		</div>
 		<!-- 
 		<div class="p-2 bd-highlight">
 			<span>창작자 프로필 사진</span> 

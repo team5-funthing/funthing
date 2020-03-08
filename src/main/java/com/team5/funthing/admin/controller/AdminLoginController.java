@@ -26,7 +26,7 @@ public class AdminLoginController {
 	}
 	
 	@RequestMapping("LoginCheck.ado")
-	public String LoginCheck(AdminMemberVO vo,AlarmVO avo,HttpSession session,Model model) {
+	public String LoginCheck(AdminMemberVO vo,HttpSession session,Model model) {
 		String getPassword = null;
 		System.out.println("로그인 시작");
 		if(getAdminPasswordService.getAdminPassword(vo)==null) {
@@ -34,10 +34,6 @@ public class AdminLoginController {
 		}else {
 			getPassword = getAdminPasswordService.getAdminPassword(vo);
 			if(getPassword.equals(vo.getAdminPassword())) {
-				avo.setReceiveId(vo.getAdminId());
-				avo.setReadConfirm('n');
-				System.out.println(getNewestAlarmListService.getNewestAlarmList(avo).toString());
-				model.addAttribute("adminAlarmList", getNewestAlarmListService.getNewestAlarmList(avo));
 				session.setAttribute("adminSessionEmail", vo.getAdminId());
 				return "p-index";
 			}else {

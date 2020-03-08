@@ -334,13 +334,12 @@ public class ProjectController {
 		System.out.println("수정후의 프로젝트 상태 : " + pvo.toString());
 		
 		//////////////////////////////////////////////////////////////
-		System.out.println(pvo.getEmail());
-		System.out.println(pvo.getProjectNo());
-		System.out.println(pvo.getProjectTitle());
-		avo.setAlarmType("프로젝트 심사요청");
+
+		avo.setAlarmType(pvo.getProjectTitle() + " 심사요청");
 		avo.setReceiveId("admin@funthing.com");
 		avo.setReadConfirm('n');
 		avo.setProjectNo(pvo.getProjectNo());
+		avo.setDetailAlarmType("요청");
 		System.out.println(avo.toString());
 		insertProjectJudgeRequestAlarmService.insertProjectJudgeRequestAlarm(avo);
 		
