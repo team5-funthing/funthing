@@ -1,12 +1,13 @@
 package com.team5.funthing.admin.model.vo;
 
-import org.springframework.stereotype.Component;
 
-@Component
+
 public class AdminStatisticsVO {
 
-	private String successYear;
-	private String failYear;
+	public String yearr;
+	
+	private String successyear;
+	private String failyear;
 
 	private String success1;
 	private String success2;
@@ -33,29 +34,23 @@ public class AdminStatisticsVO {
 	private String fail10;
 	private String fail11;
 	private String fail12;
-	
-	@Override
-	public String toString() {
-		return "AdminStatisticsVO [successYear=" + successYear + ", failYear=" + failYear + ", success1=" + success1
-				+ ", success2=" + success2 + ", success3=" + success3 + ", success4=" + success4 + ", success5="
-				+ success5 + ", success6=" + success6 + ", success7=" + success7 + ", success8=" + success8
-				+ ", success9=" + success9 + ", success10=" + success10 + ", success11=" + success11 + ", success12="
-				+ success12 + ", fail1=" + fail1 + ", fail2=" + fail2 + ", fail3=" + fail3 + ", fail4=" + fail4
-				+ ", fail5=" + fail5 + ", fail6=" + fail6 + ", fail7=" + fail7 + ", fail8=" + fail8 + ", fail9=" + fail9
-				+ ", fail10=" + fail10 + ", fail11=" + fail11 + ", fail12=" + fail12 + "]";
+	public String getYearr() {
+		return yearr;
 	}
-	
-	public String getSuccessYear() {
-		return successYear;
+	public void setYearr(String yearr) {
+		this.yearr = yearr;
 	}
-	public void setSuccessYear(String successYear) {
-		this.successYear = successYear;
+	public String getSuccessyear() {
+		return successyear;
 	}
-	public String getFailYear() {
-		return failYear;
+	public void setSuccessyear(String successyear) {
+		this.successyear = successyear;
 	}
-	public void setFailYear(String failYear) {
-		this.failYear = failYear;
+	public String getFailyear() {
+		return failyear;
+	}
+	public void setFailyear(String failyear) {
+		this.failyear = failyear;
 	}
 	public String getSuccess1() {
 		return success1;
@@ -201,7 +196,17 @@ public class AdminStatisticsVO {
 	public void setFail12(String fail12) {
 		this.fail12 = fail12;
 	}
-	
+	@Override
+	public String toString() {
+		return "AdminStatisticsVO [yearr=" + yearr + ", successyear=" + successyear + ", failyear=" + failyear
+				+ ", success1=" + success1 + ", success2=" + success2 + ", success3=" + success3 + ", success4="
+				+ success4 + ", success5=" + success5 + ", success6=" + success6 + ", success7=" + success7
+				+ ", success8=" + success8 + ", success9=" + success9 + ", success10=" + success10 + ", success11="
+				+ success11 + ", success12=" + success12 + ", fail1=" + fail1 + ", fail2=" + fail2 + ", fail3=" + fail3
+				+ ", fail4=" + fail4 + ", fail5=" + fail5 + ", fail6=" + fail6 + ", fail7=" + fail7 + ", fail8=" + fail8
+				+ ", fail9=" + fail9 + ", fail10=" + fail10 + ", fail11=" + fail11 + ", fail12=" + fail12 + "]";
+	}
+
 
 	
 }

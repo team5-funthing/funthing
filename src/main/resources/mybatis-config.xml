@@ -104,6 +104,7 @@
 
  		<mapper resource="mappers/personalinfoprocessing-mapper.xml"/>
  		<mapper resource="mappers/registerTos-mapper.xml"/>
+ 		<mapper resource="mappers/adminStatistics-mapper.xml"/>
 
 	</mappers>
 </configuration>

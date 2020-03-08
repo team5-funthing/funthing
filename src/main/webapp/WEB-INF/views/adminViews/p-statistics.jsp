@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 
@@ -107,12 +108,6 @@
 										<div class="card">
 											<div class="card-body">
 												<h5 class="card-title m-b-0">펀딩 모금액 통계</h5>
-												<form style="float: right;">
-													<select>
-														<option value="">월별</option>
-														<option value="">연도별</option>
-													</select>
-												</form>
 											</div>
 										</div>
 										 
@@ -123,55 +118,57 @@
 							</div>
 						</div>
 <script>
-	var ctx = document.getElementById('myChart2').getContext('2d');
-	var myChart = new Chart(ctx, {
-	    type: 'bar',
-	    data: {
-	        labels: ['1월', '2월', '3월 ', '4월 ', '5월', '6월 ','7월', '8월 ', '9월 ', '10월', '11월', '12월 '],
-	        datasets: [{
-	            label: '월 별 펀딩모금액',
-	            data: [12, 19, 3, 5, 2, 3, 12, 19, 3, 5, 2, 3],
-	            backgroundColor: [
-	                'rgba(255, 99, 132, 0.2)',
-	                'rgba(54, 162, 235, 0.2)',
-	                'rgba(255, 206, 86, 0.2)',
-	                'rgba(75, 192, 192, 0.2)',
-	                'rgba(153, 102, 255, 0.2)',
-	                'rgba(255, 159, 64, 0.2)',
-	                'rgba(255, 99, 132, 0.2)',
-	                'rgba(54, 162, 235, 0.2)',
-	                'rgba(255, 206, 86, 0.2)',
-	                'rgba(75, 192, 192, 0.2)',
-	                'rgba(153, 102, 255, 0.2)',
-	                'rgba(255, 159, 64, 0.2)'
-	            ],
-	            borderColor: [
-	                'rgba(255, 99, 132, 1)',
-	                'rgba(54, 162, 235, 1)',
-	                'rgba(255, 206, 86, 1)',
-	                'rgba(75, 192, 192, 1)',
-	                'rgba(153, 102, 255, 1)',
-	                'rgba(255, 159, 64, 1)',
-	                'rgba(255, 99, 132, 1)',
-	                'rgba(54, 162, 235, 1)',
-	                'rgba(255, 206, 86, 1)',
-	                'rgba(75, 192, 192, 1)',
-	                'rgba(153, 102, 255, 1)',
-	                'rgba(255, 159, 64, 1)'
-	            ],
-	            borderWidth: 1
-	        }]
-	    },
-	    options: {
-	        scales: {
-	            yAxes: [{
-	                ticks: {
-	                    beginAtZero: true
-	                }
-	            }]
-	        }
-	    }
-	});
+	var ctx2 = document.getElementById('myChart2').getContext('2d');
+	var config = {
+		    type: 'bar',
+		    data: {
+		        labels: ['1월', '2월', '3월 ', '4월 ', '5월', '6월 ','7월', '8월 ', '9월 ', '10월', '11월', '12월 '],
+		        datasets: [{
+		            label: '월 별 펀딩모금액',
+		            data: [12, 19, 3, 5, 2, 3, 12, 19, 3, 5, 2, 3],
+		            backgroundColor: [
+		                'rgba(255, 99, 132, 0.2)',
+		                'rgba(54, 162, 235, 0.2)',
+		                'rgba(255, 206, 86, 0.2)',
+		                'rgba(75, 192, 192, 0.2)',
+		                'rgba(153, 102, 255, 0.2)',
+		                'rgba(255, 159, 64, 0.2)',
+		                'rgba(255, 99, 132, 0.2)',
+		                'rgba(54, 162, 235, 0.2)',
+		                'rgba(255, 206, 86, 0.2)',
+		                'rgba(75, 192, 192, 0.2)',
+		                'rgba(153, 102, 255, 0.2)',
+		                'rgba(255, 159, 64, 0.2)'
+		            ],
+		            borderColor: [
+		                'rgba(255, 99, 132, 1)',
+		                'rgba(54, 162, 235, 1)',
+		                'rgba(255, 206, 86, 1)',
+		                'rgba(75, 192, 192, 1)',
+		                'rgba(153, 102, 255, 1)',
+		                'rgba(255, 159, 64, 1)',
+		                'rgba(255, 99, 132, 1)',
+		                'rgba(54, 162, 235, 1)',
+		                'rgba(255, 206, 86, 1)',
+		                'rgba(75, 192, 192, 1)',
+		                'rgba(153, 102, 255, 1)',
+		                'rgba(255, 159, 64, 1)'
+		            ],
+		            borderWidth: 1
+		        }]
+		    },
+		    options: {
+		        scales: {
+		            yAxes: [{
+		                ticks: {
+		                    beginAtZero: true
+		                }
+		            }]
+		        }
+		    }
+		};
+	
+	var myChart = new Chart(ctx2,config );    //그리기
 
 
 </script>
@@ -186,87 +183,108 @@
 										<div  class="card">
 											<div  class="card-body">
 												<h5 class="card-title m-b-0">프로젝트 성공률 통계</h5>
-												<form style="float: right;">
-													<select>
-														<option value="">월별</option>
-														<option value="">연도별</option>
-													</select>
-												</form>
 											</div>
 										</div>
 									<div style="display:flex;">
 											<!--  그래프 구역   -->
 									<div id="left" style="height:225px;width:49%;">
+									<center><input type="text" id="canvaslabel" disabled="disabled" style="text-align:center"></center>
+									<div id="refresh">
 									<canvas id="myChart" style="height:auto;width:auto;"></canvas>
-									<!--  표 구역   -->
-									
-									
-									<input type="hidden" name="projectSuccess">   <!--  END DATE 기준 연 /월  구분     성공 실패 구분   -->
-									<input type="hidden" name="projectFail">
+                                    </div>
+									<input type="text" id="inputSuccess" >
+									<input type="text" id="inputFail" >
+
+   
+  
+	
+	
+
 									</div>
-									<!--  표 구역   -->
 									<div id="rightdiv" style="width:49%">
+								
+								    <table border="1">
+								    <tr>
+									<td><input type="button" value="2020" name="yearbtn"></td>
+									<td><input type="button" value="2021" name="yearbtn"></td>
+									<td><input type="button" value="2022" name="yearbtn"></td>
+									<td><input type="button" value="2023" name="yearbtn"></td>
+									<td><input type="button" value="2024" name="yearbtn"></td>
+									<td><input type="button" value="2025" name="yearbtn"></td>
+									<td><input type="button" value="2026" name="yearbtn"></td>
+									<td><input type="button" value="2027" name="yearbtn"></td>
+									<td><input type="button" value="2028" name="yearbtn"></td>
+									<td><input type="button" value="2029" name="yearbtn"></td>
+									
+									</tr>
+								    </table>
 									<table border="1"  >
-									<thead> N월 프로젝트 성공률</thead>
+									<thead ><input type="text" disabled="disabled" id="headname2"> </thead>
 									<tr>
-									<td>구분</td>
-									<td>1월</td>
-									<td>2월</td>
-									<td>3월</td>
-									<td>4월</td>
-									<td>5월</td>
-									<td>6월</td>
-									<td>7월</td>
-									<td>8월</td>
-									<td>9월</td>
-									<td>10월</td>
-									<td>11월</td>
-									<td>12월</td>
+									<td>구분</td> 
+									<td><input type="button" value="1월" id="btn1"></td>
+									<td><input type="button" value="2월" id="btn2"></td>
+									<td><input type="button" value="3월" id="btn3"></td>
+									<td><input type="button" value="4월" id="btn4"></td>
+									<td><input type="button" value="5월" id="btn5"></td>
+									<td><input type="button" value="6월" id="btn6"></td>
+									<td><input type="button" value="7월" id="btn7"></td>
+									<td><input type="button" value="8월" id="btn8"></td>
+									<td><input type="button" value="9월" id="btn9"></td>
+									<td><input type="button" value="10월" id="btn10"></td>
+									<td><input type="button" value="11월" id="btn11"></td>
+									<td><input type="button" value="12월" id="btn12"></td>
 									</tr>
 									<tr>
 									<td>성공</td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
+									<td id="s1">${successRatioMonth.success1 }</td>
+									<td id="s2">${successRatioMonth.success2 }</td>
+									<td id="s3">${successRatioMonth.success3 }</td>
+									<td id="s4">${successRatioMonth.success4 }</td>
+									<td id="s5">${successRatioMonth.success5 }</td>
+									<td id="s6">${successRatioMonth.success6 }</td>
+									<td id="s7">${successRatioMonth.success7 }</td>
+									<td id="s8">${successRatioMonth.success8 }</td>
+									<td id="s9">${successRatioMonth.success9 }</td>
+									<td id="s10">${successRatioMonth.success10 }</td>
+									<td id="s11">${successRatioMonth.success11 }</td>
+									<td id="s12">${successRatioMonth.success12 }</td>
 									</tr>
 									<tr>
 									<td>실패</td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
+									<td id="f1">${successRatioMonth.fail1 }</td>
+									<td id="f2">${successRatioMonth.fail2 }</td>
+									<td id="f3">${successRatioMonth.fail3 }</td>
+									<td id="f4">${successRatioMonth.fail4 }</td>
+									<td id="f5">${successRatioMonth.fail5 }</td>
+									<td id="f6">${successRatioMonth.fail6 }</td>
+									<td id="f7">${successRatioMonth.fail7 }</td>
+									<td id="f8">${successRatioMonth.fail8 }</td>
+									<td id="f9">${successRatioMonth.fail9 }</td>
+									<td id="f10">${successRatioMonth.fail10 }</td>
+									<td id="f11">${successRatioMonth.fail11 }</td>
+									<td id="f12">${successRatioMonth.fail12 }</td>
 									</tr>
 									</table>
-									</div>
-									</div>
 									
+									
+									
+									
+									</div>
+									</div>
+
+							
 <script>
-    var tx = 2;
-	var ctx = document.getElementById('myChart').getContext('2d');
-	var myDoughnutChart = new Chart(ctx, {
+
+//차트 셋팅 
+var ctx = document.getElementById('myChart').getContext('2d');
+var config = {
 	    type: 'doughnut',
 	    data: {
 	    	 labels: [ '성공','실패'],
 		     datasets: [{
 		    	label:'piechart',
-		        data: [ 30, 20,],    // 여기에    성공 / 실패 월별 수량 집어넣어! 
+		        data: [ 0,0 ],    // 여기에    성공 / 실패 월별 수량 집어넣어! 
 		        backgroundColor:  [ 'rgba(54, 162, 235, 1)','rgba(255, 99, 132, 1)' ],
 	            borderColor:  [ 'rgba(54, 162, 235, 1)','rgba(255, 99, 132, 1)' ],
 		    }],
@@ -275,31 +293,272 @@
 		options: {
 	  	responsive: true
 	  }
+	};
+//차트셋팅 끝 
+
+var myDoughnutChart = new Chart(ctx, config);   //차트 그리기 
+
+	Chart.pluginService.register({
+	  beforeDraw: function(chart) {
+	    var width = chart.chart.width,
+	        height = chart.chart.height,
+	        ctx = chart.chart.ctx;
+
+	    ctx.restore();
+	    var fontSize = (height / 114).toFixed(2);
+	    ctx.font = fontSize + "em sans-serif";
+	    ctx.textBaseline = "middle";
+
+	    //
+	    var value = ($("#inputSuccess").val()/ (parseInt($("#inputSuccess").val())+parseInt($("#inputFail").val()))*10000 );
+	    var round = Math.round(value)/100;
+	    var text = round+'%',
+	        textX = Math.round((width - ctx.measureText(text).width) / 2),
+	        textY = (height / 1.8);
+
+	    ctx.fillText(text, textX, textY);
+	    ctx.save();
+	  }
 	});
-if(tx==2){
-		Chart.pluginService.register({
-		  beforeDraw: function(chart) {
-		    var width = chart.chart.width,
-		        height = chart.chart.height,
-		        ctx = chart.chart.ctx;
+//////////////////////////// 파이차트 끝 	
+	
+$(document).ready(function() {
+	
+	var thisyear = new Date().getFullYear();
+	var use = thisyear-2000;
+	var thismonth = new Date().getMonth();
+	var use2 = thismonth +1;
+	document.getElementById("canvaslabel").value="20"+use+"년 "+use2+"월 성공률";
+	document.getElementById("headname2").value="20"+use+"년 성공률";
+	
 
-		    ctx.restore();
-		    var fontSize = (height / 114).toFixed(2);
-		    ctx.font = fontSize + "em sans-serif";
-		    ctx.textBaseline = "middle";
-  
-		    
-		    var value = (30/(30+20))*100;
-		    var text = value+'%',
-		        textX = Math.round((width - ctx.measureText(text).width) / 2),
-		        textY = (height / 1.8);
+	if(use2==1){
+		document.getElementById("inputSuccess").value = '${successRatioMonth.success1}';
+		document.getElementById("inputFail").value = '${successRatioMonth.fail1}';
+	}else if(use2==2){
+		document.getElementById("inputSuccess").value = '${successRatioMonth.success2}';
+		document.getElementById("inputFail").value = '${successRatioMonth.fail2}';
+	}else if(use2==3){
+		document.getElementById("inputSuccess").value = '${successRatioMonth.success3}';
+		document.getElementById("inputFail").value = '${successRatioMonth.fail3}';
+	}else if(use2==4){
+		document.getElementById("inputSuccess").value = '${successRatioMonth.success4}';
+		document.getElementById("inputFail").value = '${successRatioMonth.fail4}';
+	}else if(use2==5){
+		document.getElementById("inputSuccess").value = '${successRatioMonth.success5}';
+		document.getElementById("inputFail").value = '${successRatioMonth.fail5}';
+	}else if(use2==6){
+		document.getElementById("inputSuccess").value = '${successRatioMonth.success6}';
+		document.getElementById("inputFail").value = '${successRatioMonth.fail6}';
+	}else if(use2==7){
+		document.getElementById("inputSuccess").value = '${successRatioMonth.success7}';
+		document.getElementById("inputFail").value = '${successRatioMonth.fail7}';
+	}else if(use2==8){
+		document.getElementById("inputSuccess").value = '${successRatioMonth.success8}';
+		document.getElementById("inputFail").value = '${successRatioMonth.fail8}';
+	}else if(use2==9){
+		document.getElementById("inputSuccess").value = '${successRatioMonth.success9}';
+		document.getElementById("inputFail").value = '${successRatioMonth.fail9}';
+	}else if(use2==10){
+		document.getElementById("inputSuccess").value = '${successRatioMonth.success10}';
+		document.getElementById("inputFail").value = '${successRatioMonth.fail10}';
+	}else if(use2==11){
+		document.getElementById("inputSuccess").value = '${successRatioMonth.success11}';
+		document.getElementById("inputFail").value = '${successRatioMonth.fail11}';
+	}else if(use2==12){
+		document.getElementById("inputSuccess").value = '${successRatioMonth.success12}';
+		document.getElementById("inputFail").value = '${successRatioMonth.fail12}';
+	}
+	
+	
+	/// 파이차트에 데이터 넣기
+	var dataset = config.data.datasets;
+	for(var i=0; i<dataset.length; i++){
+		console.log(dataset);
+		//데이터 갯수 만큼 반복
+		var data = dataset[i].data;
+		data[0] = document.getElementById("inputSuccess").value ;
+		data[1] = document.getElementById("inputFail").value;
+	}
+	
+	myChart.update();
+	/// 파이차트에 데이터 넣기 끝
+	
+	});  	
+	
 
-		    ctx.fillText(text, textX, textY);
-		    ctx.save();
-		  }
+	
+$("input[name=yearbtn]").click(function(){              //연도 클릭
+	var thisyear = new Date().getFullYear();
+	if(thisyear < $(this).val()){
+		alert("아직 해당 연도가 시작되지 않았습니다!");	
+	}else{
+		var using = thisyear-2000;
+		var data ={"year":using};
+		$.ajax({
+			type : "post",
+			url : "statisticsManagement.ado",
+			data : data,
+			success : function(data) {
+				document.getElementById("canvaslabel").value="20"+using+"년 성공률";
+				document.getElementById("headname2").value="20"+using+"년 성공률";
+				
+				/// 나만 안되는건지 확인 필요!
+				document.getElementById("inputSuccess").value='${successRatio}';
+				document.getElementById("inputFail").value='${successRatio}';
+				config.data.datasets[0].data[0]=document.getElementById("inputSuccess").value;
+				config.data.datasets[0].data[1]=document.getElementById("inputFail").value;
+				myChart.update({duration: 800});
+			},
+			error : function() {
+				
+			}
 		});
-}	
+	}
+	
+});
+
+
+
+
+$("#btn1").click(function(){  
+	var title = document.getElementById("headname2").value;
+	var year = title.substring(2,4);
+	var month = document.getElementById("btn1").value;
+	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률";
+	document.getElementById("inputSuccess").value =${successRatioMonth.success1 };
+	document.getElementById("inputFail").value=${successRatioMonth.fail1};
+	config.data.datasets[0].data[0]=document.getElementById("inputSuccess").value;
+	config.data.datasets[0].data[1]=document.getElementById("inputFail").value;
+	myChart.update();
+});
+
+$("#btn2").click(function(){  
+	var title = document.getElementById("headname2").value;
+	var year = title.substring(2,4);
+	var month = document.getElementById("btn2").value;
+	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률";
+	document.getElementById("inputSuccess").value =${successRatioMonth.success2 };
+	document.getElementById("inputFail").value=${successRatioMonth.fail2};
+	config.data.datasets[0].data[0]=document.getElementById("inputSuccess").value;
+	config.data.datasets[0].data[1]=document.getElementById("inputFail").value;
+	myChart.update();
+	});
+$("#btn3").click(function(){  
+	var title = document.getElementById("headname2").value;
+	var year = title.substring(2,4);
+	var month = document.getElementById("btn3").value;
+	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률";
+	document.getElementById("inputSuccess").value =${successRatioMonth.success3 };
+	document.getElementById("inputFail").value=${successRatioMonth.fail3};
+	config.data.datasets[0].data[0]=document.getElementById("inputSuccess").value;
+	config.data.datasets[0].data[1]=document.getElementById("inputFail").value;
+	myChart.update();
+	});
+$("#btn4").click(function(){  
+	var title = document.getElementById("headname2").value;
+	var year = title.substring(2,4);
+	var month = document.getElementById("btn4").value;
+	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률";
+	document.getElementById("inputSuccess").value =${successRatioMonth.success4 };
+	document.getElementById("inputFail").value=${successRatioMonth.fail4};
+	config.data.datasets[0].data[0]=document.getElementById("inputSuccess").value;
+	config.data.datasets[0].data[1]=document.getElementById("inputFail").value;
+	myChart.update();
+	});
+$("#btn5").click(function(){  
+	var title = document.getElementById("headname2").value;
+	var year = title.substring(2,4);
+	var month = document.getElementById("btn5").value;
+	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률";
+	document.getElementById("inputSuccess").value =${successRatioMonth.success5 };
+	document.getElementById("inputFail").value=${successRatioMonth.fail5};
+	config.data.datasets[0].data[0]=document.getElementById("inputSuccess").value;
+	config.data.datasets[0].data[1]=document.getElementById("inputFail").value;
+	myChart.update();
+	});
+$("#btn6").click(function(){  
+	var title = document.getElementById("headname2").value;
+	var year = title.substring(2,4);
+	var month = document.getElementById("btn6").value;
+	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률";
+	document.getElementById("inputSuccess").value =${successRatioMonth.success6 };
+	document.getElementById("inputFail").value=${successRatioMonth.fail6};
+	config.data.datasets[0].data[0]=document.getElementById("inputSuccess").value;
+	config.data.datasets[0].data[1]=document.getElementById("inputFail").value;
+	myChart.update();
+	});
+$("#btn7").click(function(){  
+	var title = document.getElementById("headname2").value;
+	var year = title.substring(2,4);
+	var month = document.getElementById("btn7").value;
+	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률";
+	document.getElementById("inputSuccess").value =${successRatioMonth.success7 };
+	document.getElementById("inputFail").value=${successRatioMonth.fail7};
+	config.data.datasets[0].data[0]=document.getElementById("inputSuccess").value;
+	config.data.datasets[0].data[1]=document.getElementById("inputFail").value;
+	myChart.update();
+	});
+$("#btn8").click(function(){  
+	var title = document.getElementById("headname2").value;
+	var year = title.substring(2,4);
+	var month = document.getElementById("btn8").value;
+	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률";
+	document.getElementById("inputSuccess").value =${successRatioMonth.success8 };
+	document.getElementById("inputFail").value=${successRatioMonth.fail8};
+	config.data.datasets[0].data[0]=document.getElementById("inputSuccess").value;
+	config.data.datasets[0].data[1]=document.getElementById("inputFail").value;
+	myChart.update();
+	});
+$("#btn9").click(function(){  
+	var title = document.getElementById("headname2").value;
+	var year = title.substring(2,4);
+	var month = document.getElementById("btn9").value;
+	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률";
+	document.getElementById("inputSuccess").value =${successRatioMonth.success9 };
+	document.getElementById("inputFail").value=${successRatioMonth.fail9};
+	config.data.datasets[0].data[0]=document.getElementById("inputSuccess").value;
+	config.data.datasets[0].data[1]=document.getElementById("inputFail").value;
+	myChart.update();
+	});
+$("#btn10").click(function(){  
+	var title = document.getElementById("headname2").value;
+	var year = title.substring(2,4);
+	var month = document.getElementById("btn10").value;
+	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률";
+	document.getElementById("inputSuccess").value =${successRatioMonth.success10 };
+	document.getElementById("inputFail").value=${successRatioMonth.fail10};
+	config.data.datasets[0].data[0]=document.getElementById("inputSuccess").value;
+	config.data.datasets[0].data[1]=document.getElementById("inputFail").value;
+	myChart.update();
+	});
+$("#btn11").click(function(){  
+	var title = document.getElementById("headname2").value;
+	var year = title.substring(2,4);
+	var month = document.getElementById("btn11").value;
+	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률";
+	document.getElementById("inputSuccess").value =${successRatioMonth.success11 };
+	document.getElementById("inputFail").value=${successRatioMonth.fail11};
+	config.data.datasets[0].data[0]=document.getElementById("inputSuccess").value;
+	config.data.datasets[0].data[1]=document.getElementById("inputFail").value;
+	myChart.update();
+	});
+$("#btn12").click(function(){  
+	var title = document.getElementById("headname2").value;
+	var year = title.substring(2,4);
+	var month = document.getElementById("btn12").value;
+	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률";
+	document.getElementById("inputSuccess").value =${successRatioMonth.success12 };
+	document.getElementById("inputFail").value=${successRatioMonth.fail12};
+	config.data.datasets[0].data[0]=document.getElementById("inputSuccess").value;
+	config.data.datasets[0].data[1]=document.getElementById("inputFail").value;
+	myChart.update();
+	});
+
+
+
 </script>
+
 
 
 									</div>
