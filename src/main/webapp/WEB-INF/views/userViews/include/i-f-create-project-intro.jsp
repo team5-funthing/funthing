@@ -33,7 +33,6 @@
 			
 			<script>
 			
-			
 				//goalMoney
 				var replaceNotInt = /[^0-9]/gi;
 	

@@ -16,20 +16,28 @@
 		SELECT * FROM Creator WHERE email = #{email}
 	</select>
 	
+	<select id="getCreatorListByEmail" parameterType="creator" resultType="creator">
+		SELECT * FROM Creator WHERE email = #{email}
+	</select>
+	
 	<delete id="deleteCreator" parameterType="creator">
 		DELETE FROM Creator WHERE creator = #{creator}
 	</delete>
 
 	<update id="updateCreator" parameterType="creator">
-		UPDATE Creator 
-		SET makerPhone=#{makerPhone}, businessNumber=#{businessNumber}, 
-		businessAddress=#{businessAddress}, businessFileLink=#{businessFileLink}, lv=#{lv}
+		UPDATE creator 
+		SET 
+		makerPhone = #{makerPhone }, 
+		businessNumber = #{businessNumber }, 
+		businessAddress= #{businessAddress }, 
+		businessFileLink= #{businessFileLink }
+		
 		WHERE creator = #{creator}
 	</update>
 	
 	<insert id="insertCreator" parameterType="creator">
-		INSERT INTO Creator (creator, email, makerPhone, businessNumber, businessAddress, businessFileLink)
-		VALUES(#{creator}, #{email}, #{makerPhone}, #{businessNumber}, #{businessAddress}, #{businessFileLink} )
+		INSERT INTO Creator (creator, email, makerPhone, businessNumber, businessAddress, businessFileLink, creatorProfileImage)
+		VALUES(#{creator}, #{email}, #{makerPhone}, #{businessNumber}, #{businessAddress}, #{businessFileLink}, #{creatorProfileImage} )
 	</insert>
 
 </mapper>

@@ -29,7 +29,7 @@
 			
 							<input type="text" id="urlVideo" class="form-control" placeholder="소개 영상으로 올리려는 영상 URL 주소를 입력하세요." aria-label="소개 영상으로 올리려는 영상 URL 주소를 입력하세요." aria-describedby="urlBtn">
 							<div class="input-group-append urlBtn-registry">
-							  <button class="btn btn-outline-secondary" type="button" id="urlBtn">등록</button>
+								<button class="btn btn-outline-secondary" type="button" id="urlBtn">등록</button>
 							</div>
 							<div class="mt-3">
 								<div id="toAppendIframeDiv" class="form-group"></div>
@@ -41,7 +41,7 @@
 							
 							<input type="text" id="urlVideo" value="${writingProject.projectIntroduceVideo }" disabled  class="form-control" placeholder="소개 영상으로 올리려는 영상 URL 주소를 입력하세요." aria-label="소개 영상으로 올리려는 영상 URL 주소를 입력하세요." aria-describedby="urlBtn">
 							<div class="input-group-append urlBtn-registry">
-							  <button class="btn btn-outline-secondary" type="button" id="urlBtn" disabled>등록</button>
+								<button class="btn btn-outline-secondary" type="button" id="urlBtn" disabled>등록</button>
 							</div>
 							<div class='input-group-append urlBtn-remove'>
 								<a class='btn fas fa-times fa-2x' type='button' id='urlBtn'></a>
@@ -65,38 +65,7 @@
 				<c:choose>
 					<c:when test="${projectIntroduceImageList eq null}">
 					
-					
-						<script>
-			            	
-			            	// 일단 1. 버튼 눌렸을시
-			            	// <div class="select_introduce_img"><img src="" /></div> 코드 추가되게 하기
-							const no = 1;
-			            	$(document).on("change","#projectIntroduceImage", function(){
-			            		alert("감지감지");
-			            		$("#projectIntroduceImageUl").append(
-			            				"<li id='projectIntroduceImage" + no + "'"
-			            				+ " onclick='$(" + "'#projectIntroduceImage" + no + "').remove();'>"
-			            				+ "<div class='select_introduce_img m-3'><img src='' /></div></li>");
-
-			            	});
-			            	$(document).on("change","#projectIntroduceImage", function(){
-			            		alert("감지감지2");
-								if(this.files && this.files[0]){
-				           			var reader = new FileReader;
-				           			reader.onload = function(data){
-				           				$("#projectIntroduceImage${no} .select_introduce_img img").attr("src", data.target.result).width(400);
-				           			}; 
-				           			reader.readAsDataURL(this.files[0]);
-				           			no++;
-				           		}
-			            	});
-					    </script>
-					
-					
-					
-						<input type="file" name="projectIntroduceImageUpload"
-							class="form-control-file select-project-image"
-							id="projectIntroduceImage">
+						<input type="file" class="form-control-file select-project-image projectIntroduceImage">
 						<hr>
 			           	<ul id="projectIntroduceImageUl">
 						</ul>
@@ -104,26 +73,68 @@
 					</c:when>
 					
 					<c:when test="${projectIntroduceImageList ne null}">
-						<input type="file" name="projectIntroduceImageUpload" 
-								class="form-control-file select-project-image"
-								id="projectIntroduceImage">
+						<input type="file" class="form-control-file select-project-image projectIntroduceImage">
 						<ul id="projectIntroduceImageUl">
 				
 							<c:forEach var="projectIntroduceImage" items="${projectIntroduceImageList }" varStatus="step">
 							
-								<input type="hidden" name="projectIntroduceImageUpload" value="${projectIntroduceImage.projectIntroduceImage }">
-								
-								<li id="projectIntroduceImageLi" value="">
+								<li id="projectIntroduceImageLi">
 									<div class="select_introduce_img m-3">
-										<img style="width: 400px; height: auto;" src="${projectIntroduceImage.projectIntroduceImage }" />
+										<input type="hidden" value="${projectIntroduceImage.projectIntroduceImageNo }">
+										<img style="width: 200px; height: auto;" src="${projectIntroduceImage.projectIntroduceImage }" />
+										<a href="javaScript: return(0);" class='btn fas fa-times fa-2x imgRemoveBtn' type='button' ></a>
 									</div>
+									
 								</li>
-								
 							</c:forEach>
-							
 						</ul>
 					</c:when>
+					
 				</c:choose>
+				
+				<script>
+				
+	            	$(document).on("change",".projectIntroduceImage", function(){
+	            		var fileVal = $(this).val();
+	            		
+	            		if(fileVal != ""){
+	            			
+	            			$("#nav-images").prepend("<input type='file' class='form-control-file select-project-image projectIntroduceImage'>");
+	            			$(this).attr('name', 'projectIntroduceImageUpload'); 
+	            			$(this).css('display', 'none');
+	            	       	
+	            			var idx = $('#projectIntroduceImageUl li').length;
+
+	            	       	alert(fileVal);
+							if(this.files && this.files[0]){
+			           			var reader = new FileReader;
+			           			reader.onload = function(data){
+			           				$("#projectIntroduceImageUl").append("<li id='projectIntroduceImageLi'>"
+			           						+	"<div class='select_introduce_img'>"
+			    							+	"<img id='img" + idx + "' style='width: 400px; height: auto;' src='' />"
+			    							+	"<a class='btn fas fa-times fa-2x imgRemoveBtn' type='button' ></a>"
+			    							+	"</div>"
+			    							+	"</li>");
+			           				
+			           				$("img[id='img" + idx + "']").attr("src", data.target.result).width(200);
+			           				
+			           				
+			           			}; 
+			           			reader.readAsDataURL(this.files[0]);
+			           		}
+	            		}
+	            		
+	            	});
+	            	
+					$(document).on("click", ".imgRemoveBtn", function(){
+						
+						$(this).siblings("input").attr("name", "projectIntroduceImageNo");
+						$(this).closest("li").css('display', 'none');
+						
+					})
+
+	            	
+			    </script>		
 		  </div>
 		</div>		
 	</article>
@@ -142,27 +153,9 @@
 					<textarea name="projectSummary" class="form-control" id="projectSummaryTextarea" rows="3">${writingProject.projectSummary }</textarea>
 			</c:when>
 		</c:choose>
+	</div>
+</div>
 
-	</div>
-</div>
-<div class="p-2 bd-highlight">
-	<span>스토리 광고 심의 동의*</span>
-	<div class="form-group">
-		<label for="projectAgreeField">동의를 진행해야 스토리작성이 가능합니다.</label>
-		<div class="row">
-			<div class="col">
-				<p>공통 표시 광고 가이드라인</p>
-				<p>식품 표시 광고 가이드라인</p>
-				<p>화장품 표시 광고 가이드라인</p>
-				<p>건강보조기구 표시 광고 가이드 라인</p>
-				
-				<p>//체크 동의 완료시</p>
-				<p>[동의 완료] [동의 날짜 시간 ]</p>
-				<p>[동의한 회원 정보]</p>
-			</div>
-			</div>
-	</div>
-</div>
 <div class="p-2 bd-highlight">
 
 	<span>프로젝트 스토리*</span>

@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.team5.funthing.user.model.vo.ProjectIntroduceImageVO;
 
-public interface InsertProjectIntroduceImageService {
+public interface DeleteProjectIntroduceImageService {
 	
-	public void insertProjectIntroduceImage(ProjectIntroduceImageVO vo, List<String> toInsertIntroduceImage);
-	
+	public void deleteProjectIntroduceImage(ProjectIntroduceImageVO vo, List<Integer> toRemoveImageNoList);
+
 }

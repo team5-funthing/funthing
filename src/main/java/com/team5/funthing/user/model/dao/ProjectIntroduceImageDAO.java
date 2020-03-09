@@ -23,4 +23,8 @@ public class ProjectIntroduceImageDAO {
 		return sqlSessionTemplate.selectList("getProjectIntroduceImageList", vo);
 	}
 	
+	public void deleteProjectIntroduceImage(ProjectIntroduceImageVO vo) {
+		sqlSessionTemplate.delete("deleteProjectIntroduceImage", vo);
+	}
+	
 }
