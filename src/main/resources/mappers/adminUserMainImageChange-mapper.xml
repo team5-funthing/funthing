@@ -10,6 +10,10 @@
 		UPDATE usermainimagechange set imagePath = #{imagePath}, imageName = #{imageName} where imageNo = #{imageNo}
 	</update>
 	
+	<select id="getUserMainImageList" resultType="adminUserMainImageChange" >
+		select * from usermainimagechange
+	</select>
+	
 	<!-- 이미지 삭제 -->
 	<update id="updateUserMainImageNull" parameterType="adminUserMainImageChange">
 		UPDATE usermainimagechange set imagePath = '', imageName = '' where imageNo = #{imageNo}
