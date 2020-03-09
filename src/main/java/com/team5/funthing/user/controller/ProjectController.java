@@ -160,16 +160,24 @@ public class ProjectController {
 		return "p-project-list";
 	}
 	
-	@RequestMapping(value="/showStartProjectPage.udo", method = RequestMethod.GET)
-	public String startProject(HttpSession session, Model model) {
+	@RequestMapping(value="showStartProjectPage.udo", method = RequestMethod.GET)
+	public String startProject( RedirectAttributes redirectAttributes,
+								HttpSession session, Model model) {
 		
 		memberVO = (MemberVO)session.getAttribute("memberSession");
+		
 		if(memberVO == null) {
-			model.addAttribute("msg", "로그인 후 이용 가능합니다.");
-			return "p-index";
+			
+			redirectAttributes.addAttribute("msg", "로그인 후 이용 가능합니다.");
+			return "redirect:index.udo";// 시작하기 페이지로 이동하자
+			
+		}else {
+			
+			model.addAttribute("loginEmail", memberVO.getEmail()); 
+			return "p-start-project"; 
+			
 		}
-		model.addAttribute("loginEmail", memberVO.getEmail()); 
-		return "p-start-project"; // 시작하기 페이지로 이동하자
+		
 	} // 로그인 시에만 프로젝트 만들기 접근 가능하도록 하기위해 세션에 저장된 값 확인 후 페이지 이동.
 	
 	@RequestMapping(value="/getWritingProject.udo", method = RequestMethod.GET)

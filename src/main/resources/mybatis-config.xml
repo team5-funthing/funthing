@@ -88,6 +88,8 @@
 		<mapper resource="mappers/userMainImageChange-mapper.xml"/>
  		<mapper resource="mappers/tos-mapper.xml"/>
  		<mapper resource="mappers/alarm-mapper.xml"/>
+ 		<mapper resource="mappers/creatorStatistics-mapper.xml"/>
+ 		
 
 
 		<!-- user : admin -->

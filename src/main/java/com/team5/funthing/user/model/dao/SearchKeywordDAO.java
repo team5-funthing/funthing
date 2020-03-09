@@ -16,7 +16,7 @@ public class SearchKeywordDAO {
 	   private SqlSessionTemplate sqlSessionTemplate;
 
 	public List<ProjectVO> getSearchKeyword(String searchKeyword) {
-		return sqlSessionTemplate.selectList("SearchKeywordDAO.getSearchKeyword", searchKeyword);
+		return sqlSessionTemplate.selectList("SearchKeywordDAO.getSearchKeyword",searchKeyword);
 	}
 
 	public void updateKeywordCount(String searchKeyword) {
@@ -30,12 +30,21 @@ public class SearchKeywordDAO {
 	}
 
 	public List<ProjectVO> getSearchKeywordByKeyword(String searchKeyword) {
-		System.out.println("searchKeyword : " + searchKeyword);
-		return sqlSessionTemplate.selectList("getSearchKeywordByKeyword", searchKeyword);
+		System.out.println("searchKeyword:"+searchKeyword);
+		return sqlSessionTemplate.selectList("getSearchKeywordByKeyword",searchKeyword);
 	}
 
 	public List<ProjectVO> getClickKeywordList(String keyword) {
 		return sqlSessionTemplate.selectList("getClickKeywordList",keyword);
+	}
+
+	public List<ProjectVO> getSearchKeywordByKeywordShap(String searchKeyword) {
+		return sqlSessionTemplate.selectList("getSearchKeywordByKeywordShap",searchKeyword);
+	}
+
+	public void updateKeywordCountShap(String searchKeyword) {
+		sqlSessionTemplate.update("SearchKeywordDAO.updateKeywordCountShap",searchKeyword);
+		
 	}
 
 

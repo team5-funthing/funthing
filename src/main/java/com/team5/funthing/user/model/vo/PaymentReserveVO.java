@@ -20,9 +20,28 @@ public class PaymentReserveVO {
 	private String privateName = "off";
 	private String privateFundingMoney = "off";
 	
+	//조인할때 필요한 VO
+	private RewardVO reward;
+	private RewardSelectionVO rewardSelection;
+	
+	
 	private List<RewardSelectionVO> rewardSelectionList;
 	
 	
+	
+	
+	public RewardVO getReward() {
+		return reward;
+	}
+	public void setReward(RewardVO reward) {
+		this.reward = reward;
+	}
+	public RewardSelectionVO getRewardSelection() {
+		return rewardSelection;
+	}
+	public void setRewardSelection(RewardSelectionVO rewardSelection) {
+		this.rewardSelection = rewardSelection;
+	}
 	public int getOrderNo() {
 		return orderNo;
 	}
