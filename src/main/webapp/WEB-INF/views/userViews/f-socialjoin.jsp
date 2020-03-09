@@ -58,6 +58,10 @@ $(document).ready(function(){
 	$("#registerButton").attr("disabled",true);
 	$("#loginButton").attr("disabled",true);
 	
+	$("#registerTos1").hide();
+	$("#inputRegisterTos").hide();
+	$("#inputPersonalInfo").hide();
+	
 	$('.tosAgree').magnificPopup({
 		type:'inline',
 		midClick:true
@@ -109,8 +113,7 @@ $(document).ready(function(){
 	<script type="text/javascript"
 		src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
 		charset="utf-8"></script>
-	<script type="text/javascript"
-		src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 	<jsp:include page="./include/i-popupover-mypage.jsp" />
 	<jsp:include page="./include/i-header.jsp" />
@@ -168,8 +171,9 @@ $(document).ready(function(){
 									value="" onfocus="this.placeholder = ''"
 									onblur="this.placeholder = '이메일 입력'" required
 									class="single-input"> 
-									<input type="hidden" name="email2" id="email2">
+									<!-- <input type="hidden" name="email2" id="email2"> -->
 							</div>
+							<div id="duplicateResult"></div>
 							<div class="col-xl-12 mt-10">
 								<button id="duplButton" type="button" onclick="duplicateCheck()"
 									class="boxed-btn3">이메일 중복확인</button>
@@ -178,20 +182,28 @@ $(document).ready(function(){
                                 var joinform = document.joinform;
                              
 								function duplicateCheck(){
-     								  alert("중복확인 실행");
                                        var typedEmail = {"typedEmail":document.getElementById("email").value};  
-                               
-                                         $.ajax({ type:"GET",
+                                       //이메일 형식이 맞는지 확인하기 위한 정규 표현식
+                                       var emailExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+                                       if(!emailExp.test($("input[id='email']").val())){
+                                    	   $("#duplicateResult").append("맞지 않는 이메일 표현식 입니다.").css('color','MediumSeaGreen').css('font-size','75%');
+                                    	   $("input[id='email']").val();
+                                    	   return;
+                                       } 
+                                       
+                                       	$.ajax({ type:"GET",
                                           url:"emailCheck.udo",
                                           data:typedEmail,
                                           success:function(data){   
                                              if(data=='1'){
-                                               alert("사용 가능한 이메일 입니다.");
-                                               document.getElementById('email').disabled=true;
+                                            	$("#duplicateResult").empty();
+                                               	$("#duplicateResult").append("사용 가능한 이메일입니다.").css('color','MediumSeaGreen').css('font-size','75%');
+                                               	document.getElementById('email').disabled=true;
                                                   checking=true;
                                              }else{
+                                            	$("#duplicateResult").empty();
+                                                $("#duplicateResult").append("이미 가입된 메일입니다.").css('color','Tomato').css('font-size','75%');
                                                 document.getElementById('email').value="";
-                                                alert("이미 가입된 메일 입니다.");
                                              }
                                           },error:function(){
                                              alert("연결에 문제가 있습니다. 인터넷 환경을 확인 후 다시 시도해 주세요.");
@@ -200,8 +212,29 @@ $(document).ready(function(){
                                     }
 
                                 	function join(){
+                                		
                                 		var loginData  ={"email":document.getElementById("email").value,"password":document.getElementById("password").value,"name":document.getElementById("name").value}; 
                                         
+                                		console.log(loginData.email);
+                                		
+                                		if(loginData.email==""){
+                                			$("#checkRegisterException").empty();
+                                			$("#checkRegisterException").append("이메일을 입력해주세요").css('color','Tomato').css('font-size','75%');
+                                			return;
+                                		}else if(checking==false){
+                                			$("#checkRegisterException").empty();
+                                			$("#checkRegisterException").append("이메일 중복확인을 해주세요").css('color','Tomato').css('font-size','75%');
+                                			return;
+                                		}else if(loginData.name ==""){
+                                			$("#checkRegisterException").empty();
+                                			$("#checkRegisterException").append("이름을 입력 해주세요").css('color','Tomato').css('font-size','75%');
+                                			return;
+                                		}else if(loginData.password ==""){
+                                			$("#checkRegisterException").empty();
+                                			$("#checkRegisterException").append("비밀번호를 입력 해주세요").css('color','Tomato').css('font-size','75%');
+                                			return;
+                                		}
+                                		
                                 		if(checking){
                                 		 $.ajax({ type:"POST",
                                              url:"successjoin.udo",
@@ -209,7 +242,7 @@ $(document).ready(function(){
                                              success:function(data){   
                                                 if(data=='1'){
                                             		alert("회원가입에 성공했습니다");
-                                               		location.href="member.udo";	
+                                               		location.href="member.udo";
                                                 }else{
                                                    alert("가입되지 않은 이메일 입니다. 회원가입을 먼저 해 주세요.");
                                                 }
@@ -253,16 +286,16 @@ $(document).ready(function(){
 									value="" onfocus="this.placeholder = ''"
 									onblur="this.placeholder = '비밀번호'" required class="single-input">
 
-
+							<div id="checkRegisterException"></div>
 							<div class="col-xl-12 mt-10">
 								<button id="registerButton" type="button" onclick="join()" class="boxed-btn3">
 									회원가입</button>
 
 							</div>
-							<div class="col-xl-12 mt-10">
+							<!-- <div class="col-xl-12 mt-10">
 								<button id="loginButton" type="button" onclick="login()" class="boxed-btn3">
 									회원 로그인</button>
-							</div>
+							</div> -->
 							<div class="mt-10">
 								<a
 									class="btn btn-registry-way d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"

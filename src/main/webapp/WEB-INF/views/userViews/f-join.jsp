@@ -179,10 +179,10 @@ $(document).ready(function(){
 								<input type="email" id="email" name="email" placeholder="이메일 입력"
 									onfocus="this.placeholder = ''"
 									onblur="this.placeholder = '이메일 입력'" required
-									class="single-input"> <a
-									class="btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
-									href="javascript:duplicateCheck()">이메일 중복확인</a> <input
-									type="hidden" name="email2" id="email2">
+									class="single-input"> 
+								<a class="btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
+									href="javascript:duplicateCheck()">이메일 중복확인</a> 
+								<input type="hidden" name="email2" id="email2">
 							</div>
 							<div class="mt-10">
 								<a
