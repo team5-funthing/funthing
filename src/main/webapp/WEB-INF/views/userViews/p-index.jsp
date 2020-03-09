@@ -30,13 +30,12 @@
 
   
   <c:forEach var="mainImageList" items="${getUserMainImageChangeList}">
-  
-   <c:if test="${null ne mainImageList.imageName }">
+
+				<c:if test="${null ne mainImageList.imageName }">
    <c:if test="${mainImageList.imageNo eq 1 }">
-    <input type="button" value="${mainImageList.imageNo}">
-    
+      
    <div class="carousel-item active" data-interval="500">
-      <img src="${pageContext.request.contextPath}/resources/user/img/main/${mainImageList.imageName}" class="d-block w-100" alt="...">
+      <img src="${mainImageList.imagePath}" class="d-block w-100" alt="...">
    </div>
    
     </c:if>

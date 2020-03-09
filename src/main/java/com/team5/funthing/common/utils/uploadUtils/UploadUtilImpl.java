@@ -129,7 +129,6 @@ public class UploadUtilImpl implements UploadUtil {
 	//폴더 생성 해주는 메서드
 	@Override
 	public void makeDir(String realPath, String... paths) {
-
 		if(new File(paths[paths.length - 1]).exists()) {
 			return; 
 		}
