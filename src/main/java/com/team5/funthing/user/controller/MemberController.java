@@ -80,9 +80,23 @@ public class MemberController {
 	@RequestMapping(value="getMember.udo", method=RequestMethod.POST) 
 	public String getMember(MemberVO vo, AlarmVO avo, Model model, HttpServletRequest request,HttpSession session,HttpServletResponse response) throws IOException {
 
-		if(getMemberService.getMember(vo) != null) { 
-			if(getMemberService.getMember(vo).getPassword().equals(request.getParameter("password"))) { 
+		MemberVO loginMember = getMemberService.getMember(vo);
+		if(loginMember == null) {
+			model.addAttribute("loginFail", "등록된 회원이 아닙니다.");
+			return "forward:member.udo";
+		}
+		System.out.println(loginMember.toString());
+		
+		//이메일로 값을 받아온다. 
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			
+		System.out.println(encoder.encode(vo.getPassword()));
+		System.out.println(encoder.matches(vo.getPassword(), loginMember.getPassword()));
+			//비밀번호가 같으면 처리할것
+			if(encoder.matches(vo.getPassword(), loginMember.getPassword())) { 
 				System.out.println("값 :"+request.getParameter("confirm-switch"));
+				
+				//입력아이디 버튼에 상태에따라서 처리
 				if(request.getParameter("confirm-switch")==null) {
 					Cookie cookieid = new Cookie("funthingCookieId",null);
 					cookieid.setMaxAge(0);  /// kill the cookie 
@@ -99,15 +113,12 @@ public class MemberController {
 					response.addCookie(cookiepw);
 				}
 				session.setAttribute("memberSession", getMemberService.getMember(vo));
+				System.out.println(session.getAttribute("memberSession"));
 				return "forward:member.udo";
-			}else {
-				//response.sendRedirect("findpw.udo");
-				model.addAttribute("memberAlarmList", "");
+			//만일 비밀번호가 일치하지 않는 경우
 			}
-			
-			model.addAttribute("memberAlarmList", "");
-		}
-		return "forward:findpw.udo";
+			model.addAttribute("loginFail", "비밀번호가 일치하지 않습니다.");
+			return "forward:member.udo";
 	}
 
 	@RequestMapping(value="joinselect.udo" ,method=RequestMethod.GET)
