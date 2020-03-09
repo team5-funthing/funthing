@@ -33,16 +33,10 @@
                         </div>
                         <div class="d-flex align-self-center mt-10 w-100">
                             <div class="d-flex align-content-center">
-                                <div class="h5">
-                                    또는
-                                </div>
                             </div>
                         </div>
                         <hr />
-                        <div class="col-xl-12 mt-10">
-                            <button type="submit" class="big-btn">네이버 아이디로 회원가입</button>
-                        </div>
- <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+ 					<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
                   <!-- 네이버아이디로로그인 버튼 노출 영역 -->
                   <div id="naver_id_login"></div>
                   <!-- //네이버아이디로로그인 버튼 노출 영역 -->
@@ -54,21 +48,14 @@
                      naver_id_login.setDomain("http://localhost:8080/");
                      naver_id_login.setState(state);
                      naver_id_login.init_naver_id_login();
-                     
-         
-                  </script>
-
-
+                   </script>
                   <div class="col-xl-12 mt-10">
-                            <button type="submit" class="big-btn">카카오 아이디로 회원가입</button>
-                        </div>
-<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-         
-                     
-                  <a id="custom-login-btn2" href="javascript:loginWithKakao()"> <img
-                     src="${pageContext.request.contextPath}/resources/user/img/apiBtn/kakaoLoginBtn/kakao69.png"
-                     width="68" />
-                  </a>
+                     	 <a id="custom-login-btn2" href="javascript:loginWithKakao()"> 
+                 		 	<img src="${pageContext.request.contextPath}/resources/user/img/apiBtn/kakaoLoginBtn/kakao69.png" width="68" />
+                 		 	카카오 아이디로 회원가입
+              		    </a>
+                  </div>
+					<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
             
                   <script type='text/javascript'>
                      

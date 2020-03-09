@@ -36,6 +36,14 @@
 
 	 select project.* from 
 	 project join projectKeyword on project.projectNo = projectKeyword.projectNo 
+	 where projectKeyword.keyword = '#'||#{searchKeyword}
+	 
+	</select>
+	
+	<select id="getSearchKeywordByKeywordShap" parameterType="string" resultType="project">
+
+	 select project.* from 
+	 project join projectKeyword on project.projectNo = projectKeyword.projectNo 
 	 where projectKeyword.keyword = #{searchKeyword}
 	 
 	</select>
@@ -59,9 +67,16 @@
 	
 	<update id="updateKeywordCount" parameterType="string">
    	UPDATE keyword
-   	SET keywordCount = +1
+   	SET keywordCount = keywordCount+1
    	where keyword like '#'||#{searchKeyword} 
    </update>
+   
+   <update id="updateKeywordCountShap" parameterType="string">
+   	UPDATE keyword
+   	SET keywordCount = keywordCount+1
+   	where keyword like #{searchKeyword} 
+   </update>
+   
    
    <select id="getKeywordFiveList" parameterType="keyword" resultType="keyword">
 	 select * from keyword order by keywordCount desc

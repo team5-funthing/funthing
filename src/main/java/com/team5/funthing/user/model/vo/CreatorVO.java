@@ -5,9 +5,9 @@ public class CreatorVO {
 	private String creator;
 	private String email;
 	private String creatorProfileImage = "";
-	private String makerPhone;
-	private String businessNumber;
-	private String businessAddress;
+	private String makerPhone = "";
+	private String businessNumber = "";
+	private String businessAddress = "";
 	private String businessFileLink = "";
 	private String lv;			
 	

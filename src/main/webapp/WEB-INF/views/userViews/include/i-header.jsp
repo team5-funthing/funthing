@@ -57,3 +57,31 @@
 	</div>
 </header>
 <!-- header-end -->
+
+
+	<script>
+		
+	
+	
+		/*
+		$('.clickKeyword').on("click", function() {
+			
+			var idx = $keyword.index(this); // <- 변경된 코드
+			alert(idx);
+			$("'#test"+ idx + "'").submit();  
+			
+			
+			  
+		});
+		*/
+		
+	</script>
+	
+	
+	
+	
+	
+	
+	
+	
+	

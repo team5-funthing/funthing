@@ -35,8 +35,11 @@ public class CreatorDAO {
 	}
 
 	public CreatorVO getCreatorEmail(CreatorVO vo) {
-
 		return sqlSessionTemplate.selectOne("CreatorDAO.getCreatorEmail",vo);
+	}
+	
+	public List<CreatorVO> getCreatorListByEmail(CreatorVO vo){
+		return sqlSessionTemplate.selectList("getCreatorListByEmail", vo);
 	}
 	
 }

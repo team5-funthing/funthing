@@ -59,6 +59,7 @@
 
  	<select id="getProject" parameterType="project"  resultMap="project">
  -->
+ 
  	<select id="getProject" parameterType="project" resultType="project">
 		<!--  select project.*, projectIntroduceImage.* from(select * from project where projectNo = #{projectNo}) project join projectIntroduceImage on projectIntroduceImage.projectNo = project.projectNo
 		-->
@@ -95,13 +96,17 @@
 	</select> -->
 	
 	<update id="updateProject" parameterType="project">
-		UPDATE project
-		<if test = " endDate != null">
-			SET creator = #{creator}, projectTitle = #{projectTitle},  goalMoney = #{goalMoney}, projectMainImage = #{projectMainImage}, category = #{category}, projectsubtitle = #{projectSubTitle}, projectsummary = #{projectSummary}, projectcaution = #{projectCaution}, projectIntroduceVideo = #{projectIntroduceVideo}, projectStory = #{projectStory}, status = #{status}, informationagree = #{informationAgree}, endDate = #{endDate}, writestatus = #{writeStatus} 																																									  
+		UPDATE project SET 
+		creator = #{creator}, projectTitle = #{projectTitle},  goalMoney = #{goalMoney}, 
+		projectMainImage = #{projectMainImage}, category = #{category}, 
+		projectsubtitle = #{projectSubTitle}, projectsummary = #{projectSummary}, 
+		projectcaution = #{projectCaution}, projectIntroduceVideo = #{projectIntroduceVideo}, 
+		projectStory = #{projectStory}, status = #{status}, informationagree = #{informationAgree}, 
+		<if test="endDate != null">
+			endDate = #{endDate},
 		</if>
-		<if test = "endDate == null">
-			SET creator = #{creator}, projectTitle = #{projectTitle},  goalMoney = #{goalMoney}, projectMainImage = #{projectMainImage}, category = #{category}, projectsubtitle = #{projectSubTitle}, projectsummary = #{projectSummary}, projectcaution = #{projectCaution}, projectIntroduceVideo = #{projectIntroduceVideo}, projectStory = #{projectStory}, status = #{status}, informationagree = #{informationAgree}, writestatus = #{writeStatus} 																																									  
-		</if>
+		writestatus = #{writeStatus}  				
+		
 		WHERE projectNo = #{projectNo}
 	</update>
 	
@@ -171,9 +176,20 @@
 		WHERE projectNo = #{projectNo }
 	
 	</update>
+		
+	<update id="updateProjectDeadline">
+		UPDATE project 
+		SET funding = 'n'
+		WHERE TO_CHAR(enddate,'YYYYMMDD') = TO_CHAR(sysdate,'YYYYMMDD') and funding = 'y'
+	</update>
 	
+	<select id="getClosedProjectNoList" resultType="int">
 	
-	
+		SELECT projectNo
+		FROM project
+		WHERE WHERE TO_CHAR(enddate,'YYYYMMDD') = TO_CHAR(sysdate,'YYYYMMDD')
+		
+	</select>
 	
 	
 	

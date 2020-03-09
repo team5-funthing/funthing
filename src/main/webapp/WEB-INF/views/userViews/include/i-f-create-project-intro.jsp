@@ -33,7 +33,6 @@
 			
 			<script>
 			
-			
 				//goalMoney
 				var replaceNotInt = /[^0-9]/gi;
 	
@@ -134,10 +133,13 @@
 				});
 			</script>
 			<select id="categorySelectBox" name="category" class="custom-select" >
-				<option value="book">도서</option>
+				<!-- <option value="book">도서</option>
 				<option value="publish">출판</option>
 				<option value="performance">공연</option>
-				<option value="art">예술</option>
+				<option value="art">예술</option> -->
+				<c:forEach var="category" items="${categoryList}">
+					<option value="${category.categoryName}">${category.categoryName}</option>
+				</c:forEach>
 			</select>
 	</div>
 	

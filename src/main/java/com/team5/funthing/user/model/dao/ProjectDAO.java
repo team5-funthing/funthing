@@ -1,5 +1,6 @@
 package com.team5.funthing.user.model.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -25,6 +26,8 @@ public class ProjectDAO {
 	}
 	
 	public void updateProject(ProjectVO vo) {
+		System.out.println("updateProject");
+		System.out.println(vo.toString());
 		sqlSessionTemplate.update("updateProject", vo);
 	}
 	
@@ -50,6 +53,16 @@ public class ProjectDAO {
 		return sqlSessionTemplate.selectList("getAllFundingProjectList");
 	}
 
+	public void updateProjectDeadline(){
+		sqlSessionTemplate.update("updateProjectDeadline");
+	}
+	
+	
+	public List<Integer> getClosedProjectNoList() {
+		return sqlSessionTemplate.selectList("getClosedProjectNoList");
+	}
+	
+	
 //===================================카테고리 검색==========================================
 
 	public List<ProjectVO> getShowCategorySubList(ProjectVO vo) {

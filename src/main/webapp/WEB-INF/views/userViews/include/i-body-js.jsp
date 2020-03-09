@@ -17,6 +17,8 @@
     <script src="${pageContext.request.contextPath}/resources/user/js/jquery.slicknav.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/user/js/jquery.magnific-popup.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/user/js/plugins.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/slick.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/user/js/slideIn.js"></script>
     
     <!--contact js -->
     <script src="${pageContext.request.contextPath}/resources/user/js/contact.js"></script>

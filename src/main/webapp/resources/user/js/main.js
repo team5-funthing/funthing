@@ -325,8 +325,6 @@ function mailChimp() {
 
 mailChimp();
 
-
-
         // Search Toggle
         $("#search_input_box").hide();
         $("#search").on("click", function () {
@@ -514,9 +512,11 @@ function findPostcode() {
 	}).open();
 }
 
+
 $(document).on("click", '#search', function(){
-
-
+	
+	
+	
 	$.ajax({
 		url : "getKeywordFiveList.udo",
 		type : "get",
@@ -524,24 +524,26 @@ $(document).on("click", '#search', function(){
 
 
 		success : function(data) {
-
+			
 			var fiveList = JSON.parse(data);
 
 			$("#keywordFiveList").empty();
 
 			for (var i = 0; i <5; i++) {
+				
 				var elId = "test" + i;
-				var aId = "a" + i;
-				console.log(elId)
-				$("#keywordFiveList").append("<li><a onclick='' id='#"+aId+"' class='btn btn-outline-secondary btn-search d-none d-inline-block ml-2 mb-1 clickKeyword' href='#'>" + fiveList[i].keyword + "</a></li>");
 				
-				$("#skytest").append("<form action='getClickKeywordList.udo' method='GET' id= '"+ elId +"'>"
-									+"<input type='hidden' name='searchKeywordStr' value='" + fiveList[i].keyword + "' "
-									+"</form>");
+				$("#skytest").append("<form action='getClickKeywordList.udo' method='GET' id='"+ elId +"'>"
+						+"<input type='hidden' name='searchKeywordStr' value='" + fiveList[i].keyword + "'>"
+						+"</form>");
 				
-				$("#keywordFiveList").children("#"+aId+"").attr("onclick", "document.getElementById('"+elId+"')");
+				console.log(elId);
+				$("#keywordFiveList").append("<li><a class='btn btn-outline-secondary btn-search d-none d-inline-block ml-2 mb-1 clickKeyword' href='#'>" + fiveList[i].keyword + "</a></li>");
+				
+				
+				
 			}
-			
+
 		},
 
 
@@ -549,8 +551,22 @@ $(document).on("click", '#search', function(){
 			alert(errorThrown.statusText);
 		}
 	});
+	
+});
+
+
+$(document).on("click",".clickKeyword",function(){ 
+	
+	var idx = $(".clickKeyword").index(this);
+	
+	var keyword = "test" + idx;
+	alert(keyword);
+    $("form[id='"+keyword+"']").submit();
+    
+
 
 });
+
 
 
 

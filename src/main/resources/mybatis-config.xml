@@ -49,6 +49,8 @@
     	<typeAlias type="com.team5.funthing.admin.model.vo.AdminUserMainImageChangeVO" alias="adminUserMainImageChange"/>
     	<typeAlias type="com.team5.funthing.admin.model.vo.AdminUserMainProjectVO" alias="adminUserMainProject"/>
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminStatisticsVO" alias="adminStatistics"/>
+		<typeAlias type="com.team5.funthing.admin.model.vo.AdminCategoryVO" alias="category"/>
+		
 	</typeAliases>
   
   
@@ -88,6 +90,8 @@
 		<mapper resource="mappers/userMainImageChange-mapper.xml"/>
  		<mapper resource="mappers/tos-mapper.xml"/>
  		<mapper resource="mappers/alarm-mapper.xml"/>
+ 		<mapper resource="mappers/creatorStatistics-mapper.xml"/>
+ 		
 
 
 		<!-- user : admin -->
@@ -105,6 +109,8 @@
  		<mapper resource="mappers/personalinfoprocessing-mapper.xml"/>
  		<mapper resource="mappers/registerTos-mapper.xml"/>
  		<mapper resource="mappers/adminStatistics-mapper.xml"/>
+ 		<mapper resource="mappers/category-mapper.xml"/>
+
 
 	</mappers>
 </configuration>
