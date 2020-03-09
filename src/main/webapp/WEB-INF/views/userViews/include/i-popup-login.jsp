@@ -4,7 +4,7 @@
 	<!-- 로그인 팝업페이지-->
 
     <form id="login-popup" class="white-popup-block mfp-hide" action="getMember.udo" method="post">
-        <div class="popup_box ">
+        <div class="popup_box">
             <div class="popup_inner">
                 <h3>로그인</h3>
             		
@@ -56,11 +56,11 @@
                     </div>
 
                     <hr/>
-					<div class="col-xl-12 mt-10 naver_login_btn-wrapper">
-                    	<a href="javaScript: return(0);" class="naver_id_login" id="naver_id_login" style="width: 300px; height: 50px;"></a>
-                    </div>
                     
                  	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+				
+                    <div id="naver_id_login"></div>
+                    
 					<script type="text/javascript">
 						var naver_id_login = new naver_id_login(
 								"T6JggIUb0xG2LBu9Q7Pf", "http://localhost:8080/funthing/socialLogin.udo");

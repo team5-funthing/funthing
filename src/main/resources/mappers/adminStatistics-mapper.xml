@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminStatisticsDAO">
+
+	<select id="getProjectSuccessRatioPerMonth" parameterType="project" resultType="adminStatistics">
+		<![CDATA[
+		SELECT   count(CASE  WHEN   enddate between '#{year}/01/01' and '#{year}/02/01' and goalmoney <= fundingmoney then 1  end ) as "success1", 
+      			 count(CASE  WHEN   enddate between '#{year}/02/01' and '#{year}/03/01' and goalmoney <= fundingmoney then 1  end ) as "success2",
+       			 count(CASE  WHEN   enddate between '#{year}/03/01' and '#{year}/04/01' and goalmoney <= fundingmoney then 1  end ) as "success3",
+      			 count(CASE  WHEN   enddate between '#{year}/04/01' and '#{year}/05/01' and goalmoney <= fundingmoney then 1  end ) as "success4",
+     			 count(CASE  WHEN   enddate between '#{year}/05/01' and '#{year}/06/01' and goalmoney <= fundingmoney then 1  end ) as "success5",
+    			 count(CASE  WHEN   enddate between '#{year}/06/01' and '#{year}/07/01' and goalmoney <= fundingmoney then 1  end ) as "success6",
+     			 count(CASE  WHEN   enddate between '#{year}/07/01' and '#{year}/08/01' and goalmoney <= fundingmoney then 1  end ) as "success7",
+     			 count(CASE  WHEN   enddate between '#{year}/08/01' and '#{year}/09/01' and goalmoney <= fundingmoney then 1  end ) as "success8",
+     			 count(CASE  WHEN   enddate between '#{year}/09/01' and '#{year}/10/01' and goalmoney <= fundingmoney then 1  end ) as "success9",
+      			 count(CASE  WHEN   enddate between '#{year}/10/01' and '#{year}/11/01' and goalmoney <= fundingmoney then 1  end ) as "success10",
+      			 count(CASE  WHEN   enddate between '#{year}/11/01' and '#{year}/12/01' and goalmoney <= fundingmoney then 1  end ) as "success11",
+      			 count(CASE  WHEN   enddate between '#{year}/12/01' and to_date('#{year}/12/31 23:59:59','yy/mm/dd hh24:mi:ss') and goalmoney <= fundingmoney then 1  end ) as "success12",
+       
+       			 count(CASE  WHEN   enddate between '#{year}/01/01' and '#{year}/02/01' and goalmoney >= fundingmoney then 2  end ) as "fail1", 
+     			 count(CASE  WHEN   enddate between '#{year}/02/01' and '#{year}/03/01' and goalmoney >= fundingmoney then 2  end ) as "fail2",
+     			 count(CASE  WHEN   enddate between '#{year}/03/01' and '#{year}/04/01' and goalmoney >= fundingmoney then 2  end ) as "fail3",
+      			 count(CASE  WHEN   enddate between '#{year}/04/01' and '#{year}/05/01' and goalmoney >= fundingmoney then 2  end ) as "fail4",
+       			 count(CASE  WHEN   enddate between '#{year}/05/01' and '#{year}/06/01' and goalmoney >= fundingmoney then 2  end ) as "fail5",
+      			 count(CASE  WHEN   enddate between '#{year}/06/01' and '#{year}/07/01' and goalmoney >= fundingmoney then 2  end ) as "fail6",
+      			 count(CASE  WHEN   enddate between '#{year}/07/01' and '#{year}/08/01' and goalmoney >= fundingmoney then 2  end ) as "fail7",
+      			 count(CASE  WHEN   enddate between '#{year}/08/01' and '#{year}/09/01' and goalmoney >= fundingmoney then 2  end ) as "fail8",
+      			 count(CASE  WHEN   enddate between '#{year}/09/01' and '#{year}/10/01' and goalmoney >= fundingmoney then 2  end ) as "fail9",
+      			 count(CASE  WHEN   enddate between '#{year}/10/01' and '#{year}/11/01' and goalmoney >= fundingmoney then 2  end ) as "fail10",
+     		     count(CASE  WHEN   enddate between '#{year}/11/01' and '#{year}/12/01' and goalmoney >= fundingmoney then 2  end ) as "fail11",
+      			 count(CASE  WHEN   enddate between '#{year}/12/01' and to_date('#{year}/12/31 23:59:59','yy/mm/dd hh24:mi:ss') and goalmoney >= fundingmoney then 2  end ) as "fail12"
+FROM project; 
+		]]>
+	</select>
+
+<select id="getProjectSuccessRatioPerYear" parameterType="project" resultType="adminStatistics">
+		<![CDATA[
+		SELECT count(case when enddate like '#{year}/%' and goalmoney <= fundingmoney then 1 end) as "successYear",
+     		   count(case when enddate like '#{year}/%' and goalmoney >= fundingmoney then 2 end) as "failYear"
+		FROM project;
+		]]>
+</select>
+</mapper>

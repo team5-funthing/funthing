@@ -38,11 +38,11 @@ public class ProjectVO {
 
 
 	private char writeStatus = 'n'; 
-	private char status = 'n'; // n: 占심삼옙占시� 占쏙옙, w : wating[占심삼옙占쏙옙], p : pass[占쏙옙占�], f : fail[占쏙옙占쏙옙], m : modify[占쏙옙占쏙옙占쏙옙청]
+	private char status = 'n';
 	private String statusReplyMessage = "";
 	private char funding = 'n'; 
 
-	private int fundingMoney ; 
+	private int fundingMoney; 
 	private String supporters; 
 	private char informationAgree = 'n'; 
 
@@ -204,7 +204,7 @@ public class ProjectVO {
 	public void setPercent(int percent) {
 		this.percent = percent;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "ProjectVO [projectNo=" + projectNo + ", creator=" + creator + ", email=" + email + ", goalMoney="
@@ -215,21 +215,8 @@ public class ProjectVO {
 				+ ", writeStatus=" + writeStatus + ", status=" + status + ", statusReplyMessage=" + statusReplyMessage
 				+ ", funding=" + funding + ", fundingMoney=" + fundingMoney + ", supporters=" + supporters
 				+ ", informationAgree=" + informationAgree + ", percent=" + percent + ", memberActivity="
-
-				+ memberActivity + ", searchKeyword=" + searchKeyword + ", reward=" + reward + ", getSearchKeyword()="
-				+ getSearchKeyword() + ", getMemberActivity()=" + getMemberActivity() + ", getFunding()=" + getFunding()
-				+ ", getProjectNo()=" + getProjectNo() + ", getCreator()=" + getCreator() + ", getEmail()=" + getEmail()
-				+ ", getGoalMoney()=" + getGoalMoney() + ", getProjectMainImage()=" + getProjectMainImage()
-				+ ", getProjectTitle()=" + getProjectTitle() + ", getProjectSubTitle()=" + getProjectSubTitle()
-				+ ", getCategory()=" + getCategory() + ", getStartDate()=" + getStartDate() + ", getEndDate()="
-				+ getEndDate() + ", getProjectSummary()=" + getProjectSummary() + ", getProjectCaution()="
-				+ getProjectCaution() + ", getProjectIntroduceVideo()=" + getProjectIntroduceVideo()
-				+ ", getProjectStory()=" + getProjectStory() + ", getSupporters()=" + getSupporters()
-				+ ", getFundingMoney()=" + getFundingMoney() + ", getStatus()=" + getStatus()
-				+ ", getInformationAgree()=" + getInformationAgree() + ", getWriteStatus()=" + getWriteStatus()
-				+ ", getStatusReplyMessage()=" + getStatusReplyMessage() + ", getPercent()=" + getPercent()
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
-				+ "]";
+				+ memberActivity + ", searchKeyword=" + searchKeyword + ", reward=" + reward + "]";
 	}
+
 	
 }

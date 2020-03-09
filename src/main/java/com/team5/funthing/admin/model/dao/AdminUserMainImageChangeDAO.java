@@ -1,5 +1,7 @@
 package com.team5.funthing.admin.model.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,6 +20,11 @@ public class AdminUserMainImageChangeDAO {
 	
 	public void updateUserMainImageNull(AdminUserMainImageChangeVO vo) {
 		sqlSessionTemplate.update("UserMainImageChangeDAO.updateUserMainImageNull",vo);
+	}
+	
+	public List<AdminUserMainImageChangeVO> getUserMainImageChange(){
+		
+		return sqlSessionTemplate.selectList("UserMainImageChangeDAO.getUserMainImageChange");
 	}
 	
 }

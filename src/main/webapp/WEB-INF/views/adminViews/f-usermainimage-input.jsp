@@ -103,7 +103,70 @@
 										<div class="table-responsive">
 											
 											
-											<c:forEach var="mainImageList" items="${getUserMainImageChangeList}">
+				<form action="userMainImageChange.ado" id="userMainImageChangSetting" method="post" enctype="multipart/form-data">
+					<c:forEach var="mainImageList" items="${getUserMainImageChangeList}">
+						
+						<!-- 첫번째 시작 -->
+						<div class="mt-30">
+								<div class="input-group mt-2 mb-3">
+								    <div class="form-group">
+								   		<label for="creatorProfile">이미지를 선택해주세요.</label>
+								    	<input type="file" id="userMainImageBt1" name="userMainUploadImage" class="form-control-file">
+								    </div>
+									<div class="userMain_select_img1"><img src="" /></div>
+								</div>
+								<script>
+					            	$("#userMainImageBt1").change(function(){
+					            		if(this.files && this.files[0]){
+					            			var reader = new FileReader;
+					            			reader.onload = function(data){
+					            				$(".userMain_select_img1 img").attr("src", data.target.result).width(200);
+					            			}
+					            			reader.readAsDataURL(this.files[0]);
+					            		}
+					            	})
+								</script>
+						</div>
+						<!-- 첫번째 끝 -->
+						
+						<!-- 두번째 시작 -->
+						<div class="mt-30">
+								<div class="input-group mt-2 mb-3">
+								    <div class="form-group">
+								   		<label for="creatorProfile">이미지를 선택해주세요.</label>
+								    	<input type="file" id="userMainImageBt" name="userMainUploadImage" class="form-control-file">
+								    </div>
+									<div class="userMain_select_img"><img src="" /></div>
+								</div>
+								<script>
+					            	$("#userMainImageBt").change(function(){
+					            		if(this.files && this.files[0]){
+					            			var reader = new FileReader;
+					            			reader.onload = function(data){
+					            				$(".userMain_select_img img").attr("src", data.target.result).width(200);
+					            			}
+					            			reader.readAsDataURL(this.files[0]);
+					            		}
+					            	})
+								</script>
+						</div>
+						<!-- 두번째 끝 -->
+						
+						
+						
+						
+					</c:forEach>
+				</form>
+				
+				<a class="btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
+										href="javaScript:return(0);" onclick="document.getElementById('userMainImageChangSetting').submit();">바꾸기</a> 
+								</div>
+				<!-- 
+				<c:forEach var="mainImageList" items="${getUserMainImageChangeList}">
+				<div class="col-xl-5">
+									
+							
+											
 											
 											<c:if test="${1 eq mainImageList.imageNo }">
 											<form method="post" action="userMainImageChange.ado"
@@ -168,8 +231,8 @@
 											
 											
 											
-											</c:forEach>
-											
+								</c:forEach>
+										 -->	
 										</div>
 
 									</div>

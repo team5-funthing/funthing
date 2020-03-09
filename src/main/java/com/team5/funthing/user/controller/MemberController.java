@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -98,11 +99,6 @@ public class MemberController {
 					response.addCookie(cookiepw);
 				}
 				session.setAttribute("memberSession", getMemberService.getMember(vo));
-				avo.setReceiveId(vo.getEmail());
-				avo.setReadConfirm('n');
-				model.addAttribute("memberAlarmList", getNewestAlarmListService.getNewestAlarmList(avo));
-				System.out.println( getNewestAlarmListService.getNewestAlarmList(avo));
-				//response.sendRedirect("member.udo");
 				return "forward:member.udo";
 			}else {
 				//response.sendRedirect("findpw.udo");
@@ -136,15 +132,27 @@ public class MemberController {
 	public String successjoin(MemberVO vo,Model model,@RequestParam(name="email2",required=false)String email,HttpSession session) {
 		System.out.println("석세스조인 실행");
 		if(email!=null) {
-			vo.setEmail(email);  
+			vo.setEmail(email);
 		}
 		System.out.println(vo.toString());
 		if(vo.getEmail()!=null && vo.getName()!=null && vo.getPassword()!=null)    {
+			
+			//비밀번호 암호화를 하기 위한 BCryptPasswordEncoder 객체
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			System.out.println("암호화 전  : " + vo.getPassword());
+			
+			String encodePassword = encoder.encode(vo.getPassword());
+			
+			System.out.println("암호화 후 : " + encodePassword);
+			vo.setPassword(encodePassword);
+			
 			insertMemberService.insertMember(vo);
+			//성공,실패를 구분하는 result플래그
 			model.addAttribute("result","1");
-			session.setAttribute("memberSession",getMemberService.getMember(vo));
-			System.out.println("세션 확인!"+session.getAttribute("memberSession").toString());
+			//session.setAttribute("memberSession",getMemberService.getMember(vo));
+			//System.out.println("세션 확인!"+session.getAttribute("memberSession").toString());
 		}else {
+			//성공,실패를 구분하는 result플래그
 			model.addAttribute("result","2");
 		}
 
