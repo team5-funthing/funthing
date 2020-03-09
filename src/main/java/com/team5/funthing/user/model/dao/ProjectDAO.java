@@ -58,6 +58,11 @@ public class ProjectDAO {
 	}
 	
 	
+	public List<Integer> getClosedProjectNoList() {
+		return sqlSessionTemplate.selectList("getClosedProjectNoList");
+	}
+	
+	
 //===================================카테고리 검색==========================================
 
 	public List<ProjectVO> getShowCategorySubList(ProjectVO vo) {
