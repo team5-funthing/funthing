@@ -105,7 +105,35 @@
 	
 	</select>
 	
+	<select id="getOrderNoListByProjectNo" parameterType="int" resultType="int">
+	
+		SELECT paymentReserve.orderNo
+		FROM paymentReserve
+		INNER JOIN ((rewardselection
+        LEFT OUTER JOIN reward
+        ON rewardselection.rewardNo = reward.rewardNo)
+        LEFT OUTER JOIN RewardOptionValueList
+		ON rewardselection.selectRewardNo = RewardOptionValueList.selectRewardNo)
+		ON paymentReserve.orderNo = rewardselection.orderNo where reward.projectno = #{projectNo} and paymentstatus = '결제예약'
+		
+	</select>
+	
+	<!-- <update id="updatePaymentComplete" paramterType="java.util.List" >
+		<foreach collection="orderNoList" item="orderNo" open="INSERT ALL" close="; END;" 
+        separator=";">
+        			Update paymentReserve
+		SET paymentstatus = '결제완료'
+		WHERE orderNo = #{orderNo}
+        
+        </foreach>
+        
+		
+	</update>
 	
 	
-
+	<insert id="insCompareResult" parameterType="java.util.List" >
+    <foreach collection="list" item="item" open="INSERT ALL" close="SELECT * FROM SYS.DUAL" 
+        separator=" ">
+	-->
+	
 </mapper>

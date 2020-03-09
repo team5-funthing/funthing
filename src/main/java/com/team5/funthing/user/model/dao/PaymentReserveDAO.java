@@ -27,4 +27,8 @@ public class PaymentReserveDAO {
 		return sqlsessionTemplate.selectList("getPaymentReserveListByEmail", vo);
 	}
 	
+	public List<PaymentReserveVO> getPaymentReserveListByProjectNo(int projectNo) {
+		return sqlsessionTemplate.selectList("getPaymentReserveListByProjectNo", projectNo);
+	}
+	
 }

@@ -59,6 +59,7 @@
 
  	<select id="getProject" parameterType="project"  resultMap="project">
  -->
+ 
  	<select id="getProject" parameterType="project" resultType="project">
 		<!--  select project.*, projectIntroduceImage.* from(select * from project where projectNo = #{projectNo}) project join projectIntroduceImage on projectIntroduceImage.projectNo = project.projectNo
 		-->
@@ -182,7 +183,13 @@
 		WHERE TO_CHAR(enddate,'YYYYMMDD') = TO_CHAR(sysdate,'YYYYMMDD') and funding = 'y'
 	</update>
 	
-	<select id="selectClosedProjectList"></select>
+	<select id="getClosedProjectNoList" resultType="int">
+	
+		SELECT projectNo
+		FROM project
+		WHERE WHERE TO_CHAR(enddate,'YYYYMMDD') = TO_CHAR(sysdate,'YYYYMMDD')
+		
+	</select>
 	
 	
 	
