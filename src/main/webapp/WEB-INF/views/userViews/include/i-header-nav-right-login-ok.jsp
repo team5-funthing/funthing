@@ -11,15 +11,38 @@
 	            <a class="popup-with-form" href="#search-popup" id="search"><span
 	                    class="fa fa-search fa-2x pr-1"></span></a>
 	        </div>
-	
+			
+			<script>
+				$(document).ready(function(){
+					$("i").on('click',function(){
+						var id = $(".bbb").attr('id');
+						$.ajax({
+							type:"post",
+							url:"getUserAlarmList.udo",
+							data:{
+								status : 'n',
+								receiveId : id
+							},
+							success:function(data){
+								$("#userAlarmList").append(data);							
+							},
+							error:function(request,status,error){
+								console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+							}
+						});
+					});
+				});
+			</script>
+			
+			
 			<div class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown">
+				<a id="${sessionScope.memberSession.email}" class="dropdown-toggle bbb" data-toggle="dropdown">
 					<i class="far fa-bell fa-2x pr-1"></i>
 				</a>
-				<ul class="dropdown-menu">
-					<c:forEach var="alarmList" items="${memberAlarmList}">
-						<li>${alarmList.alarmType}</li>
-					</c:forEach>
+				<ul id="userAlarmList" class="dropdown-menu">
+					<!--<c:forEach var="alarmList" items="${sessionScope.memberAlarmList}">
+						<li><a href="alarmPaging.udo?alarmNo=${alarmList.alarmNo}&alarmType=${alarmList.alarmType}">${alarmList.alarmType}</a></li>
+					</c:forEach>-->
 				</ul>
 			</div>
 			<script>

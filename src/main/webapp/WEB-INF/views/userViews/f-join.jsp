@@ -22,7 +22,7 @@
   	background: #FFF;
   	padding: 20px;
   	width:auto;
-  	height:500px;
+  	height:auto;
   	max-width: 500px;
   	margin: 10px auto;
 }

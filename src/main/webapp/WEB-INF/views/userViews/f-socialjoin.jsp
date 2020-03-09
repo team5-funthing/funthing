@@ -6,6 +6,104 @@
 <jsp:include page="./include/i-head-setting.jsp" />
 <meta charset="UTF-8">
 <title>소셜로그인</title>
+<style>
+#tostos{
+	float:right;
+}
+.showThing{
+	margin-bottom:40px;
+}
+.agree{
+	text-align:center;
+	position: relative;
+  	background: #FFF;
+  	padding: 20px;
+  	width:auto;
+  	height:auto;
+  	max-width: 500px;
+  	margin: 10px auto;
+}
+.ItemShow{float:right;margin:5px;}
+.ItemName{float:left;margin-left:15px;}
+a{text-decoration:none;}
+</style>
+<script>
+function checkFunction(){
+	var finalAgree=document.getElementById("finalAgree");
+	var firstAgree=document.getElementById("firstAgree");
+	if(firstAgree.checked==true){
+		$("#finalAgree").attr("checked",true);
+	}
+	if(finalAgree.checked==true){
+		$("#email").removeAttr("disabled");
+		$("#duplButton").removeAttr("disabled");
+		$("#name").removeAttr("disabled");
+		$("#password").removeAttr("disabled");
+		$("#registerButton").removeAttr("disabled");
+		$("#loginButton").removeAttr("disabled");
+	}else{
+		$("#email").val("").attr("disabled",true);
+		$("#duplButton").attr("disabled",true);
+		$("#name").val("").attr("disabled",true);
+		$("#password").val("").attr("disabled",true);
+		$("#registerButton").attr("disabled",true);
+		$("#loginButton").attr("disabled",true);
+	}
+}
+$(document).ready(function(){
+	$("#email").val("").attr("disabled",true);
+	$("#duplButton").attr("disabled",true);
+	$("#name").val("").attr("disabled",true);
+	$("#password").val("").attr("disabled",true);
+	$("#registerButton").attr("disabled",true);
+	$("#loginButton").attr("disabled",true);
+	
+	$('.tosAgree').magnificPopup({
+		type:'inline',
+		midClick:true
+	});
+	$("#registerTos").click(function(){
+		$("#registerTos1").toggle("slow");
+		$.ajax({
+			type:"post",
+			url:"getRegisterTos.udo",
+			success:function(data){
+				$("#registerTos1").html(data);
+			},
+			error:function(){
+				alert('실패');
+			}
+		});
+	});
+	$("#serviceTos").click(function(){
+		$("#inputRegisterTos").toggle("slow");
+		$.ajax({
+			type:"post",
+			url:"getServiceTos.udo",
+			success:function(data){
+				$("#inputRegisterTos").html(data);
+			},
+			error:function(){
+				alert("실패");
+			}
+		});
+	});
+	$("#PersonalInfo").click(function(){
+		$("#inputPersonalInfo").toggle("slow");
+		$.ajax({
+			type:"post",
+			url:"getPersonalInfo.udo",
+			success:function(data){
+				$("#inputPersonalInfo").html(data);
+			},
+			error:function(){
+				alert("실패");
+			}
+		});
+	});
+	
+});
+</script>
 </head>
 <body>
 	<script type="text/javascript"
@@ -30,7 +128,40 @@
 							<div class="mt-10">
 								<h2>회원가입</h2>
 							</div>
-
+							<div id="loginTos">
+								<!-- href 값 : popup을 띄울 영역에 대한 값 -->
+								<!-- class 속성 : javascript의 이벤트 처리 -->
+								<input type="checkbox" id="finalAgree" onclick="checkFunction()">&nbsp;&nbsp;&nbsp;약관 동의<a href="#showTosAgree" class="tosAgree" id="tostos">>>></a>
+							</div>
+							<!-- 약관 동의 팝업 시작 -->
+							<!-- class 속성 : css처리 부분, 팝업으로 보일 부분이므로 감추어야 한다. -->
+							<div id="showTosAgree" class="agree mfp-hide">
+								<div class="showThing"><input type="checkbox" id="firstAgree" onclick="checkFunction()"> 서비스 이용약관 동의(필수)</div><br>
+								<div class="showThing">
+									<span class="ItemName">회원가입 약관</span>
+									<span class="ItemShow"><a id="registerTos">내용 보기</a></span>
+								</div>
+								<div style="overflow:auto;height:150px;" id="registerTos1">
+								</div>
+								<br>
+								<div class="showThing">
+									<span class="ItemName">리워드 서비스 이용약관</span>
+									<span class="ItemShow"><a id="serviceTos">내용 보기</a></span>
+									<div id="rewardTos"></div>
+								</div>
+								<div style="overflow:auto;height:150px;" id="inputRegisterTos">
+								</div>
+								<br>
+								<div class="showThing">
+									<span class="ItemName">리워드 서비스 개인정보취급방침</span>
+									<span class="ItemShow"><a id="PersonalInfo">내용 보기</a></span>
+									<div id="rewardPersonalInfo"></div>
+								</div>
+								<div style="overflow:auto;height:150px;" id="inputPersonalInfo">
+								</div>
+								<br>
+							</div>
+							<!-- 약관 동의 팝업 종료 -->
 							<div class="mt-10">
 								<h5>이메일</h5>
 								<input type="email" id="email" name="email" placeholder="이메일 입력"
@@ -40,7 +171,7 @@
 									<input type="hidden" name="email2" id="email2">
 							</div>
 							<div class="col-xl-12 mt-10">
-								<button type="button" onclick="duplicateCheck()"
+								<button id="duplButton" type="button" onclick="duplicateCheck()"
 									class="boxed-btn3">이메일 중복확인</button>
 								<script>
                                 var checking = false;
@@ -118,16 +249,18 @@
 									value="" onfocus="this.placeholder = ''"
 									onblur="this.placeholder = '이름'" required class="single-input">
 							</div>
-							<input type="password" id="password" name="password" value="">
+							<input type="password" id="password" name="password" placeholder="비밀번호"
+									value="" onfocus="this.placeholder = ''"
+									onblur="this.placeholder = '비밀번호'" required class="single-input">
 
 
 							<div class="col-xl-12 mt-10">
-								<button type="button" onclick="join()" class="boxed-btn3">
+								<button id="registerButton" type="button" onclick="join()" class="boxed-btn3">
 									회원가입</button>
 
 							</div>
 							<div class="col-xl-12 mt-10">
-								<button type="button" onclick="login()" class="boxed-btn3">
+								<button id="loginButton" type="button" onclick="login()" class="boxed-btn3">
 									회원 로그인</button>
 							</div>
 							<div class="mt-10">
