@@ -28,13 +28,14 @@ import com.team5.funthing.user.model.vo.ProjectIntroduceImageVO;
 import com.team5.funthing.user.model.vo.ProjectKeywordVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.model.vo.RewardVO;
-
-import com.team5.funthing.user.service.creatorService.GetCreatorListService;
+import com.team5.funthing.user.service.creatorService.GetCreatorListByEmailService;
 
 import com.team5.funthing.user.service.creatorService.InsertCreatorService;
+import com.team5.funthing.user.service.creatorService.UpdateCreatorService;
 import com.team5.funthing.user.service.keywordService.GetKeywordListService;
 import com.team5.funthing.user.service.keywordService.InsertKeywordService;
 import com.team5.funthing.user.service.projectBoardService.GetEntireProjectBoardListService;
+import com.team5.funthing.user.service.projectIntroduceImageService.DeleteProjectIntroduceImageService;
 import com.team5.funthing.user.service.projectIntroduceImageService.GetProjectIntroduceImageListService;
 import com.team5.funthing.user.service.projectIntroduceImageService.InsertProjectIntroduceImageService;
 import com.team5.funthing.user.service.projectKeywordService.DeleteProjectKeywordService;
@@ -73,7 +74,8 @@ public class ProjectController {
 	private GetProjectListByEmailService getProjectListByEmailService;
 	@Autowired
 	private GetAllFundingProjectListService getAllFundingProjectListService;
-
+	@Autowired
+	private GetCreatorListByEmailService getCreatorListByEmailService;
 
 	// Keyword Service
 	@Autowired
@@ -96,6 +98,10 @@ public class ProjectController {
 	private InsertProjectIntroduceImageService insertProjectIntroduceImageService;
 	@Autowired
 	private GetProjectIntroduceImageListService getProjectIntroduceImageListService;
+	@Autowired
+	private DeleteProjectIntroduceImageService deleteProjectIntroduceImageService;
+	
+	
 
 	// ProjectBoard Service
 	@Autowired
@@ -105,7 +111,7 @@ public class ProjectController {
 	@Autowired
 	private InsertCreatorService insertCreatorService;
 	@Autowired
-	private GetCreatorListService getCreatorListService;
+	private UpdateCreatorService updateCreatorService;
 
 	// Reward Service
 	@Autowired
@@ -215,7 +221,7 @@ public class ProjectController {
 		pvo.setEmail(memberVO.getEmail());
 		cvo.setEmail(memberVO.getEmail());
 		
-		List<CreatorVO> getCreatorList = getCreatorListService.getCreatorList(cvo);
+		List<CreatorVO> getCreatorList = getCreatorListByEmailService.getCreatorListByEmail(cvo);
 		if(!getCreatorList.isEmpty()) {
 			model.addAttribute("getCreatorList", getCreatorList);
 		}
@@ -230,14 +236,14 @@ public class ProjectController {
 	} // 프로젝트 만들기 시작 페이지에서 수행
 	
 	//리워드 등록시에 목록을 추가하는 메서드 추가해야한다()
-	@RequestMapping(value = "/insertProject.udo", method = RequestMethod.POST)
-	public String insertProject(	@RequestParam(name = "creatorUploadImage", required = false)List<MultipartFile> creatorUploadImage,
-									@RequestParam(name = "businessUploadFile", required = false)List<MultipartFile> businessUploadFile,
-									HttpSession session, 
-									ProjectVO pvo, 
-									CreatorVO cvo, 
-									Model model) throws Exception {
-
+	@RequestMapping(value = "/insertCreatorAndInsertProject.udo", method = RequestMethod.POST)
+	public String insertCreatorAndInsertProject(	@RequestParam(name = "creatorUploadImage", required = false)List<MultipartFile> creatorUploadImage,
+													@RequestParam(name = "businessUploadFile", required = false)List<MultipartFile> businessUploadFile,
+													HttpSession session, 
+													ProjectVO pvo, 
+													CreatorVO cvo, 
+													Model model) throws Exception {
+		
 		// 프로젝트 제작 첫 시작시에만 시작
 		ProjectVO checkVO = (ProjectVO)session.getAttribute("updatingProject");
 
@@ -259,6 +265,41 @@ public class ProjectController {
 		return "f-create-project";
 	} // 프로젝트 작성 시작할때 메서드 
 	
+	@RequestMapping(value = "/updateCreatorAndInsertProject.udo", method = RequestMethod.POST)
+	public String updateCreatorAndInsertProject(	@RequestParam(name = "creatorUploadImage", required = false)List<MultipartFile> creatorUploadImage,
+													@RequestParam(name = "businessUploadFile", required = false)List<MultipartFile> businessUploadFile,
+													HttpSession session, 
+													ProjectVO pvo, 
+													CreatorVO cvo, 
+													Model model) throws Exception {
+		
+		System.out.println("cvo : " + cvo == null);
+		
+		// 프로젝트 제작 첫 시작시에만 시작
+		ProjectVO checkVO = (ProjectVO)session.getAttribute("updatingProject");
+
+
+		// 새로고침을 할 경우에 반복적으로 requestMapping 작업이 수행되는 부분을 방지하기 위한 코드
+		if(checkVO == null) {
+			pvo = insertProjectService.insertProject(pvo);
+			creatorProfileImageUploader(creatorUploadImage, cvo);
+			creatorBusinessfileUploader(businessUploadFile, cvo);
+			updateCreatorService.updateCreator(cvo);
+			session.setAttribute("updatingProject", pvo);
+		}
+		else {
+			pvo = checkVO;
+		}
+		model.addAttribute("writingCreator");
+		model.addAttribute("writingProject", pvo);
+
+		return "f-create-project";
+	} // 프로젝트 작성 시작할때 메서드 
+	
+	
+	
+	
+	
 	@RequestMapping(value = "deleteProject.udo", method = RequestMethod.GET)
 	public String deleteProject(@RequestParam int currentProjectNo) {
 		
@@ -269,7 +310,8 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value = "/saveInputWritingProject.udo", method = RequestMethod.POST)
-	public String updateProject(	@RequestParam(name = "uploadImage", required = false)List<MultipartFile> projectMainImageUpload,
+	public String updateProject(	@RequestParam(name = "projectIntroduceImageNo", required = false)List<Integer> projectIntroduceImageNoList,
+									@RequestParam(name = "uploadImage", required = false)List<MultipartFile> projectMainImageUpload,
 									@RequestParam(name = "projectIntroduceImageUpload", required = false)List<MultipartFile> projectIntroduceImageUploadList,
 									@RequestParam(name = "keywords", required = false)List<String> toAddKeywords,
 //									@RequestParam(name = "creatorUploadImage", required = false)List<MultipartFile> creatorUploadImage,
@@ -279,15 +321,12 @@ public class ProjectController {
 									RedirectAttributes redirectAttributes,
 									Model model) throws Exception { // 프로젝트 임시저장 시 실행되는 메서드
 
+	
+
 		
 		int ProjectNo = pvo.getProjectNo();
 		
-		System.out.println("-------------임시저장 실행----------------");
-//		System.out.println(cvo.toString());
-		System.out.println("--------------------------------------");
-		
-		
-		projectIntroduceImageUploader(projectIntroduceImageUploadList, projectIntroduceImageVO, ProjectNo);
+		projectIntroduceImageUploader(projectIntroduceImageUploadList, projectIntroduceImageVO, ProjectNo, projectIntroduceImageNoList);
 		projectMainImageUploader(projectMainImageUpload, pvo);
 //		creatorProfileImageUploader(creatorUploadImage, cvo);
 //		creatorBusinessfileUploader(businessUploadFile, cvo);
@@ -300,7 +339,6 @@ public class ProjectController {
 			deleteProjectKeyword(pvo); // 기존 프로젝트에 있던 키워드들 삭제
 			insertProjectKeyword(toAddKeywords, pvo.getProjectNo());//DB에 프로젝트와 연결되는 키워드를 추가 하는 메서드
 		}
-		
 		
 		char checkResult = inputCompleteCheck(pvo);
 		pvo.setWriteStatus(checkResult); // 입력해야하는 작성부분 체크
@@ -367,10 +405,6 @@ public class ProjectController {
 		
 		rewardVO.setProjectNo(projectNo);
 		List<RewardVO> rewardList = getRewardListService.getRewardList(rewardVO);
-		
-		
-		
-		
 		
 		model.addAttribute("rewardList", rewardList);
 		model.addAttribute("projectIntroduceImageList", projectIntroduceImageList);
@@ -439,40 +473,47 @@ public class ProjectController {
 	
 	//=================== 업로드 메서드 =================================
 
-	public void projectIntroduceImageUploader(List<MultipartFile> toDoUploadList, ProjectIntroduceImageVO vo, int ProjectNo) throws Exception {
+	public void projectIntroduceImageUploader(List<MultipartFile> toDoUploadList, ProjectIntroduceImageVO vo, int ProjectNo, List<Integer> toRemoveImageNoList) throws Exception {
 		
-		List<String>toRemoveFilePath = new ArrayList<String>();
+		List<String> toRemoveFilePath = new ArrayList<String>();
+		vo.setProjectNo(ProjectNo);
+		String voName = vo.getClass().getSimpleName();
+		List<ProjectIntroduceImageVO> projectIntroduceImageList = getProjectIntroduceImageListService.getProjectIntroduceImageList(vo);
 		
-		if(!toDoUploadList.get(0).isEmpty()){ //프로젝트 소개 이미지 기존업로드 제거 및 새 업로드, DB 추가 작업 메서드
-			vo.setProjectNo(ProjectNo);
-			String voName = vo.getClass().getSimpleName();
-			
-			List<ProjectIntroduceImageVO> projectIntroduceImageList = getProjectIntroduceImageListService.getProjectIntroduceImageList(vo);
-			
+		if(projectIntroduceImageList != null && toRemoveImageNoList != null) {
 			for(ProjectIntroduceImageVO projectIntroduceImage : projectIntroduceImageList) {
-				toRemoveFilePath.add(projectIntroduceImage.getProjectIntroduceImage());
-			}
-			
-			List<String> tmpUploadList = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);
-			
-			
-			if(tmpUploadList != null) {
-				for(String toInsertImage : tmpUploadList) {
-					projectIntroduceImageVO.setProjectIntroduceImage(toInsertImage);
-
-					insertProjectIntroduceImageService.insertProjectIntroduceImage(projectIntroduceImageVO);
-				} // 소개 이미지 경로 DB에 추가
-			}else {
-				return;
+				for(int toRemoveImageNo : toRemoveImageNoList) {
+					if (projectIntroduceImage.getProjectIntroduceImageNo() == toRemoveImageNo) {
+						toRemoveFilePath.add(projectIntroduceImage.getProjectIntroduceImage());
+					}
+				}
 			}
 		}
 		
+		deleteProjectIntroduceImageService.deleteProjectIntroduceImage(vo, toRemoveImageNoList);
+
+		if(toRemoveFilePath.isEmpty()) {
+			toRemoveFilePath.add(0, null);
+		}
+		
+		if(!toDoUploadList.isEmpty()){ //프로젝트 소개 이미지 기존업로드 제거 및 새 업로드, DB 추가 작업 메서드
+			
+			List<String> tmpUploadList = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);
+			insertProjectIntroduceImageService.insertProjectIntroduceImage(projectIntroduceImageVO, tmpUploadList);
+			
+
+		}else {
+			uploadUtil.removeUtil(voName, toRemoveFilePath);
+		
+		}
+		
+		
+		
 	}	
+	
 	public void projectMainImageUploader(List<MultipartFile> toDoUploadList, ProjectVO vo) throws Exception {
 		
 		List<String> toRemoveFilePath = new ArrayList<String>();
-
-
 				
 		if(!toDoUploadList.get(0).isEmpty()) { // 업로드 시킨 파일이 이미 존재하는 경우 파일 선택을 다시 안한 경우에 나올 수 있는 상황 처리  
 			toRemoveFilePath.add(vo.getProjectMainImage()); //제거될 파일경로를 vo객체에서 가져오기

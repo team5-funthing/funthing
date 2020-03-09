@@ -1,5 +1,7 @@
 package com.team5.funthing.user.service.impl.projectIntroduceImageServiceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +16,16 @@ public class InsertProjectIntroduceImageServiceImpl implements InsertProjectIntr
 	private ProjectIntroduceImageDAO projectIntroduceImageDAO;
 	
 	@Override
-	public void insertProjectIntroduceImage(ProjectIntroduceImageVO vo) {
-	
-		projectIntroduceImageDAO.insertProjectIntroduceImage(vo);
+	public void insertProjectIntroduceImage(ProjectIntroduceImageVO vo, List<String> toInsertImageList) {
 		
+		if(toInsertImageList != null) {
+			
+			for(String toInsertImage : toInsertImageList) {
+				vo.setProjectIntroduceImage(toInsertImage);
+				projectIntroduceImageDAO.insertProjectIntroduceImage(vo);
+				
+			} // 소개 이미지 경로 DB에 추가
+		}
 	}
 
 }

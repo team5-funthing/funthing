@@ -67,9 +67,9 @@
 											href="#v-pills-settings" role="tab" aria-controls="v-pills-settings"
 											aria-selected="false">리워드 설계</a>
 											
-										<button type="submit" id="inputSaveBtn" class="btn btn-secondary btn-lg btn-block mt-5">저장하기</button>
-										<button type="submit" id="inputCompleteBtn" class="btn btn-secondary btn-lg btn-block" formaction="requestCheckProject.udo" >
-											
+										<button type="submit" id="inputSaveBtn" class="btn btn-outline-primary btn-lg btn-block mt-5">저장하기</button>
+										<button type="submit" id="inputCompleteBtn" class="btn btn-light btn-lg mt-2" formaction="requestCheckProject.udo" >
+
 											<c:choose>
 												<c:when test="${writingProject.status eq 'w'.charAt(0) }">
 													심사중
@@ -84,12 +84,12 @@
 													거부
 												</c:when>
 												<c:otherwise>
-													작성완료
+													제출하기
 												</c:otherwise>
 											</c:choose>	
 										
 										</button>
-										<button type="submit" class="btn btn-secondary btn-lg btn-block mt-5" formaction="showPreviewProject.udo">미리보기</button>
+										<button type="submit" class="btn btn-light btn-lg btn-block mt-5" formaction="showPreviewProject.udo">미리보기</button>
 									</div>
 								</div>
 

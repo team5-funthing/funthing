@@ -325,8 +325,6 @@ function mailChimp() {
 
 mailChimp();
 
-
-
         // Search Toggle
         $("#search_input_box").hide();
         $("#search").on("click", function () {

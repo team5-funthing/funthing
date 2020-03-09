@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!doctype html>
 <html class="no-js">
@@ -53,51 +54,97 @@
 			</div>
 
 			<article class="row d-flex justify-content-center">
-
-
 				<aside id="project-main-img" class="col-8">
 				
-					<c:if test="${previewProject ne null }">
-						${previewProject.projectIntroduceVideo }"
-					</c:if>
+					<ul class="nav mb-3" id="pills-tab" role="tablist">
+					  <li class="nav-item">
+					    <a class="nav-link active" id="pills-image-tab" data-toggle="pill" href="#pills-image" role="tab" aria-controls="pills-image" aria-selected="true">소개 이미지</a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" id="pills-video-tab" data-toggle="pill" href="#pills-video" role="tab" aria-controls="pills-video" aria-selected="false">소개 영상</a>
+					  </li>
+					</ul>
+					
+					<div class="tab-content" id="pills-tabContent">
+					
+						  <div class="tab-pane fade show active" id="pills-image" role="tabpanel" aria-labelledby="pills-image-tab">
+						  
+						  </div>
+						  <div class="tab-pane fade" id="pills-video" role="tabpanel" aria-labelledby="pills-video-tab">
+								<c:if test="${projectPreview.projectIntroduceVideo ne null }">
+									${projectPreview.projectIntroduceVideo }
+								</c:if>
+						  </div>
+					</div>
+					
+					<script>
+					
+						$(document).ready(function (){
+							var videoCheck = ${ projectPreview.projectIntroduceVideo eq null }
+							
+							if(videoCheck){
+									
+									$("#pills-video-tab").attr("class", "disabled");
+									
+							}
+						});
+					 	
+					</script>
+
 				</aside>
 				
 				<aside id="project-details-info"
 					class="col-4 align-items-start d-flex flex-column bd-highlight">
 					
+					<fmt:formatNumber type="number" var="progressPercent"
+										value="${(projectPreview.fundingMoney / projectPreview.goalMoney)*100}"
+										pattern=".00" />
+					<fmt:formatNumber type="number" var="progress"
+						maxFractionDigits="3" value="${projectPreview.fundingMoney}" />
+					
 					
 					<div class="p-2 bd-highlight">
 						<div class="h4">모인 금액</div>
 						<div class="h2" style="color: #000000">
-						
-							<c:if test="${previewProject ne null }">
-								${previewProject.fundingMoney }원
-							</c:if> 
+								${progress} 원
+							
 							<div class="h5" style="color: #000000">
-								<c:if test="${previewProject ne null }">
-									[퍼센트 수치]
-								</c:if> 
+								${progressPercent}% 달성중
 							</div>
 						</div>
 					</div>
+					<div class="progress">
+						<div class="progress-bar color-7" role="progressbar"
+							style="width: ${progressPercent}%" aria-valuenow="30"
+							aria-valuemin="0" aria-valuemax="100"></div>
+					</div>
+					
+					<jsp:useBean id="now" class="java.util.Date" />
+					<fmt:formatDate var="today" value="${now}" pattern="yyyyMMdd" />
+					<fmt:formatDate var="endDate" value="${projectPreview.endDate}" pattern="yyyyMMdd" />
+
+					
 					<div class="p-2 bd-highlight">
 						<div class="h4">남은 날짜</div>
 						<div class="h2" style="color: #000000">
-							[날짜 들어오기]
+							${endDate - today } 일
 							<div class="h5" style="color: #000000"></div>
 						</div>
 					</div>
 					<div class="p-2 bd-highlight mt-auto ml-0">
-						<a
-							class="btn btn-lg btn-spon-prj d-none d-lg-inline-block pr-5 pl-5 mb-2"
-							href="#">프로젝트 밀어주기</a>
+						<form id="supportProject" action="supportprojectPreview.udo" method="GET">
+							<input type="hidden" name="projectNo" value="${projectPreview.projectNo }">
+							<a class="btn btn-lg btn-spon-prj d-none d-lg-inline-block pr-5 pl-5 mb-2"
+								href="javaScript: return(0);" onclick="document.getElementById('supportProject').submit();">
+								프로젝트 밀어주기</a>
+						</form>
 					</div>
 					<div class="row d-flex justify-content-around m-0 ">
 						<a
 							class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2"
 							href="#">좋아요</a> <a
 							class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2"
-							href="showInsertwAskMessage.udo?projectNo=${vo.projectNo }">문의하기</a> <a
+							href="showInsertwAskMessage.udo?projectNo=${projectPreview.projectNo }">문의하기</a> <a
 							class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2"
 							href="#">공유하기</a>
 
@@ -166,123 +213,6 @@
 								</form>
 							</div>
 							<!-- projectBoard form 끝 -->
-							
-							
-							<!-- proejctBoardList 시작 -->
-							<div class="comments-area">
-								<h4>리뷰 게시판</h4>
-								
-								<!-- projectBoard 시작 -->
-								<c:forEach var="b1" items="${getProjectBoard}">
-									<c:if test="${b1.step eq 0}"> 
-										
-										<div class="comment-list">
-											<div class="single-comment justify-content-between d-flex">
-												<div class="user justify-content-between d-flex">
-													<div class="thumb">
-														<img src="${pageContext.request.contextPath}/resources/user/img/comment/comment_1.png" alt="">
-													</div>
-													<div class="desc" style="width: 600px;">
-														<p class="comment">
-															${b1.projectBoardContents}
-														</p>
-														<div class="d-flex justify-content-between">
-															<div class="d-flex align-items-center">
-																<h5>
-																	<a href="#">${b1.member.name }</a>
-																</h5>
-																<p class="date">${b1.projectBoardDate}</p>
-															</div>
-															<c:choose>
-																<c:when
-																	test="${ b1.email eq sessionScope.memberSessionEmail }">
-
-																	<div class="reply-btn">
-																		<a type="submit" href="getProjectBoard.udo?projectBoardNo=${b1.projectBoardNo }"
-																			class="button button-contactForm btn_1 boxed-btn pt-1 pl-2 pr-2 pb-0">
-																			수정 </a> 
-																		<a type="submit" href="deleteProjectBoard.udo?projectBoardNo=${b1.projectBoardNo }"
-																			class="button button-contactForm btn_1 boxed-btn pt-1 pl-2 pr-2 pb-0">
-																			삭제 </a>
-
-																	</div>
-
-																</c:when>
-
-
-																<c:when
-																	test="${sessionScope.memberSessionEmail eq 'shn807@naver.com' }">
-
-																		<div class="reply-btn">
-																			<a type="submit" href="replyBoard.udo?projectBoardNo=${b1.projectBoardNo }"
-																				class="button button-contactForm btn_1 boxed-btn pt-1 pl-3 pr-3 pb-1">
-																				Reply </a>
-																		</div>
-																	</c:when>
-															</c:choose>
-														</div>
-														
-														<!-- projectBoard Reply 시작 -->
-														<c:forEach var="b2" items="${getProjectBoard}">
-															<c:if test="${b1.ref eq b2.ref && b1.step ne b2.step}">
-																<div class="d-flex justify-content-around mt-3">
-							                                       <div class="d-flex align-items-center">
-							                                          <div class="single-comment justify-content-between d-flex">
-							                                             <div class="user justify-content-between d-flex p-3"
-							                                                style="background-color: whitesmoke;">
-							                                                <div class="thumb">
-							                                                   <img src="${pageContext.request.contextPath}/resources/user/img/comment/comment_2.png" alt="">
-							                                                </div>
-							                                                <div class="desc" style="width: 500px;">
-							                                                    <p class="comment">
-							                                                   		${b2.projectBoardContents}
-							                                                    </p>
-							                                                    <div class="d-flex justify-content-between">
-							                                                       <div class="d-flex align-items-center">
-							                                                          <h5>
-							                                                             <a href="#">${b2.member.name}</a>
-							                                                          </h5>
-							                                                          <p class="date">${b2.projectBoardDate}</p>
-							                                                       </div>
-							                                                       <c:if test="${ b2.email eq sessionScope.memberSessionEmail }">
-							                                                       	<form action="getProjectBoardReply.udo" method="post">
-																						<div class="reply-btn">
-																							<input type="submit" 
-																							class="button button-contactForm btn_1 boxed-btn pt-1 pl-2 pr-2 pb-0" value="수정">
-																								 <input type="submit" formaction="deleteProjectBoardReply.udo"
-																								class="button button-contactForm btn_1 boxed-btn pt-1 pl-2 pr-2 pb-0" value="삭제"> 
-																								<input type="hidden" name="step" id="step" value="${b2.step}"> 
-																								<input type="hidden" name="ref" id="ref" value="${b2.ref}">
-
-																								</div>
-																						</form>
-																					</c:if>
-																					</div>
-							                                                </div>
-							                                             </div>
-							                                          </div>
-							                                       </div>
-							                                       <div class="d-flex align-items-center">
-							                                       </div>
-							                                    </div>
-							                                 
-							                            	</c:if>
-					                                    </c:forEach>
-														<!-- projectBoard Reply 끝 -->
-														
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- projectBoard 끝 -->
-										
-									</c:if>
-								</c:forEach>
-							</div>
-							<!-- proejctBoardList 끝 -->
-							
-							
-							
 							
 						</div>
 						<!-- 프로젝트 디테일 페이지 스토리 및 게시글 끝 [왼쪽] -->

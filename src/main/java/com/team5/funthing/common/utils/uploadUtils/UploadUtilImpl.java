@@ -47,7 +47,7 @@ public class UploadUtilImpl implements UploadUtil {
 	
 	@Override
 	public List<String> upload(List<MultipartFile> uploadFiles, String voName, List<String> toRemoveFilePath) throws Exception {
-		
+
 		List<String> uploadCompletePaths = new ArrayList<String>();
 		
 		String realPath = initRealPathController.getRealPath(); // 업로드 파일의 실제 저장될 경로 
@@ -56,7 +56,6 @@ public class UploadUtilImpl implements UploadUtil {
 		String dirPath = calcPath(realPath, dirName);
 		String fileName = null;
 				
-				
 		//이미지 바꾸기 시에 수행 되는 메서드
 		if(toRemoveFilePath.get(0) != null) {
 			
@@ -64,15 +63,16 @@ public class UploadUtilImpl implements UploadUtil {
 				System.out.println("removePath : " + removePath);
 				remove(removePath, dirName);
 			}
-		}
-		
-		for(MultipartFile uploadFile : uploadFiles) {
 			
+		}
+
+		for(MultipartFile uploadFile : uploadFiles) {
+
 			//경로에 따른 폴더 및 파일 생성 코드
 			if(uploadFile != null) {
 				String originalFileName = uploadFile.getOriginalFilename().trim();
+
 				if( originalFileName != "") {
-					
 					fileName = fileUpload(realPath, uploadFile.getOriginalFilename(), uploadFile.getBytes(), dirPath);
 					
 				}else {
@@ -82,13 +82,11 @@ public class UploadUtilImpl implements UploadUtil {
 				System.out.println("업로드 할 파일 없이 실행 ");
 				return null;
 			}
-			
 			//DB에 저장할 경로
 			String completePath = File.separator + "funthing" + File.separator + "resources" + File.separator + "upload" + dirPath + File.separator + fileName;
 			uploadCompletePaths.add(completePath);
 
 		}
-		
 		return uploadCompletePaths;
 	}
 
@@ -138,6 +136,19 @@ public class UploadUtilImpl implements UploadUtil {
 			File dirPath = new File(realPath + path);
 			if (!dirPath.exists()) {
 				dirPath.mkdir();
+			}
+		}
+
+	}
+	
+	@Override
+	public void removeUtil(String voName, List<String> toRemoveFilePath) throws Exception {
+
+		String temp = voName.replace("VO", "");
+		String dirName = File.separator + temp.substring(0, 1).toLowerCase() + temp.substring(1); // vo 클래스 네임을 폴더 명으로 사용하기 위한 변수 ex) ProjectVO ---> project
+		if(toRemoveFilePath.get(0) != null) {
+			for(String removePath : toRemoveFilePath) {
+				remove(removePath, dirName);
 			}
 		}
 
