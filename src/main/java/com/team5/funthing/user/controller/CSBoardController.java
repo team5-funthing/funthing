@@ -27,7 +27,7 @@ public class CSBoardController {
 	@RequestMapping(value="CSWrite.udo")   
 	public String userAskGo(HttpServletRequest request,Model model,CSBoardVO vo) {
 		System.out.println(request.getParameter("csid"));
-		///  °Ô½ÃÆÇÀ» µû·Î ¸¸µéÁö ¾Ê±â·Î ÇØ¼­,  °ü¸®ÀÚ¹®ÀÇÇÏ±â´Â  ±Û¾²±â ÆäÀÌÁö¿¡   Áı¾î³ÖÀ½.
+		///  ê²Œì‹œíŒì„ ë”°ë¡œ ë§Œë“¤ì§€ ì•Šê¸°ë¡œ í•´ì„œ,  ê´€ë¦¬ìë¬¸ì˜í•˜ê¸°ëŠ”  ê¸€ì“°ê¸° í˜ì´ì§€ì—   ì§‘ì–´ë„£ìŒ.
 		if(request.getParameter("csid")==null) {
 			return "f-CSWrite";
 			
@@ -46,7 +46,7 @@ public class CSBoardController {
 		System.out.println(vo);
 	MemberVO vo2 =	(MemberVO)session.getAttribute("memberSession");
 		vo.setEmail(vo2.getEmail());
-		//Æû¿¡ ÀÔ·ÂÇÑ °ª DB¿¡ ³ÖÀº ÈÄ ´Ù½Ã ÆûÀ¸·Î ÀÌµ¿
+		//í¼ì— ì…ë ¥í•œ ê°’ DBì— ë„£ì€ í›„ ë‹¤ì‹œ í¼ìœ¼ë¡œ ì´ë™
 		insertCSBoardService.insertCSBoard(vo);
 		return "f-CSWrite";
 	}

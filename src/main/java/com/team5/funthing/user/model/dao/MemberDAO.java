@@ -19,7 +19,6 @@ public class MemberDAO {
    
    public void insertSocialMember(MemberVO vo) {
       System.out.println("insertSocialMember ½ÇÇà");
-      System.out.println(vo.toString());
       sqlSessionTemplate.insert("MemberDAO.insertSocialMember",vo);
    }
    

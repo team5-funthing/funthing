@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.team5.funthing.user.model.vo.DeliveryAddressVO;
 import com.team5.funthing.user.model.vo.MemberVO;
-import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.service.deliveryService.GetDeliveryAddressService;
 import com.team5.funthing.user.service.deliveryService.InsertDeliveryAddressService;
 import com.team5.funthing.user.service.deliveryService.UpdateDeliveryAddressService;

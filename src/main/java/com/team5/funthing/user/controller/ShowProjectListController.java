@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.service.showProjectListService.GetAllDeadLineListService;
 import com.team5.funthing.user.service.showProjectListService.GetAllLikeCountListService;
+import com.team5.funthing.user.service.showProjectListService.GetAllMoneyPercentListService;
 import com.team5.funthing.user.service.showProjectListService.GetAllNewProjectListService;
 import com.team5.funthing.user.service.showProjectListService.GetShowCategorySubListService;
 
@@ -26,6 +27,8 @@ public class ShowProjectListController {
 	private GetAllDeadLineListService getAllDeadLineListService;
 	@Autowired
 	private GetAllNewProjectListService getAllNewProjectListService;
+	@Autowired
+	private GetAllMoneyPercentListService getAllMoneyPercentListService;
 
 	
 //	=======================================카테고리 선택시 보여주는 리스트=========================================
@@ -36,9 +39,9 @@ public class ShowProjectListController {
 		System.out.println(vo.toString());
 		
 	
-			System.out.println("카테고리 기본값 아무것도 설정안했을때 보여주기 ");
-			List<ProjectVO> getAllFundingProjectList = getShowCategorySubListService.getShowCategorySubList(vo);
-			model.addAttribute("getAllFundingProjectList", getAllFundingProjectList);
+		System.out.println("카테고리 기본값 아무것도 설정안했을때 보여주기 ");
+		List<ProjectVO> getAllFundingProjectList = getShowCategorySubListService.getShowCategorySubList(vo);
+		model.addAttribute("getAllFundingProjectList", getAllFundingProjectList);
 			
 		
 		
@@ -80,6 +83,20 @@ public class ShowProjectListController {
 	public String getAllNewProjectList(ProjectVO vo, Model model) {
 		
 		List<ProjectVO> getAllFundingProjectList = getAllNewProjectListService.getAllNewProjectList(vo);
+		model.addAttribute("getAllFundingProjectList",getAllFundingProjectList);
+		
+		return "p-project-list";
+		
+		
+	}
+	
+	
+//	====================================성공임박 리스트 보여주기=================================================================
+	
+	@RequestMapping(value="getAllMoneyPercentList.udo", method = RequestMethod.GET)
+	public String getAllMoneyPercentList(ProjectVO vo, Model model) {
+		
+		List<ProjectVO> getAllFundingProjectList = getAllMoneyPercentListService.getAllMoneyPercentList(vo);
 		model.addAttribute("getAllFundingProjectList",getAllFundingProjectList);
 		
 		return "p-project-list";

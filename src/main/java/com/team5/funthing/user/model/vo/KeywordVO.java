@@ -8,11 +8,11 @@ public class KeywordVO {
 
 	private Integer keywordNo = -1; //pk
 	private String keyword;
-	
-	public int getKeywordNo() {
+	private int keywordCount;
+	public Integer getKeywordNo() {
 		return keywordNo;
 	}
-	public void setKeywordNo(int keywordNo) {
+	public void setKeywordNo(Integer keywordNo) {
 		this.keywordNo = keywordNo;
 	}
 	public String getKeyword() {
@@ -21,11 +21,17 @@ public class KeywordVO {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-	
+	public int getKeywordCount() {
+		return keywordCount;
+	}
+	public void setKeywordCount(int keywordCount) {
+		this.keywordCount = keywordCount;
+	}
 	@Override
 	public String toString() {
-		return "KeywordVO [keywordNo=" + keywordNo + ", keyword=" + keyword + "]";
+		return "KeywordVO [keywordNo=" + keywordNo + ", keyword=" + keyword + ", keywordCount=" + keywordCount + "]";
 	}
+
 	
 
 	

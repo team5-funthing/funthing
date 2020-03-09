@@ -7,10 +7,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.team5.funthing.admin.model.vo.AdminCategoryVO;
 import com.team5.funthing.admin.model.vo.AdminNoticeBoardVO;
+import com.team5.funthing.admin.model.vo.AdminPersonalInfoProcessingVO;
+import com.team5.funthing.admin.model.vo.AdminRegisterTosVO;
+import com.team5.funthing.admin.model.vo.AdminUserMainImageChangeVO;
+import com.team5.funthing.admin.service.adminCategoryService.GetCategoryListService;
 import com.team5.funthing.admin.service.adminNoticeBoardService.GetAdminNoticeBoardListService;
 import com.team5.funthing.admin.service.adminProjectCheckService.GetProjectCheckListService;
+import com.team5.funthing.admin.service.adminRegisterTosService.GetRegisterTosListService;
 import com.team5.funthing.user.model.vo.ProjectVO;
+import com.team5.funthing.user.model.vo.TosVO;
+import com.team5.funthing.user.service.TosService.GetTosListService;
+import com.team5.funthing.user.service.personalInfoProcessingService.GetPersonalInfoProcessingListService;
+import com.team5.funthing.user.service.projectService.GetAllFundingProjectListService;
+import com.team5.funthing.user.service.userMainImageChangeService.GetUserMainImageChangeListService;
+
 
 @Controller
 public class AdminHomeController {
@@ -19,15 +31,34 @@ public class AdminHomeController {
 	GetAdminNoticeBoardListService getAdminNoticeBoardListService;
 	@Autowired
 	GetProjectCheckListService getProjectCheckListService;
+  
+	@Autowired 
+	GetUserMainImageChangeListService getUserMainImageChangeListService;
+	@Autowired
+	GetAllFundingProjectListService getAllFundingProjectListService;
+  
+	@Autowired
+	GetTosListService getTosListService;
+	@Autowired
+	GetPersonalInfoProcessingListService getPersonalInfoProcessingListService;
+	@Autowired
+	GetRegisterTosListService getRegisterTosListService;
+	@Autowired
+	GetCategoryListService getCategoryListService;
+	
 	
 	@RequestMapping("adminIndex.ado")
 	public String showIndex() {
 		return "p-index";
 	}
 	
-	@RequestMapping("projectManagement.ado")
-	public String showProjectManagement() {
-		return "b-project-list";
+	@RequestMapping("projectCategoryManagement.ado")
+	public String showProjectCategoryManagement(AdminCategoryVO vo, Model model) {
+		
+		List<AdminCategoryVO> CategoryList = getCategoryListService.getCategoryList(vo);
+		model.addAttribute("CategoryList", CategoryList);
+		
+		return "f-category-management";
 	}
 	
 	@RequestMapping("memberManagement.ado")
@@ -35,10 +66,7 @@ public class AdminHomeController {
 		return "b-member-list";
 	}
 	
-	@RequestMapping("statisticsManagement.ado")
-	public String showStatisticsManagement() {
-		return "p-statistics";
-	}
+	
 	
 	@RequestMapping("customerService.ado")
 	public String showCustomerServiceBoard() {
@@ -46,8 +74,11 @@ public class AdminHomeController {
 	}
 	
 	@RequestMapping("termsOfService.ado")
-	public String showTermsOfService() {
-		return "f-clause-input";
+	public String showTermsOfService(TosVO vo, Model model) {
+		List<TosVO> getTosList = getTosListService.getTosList(vo);
+		
+		model.addAttribute("TosList", getTosList);
+		return "b-tos-list";
 	}
 	
 	@RequestMapping("adminNoticeInput.ado")
@@ -59,8 +90,19 @@ public class AdminHomeController {
 	}
 	
 	@RequestMapping("infoProcessingInput.ado")
-	public String showInputInfoProcessing() {
-		return "f-info-processing-input";
+	public String showInputInfoProcessing(AdminPersonalInfoProcessingVO vo, Model model) {
+		
+		model.addAttribute("PersonalInfoProcessing", getPersonalInfoProcessingListService.getPersonalInfoProcessingList(vo));
+		
+		return "b-personalInfoProcessing-list";
+	}
+	
+	@RequestMapping("registerTos.ado")
+	public String showRegisterTos(AdminRegisterTosVO vo, Model model) {
+		
+		model.addAttribute("RegisterTosList", getRegisterTosListService.getRegisterTosList(vo));
+		
+		return "b-regitos-list";
 	}
 
 	@RequestMapping("getProjectCheckList.ado")
@@ -73,5 +115,12 @@ public class AdminHomeController {
 		return "b-project-check-list";
 	}
 	
-	
+	@RequestMapping("userMainImageChangeForm.ado")
+	public String userMainImageForm(AdminUserMainImageChangeVO vo, Model model) {
+		List<AdminUserMainImageChangeVO> getUserMainImageChangeList =getUserMainImageChangeListService.getUserMainImageChangeList(vo);
+		
+		model.addAttribute("getUserMainImageChangeList",getUserMainImageChangeList);
+		return "f-usermainimage-input";
+	}
+		
 }

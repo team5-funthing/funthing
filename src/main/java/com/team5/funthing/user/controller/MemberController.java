@@ -8,21 +8,26 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.team5.funthing.common.utils.SendMailUtil;
 import com.team5.funthing.common.utils.uploadUtils.UploadUtil;
+import com.team5.funthing.user.model.vo.AlarmVO;
 import com.team5.funthing.user.model.vo.MemberVO;
+import com.team5.funthing.user.service.AlarmService.GetNewestAlarmListService;
 import com.team5.funthing.user.service.memberService.GetMemberService;
 import com.team5.funthing.user.service.memberService.InsertImageService;
 import com.team5.funthing.user.service.memberService.InsertMemberService;
 import com.team5.funthing.user.service.memberService.InsertSocialMemberService;
+import com.team5.funthing.user.service.memberService.UpdateMemberService;
 
 @Controller
 @SessionAttributes("member")
@@ -37,6 +42,8 @@ public class MemberController {
 	@Autowired
 	private GetMemberService getMemberService;
 
+	@Autowired
+	private GetNewestAlarmListService getNewestAlarmListService;
 
 	@Autowired
 	private InsertMemberService insertMemberService;
@@ -44,6 +51,8 @@ public class MemberController {
 	private InsertSocialMemberService insertSocialMemberService;
 	@Autowired
 	private InsertImageService insertImageService;
+	@Autowired
+	private UpdateMemberService updateMemberService;
 	@Autowired
 	private UploadUtil upload;
 
@@ -54,11 +63,11 @@ public class MemberController {
 		return "f-socialjoin";
 	}
 	@RequestMapping(value="socialLoginSuccess.udo",method=RequestMethod.POST)
-	public String socialLoginSuccess(HttpServletRequest request,HttpSession session,MemberVO vo,Model model) throws IOException {   
+	public String socialLoginSuccess(HttpServletRequest request,HttpSession session, MemberVO vo, Model model) throws IOException {   
 		System.out.println("socialLoginSuccess.udo ");
 		System.out.println(vo.toString());
 		if(getMemberService.getMember(vo) != null) { 
-
+			
 			model.addAttribute("result","1");
 			session.setAttribute("memberSession", vo);	 
 		}else {
@@ -69,32 +78,47 @@ public class MemberController {
 
 
 	@RequestMapping(value="getMember.udo", method=RequestMethod.POST) 
-	public void getMember(MemberVO vo, HttpServletRequest request,HttpSession session,HttpServletResponse response) throws IOException {
+	public String getMember(MemberVO vo, AlarmVO avo, Model model, HttpServletRequest request,HttpSession session,HttpServletResponse response) throws IOException {
 
-		if(getMemberService.getMember(vo) != null) { 
-			if(getMemberService.getMember(vo).getPassword().equals(request.getParameter("password"))) { 
-				if(request.getParameter("confirm-switch") != null) {
+		MemberVO loginMember = getMemberService.getMember(vo);
+		if(loginMember == null) {
+			model.addAttribute("loginFail", "등록된 회원이 아닙니다.");
+			return "forward:member.udo";
+		}
+		System.out.println(loginMember.toString());
+		
+		//이메일로 값을 받아온다. 
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			
+		System.out.println(encoder.encode(vo.getPassword()));
+		System.out.println(encoder.matches(vo.getPassword(), loginMember.getPassword()));
+			//비밀번호가 같으면 처리할것
+			if(encoder.matches(vo.getPassword(), loginMember.getPassword())) { 
+				System.out.println("값 :"+request.getParameter("confirm-switch"));
+				
+				//입력아이디 버튼에 상태에따라서 처리
+				if(request.getParameter("confirm-switch")==null) {
+					Cookie cookieid = new Cookie("funthingCookieId",null);
+					cookieid.setMaxAge(0);  /// kill the cookie 
+					Cookie cookiepw = new Cookie("funthingCookiePw",null);
+					cookiepw.setMaxAge(0); /// kill the cookie
+					response.addCookie(cookieid);
+					response.addCookie(cookiepw);
+				}else {
 					Cookie cookieid = new Cookie("funthingCookieId",vo.getEmail());
 					cookieid.setMaxAge(60*60*24*30);  /// cookie's life setting 30 days 
 					Cookie cookiepw = new Cookie("funthingCookiePw",vo.getPassword());
 					cookiepw.setMaxAge(60*60*24*30); /// cookie's life setting 30 days 
 					response.addCookie(cookieid);
 					response.addCookie(cookiepw);
-				}else {
-					Cookie cookieid = new Cookie("funthingCookieId",null);
-					cookieid.setMaxAge(0);  /// kill the cookie 
-					Cookie cookiepw = new Cookie("funthingCookiePw",null);
-					cookiepw.setMaxAge(0); /// kill the cookie
 				}
 				session.setAttribute("memberSession", getMemberService.getMember(vo));
-
-				response.sendRedirect("member.udo");
-
-			}else {
-				response.sendRedirect("findpw.udo");
+				System.out.println(session.getAttribute("memberSession"));
+				return "forward:member.udo";
+			//만일 비밀번호가 일치하지 않는 경우
 			}
-
-		}
+			model.addAttribute("loginFail", "비밀번호가 일치하지 않습니다.");
+			return "forward:member.udo";
 	}
 
 	@RequestMapping(value="joinselect.udo" ,method=RequestMethod.GET)
@@ -119,15 +143,27 @@ public class MemberController {
 	public String successjoin(MemberVO vo,Model model,@RequestParam(name="email2",required=false)String email,HttpSession session) {
 		System.out.println("석세스조인 실행");
 		if(email!=null) {
-			vo.setEmail(email);  
+			vo.setEmail(email);
 		}
 		System.out.println(vo.toString());
 		if(vo.getEmail()!=null && vo.getName()!=null && vo.getPassword()!=null)    {
+			
+			//비밀번호 암호화를 하기 위한 BCryptPasswordEncoder 객체
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			System.out.println("암호화 전  : " + vo.getPassword());
+			
+			String encodePassword = encoder.encode(vo.getPassword());
+			
+			System.out.println("암호화 후 : " + encodePassword);
+			vo.setPassword(encodePassword);
+			
 			insertMemberService.insertMember(vo);
+			//성공,실패를 구분하는 result플래그
 			model.addAttribute("result","1");
-			session.setAttribute("memberSession",getMemberService.getMember(vo));
-			System.out.println("세션 확인!"+session.getAttribute("memberSession").toString());
+			//session.setAttribute("memberSession",getMemberService.getMember(vo));
+			//System.out.println("세션 확인!"+session.getAttribute("memberSession").toString());
 		}else {
+			//성공,실패를 구분하는 result플래그
 			model.addAttribute("result","2");
 		}
 
@@ -144,7 +180,7 @@ public class MemberController {
 		try {
 			vo.setEmail(email);
 			String certificationCode = sendMailUtil.createCertificationCode(50);
-			sendMailUtil.sendMail("[Funthing] ", " : ["+certificationCode+"]", vo.getEmail());   
+			sendMailUtil.sendMail("[Funthing] 인증코드 입니다.", "인증코드 : ["+certificationCode+"]", vo.getEmail());   
 			model.addAttribute("certificationCode",certificationCode);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -152,8 +188,30 @@ public class MemberController {
 		return "ajax/certificationCodeCallback";
 	}
 
-	//
-
+    @RequestMapping(value="pwSuccess.udo",method=RequestMethod.POST)
+    @ResponseBody
+    public String updatePw(MemberVO vo,String email) {
+    	String result = "2";
+    	try {
+			vo.setEmail(email);
+			System.out.println(vo.toString());
+			if(getMemberService.getMember(vo)!=null) {
+				System.out.println(getMemberService.getMember(vo).toString());
+			String password = sendMailUtil.createCertificationCode(50);
+			sendMailUtil.sendMail("[Funthing] 임의로 생성된 비밀번호 입니다.", "발송된 비밀번호로 로그인을 하시고 꼭 "
+					+ "마이페이지 - 회원정보수정 에서 비밀번호를 변경하여 이용에 불편함이 없으시길 바랍니다. "
+					+ "비밀번호 : ["+password+"]", vo.getEmail());
+			MemberVO vo2 = getMemberService.getMember(vo);
+			vo2.setPassword(password);
+			System.out.println(vo2.toString());
+			updateMemberService.updateMember(vo2);
+			result="1";
+			}
+    	}catch(Exception e) {
+			e.printStackTrace();
+		}
+    	return result;
+    }
 
 	@RequestMapping(value="imageUpload.udo",method=RequestMethod.GET)
 	public String imageUpload() {
@@ -166,7 +224,7 @@ public class MemberController {
 	@RequestMapping(value="logout.udo",method=RequestMethod.GET)
 	public String logOut(HttpSession session) {
 		session.invalidate();
-		return "p-index";
+		return "redirect:index.udo";
 	}    
 
 
@@ -187,14 +245,5 @@ public class MemberController {
 	public String updateProfile() {
 		return "f-update-profile";
 	}
-
-
-
-
-
-
-
-
-
 
 }

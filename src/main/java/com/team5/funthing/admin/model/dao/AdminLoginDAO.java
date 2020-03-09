@@ -12,7 +12,7 @@ public class AdminLoginDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
-	public AdminMemberVO getAdminPassword(AdminMemberVO vo) {
+	public String getAdminPassword(AdminMemberVO vo) {
 		return sqlSessionTemplate.selectOne("AdminLoginDAO.getAdminLoginPassword", vo);
 	}
 	

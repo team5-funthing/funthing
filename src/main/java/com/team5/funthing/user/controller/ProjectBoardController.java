@@ -41,7 +41,7 @@ public class ProjectBoardController {
 	
 
 	
-	@RequestMapping(value = "insertProjectBoard.udo", method = RequestMethod.POST )
+	@RequestMapping(value = "insertProjectBoard.udo", method = RequestMethod.GET )
 	public String insertProjectBoard(	ProjectBoardVO vo,
 										RedirectAttributes redirectAttributes) { //새글등록하기
 		
@@ -77,12 +77,13 @@ public class ProjectBoardController {
 			
 	}
 	
-	@RequestMapping(value="insertReplyProjectBoard.udo", method = RequestMethod.POST)
+	@RequestMapping(value="insertReplyProjectBoard.udo", method = RequestMethod.GET)
 	public String insertReplyProjectBoard(ProjectBoardVO vo, Model model, RedirectAttributes redirectAttributes) { //답글작성하기 (Maker만 수행가능)
 		
 		System.out.println("답글작성하기");
 		insertProjectBoardReplyService.insertProjectBoardReply(vo);
 		redirectAttributes.addAttribute("currentProjectNo", vo.getProjectNo());
+		System.out.println("찍어봐"+vo.getProjectNo());
 		
 		return "redirect: projectDetailsFromProjectBoard.udo"; //전체글 보여주는 메소드로 이동 
 			
@@ -99,7 +100,7 @@ public class ProjectBoardController {
 		return "f-projectBoard-update"; //글 수정 하는 곳
 	}
 	
-	@RequestMapping(value = "updateProjectBoard.udo", method = RequestMethod.POST )
+	@RequestMapping(value = "updateProjectBoard.udo", method = RequestMethod.GET )
 	public String updateProjectBoard(ProjectBoardVO vo, Model model, HttpSession session, RedirectAttributes redirectAttributes) { //글수정하기
 		
 		System.out.println("글수정하기");
@@ -124,7 +125,7 @@ public class ProjectBoardController {
 //------------------------------------------답변쪽 기능-----------------------------------------
 	
 	//답변글수정
-	@RequestMapping(value = "getProjectBoardReply.udo", method = RequestMethod.POST)
+	@RequestMapping(value = "getProjectBoardReply.udo", method = RequestMethod.GET)
 	public String updateReplyProjectBoard(ProjectBoardVO vo, Model model) { //답변선택한 글 가져오기
 
 		System.out.println("답변 글수정할 글 넘기기");
@@ -140,7 +141,7 @@ public class ProjectBoardController {
 	}
 	
 	//답변글 수정하기
-	@RequestMapping(value = "updateProjectBoardReply.udo", method = RequestMethod.POST )
+	@RequestMapping(value = "updateProjectBoardReply.udo", method = RequestMethod.GET )
 	public String updateProjectBoardReply(ProjectBoardVO vo, Model model, HttpSession session, RedirectAttributes redirectAttributes) { //답변글수정하기
 	
 		System.out.println("답변글수정하기");
@@ -152,7 +153,7 @@ public class ProjectBoardController {
 	}
 	
 	//답변글 삭제하기 
-	@RequestMapping(value="deleteProjectBoardReply.udo" , method = RequestMethod.POST)
+	@RequestMapping(value="deleteProjectBoardReply.udo" , method = RequestMethod.GET)
 	public String deleteProjectBoardReply(ProjectBoardVO vo, Model model, RedirectAttributes redirectAttributes) { //답변글 삭제하기
 		
 		System.out.println("답변글 삭제한다");

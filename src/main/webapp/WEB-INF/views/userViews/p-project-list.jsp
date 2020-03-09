@@ -18,117 +18,107 @@
     <jsp:include page="./include/i-header.jsp"/>
 
 	<!-- ------------------ -->
-	
 
-        <div class="container ">
-            <div class="container">
-                <div class="row mx-lg-n5">
-                
-                <form id="getProgressSelectList" action="getShowCategoryList.udo" method="GET">
-                    <div class="col py-3 d-flex justify-content-start">
-                        <div class="input-group ">
-                        
-                        
-                            <div class="input-group-btn">
-                            
-                            <script>
-			               	$(document).ready(function(){    
-			                    $("#category").val().prop("selected", true);
-			                });
-	            		  </script>
 
-	            			<!-- category고르는곳 -->
-						    <select class="form-control" id="category" name="category" >
-						      <option value="no">카테고리</option>
-						      <option value="태크/가전">태크/가전</option>
-						      <option value="패션/잡화">패션/잡화</option>
-						      <option value="뷰티">뷰티</option>
-						      <option value="식품">식품</option>
-						      <option value="도서/출판">도서/출판</option>
-						      <option value="예술/공연">예술/공연</option>
-						    </select>
-				
-                            </div><!-- /btn-group -->
-                            
-                           
-                            <div class="input-group-btn">
-                            
-							<!-- funding 진행상태 고르는곳 -->
-						    <select class="form-control" id="funding" name="funding">
-						      <option value="z">진행상태</option> <!-- 기본값셋팅 -->
-						      <option value="y">진행중인 펀딩</option>
-						      <option value="n">성공한 펀딩</option>
-						      <option value="n">실패한 펀딩</option>
-						      <option value="n">진행예정인 펀딩</option>
-						    </select>
-                            </div><!-- /btn-group -->
-                           
-                            <div class="input-group-btn">
-                            
-                       		<!-- fundingMoney 모인금액 범위 고르는곳 -->
-                                 <select class="form-control" id="fundingMoney" name="fundingMoney">
-						      <option value=1>모인금액</option> <!-- 기본값셋팅 -->
-						      <option value=0>0원~500만원미만</option>
-						      <option value=5000000>500만원~1000만원미만</option>
-						      <option value=10000000>1000만원~1500만원미만</option>
-						    </select>
-                                
-                                
-                                
-                            </div><!-- /btn-group -->
-                            <!-- 달성률 fundingmoney/goalmoney *100 %율 고르는곳 -->
-                            <div class="input-group-btn ">
-                            
-                              <select class="form-control" id="percent" name="percent">
-						      <option value=1>프로젝트 달성률</option> <!-- 기본값셋팅 -->
-						      <option value="0">0~25%</option>
-						      <option value="25">26%~50%</option>
-						      <option value="50">51%~75%</option>
-						      <option value="75">76%~100%</option>
-						    </select>
-						    
-                            </div><!-- /btn-group -->
-                            
-                             <div class="col py-3">
-                        <div class="d-flex justify-content-end">
- 
-                            <button type="submit" class="btn btn-outline-secondary">검색</button>
-          
-                        </div>
-                    	</div>
-                            
-                        </div><!-- /input-group -->
-                         
-                       
-                    
-                    </div><!-- <div class="row mx-lg-n5"> -->
-                    
-                    </form>
-                </div>
-            </div>
-        </div>
-        <hr />
-		
-        <div class="container ">
-            <div class="btn-group d-flex justify-content-end">
-                <!-- <button type="button" class="btn btn-outline-secondary">인기순</button>
-                <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#"></a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Separated link</a>
-                </div>
-                 -->
-            </div>
-        </div>
-		<hr>
+	<div class="container ">
+		<div class="container">
+			<div class="row mx-lg-n5">
 
-        <div class="container">
+				<form id="getProgressSelectList" action="getShowCategoryList.udo"
+					method="GET">
+					<div class="col py-3 d-flex justify-content-start">
+						<div class="input-group ">
+
+
+							<div class="input-group-btn">
+
+								<script>
+									$(document).ready(
+											function() {
+												$("#category").val().prop(
+														"selected", true);
+											});
+								</script>
+
+								<!-- category고르는곳 -->
+								<select class="form-control" id="category" name="category">
+									<option value="no">카테고리</option>
+									<option value="태크/가전">태크/가전</option>
+									<option value="패션/잡화">패션/잡화</option>
+									<option value="뷰티">뷰티</option>
+									<option value="식품">식품</option>
+									<option value="도서/출판">도서/출판</option>
+									<option value="예술/공연">예술/공연</option>
+								</select>
+
+							</div>
+							<!-- /btn-group -->
+
+
+							<div class="input-group-btn">
+
+								<!-- funding 진행상태 고르는곳 -->
+								<select class="form-control" id="funding" name="funding">
+									<option value="z">진행상태</option>
+									<!-- 기본값셋팅 -->
+									<option value="y">진행중인 펀딩</option>
+									<option value="n">성공한 펀딩</option>
+									<option value="n">실패한 펀딩</option>
+									<option value="n">진행예정인 펀딩</option>
+								</select>
+							</div>
+							<!-- /btn-group -->
+
+							<div class="input-group-btn">
+
+								<!-- fundingMoney 모인금액 범위 고르는곳 -->
+								<select class="form-control" id="fundingMoney"
+									name="fundingMoney">
+									<option value=1>모인금액</option>
+									<!-- 기본값셋팅 -->
+									<option value=0>0원~500만원미만</option>
+									<option value=5000000>500만원~1000만원미만</option>
+									<option value=10000000>1000만원~1500만원미만</option>
+									<option value=15000000>1500만원이상</option>
+								</select>
+
+
+
+							</div>
+							<!-- /btn-group -->
+							<!-- 달성률 fundingmoney/goalmoney *100 %율 고르는곳 -->
+							<div class="input-group-btn ">
+
+								<select class="form-control" id="percent" name="percent">
+									<option value=1>프로젝트 달성률</option>
+									<!-- 기본값셋팅 -->
+									<option value="0">0~25%</option>
+									<option value="25">26%~50%</option>
+									<option value="50">51%~75%</option>
+									<option value="75">76%~100%</option>
+
+								</select>
+
+							</div>
+							<!-- /btn-group -->
+
+							<div class="input-group-btn">
+
+								<button type="submit" class="btn btn-outline-secondary">검색</button>
+
+
+							</div>
+							<!-- /btn-group -->
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<hr>
+       <div class="container">
         
         
         
@@ -141,7 +131,7 @@
 	<!-- --------------------------------------------------전체보기------------------------------------------------------------------ -->
                 <c:forEach var="fundingProject" items="${getAllFundingProjectList }" varStatus="step">
                 
-	                <article>
+	                <article class="js-slidein block">
 	                    <div class="project">
 	                        <div class="thumbnail-wrap">
 	                            <div class="thumbnail">

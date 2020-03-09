@@ -61,7 +61,20 @@
 					return;
 				}
 			});
-			$("li").click(function(){
+			
+			
+			
+			$(document).on("click", "#rewardUl li", function(){
+				
+				$("#reward-popup").attr("action", "");
+				$("#reward-popup").attr("action", "updateReward.udo");
+				
+				$("#rewardRegistryBtn").empty();
+				$("#rewardRegistryBtn").append(	"<div>"
+										+		"<a id='updateReward' class='btn btn-lg btn-report-submit d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3' href='javaScript: return(0);'>수정하기</a>"
+										+		"</div>");
+
+				
 				//해당 리워드의 편집링크 또는 칸을 누르면
 				var index = $(this).attr('id');
 				//해당 li태그의 id값(리워드 번호)을 저장한다.
@@ -135,11 +148,13 @@
 							return;
 						});
 						
-					},
-					error:function(){
-						alert('실패');
-					}
+					}/////////////
 				});
+			});
+			
+			$(document).on("click","#updateReward",function(){ 
+
+			    $("form[id='reward-popup']").submit();
 			});
 			
 			//리워딩 입력시에 배송필요 라디오버튼을 누르면 배송료 입력창을 보여준다.
@@ -156,6 +171,9 @@
 					$(".aa").hide();
 				}
 			});
+			
+			
+
 			
 		});
 		
@@ -190,7 +208,7 @@
                        <div class="col-4" style="font-weight: bold; color: darkslateblue">리워드이름</div>
                        <div class="col-7">
                            <input type="text" name="rewardName" class="form-control" id="formGroupExampleInput"
-                           placeholder="Example input placeholder">
+                           placeholder="">
                        </div>
                        <div class="col-1"></div>
                    </div>
@@ -285,14 +303,12 @@
                        </div>
                    </div>
                    <div class="row d-flex justify-content-end">
-                   	   <div>
-                           <input type="submit" formaction="updateReward.udo?projectNo=${projectNo}" value="수정">
-                       </div>
+
                        <div>
                            <a id="cancleBtn" class="btn btn-lg btn-report-cancel d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
                                href="javaScript:return(0);" >취소</a>
                        </div>
-                       <div>
+                       <div id="rewardRegistryBtn">
                            <a class="btn btn-lg btn-report-submit d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
                                href="javaScript: return(0);" onclick="document.getElementById('reward-popup').submit();">등록하기</a>
                        </div>

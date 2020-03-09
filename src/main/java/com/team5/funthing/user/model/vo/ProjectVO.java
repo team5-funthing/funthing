@@ -1,8 +1,11 @@
 package com.team5.funthing.user.model.vo;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
+
+import com.team5.funthing.admin.model.vo.AdminUserMainProjectVO;
 
 /**
  * 
@@ -35,22 +38,34 @@ public class ProjectVO {
 
 
 	private char writeStatus = 'n'; 
-	private char status = 'n'; // n: 심사요청 전, w : wating[심사중], p : pass[통과], f : fail[실패], m : modify[수정요청]
+	private char status = 'n';
 	private String statusReplyMessage = "";
 	private char funding = 'n'; 
 
-	private int fundingMoney ; 
+	private int fundingMoney; 
 	private String supporters; 
 	private char informationAgree = 'n'; 
 
 	private int percent;
 	
 	private MemberActivityVO memberActivity;
+	private SearchKeywordVO searchKeyword;
+	private List<RewardVO> reward;
 	
-	
-	
-	
-	
+
+	public List<RewardVO> getReward() {
+		return reward;
+	}
+	public void setReward(List<RewardVO> reward) {
+		this.reward = reward;
+	}
+	public SearchKeywordVO getSearchKeyword() {
+		return searchKeyword;
+	}
+	public void setSearchKeyword(SearchKeywordVO searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
+
 	public MemberActivityVO getMemberActivity() {
 		return memberActivity;
 	}
@@ -189,6 +204,7 @@ public class ProjectVO {
 	public void setPercent(int percent) {
 		this.percent = percent;
 	}
+	
 	@Override
 	public String toString() {
 		return "ProjectVO [projectNo=" + projectNo + ", creator=" + creator + ", email=" + email + ", goalMoney="
@@ -199,14 +215,8 @@ public class ProjectVO {
 				+ ", writeStatus=" + writeStatus + ", status=" + status + ", statusReplyMessage=" + statusReplyMessage
 				+ ", funding=" + funding + ", fundingMoney=" + fundingMoney + ", supporters=" + supporters
 				+ ", informationAgree=" + informationAgree + ", percent=" + percent + ", memberActivity="
-				+ memberActivity + "]";
+				+ memberActivity + ", searchKeyword=" + searchKeyword + ", reward=" + reward + "]";
 	}
-	
 
-	
-	
-	
-	
-	
 	
 }

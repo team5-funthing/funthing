@@ -11,12 +11,12 @@ public class CSBoardVO {
 	private Date csRegdate;
 	private char replyProgress;
 	
-	
 
 	public int getCsid() {
 		return csid;
 	}
 	public void setCsid(int csid) {
+
 		this.csid = csid;
 	}
 	public String getEmail() {
@@ -51,8 +51,8 @@ public class CSBoardVO {
 	}
 	@Override
 	public String toString() {
-		return "customercenterVO [CSID=" + csid + ", email=" + email + ", csTitle=" + csTitle + ", csContent="
-				+ csContent + ", csRegdate=" + csRegdate + ", replyProgress=" + replyProgress + "]";
+		return "CSBoardVO [csid=" + csid + ", email=" + email + ", csTitle=" + csTitle + ", csContent=" + csContent
+				+ ", csRegdate=" + csRegdate + ", replyProgress=" + replyProgress + "]";
 	}
 	
 	

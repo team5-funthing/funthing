@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PersonalInfoProcessingDAO">
+
+	<select id="getPersonalInfoProcessingList" resultType="personalinfo">
+		SELECT * FROM personalInfo order by infoNo asc
+	</select>
+
+	<select id="getPersonalInfoProcessing" parameterType="personalinfo" resultType="personalinfo">
+		SELECT * FROM personalInfo WHERE infoNo = #{infoNo}
+	</select>
+	
+	<insert id="insertPersonalInfoProcessing" parameterType="personalinfo">
+		INSERT INTO personalInfo(infoNo, infoTitle, infoContent)
+		VALUES(personalinfo_seq.nextval, #{infoTitle}, #{infoContent})
+	</insert>
+	
+	<update id="updatePersonalInfoProcessing" parameterType="personalinfo">
+		UPDATE personalInfo
+		SET infoTitle=#{infoTitle}, infoContent=#{infoContent}
+		WHERE infoNo=#{infoNo}
+	</update>
+	
+	<delete id="deletePersonalInfoProcessing" parameterType="personalinfo">
+		DELETE FROM personalInfo WHERE infoNo = #{infoNo}
+	</delete>
+
+</mapper>

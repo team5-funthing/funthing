@@ -3,6 +3,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
 <!doctype html>
 <html class="no-js">
 
@@ -62,25 +64,38 @@
 				<aside id="project-details-info"
 					class="col-4 align-items-start d-flex flex-column bd-highlight">
 					
+					<fmt:formatNumber type="number" var="progressPercent"
+										value="${(project.fundingMoney / project.goalMoney)*100}"
+										pattern=".00" />
+					<fmt:formatNumber type="number" var="progress"
+						maxFractionDigits="3" value="${project.fundingMoney}" />
+					
 					
 					<div class="p-2 bd-highlight">
 						<div class="h4">모인 금액</div>
 						<div class="h2" style="color: #000000">
-						
-							<c:if test="${project ne null }">
-								${project.fundingMoney }원
-							</c:if> 
+								${progress} 원
+							
 							<div class="h5" style="color: #000000">
-								<c:if test="${project ne null }">
-									[퍼센트 수치]
-								</c:if> 
+								${progressPercent}% 달성중
 							</div>
 						</div>
 					</div>
+					<div class="progress">
+						<div class="progress-bar color-7" role="progressbar"
+							style="width: ${progressPercent}%" aria-valuenow="30"
+							aria-valuemin="0" aria-valuemax="100"></div>
+					</div>
+					
+					<jsp:useBean id="now" class="java.util.Date" />
+					<fmt:formatDate var="today" value="${now}" pattern="yyyyMMdd" />
+					<fmt:formatDate var="endDate" value="${project.endDate}" pattern="yyyyMMdd" />
+
+					
 					<div class="p-2 bd-highlight">
 						<div class="h4">남은 날짜</div>
 						<div class="h2" style="color: #000000">
-							[날짜 들어오기]
+							${endDate - today } 일
 							<div class="h5" style="color: #000000"></div>
 						</div>
 					</div>
@@ -138,7 +153,7 @@
 								<h4>리뷰 게시판 글 남기기</h4>
 								
 								<form class="form-contact comment_form" action="insertProjectBoard.udo" 
-												id="commentForm" method="post">
+												id="commentForm" method="get">
 									<input type="hidden" name="projectNo" value="${project.projectNo}">
 									<div class="row">
 										<div class="col-12">
@@ -223,7 +238,7 @@
 														</div>
 														
 														<!-- projectBoard Reply 시작 -->
-														<c:forEach var="b2" items="${getProjectBoard}">
+														<c:forEach var="b2" items="${getProjectBoardList}">
 															<c:if test="${b1.ref eq b2.ref && b1.step ne b2.step}">
 																<div class="d-flex justify-content-around mt-3">
 							                                       <div class="d-flex align-items-center">
@@ -245,7 +260,7 @@
 							                                                          <p class="date">${b2.projectBoardDate}</p>
 							                                                       </div>
 							                                                       <c:if test="${ b2.email eq sessionScope.memberSession.email }">
-							                                                       	<form action="getProjectBoardReply.udo" method="post">
+							                                                       	<form action="getProjectBoardReply.udo" method="get">
 																						<div class="reply-btn">
 																							<input type="submit" 
 																							class="button button-contactForm btn_1 boxed-btn pt-1 pl-2 pr-2 pb-0" value="수정">
@@ -253,6 +268,8 @@
 																								class="button button-contactForm btn_1 boxed-btn pt-1 pl-2 pr-2 pb-0" value="삭제"> 
 																								<input type="hidden" name="step" id="step" value="${b2.step}"> 
 																								<input type="hidden" name="ref" id="ref" value="${b2.ref}">
+																								<input type="hidden" name="projectNo" id="projectNo" value="${b2.projectNo}">
+																								
 
 																								</div>
 																						</form>

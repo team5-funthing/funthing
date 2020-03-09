@@ -17,12 +17,6 @@
                         	</a>
                         </li>
                         <li class="sidebar-item"> 
-                        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="projectManagement.ado" aria-expanded="false">
-                        		<i class="mdi mdi-file-document"></i>
-                        		<span class="hide-menu">프로젝트관리</span>
-                        	</a>
-                        </li>
-                        <li class="sidebar-item"> 
                         	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="getMemberList.ado" aria-expanded="false">
                                 <i class="mdi mdi-account-multiple"></i>
                                 <span class="hide-menu">회원관리</span>
@@ -43,7 +37,7 @@
                         <li class="sidebar-item"> 
                        		<a class="sidebar-link waves-effect waves-dark sidebar-link" href="termsOfService.ado" aria-expanded="false">
                                 <i class="mdi mdi-feather"></i>
-                                    <span class="hide-menu">약관입력 </span>
+                                    <span class="hide-menu">약관관리 </span>
                             </a>
                         </li>
                         <li class="sidebar-item"> 
@@ -53,20 +47,41 @@
                             </a>
                         </li>
                         <li class="sidebar-item"> 
+                        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="projectCategoryManagement.ado" aria-expanded="false">
+                        		<i class="mdi mdi-file-document"></i>
+                        		<span class="hide-menu">카테고리관리</span>
+                        	</a>
+                        </li>
+                        <li class="sidebar-item"> 
                         	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="infoProcessingInput.ado" aria-expanded="false">
                                 <i class="mdi mdi-account-card-details"></i>
-                                <span class="hide-menu">개인정보 처리방침 </span>
+                                <span class="hide-menu">개인정보 처리방침 관리 </span>
                             </a>
-
+                        </li>
+                        <li class="sidebar-item"> 
+                        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="registerTos.ado" aria-expanded="false">
+                                <i class="mdi mdi-account-card-details"></i>
+                                <span class="hide-menu">회원가입약관 관리 </span>
+                            </a>
                         </li>
                         <li class="sidebar-item"> 
                         	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="getProjectCheckList.ado" aria-expanded="false">
                                 <i class="mdi mdi-account-card-details"></i>
                                 <span class="hide-menu">심사하기 </span>
                             </a>
-
                         </li>
-                        
+                        <li class="sidebar-item">
+                        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="userMainImageChangeForm.ado" aria-expanded="false">
+                                <i class="mdi mdi-account-card-details"></i>
+                                <span class="hide-menu">유저 메인 이미지 </span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item"> 
+                        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="getFocusProjectList.ado" aria-expanded="false">
+                                <i class="mdi mdi-account-card-details"></i>
+                                <span class="hide-menu">유저 메인 프로젝트 설정 </span>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->

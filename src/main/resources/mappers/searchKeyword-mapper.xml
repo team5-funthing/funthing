@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SearchKeywordDAO">
+
+
+	<resultMap type="projectKeyword" id="projectKeyword">
+		<result column="projectNo" property="projectNo" />
+		<result column="keyword" property="keyword" />
+	</resultMap>
+	
+	<resultMap type="project" id="project">
+		<result column="projectNo" property="projectNo" />
+		<result column="creator" property="creator"/>
+		<result column="email" property="email" />
+		<result column="goalMoney" property="goalMoney" />
+		<result column="projectMainImage" property="projectMainImage" />
+		<result column="projectTitle" property="projectTitle" />
+		<result column="projectSubTitle" property="projectSubTitle" />
+		<result column="category" property="category" />
+		<result column="startDate" property="startDate"/>
+		<result column="endDate" property="endDate" />
+		<result column="projectSummary" property="projectSummary" />
+		<result column="projectCaution" property="projectCaution" />
+		<result column="projectIntroduceVideo" property="projectIntroduceVideo" />
+		<result column="projectStory" property="projectStory" />
+		<result column="status" property="status" />
+		<result column="writeStatus" property="writeStatus" />
+		
+		<collection property="projectKeyword" resultMap="projectKeyword"></collection>
+		
+	</resultMap>
+	
+	<select id="getSearchKeywordByKeyword" parameterType="string" resultType="project">
+
+	 select project.* from 
+	 project join projectKeyword on project.projectNo = projectKeyword.projectNo 
+	 where projectKeyword.keyword = '#'||#{searchKeyword}
+	 
+	</select>
+	
+	<select id="getSearchKeywordByKeywordShap" parameterType="string" resultType="project">
+
+	 select project.* from 
+	 project join projectKeyword on project.projectNo = projectKeyword.projectNo 
+	 where projectKeyword.keyword = #{searchKeyword}
+	 
+	</select>
+	
+
+	<select id="getSearchKeyword" parameterType="string" resultType="project">
+	
+	 select * from project where projectTitle like '%'||#{searchKeyword}||'%' 
+
+	</select>
+	
+	<select id="getClickKeywordList" parameterType="string" resultType="project">
+
+	 select project.* from 
+	 project join projectKeyword on project.projectNo = projectKeyword.projectNo 
+	 where projectKeyword.keyword = #{searchKeyword}
+	 
+	</select>
+	
+	
+	
+	<update id="updateKeywordCount" parameterType="string">
+   	UPDATE keyword
+   	SET keywordCount = keywordCount+1
+   	where keyword like '#'||#{searchKeyword} 
+   </update>
+   
+   <update id="updateKeywordCountShap" parameterType="string">
+   	UPDATE keyword
+   	SET keywordCount = keywordCount+1
+   	where keyword like #{searchKeyword} 
+   </update>
+   
+   
+   <select id="getKeywordFiveList" parameterType="keyword" resultType="keyword">
+	 select * from keyword order by keywordCount desc
+	</select>
+
+<!--  
+	<resultMap type="searchKeyword" id="searchKeyword">
+		<result column="searchKeyword" property="searchKeyword" />
+		<result column="count" property="count" />
+	</resultMap>
+
+	<resultMap type="project" id="project">
+	
+		<result column="projectNo" property="projectNo" />
+		<result column="creator" property="creator"/>
+		<result column="email" property="email" />
+		<result column="goalMoney" property="goalMoney" />
+		<result column="projectMainImage" property="projectMainImage" />
+		<result column="projectTitle" property="projectTitle" />
+		<result column="projectSubTitle" property="projectSubTitle" />
+		<result column="category" property="category" />
+		<result column="startDate" property="startDate"/>
+		<result column="endDate" property="endDate" />
+		<result column="projectSummary" property="projectSummary" />
+		<result column="projectCaution" property="projectCaution" />
+		<result column="projectIntroduceVideo" property="projectIntroduceVideo" />
+		<result column="projectStory" property="projectStory" />
+		<result column="status" property="status" />
+		<result column="writeStatus" property="writeStatus" />
+	
+		<collection property="searchKeyword" resultMap="searchKeyword"></collection>
+	</resultMap>
+	
+
+	<select id="getSearchKeyword" parameterType="project" resultType="project">
+
+	 select project.* from project join searchKeyword on projectKeyword like '%'||#{searchKeyword}||'%' 
+
+	</select>
+
+	-->
+
+	
+
+</mapper>

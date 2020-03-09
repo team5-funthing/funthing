@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserMainImageChangeDAO">
+
+
+	<!-- 이미지 교체 -->
+	<update id="updateUserMainImage" parameterType="adminUserMainImageChange">
+		UPDATE usermainimagechange set imagePath = #{imagePath}, imageName = #{imageName} where imageNo = #{imageNo}
+	</update>
+	
+	<select id="getUserMainImageList" resultType="adminUserMainImageChange" >
+		select * from usermainimagechange
+	</select>
+	
+	<!-- 이미지 삭제 -->
+	<update id="updateUserMainImageNull" parameterType="adminUserMainImageChange">
+		UPDATE usermainimagechange set imagePath = '', imageName = '' where imageNo = #{imageNo}
+	</update>
+	
+	
+	
+
+</mapper>

@@ -67,7 +67,7 @@
 							<c:if test="${empty askForAdmin }">
 								<textarea class="form-control w-100" form="askForm"
 									name="csContent" id="csContent" cols="30"
-									rows="9" placeholder="Write Comment"><h5>문의사항에 대한 <b>답변</b>은  작성자의  Email로 발송해드리니, Email에서 확인 바랍니다.</h5></textarea>
+									rows="9" >문의사항에 대한 답변은  작성자의  Email로 발송해드리니, Email에서 확인 바랍니다.</textarea>
 							</c:if>
 							
 							<c:if test="${not empty askForAdmin }">

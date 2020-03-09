@@ -30,7 +30,7 @@
    
    <update id="updateMember" parameterType="member">
    	UPDATE member
-   	SET (password = #{password}, phone=#{phone}, introduce=#{introduce})
+   	SET password = #{password} , phone= #{ phone , jdbcType=VARCHAR } , introduce= #{ introduce , jdbcType=VARCHAR } 
    	WHERE email=#{email}
    
    </update>
