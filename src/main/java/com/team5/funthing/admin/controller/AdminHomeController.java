@@ -7,22 +7,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.team5.funthing.admin.model.vo.AdminCategoryVO;
 import com.team5.funthing.admin.model.vo.AdminNoticeBoardVO;
-
-import com.team5.funthing.admin.model.vo.AdminUserMainImageChangeVO;
 import com.team5.funthing.admin.model.vo.AdminPersonalInfoProcessingVO;
 import com.team5.funthing.admin.model.vo.AdminRegisterTosVO;
-
+import com.team5.funthing.admin.model.vo.AdminUserMainImageChangeVO;
+import com.team5.funthing.admin.service.adminCategoryService.GetCategoryListService;
 import com.team5.funthing.admin.service.adminNoticeBoardService.GetAdminNoticeBoardListService;
 import com.team5.funthing.admin.service.adminProjectCheckService.GetProjectCheckListService;
 import com.team5.funthing.admin.service.adminRegisterTosService.GetRegisterTosListService;
 import com.team5.funthing.user.model.vo.ProjectVO;
-
-import com.team5.funthing.user.service.projectService.GetAllFundingProjectListService;
-import com.team5.funthing.user.service.userMainImageChangeService.GetUserMainImageChangeListService;
 import com.team5.funthing.user.model.vo.TosVO;
 import com.team5.funthing.user.service.TosService.GetTosListService;
 import com.team5.funthing.user.service.personalInfoProcessingService.GetPersonalInfoProcessingListService;
+import com.team5.funthing.user.service.projectService.GetAllFundingProjectListService;
+import com.team5.funthing.user.service.userMainImageChangeService.GetUserMainImageChangeListService;
 
 
 @Controller
@@ -44,15 +43,22 @@ public class AdminHomeController {
 	GetPersonalInfoProcessingListService getPersonalInfoProcessingListService;
 	@Autowired
 	GetRegisterTosListService getRegisterTosListService;
+	@Autowired
+	GetCategoryListService getCategoryListService;
+	
 	
 	@RequestMapping("adminIndex.ado")
 	public String showIndex() {
 		return "p-index";
 	}
 	
-	@RequestMapping("projectManagement.ado")
-	public String showProjectManagement() {
-		return "b-project-list";
+	@RequestMapping("projectCategoryManagement.ado")
+	public String showProjectCategoryManagement(AdminCategoryVO vo, Model model) {
+		
+		List<AdminCategoryVO> CategoryList = getCategoryListService.getCategoryList(vo);
+		model.addAttribute("CategoryList", CategoryList);
+		
+		return "f-category-management";
 	}
 	
 	@RequestMapping("memberManagement.ado")
