@@ -37,9 +37,33 @@ FROM project
 
 <select id="getProjectSuccessRatioPerYear" parameterType="adminStatistics" resultType="adminStatistics">
 	
-		SELECT count(case when enddate like '${yearr}/%' and goalmoney <![CDATA[<=]]>  fundingmoney then 1 end) as "successyear",
-     		   count(case when enddate like '${yearr}/%' and goalmoney <![CDATA[>=]]>  fundingmoney then 2 end) as "failyear"
+		SELECT sum(case when enddate like '${yearr}/%' and goalmoney <![CDATA[<=]]>  fundingmoney then 1 end) as "successyear",
+     		   sum(case when enddate like '${yearr}/%' and goalmoney <![CDATA[>=]]>  fundingmoney then 2 end) as "failyear"
 		FROM project
 		
 </select>
+
+<select id="getFundingMoneyPerMonth" parameterType="adminStatistics" resultType="adminStatistics">
+
+SELECT  
+	nvl(sum(CASE  WHEN   enddate between '${yearr}/01/01' and '${yearr}/02/01' and goalmoney <![CDATA[<=]]> fundingmoney and sysdate <![CDATA[>=]]> enddate then fundingmoney  end ),0) as "m1",
+    nvl(sum(CASE  WHEN   enddate between '${yearr}/02/01' and '${yearr}/03/01' and goalmoney <![CDATA[<=]]> fundingmoney and sysdate <![CDATA[>=]]> enddate then fundingmoney  end ),0) as "m2",
+    nvl(sum(CASE  WHEN   enddate between '${yearr}/03/01' and '${yearr}/04/01' and goalmoney <![CDATA[<=]]> fundingmoney and sysdate <![CDATA[>=]]> enddate then fundingmoney  end ),0) as "m3",
+    nvl(sum(CASE  WHEN   enddate between '${yearr}/04/01' and '${yearr}/05/01' and goalmoney <![CDATA[<=]]> fundingmoney and sysdate <![CDATA[>=]]> enddate then fundingmoney  end ),0) as "m4",
+    nvl(sum(CASE  WHEN   enddate between '${yearr}/05/01' and '${yearr}/06/01' and goalmoney <![CDATA[<=]]> fundingmoney and sysdate <![CDATA[>=]]> enddate then fundingmoney  end ),0) as "m5",
+    nvl(sum(CASE  WHEN   enddate between '${yearr}/06/01' and '${yearr}/07/01' and goalmoney <![CDATA[<=]]> fundingmoney and sysdate <![CDATA[>=]]> enddate then fundingmoney  end ),0) as "m6",
+    nvl(sum(CASE  WHEN   enddate between '${yearr}/07/01' and '${yearr}/08/01' and goalmoney <![CDATA[<=]]> fundingmoney and sysdate <![CDATA[>=]]> enddate then fundingmoney  end ),0) as "m7",
+    nvl(sum(CASE  WHEN   enddate between '${yearr}/08/01' and '${yearr}/09/01' and goalmoney <![CDATA[<=]]> fundingmoney and sysdate <![CDATA[>=]]> enddate then fundingmoney  end ),0) as "m8",
+    nvl(sum(CASE  WHEN   enddate between '${yearr}/09/01' and '${yearr}/10/01' and goalmoney <![CDATA[<=]]> fundingmoney and sysdate <![CDATA[>=]]> enddate then fundingmoney  end ),0) as "m9",
+    nvl(sum(CASE  WHEN   enddate between '${yearr}/10/01' and '${yearr}/11/01' and goalmoney <![CDATA[<=]]> fundingmoney and sysdate <![CDATA[>=]]> enddate then fundingmoney  end ),0) as "m10",
+    nvl(sum(CASE  WHEN   enddate between '${yearr}/11/01' and '${yearr}/12/01' and goalmoney <![CDATA[<=]]> fundingmoney and sysdate <![CDATA[>=]]> enddate then fundingmoney  end ),0) as "m11",
+    nvl(sum(CASE  WHEN   enddate between '${yearr}/12/01' and to_date('${yearr}/12/31 23:59:59','yy/mm/dd hh24:mi:ss') and goalmoney <![CDATA[<=]]> fundingmoney and sysdate <![CDATA[>=]]> enddate then fundingmoney  end ),0) as "m12",
+    nvl(sum(CASE  WHEN   enddate between '${yearr}/01/01' and to_date('${yearr}/12/31 23:59:59','yy/mm/dd hh24:mi:ss') and goalmoney <![CDATA[<=]]> fundingmoney and sysdate <![CDATA[>=]]> enddate then fundingmoney  end ),0) as "sumfunding"
+
+FROM project
+
+
+</select>
+
+
 </mapper>

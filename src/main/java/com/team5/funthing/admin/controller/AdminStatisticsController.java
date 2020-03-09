@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.team5.funthing.admin.model.vo.AdminStatisticsVO;
+import com.team5.funthing.admin.service.adminStatisticsService.GetFundingMoneyPerMonthService;
 import com.team5.funthing.admin.service.adminStatisticsService.GetProjectSuccessRatioPerMonthService;
 import com.team5.funthing.admin.service.adminStatisticsService.GetProjectSuccessRatioPerYearService;
 
@@ -19,6 +20,8 @@ public class AdminStatisticsController {
 	GetProjectSuccessRatioPerMonthService perMonth;
 	@Autowired
 	GetProjectSuccessRatioPerYearService perYear;
+	@Autowired
+	GetFundingMoneyPerMonthService fmpm;
 	
 	
 	@RequestMapping(value ="statisticsManagement.ado",method=RequestMethod.GET)
@@ -27,10 +30,12 @@ public class AdminStatisticsController {
 		int year = cal.get(cal.YEAR)-2000;
 		String parse = Integer.toString(year);
 		vo.setYearr(parse);
+		model.addAttribute("fundingMoneyPerMonth",fmpm.getFundingMoneyPerMonth(vo));
+		
 		model.addAttribute("successRatio",perYear.getProjectSuccessRatioPerYear(vo));
-		System.out.println("peryear"+model.getAttribute("successRatio"));
+	
 		model.addAttribute("successRatioMonth",perMonth.getProjectSuccessRatioPerMonth(vo));
-        System.out.println("permonth"+perMonth.getProjectSuccessRatioPerMonth(vo));
+
 		return "p-statistics";
 	}
 
@@ -39,6 +44,7 @@ public class AdminStatisticsController {
 	public String showStatisticsManagement2(AdminStatisticsVO vo,Model model,String year) {
 		System.out.println(year);
 	    vo.setYearr(year);
+	    model.addAttribute("fundingMoneyPerMonth",fmpm.getFundingMoneyPerMonth(vo));
 	    model.addAttribute("successRatio",perYear.getProjectSuccessRatioPerYear(vo));
 	    model.addAttribute("successRatioMonth",perMonth.getProjectSuccessRatioPerMonth(vo));
 		return "p-statistics";

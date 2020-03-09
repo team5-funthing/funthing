@@ -103,21 +103,72 @@
 
 						<div class="tab-pane active" id="home" role="tabpanel">
 							<div class="p-20">
-								<div class="row">
+								<div class="row" style="height:700px">
 									<div class="col-12">
 										<div class="card">
 											<div class="card-body">
 												<h5 class="card-title m-b-0">펀딩 모금액 통계</h5>
 											</div>
 										</div>
-										 
-										<canvas id="myChart2" style="height:auto;width:auto;"></canvas>
+									<table border="1">
+								    <tr>
+									<td><input type="button" value="2020" name="yearbtn2"></td>
+									<td><input type="button" value="2021" name="yearbtn2"></td>
+									<td><input type="button" value="2022" name="yearbtn2"></td>
+									<td><input type="button" value="2023" name="yearbtn2"></td>
+									<td><input type="button" value="2024" name="yearbtn2"></td>
+									<td><input type="button" value="2025" name="yearbtn2"></td>
+									<td><input type="button" value="2026" name="yearbtn2"></td>
+									<td><input type="button" value="2027" name="yearbtn2"></td>
+									<td><input type="button" value="2028" name="yearbtn2"></td>
+									<td><input type="button" value="2029" name="yearbtn2"></td>
+									</tr>
+								    </table>
+								    
+										 <center><input type="text" disabled="disabled" id="chart2title"></center>
+										<canvas id="myChart2" style="height:auto;width:400px;"></canvas>
+									<table border="1">
+									<tr>
+									<td> 1월 </td>
+									<td> 2월 </td>
+									<td> 3월 </td>
+									<td> 4월 </td>
+									<td> 5월 </td>
+									<td> 6월 </td>
+									<td> 7월 </td>
+									<td> 8월 </td>
+									<td> 9월 </td>
+									<td> 10월 </td>
+									<td> 11월 </td>
+									<td> 12월 </td>
+									<td> 합계 </td>
+									</tr>
+									<tr>
+									<td> ${fundingMoneyPerMonth.m1 } </td>
+									<td> ${fundingMoneyPerMonth.m2 } </td>
+									<td> ${fundingMoneyPerMonth.m3 } </td>
+									<td> ${fundingMoneyPerMonth.m4 } </td>
+									<td> ${fundingMoneyPerMonth.m5 } </td>
+									<td> ${fundingMoneyPerMonth.m6 } </td>
+									<td> ${fundingMoneyPerMonth.m7 } </td>
+									<td> ${fundingMoneyPerMonth.m8 } </td>
+									<td> ${fundingMoneyPerMonth.m9 } </td>
+									<td> ${fundingMoneyPerMonth.m10 } </td>
+									<td> ${fundingMoneyPerMonth.m11 } </td>
+									<td> ${fundingMoneyPerMonth.m12 } </td>
+									<td> <input type="text" disabled="disabled"	id="fundingMoneySum"> </td>
+									</tr>
+									</table>
 									</div>
 								
 								</div>
 							</div>
 						</div>
+						
 <script>
+
+
+
 	var ctx2 = document.getElementById('myChart2').getContext('2d');
 	var config = {
 		    type: 'bar',
@@ -168,8 +219,46 @@
 		    }
 		};
 	
-	var myChart = new Chart(ctx2,config );    //그리기
+	var myChart2 = new Chart(ctx2,config );    //그리기
 
+	
+	$(document).ready(function(){
+		var thisyear = new Date().getFullYear();
+		var use = thisyear-2000;
+		$("#chart2title").val(thisyear+"년 펀딩모금액");
+	    $("#fundingMoneySum").val(${fundingMoneyPerMonth.sumfunding});
+		
+		
+		
+	});
+
+
+	$("input[name=yearbtn2]").click(function(){    //연도 클릭
+		
+		var thisyear = new Date().getFullYear();
+		if(thisyear < $(this).val()){
+			alert("아직 해당 연도가 시작되지 않았습니다!");	
+		}else{
+			var using = thisyear-2000;
+			var data ={"year":using};
+			$.ajax({
+				type : "post",
+				url : "statisticsManagement.ado",
+				data : data,
+				success : function(data) {
+					document.getElementById("chart2title").value="20"+using+"년 펀딩모금액";
+					
+					config.data.datasets[0].data[0]=document.getElementById("inputSuccess").value;
+					config.data.datasets[0].data[1]=document.getElementById("inputFail").value;
+					myChart2.update();
+				},
+				error : function() {
+					
+				}
+			});
+		}
+		
+	});
 
 </script>
 
@@ -205,16 +294,16 @@
 								
 								    <table border="1">
 								    <tr>
-									<td><input type="button" value="2020" name="yearbtn"></td>
-									<td><input type="button" value="2021" name="yearbtn"></td>
-									<td><input type="button" value="2022" name="yearbtn"></td>
-									<td><input type="button" value="2023" name="yearbtn"></td>
-									<td><input type="button" value="2024" name="yearbtn"></td>
-									<td><input type="button" value="2025" name="yearbtn"></td>
-									<td><input type="button" value="2026" name="yearbtn"></td>
-									<td><input type="button" value="2027" name="yearbtn"></td>
-									<td><input type="button" value="2028" name="yearbtn"></td>
-									<td><input type="button" value="2029" name="yearbtn"></td>
+									<td><input type="button" value="2020" name="yearbtn2"></td>
+									<td><input type="button" value="2021" name="yearbtn2"></td>
+									<td><input type="button" value="2022" name="yearbtn2"></td>
+									<td><input type="button" value="2023" name="yearbtn2"></td>
+									<td><input type="button" value="2024" name="yearbtn2"></td>
+									<td><input type="button" value="2025" name="yearbtn2"></td>
+									<td><input type="button" value="2026" name="yearbtn2"></td>
+									<td><input type="button" value="2027" name="yearbtn2"></td>
+									<td><input type="button" value="2028" name="yearbtn2"></td>
+									<td><input type="button" value="2029" name="yearbtn2"></td>
 									
 									</tr>
 								    </table>
@@ -387,8 +476,9 @@ $(document).ready(function() {
 	});  	
 	
 
+$("input[name=yearbtn]").click(function(){    //연도 클릭
+	alert("이게눌려?");
 	
-$("input[name=yearbtn]").click(function(){              //연도 클릭
 	var thisyear = new Date().getFullYear();
 	if(thisyear < $(this).val()){
 		alert("아직 해당 연도가 시작되지 않았습니다!");	
@@ -404,8 +494,8 @@ $("input[name=yearbtn]").click(function(){              //연도 클릭
 				document.getElementById("headname2").value="20"+using+"년 성공률";
 				
 				/// 나만 안되는건지 확인 필요!
-				document.getElementById("inputSuccess").value='${successRatio}';
-				document.getElementById("inputFail").value='${successRatio}';
+				document.getElementById("inputSuccess").value='${successRatio.successyear}';
+				document.getElementById("inputFail").value='${successRatio.failyear}';
 				config.data.datasets[0].data[0]=document.getElementById("inputSuccess").value;
 				config.data.datasets[0].data[1]=document.getElementById("inputFail").value;
 				myChart.update({duration: 800});

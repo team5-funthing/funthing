@@ -19,9 +19,15 @@ public class AdminStatisticsDAO {
 		return st.selectOne("AdminStatisticsDAO.getProjectSuccessRatioPerMonth",vo);
 	}
 	
-	public List<AdminStatisticsVO> getProjectSuccessRatioPerYear(AdminStatisticsVO vo) {
+	public AdminStatisticsVO getProjectSuccessRatioPerYear(AdminStatisticsVO vo) {
 		System.out.println("프로젝트성공율  연  실행");
 		System.out.println(vo);
-		return st.selectList("AdminStatisticsDAO.getProjectSuccessRatioPerYear",vo);
+		return st.selectOne("AdminStatisticsDAO.getProjectSuccessRatioPerYear",vo);
 	}
+	
+	public AdminStatisticsVO getFundingMoneyPerMonth(AdminStatisticsVO vo) {
+		System.out.println("펀딩머니 월 실행");
+		return st.selectOne("AdminStatisticsDAO.getFundingMoneyPerMonth",vo);
+	}
+	
 }
