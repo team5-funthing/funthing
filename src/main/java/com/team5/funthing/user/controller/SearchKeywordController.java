@@ -68,15 +68,13 @@ public class SearchKeywordController {
 	
 	@RequestMapping(value="getSearchKeywordList.udo", method = RequestMethod.GET)
 	public String getSearchKeywordList(@RequestParam(value="searchKeywordStr", required = false)String searchKeyword,
-										ProjectVO vo, Model model, KeywordVO vo2) {
+										ProjectVO vo, Model model) {
 		
-		updateKeywordCountService.updateKeywordCount(searchKeyword);
+		updateKeywordCountService.updateKeywordCount(searchKeyword); //업데이트 키워드 (키워드 카운트+1)
 		
 		List<ProjectVO> getAllFundingProjectList = getSearchKeywordService.getSearchKeyword(searchKeyword);
 		List<ProjectVO> getAllFundingProjectListByKeyword = getSearchKeywordByKeywordService.getSearchKeywordByKeyword(searchKeyword);
 		
-		System.out.println("getAllFundingProjectListByKeyword :"+getAllFundingProjectListByKeyword.toString());
-
 		for(ProjectVO pvo : getAllFundingProjectListByKeyword) {
 			getAllFundingProjectList.add(pvo);
 		}
@@ -93,10 +91,9 @@ public class SearchKeywordController {
 	public String getClickKeywordList(@RequestParam(value="searchKeywordStr", required = false)String searchKeyword,
 										ProjectVO vo, Model model) {
 		System.out.println("searchKeyword :" + searchKeyword);
-		updateKeywordCountService.updateKeywordCount(searchKeyword);
-		List<ProjectVO> getAllFundingProjectList = getSearchKeywordByKeywordService.getSearchKeywordByKeyword(searchKeyword);
-		
-		
+		updateKeywordCountService.updateKeywordCountShap(searchKeyword);
+		List<ProjectVO> getAllFundingProjectList = getSearchKeywordByKeywordService.getSearchKeywordByKeywordShap(searchKeyword);
+			
 		model.addAttribute("getAllFundingProjectList",getAllFundingProjectList);
 		
 

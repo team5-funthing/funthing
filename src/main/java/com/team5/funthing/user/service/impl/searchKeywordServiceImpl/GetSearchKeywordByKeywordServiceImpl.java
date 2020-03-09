@@ -22,4 +22,11 @@ public class GetSearchKeywordByKeywordServiceImpl implements GetSearchKeywordByK
 		return searchKeywordDAO.getSearchKeywordByKeyword(searchKeyword);
 	}
 
+
+	@Override
+	public List<ProjectVO> getSearchKeywordByKeywordShap(String searchKeyword) {
+		// TODO Auto-generated method stub
+		return searchKeywordDAO.getSearchKeywordByKeywordShap(searchKeyword);
+	}
+
 }

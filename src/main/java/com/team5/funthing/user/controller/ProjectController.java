@@ -179,11 +179,14 @@ public class ProjectController {
 		return "p-project-list";
 	}
 	
-	@RequestMapping(value="/showStartProjectPage.udo", method = RequestMethod.GET)
-	public String startProject(HttpSession session, Model model) {
+	@RequestMapping(value="showStartProjectPage.udo", method = RequestMethod.GET)
+	public String startProject( RedirectAttributes redirectAttributes,
+								HttpSession session, Model model) {
 		
 		memberVO = (MemberVO)session.getAttribute("memberSession");
+		
 		if(memberVO == null) {
+
 			model.addAttribute("msg", "로그인 후 이용 가능합니다.");
 			return "p-index";
 		}

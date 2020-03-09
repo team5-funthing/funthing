@@ -18,4 +18,10 @@ public class UpdateKeywordCountServiceImpl implements UpdateKeywordCountService 
 
 	}
 
+	@Override
+	public void updateKeywordCountShap(String searchKeyword) {
+		searchKeywordDAO.updateKeywordCountShap(searchKeyword);
+		
+	}
+
 }
