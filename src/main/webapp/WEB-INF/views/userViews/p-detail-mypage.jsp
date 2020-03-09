@@ -214,6 +214,8 @@
 		                                       <div class="card-footer">
 		                                          <a href="getWritingProject.udo?currentProjectNo=${myProject.projectNo }">수정</a>
 		                                          <a href="deleteProject.udo?currentProjectNo=${myProject.projectNo }">삭제</a>
+		                                          <a href="getSatistics.udo?currentProjectNo=${myProject.projectNo }">통계</a>
+		                                          
 		                                       </div>
 		                                    </div>
 		                                 </div>
