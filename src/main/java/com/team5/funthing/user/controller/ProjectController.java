@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.team5.funthing.admin.model.vo.AdminCategoryVO;
+import com.team5.funthing.admin.service.adminCategoryService.GetCategoryListService;
 import com.team5.funthing.common.utils.uploadUtils.UploadUtil;
 import com.team5.funthing.user.model.vo.AlarmVO;
 import com.team5.funthing.user.model.vo.CreatorVO;
@@ -115,6 +117,10 @@ public class ProjectController {
 	@Autowired
 	private InsertProjectJudgeRequestAlarmService insertProjectJudgeRequestAlarmService;
 	
+	//category Service
+	@Autowired
+	private GetCategoryListService getCategoryListSerivce;
+	
 // ===================== VO 주입 =====================
 	
 	@Autowired
@@ -179,7 +185,7 @@ public class ProjectController {
 	@RequestMapping(value="/getWritingProject.udo", method = RequestMethod.GET)
 	public String getProject(	@RequestParam int currentProjectNo, 
 								@RequestParam(required = false)String msg, 
-								Model model) {
+								AdminCategoryVO cvo, Model model) {
 		
 		projectVO.setProjectNo(currentProjectNo);
 		projectIntroduceImageVO.setProjectNo(currentProjectNo);
@@ -201,6 +207,7 @@ public class ProjectController {
 			model.addAttribute("rewardList", getRewardList);
 		}
 		
+		model.addAttribute("categoryList", getCategoryListSerivce.getCategoryList(cvo));
 		model.addAttribute("msg", msg);
 		model.addAttribute("writingProject", projectVO);
 		
@@ -239,7 +246,8 @@ public class ProjectController {
 									@RequestParam(name = "businessUploadFile", required = false)List<MultipartFile> businessUploadFile,
 									HttpSession session, 
 									ProjectVO pvo, 
-									CreatorVO cvo, 
+									CreatorVO cvo,
+									AdminCategoryVO acvo,
 									Model model) throws Exception {
 
 		// 프로젝트 제작 첫 시작시에만 시작
@@ -257,6 +265,7 @@ public class ProjectController {
 		else {
 			pvo = checkVO;
 		}
+		model.addAttribute("categoryList", getCategoryListSerivce.getCategoryList(acvo));
 		model.addAttribute("writingCreator");
 		model.addAttribute("writingProject", pvo);
 

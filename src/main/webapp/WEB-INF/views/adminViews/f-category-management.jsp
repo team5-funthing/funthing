@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 
@@ -23,6 +24,21 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+<style>
+.categoryArea{
+	float:left;
+	width:50%;
+}
+.categoryArea ul{
+	list-style:none;
+}
+.categoryArea ul li{
+		margin-bottom:10px;
+}
+.deleteButton{
+	float:right;
+}
+</style>
 </head>
 
 <body>
@@ -43,27 +59,11 @@
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
         <jsp:include page="include/i-topbar-header.jsp"/> 
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
         <jsp:include page="include/i-left-sidebar.jsp"/>
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
         <div class="page-wrapper">
-            <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">project_list</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
@@ -76,144 +76,43 @@
                         </div>
                     </div>
                 </div>
-            
-         
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
-
 <!-- Tabs -->
 <div class="card">
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
-        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab"><span class="hidden-sm-up"></span> <span class="hidden-xs-down">심사</span></a> </li>
-        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"></span> <span class="hidden-xs-down">진행</span></a> </li>
-        
-        
-        
-    </ul>
-    
     <!-- Tab panes -->
-    <div class="tab-content tabcontent-border">
-
-        
+    <div class="tab-content tabcontent-border"> 
         <div class="tab-pane active" id="home" role="tabpanel">
             <div class="p-20" style="padding:20px 20px 0 20px;height:509.5px;">
-                 <!-- 여기에 들어갈거-->
-            <div class="row">
-                <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title m-b-0">심사관리 페이지</h5>
-                    <form style="float: right;">
-                        <select>
-                            <option value="">분류</option>
-                            <option value="">분류2</option>
-                        </select>
-                    </form>
-                </div>
-                <table class="table">
-                      <thead>
-                        <tr>
-                          <th scope="col">번호</th>
-                          <th scope="col">카테고리</th>
-                          <th scope="col">제목</th>
-                          <th scope="col">메이커이름</th>
-                          <th scope="col">기간</th>
-                          <th scope="col">금액</th>
-                          <th scope="col">상태</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row">1</th>
-                          <td>Mark</td>
-                          <td><a href="getProjectCheck.ado?projectNo=${list.projectNo}">${list.projectTitle}</a></td>
-                          <td>Otto</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">2</th>
-                          <td>Jacob</td>
-                          <td><a href="C:\Users\pjh\Desktop\5jo\matrix-admin-master\project_approve.html">vbbfg</a></td>
-                          <td>Thornton</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                        </tr>
-                      </tbody>
-                </table>
+                <!-- 여기에 들어갈거-->
+            	<div class="row">
+            		<div class="card">
+			            <div class="card-body">
+			                <h4 class="card-title m-b-0">카테고리 관리</h4>
+			            </div>    
+            		</div>
+    			</div>
+    			<div class="categoryArea">
+    				<h5>카테고리 입력란</h5>
+    				<form method="post" action="insertCategory.ado">
+    					<div>
+	    					입력할 카테고리 : <input type="text" name="categoryName">					
+    					</div>
+    					<input type="submit" value="입력">
+    				</form>
+    			</div>
+    			<div class="categoryArea">
+    				<h5>현재 카테고리 목록</h5>
+    				<div style="overflow-x:hidden;">
+    				<ul>
+    					<c:forEach var="category" items="${CategoryList}">
+    						<li>${category.categoryName}<a href="deleteCategory.ado?categoryName=${category.categoryName}" class="deleteButton"><button>삭제</button></a></li>
+    					</c:forEach>
+    				</ul>
+    				</div>
+    			</div>
             </div>
-        </div>
+        </div>   
     </div>
-            </div>
-        </div>
-
-        <div class="tab-pane  p-20" id="profile" role="tabpanel">
-            <div >
-                 <!-- 여기에 들어갈거-->
-            <div class="row">
-                <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title m-b-0">진행관리 페이지</h5>
-                    <form style="float: right;">
-                        <select>
-                            <option value="">분류</option>
-                            <option value="">분류2</option>
-                        </select>
-                    </form>
-                </div>
-                <table class="table">
-                      <thead>
-                        <tr>
-                            <th scope="col">번호</th>
-                            <th scope="col">카테고리</th>
-                            <th scope="col">제목</th>
-                            <th scope="col">메이커이름</th>
-                            <th scope="col">기간</th>
-                            <th scope="col">금액</th>
-                            <th scope="col">상태</th>
-                        
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row">1</th>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">2</th>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                        </tr>
-                      </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-            </div>
-        </div>
-        
-    </div>
-</div>
-
-           
-            
+</div>         
                 <!-- ============================================================== -->
                 <!-- End Container fluid  -->
                 <!-- ============================================================== -->

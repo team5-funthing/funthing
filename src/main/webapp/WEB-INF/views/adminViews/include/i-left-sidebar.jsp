@@ -17,12 +17,6 @@
                         	</a>
                         </li>
                         <li class="sidebar-item"> 
-                        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="projectManagement.ado" aria-expanded="false">
-                        		<i class="mdi mdi-file-document"></i>
-                        		<span class="hide-menu">프로젝트관리</span>
-                        	</a>
-                        </li>
-                        <li class="sidebar-item"> 
                         	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="getMemberList.ado" aria-expanded="false">
                                 <i class="mdi mdi-account-multiple"></i>
                                 <span class="hide-menu">회원관리</span>
@@ -51,6 +45,12 @@
                                 <i class="mdi mdi-bell-ring-outline"></i>
                                 <span class="hide-menu">공지사항 목록 </span>
                             </a>
+                        </li>
+                        <li class="sidebar-item"> 
+                        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="projectCategoryManagement.ado" aria-expanded="false">
+                        		<i class="mdi mdi-file-document"></i>
+                        		<span class="hide-menu">카테고리관리</span>
+                        	</a>
                         </li>
                         <li class="sidebar-item"> 
                         	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="infoProcessingInput.ado" aria-expanded="false">
