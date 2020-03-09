@@ -10,8 +10,8 @@
 			SELECT orderno_seq.currval FROM dual
 		</selectKey>
 	
-		INSERT INTO paymentReserve (orderNo, email, paymentReserveDate, paymentOption, applyNo, deliveryAddressNo, fundingMoney, additionalFundingMoney, shippingFee, privateName, privateFundingMoney)                                           
-		VALUES (orderno_seq.nextval, #{email }, sysdate, #{paymentOption }, #{applyNo }, #{deliveryAddressNo }, #{fundingMoney }, #{additionalFundingMoney }, #{shippingFee }, #{privateName },  #{privateFundingMoney })
+		INSERT INTO paymentReserve (orderNo, email, projectNo, paymentReserveDate, paymentOption, applyNo, deliveryAddressNo, fundingMoney, additionalFundingMoney, shippingFee, privateName, privateFundingMoney)                                           
+		VALUES (orderno_seq.nextval, #{email }, ${projectNo}, sysdate, #{paymentOption }, #{applyNo }, #{deliveryAddressNo }, #{fundingMoney }, #{additionalFundingMoney }, #{shippingFee }, #{privateName },  #{privateFundingMoney })
 	
 	</insert>
 	
@@ -71,7 +71,6 @@
 		<result column="shippingFee" 	property="shippingFee" />
 		<result column="privateName" 	property="privateName" />
 		<result column="privateFundingMoney" 	property="privateFundingMoney" />
-		
 		
 		<collection property="rewardSelectionList" resultMap="rewardSelection" />
 	

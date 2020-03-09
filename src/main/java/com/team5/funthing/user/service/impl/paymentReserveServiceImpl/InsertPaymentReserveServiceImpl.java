@@ -54,6 +54,7 @@ public class InsertPaymentReserveServiceImpl implements InsertPaymentReserveServ
 		//배송지 추가
 		davo = deliveryAddressDAO.insertDeleveryAddress(davo);
 		prvo.setDeliveryAddressNo(davo.getDeliveryAddressNo());
+		prvo.setProjectNo(projectNo);
 		
 		//결제예약 테이블 추가
 		prvo = paymentReserveDAO.insertPaymentReserve(prvo);
