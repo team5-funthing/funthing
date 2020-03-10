@@ -7,7 +7,7 @@
 
 	<!-- 이미지 교체 -->
 	<update id="updateUserMainImage" parameterType="adminUserMainImageChange">
-		UPDATE usermainimagechange set imagePath = #{imagePath}, imageName = #{imageName} where imageNo = #{imageNo}
+		UPDATE usermainimagechange set imagePath = #{imagePath} where imageNo = #{imageNo}
 	</update>
 	
 	<select id="getUserMainImageList" resultType="adminUserMainImageChange" >

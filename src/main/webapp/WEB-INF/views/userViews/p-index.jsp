@@ -26,31 +26,38 @@
    <!-- slider_area_start -->
    <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
- 
-
-  
+ <!-- if1 -->
+<c:if test="${null ne mainImageList.imageName }">
+ <c:if test="${mainImageList.imageNo eq 1 }">
+   </c:if>
+    </c:if>
+    
+    <c:if test="${null ne mainImageList.imageName }">
+  <c:if test="${mainImageList.imageNo ne 1 }">
+     </c:if>
+  </c:if>
+   
   <c:forEach var="mainImageList" items="${getUserMainImageChangeList}">
 
-				<c:if test="${null ne mainImageList.imageName }">
-   <c:if test="${mainImageList.imageNo eq 1 }">
-      
+				
+  
+     <!-- if들어가는 자리1 -->
    <div class="carousel-item active" data-interval="500">
+ 
       <img src="${mainImageList.imagePath}" class="d-block w-100" alt="...">
    </div>
    
-    </c:if>
-    </c:if>
+   <!-- if종료 들어가던자리 -->
+   
  
-  <c:if test="${null ne mainImageList.imageName }">
-  <c:if test="${mainImageList.imageNo ne 1 }">
-  <input type="button" value="${mainImageList.imageName}">
+  <!-- if2 들어가는자리 -->
+  
   
     <div class="carousel-item" data-interval="500">
-      <img src="${pageContext.request.contextPath}/resources/user/img/main/${mainImageList.imageName}" class="d-block w-100" alt="...">
+      <img src="${mainImageList.imagePath}" class="d-block w-100" alt="...">
     </div>
-    
-  </c:if>
-  </c:if>
+    <!-- if2 종료 자리  -->
+
   
    </c:forEach>
     

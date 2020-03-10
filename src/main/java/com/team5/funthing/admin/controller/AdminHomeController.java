@@ -16,6 +16,7 @@ import com.team5.funthing.admin.service.adminCategoryService.GetCategoryListServ
 import com.team5.funthing.admin.service.adminNoticeBoardService.GetAdminNoticeBoardListService;
 import com.team5.funthing.admin.service.adminProjectCheckService.GetProjectCheckListService;
 import com.team5.funthing.admin.service.adminRegisterTosService.GetRegisterTosListService;
+import com.team5.funthing.admin.service.userMainImageChangeService.GetUserMainImageListService;
 import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.model.vo.TosVO;
 import com.team5.funthing.user.service.TosService.GetTosListService;
@@ -45,6 +46,9 @@ public class AdminHomeController {
 	GetRegisterTosListService getRegisterTosListService;
 	@Autowired
 	GetCategoryListService getCategoryListService;
+	
+	@Autowired
+	GetUserMainImageListService getUserMainImageListService;
 	
 	
 	@RequestMapping("adminIndex.ado")
@@ -117,9 +121,9 @@ public class AdminHomeController {
 	
 	@RequestMapping("userMainImageChangeForm.ado")
 	public String userMainImageForm(AdminUserMainImageChangeVO vo, Model model) {
-		List<AdminUserMainImageChangeVO> getUserMainImageChangeList =getUserMainImageChangeListService.getUserMainImageChangeList(vo);
+		List<AdminUserMainImageChangeVO> userMainImageList =getUserMainImageListService.getUserMainImageList();
 		
-		model.addAttribute("getUserMainImageChangeList",getUserMainImageChangeList);
+		model.addAttribute("userMainImageList",userMainImageList);
 		return "f-usermainimage-input";
 	}
 		
