@@ -100,32 +100,32 @@
                     <div class="col-6">
                         <div class="bg-dark p-10 text-white text-center">
                             <i class="fas fa-check-circle m-b-5 font-16"></i>
-                            <h5 class="m-b-0 m-t-5">470</h5>
-                            <small class="font-light">성공</small>
+                            <h5 class="m-b-0 m-t-5">${statusPListCount}</h5>
+                            <small class="font-light">펀딩 성공</small>
                         </div>
                     </div>
 
                     <div class="col-6">
                         <div class="bg-dark p-10 text-white text-center">
                             <i class="fas fa-times m-b-5 font-16"></i>
-                            <h5 class="m-b-0 m-t-5">76</h5>
-                            <small class="font-light">실패</small>
+                            <h5 class="m-b-0 m-t-5">${statusFListCount}</h5>
+                            <small class="font-light">펀딩 실패</small>
+                        </div>
+                    </div>
+
+  					<div class="col-6 m-t-15">
+                        <div class="bg-dark p-10 text-white text-center">
+                            <i class="fas fa-exclamation-triangle m-b-5 font-16"></i>
+                            <h5 class="m-b-0 m-t-5">${statusMListCount}</h5>
+                            <small class="font-light">펀딩 진행중</small>
                         </div>
                     </div>
 
                     <div class="col-6 m-t-15">
                         <div class="bg-dark p-10 text-white text-center">
                             <i class="fas fa-comment-dots m-b-5 font-16"></i>
-                            <h5 class="m-b-0 m-t-5">2</h5>
-                            <small class="font-light">심사</small>
-                        </div>
-                    </div>
-
-                    <div class="col-6 m-t-15">
-                        <div class="bg-dark p-10 text-white text-center">
-                            <i class="fas fa-exclamation-triangle m-b-5 font-16"></i>
-                            <h5 class="m-b-0 m-t-5">17</h5>
-                            <small class="font-light">반려</small>
+                            <h5 class="m-b-0 m-t-5">${statusWListCount}</h5>
+                            <small class="font-light">심사 진행중</small>
                         </div>
                     </div>
 
@@ -161,7 +161,7 @@
                         <div class="card card-hover">
                             <div class="box bg-cyan text-center">
                                 <h1 class="font-light text-white"><i class="mdi mdi-file-find"></i></h1>
-                                <h6 class="text-white"><a href="C:\Users\pjh\Desktop\5jo\matrix-admin-master\project_list.html">심사 프로젝트</a></h6>
+                                <h6 class="text-white"><a href="getProjectCheckList.ado">심사 프로젝트</a></h6>
                             </div>
                         </div>
                     </div>

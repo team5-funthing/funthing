@@ -53,7 +53,7 @@ public class AdminHomeController {
 	
 	@RequestMapping("adminIndex.ado")
 	public String showIndex() {
-		return "p-index";
+		return "redirect:getMainViewProjectStatusList.ado";
 	}
 	
 	@RequestMapping("projectCategoryManagement.ado")
