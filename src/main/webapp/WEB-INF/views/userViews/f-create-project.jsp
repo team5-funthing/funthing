@@ -68,7 +68,7 @@
 											aria-selected="false">리워드 설계</a>
 											
 										<button type="submit" id="inputSaveBtn" class="btn btn-outline-primary btn-lg btn-block mt-5">저장하기</button>
-										<button type="submit" id="inputCompleteBtn" class="btn btn-light btn-lg mt-2" formaction="requestCheckProject.udo" >
+										<button type="submit" id="inputCompleteBtn" class="btn btn-light btn-lg mt-2" formaction="requestCheckProject.udo?creator=${writingCreator.creator}" >
 
 											<c:choose>
 												<c:when test="${writingProject.status eq 'w'.charAt(0) }">

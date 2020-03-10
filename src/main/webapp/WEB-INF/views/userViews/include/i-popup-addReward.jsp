@@ -32,6 +32,14 @@
 				$("input[name=rewardNo]").val("");
 				$("#appendTag").empty();
 				$("#appendBtn").empty();	
+				
+				$("#reward-popup").attr("action", "");
+				$("#reward-popup").attr("action", "insertReward.udo");
+				
+				$("#rewardRegistryBtn").empty();
+				$("#rewardRegistryBtn").append(	"<div>"
+										+		"<a id='insertReward' class='btn btn-lg btn-report-submit d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3' href='javaScript: return(0);' onclick='rewardInputCheck()'>등록하기</a>"
+										+		"</div>");
 			});
 			
 			//리워드 선택 옵션조건에 따라서 input태그를 추가하는 부분이다.
@@ -71,7 +79,7 @@
 				
 				$("#rewardRegistryBtn").empty();
 				$("#rewardRegistryBtn").append(	"<div>"
-										+		"<a id='updateReward' class='btn btn-lg btn-report-submit d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3' href='javaScript: return(0);'>수정하기</a>"
+										+		"<a id='updateReward' class='btn btn-lg btn-report-submit d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3' href='javaScript: return(0);'  onclick='rewardInputCheck()'>수정하기</a>"
 										+		"</div>");
 
 				
@@ -183,6 +191,7 @@
    <form action="insertReward.udo" method="post" id="reward-popup" class="white-popup-block mfp-hide">
    		
    		<input type="hidden" name="projectNo" value="${writingProject.projectNo}">
+   		<input type="hidden" name="creator" value="${writingCreator.creator}">
 
        	<div class="addReward_popup_box">
            <div class="popup_inner">
@@ -199,11 +208,12 @@
                    <div class="row p-3">
                        <div class="col-4" style="font-weight: bold; color: darkslateblue">금액</div>
                        <div class="col-5">                
-                           <input type="text" name="rewardPrice" class="form-control">
+                           <input type="text" name="rewardPrice" class="form-control" placeholder="숫자로 입력하세요">
                        </div>
                        <div class="col-2">원</div>
                        <div class="col-1"></div>
                    </div>
+
                    <div class="row p-3">
                        <div class="col-4" style="font-weight: bold; color: darkslateblue">리워드이름</div>
                        <div class="col-7">
@@ -212,6 +222,7 @@
                        </div>
                        <div class="col-1"></div>
                    </div>
+
                    <div class="row p-3">
                        <div class="col-4" style="font-weight: bold; color: darkslateblue">상세설명</div>
                        <div class="col-7">
@@ -285,7 +296,7 @@
                         <div class="col-4" style="font-weight: bold; color: darkslateblue">발송시작일</div>
                         <div class="col-4 pr-1">
                            <select class="rewardSendDate" name="rewardMonth" class="custom-select">
-                               <option selected="selected">월별 선택</option>
+                               <option selected="selected" value="월별 선택">월별 선택</option>
                                <c:forEach var="i" begin="1" end="12" step="1">
                                		<option value="${i}월">${i} 월</option>
                                </c:forEach>
@@ -294,7 +305,7 @@
                        <div class="col-4">
 
                            <select class="rewardSendTime" name="rewardDay" class="custom-select">
-                               <option selected="selected">일자 선택</option>
+                               <option selected="selected" value="일자 선택">일자 선택</option>
                                <c:forEach var="i" begin="1" end="31" step="1">
                                		<option value="${i}일">${i} 일</option>
                                </c:forEach>
@@ -302,6 +313,7 @@
 
                        </div>
                    </div>
+                   <div id="showMessage"></div>
                    <div class="row d-flex justify-content-end">
 
                        <div>
@@ -310,7 +322,7 @@
                        </div>
                        <div id="rewardRegistryBtn">
                            <a class="btn btn-lg btn-report-submit d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
-                               href="javaScript: return(0);" onclick="document.getElementById('reward-popup').submit();">등록하기</a>
+                               href="javaScript: return(0);" onclick="rewardInputCheck()">등록하기</a>
                        </div>
                    </div>
                </div>   
@@ -318,4 +330,64 @@
        </div>
    </form>
    <!-- ---------- -->
+   <script>
+   
+   function rewardInputCheck(){
+	   var rewardPrice = document.getElementsByName("rewardPrice")[0].value;
+	   var rewardName = document.getElementsByName("rewardName")[0].value;
+	   var rewardContent = document.getElementsByTagName("textarea")[0].value;
+	   var shippingFee = document.getElementsByName("shippingFee")[0].value;
+	   var shippingNeed = $("input:radio[name='shippingNeed']:checked").val();
+	   var rewardAmount = document.getElementsByName("rewardAmount")[0].value;
+	   var rewardMonth = $("select[name='rewardMonth']").val();
+	   var rewardDay = $("select[name='rewardDay']").val();
+	   
+	   $("#showMessage").empty();
+	 
+	   if(rewardPrice == ""){
+		   $("#showMessage").empty();
+		   $("#showMessage").append("리워드 가격을 입력해 주세요.").css('color','Tomato');
+		   $("input[name='rewardPrice']").focus();
+		   return;
+	   }
+	   if(isNaN(parseInt(rewardPrice))){
+		   $("#showMessage").empty();
+		   $("#showMessage").append("숫자로 입력해 주세요.").css('color','Tomato');
+		   return;
+	   }
+	   if(rewardName == ""){
+		   $("#showMessage").empty();
+		   $("#showMessage").append("리워드 이름을 입력해 주세요.").css('color','Tomato');
+		   $("input[name='rewardName']").focus();
+		   return;
+	   }
+	   if(rewardContent == ""){
+		   $("#showMessage").empty();
+		   $("#showMessage").append("리워드 상세설명을 입력해 주세요.").css('color','Tomato');
+		   $("textarea").focus();
+		   return;
+	   }
+	   if(shippingNeed == "배송 필요" && shippingFee  == ""){
+		   $("#showMessage").empty();
+		   $("#showMessage").append("리워드 배송비용을 입력해 주세요.").css('color','Tomato');
+		   $("input[name='shippingFee']").focus();
+		   return;
+	  }
+	  if(rewardAmount == ""){
+		   $("#showMessage").empty();
+		   $("#showMessage").append("리워드 수량을 입력해 주세요.").css('color','Tomato');
+		   $("input[name='rewardAmount']").focus();
+		   return;
+	  }
+	  if (rewardMonth == "월별 선택" | rewardDay == "일자 선택") {
+			
+			$("#showMessage").empty();
+			$("#showMessage").append("리워드 배송일자를 입력해 주세요.").css('color', 'Tomato');
+			return;
+	  }
+			
+	  document.getElementById('reward-popup').submit();
+
+	}
+			</script>
   

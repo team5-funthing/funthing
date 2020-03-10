@@ -147,10 +147,10 @@
 		<label for="projectSummaryTextarea">프로젝트에 대해 간략하게 설명해주세요.</label>
 		<c:choose>
 			<c:when test="${writingProject.projectSummary eq null }">
-					<textarea name="projectSummary" class="form-control" id="projectSummaryTextarea" rows="3"></textarea>
+					<textarea name="projectSummary" class="form-control" id="projectSummaryTextarea" rows="3" placeholder="프로젝트에 대해 간략하게 설명해주세요."></textarea>
 			</c:when>
 			<c:when test="${writingProject.projectSummary ne null }">
-					<textarea name="projectSummary" class="form-control" id="projectSummaryTextarea" rows="3">${writingProject.projectSummary }</textarea>
+					<textarea name="projectSummary" class="form-control" id="projectSummaryTextarea" rows="3" placeholder="프로젝트에 대해 간략하게 설명해주세요.">${writingProject.projectSummary }</textarea>
 			</c:when>
 		</c:choose>
 	</div>
