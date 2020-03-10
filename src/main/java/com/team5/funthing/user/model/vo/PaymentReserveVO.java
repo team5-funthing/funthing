@@ -24,12 +24,27 @@ public class PaymentReserveVO {
 	private RewardVO reward;
 	private RewardSelectionVO rewardSelection;
 	
+	private String sumDate; 
+	private int sumFundingMoney;
+	
 	
 	private List<RewardSelectionVO> rewardSelectionList;
 	
 	
 	
 	
+	public int getSumFundingMoney() {
+		return sumFundingMoney;
+	}
+	public void setSumFundingMoney(int sumFundingMoney) {
+		this.sumFundingMoney = sumFundingMoney;
+	}
+	public String getSumDate() {
+		return sumDate;
+	}
+	public void setSumDate(String sumDate) {
+		this.sumDate = sumDate;
+	}
 	public RewardVO getReward() {
 		return reward;
 	}
