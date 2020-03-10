@@ -19,6 +19,14 @@
 		UPDATE usermainimagechange set imagePath = '', imageName = '' where imageNo = #{imageNo}
 	</update>
 	
+	<delete id="deleteUserMainImage" parameterType="adminUserMainImageChange">
+		DELETE 	usermainimagechange where imageNo = #{imageNo}	
+	</delete>
+	
+	<insert id="insertUserMainImage" parameterType="adminUserMainImageChange">
+		INSERT into usermainimagechange(imageNo,imagePath) values(usermainimagechange_seq.nextval,#{imagePath})
+	</insert>
+	
 	
 	
 
