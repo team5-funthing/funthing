@@ -9,19 +9,19 @@ public class PaymentReserveVO {
 	private int projectNo;
 	private String email;
 	private Date paymentReserveDate;
-	private String paymentOption = "ì¹´ì¹´ì˜¤í˜ì´";
-	private int applyNo; // ìŠ¹ì¸ë²ˆí˜¸
+	private String paymentOption = "Ä«Ä«¿ÀÆäÀÌ";
+	private int applyNo; //½ÂÀÎ¹øÈ£
 	private String paymentStatus;
 	private int deliveryAddressNo;
 	private int fundingMoney;
 	
-	//í€ë”© ë°€ì–´ì£¼ê¸° ì‹œ ì¶”ê°€í•­ëª©ë“¤
+// Æİµù ¹Ğ¾îÁÖ±â ½Ã Ãß°¡ Ç×¸ñµé 
 	private int additionalFundingMoney;
 	private int shippingFee;
 	private String privateName = "off";
 	private String privateFundingMoney = "off";
 	
-	//ì¡°ì¸í• ë•Œ í•„ìš”í•œ VO
+// Á¶ÀÎÇÒ¶§ ÇÊ¿äÇÑ VO
 	private RewardVO reward;
 	private RewardSelectionVO rewardSelection;
 	
@@ -31,34 +31,6 @@ public class PaymentReserveVO {
 	
 	private List<RewardSelectionVO> rewardSelectionList;
 
-	
-	
-	
-	
-	public int getSumFundingMoney() {
-		return sumFundingMoney;
-	}
-	public void setSumFundingMoney(int sumFundingMoney) {
-		this.sumFundingMoney = sumFundingMoney;
-	}
-	public String getSumDate() {
-		return sumDate;
-	}
-	public void setSumDate(String sumDate) {
-		this.sumDate = sumDate;
-	}
-	public RewardVO getReward() {
-		return reward;
-	}
-	public void setReward(RewardVO reward) {
-		this.reward = reward;
-	}
-	public RewardSelectionVO getRewardSelection() {
-		return rewardSelection;
-	}
-	public void setRewardSelection(RewardSelectionVO rewardSelection) {
-		this.rewardSelection = rewardSelection;
-	}
 
 	public int getOrderNo() {
 		return orderNo;
@@ -210,6 +182,26 @@ public class PaymentReserveVO {
 	}
 
 
+	public String getSumDate() {
+		return sumDate;
+	}
+
+
+	public void setSumDate(String sumDate) {
+		this.sumDate = sumDate;
+	}
+
+
+	public int getSumFundingMoney() {
+		return sumFundingMoney;
+	}
+
+
+	public void setSumFundingMoney(int sumFundingMoney) {
+		this.sumFundingMoney = sumFundingMoney;
+	}
+
+
 	public List<RewardSelectionVO> getRewardSelectionList() {
 		return rewardSelectionList;
 	}
@@ -227,9 +219,16 @@ public class PaymentReserveVO {
 				+ applyNo + ", paymentStatus=" + paymentStatus + ", deliveryAddressNo=" + deliveryAddressNo
 				+ ", fundingMoney=" + fundingMoney + ", additionalFundingMoney=" + additionalFundingMoney
 				+ ", shippingFee=" + shippingFee + ", privateName=" + privateName + ", privateFundingMoney="
-				+ privateFundingMoney + ", reward=" + reward + ", rewardSelection=" + rewardSelection
-				+ ", rewardSelectionList=" + rewardSelectionList + "]";
+				+ privateFundingMoney + ", reward=" + reward + ", rewardSelection=" + rewardSelection + ", sumDate="
+				+ sumDate + ", sumFundingMoney=" + sumFundingMoney + ", rewardSelectionList=" + rewardSelectionList
+				+ "]";
 	}
+
+	
+	
+	
+	
+	
 	
 	
 
