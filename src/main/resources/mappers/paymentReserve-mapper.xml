@@ -10,8 +10,8 @@
 			SELECT orderno_seq.currval FROM dual
 		</selectKey>
 	
-		INSERT INTO paymentReserve (orderNo, email, paymentReserveDate, paymentOption, applyNo, deliveryAddressNo, fundingMoney, additionalFundingMoney, shippingFee, privateName, privateFundingMoney)                                           
-		VALUES (orderno_seq.nextval, #{email }, sysdate, #{paymentOption }, #{applyNo }, #{deliveryAddressNo }, #{fundingMoney }, #{additionalFundingMoney }, #{shippingFee }, #{privateName },  #{privateFundingMoney })
+		INSERT INTO paymentReserve (orderNo, email, projectNo, paymentReserveDate, paymentOption, applyNo, deliveryAddressNo, fundingMoney, additionalFundingMoney, shippingFee, privateName, privateFundingMoney)                                           
+		VALUES (orderno_seq.nextval, #{email }, ${projectNo}, sysdate, #{paymentOption }, #{applyNo }, #{deliveryAddressNo }, #{fundingMoney }, #{additionalFundingMoney }, #{shippingFee }, #{privateName },  #{privateFundingMoney })
 	
 	</insert>
 	
@@ -72,7 +72,6 @@
 		<result column="privateName" 	property="privateName" />
 		<result column="privateFundingMoney" 	property="privateFundingMoney" />
 		
-		
 		<collection property="rewardSelectionList" resultMap="rewardSelection" />
 	
 	</resultMap>
@@ -105,35 +104,20 @@
 	
 	</select>
 	
-	<select id="getOrderNoListByProjectNo" parameterType="int" resultType="int">
-	
-		SELECT paymentReserve.orderNo
-		FROM paymentReserve
-		INNER JOIN ((rewardselection
-        LEFT OUTER JOIN reward
-        ON rewardselection.rewardNo = reward.rewardNo)
-        LEFT OUTER JOIN RewardOptionValueList
-		ON rewardselection.selectRewardNo = RewardOptionValueList.selectRewardNo)
-		ON paymentReserve.orderNo = rewardselection.orderNo where reward.projectno = #{projectNo} and paymentstatus = '결제예약'
-		
-	</select>
-	
-	<!-- <update id="updatePaymentComplete" paramterType="java.util.List" >
-		<foreach collection="orderNoList" item="orderNo" open="INSERT ALL" close="; END;" 
-        separator=";">
-        			Update paymentReserve
-		SET paymentstatus = '결제완료'
-		WHERE orderNo = #{orderNo}
-        
-        </foreach>
-        
+	<update id="updatePaymentComplete" parameterType="int">
+
+        Update paymentReserve
+		SET paymentStatus = '결제완료'
+		WHERE projectNo = #{projectNo} and paymentStatus = '결제예약'
 		
 	</update>
 	
-	
-	<insert id="insCompareResult" parameterType="java.util.List" >
-    <foreach collection="list" item="item" open="INSERT ALL" close="SELECT * FROM SYS.DUAL" 
-        separator=" ">
-	-->
+	<update id="updatePaymentCancel" parameterType="int">
+
+        Update paymentReserve
+		SET paymentStatus = '결제취소'
+		WHERE projectNo = #{projectNo} and paymentStatus = '결제예약'
+		
+	</update>
 	
 </mapper>

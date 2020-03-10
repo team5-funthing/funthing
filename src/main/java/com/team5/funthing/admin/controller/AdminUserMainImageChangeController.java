@@ -1,10 +1,8 @@
 package com.team5.funthing.admin.controller;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.tomcat.jni.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +16,10 @@ import com.team5.funthing.admin.service.userMainImageChangeService.InsertUserMai
 import com.team5.funthing.admin.service.userMainImageChangeService.UpdateUserMainImageNullService;
 import com.team5.funthing.admin.service.userMainImageChangeService.UpdateUserMainImageService;
 import com.team5.funthing.common.utils.uploadUtils.UploadUtil;
+
 import com.team5.funthing.user.model.vo.CreatorVO;
 import com.team5.funthing.user.model.vo.ProjectIntroduceImageVO;
+
 
 @Controller
 public class AdminUserMainImageChangeController {
@@ -38,7 +38,7 @@ public class AdminUserMainImageChangeController {
 	@Autowired
 	AdminUserMainImageChangeVO adminUserMainImageChangeVO;
 
-	// ===================== À¯Æ¿ ÁÖÀÔ =====================
+	// ===================== ìœ í‹¸ ì£¼ì… =====================
 
 	@Autowired
 	private UploadUtil uploadUtil;
@@ -67,8 +67,8 @@ public class AdminUserMainImageChangeController {
 
 		List<String> toRemoveFilePath = new ArrayList<String>();
 
-		if (!toDoUploadList.get(0).isEmpty()) { // ¾÷·Îµå ½ÃÅ² ÆÄÀÏÀÌ ÀÌ¹Ì Á¸ÀçÇÏ´Â °æ¿ì ÆÄÀÏ ¼±ÅÃÀ» ´Ù½Ã ¾ÈÇÑ °æ¿ì¿¡ ³ª¿Ã ¼ö ÀÖ´Â »óÈ² Ã³¸®
-			toRemoveFilePath.add(vo.getImagePath()); // Á¦°ÅµÉ ÆÄÀÏ°æ·Î¸¦ vo°´Ã¼¿¡¼­ °¡Á®¿À±â
+		if (!toDoUploadList.get(0).isEmpty()) { // ì—…ë¡œë“œ ì‹œí‚¨ íŒŒì¼ì´ ì´ë¯¸ ì¡´ì¬í•˜ëŠ” ê²½ìš° íŒŒì¼ ì„ íƒì„ ë‹¤ì‹œ ì•ˆí•œ ê²½ìš°ì— ë‚˜ì˜¬ ìˆ˜ ìˆëŠ” ìƒí™© ì²˜ë¦¬
+			toRemoveFilePath.add(vo.getImagePath()); // ì œê±°ë  íŒŒì¼ê²½ë¡œë¥¼ voê°ì²´ì—ì„œ ê°€ì ¸ì˜¤ê¸°
 			String voName = vo.getClass().getSimpleName();
 			List<String> toSettingPath = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);
 			if (toSettingPath == null)
@@ -104,7 +104,7 @@ public class AdminUserMainImageChangeController {
 			toRemoveFilePath.add(0, null);
 		}
 
-		if (!toDoUploadList.isEmpty()) { // ÇÁ·ÎÁ§Æ® ¼Ò°³ ÀÌ¹ÌÁö ±âÁ¸¾÷·Îµå Á¦°Å ¹× »õ ¾÷·Îµå, DB Ãß°¡ ÀÛ¾÷ ¸Ş¼­µå
+		if (!toDoUploadList.isEmpty()) { // í”„ë¡œì íŠ¸ ì†Œê°œ ì´ë¯¸ì§€ ê¸°ì¡´ì—…ë¡œë“œ ì œê±° ë° ìƒˆ ì—…ë¡œë“œ, DB ì¶”ê°€ ì‘ì—… ë©”ì„œë“œ
 
 			List<String> tmpUploadList = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);
 			insertUserMainImageService.insertUserMainImage(adminUserMainImageChangeVO, tmpUploadList);

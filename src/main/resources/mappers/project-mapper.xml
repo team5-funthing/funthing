@@ -180,14 +180,14 @@
 	<update id="updateProjectDeadline">
 		UPDATE project 
 		SET funding = 'n'
-		WHERE TO_CHAR(enddate,'YYYYMMDD') = TO_CHAR(sysdate,'YYYYMMDD') and funding = 'y'
+		WHERE TO_CHAR(enddate, 'YYYYMMDD') = TO_CHAR(current_timestamp, 'YYYYMMDD') and funding = 'y'
 	</update>
 	
-	<select id="getClosedProjectNoList" resultType="int">
-	
-		SELECT projectNo
+	<select id="getTodayClosedProjectList" resultType="project">
+		
+		SELECT *
 		FROM project
-		WHERE WHERE TO_CHAR(enddate,'YYYYMMDD') = TO_CHAR(sysdate,'YYYYMMDD')
+		WHERE TO_CHAR(enddate, 'YYYYMMDD') = TO_CHAR(current_timestamp, 'YYYYMMDD') and funding = 'n'
 		
 	</select>
 	

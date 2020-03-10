@@ -20,4 +20,11 @@ public class GetAllProjectAndPaymentServiceImpl implements GetAllProjectAndPayme
 		return CreatorStatisticsDAO.getAllProjectAndPayment(currentProjectNo);
 	}
 
+	@Override
+	public List<PaymentReserveVO> getSumProjectAndPayment(int currentProjectNo) {
+		return CreatorStatisticsDAO.getSumProjectAndPayment(currentProjectNo);
+	}
+
+
+
 }

@@ -15,7 +15,7 @@ public class GetProjectSuccessRatioPerMonthServiceImpl implements GetProjectSucc
 	AdminStatisticsDAO dao;
 
 	@Override
-	public AdminStatisticsVO getProjectSuccessRatioPerMonth(ProjectVO vo) {
+	public AdminStatisticsVO getProjectSuccessRatioPerMonth(AdminStatisticsVO vo) {
 		
 		return dao.getProjectSuccessRatioPerMonth(vo);
 	}

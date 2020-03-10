@@ -32,21 +32,40 @@
 		<collection property="reward" resultMap="reward"></collection>
 		
 	</resultMap>
-	<!-- 프로젝트 번호에 이루어진 결제된 리스트 가져오기  -->
+	
+	<!-- 값 SUM해서 가져오기 -->
+	<select id="getSumProjectAndPayment" parameterType="int" resultType="paymentReserve">
+
+		select projectNo,sumDate, sum(fundingMoney) as sumFundingMoney from
+		(select projectNo,fundingMoney, to_char(paymentReservedate,'yyyy-mm-dd')as sumDate from paymentReserve )
+		group by sumDate,projectNo having projectNo = #{currentProjectNo}
+
+
+	</select>
+	
+	<!-- 프로젝트 번호에 이루어진 결제된 리스트 가져오기   -->
 	<select id="getAllProjectAndPayment" parameterType="int" resultType="paymentReserve">
 
-		select p.* from PaymentReserve p
+		select distinct p.* from PaymentReserve p
 		inner join rewardSelection R on P.orderNo = R.orderNo 
 		Inner Join reward W on W.rewardNo = R.rewardNo where w.projectNo = #{currentProjectNo}
 		order by paymentReservedate asc
 		
 	</select>
 	
+	
 	<!-- 카운트세기 몇번의 펀딩이 이루어졌는지 알아보기 위해 -->
 	<select id="getFundingPaymentCount" parameterType="int" resultType="int">
-		select COUNT (*) from PaymentReserve p
-		inner join rewardSelection R on P.orderNo = R.orderNo 
-		Inner Join reward W on W.rewardNo = R.rewardNo where w.projectNo = #{currentProjectNo}
+	
+		select count(*) from 
+		(select distinct p.* from 
+		PaymentReserve p, rewardSelection R, reward W 
+		where w.projectNo = #{currentProjectNo} and w.rewardNo = R.rewardNo and R.orderNo = p.orderNo order by paymentReservedate asc)	
+		
 	</select>
+	
+
+	
+	
 	
 </mapper>

@@ -1,6 +1,5 @@
 package com.team5.funthing.user.model.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -58,8 +57,8 @@ public class ProjectDAO {
 	}
 	
 	
-	public List<Integer> getClosedProjectNoList() {
-		return sqlSessionTemplate.selectList("getClosedProjectNoList");
+	public List<ProjectVO> getTodayClosedProjectList() {
+		return sqlSessionTemplate.selectList("getTodayClosedProjectList");
 	}
 	
 	
