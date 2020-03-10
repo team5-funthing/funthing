@@ -23,8 +23,7 @@
 					    <div class="nav_right">
 					        <div class="login_btn d-none d-lg-block pr-3">
 					            <a class="btn d-none d-lg-inline-block pl-3 pr-3 mb-3 mb-md-0 ml-md-3 " 
-					            	href="getWritingProject.udo?currentProjectNo=${previewProject.projectNo }">미리보기 나가기</a>
-								
+					            	href="getWritingProject.udo?currentProjectNo=${previewProject.projectNo}&creator=${creator}">미리보기 나가기</a>
 					        </div>
 					    </div>
 					</div>
