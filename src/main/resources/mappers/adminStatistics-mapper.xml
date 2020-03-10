@@ -43,6 +43,14 @@ FROM project
 		
 </select>
 
+<select id="getProjectSuccessRatioTotalYear" parameterType="adminStatistics" resultType="adminStatistics">
+	
+		SELECT count(case when enddate <![CDATA[<=]]> sysdate and  goalmoney <![CDATA[<=]]>  fundingmoney then 1 end) as "successtotal",
+     		   count(case when enddate <![CDATA[<=]]> sysdate and  goalmoney <![CDATA[>=]]>  fundingmoney then 2 end) as "failtotal"
+		FROM project
+		
+</select>
+
 <select id="getFundingMoneyPerMonth" parameterType="adminStatistics" resultType="adminStatistics">
 
 SELECT  

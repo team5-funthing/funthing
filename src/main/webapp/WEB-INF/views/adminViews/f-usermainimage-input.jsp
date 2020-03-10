@@ -107,20 +107,22 @@
 					<c:forEach var="mainImageList" items="${getUserMainImageChangeList}">
 						
 						<!-- 첫번째 시작 -->
-						<div class="mt-30">
-								<div class="input-group mt-2 mb-3">
+						<div class="mt-30"   style="display:flex;">
+								<div class="input-group mt-2 mb-3" style="width:40%;">
 								    <div class="form-group">
 								   		<label for="creatorProfile">이미지를 선택해주세요.</label>
 								    	<input type="file" id="userMainImageBt1" name="userMainUploadImage" class="form-control-file">
-								    </div>
-									<div class="userMain_select_img1"><img src="" /></div>
+								    </div >
+								</div>
+								<div style="width:59%;" class="userMain_select_img1">
+								  <img src="" />
 								</div>
 								<script>
 					            	$("#userMainImageBt1").change(function(){
 					            		if(this.files && this.files[0]){
 					            			var reader = new FileReader;
 					            			reader.onload = function(data){
-					            				$(".userMain_select_img1 img").attr("src", data.target.result).width(200);
+					            				$(".userMain_select_img1 img").attr("src", data.target.result).width(300);
 					            			}
 					            			reader.readAsDataURL(this.files[0]);
 					            		}
