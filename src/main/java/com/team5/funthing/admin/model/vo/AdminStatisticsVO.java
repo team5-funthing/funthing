@@ -7,7 +7,9 @@ public class AdminStatisticsVO {
 	public String yearr;
 	
 	private String successyear;
+	private String successtotal;
 	private String failyear;
+	private String failtotal;
 
 	private String success1;
 	private String success2;
@@ -42,6 +44,36 @@ public class AdminStatisticsVO {
 	
 	
 	
+	@Override
+	public String toString() {
+		return "AdminStatisticsVO [yearr=" + yearr + ", successyear=" + successyear + ", successtotal=" + successtotal
+				+ ", failyear=" + failyear + ", failtotal=" + failtotal + ", success1=" + success1 + ", success2="
+				+ success2 + ", success3=" + success3 + ", success4=" + success4 + ", success5=" + success5
+				+ ", success6=" + success6 + ", success7=" + success7 + ", success8=" + success8 + ", success9="
+				+ success9 + ", success10=" + success10 + ", success11=" + success11 + ", success12=" + success12
+				+ ", fail1=" + fail1 + ", fail2=" + fail2 + ", fail3=" + fail3 + ", fail4=" + fail4 + ", fail5=" + fail5
+				+ ", fail6=" + fail6 + ", fail7=" + fail7 + ", fail8=" + fail8 + ", fail9=" + fail9 + ", fail10="
+				+ fail10 + ", fail11=" + fail11 + ", fail12=" + fail12 + ", m1=" + m1 + ", m2=" + m2 + ", m3=" + m3
+				+ ", m4=" + m4 + ", m5=" + m5 + ", m6=" + m6 + ", m7=" + m7 + ", m8=" + m8 + ", m9=" + m9 + ", m10="
+				+ m10 + ", m11=" + m11 + ", m12=" + m12 + ", sumfunding=" + sumfunding + "]";
+	}
+
+	public String getSuccesstotal() {
+		return successtotal;
+	}
+
+	public void setSuccesstotal(String successtotal) {
+		this.successtotal = successtotal;
+	}
+
+	public String getFailtotal() {
+		return failtotal;
+	}
+
+	public void setFailtotal(String failtotal) {
+		this.failtotal = failtotal;
+	}
+
 	public String getSumfunding() {
 		return sumfunding;
 	}
@@ -50,19 +82,6 @@ public class AdminStatisticsVO {
 		this.sumfunding = sumfunding;
 	}
 
-	@Override
-	public String toString() {
-		return "AdminStatisticsVO [yearr=" + yearr + ", successyear=" + successyear + ", failyear=" + failyear
-				+ ", success1=" + success1 + ", success2=" + success2 + ", success3=" + success3 + ", success4="
-				+ success4 + ", success5=" + success5 + ", success6=" + success6 + ", success7=" + success7
-				+ ", success8=" + success8 + ", success9=" + success9 + ", success10=" + success10 + ", success11="
-				+ success11 + ", success12=" + success12 + ", fail1=" + fail1 + ", fail2=" + fail2 + ", fail3=" + fail3
-				+ ", fail4=" + fail4 + ", fail5=" + fail5 + ", fail6=" + fail6 + ", fail7=" + fail7 + ", fail8=" + fail8
-				+ ", fail9=" + fail9 + ", fail10=" + fail10 + ", fail11=" + fail11 + ", fail12=" + fail12 + ", m1=" + m1
-				+ ", m2=" + m2 + ", m3=" + m3 + ", m4=" + m4 + ", m5=" + m5 + ", m6=" + m6 + ", m7=" + m7 + ", m8=" + m8
-				+ ", m9=" + m9 + ", m10=" + m10 + ", m11=" + m11 + ", m12=" + m12 + "]";
-	}
-	
 	public String getYearr() {
 		return yearr;
 	}

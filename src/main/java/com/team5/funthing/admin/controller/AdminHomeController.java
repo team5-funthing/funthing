@@ -1,5 +1,6 @@
 package com.team5.funthing.admin.controller;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +12,14 @@ import com.team5.funthing.admin.model.vo.AdminCategoryVO;
 import com.team5.funthing.admin.model.vo.AdminNoticeBoardVO;
 import com.team5.funthing.admin.model.vo.AdminPersonalInfoProcessingVO;
 import com.team5.funthing.admin.model.vo.AdminRegisterTosVO;
+import com.team5.funthing.admin.model.vo.AdminStatisticsVO;
 import com.team5.funthing.admin.model.vo.AdminUserMainImageChangeVO;
 import com.team5.funthing.admin.service.adminCategoryService.GetCategoryListService;
 import com.team5.funthing.admin.service.adminNoticeBoardService.GetAdminNoticeBoardListService;
 import com.team5.funthing.admin.service.adminProjectCheckService.GetProjectCheckListService;
 import com.team5.funthing.admin.service.adminRegisterTosService.GetRegisterTosListService;
+import com.team5.funthing.admin.service.adminStatisticsService.GetFundingMoneyPerMonthService;
+import com.team5.funthing.admin.service.adminStatisticsService.GetProjectSuccessRatioTotalYearService;
 import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.model.vo.TosVO;
 import com.team5.funthing.user.service.TosService.GetTosListService;
@@ -45,10 +49,20 @@ public class AdminHomeController {
 	GetRegisterTosListService getRegisterTosListService;
 	@Autowired
 	GetCategoryListService getCategoryListService;
-	
+	@Autowired
+	GetProjectSuccessRatioTotalYearService getProjectSuccessRatioTotalYearService;
+	@Autowired
+	GetFundingMoneyPerMonthService getFundingMoneyPerMonthService;
 	
 	@RequestMapping("adminIndex.ado")
-	public String showIndex() {
+	public String showIndex(AdminStatisticsVO vo,Model model) {
+		model.addAttribute("totalSuccess",getProjectSuccessRatioTotalYearService.getProjectSuccessRatioTotalYear(vo));
+		Calendar cal = Calendar.getInstance();// 현재 연도 구하기.
+		int year = cal.get(cal.YEAR)-2000;
+		String parse = Integer.toString(year);
+		vo.setYearr(parse);
+		model.addAttribute("fundingMoney",getFundingMoneyPerMonthService.getFundingMoneyPerMonth(vo));
+		
 		return "p-index";
 	}
 	

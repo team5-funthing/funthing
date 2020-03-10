@@ -194,6 +194,7 @@
 	            	
 					$(document).on("click", ".imgRemoveBtn", function(){
 						
+
 						$(this).siblings("input").attr("name", "projectIntroduceImageNo");
 						$(this).closest("li").css('display', 'none');
 						

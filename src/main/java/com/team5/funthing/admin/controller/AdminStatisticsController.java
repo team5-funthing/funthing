@@ -49,4 +49,14 @@ public class AdminStatisticsController {
 	    model.addAttribute("successRatioMonth",perMonth.getProjectSuccessRatioPerMonth(vo));
 		return "p-statistics";
 	}
+	
+	@RequestMapping("t1.ado")
+	public String t1() {
+		return "/sample/index";
+	}
+	
+	@RequestMapping("t2.ado")
+	public String t2() {
+		return "sample/info_processing_input";
+	}
 }

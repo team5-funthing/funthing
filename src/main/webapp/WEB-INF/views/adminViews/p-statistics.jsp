@@ -103,60 +103,59 @@
 
 						<div class="tab-pane active" id="home" role="tabpanel">
 							<div class="p-20">
-								<div class="row" style="height:700px">
+								<div class="row" style="height:800px">
 									<div class="col-12">
 										<div class="card">
 											<div class="card-body">
-												<h5 class="card-title m-b-0">펀딩 모금액 통계</h5>
+												<center><h4 class="card-title m-b-0">펀딩 모금액 통계</h4></center>
 											</div>
 										</div>
-									<table border="1">
-								    <tr>
-									<td><input type="button" value="2020" name="yearbtn2"></td>
-									<td><input type="button" value="2021" name="yearbtn2"></td>
-									<td><input type="button" value="2022" name="yearbtn2"></td>
-									<td><input type="button" value="2023" name="yearbtn2"></td>
-									<td><input type="button" value="2024" name="yearbtn2"></td>
-									<td><input type="button" value="2025" name="yearbtn2"></td>
-									<td><input type="button" value="2026" name="yearbtn2"></td>
-									<td><input type="button" value="2027" name="yearbtn2"></td>
-									<td><input type="button" value="2028" name="yearbtn2"></td>
-									<td><input type="button" value="2029" name="yearbtn2"></td>
-									</tr>
-								    </table>
-								    
-										 <center><input type="text" disabled="disabled" id="chart2title"></center>
+									
+								    <input class="btn btn-outline-dark" type="button" value="2020" name="yearbtn2" style="width:60px;">
+									<input class="btn btn-outline-dark" type="button" value="2021" name="yearbtn2" style="width:60px;">
+									<input class="btn btn-outline-dark" type="button" value="2022" name="yearbtn2" style="width:60px;">
+									<input class="btn btn-outline-dark" type="button" value="2023" name="yearbtn2" style="width:60px;">
+									<input class="btn btn-outline-dark" type="button" value="2024" name="yearbtn2" style="width:60px;">
+									<input class="btn btn-outline-dark" type="button" value="2025" name="yearbtn2" style="width:60px;">
+									<input class="btn btn-outline-dark" type="button" value="2026" name="yearbtn2" style="width:60px;">
+									<input class="btn btn-outline-dark" type="button" value="2027" name="yearbtn2" style="width:60px;">
+									<input class="btn btn-outline-dark" type="button" value="2028" name="yearbtn2" style="width:60px;">
+									<input class="btn btn-outline-dark" type="button" value="2029" name="yearbtn2" style="width:60px;">
+										 <center>
+										 <input type="text" disabled="disabled" id="chart2title" class="form-control" style="text-align:center;background-color:white;">
+										 </center>
 										<canvas id="myChart2" style="height:auto;width:400px;"></canvas>
-									<table border="1">
+										<br><br>
+									<table class="table">
 									<tr>
-									<td> 1월 </td>
-									<td> 2월 </td>
-									<td> 3월 </td>
-									<td> 4월 </td>
-									<td> 5월 </td>
-									<td> 6월 </td>
-									<td> 7월 </td>
-									<td> 8월 </td>
-									<td> 9월 </td>
-									<td> 10월 </td>
-									<td> 11월 </td>
-									<td> 12월 </td>
-									<td> 합계 </td>
+									<td style="width:7.5%;text-align:center;"> 1월 </td>
+									<td style="width:7.5%;text-align:center;"> 2월 </td>
+									<td style="width:7.5%;text-align:center;"> 3월 </td>
+									<td style="width:7.5%;text-align:center;"> 4월 </td>
+									<td style="width:7.5%;text-align:center;"> 5월 </td>
+									<td style="width:7.5%;text-align:center;"> 6월 </td>
+									<td style="width:7.5%;text-align:center;"> 7월 </td>
+									<td style="width:7.5%;text-align:center;"> 8월 </td>
+									<td style="width:7.5%;text-align:center;"> 9월 </td>
+									<td style="width:7.5%;text-align:center;"> 10월 </td>
+									<td style="width:7.5%;text-align:center;"> 11월 </td>
+									<td style="width:7.5%;text-align:center;"> 12월 </td>
+									<td> <input type="text" readonly value="합계" class="form-control" style="text-align:center;background-color:white;"></td>
 									</tr>
 									<tr>
-									<td> ${fundingMoneyPerMonth.m1 } </td>
-									<td> ${fundingMoneyPerMonth.m2 } </td>
-									<td> ${fundingMoneyPerMonth.m3 } </td>
-									<td> ${fundingMoneyPerMonth.m4 } </td>
-									<td> ${fundingMoneyPerMonth.m5 } </td>
-									<td> ${fundingMoneyPerMonth.m6 } </td>
-									<td> ${fundingMoneyPerMonth.m7 } </td>
-									<td> ${fundingMoneyPerMonth.m8 } </td>
-									<td> ${fundingMoneyPerMonth.m9 } </td>
-									<td> ${fundingMoneyPerMonth.m10 } </td>
-									<td> ${fundingMoneyPerMonth.m11 } </td>
-									<td> ${fundingMoneyPerMonth.m12 } </td>
-									<td> <input type="text" disabled="disabled"	id="fundingMoneySum"> </td>
+									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m1 } </td>
+									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m2 } </td>
+									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m3 } </td>
+									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m4 } </td>
+									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m5 } </td>
+									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m6 } </td>
+									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m7 } </td>
+									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m8 } </td>
+									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m9 } </td>
+									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m10 } </td>
+									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m11 } </td>
+									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m12 } </td>
+									<td> <input type="text" readonly	id="fundingMoneySum" class="form-control" style="text-align:center;background-color:white;font-size:10px;"> </td>
 									</tr>
 									</table>
 									</div>
@@ -170,7 +169,7 @@
 
 
 	var ctx2 = document.getElementById('myChart2').getContext('2d');
-	var config = {
+	var config2 = {
 		    type: 'bar',
 		    data: {
 		        labels: ['1월', '2월', '3월 ', '4월 ', '5월', '6월 ','7월', '8월 ', '9월 ', '10월', '11월', '12월 '],
@@ -219,16 +218,32 @@
 		    }
 		};
 	
-	var myChart2 = new Chart(ctx2,config );    //그리기
+	var myChart2 = new Chart(ctx2,config2 );    //그리기
 
 	
 	$(document).ready(function(){
 		var thisyear = new Date().getFullYear();
 		var use = thisyear-2000;
 		$("#chart2title").val(thisyear+"년 펀딩모금액");
-	    $("#fundingMoneySum").val(${fundingMoneyPerMonth.sumfunding});
+	   
 		
-		
+	    
+	    config2.data.datasets[0].data[0]=${fundingMoneyPerMonth.m1};
+	    config2.data.datasets[0].data[1]=${fundingMoneyPerMonth.m2};
+	    config2.data.datasets[0].data[2]=${fundingMoneyPerMonth.m3};
+	    config2.data.datasets[0].data[3]=${fundingMoneyPerMonth.m4};
+	    config2.data.datasets[0].data[4]=${fundingMoneyPerMonth.m5};
+	    config2.data.datasets[0].data[5]=${fundingMoneyPerMonth.m6};
+	    config2.data.datasets[0].data[6]=${fundingMoneyPerMonth.m7};
+	    config2.data.datasets[0].data[7]=${fundingMoneyPerMonth.m8};
+	    config2.data.datasets[0].data[8]=${fundingMoneyPerMonth.m9};
+	    config2.data.datasets[0].data[9]=${fundingMoneyPerMonth.m10};
+	    config2.data.datasets[0].data[10]=${fundingMoneyPerMonth.m11};
+	    config2.data.datasets[0].data[11]=${fundingMoneyPerMonth.m12};
+	    $("#fundingMoneySum").val('${fundingMoneyPerMonth.sumfunding}'); 
+	    
+
+		myChart2.update();
 		
 	});
 
@@ -248,8 +263,19 @@
 				success : function(data) {
 					document.getElementById("chart2title").value="20"+using+"년 펀딩모금액";
 					
-					config.data.datasets[0].data[0]=document.getElementById("inputSuccess").value;
-					config.data.datasets[0].data[1]=document.getElementById("inputFail").value;
+				    config2.data.datasets[0].data[0]=${fundingMoneyPerMonth.m1};
+				    config2.data.datasets[0].data[1]=${fundingMoneyPerMonth.m2};
+				    config2.data.datasets[0].data[2]=${fundingMoneyPerMonth.m3};
+				    config2.data.datasets[0].data[3]=${fundingMoneyPerMonth.m4};
+				    config2.data.datasets[0].data[4]=${fundingMoneyPerMonth.m5};
+				    config2.data.datasets[0].data[5]=${fundingMoneyPerMonth.m6};
+				    config2.data.datasets[0].data[6]=${fundingMoneyPerMonth.m7};
+				    config2.data.datasets[0].data[7]=${fundingMoneyPerMonth.m8};
+				    config2.data.datasets[0].data[8]=${fundingMoneyPerMonth.m9};
+				    config2.data.datasets[0].data[9]=${fundingMoneyPerMonth.m10};
+				    config2.data.datasets[0].data[10]=${fundingMoneyPerMonth.m11};
+				    config2.data.datasets[0].data[11]=${fundingMoneyPerMonth.m12};
+				    $("#fundingMoneySum").val('${fundingMoneyPerMonth.sumfunding}'); 
 					myChart2.update();
 				},
 				error : function() {
@@ -267,92 +293,88 @@
 
 						<div class="tab-pane  p-20" id="home2" role="tabpanel">
 							<div class="p-20">
-								<div class="row" style="height:600px" >
+								<div class="row" style="height:auto" >
 									<div class="col-12" >
 										<div  class="card">
 											<div  class="card-body">
-												<h5 class="card-title m-b-0">프로젝트 성공률 통계</h5>
+												<center><h4 class="card-title m-b-0">프로젝트 성공률 통계</h4></center>
 											</div>
 										</div>
 									<div style="display:flex;">
 											<!--  그래프 구역   -->
-									<div id="left" style="height:225px;width:49%;">
-									<center><input type="text" id="canvaslabel" disabled="disabled" style="text-align:center"></center>
+									<div id="left" style="height:225px;width:39%;">
 									<div id="refresh">
 									<canvas id="myChart" style="height:auto;width:auto;"></canvas>
                                     </div>
-									<input type="text" id="inputSuccess" >
-									<input type="text" id="inputFail" >
-
+									<input type="hidden" id="inputSuccess" >
+									<input type="hidden" id="inputFail" >
+									<center><input type="text" id="canvaslabel" readonly class="form-control" style="width:250px;text-align:center;background-color:white;font-weight:bold"></center>
+									
    
   
 	
 	
 
 									</div>
-									<div id="rightdiv" style="width:49%">
-								
-								    <table border="1">
-								    <tr>
-									<td><input type="button" value="2020" name="yearbtn2"></td>
-									<td><input type="button" value="2021" name="yearbtn2"></td>
-									<td><input type="button" value="2022" name="yearbtn2"></td>
-									<td><input type="button" value="2023" name="yearbtn2"></td>
-									<td><input type="button" value="2024" name="yearbtn2"></td>
-									<td><input type="button" value="2025" name="yearbtn2"></td>
-									<td><input type="button" value="2026" name="yearbtn2"></td>
-									<td><input type="button" value="2027" name="yearbtn2"></td>
-									<td><input type="button" value="2028" name="yearbtn2"></td>
-									<td><input type="button" value="2029" name="yearbtn2"></td>
-									
-									</tr>
-								    </table>
-									<table border="1"  >
-									<thead ><input type="text" disabled="disabled" id="headname2"> </thead>
+									<div id="rightdiv" style="width:59%">
+								    <input class="btn btn-outline-info" type="button" value="2020" name="yearbtn"  style="width:64px;">
+									<input class="btn btn-outline-info" type="button" value="2021" name="yearbtn"  style="width:64px;">
+									<input class="btn btn-outline-info" type="button" value="2022" name="yearbtn" style="width:64px;">
+									<input class="btn btn-outline-info" type="button" value="2023" name="yearbtn" style="width:64px;">
+									<input class="btn btn-outline-info" type="button" value="2024" name="yearbtn" style="width:64px;">
+									<input class="btn btn-outline-info" type="button" value="2025" name="yearbtn" style="width:64px;">
+									<input class="btn btn-outline-info" type="button" value="2026" name="yearbtn" style="width:64px;">
+									<input class="btn btn-outline-info" type="button" value="2027" name="yearbtn" style="width:64px;">
+									<input class="btn btn-outline-info" type="button" value="2028" name="yearbtn" style="width:64px;">
+									<input class="btn btn-outline-info" type="button" value="2029" name="yearbtn" style="width:64px;">
+									<p></p>
+								 
+								    <input  type="text" readonly id="headname2" class="form-control" style="text-align:center;background-color:white;">
+									<table "table">
 									<tr>
-									<td>구분</td> 
-									<td><input type="button" value="1월" id="btn1"></td>
-									<td><input type="button" value="2월" id="btn2"></td>
-									<td><input type="button" value="3월" id="btn3"></td>
-									<td><input type="button" value="4월" id="btn4"></td>
-									<td><input type="button" value="5월" id="btn5"></td>
-									<td><input type="button" value="6월" id="btn6"></td>
-									<td><input type="button" value="7월" id="btn7"></td>
-									<td><input type="button" value="8월" id="btn8"></td>
-									<td><input type="button" value="9월" id="btn9"></td>
-									<td><input type="button" value="10월" id="btn10"></td>
-									<td><input type="button" value="11월" id="btn11"></td>
-									<td><input type="button" value="12월" id="btn12"></td>
+									<td><input class="btn btn-outline-success" type="button" value="구분" disabled="disabled"></td> 
+									<td><input class="btn btn-outline-success" type="button" value="1월" id="btn1" style="width:50px;"></td>
+									<td><input class="btn btn-outline-success" type="button" value="2월" id="btn2" style="width:50px;"></td>
+									<td><input class="btn btn-outline-success" type="button" value="3월" id="btn3" style="width:50px;"></td>
+									<td><input class="btn btn-outline-success" type="button" value="4월" id="btn4" style="width:50px;"></td>
+									<td><input class="btn btn-outline-success" type="button" value="5월" id="btn5" style="width:50px;"></td>
+									<td><input class="btn btn-outline-success" type="button" value="6월" id="btn6" style="width:50px;"></td>
+									<td><input class="btn btn-outline-success" type="button" value="7월" id="btn7" style="width:50px;"></td>
+									<td><input class="btn btn-outline-success" type="button" value="8월" id="btn8" style="width:50px;"></td>
+									<td><input class="btn btn-outline-success" type="button" value="9월" id="btn9" style="width:50px;"></td>
+									<td><input class="btn btn-outline-success" type="button" value="10월" id="btn10" style="width:50px;"></td>
+									<td><input class="btn btn-outline-success" type="button" value="11월" id="btn11" style="width:50px;"></td>
+									<td><input class="btn btn-outline-success" type="button" value="12월" id="btn12" style="width:50px;"></td>
 									</tr>
 									<tr>
-									<td>성공</td>
-									<td id="s1">${successRatioMonth.success1 }</td>
-									<td id="s2">${successRatioMonth.success2 }</td>
-									<td id="s3">${successRatioMonth.success3 }</td>
-									<td id="s4">${successRatioMonth.success4 }</td>
-									<td id="s5">${successRatioMonth.success5 }</td>
-									<td id="s6">${successRatioMonth.success6 }</td>
-									<td id="s7">${successRatioMonth.success7 }</td>
-									<td id="s8">${successRatioMonth.success8 }</td>
-									<td id="s9">${successRatioMonth.success9 }</td>
-									<td id="s10">${successRatioMonth.success10 }</td>
-									<td id="s11">${successRatioMonth.success11 }</td>
-									<td id="s12">${successRatioMonth.success12 }</td>
+									<td><input class="btn btn-outline-info" type="button" value="성공" disabled="disabled"></td>
+									<td ><button id="s1" class="btn btn-outline-success" disabled="disabled" style="width:50px;">${successRatioMonth.success1 }</button></td>
+									<td ><button id="s2" class="btn btn-outline-success" disabled="disabled" style="width:50px;">${successRatioMonth.success2 }</button></td>
+									<td ><button id="s3" class="btn btn-outline-success" disabled="disabled" style="width:50px;">${successRatioMonth.success3 }</button></td>
+									<td ><button id="s4" class="btn btn-outline-success" disabled="disabled" style="width:50px;">${successRatioMonth.success4 }</button></td>
+									<td ><button id="s5" class="btn btn-outline-success" disabled="disabled" style="width:50px;">${successRatioMonth.success5 }</button></td>
+									<td ><button id="s6" class="btn btn-outline-success" disabled="disabled" style="width:50px;">${successRatioMonth.success6 }</button></td>
+									<td ><button id="s7" class="btn btn-outline-success" disabled="disabled" style="width:50px;">${successRatioMonth.success7 }</button></td>
+									<td ><button id="s8" class="btn btn-outline-success" disabled="disabled" style="width:50px;">${successRatioMonth.success8 }</button></td>
+									<td ><button id="s9" class="btn btn-outline-success" disabled="disabled" style="width:50px;">${successRatioMonth.success9 }</button></td>
+									<td ><button id="s10" class="btn btn-outline-success" disabled="disabled" style="width:50px;">${successRatioMonth.success10 }</button></td>
+									<td ><button id="s11" class="btn btn-outline-success" disabled="disabled" style="width:50px;">${successRatioMonth.success11 }</button></td>
+									<td ><button id="s12" class="btn btn-outline-success" disabled="disabled" style="width:50px;">${successRatioMonth.success12 }</button></td>
 									</tr>
 									<tr>
-									<td>실패</td>
-									<td id="f1">${successRatioMonth.fail1 }</td>
-									<td id="f2">${successRatioMonth.fail2 }</td>
-									<td id="f3">${successRatioMonth.fail3 }</td>
-									<td id="f4">${successRatioMonth.fail4 }</td>
-									<td id="f5">${successRatioMonth.fail5 }</td>
-									<td id="f6">${successRatioMonth.fail6 }</td>
-									<td id="f7">${successRatioMonth.fail7 }</td>
-									<td id="f8">${successRatioMonth.fail8 }</td>
-									<td id="f9">${successRatioMonth.fail9 }</td>
-									<td id="f10">${successRatioMonth.fail10 }</td>
-									<td id="f11">${successRatioMonth.fail11 }</td>
-									<td id="f12">${successRatioMonth.fail12 }</td>
+									<td><input class="btn btn-outline-danger" type="button" value="실패" disabled="disabled"></td>
+									<td ><button id="f1" class="btn btn-outline-danger" disabled="disabled" style="width:50px;">${successRatioMonth.fail1 }</button></td>
+									<td><button  id="f2" class="btn btn-outline-danger" disabled="disabled" style="width:50px;">${successRatioMonth.fail2 }</button></td>
+									<td ><button id="f3" class="btn btn-outline-danger" disabled="disabled" style="width:50px;">${successRatioMonth.fail3 }</button></td>
+									<td ><button id="f4" class="btn btn-outline-danger" disabled="disabled" style="width:50px;">${successRatioMonth.fail4 }</button></td>
+									<td ><button id="f5" class="btn btn-outline-danger" disabled="disabled" style="width:50px;">${successRatioMonth.fail5 }</button></td>
+									<td ><button id="f6" class="btn btn-outline-danger" disabled="disabled" style="width:50px;">${successRatioMonth.fail6 }</button></td>
+									<td ><button id="f7" class="btn btn-outline-danger" disabled="disabled" style="width:50px;">${successRatioMonth.fail7 }</button></td>
+									<td ><button id="f8" class="btn btn-outline-danger" disabled="disabled" style="width:50px;">${successRatioMonth.fail8 }</button></td>
+									<td ><button id="f9" class="btn btn-outline-danger" disabled="disabled" style="width:50px;">${successRatioMonth.fail9 }</button></td>
+									<td ><button id="f10" class="btn btn-outline-danger" disabled="disabled" style="width:50px;">${successRatioMonth.fail10 }</button></td>
+									<td ><button id="f11" class="btn btn-outline-danger" disabled="disabled" style="width:50px;">${successRatioMonth.fail11 }</button></td>
+									<td ><button id="f12" class="btn btn-outline-danger" disabled="disabled" style="width:50px;">${successRatioMonth.fail12 }</button></td>
 									</tr>
 									</table>
 									
@@ -387,7 +409,8 @@ var config = {
 
 var myDoughnutChart = new Chart(ctx, config);   //차트 그리기 
 
-	Chart.pluginService.register({
+
+	/* Chart.pluginService.register({
 	  beforeDraw: function(chart) {
 	    var width = chart.chart.width,
 	        height = chart.chart.height,
@@ -408,7 +431,7 @@ var myDoughnutChart = new Chart(ctx, config);   //차트 그리기
 	    ctx.fillText(text, textX, textY);
 	    ctx.save();
 	  }
-	});
+	}); */
 //////////////////////////// 파이차트 끝 	
 	
 $(document).ready(function() {
@@ -417,10 +440,6 @@ $(document).ready(function() {
 	var use = thisyear-2000;
 	var thismonth = new Date().getMonth();
 	var use2 = thismonth +1;
-	document.getElementById("canvaslabel").value="20"+use+"년 "+use2+"월 성공률";
-	document.getElementById("headname2").value="20"+use+"년 성공률";
-	
-
 	if(use2==1){
 		document.getElementById("inputSuccess").value = '${successRatioMonth.success1}';
 		document.getElementById("inputFail").value = '${successRatioMonth.fail1}';
@@ -470,15 +489,20 @@ $(document).ready(function() {
 		data[1] = document.getElementById("inputFail").value;
 	}
 	
-	myChart.update();
-	/// 파이차트에 데이터 넣기 끝
+	myDoughnutChart.update();
+
+	var succ = parseInt(document.getElementById("inputSuccess").value);
+	var fail =  parseInt(document.getElementById("inputFail").value);
+	var realratio = Math.round(succ/(succ+fail)*10000);
+	var ratio = realratio/100;
+	document.getElementById("canvaslabel").value="20"+use+"년 "+use2+"월 성공률  :"+ratio+"%";
+	document.getElementById("headname2").value="20"+use+"년 성공률";
 	
 	});  	
 	
 
 $("input[name=yearbtn]").click(function(){    //연도 클릭
-	alert("이게눌려?");
-	
+
 	var thisyear = new Date().getFullYear();
 	if(thisyear < $(this).val()){
 		alert("아직 해당 연도가 시작되지 않았습니다!");	
@@ -498,7 +522,7 @@ $("input[name=yearbtn]").click(function(){    //연도 클릭
 				document.getElementById("inputFail").value='${successRatio.failyear}';
 				config.data.datasets[0].data[0]=document.getElementById("inputSuccess").value;
 				config.data.datasets[0].data[1]=document.getElementById("inputFail").value;
-				myChart.update({duration: 800});
+				myDoughnutChart.update();
 			},
 			error : function() {
 				
@@ -515,134 +539,194 @@ $("#btn1").click(function(){
 	var title = document.getElementById("headname2").value;
 	var year = title.substring(2,4);
 	var month = document.getElementById("btn1").value;
-	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률";
+	
 	document.getElementById("inputSuccess").value =${successRatioMonth.success1 };
 	document.getElementById("inputFail").value=${successRatioMonth.fail1};
 	config.data.datasets[0].data[0]=document.getElementById("inputSuccess").value;
 	config.data.datasets[0].data[1]=document.getElementById("inputFail").value;
-	myChart.update();
+	myDoughnutChart.update();
+	var succ = parseInt(document.getElementById("inputSuccess").value);
+	var fail =  parseInt(document.getElementById("inputFail").value);
+	var realratio = Math.round(succ/(succ+fail)*10000);
+	var ratio = realratio/100;
+	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률 :"+ratio+"%";
 });
 
 $("#btn2").click(function(){  
 	var title = document.getElementById("headname2").value;
 	var year = title.substring(2,4);
 	var month = document.getElementById("btn2").value;
-	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률";
+
 	document.getElementById("inputSuccess").value =${successRatioMonth.success2 };
 	document.getElementById("inputFail").value=${successRatioMonth.fail2};
 	config.data.datasets[0].data[0]=document.getElementById("inputSuccess").value;
 	config.data.datasets[0].data[1]=document.getElementById("inputFail").value;
-	myChart.update();
+	myDoughnutChart.update();
+	var succ = parseInt(document.getElementById("inputSuccess").value);
+	var fail =  parseInt(document.getElementById("inputFail").value);
+	var realratio = Math.round(succ/(succ+fail)*10000);
+	var ratio = realratio/100;
+	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률 :"+ratio+"%";
 	});
 $("#btn3").click(function(){  
 	var title = document.getElementById("headname2").value;
 	var year = title.substring(2,4);
 	var month = document.getElementById("btn3").value;
-	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률";
+	
 	document.getElementById("inputSuccess").value =${successRatioMonth.success3 };
 	document.getElementById("inputFail").value=${successRatioMonth.fail3};
 	config.data.datasets[0].data[0]=document.getElementById("inputSuccess").value;
 	config.data.datasets[0].data[1]=document.getElementById("inputFail").value;
-	myChart.update();
+	myDoughnutChart.update();
+	var succ = parseInt(document.getElementById("inputSuccess").value);
+	var fail =  parseInt(document.getElementById("inputFail").value);
+	var realratio = Math.round(succ/(succ+fail)*10000);
+	var ratio = realratio/100;
+	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률 :"+ratio+"%";
 	});
 $("#btn4").click(function(){  
 	var title = document.getElementById("headname2").value;
 	var year = title.substring(2,4);
 	var month = document.getElementById("btn4").value;
-	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률";
+	
 	document.getElementById("inputSuccess").value =${successRatioMonth.success4 };
 	document.getElementById("inputFail").value=${successRatioMonth.fail4};
 	config.data.datasets[0].data[0]=document.getElementById("inputSuccess").value;
 	config.data.datasets[0].data[1]=document.getElementById("inputFail").value;
-	myChart.update();
+	myDoughnutChart.update();
+	var succ = parseInt(document.getElementById("inputSuccess").value);
+	var fail =  parseInt(document.getElementById("inputFail").value);
+	var realratio = Math.round(succ/(succ+fail)*10000);
+	var ratio = realratio/100;
+	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률 :"+ratio+"%";
 	});
 $("#btn5").click(function(){  
 	var title = document.getElementById("headname2").value;
 	var year = title.substring(2,4);
 	var month = document.getElementById("btn5").value;
-	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률";
+	
 	document.getElementById("inputSuccess").value =${successRatioMonth.success5 };
 	document.getElementById("inputFail").value=${successRatioMonth.fail5};
 	config.data.datasets[0].data[0]=document.getElementById("inputSuccess").value;
 	config.data.datasets[0].data[1]=document.getElementById("inputFail").value;
-	myChart.update();
+	myDoughnutChart.update();
+	var succ = parseInt(document.getElementById("inputSuccess").value);
+	var fail =  parseInt(document.getElementById("inputFail").value);
+	var realratio = Math.round(succ/(succ+fail)*10000);
+	var ratio = realratio/100;
+	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률 :"+ratio+"%";
 	});
 $("#btn6").click(function(){  
 	var title = document.getElementById("headname2").value;
 	var year = title.substring(2,4);
 	var month = document.getElementById("btn6").value;
-	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률";
+	
 	document.getElementById("inputSuccess").value =${successRatioMonth.success6 };
 	document.getElementById("inputFail").value=${successRatioMonth.fail6};
 	config.data.datasets[0].data[0]=document.getElementById("inputSuccess").value;
 	config.data.datasets[0].data[1]=document.getElementById("inputFail").value;
-	myChart.update();
+	myDoughnutChart.update();
+	var succ = parseInt(document.getElementById("inputSuccess").value);
+	var fail =  parseInt(document.getElementById("inputFail").value);
+	var realratio = Math.round(succ/(succ+fail)*10000);
+	var ratio = realratio/100;
+	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률 :"+ratio+"%";
 	});
 $("#btn7").click(function(){  
 	var title = document.getElementById("headname2").value;
 	var year = title.substring(2,4);
 	var month = document.getElementById("btn7").value;
-	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률";
+	
 	document.getElementById("inputSuccess").value =${successRatioMonth.success7 };
 	document.getElementById("inputFail").value=${successRatioMonth.fail7};
 	config.data.datasets[0].data[0]=document.getElementById("inputSuccess").value;
 	config.data.datasets[0].data[1]=document.getElementById("inputFail").value;
-	myChart.update();
+	myDoughnutChart.update();
+	var succ = parseInt(document.getElementById("inputSuccess").value);
+	var fail =  parseInt(document.getElementById("inputFail").value);
+	var realratio = Math.round(succ/(succ+fail)*10000);
+	var ratio = realratio/100;
+	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률 :"+ratio+"%";
 	});
 $("#btn8").click(function(){  
 	var title = document.getElementById("headname2").value;
 	var year = title.substring(2,4);
 	var month = document.getElementById("btn8").value;
-	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률";
+	
 	document.getElementById("inputSuccess").value =${successRatioMonth.success8 };
 	document.getElementById("inputFail").value=${successRatioMonth.fail8};
 	config.data.datasets[0].data[0]=document.getElementById("inputSuccess").value;
 	config.data.datasets[0].data[1]=document.getElementById("inputFail").value;
-	myChart.update();
+	myDoughnutChart.update();
+	var succ = parseInt(document.getElementById("inputSuccess").value);
+	var fail =  parseInt(document.getElementById("inputFail").value);
+	var realratio = Math.round(succ/(succ+fail)*10000);
+	var ratio = realratio/100;
+	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률 :"+ratio+"%";
 	});
 $("#btn9").click(function(){  
 	var title = document.getElementById("headname2").value;
 	var year = title.substring(2,4);
 	var month = document.getElementById("btn9").value;
-	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률";
+	
 	document.getElementById("inputSuccess").value =${successRatioMonth.success9 };
 	document.getElementById("inputFail").value=${successRatioMonth.fail9};
 	config.data.datasets[0].data[0]=document.getElementById("inputSuccess").value;
 	config.data.datasets[0].data[1]=document.getElementById("inputFail").value;
-	myChart.update();
+	myDoughnutChart.update();
+	var succ = parseInt(document.getElementById("inputSuccess").value);
+	var fail =  parseInt(document.getElementById("inputFail").value);
+	var realratio = Math.round(succ/(succ+fail)*10000);
+	var ratio = realratio/100;
+	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률 :"+ratio+"%";
 	});
 $("#btn10").click(function(){  
 	var title = document.getElementById("headname2").value;
 	var year = title.substring(2,4);
 	var month = document.getElementById("btn10").value;
-	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률";
+	
 	document.getElementById("inputSuccess").value =${successRatioMonth.success10 };
 	document.getElementById("inputFail").value=${successRatioMonth.fail10};
 	config.data.datasets[0].data[0]=document.getElementById("inputSuccess").value;
 	config.data.datasets[0].data[1]=document.getElementById("inputFail").value;
-	myChart.update();
+	myDoughnutChart.update();
+	var succ = parseInt(document.getElementById("inputSuccess").value);
+	var fail =  parseInt(document.getElementById("inputFail").value);
+	var realratio = Math.round(succ/(succ+fail)*10000);
+	var ratio = realratio/100;
+	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률 :"+ratio+"%";
 	});
 $("#btn11").click(function(){  
 	var title = document.getElementById("headname2").value;
 	var year = title.substring(2,4);
 	var month = document.getElementById("btn11").value;
-	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률";
+	
 	document.getElementById("inputSuccess").value =${successRatioMonth.success11 };
 	document.getElementById("inputFail").value=${successRatioMonth.fail11};
 	config.data.datasets[0].data[0]=document.getElementById("inputSuccess").value;
 	config.data.datasets[0].data[1]=document.getElementById("inputFail").value;
-	myChart.update();
+	myDoughnutChart.update();
+	var succ = parseInt(document.getElementById("inputSuccess").value);
+	var fail =  parseInt(document.getElementById("inputFail").value);
+	var realratio = Math.round(succ/(succ+fail)*10000);
+	var ratio = realratio/100;
+	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률 :"+ratio+"%";
 	});
 $("#btn12").click(function(){  
 	var title = document.getElementById("headname2").value;
 	var year = title.substring(2,4);
 	var month = document.getElementById("btn12").value;
-	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률";
+	
 	document.getElementById("inputSuccess").value =${successRatioMonth.success12 };
 	document.getElementById("inputFail").value=${successRatioMonth.fail12};
 	config.data.datasets[0].data[0]=document.getElementById("inputSuccess").value;
 	config.data.datasets[0].data[1]=document.getElementById("inputFail").value;
-	myChart.update();
+	myDoughnutChart.update();
+	var succ = parseInt(document.getElementById("inputSuccess").value);
+	var fail =  parseInt(document.getElementById("inputFail").value);
+	var realratio = Math.round(succ/(succ+fail)*10000);
+	var ratio = realratio/100;
+	document.getElementById("canvaslabel").value="20"+year+"년 "+month+" 성공률 :"+ratio+"%";
 	});
 
 
