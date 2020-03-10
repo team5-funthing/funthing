@@ -1,5 +1,8 @@
 package com.team5.funthing.admin.model.vo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class AdminUserMainImageChangeVO {
 	
 	private int imageNo;
