@@ -9,25 +9,56 @@ public class PaymentReserveVO {
 	private int projectNo;
 	private String email;
 	private Date paymentReserveDate;
-	private String paymentOption = "Ä«Ä«¿ÀÆäÀÌ";
-	private int applyNo; // ½ÂÀÎ¹øÈ£
+	private String paymentOption = "ì¹´ì¹´ì˜¤í˜ì´";
+	private int applyNo; // ìŠ¹ì¸ë²ˆí˜¸
 	private String paymentStatus;
 	private int deliveryAddressNo;
 	private int fundingMoney;
 	
-	//Æİµù ¹Ğ¾îÁÖ±â ½Ã Ãß°¡Ç×¸ñµé
+	//í€ë”© ë°€ì–´ì£¼ê¸° ì‹œ ì¶”ê°€í•­ëª©ë“¤
 	private int additionalFundingMoney;
 	private int shippingFee;
 	private String privateName = "off";
 	private String privateFundingMoney = "off";
 	
-	//Á¶ÀÎÇÒ¶§ ÇÊ¿äÇÑ VO
+	//ì¡°ì¸í• ë•Œ í•„ìš”í•œ VO
 	private RewardVO reward;
 	private RewardSelectionVO rewardSelection;
+	
+	private String sumDate; 
+	private int sumFundingMoney;
 	
 	
 	private List<RewardSelectionVO> rewardSelectionList;
 
+	
+	
+	
+	
+	public int getSumFundingMoney() {
+		return sumFundingMoney;
+	}
+	public void setSumFundingMoney(int sumFundingMoney) {
+		this.sumFundingMoney = sumFundingMoney;
+	}
+	public String getSumDate() {
+		return sumDate;
+	}
+	public void setSumDate(String sumDate) {
+		this.sumDate = sumDate;
+	}
+	public RewardVO getReward() {
+		return reward;
+	}
+	public void setReward(RewardVO reward) {
+		this.reward = reward;
+	}
+	public RewardSelectionVO getRewardSelection() {
+		return rewardSelection;
+	}
+	public void setRewardSelection(RewardSelectionVO rewardSelection) {
+		this.rewardSelection = rewardSelection;
+	}
 
 	public int getOrderNo() {
 		return orderNo;
