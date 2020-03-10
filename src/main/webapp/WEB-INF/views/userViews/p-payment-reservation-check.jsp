@@ -48,7 +48,7 @@
                                     <th scope="col">no.</th>
                                     <th scope="col">카테고리</th>
                                     <th scope="col">프로젝트</th>
-                                    <th scope="col">결제 예정일</th>
+                                    <th scope="col">결제 상황</th>
                                     <th scope="col">금액</th>
                                   </tr>
                                 </thead>
