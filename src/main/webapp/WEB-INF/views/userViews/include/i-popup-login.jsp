@@ -49,10 +49,10 @@
                         </div>
 
                     </div>
-
+					<div id="loginProcessingResult">${loginFail}</div>
                     <div class="col-xl-12 mt-10">
                         
-                        <input type="submit" class="boxed-btn3" value="로그인하기"> 
+                        <input onclick="inputCheck()" type="button" class="boxed-btn3" value="로그인하기"> 
                     </div>
 
                     <hr/>
@@ -115,6 +115,26 @@
 									}
 								});
 							};
+							
+							function inputCheck(){								
+								var email = document.getElementById("email").value;
+								var password = document.getElementById("password").value;
+								
+								console.log(email);
+								console.log(password);
+								
+								if(email == ""){
+									$("#loginProcessingResult").empty();
+									$("#loginProcessingResult").append("아이디를 입력하세요").css('color','Tomato').css('font-size','75%');
+									return;
+								}else if(password == ""){
+									$("#loginProcessingResult").empty();
+									$("#loginProcessingResult").append("비밀번호를 입력하세요").css('color','Tomato').css('font-size','75%');
+									return;
+								}else{
+									document.getElementById('login-popup').submit();
+								}
+							}
 						</script>
                     <div class="mt-10">
                         	아직 회원이 아니신가요?
