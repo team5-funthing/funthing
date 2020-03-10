@@ -49,7 +49,7 @@
                         <li class="sidebar-item"> 
                         	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="projectCategoryManagement.ado" aria-expanded="false">
                         		<i class="mdi mdi-file-document"></i>
-                        		<span class="hide-menu">카테고리관리</span>
+                        		<span class="hide-menu">프로젝트 카테고리관리</span>
                         	</a>
                         </li>
                         <li class="sidebar-item"> 
@@ -67,13 +67,13 @@
                         <li class="sidebar-item"> 
                         	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="getProjectCheckList.ado" aria-expanded="false">
                                 <i class="mdi mdi-account-card-details"></i>
-                                <span class="hide-menu">심사하기 </span>
+                                <span class="hide-menu">프로젝트 심사 </span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                         	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="userMainImageChangeForm.ado" aria-expanded="false">
                                 <i class="mdi mdi-account-card-details"></i>
-                                <span class="hide-menu">유저 메인 이미지 </span>
+                                <span class="hide-menu">유저 메인배너 이미지 설정 </span>
                             </a>
                         </li>
                         <li class="sidebar-item"> 

@@ -35,9 +35,7 @@
 .categoryArea ul li{
 		margin-bottom:10px;
 }
-.deleteButton{
-	float:right;
-}
+
 </style>
 </head>
 
@@ -94,9 +92,12 @@
     				<h5>카테고리 입력란</h5>
     				<form method="post" action="insertCategory.ado">
     					<div>
-	    					입력할 카테고리 : <input type="text" name="categoryName">					
+	    					<p class="alert alert-secondary" style="display:flex;"><input type="text" readonly value="  입력할 카테고리  :" class="form-control" style="width:45%;background-color:#E2E3E5;" >&nbsp;
+	    					<input type="text" name="categoryName" class="form-control" style="width:35%;background-color:white;">
+	    					&nbsp;<input class="btn btn-outline-dark" type="submit" value="입력">
+	    					</p>				
     					</div>
-    					<input type="submit" value="입력">
+    					
     				</form>
     			</div>
     			<div class="categoryArea">
@@ -104,7 +105,7 @@
     				<div style="overflow-x:hidden;">
     				<ul>
     					<c:forEach var="category" items="${CategoryList}">
-    						<li>${category.categoryName}<a href="deleteCategory.ado?categoryName=${category.categoryName}" class="deleteButton"><button>삭제</button></a></li>
+    						<li class="alert alert-secondary">${category.categoryName}<a href="deleteCategory.ado?categoryName=${category.categoryName}" class="badge badge-dark" style="float:right;height:auto;" >삭제</a></li>
     					</c:forEach>
     				</ul>
     				</div>

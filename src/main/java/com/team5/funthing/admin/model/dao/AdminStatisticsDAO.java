@@ -27,4 +27,9 @@ public class AdminStatisticsDAO {
 		return st.selectOne("AdminStatisticsDAO.getFundingMoneyPerMonth",vo);
 	}
 	
+	public AdminStatisticsVO getProjectSuccessRatioTotalYear(AdminStatisticsVO vo) {
+		System.out.println("전체 성공/실패 실행");
+		return st.selectOne("AdminStatisticsDAO.getProjectSuccessRatioTotalYear",vo);
+				
+	}
 }

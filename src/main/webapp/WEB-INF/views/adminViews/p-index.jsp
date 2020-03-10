@@ -94,59 +94,96 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title m-b-0"></h5>
-            <div class="col-lg-4">
+            
                 <div class="row">
 
                     <div class="col-6">
-                        <div class="bg-dark p-10 text-white text-center">
+                        <div class="bg-dark p-10 text-white text-center" >
                             <i class="fas fa-check-circle m-b-5 font-16"></i>
-                            <h5 class="m-b-0 m-t-5">${statusPListCount}</h5>
-                            <small class="font-light">펀딩 성공</small>
+
+                            <h5 class="m-b-0 m-t-5">${totalSuccess.successtotal }</h5>
+                            <small class="font-light">성공</small>
+
                         </div>
                     </div>
 
                     <div class="col-6">
-                        <div class="bg-dark p-10 text-white text-center">
+                        <div class="bg-dark p-10 text-white text-center" >
                             <i class="fas fa-times m-b-5 font-16"></i>
-                            <h5 class="m-b-0 m-t-5">${statusFListCount}</h5>
-                            <small class="font-light">펀딩 실패</small>
-                        </div>
-                    </div>
 
-  					<div class="col-6 m-t-15">
-                        <div class="bg-dark p-10 text-white text-center">
-                            <i class="fas fa-exclamation-triangle m-b-5 font-16"></i>
-                            <h5 class="m-b-0 m-t-5">${statusMListCount}</h5>
-                            <small class="font-light">펀딩 진행중</small>
+                            <h5 class="m-b-0 m-t-5">${totalSuccess.failtotal }</h5>
+                            <small class="font-light">실패</small>
                         </div>
                     </div>
 
                     <div class="col-6 m-t-15">
-                        <div class="bg-dark p-10 text-white text-center">
+                        <div class="bg-dark p-10 text-white text-center" >
                             <i class="fas fa-comment-dots m-b-5 font-16"></i>
                             <h5 class="m-b-0 m-t-5">${statusWListCount}</h5>
-                            <small class="font-light">심사 진행중</small>
+                            <small class="font-light">심사</small>
+
                         </div>
                     </div>
 
                     <div class="col-6 m-t-15">
-                        <div class="bg-dark p-10 text-white text-center">
+
+                        <div class="bg-dark p-10 text-white text-center" >
+                            <i class="fas fa-exclamation-triangle m-b-5 font-16"></i>
+                            <h5 class="m-b-0 m-t-5">17</h5>
+                            <small class="font-light">반려</small>
+
+                        </div>
+                    </div>
+
+                    <div class="col-6 m-t-15">
+                        <div class="bg-dark p-10 text-white text-center" >
                             <i class="fa fa-table m-b-5 font-16"></i>
-                            <h5 class="m-b-0 m-t-5">100원</h5>
+                            <h5 class="m-b-0 m-t-5" ><input type="text" readonly style="border:none;background-color:#343A40;color:white;width:100%;text-align:center;" id="thisMonth"></h5>
                             <small class="font-light">이번달</small>
                         </div>
                     </div>
-
+					<script>
+					$(document).ready(function(){
+					var thismonth = new Date().getMonth();
+					var use2 = thismonth +1;
+					if(use2==1){
+						$("#thisMonth").val('${fundingMoney.m1}');
+					}else if(use2==2){
+						document.getElementById("thisMonth").value = '${fundingMoney.m2}';
+					}else if(use2==3){						
+						$("#thisMonth").val('${fundingMoney.m3}');
+					}else if(use2==4){
+						document.getElementById("thisMonth").value = '${fundingMoney.m4}';
+					}else if(use2==5){
+						document.getElementById("thisMonth").value = '${fundingMoney.m5}';
+					}else if(use2==6){
+						document.getElementById("thisMonth").value = '${fundingMoney.m6}';
+					}else if(use2==7){
+						document.getElementById("thisMonth").value = '${fundingMoney.m7}';
+					}else if(use2==8){
+						document.getElementById("thisMonth").value = '${fundingMoney.m8}';
+					}else if(use2==9){
+						document.getElementById("thisMonth").value = '${fundingMoney.m9}';
+					}else if(use2==10){
+						document.getElementById("thisMonth").value = '${fundingMoney.m10}';
+					}else if(use2==11){
+						document.getElementById("thisMonth").value = '${fundingMoney.m11}';
+					}else if(use2==12){
+						document.getElementById("thisMonth").value = '${fundingMoney.m12}';
+					}
+					
+					});
+					</script>
                     <div class="col-6 m-t-15">
-                        <div class="bg-dark p-10 text-white text-center">
+                        <div class="bg-dark p-10 text-white text-center" >
                             <i class="fab fa-y-combinator m-b-5 font-16"></i>
-                            <h5 class="m-b-0 m-t-5">8540원</h5>
+                            <h5 class="m-b-0 m-t-5">${fundingMoney.sumfunding }</h5>
                             <small class="font-light">올해</small>
                         </div>
                     </div>
 
                 </div>
-            </div>
+            
 
 
 

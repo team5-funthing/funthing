@@ -194,7 +194,9 @@
 	            	
 					$(document).on("click", ".imgRemoveBtn", function(){
 						
+
 						$(this).siblings("input").attr("name", "userMainImageNo");
+
 						$(this).closest("li").css('display', 'none');
 						
 					})

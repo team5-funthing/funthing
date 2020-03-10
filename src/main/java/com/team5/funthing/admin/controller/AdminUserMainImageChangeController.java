@@ -18,9 +18,6 @@ import com.team5.funthing.admin.service.userMainImageChangeService.UpdateUserMai
 import com.team5.funthing.admin.service.userMainImageChangeService.UpdateUserMainImageService;
 import com.team5.funthing.common.utils.uploadUtils.UploadUtil;
 
-import com.team5.funthing.user.model.vo.CreatorVO;
-import com.team5.funthing.user.model.vo.ProjectIntroduceImageVO;
-
 
 @Controller
 public class AdminUserMainImageChangeController {
