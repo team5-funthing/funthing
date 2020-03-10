@@ -1,10 +1,8 @@
 package com.team5.funthing.admin.controller;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.tomcat.jni.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +13,6 @@ import com.team5.funthing.admin.model.vo.AdminUserMainImageChangeVO;
 import com.team5.funthing.admin.service.userMainImageChangeService.UpdateUserMainImageNullService;
 import com.team5.funthing.admin.service.userMainImageChangeService.UpdateUserMainImageService;
 import com.team5.funthing.common.utils.uploadUtils.UploadUtil;
-import com.team5.funthing.user.model.vo.CreatorVO;
 
 @Controller
 public class AdminUserMainImageChangeController {
