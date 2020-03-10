@@ -1,6 +1,7 @@
 package com.team5.funthing.admin.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,27 +36,27 @@ public class AdminUserMainImageChangeController {
 	@Autowired
 	AdminUserMainImageChangeVO adminUserMainImageChangeVO;
 
-	// ===================== 유틸 주입 =====================
+	// ===================== �쑀�떥 二쇱엯 =====================
 
 	@Autowired
 	private UploadUtil uploadUtil;
 
 	@RequestMapping("userMainImageChange.ado")
 	public String upload(
-			@RequestParam(name = "projectIntroduceImageNo", required = false)List<Integer> userMainImageNoList,
+			@RequestParam(name = "userMainImageNo", required = false)List<Integer> userMainImageNoList,
 			@RequestParam(name = "userMainUploadImage",required = false) List<MultipartFile> userMainUploadImage,
 			AdminUserMainImageChangeVO vo) {
 
-		vo.setImageNo(1);
-		vo.setImageName("imsi");
+		
 		try {
 			userMainImageUploader(userMainUploadImage,vo, userMainImageNoList);
-			updateUserMainImageService.updateUserMainImage(vo);
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
+		
 		return "redirect: userMainImageChangeForm.ado";
 	}
 
@@ -64,8 +65,8 @@ public class AdminUserMainImageChangeController {
 
 		List<String> toRemoveFilePath = new ArrayList<String>();
 
-		if (!toDoUploadList.get(0).isEmpty()) { // 업로드 시킨 파일이 이미 존재하는 경우 파일 선택을 다시 안한 경우에 나올 수 있는 상황 처리
-			toRemoveFilePath.add(vo.getImagePath()); // 제거될 파일경로를 vo객체에서 가져오기
+		if (!toDoUploadList.get(0).isEmpty()) { // �뾽濡쒕뱶 �떆�궓 �뙆�씪�씠 �씠誘� 議댁옱�븯�뒗 寃쎌슦 �뙆�씪 �꽑�깮�쓣 �떎�떆 �븞�븳 寃쎌슦�뿉 �굹�삱 �닔 �엳�뒗 �긽�솴 泥섎━
+			toRemoveFilePath.add(vo.getImagePath()); // �젣嫄곕맆 �뙆�씪寃쎈줈瑜� vo媛앹껜�뿉�꽌 媛��졇�삤湲�
 			String voName = vo.getClass().getSimpleName();
 			List<String> toSettingPath = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);
 			if (toSettingPath == null)
@@ -101,9 +102,13 @@ public class AdminUserMainImageChangeController {
 			toRemoveFilePath.add(0, null);
 		}
 
-		if (!toDoUploadList.isEmpty()) { // 프로젝트 소개 이미지 기존업로드 제거 및 새 업로드, DB 추가 작업 메서드
+		if (!toDoUploadList.isEmpty()) { // �봽濡쒖젥�듃 �냼媛� �씠誘몄� 湲곗〈�뾽濡쒕뱶 �젣嫄� 諛� �깉 �뾽濡쒕뱶, DB 異붽� �옉�뾽 硫붿꽌�뱶
 
 			List<String> tmpUploadList = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);
+			for(int i=0; i<tmpUploadList.size();i++) {
+			System.out.println("tmpUploadList:"+tmpUploadList.get(i));
+			}
+			Collections.reverse(tmpUploadList);
 			insertUserMainImageService.insertUserMainImage(adminUserMainImageChangeVO, tmpUploadList);
 
 		} else {

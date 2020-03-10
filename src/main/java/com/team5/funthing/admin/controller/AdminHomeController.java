@@ -18,6 +18,7 @@ import com.team5.funthing.admin.service.adminCategoryService.GetCategoryListServ
 import com.team5.funthing.admin.service.adminNoticeBoardService.GetAdminNoticeBoardListService;
 import com.team5.funthing.admin.service.adminProjectCheckService.GetProjectCheckListService;
 import com.team5.funthing.admin.service.adminRegisterTosService.GetRegisterTosListService;
+import com.team5.funthing.admin.service.userMainImageChangeService.GetUserMainImageListService;
 import com.team5.funthing.admin.service.adminStatisticsService.GetFundingMoneyPerMonthService;
 import com.team5.funthing.admin.service.adminStatisticsService.GetProjectSuccessRatioTotalYearService;
 import com.team5.funthing.user.model.vo.ProjectVO;
@@ -49,6 +50,12 @@ public class AdminHomeController {
 	GetRegisterTosListService getRegisterTosListService;
 	@Autowired
 	GetCategoryListService getCategoryListService;
+
+	@Autowired
+	GetUserMainImageListService getUserMainImageListService;
+	
+	
+
 	@Autowired
 	GetProjectSuccessRatioTotalYearService getProjectSuccessRatioTotalYearService;
 	@Autowired
@@ -57,13 +64,14 @@ public class AdminHomeController {
 	@RequestMapping("adminIndex.ado")
 	public String showIndex(AdminStatisticsVO vo,Model model) {
 		model.addAttribute("totalSuccess",getProjectSuccessRatioTotalYearService.getProjectSuccessRatioTotalYear(vo));
-		Calendar cal = Calendar.getInstance();// «ˆ¿Á ø¨µµ ±∏«œ±‚.
+		Calendar cal = Calendar.getInstance();// √á√∂√Ä√ß ¬ø¬¨¬µ¬µ ¬±¬∏√á√è¬±√¢.
 		int year = cal.get(cal.YEAR)-2000;
 		String parse = Integer.toString(year);
 		vo.setYearr(parse);
 		model.addAttribute("fundingMoney",getFundingMoneyPerMonthService.getFundingMoneyPerMonth(vo));
 		
 		return "p-index";
+
 	}
 	
 	@RequestMapping("projectCategoryManagement.ado")
@@ -131,9 +139,9 @@ public class AdminHomeController {
 	
 	@RequestMapping("userMainImageChangeForm.ado")
 	public String userMainImageForm(AdminUserMainImageChangeVO vo, Model model) {
-		List<AdminUserMainImageChangeVO> getUserMainImageChangeList =getUserMainImageChangeListService.getUserMainImageChangeList(vo);
+		List<AdminUserMainImageChangeVO> userMainImageList =getUserMainImageListService.getUserMainImageList();
 		
-		model.addAttribute("getUserMainImageChangeList",getUserMainImageChangeList);
+		model.addAttribute("userMainImageList",userMainImageList);
 		return "f-usermainimage-input";
 	}
 		
