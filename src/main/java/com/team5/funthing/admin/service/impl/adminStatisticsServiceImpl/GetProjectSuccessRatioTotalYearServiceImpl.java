@@ -5,17 +5,17 @@ import org.springframework.stereotype.Service;
 
 import com.team5.funthing.admin.model.dao.AdminStatisticsDAO;
 import com.team5.funthing.admin.model.vo.AdminStatisticsVO;
-import com.team5.funthing.admin.service.adminStatisticsService.GetProjectSuccessRatioPerYearService;
+import com.team5.funthing.admin.service.adminStatisticsService.GetProjectSuccessRatioTotalYearService;
 @Service
-public class GetProjectSuccessRatioPerYearServiceImpl implements GetProjectSuccessRatioPerYearService {
+public class GetProjectSuccessRatioTotalYearServiceImpl implements GetProjectSuccessRatioTotalYearService {
 
+	
 	@Autowired
 	AdminStatisticsDAO dao;
-	
 	@Override
-	public AdminStatisticsVO getProjectSuccessRatioPerYear(AdminStatisticsVO vo) {
+	public AdminStatisticsVO getProjectSuccessRatioTotalYear(AdminStatisticsVO vo) {
 		
-		return dao.getProjectSuccessRatioPerYear(vo);
+		return dao.getProjectSuccessRatioTotalYear(vo);
 	}
 
 }

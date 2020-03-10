@@ -22,4 +22,10 @@ public class CreatorStatisticsDAO {
 		return SqlSessionTemplate.selectOne("CreatorStatisticsDAO.getFundingPaymentCount", currentProjectNo);
 	}
 
+	public List<PaymentReserveVO> getSumProjectAndPayment(int currentProjectNo) {
+		return SqlSessionTemplate.selectList("CreatorStatisticsDAO.getSumProjectAndPayment", currentProjectNo);
+	}
+
+
+
 }

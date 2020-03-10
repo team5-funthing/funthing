@@ -23,8 +23,15 @@ public class AdminUserMainImageChangeDAO {
 	}
 	
 	public List<AdminUserMainImageChangeVO> getUserMainImageChange(){
-		
 		return sqlSessionTemplate.selectList("UserMainImageChangeDAO.getUserMainImageChange");
+	}
+	
+	public void deleteUserMainImageChange(AdminUserMainImageChangeVO vo) {
+		sqlSessionTemplate.delete("UserMainImageChangeDAO.deleteUserMainImage",vo);
+	}
+	
+	public void insertUserMainImage(AdminUserMainImageChangeVO vo) {
+		sqlSessionTemplate.insert("UserMainImageChangeDAO.inserUserMainImage",vo);
 	}
 	
 }

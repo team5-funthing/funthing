@@ -40,7 +40,7 @@ public class CreatorStatisticsController {
 	
 	@RequestMapping(value="getSatistics.udo", method = RequestMethod.GET)
 	public String getSatistics(@RequestParam int currentProjectNo,
-											Model model, ProjectVO vo, PaymentReserveVO vo2 ) throws JsonProcessingException {
+											Model model, ProjectVO vo, PaymentReserveVO vo2) throws JsonProcessingException {
 		
 		vo.setProjectNo(currentProjectNo);
 		model.addAttribute("currentProjectNo",currentProjectNo);
@@ -54,31 +54,37 @@ public class CreatorStatisticsController {
 		model.addAttribute("count", count);
 		
 		
-		//차트에 들어가는 데이터 뽑아내기 
 		
 		//결제정보가져오기 
-		List<PaymentReserveVO> getAllProjectAndPayment = getAllProjectAndPaymentService.getAllProjectAndPayment(currentProjectNo);
+		List<PaymentReserveVO> getSumProjectAndPayment = getAllProjectAndPaymentService.getSumProjectAndPayment(currentProjectNo);
 		
+		
+		//결제정보 보내기 JSON으로
 		Gson gson = new Gson();
 		JsonArray jArray = new JsonArray();
-		
-		Iterator<PaymentReserveVO> it = getAllProjectAndPayment.iterator();
+
+
+		Iterator<PaymentReserveVO> it = getSumProjectAndPayment.iterator();
 		while(it.hasNext()) {
 			PaymentReserveVO projectAndPayment = it.next();
 			JsonObject object = new JsonObject();
-			
+	
 			//getPaymentReserveDate Date타입 -> String으로 변환 하는중
-			Date from = projectAndPayment.getPaymentReserveDate();
-			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
-			String to = transFormat.format(from);
+//			Date from = projectAndPayment.getPaymentReserveDate();
+//			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+//			String to = transFormat.format(from);
 			
+		
 			//getFundingMoney 
-			int Data = projectAndPayment.getFundingMoney();
+			String to = projectAndPayment.getSumDate();
+			int Data = projectAndPayment.getSumFundingMoney();
 			
 			object.addProperty("labelDate", to);
 			object.addProperty("dataFundingMoney", Data);
 			jArray.add(object);
 		}
+		
+		
 		
 		String json = gson.toJson(jArray);
 		model.addAttribute("json", json);
@@ -86,6 +92,9 @@ public class CreatorStatisticsController {
 		
 		return "p-test-statistics";
 	}
+	
+	
+	
 	
 	@RequestMapping(value="getAllProjectAndPayment.udo", method = RequestMethod.GET)
 	public String getAllProjectAndPayment(@RequestParam int currentProjectNo,

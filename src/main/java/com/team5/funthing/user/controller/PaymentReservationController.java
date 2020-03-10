@@ -127,4 +127,10 @@ public class PaymentReservationController {
 		return "p-payment-result";
 	}
 	
+	@RequestMapping(value = "", method = RequestMethod.POST)
+	public String getPaymentReserveListByEmail() {
+		return null;
+	}
+	
+	
 }
