@@ -1,6 +1,7 @@
 package com.team5.funthing.admin.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,8 @@ public class AdminUserMainImageChangeController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
+		
 		return "redirect: userMainImageChangeForm.ado";
 	}
 
@@ -106,6 +108,10 @@ public class AdminUserMainImageChangeController {
 		if (!toDoUploadList.isEmpty()) { // �봽濡쒖젥�듃 �냼媛� �씠誘몄� 湲곗〈�뾽濡쒕뱶 �젣嫄� 諛� �깉 �뾽濡쒕뱶, DB 異붽� �옉�뾽 硫붿꽌�뱶
 
 			List<String> tmpUploadList = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);
+			for(int i=0; i<tmpUploadList.size();i++) {
+			System.out.println("tmpUploadList:"+tmpUploadList.get(i));
+			}
+			Collections.reverse(tmpUploadList);
 			insertUserMainImageService.insertUserMainImage(adminUserMainImageChangeVO, tmpUploadList);
 
 		} else {

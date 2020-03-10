@@ -123,9 +123,10 @@
 				<form action="userMainImageChange.ado"
 												id="userMainImageChangSetting" method="post"
 												enctype="multipart/form-data">
+				<div id="userMainImage">
 				<c:choose>
 					<c:when test="${userMainImageList eq null}">
-					
+						<input type="hidden">
 						<input type="file" class="form-control-file select-project-image userMainImage">
 						<hr>
 			           	<ul id="projectIntroduceImageUl">
@@ -155,6 +156,7 @@
 					</c:when>
 					
 				</c:choose>
+				</div>
 				</form>
 				<script>
 				
@@ -163,7 +165,7 @@
 	            		
 	            		if(fileVal != ""){
 	            			
-	            			$("#nav-images").prepend("<input type='file' class='form-control-file select-project-image userMainImage'>");
+	            			$("#userMainImage").prepend("<input type='file' class='form-control-file select-project-image userMainImage'>");
 	            			$(this).attr('name', 'userMainUploadImage'); 
 	            			$(this).css('display', 'none');
 	            	       	
@@ -237,11 +239,11 @@
 
 											
 											
-
+											<input type="button">
 											<a
 												class="btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
 												href="javaScript:return(0);"
-												onclick="document.getElementById('userMainImageChangSetting').submit();">바꾸기</a>
+												onclick="document.getElementById('userMainImageChangSetting').submit();">적용허가</a>
 										</div>
 
 

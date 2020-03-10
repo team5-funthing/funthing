@@ -50,6 +50,7 @@
     	<typeAlias type="com.team5.funthing.admin.model.vo.AdminUserMainProjectVO" alias="adminUserMainProject"/>
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminStatisticsVO" alias="adminStatistics"/>
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminCategoryVO" alias="category"/>
+		<typeAlias type="com.team5.funthing.admin.model.vo.AdminMainViewVO" alias="adminMainView"/>
 		
 	</typeAliases>
   
@@ -110,6 +111,7 @@
  		<mapper resource="mappers/registerTos-mapper.xml"/>
  		<mapper resource="mappers/adminStatistics-mapper.xml"/>
  		<mapper resource="mappers/category-mapper.xml"/>
+ 		<mapper resource="mappers/adminMainView-mapper.xml"/>
 
 
 	</mappers>
