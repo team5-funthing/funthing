@@ -28,82 +28,7 @@
 a{text-decoration:none;}
 </style>
 <script>
-function checkFunction(){
-	var finalAgree=document.getElementById("finalAgree");
-	var firstAgree=document.getElementById("firstAgree");
-	if(firstAgree.checked==true){
-		$("#finalAgree").attr("checked",true);
-	}
-	if(finalAgree.checked==true){
-		$("#email").removeAttr("disabled");
-		$("#duplButton").removeAttr("disabled");
-		$("#name").removeAttr("disabled");
-		$("#password").removeAttr("disabled");
-		$("#registerButton").removeAttr("disabled");
-		$("#loginButton").removeAttr("disabled");
-	}else{
-		$("#email").attr("disabled",true);
-		$("#duplButton").attr("disabled",true);
-		$("#name").attr("disabled",true);
-		$("#password").attr("disabled",true);
-		$("#registerButton").attr("disabled",true);
-		$("#loginButton").attr("disabled",true);
-	}
-}
-$(document).ready(function(){
-	alert("이게1번");
-	$("#duplButton").attr("disabled",true);
-	$("#registerButton").attr("disabled",true);
-	$("#loginButton").attr("disabled",true);
-	$("#registerTos1").hide();
-	$("#inputRegisterTos").hide();
-	$("#inputPersonalInfo").hide();
-	
-	$('.tosAgree').magnificPopup({
-		type:'inline',
-		midClick:true
-	});
-	$("#registerTos").click(function(){
-		$("#registerTos1").toggle("slow");
-		$.ajax({
-			type:"post",
-			url:"getRegisterTos.udo",
-			success:function(data){
-				$("#registerTos1").html(data);
-			},
-			error:function(){
-				alert('실패');
-			}
-		});
-	});
-	$("#serviceTos").click(function(){
-		$("#inputRegisterTos").toggle("slow");
-		$.ajax({
-			type:"post",
-			url:"getServiceTos.udo",
-			success:function(data){
-				$("#inputRegisterTos").html(data);
-			},
-			error:function(){
-				alert("실패");
-			}
-		});
-	});
-	$("#PersonalInfo").click(function(){
-		$("#inputPersonalInfo").toggle("slow");
-		$.ajax({
-			type:"post",
-			url:"getPersonalInfo.udo",
-			success:function(data){
-				$("#inputPersonalInfo").html(data);
-			},
-			error:function(){
-				alert("실패");
-			}
-		});
-	});
-	
-});
+
 </script>
 </head>
 <body>
@@ -124,7 +49,7 @@ $(document).ready(function(){
 				<div class="col">
 					<div class="col align-self-center">
 
-						<form action="#" method="post" name="joinform">
+						<form action="getMember.udo" method="post" name="joinform">
 							<div class="mt-10">
 								<h2>회원가입</h2>
 							</div>
@@ -164,7 +89,7 @@ $(document).ready(function(){
 							<!-- 약관 동의 팝업 종료 -->
 							<div class="mt-10">
 								<h5>이메일</h5>
-								<input type="email" id="email" name="email" placeholder="이메일 입력"
+								<input type="email" id="email2" name="email" placeholder="이메일 입력"
 									onfocus="this.placeholder = ''" value="${param.email }"
 									onblur="this.placeholder = '이메일 입력'" required
 									class="single-input"> 
@@ -174,104 +99,7 @@ $(document).ready(function(){
 							<div class="col-xl-12 mt-10">
 								<button id="duplButton" type="button" onclick="duplicateCheck()"
 									class="boxed-btn3">이메일 중복확인</button>
-								<script>
-                                var checking = false;
-                                var joinform = document.joinform;
-                             
-								function duplicateCheck(){
-                                       var typedEmail = {"typedEmail":document.getElementById("email").value};  
-                                       //이메일 형식이 맞는지 확인하기 위한 정규 표현식
-                                       var emailExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-                                       if(!emailExp.test($("input[id='email']").val())){
-                                    	   $("#duplicateResult").append("맞지 않는 이메일 표현식 입니다.").css('color','MediumSeaGreen').css('font-size','75%');
-                                    	   $("input[id='email']").val();
-                                    	   return;
-                                       } 
-                                       
-                                       	$.ajax({ type:"GET",
-                                          url:"emailCheck.udo",
-                                          data:typedEmail,
-                                          success:function(data){   
-                                             if(data=='1'){
-                                            	$("#duplicateResult").empty();
-                                               	$("#duplicateResult").append("사용 가능한 이메일입니다.").css('color','MediumSeaGreen').css('font-size','75%');
-                                               	document.getElementById('email').disabled=true;
-                                                  checking=true;
-                                             }else{
-                                            	$("#duplicateResult").empty();
-                                                $("#duplicateResult").append("이미 가입된 메일입니다.").css('color','Tomato').css('font-size','75%');
-                                                document.getElementById('email').value="";
-                                             }
-                                          },error:function(){
-                                             alert("연결에 문제가 있습니다. 인터넷 환경을 확인 후 다시 시도해 주세요.");
-                                          }
-                                       });   
-                                    }
-
-                                	function join(){
-                                		
-                                		var loginData  ={"email":document.getElementById("email").value,"password":document.getElementById("password").value,"name":document.getElementById("name").value}; 
-                                        
-                                		console.log(loginData.email);
-                                		
-                                		if(loginData.email==""){
-                                			$("#checkRegisterException").empty();
-                                			$("#checkRegisterException").append("이메일을 입력해주세요").css('color','Tomato').css('font-size','75%');
-                                			return;
-                                		}else if(checking==false){
-                                			$("#checkRegisterException").empty();
-                                			$("#checkRegisterException").append("이메일 중복확인을 해주세요").css('color','Tomato').css('font-size','75%');
-                                			return;
-                                		}else if(loginData.name ==""){
-                                			$("#checkRegisterException").empty();
-                                			$("#checkRegisterException").append("이름을 입력 해주세요").css('color','Tomato').css('font-size','75%');
-                                			return;
-                                		}else if(loginData.password ==""){
-                                			$("#checkRegisterException").empty();
-                                			$("#checkRegisterException").append("비밀번호를 입력 해주세요").css('color','Tomato').css('font-size','75%');
-                                			return;
-                                		}
-                                		
-                                		if(checking){
-                                		 $.ajax({ type:"POST",
-                                             url:"successjoin.udo",
-                                             data:loginData,
-                                             success:function(data){   
-                                                if(data=='1'){
-                                            		alert("회원가입에 성공했습니다");
-                                               		location.href="member.udo";
-                                                }else{
-                                                   alert("가입되지 않은 이메일 입니다. 회원가입을 먼저 해 주세요.");
-                                                }
-                                             },error:function(){
-                                                alert("연결에 문제가 있습니다. 인터넷 환경을 확인 후 다시 시도해 주세요.");
-                                             }
-                                          });   
-                                		}else{
-                            				alert("이메일 중복확인을 해 주세요.");
-                            			}
-                                	}
-
-   
-                                	function login(){
-                                		 alert("로그인 실행");
-                                         var loginData  ={"email":document.getElementById("email2").value,"password":document.getElementById("password").value,"name":document.getElementById("name").value}; 
-                                		 $.ajax({ type:"POST",
-                                             url:"socialLoginSuccess.udo",
-                                             data:loginData,
-                                             success:function(data){   
-                                                if(data=='1'){
-                                                 location.href="member.udo";
-                                                }else{
-                                                   alert("가입되지 않은 이메일 입니다. 회원가입을 먼저 해 주세요.");
-                                                }
-                                             },error:function(){
-                                                alert("연결에 문제가 있습니다. 인터넷 환경을 확인 후 다시 시도해 주세요.");
-                                             }
-                                          });   
-                                	}
-                                	
-                                </script>
+								
 							</div>
 							<div class="mt-10">
 								<h5>이름</h5>
@@ -279,10 +107,9 @@ $(document).ready(function(){
 									value="" onfocus="this.placeholder = ''" 
 									onblur="this.placeholder = '이름'" required class="single-input">
 							</div>
-							<input type="hidden" id="password" name="password" placeholder="비밀번호"
+							<input type="hidden" id="password2" name="password" placeholder="비밀번호"
 									value="" onfocus="this.placeholder = ''" 
 									onblur="this.placeholder = '비밀번호'" required class="single-input">
-`
 							<div id="checkRegisterException"></div>
 							<div class="col-xl-12 mt-10">
 								<button id="registerButton" type="button" onclick="join()" class="boxed-btn3">
@@ -310,6 +137,168 @@ $(document).ready(function(){
 
 
 	<script type="text/javascript">
+	function checkFunction(){
+		var finalAgree=document.getElementById("finalAgree");
+		var firstAgree=document.getElementById("firstAgree");
+		if(firstAgree.checked==true){
+			$("#finalAgree").attr("checked",true);
+		}
+		if(finalAgree.checked==true){
+			$("#email2").removeAttr("disabled");
+			$("#duplButton").removeAttr("disabled");
+			$("#name").removeAttr("disabled");
+			$("#password2").removeAttr("disabled");
+			$("#registerButton").removeAttr("disabled");
+			$("#loginButton").removeAttr("disabled");
+		}else{
+			$("#email2").attr("disabled",true);
+			$("#duplButton").attr("disabled",true);
+			$("#name").attr("disabled",true);
+			$("#password2").attr("disabled",true);
+			$("#registerButton").attr("disabled",true);
+			$("#loginButton").attr("disabled",true);
+		}
+	}
+	$(document).ready(function(){
+		$("#duplButton").attr("disabled",true);
+		$("#registerButton").attr("disabled",true);
+		$("#loginButton").attr("disabled",true);
+		$("#registerTos1").hide();
+		$("#inputRegisterTos").hide();
+		$("#inputPersonalInfo").hide();
+		
+		$('.tosAgree').magnificPopup({
+			type:'inline',
+			midClick:true
+		});
+		
+		$("#registerTos").click(function(){
+			$("#registerTos1").toggle("slow");
+			$.ajax({
+				type:"post",
+				url:"getRegisterTos.udo",
+				success:function(data){
+					$("#registerTos1").html(data);
+				},
+				error:function(){
+					alert('실패');
+				}
+			});
+		});
+		$("#serviceTos").click(function(){
+			$("#inputRegisterTos").toggle("slow");
+			$.ajax({
+				type:"post",
+				url:"getServiceTos.udo",
+				success:function(data){
+					$("#inputRegisterTos").html(data);
+				},
+				error:function(){
+					alert("실패");
+				}
+			});
+		});
+		$("#PersonalInfo").click(function(){
+			$("#inputPersonalInfo").toggle("slow");
+			$.ajax({
+				type:"post",
+				url:"getPersonalInfo.udo",
+				success:function(data){
+					$("#inputPersonalInfo").html(data);
+				},
+				error:function(){
+					alert("실패");
+				}
+			});
+		});
+		
+	});
+	
+	
+	
+	   var checking = false;
+
+    
+		function duplicateCheck(){
+              var typedEmail = {"typedEmail":document.getElementById("email2").value};  
+              //이메일 형식이 맞는지 확인하기 위한 정규 표현식
+              var emailExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+              if(!emailExp.test($("input[id='email2']").val())){
+           	   $("#duplicateResult").append("맞지 않는 이메일 표현식 입니다.").css('color','MediumSeaGreen').css('font-size','75%');
+           	   $("input[id='email2']").val();
+           	   return;
+              } 
+              
+              	$.ajax({ type:"GET",
+                 url:"emailCheck.udo",
+                 data:typedEmail,
+                 success:function(data){   
+                    if(data=='1'){
+                   	$("#duplicateResult").empty();
+                      	$("#duplicateResult").append("사용 가능한 이메일입니다.").css('color','MediumSeaGreen').css('font-size','75%');
+                      	document.getElementById('email2').disabled=true;
+                         checking=true;
+                    }else{
+                   	$("#duplicateResult").empty();
+                       $("#duplicateResult").append("이미 가입된 메일입니다.").css('color','Tomato').css('font-size','75%');
+                       document.getElementById('email2').value="";
+                    }
+                 },error:function(){
+                    alert("연결에 문제가 있습니다. 인터넷 환경을 확인 후 다시 시도해 주세요.");
+                 }
+              });   
+           }
+
+       	function join(){
+       		
+       		var loginData  ={"email":document.getElementById("email2").value,"password":document.getElementById("password2").value,"name":document.getElementById("name").value}; 
+               
+       		console.log(loginData.email);
+       		
+       		if(loginData.email==""){
+       			$("#checkRegisterException").empty();
+       			$("#checkRegisterException").append("이메일을 입력해주세요").css('color','Tomato').css('font-size','75%');
+       			return;
+       		}else if(checking==false){
+       			$("#checkRegisterException").empty();
+       			$("#checkRegisterException").append("이메일 중복확인을 해주세요").css('color','Tomato').css('font-size','75%');
+       			return;
+       		}else if(loginData.name ==""){
+       			$("#checkRegisterException").empty();
+       			$("#checkRegisterException").append("이름을 입력 해주세요").css('color','Tomato').css('font-size','75%');
+       			return;
+       		}else if(loginData.password ==""){
+       			$("#checkRegisterException").empty();
+       			$("#checkRegisterException").append("비밀번호를 입력 해주세요").css('color','Tomato').css('font-size','75%');
+       			return;
+       		}
+       		
+       		if(checking){
+       		 $.ajax({ type:"POST",
+                    url:"successjoin.udo",
+                    data:loginData,
+                    success:function(data){   
+                       if(data=='1'){
+                   		alert("회원가입에 성공했습니다");
+                      		location.href="member.udo";
+                       }else{
+                          alert("가입되지 않은 이메일 입니다. 회원가입을 먼저 해 주세요.");
+                       }
+                    },error:function(){
+                       alert("연결에 문제가 있습니다. 인터넷 환경을 확인 후 다시 시도해 주세요.");
+                    }
+                 });   
+       		}else{
+   				alert("이메일 중복확인을 해 주세요.");
+   			}
+       	}
+
+	
+	
+	
+	
+	
+	
    function getParam(sname) {
 	    var params = location.search.substr(location.search.indexOf("?") + 1);
 	    var sval = "";
@@ -321,18 +310,7 @@ $(document).ready(function(){
 	    return sval;
 	} 
    
-	$(document).ready(function(){
-		alert("이게2번");
-		if(getParam('eamil')!=null){
-			var daumEmail = getParam('email');
-			document.getElementById('email').value = daumEmail;
-			document.getElementById('email2')=daumEmail;
-			var daumPassword = getParam('password');
-			document.getElementById('password').value = daumPassword;
-			var daumName = decodeURIComponent(getParam('name'));
-			document.getElementById('name').value = daumName;		
-		}
-	});
+
    
    var naver_id_login = new naver_id_login("bm_Jr_lzbfVgnsh6sEyX", "http://localhost:8080/funthing/.udo");
   // 접근 토큰 값 출력
@@ -341,23 +319,129 @@ $(document).ready(function(){
   naver_id_login.get_naver_userprofile("naverSignInCallback()");
   // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
   function naverSignInCallback() {
+	 
 	 if(naver_id_login.getProfileData('email')!=null){
-    var naverEemail = naver_id_login.getProfileData('email');
-    document.getElementById("email").value = naverEemail;
+    var naverEmail = naver_id_login.getProfileData('email');
+    document.getElementById("email2").value = naverEmail;
     var naverName = naver_id_login.getProfileData('name')
     document.getElementById("name").value = naverName;
  
     var naverId = naver_id_login.getProfileData('id');
-    document.getElementById("password").value = naverId;
+    document.getElementById("password2").value = naverId;
 	 }
+	 
+	 
+	 var typedEmail = {"typedEmail":document.getElementById("email2").value}; 
+	  $.ajax({type:"GET",
+	        url:"emailCheck.udo",
+	        data:typedEmail,
+	        success:function(data){   
+	           if(data=='2'){
+	        	   
+	        	   var loginsubmit = document.createElement("form");
+	        		var obj1;
+	        		obj1 = document.createElement('input');
+	        		obj1.setAttribute('type', 'hidden');
+	        		obj1.setAttribute('name', 'name');
+	        		obj1.setAttribute('value', naverName);
+	        		loginsubmit.appendChild(obj1);
+	        		
+	        		var obj2;
+	        		obj2 = document.createElement('input');
+	        		obj2.setAttribute('type', 'hidden');
+	        		obj2.setAttribute('name', 'email');
+	        		obj2.setAttribute('value', naverEmail);
+	        		loginsubmit.appendChild(obj2);
+	        		
+	        		var obj3;
+	        		obj3 = document.createElement('input');
+	        		obj3.setAttribute('type', 'hidden');
+	        		obj3.setAttribute('name', 'password');
+	        		obj3.setAttribute('value', naverId);
+	        		loginsubmit.appendChild(obj3);
+	        		
+	        		loginsubmit.setAttribute('method', 'post');
+	        		loginsubmit.setAttribute('action', "getMember.udo");
+
+	        		document.body.appendChild(loginsubmit);
+					
+	        		loginsubmit.submit();
+
+	           }else{
+	              alert("가입되지 않은 이메일 입니다. 회원가입을 먼저 해 주세요.");
+	           }
+	        },error:function(){
+	        	alert("서버와 통신이 실패했습니다. 인터넷상태를 다시 확인해주세요.");
+	        }
+	  		
+	  	});  
+	 
+	
   }
   
-  
-  
-  
- $(document).ready(function(){
-	alert("이게3번"); 
- });
+   
+   
+	$(document).ready(function(){
+
+		if(getParam('check')==1){
+           
+			var daumEmail = getParam('email');
+			document.getElementById('email2').value = daumEmail;
+			var daumPassword = getParam('password');
+			document.getElementById('password2').value = daumPassword;
+			var daumName = decodeURIComponent(getParam('name'));
+			document.getElementById('name').value = daumName;	
+			var typedEmail = {"typedEmail":document.getElementById("email2").value}; 
+			
+			  $.ajax({type:"GET",
+			        url:"emailCheck.udo",
+			        data:typedEmail,
+			        success:function(data){   
+			           if(data=='2'){
+			        	   
+			        	   
+			        	   var loginsubmit = document.createElement("form");
+			        		var obj1;
+			        		obj1 = document.createElement('input');
+			        		obj1.setAttribute('type', 'hidden');
+			        		obj1.setAttribute('name', 'name');
+			        		obj1.setAttribute('value', daumName);
+			        		loginsubmit.appendChild(obj1);
+			        		
+			        		var obj2;
+			        		obj2 = document.createElement('input');
+			        		obj2.setAttribute('type', 'hidden');
+			        		obj2.setAttribute('name', 'email');
+			        		obj2.setAttribute('value', daumEmail);
+			        		loginsubmit.appendChild(obj2);
+			        		
+			        		var obj3;
+			        		obj3 = document.createElement('input');
+			        		obj3.setAttribute('type', 'hidden');
+			        		obj3.setAttribute('name', 'password');
+			        		obj3.setAttribute('value', daumPassword);
+			        		loginsubmit.appendChild(obj3);
+			        		
+			        		loginsubmit.setAttribute('method', 'post');
+			        		loginsubmit.setAttribute('action', "getMember.udo");
+
+			        		document.body.appendChild(loginsubmit);
+							
+			        		loginsubmit.submit();
+			        		
+
+			           }else{
+			              alert("가입되지 않은 이메일 입니다. 회원가입을 먼저 해 주세요.");
+			           }
+			        },error:function(){
+			        	alert("서버와 통신이 실패했습니다. 인터넷상태를 다시 확인해주세요.");
+			        }
+			  		
+			  	});    
+		}
+	});
+ 
+
  
 </script>
 
