@@ -189,8 +189,7 @@
 								
 								<!-- projectBoard 시작 -->
 								<c:forEach var="b1" items="${getProjectBoardList}">
-									<c:if test="${b1.step eq 0}"> 
-										
+									<c:if test="${b1.step eq 0}"> 										
 										<div class="comment-list">
 											<div class="single-comment justify-content-between d-flex">
 												<div class="user justify-content-between d-flex">
