@@ -32,9 +32,7 @@ public class AdminMainViewController {
 		int statusFListCount = statusFList.size();
 		
 		//심사중
-		vo.setStatus('w');
-		List<ProjectVO> statusWList = getMainViewProjectStatusListService.getMainViewProjectStatusList(vo);
-		int statusWListCount = statusWList.size();
+		
 		
 		//보류
 		vo.setStatus('m');
@@ -43,7 +41,7 @@ public class AdminMainViewController {
 		
 		model.addAttribute("statusPListCount", statusPListCount);
 		model.addAttribute("statusFListCount", statusFListCount);
-		model.addAttribute("statusWListCount", statusWListCount);
+		
 		model.addAttribute("statusMListCount", statusMListCount);
 		
 		return "p-index";

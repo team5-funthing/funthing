@@ -116,22 +116,23 @@
                         </div>
                     </div>
 
+                   
+
                     <div class="col-6 m-t-15">
+
                         <div class="bg-dark p-10 text-white text-center" >
                             <i class="fas fa-comment-dots m-b-5 font-16"></i>
-                            <h5 class="m-b-0 m-t-5">${statusWListCount}</h5>
-                            <small class="font-light">심사</small>
+                            <h5 class="m-b-0 m-t-5">${fundingYListCount}</h5>
+                            <small class="font-light">프로젝트 진행중</small>
 
                         </div>
                     </div>
-
-                    <div class="col-6 m-t-15">
-
+                    
+					<div class="col-6 m-t-15">
                         <div class="bg-dark p-10 text-white text-center" >
-                            <i class="fas fa-exclamation-triangle m-b-5 font-16"></i>
-                            <h5 class="m-b-0 m-t-5">17</h5>
-                            <small class="font-light">반려</small>
-
+                           <i class="fas fa-exclamation-triangle m-b-5 font-16"></i>
+                           <h5 class="m-b-0 m-t-5">${statusWListCount}</h5>
+                           <small class="font-light">심사 진행중</small>
                         </div>
                     </div>
 

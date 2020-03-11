@@ -9,18 +9,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.team5.funthing.admin.model.vo.AdminCategoryVO;
+import com.team5.funthing.admin.model.vo.AdminMainViewVO;
 import com.team5.funthing.admin.model.vo.AdminNoticeBoardVO;
 import com.team5.funthing.admin.model.vo.AdminPersonalInfoProcessingVO;
 import com.team5.funthing.admin.model.vo.AdminRegisterTosVO;
 import com.team5.funthing.admin.model.vo.AdminStatisticsVO;
 import com.team5.funthing.admin.model.vo.AdminUserMainImageChangeVO;
 import com.team5.funthing.admin.service.adminCategoryService.GetCategoryListService;
+import com.team5.funthing.admin.service.adminMainViewService.GetMainViewProjectFundingListService;
+import com.team5.funthing.admin.service.adminMainViewService.GetMainViewProjectStatusListService;
 import com.team5.funthing.admin.service.adminNoticeBoardService.GetAdminNoticeBoardListService;
 import com.team5.funthing.admin.service.adminProjectCheckService.GetProjectCheckListService;
 import com.team5.funthing.admin.service.adminRegisterTosService.GetRegisterTosListService;
-import com.team5.funthing.admin.service.userMainImageChangeService.GetUserMainImageListService;
 import com.team5.funthing.admin.service.adminStatisticsService.GetFundingMoneyPerMonthService;
 import com.team5.funthing.admin.service.adminStatisticsService.GetProjectSuccessRatioTotalYearService;
+import com.team5.funthing.admin.service.userMainImageChangeService.GetUserMainImageListService;
 import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.model.vo.TosVO;
 import com.team5.funthing.user.service.TosService.GetTosListService;
@@ -54,21 +57,38 @@ public class AdminHomeController {
 	@Autowired
 	GetUserMainImageListService getUserMainImageListService;
 	
-	
+	@Autowired
+	GetMainViewProjectStatusListService getMainViewProjectStatusListService;
+	@Autowired
+	GetMainViewProjectFundingListService getMainViewProjectFundingListService;
 
 	@Autowired
 	GetProjectSuccessRatioTotalYearService getProjectSuccessRatioTotalYearService;
 	@Autowired
 	GetFundingMoneyPerMonthService getFundingMoneyPerMonthService;
 	
+	
 	@RequestMapping("adminIndex.ado")
-	public String showIndex(AdminStatisticsVO vo,Model model) {
+	public String showIndex(AdminStatisticsVO vo, AdminMainViewVO vo2,Model model) {
 		model.addAttribute("totalSuccess",getProjectSuccessRatioTotalYearService.getProjectSuccessRatioTotalYear(vo));
-		Calendar cal = Calendar.getInstance();// ÇöÀç ¿¬µµ ±¸ÇÏ±â.
+		Calendar cal = Calendar.getInstance();// 횉철�챌 쩔짭쨉쨉 짹쨍횉횕짹창.
 		int year = cal.get(cal.YEAR)-2000;
 		String parse = Integer.toString(year);
 		vo.setYearr(parse);
 		model.addAttribute("fundingMoney",getFundingMoneyPerMonthService.getFundingMoneyPerMonth(vo));
+		
+		vo2.setStatus('w');
+		List<ProjectVO> statusWList = getMainViewProjectStatusListService.getMainViewProjectStatusList(vo2);
+		int statusWListCount = statusWList.size();
+	
+		vo2.setFunding("y");
+		List<ProjectVO> fundingYList = getMainViewProjectFundingListService.getMainViewProjectFundingList(vo2);
+		System.out.println("fundingYList:"+fundingYList);
+		int fundingYListCount = fundingYList.size();
+		System.out.println("fundingYListCount:"+fundingYListCount);
+		
+		model.addAttribute("fundingYListCount",fundingYListCount);
+		model.addAttribute("statusWListCount",statusWListCount);
 		
 		return "p-index";
 
