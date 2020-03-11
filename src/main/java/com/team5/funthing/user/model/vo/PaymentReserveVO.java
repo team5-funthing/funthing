@@ -12,6 +12,7 @@ public class PaymentReserveVO {
 	private int projectNo;
 	private String email;
 	private Date paymentReserveDate;
+	private Date canceledDate;
 	private String paymentOption = "";
 	private int applyNo; //승인번호
 	private String paymentStatus;
@@ -35,20 +36,11 @@ public class PaymentReserveVO {
 	private int sumFundingMoney;
 	private String todayDate;
 	
+// 	결제내역에 보여줄 사진
+	private String projectMainImage;
+	
 	
 	private List<RewardSelectionVO> rewardSelectionList;
-
-
-	
-	
-	public String getTodayDate() {
-		return todayDate;
-	}
-
-
-	public void setTodayDate(String todayDate) {
-		this.todayDate = todayDate;
-	}
 
 
 	public int getOrderNo() {
@@ -88,6 +80,16 @@ public class PaymentReserveVO {
 
 	public void setPaymentReserveDate(Date paymentReserveDate) {
 		this.paymentReserveDate = paymentReserveDate;
+	}
+
+
+	public Date getCanceledDate() {
+		return canceledDate;
+	}
+
+
+	public void setCanceledDate(Date canceledDate) {
+		this.canceledDate = canceledDate;
 	}
 
 
@@ -241,6 +243,26 @@ public class PaymentReserveVO {
 	}
 
 
+	public String getTodayDate() {
+		return todayDate;
+	}
+
+
+	public void setTodayDate(String todayDate) {
+		this.todayDate = todayDate;
+	}
+
+
+	public String getProjectMainImage() {
+		return projectMainImage;
+	}
+
+
+	public void setProjectMainImage(String projectMainImage) {
+		this.projectMainImage = projectMainImage;
+	}
+
+
 	public List<RewardSelectionVO> getRewardSelectionList() {
 		return rewardSelectionList;
 	}
@@ -254,15 +276,18 @@ public class PaymentReserveVO {
 	@Override
 	public String toString() {
 		return "PaymentReserveVO [orderNo=" + orderNo + ", projectNo=" + projectNo + ", email=" + email
-				+ ", paymentReserveDate=" + paymentReserveDate + ", paymentOption=" + paymentOption + ", applyNo="
-				+ applyNo + ", paymentStatus=" + paymentStatus + ", deliveryAddressNo=" + deliveryAddressNo
-				+ ", fundingMoney=" + fundingMoney + ", aid=" + aid + ", tid=" + tid + ", additionalFundingMoney="
-				+ additionalFundingMoney + ", shippingFee=" + shippingFee + ", privateName=" + privateName
-				+ ", privateFundingMoney=" + privateFundingMoney + ", reward=" + reward + ", rewardSelection="
-				+ rewardSelection + ", sumDate=" + sumDate + ", sumFundingMoney=" + sumFundingMoney
+				+ ", paymentReserveDate=" + paymentReserveDate + ", canceledDate=" + canceledDate + ", paymentOption="
+				+ paymentOption + ", applyNo=" + applyNo + ", paymentStatus=" + paymentStatus + ", deliveryAddressNo="
+				+ deliveryAddressNo + ", fundingMoney=" + fundingMoney + ", aid=" + aid + ", tid=" + tid
+				+ ", additionalFundingMoney=" + additionalFundingMoney + ", shippingFee=" + shippingFee
+				+ ", privateName=" + privateName + ", privateFundingMoney=" + privateFundingMoney + ", reward=" + reward
+				+ ", rewardSelection=" + rewardSelection + ", sumDate=" + sumDate + ", sumFundingMoney="
+				+ sumFundingMoney + ", todayDate=" + todayDate + ", projectMainImage=" + projectMainImage
 				+ ", rewardSelectionList=" + rewardSelectionList + "]";
 	}
 
+
+	
 	
 	
 }
