@@ -10,5 +10,6 @@ public interface KakaoPayService {
 	
 	public String kakaoPayReady(PaymentReserveVO prvo, DeliveryAddressVO davo , List<RewardSelectionVO> selectedRewardList, int projectNo);
 	public KakaoPayApprovalVO kakaoPayInfo(String pg_token, int orderNo);
+	public void kakaoPayCancel(PaymentReserveVO prvo);
 	
 }

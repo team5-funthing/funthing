@@ -154,6 +154,7 @@ public class MemberActivityController {
 		model.addAttribute("projectReservationList",projectReservationList);
 	}
 	
+
 	@RequestMapping(value = "paymentReservationCheckList.udo", method = RequestMethod.POST )
 	public String myPaymentReservationCheckList(Model model, PaymentReserveVO prvo) {
 		
@@ -171,23 +172,5 @@ public class MemberActivityController {
 		return "p-payment-reservation-check";
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

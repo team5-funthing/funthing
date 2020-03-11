@@ -31,5 +31,15 @@
 	<delete id="deleteReward" parameterType="reward">
 		DELETE FROM reward WHERE rewardNo=#{rewardNo}
 	</delete>
+	
+	<update id="updateRewardReturnQuantityAfterCancel" parameterType="reward">
+		
+		UPDATE reward
+		SET rewardAmount = rewardAmount + #{rewardAmount}
+		WHERE rewardNo = #{rewardNo}
+		
+	</update>
+	
+	
 
 </mapper>

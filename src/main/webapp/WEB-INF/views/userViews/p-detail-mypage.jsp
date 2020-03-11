@@ -197,7 +197,7 @@
 													</div>
 		                                       </div>
 		                                       <div class="card-footer">
-		                                          <a href="getWritingProject.udo?currentProjectNo=${myProject.projectNo }&creator=${myProject.creator}">수정</a>
+		                                          <a href="getWritingProject.udo?creator=${myProject.creator }&currentProjectNo=${myProject.projectNo }">수정</a>
 		                                          <a href="deleteProject.udo?currentProjectNo=${myProject.projectNo }">삭제</a>
 		                                          
 		                                          <c:choose>
