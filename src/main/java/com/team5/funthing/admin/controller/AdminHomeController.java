@@ -71,7 +71,7 @@ public class AdminHomeController {
 	@RequestMapping("adminIndex.ado")
 	public String showIndex(AdminStatisticsVO vo, AdminMainViewVO vo2,Model model) {
 		model.addAttribute("totalSuccess",getProjectSuccessRatioTotalYearService.getProjectSuccessRatioTotalYear(vo));
-		Calendar cal = Calendar.getInstance();// 횉철�챌 쩔짭쨉쨉 짹쨍횉횕짹창.
+		Calendar cal = Calendar.getInstance();
 		int year = cal.get(cal.YEAR)-2000;
 		String parse = Integer.toString(year);
 		vo.setYearr(parse);

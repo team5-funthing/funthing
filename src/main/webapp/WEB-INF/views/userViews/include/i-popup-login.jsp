@@ -101,7 +101,7 @@
 												 id = res.id;
 												 name = res.properties.nickname;
 												 email = res.kakao_account.email;
-												 location.href=url+'?email='+email+'&password='+id+'&name='+name;
+												 location.href=url+'?email='+email+'&password='+id+'&name='+name+'&check=1';
 	
 											},
 											fail : function(error) {

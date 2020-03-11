@@ -25,6 +25,7 @@ import com.team5.funthing.common.utils.uploadUtils.UploadUtil;
 import com.team5.funthing.user.model.vo.AlarmVO;
 import com.team5.funthing.user.model.vo.CreatorVO;
 import com.team5.funthing.user.model.vo.KeywordVO;
+import com.team5.funthing.user.model.vo.MemberActivityVO;
 import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.model.vo.ProjectBoardVO;
 import com.team5.funthing.user.model.vo.ProjectIntroduceImageVO;
@@ -38,6 +39,7 @@ import com.team5.funthing.user.service.creatorService.InsertCreatorService;
 import com.team5.funthing.user.service.creatorService.UpdateCreatorService;
 import com.team5.funthing.user.service.keywordService.GetKeywordListService;
 import com.team5.funthing.user.service.keywordService.InsertKeywordService;
+import com.team5.funthing.user.service.memberActivityService.GetProjectLikeCountService;
 import com.team5.funthing.user.service.projectBoardService.GetEntireProjectBoardListService;
 import com.team5.funthing.user.service.projectIntroduceImageService.DeleteProjectIntroduceImageService;
 import com.team5.funthing.user.service.projectIntroduceImageService.GetProjectIntroduceImageListService;
@@ -64,7 +66,7 @@ import com.team5.funthing.user.service.rewardService.GetRewardListService;
 @SessionAttributes("project")
 public class ProjectController {
 
-// ===================== ¼­ºñ½º ÁÖÀÔ ==============
+// ===================== ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ==============
    
    @Autowired
    private InsertProjectService insertProjectService;
@@ -105,7 +107,9 @@ public class ProjectController {
    @Autowired
    private DeleteProjectIntroduceImageService deleteProjectIntroduceImageService;
    
-   
+   // MemberActivityService
+   @Autowired
+   private GetProjectLikeCountService getProjectLikeCountService;
 
    // ProjectBoard Service
    @Autowired
@@ -131,7 +135,7 @@ public class ProjectController {
    @Autowired
    private GetCategoryListService getCategoryListSerivce;
    
-// ===================== VO ÁÖÀÔ =====================
+// ===================== VO ï¿½ï¿½ï¿½ï¿½ =====================
    
    @Autowired
    private MemberVO memberVO;
@@ -151,7 +155,7 @@ public class ProjectController {
    private CreatorVO creatorVO;
    
    
-// ===================== À¯Æ¿ ÁÖÀÔ =====================
+// ===================== ï¿½Æ¿ ï¿½ï¿½ï¿½ï¿½ =====================
 
    @Autowired
    private UploadUtil uploadUtil;
@@ -171,7 +175,7 @@ public class ProjectController {
         });
    }
 
-// ===================== ¸Þ¼­µå =======================   
+// ===================== ï¿½Þ¼ï¿½ï¿½ï¿½ =======================   
    
    @RequestMapping(value="getAllFundingProjectList.udo", method = RequestMethod.GET)
    public String getAllFundingProjectList(Model model) {
@@ -187,12 +191,12 @@ public class ProjectController {
       
       memberVO = (MemberVO)session.getAttribute("memberSession");
       if(memberVO == null) {
-         model.addAttribute("msg", "·Î±×ÀÎ ÈÄ ÀÌ¿ë °¡´ÉÇÕ´Ï´Ù.");
+         model.addAttribute("msg", "ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.");
          return "p-index";
       }
       model.addAttribute("loginEmail", memberVO.getEmail()); 
-      return "p-start-project"; // ½ÃÀÛÇÏ±â ÆäÀÌÁö·Î ÀÌµ¿ÇÏÀÚ
-   } // ·Î±×ÀÎ ½Ã¿¡¸¸ ÇÁ·ÎÁ§Æ® ¸¸µé±â Á¢±Ù °¡´ÉÇÏµµ·Ï ÇÏ±âÀ§ÇØ ¼¼¼Ç¿¡ ÀúÀåµÈ °ª È®ÀÎ ÈÄ ÆäÀÌÁö ÀÌµ¿.
+      return "p-start-project"; // ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½
+   } // ï¿½Î±ï¿½ï¿½ï¿½ ï¿½Ã¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ ï¿½Ï±ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ È®ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½.
    
    @RequestMapping(value="/getWritingProject.udo", method = RequestMethod.GET)
    public String getProject(   @RequestParam int currentProjectNo, 
@@ -201,7 +205,7 @@ public class ProjectController {
                         AdminCategoryVO cvo, Model model) {
       
 	   
-	  System.out.println("³Ñ¾î¿Â °ª : " + creator); 
+	  System.out.println("ï¿½Ñ¾ï¿½ï¿½ ï¿½ï¿½ : " + creator); 
 	  creatorVO.setCreator(creator);
 	  creatorVO = getCreatorService.getCreator(creatorVO);
 	  
@@ -257,10 +261,10 @@ public class ProjectController {
       
       model.addAttribute("basicProjectSetting", pvo);
       
-      return "f-create-project-basic"; // ÇÁ·ÎÁ§Æ® ÀÛ¼º Æû
-   } // ÇÁ·ÎÁ§Æ® ¸¸µé±â ½ÃÀÛ ÆäÀÌÁö¿¡¼­ ¼öÇà
+      return "f-create-project-basic"; // ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Û¼ï¿½ ï¿½ï¿½
+   } // ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
    
-   //¸®¿öµå µî·Ï½Ã¿¡ ¸ñ·ÏÀ» Ãß°¡ÇÏ´Â ¸Þ¼­µå Ãß°¡ÇØ¾ßÇÑ´Ù()
+   //ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ï½Ã¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ø¾ï¿½ï¿½Ñ´ï¿½()
   
    @RequestMapping(value = "/insertCreatorAndInsertProject.udo", method = RequestMethod.POST)
    public String insertProject(   
@@ -272,11 +276,11 @@ public class ProjectController {
                            AdminCategoryVO acvo,
                            Model model) throws Exception {
 
-      // ÇÁ·ÎÁ§Æ® Á¦ÀÛ Ã¹ ½ÃÀÛ½Ã¿¡¸¸ ½ÃÀÛ
+      // ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ Ã¹ ï¿½ï¿½ï¿½Û½Ã¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
       ProjectVO checkVO = (ProjectVO)session.getAttribute("updatingProject");
 
 
-      // »õ·Î°íÄ§À» ÇÒ °æ¿ì¿¡ ¹Ýº¹ÀûÀ¸·Î requestMapping ÀÛ¾÷ÀÌ ¼öÇàµÇ´Â ºÎºÐÀ» ¹æÁöÇÏ±â À§ÇÑ ÄÚµå
+      // ï¿½ï¿½Î°ï¿½Ä§ï¿½ ï¿½ï¿½ ï¿½ï¿½ì¿¡ ï¿½Ýºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ requestMapping ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½Îºï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ ï¿½Úµï¿½
       if(checkVO == null) {
          pvo = insertProjectService.insertProject(pvo);
          creatorProfileImageUploader(creatorUploadImage, cvo);
@@ -292,7 +296,7 @@ public class ProjectController {
       model.addAttribute("writingProject", pvo);
 
       return "f-create-project";
-   } // ÇÁ·ÎÁ§Æ® ÀÛ¼º ½ÃÀÛÇÒ¶§ ¸Þ¼­µå 
+   } // ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Û¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ò¶ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ 
    
    @RequestMapping(value = "/updateCreatorAndInsertProject.udo", method = RequestMethod.POST)
    public String updateCreatorAndInsertProject(   @RequestParam(name = "creatorUploadImage", required = false)List<MultipartFile> creatorUploadImage,
@@ -305,11 +309,11 @@ public class ProjectController {
       
       System.out.println("cvo : " + cvo == null);
       
-      // ÇÁ·ÎÁ§Æ® Á¦ÀÛ Ã¹ ½ÃÀÛ½Ã¿¡¸¸ ½ÃÀÛ
+      // ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ Ã¹ ï¿½ï¿½ï¿½Û½Ã¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
       ProjectVO checkVO = (ProjectVO)session.getAttribute("updatingProject");
 
 
-      // »õ·Î°íÄ§À» ÇÒ °æ¿ì¿¡ ¹Ýº¹ÀûÀ¸·Î requestMapping ÀÛ¾÷ÀÌ ¼öÇàµÇ´Â ºÎºÐÀ» ¹æÁöÇÏ±â À§ÇÑ ÄÚµå
+      // ï¿½ï¿½Î°ï¿½Ä§ï¿½ ï¿½ï¿½ ï¿½ï¿½ì¿¡ ï¿½Ýºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ requestMapping ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½Îºï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ ï¿½Úµï¿½
       if(checkVO == null) {
          pvo = insertProjectService.insertProject(pvo);
          creatorProfileImageUploader(creatorUploadImage, cvo);
@@ -325,7 +329,7 @@ public class ProjectController {
       model.addAttribute("writingProject", pvo);
 
       return "f-create-project";
-   } // ÇÁ·ÎÁ§Æ® ÀÛ¼º ½ÃÀÛÇÒ¶§ ¸Þ¼­µå 
+   } // ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Û¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ò¶ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ 
    
    
    
@@ -350,7 +354,7 @@ public class ProjectController {
                            ProjectVO pvo,
                            CreatorVO cvo,
                            RedirectAttributes redirectAttributes,
-                           Model model) throws Exception { // ÇÁ·ÎÁ§Æ® ÀÓ½ÃÀúÀå ½Ã ½ÇÇàµÇ´Â ¸Þ¼­µå
+                           Model model) throws Exception { // ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ó½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 
    
 	   System.out.println(cvo.toString());
@@ -366,19 +370,19 @@ public class ProjectController {
       
       
       if(toAddKeywords != null) {
-         insertKeyword(toAddKeywords, keywordVO); //DB¿¡ »õ·Î¿î Å°¿öµå Ãß°¡ ¸Þ¼­µå
-         deleteProjectKeyword(pvo); // ±âÁ¸ ÇÁ·ÎÁ§Æ®¿¡ ÀÖ´ø Å°¿öµåµé »èÁ¦
-         insertProjectKeyword(toAddKeywords, pvo.getProjectNo());//DB¿¡ ÇÁ·ÎÁ§Æ®¿Í ¿¬°áµÇ´Â Å°¿öµå¸¦ Ãß°¡ ÇÏ´Â ¸Þ¼­µå
+         insertKeyword(toAddKeywords, keywordVO); //DBï¿½ï¿½ ï¿½ï¿½Î¿ï¿½ Å°ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
+         deleteProjectKeyword(pvo); // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ö´ï¿½ Å°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+         insertProjectKeyword(toAddKeywords, pvo.getProjectNo());//DBï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ Å°ï¿½ï¿½å¸¦ ï¿½ß°ï¿½ ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
       }
       
       char checkResult = inputCompleteCheck(pvo);
-      pvo.setWriteStatus(checkResult); // ÀÔ·ÂÇØ¾ßÇÏ´Â ÀÛ¼ººÎºÐ Ã¼Å©
+      pvo.setWriteStatus(checkResult); // ï¿½Ô·ï¿½ï¿½Ø¾ï¿½ï¿½Ï´ï¿½ ï¿½Û¼ï¿½ï¿½Îºï¿½ Ã¼Å©
       updateProjectService.updateProject(pvo);
       
       if(checkResult == 'y') {
-         redirectAttributes.addAttribute("msg", "ÀÛ¼ºÀÌ ¿Ï·á µÇ¾ú½À´Ï´Ù.");
+         redirectAttributes.addAttribute("msg", "ï¿½Û¼ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½ ï¿½Ç¾ï¿½ï¿½Ï´ï¿½.");
       }else {
-         redirectAttributes.addAttribute("msg", "ÀúÀå µÇ¾ú½À´Ï´Ù");
+         redirectAttributes.addAttribute("msg", "ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¾ï¿½ï¿½Ï´ï¿½");
       }
       redirectAttributes.addAttribute("creator", cvo.getCreator());
       redirectAttributes.addAttribute("currentProjectNo", pvo.getProjectNo());
@@ -395,48 +399,53 @@ public class ProjectController {
       
       pvo = getProjectService.getProject(pvo);
       pvo.setStatus('w');
-      System.out.println("¼öÁ¤ÀüÀÇ ÇÁ·ÎÁ§Æ® »óÅÂ : " + pvo.toString());
+      System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ : " + pvo.toString());
       updateProjectService.updateProject(pvo);
-      System.out.println("¼öÁ¤ÈÄÀÇ ÇÁ·ÎÁ§Æ® »óÅÂ : " + pvo.toString());
+      System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ : " + pvo.toString());
       
       //////////////////////////////////////////////////////////////
 
-      avo.setAlarmType(pvo.getProjectTitle() + " ½É»ç¿äÃ»");
+      avo.setAlarmType(pvo.getProjectTitle() + " ï¿½É»ï¿½ï¿½Ã»");
       avo.setReceiveId("admin@funthing.com");
       avo.setReadConfirm('n');
       avo.setProjectNo(pvo.getProjectNo());
-      avo.setDetailAlarmType("¿äÃ»");
+      avo.setDetailAlarmType("ï¿½ï¿½Ã»");
       System.out.println(avo.toString());
       insertProjectJudgeRequestAlarmService.insertProjectJudgeRequestAlarm(avo);
       
       redirectAttributes.addAttribute("creator", creator);
-      redirectAttributes.addAttribute("msg", "½É»ç¿äÃ»À» ¿Ï·áÇÏ¿´½À´Ï´Ù.");
+      redirectAttributes.addAttribute("msg", "ï¿½É»ï¿½ï¿½Ã»ï¿½ ï¿½Ï·ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½Ï´ï¿½.");
       redirectAttributes.addAttribute("currentProjectNo", pvo.getProjectNo());
       return "redirect:getWritingProject.udo";
    }
    
    @RequestMapping(value="projectDetailsFromProjectBoard.udo", method = RequestMethod.GET)
    public String showProjectDetails(   @RequestParam int currentProjectNo,
-                              ProjectVO pvo, Model model) { // ÀÌ¹ÌÁöÅ¬¸¯½Ã ÇÁ·ÎÁ§Æ® »ó¼¼ ÆäÀÌÁö·Î ÀÌµ¿
-      
+                              ProjectVO pvo, MemberActivityVO mavo, Model model) { // ï¿½Ì¹ï¿½ï¿½ï¿½Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
       System.out.println("currentProjectNo : " + currentProjectNo);
       pvo.setProjectNo(currentProjectNo);
-      getProjectDetails(pvo, model);
+      getProjectDetails(pvo, mavo, model);
       
-      return "p-project-details"; //ÇÁ·ÎÁ§Æ® »ó¼¼ÆäÀÌÁö
+      return "p-project-details"; //ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
    }
    
    @RequestMapping(value="projectDetails.udo", method = RequestMethod.GET)
-   public String showProjectDetails(ProjectVO pvo, Model model) { // ÀÌ¹ÌÁöÅ¬¸¯½Ã ÇÁ·ÎÁ§Æ® »ó¼¼ ÆäÀÌÁö·Î ÀÌµ¿
-
-      getProjectDetails(pvo, model);
-      return "p-project-details"; //ÇÁ·ÎÁ§Æ® »ó¼¼ÆäÀÌÁö
+   public String showProjectDetails(ProjectVO pvo, 
+		   							MemberActivityVO mavo, 
+		   							Model model,
+		   							@RequestParam(value="projectNo") String projectNo
+		   							) { // ï¿½Ì¹ï¿½ï¿½ï¿½Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
+	   mavo.setProjectNo(Integer.parseInt(projectNo));
+	   System.out.println(projectNo);
+	   getProjectDetails(pvo,mavo, model);
+	   
+	   return "p-project-details"; //ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
    }
    
    
    
    @RequestMapping(value = "/showPreviewProject.udo", method = RequestMethod.POST)
-   public String showPreviewProject(ProjectVO pvo, Model model) throws Exception { // ÇÁ·ÎÁ§Æ® ÀÓ½ÃÀúÀå ½Ã ½ÇÇàµÇ´Â ¸Þ¼­µå
+   public String showPreviewProject(ProjectVO pvo, Model model) throws Exception { // ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ó½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
       pvo = getProjectService.getProject(pvo);
       int projectNo = pvo.getProjectNo();
       String creator = pvo.getCreator();
@@ -474,7 +483,7 @@ public class ProjectController {
             }
          }
    
-         //ÀÔ·ÂÇÑ Å°¿öµå Áß¿¡ DB¿¡ Á¸ÀçÇÏ´Â Å°¿öµå°¡ ¾Æ´Ï¶ó¸é Å°¿öµå Ãß°¡
+         //ï¿½Ô·ï¿½ï¿½ï¿½ Å°ï¿½ï¿½ï¿½ ï¿½ß¿ï¿½ DBï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ Å°ï¿½ï¿½å°¡ ï¿½Æ´Ï¶ï¿½ï¿½ Å°ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
          if(!isExist) {
             kvo.setKeyword(toAddKeyword);
             insertKeywordService.insertKeyword(kvo);
@@ -516,7 +525,7 @@ public class ProjectController {
       return deleteCount;
    }
    
-   //=================== ¾÷·Îµå ¸Þ¼­µå =================================
+   //=================== ï¿½ï¿½Îµï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ =================================
 
    public void projectIntroduceImageUploader(List<MultipartFile> toDoUploadList, ProjectIntroduceImageVO vo, int ProjectNo, List<Integer> toRemoveImageNoList) throws Exception {
       
@@ -541,7 +550,7 @@ public class ProjectController {
          toRemoveFilePath.add(0, null);
       }
       
-      if(!toDoUploadList.isEmpty()){ //ÇÁ·ÎÁ§Æ® ¼Ò°³ ÀÌ¹ÌÁö ±âÁ¸¾÷·Îµå Á¦°Å ¹× »õ ¾÷·Îµå, DB Ãß°¡ ÀÛ¾÷ ¸Þ¼­µå
+      if(!toDoUploadList.isEmpty()){ //ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ò°ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Îµï¿½, DB ï¿½ß°ï¿½ ï¿½Û¾ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
          
          List<String> tmpUploadList = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);
          insertProjectIntroduceImageService.insertProjectIntroduceImage(projectIntroduceImageVO, tmpUploadList);
@@ -560,8 +569,8 @@ public class ProjectController {
       
       List<String> toRemoveFilePath = new ArrayList<String>();
             
-      if(!toDoUploadList.get(0).isEmpty()) { // ¾÷·Îµå ½ÃÅ² ÆÄÀÏÀÌ ÀÌ¹Ì Á¸ÀçÇÏ´Â °æ¿ì ÆÄÀÏ ¼±ÅÃÀ» ´Ù½Ã ¾ÈÇÑ °æ¿ì¿¡ ³ª¿Ã ¼ö ÀÖ´Â »óÈ² Ã³¸®  
-         toRemoveFilePath.add(vo.getProjectMainImage()); //Á¦°ÅµÉ ÆÄÀÏ°æ·Î¸¦ vo°´Ã¼¿¡¼­ °¡Á®¿À±â
+      if(!toDoUploadList.get(0).isEmpty()) { // ï¿½ï¿½Îµï¿½ ï¿½ï¿½Å² ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ì¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½È² Ã³ï¿½ï¿½  
+         toRemoveFilePath.add(vo.getProjectMainImage()); //ï¿½ï¿½Åµï¿½ ï¿½ï¿½ï¿½Ï°ï¿½Î¸ï¿½ voï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
          String voName = vo.getClass().getSimpleName();
          List<String> toSettingPath = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);
          if(toSettingPath == null) return;
@@ -576,8 +585,8 @@ public class ProjectController {
       List<String> toRemoveFilePath = new ArrayList<String>();
 
       
-      if(!toDoUploadList.get(0).isEmpty()) { // ¾÷·Îµå ½ÃÅ² ÆÄÀÏÀÌ ÀÌ¹Ì Á¸ÀçÇÏ´Â °æ¿ì ÆÄÀÏ ¼±ÅÃÀ» ´Ù½Ã ¾ÈÇÑ °æ¿ì¿¡ ³ª¿Ã ¼ö ÀÖ´Â »óÈ² Ã³¸®  
-         toRemoveFilePath.add(cvo.getCreatorProfileImage()); //Á¦°ÅµÉ ÆÄÀÏ°æ·Î¸¦ vo°´Ã¼¿¡¼­ °¡Á®¿À±â
+      if(!toDoUploadList.get(0).isEmpty()) { // ï¿½ï¿½Îµï¿½ ï¿½ï¿½Å² ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ì¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½È² Ã³ï¿½ï¿½  
+         toRemoveFilePath.add(cvo.getCreatorProfileImage()); //ï¿½ï¿½Åµï¿½ ï¿½ï¿½ï¿½Ï°ï¿½Î¸ï¿½ voï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
          String voName = cvo.getClass().getSimpleName();
          List<String> toSettingPath = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);
          if(toSettingPath == null) return;
@@ -592,8 +601,8 @@ public class ProjectController {
       
       List<String> toRemoveFilePath = new ArrayList<String>();
 
-      if(!toDoUploadList.get(0).isEmpty()) { // ¾÷·Îµå ½ÃÅ² ÆÄÀÏÀÌ ÀÌ¹Ì Á¸ÀçÇÏ´Â °æ¿ì ÆÄÀÏ ¼±ÅÃÀ» ´Ù½Ã ¾ÈÇÑ °æ¿ì¿¡ ³ª¿Ã ¼ö ÀÖ´Â »óÈ² Ã³¸®  
-         toRemoveFilePath.add(cvo.getBusinessFileLink()); //Á¦°ÅµÉ ÆÄÀÏ°æ·Î¸¦ vo°´Ã¼¿¡¼­ °¡Á®¿À±â
+      if(!toDoUploadList.get(0).isEmpty()) { // ï¿½ï¿½Îµï¿½ ï¿½ï¿½Å² ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ì¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½È² Ã³ï¿½ï¿½  
+         toRemoveFilePath.add(cvo.getBusinessFileLink()); //ï¿½ï¿½Åµï¿½ ï¿½ï¿½ï¿½Ï°ï¿½Î¸ï¿½ voï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
          String voName = "creatorBusinessFiles";
          List<String> toSettingPath = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);
          if(toSettingPath == null) return;
@@ -604,8 +613,8 @@ public class ProjectController {
       }
    }
    
-   // ±¸Çö OK - ¼öÁ¤ ¿ä±¸µÊ
-   public char inputCompleteCheck(ProjectVO vo) { //ÀÓ½Ã ÀúÀåµÈ ÇÁ·ÎÁ§Æ® ºóÄ­ Ã¼Å©
+   // ï¿½ï¿½ï¿½ï¿½ OK - ï¿½ï¿½ï¿½ ï¿½ä±¸ï¿½ï¿½
+   public char inputCompleteCheck(ProjectVO vo) { //ï¿½Ó½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½Ä­ Ã¼Å©
       
       System.out.println(vo.toString());
       
@@ -626,7 +635,7 @@ public class ProjectController {
             vo.getProjectIntroduceVideo() == null || vo.getProjectIntroduceVideo().equals("") || 
             vo.getProjectStory() == null || vo.getProjectStory().equals("")
 //            vo.getInformationAgree() == 'n'
-            //¸®¿öµå Ã¼Å© Ãß°¡ ÇØ¾ßÇÑ´Ù.
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å© ï¿½ß°ï¿½ ï¿½Ø¾ï¿½ï¿½Ñ´ï¿½.
             
       ){
          
@@ -640,10 +649,14 @@ public class ProjectController {
    
    
    
-   public void getProjectDetails(ProjectVO pvo, Model model) {
+   public void getProjectDetails(ProjectVO pvo,MemberActivityVO mavo, Model model) {
       
       pvo = getProjectService.getProject(pvo);
       int projectNo = pvo.getProjectNo();
+      
+      mavo.setProjectNo(pvo.getProjectNo());
+	   int likeCount = getProjectLikeCountService.getProjectLikeCount(mavo);
+      
       
       projectBoardVO.setProjectNo(projectNo);
       List<ProjectBoardVO> getProjectBoardList = getEntireProjectBoardListService.getEntireProjectBoardList(projectBoardVO);
@@ -659,11 +672,11 @@ public class ProjectController {
       
       
       model.addAttribute("rewardList", rewardList);
-      model.addAttribute("getProjectBoardList", getProjectBoardList); //ÀüÃ¼¸ñ·Ï¸®½ºÆ® ÀÌ¸§ÀÌ¶û °°ÀÌ Á¶ÀÎÇØ¼­ °¡Á®¿À±â
+      model.addAttribute("getProjectBoardList", getProjectBoardList); //ï¿½ï¿½Ã¼ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½Æ® ï¿½Ì¸ï¿½ï¿½Ì¶ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
       model.addAttribute("projectIntroduceImageList", projectIntroduceImageList);
       model.addAttribute("projectKeywordList", projectKeywordList);
       model.addAttribute("project", pvo);
-      
+      model.addAttribute("likeCount", likeCount);
       
    }
    
