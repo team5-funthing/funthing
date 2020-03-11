@@ -19,6 +19,7 @@ import com.team5.funthing.user.service.memberActivityService.DeleteMemberActivit
 import com.team5.funthing.user.service.memberActivityService.GetMemberActivityListService;
 import com.team5.funthing.user.service.memberActivityService.InsertMemberActivityService;
 import com.team5.funthing.user.service.memberActivityService.UpdateMemberActivityService;
+import com.team5.funthing.user.service.paymentReserveService.GetPaymentReserveListByEmailService;
 import com.team5.funthing.user.service.paymentReserveService.GetPaymentReserveService;
 import com.team5.funthing.user.service.projectService.GetProjectListByEmailService;
 import com.team5.funthing.user.service.projectService.GetProjectService;
@@ -40,7 +41,8 @@ public class MemberActivityController {
 	private GetProjectService getProjectService;
 	@Autowired
 	private GetPaymentReserveService getPaymentReserveService;
-
+	@Autowired
+	private GetPaymentReserveListByEmailService getPaymentReserveListByEmailService;
 
 
 	@RequestMapping(value="mypage.udo",method=RequestMethod.GET)
@@ -111,9 +113,13 @@ public class MemberActivityController {
 		
 		System.out.println("결제내역 보기 이동");
 		
+		List<PaymentReserveVO> paymentReserveList = getPaymentReserveListByEmailService.getPaymentReserveListByEmail(prvo);
 		
-		prvo = getPaymentReserveService.getPaymentReserve(prvo);
-		
+		if(!paymentReserveList.isEmpty()) {
+			
+			model.addAttribute("paymentReserveList", paymentReserveList);
+			
+		}
 		
 		
 		return "p-payment-reservation-check";

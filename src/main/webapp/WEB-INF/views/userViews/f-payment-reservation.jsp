@@ -139,18 +139,6 @@
 						</div>
 						<hr>
 						
-					<!-- 
-						<div class="d-flex justify-content-between">
-							<div class="p-2 bd-highlight">쿠폰 사용</div>
-							<div class="p-2 bd-highlight">사용가능한 쿠폰이 없습니다.</div>
-						</div>
-	
-						<div class="d-flex justify-content-between">
-							<div class="p-2 bd-highlight">포인트 사용</div>
-							<div class="p-2 bd-highlight">[포인트]</div>
-						</div>  
-					-->
-					
 					</div>
 				</div>
 	
@@ -165,22 +153,7 @@
 								<p class="card-text " >${totalAmount }원</p>
 							</div>
 						</div>
-						<div class="d-flex justify-content-between">
-							<div class="p-2 bd-highlight">
-								<p class="card-text" style="font-weight: bold;">쿠폰 차감금액</p>
-							</div>
-							<div class="p-2 bd-highlight">
-								<p class="card-text">-</p>
-							</div>
-						</div>
-						<div class="d-flex justify-content-between">
-							<div class="p-2 bd-highlight">
-								<p class="card-text" style="font-weight: bold;">포인트 차감금액</p>
-							</div>
-							<div class="p-2 bd-highlight">
-								<p class="card-text">추가 후원금</p>
-							</div>
-						</div>
+
 						<div class="d-flex justify-content-between">
 							<div class="p-2 bd-highlight">
 								<p class="card-text" style="font-weight: bold;">배송비</p>
@@ -216,10 +189,19 @@
 										placeholder="">
 								</div>
 								<div class="form-group">
-									<label for="formGroupExampleInput">이메일</label> 
-									<input type="text" class="form-control" id="formGroupExampleInput" 
-										name="email" value="${memberSession.email }"
-										placeholder="">
+									<label for="formGroupExampleInput">이메일</label>
+									<c:choose>
+										<c:when test="${memberSession ne null }">
+											<input type="text" class="form-control" id="formGroupExampleInput" 
+												name="email" value="${memberSession.email }"
+												placeholder="" readonly>
+										</c:when>
+										<c:otherwise>
+											<input type="text" class="form-control" id="formGroupExampleInput" 
+												name="email"
+												placeholder="">
+										</c:otherwise>
+									</c:choose>
 								</div>
 								<div class="form-group">
 									<label for="formGroupExampleInput">연락처</label> 
@@ -246,14 +228,35 @@
 						<div class="card" style="border: 0px;">
 						
 							<div class="card-body">
-								<div class="custom-control custom-radio">
-									<input type="radio" name="radioDisabled"
-										id="customRadioDisabled2" class="custom-control-input" checked
-										disabled> <label class="custom-control-label"
-										for="customRadioDisabled2">새로입력
-									</label>
+								<div class="row">
+									<div class="col-5">
+										<div class="custom-control custom-radio">
+											<input type="radio" name="radioDisabled"
+												id="customRadioDisabled2" class="custom-control-input" checked
+												disabled> <label class="custom-control-label"
+												for="customRadioDisabled2">새로입력
+											</label>
+										</div>
+									</div>
+									<div class="col-5">
+										<div class="custom-control custom-radio">
+											<input type="radio" name="radioDisabled"
+												id="customRadioDisabled2" class="custom-control-input"
+												disabled> <label class="custom-control-label"
+												for="customRadioDisabled2">기존 배송지
+											</label>
+										</div>
+									
+									</div>
 								</div>
 							</div>
+							
+								<div class="form-group">
+									<label for="formGroupExampleInput">배송지 이름</label> 
+									<input type="text" class="form-control" id="formGroupExampleInput" 
+										name="deliveryAddressName"
+										placeholder="">
+								</div>
 	
 								<div class="form-group">
 									<label for="formGroupExampleInput">이름</label> 
@@ -305,7 +308,7 @@
 			</article>
 	
 			<hr>
-	
+	<!-- 
 			<article class="pb-4">
 				<div class="row">
 					<div class="col">
@@ -408,24 +411,18 @@
 						</div>
 					</div>
 				</div>
-			</article>
-	
-			<hr>
-	
-			<article>
-	
-				<div class="h5 pt-3">약관 동의</div>
-				<div class="card w-100"></div>
-	
-			</article>
+			</article> -->
 	
 			<article class="p-5 d-flex justify-content-center">
 				<div class="d-inline-flex p-2 bd-highlight">
-					<a href="javaScript: return(0);" onclick="document.getElementById('paymentReserveForm').submit();" class="btn btn-primary">결제 예약하기</a>
+					<a href="javaScript: return(0);" onclick="document.getElementById('paymentReserveForm').submit();" class="btn btn-primary">리워드 결제하기</a>
+					<!-- <a href="javaScript: return(0);" onclick="document.getElementById('paymentReserveForm').submit();" class="btn btn-primary">결제 예약하기</a> -->
 				</div>
 			</article>
 			<input type="hidden" name="fundingMoney" value="${totalAmount }">
 		</form>
+
+
 	</section>
 	<!-- -------------------- -->
 

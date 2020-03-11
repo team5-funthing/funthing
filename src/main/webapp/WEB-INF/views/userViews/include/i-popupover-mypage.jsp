@@ -6,7 +6,9 @@
            <div class="container">
                <div>
 					<div>
-						<form action = "paymentReservationCheckList.udo" method = "post" id = "paymentReservationCheckListForm"></form>
+						<form action = "paymentReservationCheckList.udo" method = "post" id ="paymentReservationCheckListForm">
+							<input type="hidden" name="email" value="${memberSession.email }">
+						</form>
 						<form id="imgform" action="saveimage.udo" method="post"
 							enctype="multipart/form-data">
 							<div class="row ml-2 mr-2 mt-4 pb-4">

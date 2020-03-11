@@ -10,8 +10,8 @@
 			SELECT orderno_seq.currval FROM dual
 		</selectKey>
 	
-		INSERT INTO paymentReserve (orderNo, email, projectNo, paymentReserveDate, paymentOption, applyNo, deliveryAddressNo, fundingMoney, additionalFundingMoney, shippingFee, privateName, privateFundingMoney)                                           
-		VALUES (orderno_seq.nextval, #{email }, ${projectNo}, sysdate, #{paymentOption }, #{applyNo }, #{deliveryAddressNo }, #{fundingMoney }, #{additionalFundingMoney }, #{shippingFee }, #{privateName },  #{privateFundingMoney })
+		INSERT INTO paymentReserve (orderNo, email, projectNo, paymentOption, applyNo, deliveryAddressNo, fundingMoney, additionalFundingMoney, shippingFee, privateName, privateFundingMoney)                                           
+		VALUES (orderno_seq.nextval, #{email}, #{projectNo}, #{paymentOption }, #{applyNo }, #{deliveryAddressNo }, #{fundingMoney }, #{additionalFundingMoney }, #{shippingFee }, #{privateName },  #{privateFundingMoney })
 	
 	</insert>
 	
@@ -119,5 +119,14 @@
 		WHERE projectNo = #{projectNo} and paymentStatus = '결제예약'
 		
 	</update>
+	
+	<update id="updateKakaoPayResultSet" parameterType="paymentReserve">
+
+        Update paymentReserve
+		SET paymentReserveDate = #{paymentReserveDate}, paymentOption = #{paymentOption}, paymentStatus = '결제예약', aid = #{aid}, tid = #{tid}
+		WHERE orderNo = #{orderNo}
+		
+	</update>
+	
 	
 </mapper>

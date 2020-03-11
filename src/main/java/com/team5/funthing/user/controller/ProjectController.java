@@ -250,7 +250,7 @@ public class ProjectController {
 	
 	//리워드 등록시에 목록을 추가하는 메서드 추가해야한다()
   
-	@RequestMapping(value = "/insertProject.udo", method = RequestMethod.POST)
+	@RequestMapping(value = "/insertCreatorAndInsertProject.udo", method = RequestMethod.POST)
 	public String insertProject(	@RequestParam(name = "creatorUploadImage", required = false)List<MultipartFile> creatorUploadImage,
 									@RequestParam(name = "businessUploadFile", required = false)List<MultipartFile> businessUploadFile,
 									HttpSession session, 

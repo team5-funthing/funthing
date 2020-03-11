@@ -12,30 +12,35 @@ import com.team5.funthing.user.model.vo.PaymentReserveVO;
 public class PaymentReserveDAO {
 	
 	@Autowired
-	private SqlSessionTemplate sqlsessionTemplate;
+	private SqlSessionTemplate sqlSessionTemplate;
 	
 	public PaymentReserveVO insertPaymentReserve(PaymentReserveVO vo) {
-		sqlsessionTemplate.insert("insertPaymentReserve", vo);
+		sqlSessionTemplate.insert("insertPaymentReserve", vo);
 		return vo;
 	}
 	
 	public PaymentReserveVO getPaymentReserve(PaymentReserveVO vo) {
-		return sqlsessionTemplate.selectOne("getPaymentReserve", vo);
+		return sqlSessionTemplate.selectOne("getPaymentReserve", vo);
 	}
 	
 	public List<PaymentReserveVO> getPaymentReserveListByEmail(PaymentReserveVO vo) {
-		return sqlsessionTemplate.selectList("getPaymentReserveListByEmail", vo);
+		return sqlSessionTemplate.selectList("getPaymentReserveListByEmail", vo);
 	}
 	
 	
 	
 	public void updatePaymentComplete(int projectNo) {
-		sqlsessionTemplate.update("updatePaymentComplete", projectNo);
+		sqlSessionTemplate.update("updatePaymentComplete", projectNo);
 	}
 	
 	public void updatePaymentCancel(int projectNo) {
-		sqlsessionTemplate.update("updatePaymentCancel", projectNo);
+		sqlSessionTemplate.update("updatePaymentCancel", projectNo);
 	}
+	
+	public void updateKakaoPayResultSet(PaymentReserveVO vo) {
+		sqlSessionTemplate.update("updateKakaoPayResultSet", vo);
+	}
+	
 	
 	
 }

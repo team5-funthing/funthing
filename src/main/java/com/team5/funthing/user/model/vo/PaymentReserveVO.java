@@ -3,17 +3,22 @@ package com.team5.funthing.user.model.vo;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class PaymentReserveVO {
 	
 	private int orderNo;
 	private int projectNo;
 	private String email;
 	private Date paymentReserveDate;
-	private String paymentOption = "카카오페이";
+	private String paymentOption = "";
 	private int applyNo; //승인번호
 	private String paymentStatus;
 	private int deliveryAddressNo;
 	private int fundingMoney;
+	private String aid; // 결제, 취소, 정기결제 API 호출에 대한 고유번호. 20자리
+	private String tid; // 결제 한 건에 대한 고유번호. 20자리
 	
 // 펀딩 밀어주기 시 추가 항목들 
 	private int additionalFundingMoney;
@@ -122,6 +127,26 @@ public class PaymentReserveVO {
 	}
 
 
+	public String getAid() {
+		return aid;
+	}
+
+
+	public void setAid(String aid) {
+		this.aid = aid;
+	}
+
+
+	public String getTid() {
+		return tid;
+	}
+
+
+	public void setTid(String tid) {
+		this.tid = tid;
+	}
+
+
 	public int getAdditionalFundingMoney() {
 		return additionalFundingMoney;
 	}
@@ -217,19 +242,13 @@ public class PaymentReserveVO {
 		return "PaymentReserveVO [orderNo=" + orderNo + ", projectNo=" + projectNo + ", email=" + email
 				+ ", paymentReserveDate=" + paymentReserveDate + ", paymentOption=" + paymentOption + ", applyNo="
 				+ applyNo + ", paymentStatus=" + paymentStatus + ", deliveryAddressNo=" + deliveryAddressNo
-				+ ", fundingMoney=" + fundingMoney + ", additionalFundingMoney=" + additionalFundingMoney
-				+ ", shippingFee=" + shippingFee + ", privateName=" + privateName + ", privateFundingMoney="
-				+ privateFundingMoney + ", reward=" + reward + ", rewardSelection=" + rewardSelection + ", sumDate="
-				+ sumDate + ", sumFundingMoney=" + sumFundingMoney + ", rewardSelectionList=" + rewardSelectionList
-				+ "]";
+				+ ", fundingMoney=" + fundingMoney + ", aid=" + aid + ", tid=" + tid + ", additionalFundingMoney="
+				+ additionalFundingMoney + ", shippingFee=" + shippingFee + ", privateName=" + privateName
+				+ ", privateFundingMoney=" + privateFundingMoney + ", reward=" + reward + ", rewardSelection="
+				+ rewardSelection + ", sumDate=" + sumDate + ", sumFundingMoney=" + sumFundingMoney
+				+ ", rewardSelectionList=" + rewardSelectionList + "]";
 	}
 
 	
 	
-	
-	
-	
-	
-	
-
 }

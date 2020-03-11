@@ -35,7 +35,6 @@ public class InsertPaymentReserveServiceImpl implements InsertPaymentReserveServ
 	private ProjectDAO projectDAO;
 	@Autowired
 	private RewardDAO rewardDAO;
-	
 	@Autowired
 	private RewardVO rewardVO;
 	
@@ -56,16 +55,19 @@ public class InsertPaymentReserveServiceImpl implements InsertPaymentReserveServ
 		prvo.setDeliveryAddressNo(davo.getDeliveryAddressNo());
 		prvo.setProjectNo(projectNo);
 		
+		
+						
 		//결제예약 테이블 추가
 		prvo = paymentReserveDAO.insertPaymentReserve(prvo);
 		int orderNo = prvo.getOrderNo();
-		
 		System.out.println("==========================================");
+		
+		
+		
 		//리워드선택(하나의 결제예약번호로 묶여진) 목록 추가
 		for(RewardSelectionVO rs : selectedRewardList) {
 			
 			System.out.println(rs);
-			
 			
 			rs.setOrderNo(orderNo);
 			rs = rewardSelectionDAO.insertRewardSelection(rs);
@@ -91,7 +93,15 @@ public class InsertPaymentReserveServiceImpl implements InsertPaymentReserveServ
 			}
 			rewardSelectionDAO.insertRewardSelectionList(rs.getRewardOptionValue());
 		}
+		
 		System.out.println("==========================================");
+		
+		
+		
+		
+		
+		
+//=====================================================================================	
 		
 		//프로젝트에 펀딩 금액 반영.
 		projectVO.setProjectNo(projectNo);
@@ -100,7 +110,6 @@ public class InsertPaymentReserveServiceImpl implements InsertPaymentReserveServ
 		
 		projectVO.setFundingMoney(prvo.getFundingMoney());
 		projectDAO.updateProjectFundingMoney(projectVO);
-		
 		
 		
 		return prvo;

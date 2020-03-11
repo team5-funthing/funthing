@@ -16,8 +16,16 @@
 	</properties>
 	
 	
-
 	<dependencies>
+	
+		<!-- lombok -->
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <version>1.18.12</version>
+		    <scope>provided</scope>
+		</dependency>
+	
 
 		<!-- 비밀번호 암호화를 위한 spring-security-web maven -->
 		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
