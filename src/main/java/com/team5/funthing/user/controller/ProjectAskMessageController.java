@@ -15,8 +15,10 @@ import com.team5.funthing.user.model.vo.CSBoardVO;
 import com.team5.funthing.user.model.vo.CreatorVO;
 import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.model.vo.ProjectAskMessageVO;
+import com.team5.funthing.user.model.vo.ProjectBoardVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.service.csboardService.GetUserCSBoardListService;
+import com.team5.funthing.user.service.memberService.GetMemberService;
 import com.team5.funthing.user.service.projectAskMessageService.GetChoiceProjectAskMessageService;
 import com.team5.funthing.user.service.projectAskMessageService.GetEntireProjectAskMessageListService;
 import com.team5.funthing.user.service.projectAskMessageService.GetEntireProjectMakerAskMessageListService;
@@ -43,6 +45,9 @@ public class ProjectAskMessageController {
    private GetEntireProjectMakerAskMessageListService getEntireProjectMakerAskMessageListService;
    @Autowired
    private GetProjectService getProjectService;
+   @Autowired
+   private GetMemberService getMemberService;
+
    
    
    @Autowired
@@ -93,33 +98,33 @@ public class ProjectAskMessageController {
       
       if(getMakerMemberCreatorService.getMakerMemberCreator(vo) != null) { //메이커 일때
 
-//       1.creator인지 확인하기 
+//       1.member테이블과 creator테이블 조인해서 creator가져오기
          MemberVO getMakerMember = getMakerMemberCreatorService.getMakerMemberCreator(vo); 
+         System.out.println("크리에이터 찍혀야해"+getMakerMember.toString());
          model.addAttribute("getMakerMember", getMakerMember);
          
+//       creator를 넣기 주입
          vo2.setCreator(getMakerMember.getCreator().getCreator());
          model.addAttribute("vo2",vo2);
+         
+//       2.projectAskMessage테이블에서 creator가 맞는애의 모든 정보를 가져오기 (여기서 project와 조인해서 projectMainImage도 같이 가져오기) 
    
          List<ProjectAskMessageVO>getEntireMakerMessageList = getEntireProjectMakerAskMessageListService.getEntireProjectMakerAskMessageList(vo2);
+         System.out.println("여기찍혀"+getEntireMakerMessageList.toString());
          model.addAttribute("messagelist", getEntireMakerMessageList);
-         
-         
-         
-         
-       
-//         2.내가 보낸 문의글 확인하기
-         vo2.setEmail(vo.getEmail());
-         List<ProjectAskMessageVO> getEntireProjectAskMessageList = getEntireProjectAskMessageListService.getEntireProjectAskMessageList(vo2);
-         model.addAttribute("getMessageList",getEntireProjectAskMessageList);
-            
+                
          
          
        // 3. 관리자에게 문의하기 
          vo3.setEmail(memberVO.getEmail());
          System.out.println("vo3 : "+ vo3);
+         
          List<CSBoardVO> csboardList = getCSBoardListService.getCSBoardList(vo3);
+         System.out.println("여기에 답변상태 찍히는지보렴 : "+ csboardList.toString());
          model.addAttribute("askAdminList",csboardList);
          
+         getMemberService.getMember(vo);
+         model.addAttribute("getMember",getMemberService.getMember(vo));
          
          return "p-message-check"; //메세지 리스트로 
          
@@ -136,6 +141,10 @@ public class ProjectAskMessageController {
          //    관리자에게 문의하기 
          vo3.setEmail(memberVO.getEmail());
          System.out.println("vo3 : "+ vo3);
+         
+         getMemberService.getMember(vo);
+         model.addAttribute("getMember",getMemberService.getMember(vo));
+         
          List<CSBoardVO> csboardList = getCSBoardListService.getCSBoardList(vo3);
          model.addAttribute("askAdminList",csboardList);
          
@@ -177,7 +186,7 @@ public class ProjectAskMessageController {
          
    }
    
-   @RequestMapping(value="updateProjectAskReplyContentsStatus.udo", method = RequestMethod.POST)
+   @RequestMapping(value="updateProjectAskReplyContentsStatus.udo", method = RequestMethod.GET)
    public String updateProjectAskReplyContentsStatus(ProjectAskMessageVO vo) { //답변을 달면 수정으로 들어간다
       
       updateProjectAskReplyContentsStatusService.updateProjectAskReplyContentsStatus(vo);

@@ -3,7 +3,9 @@ package com.team5.funthing.user.model.vo;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ProjectAskMessageVO {
 	
 	private int projectAskNo;
@@ -22,9 +24,18 @@ public class ProjectAskMessageVO {
 	private int projectAskStep;
 	private int projectNo;
 	
+//	조인시 필요한 VO
+	private ProjectVO project;
 	
 	
 	
+	
+	public ProjectVO getProject() {
+		return project;
+	}
+	public void setProject(ProjectVO project) {
+		this.project = project;
+	}
 	public int getProjectNo() {
 		return projectNo;
 	}
@@ -110,7 +121,7 @@ public class ProjectAskMessageVO {
 				+ ", projectAskReplyContentsTitle=" + projectAskReplyContentsTitle + ", projectAskReplyContents="
 				+ projectAskReplyContents + ", projectAskReplyStatus=" + projectAskReplyStatus + ", projectAskDate="
 				+ projectAskDate + ", projectAskReplyDate=" + projectAskReplyDate + ", projectAskRef=" + projectAskRef
-				+ ", projectAskStep=" + projectAskStep + ", projectNo=" + projectNo + "]";
+				+ ", projectAskStep=" + projectAskStep + ", projectNo=" + projectNo + ", project=" + project + "]";
 	}
 
 	

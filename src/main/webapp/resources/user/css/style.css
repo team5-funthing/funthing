@@ -5275,6 +5275,14 @@ body.is-touch .project_detail_tile article .content {
 
 }
 
+#detail-mypage-profile2-img {
+    width: 120px;
+    height: 120px; 
+    border-radius: 70%;
+    overflow: hidden;
+
+}
+
 
 .profile {
     width: 100%;

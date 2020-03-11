@@ -195,9 +195,11 @@
 																aria-valuemin="0" aria-valuemax="100"></div>
 														</div>
 													</div>
-		                                       </div>
+		                                       </div>				
 		                                       <div class="card-footer">
-		                                          <a href="getWritingProject.udo?creator=${myProject.creator }&currentProjectNo=${myProject.projectNo }">수정</a>
+
+		                                          <a href="getWritingProject.udo?creator=${myProject.creator}&currentProjectNo=${myProject.projectNo }">수정</a>
+
 		                                          <a href="deleteProject.udo?currentProjectNo=${myProject.projectNo }">삭제</a>
 		                                          
 		                                          <c:choose>
