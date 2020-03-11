@@ -25,6 +25,7 @@ import com.team5.funthing.common.utils.uploadUtils.UploadUtil;
 import com.team5.funthing.user.model.vo.AlarmVO;
 import com.team5.funthing.user.model.vo.CreatorVO;
 import com.team5.funthing.user.model.vo.KeywordVO;
+import com.team5.funthing.user.model.vo.MemberActivityVO;
 import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.model.vo.ProjectBoardVO;
 import com.team5.funthing.user.model.vo.ProjectIntroduceImageVO;
@@ -38,6 +39,7 @@ import com.team5.funthing.user.service.creatorService.InsertCreatorService;
 import com.team5.funthing.user.service.creatorService.UpdateCreatorService;
 import com.team5.funthing.user.service.keywordService.GetKeywordListService;
 import com.team5.funthing.user.service.keywordService.InsertKeywordService;
+import com.team5.funthing.user.service.memberActivityService.GetProjectLikeCountService;
 import com.team5.funthing.user.service.projectBoardService.GetEntireProjectBoardListService;
 import com.team5.funthing.user.service.projectIntroduceImageService.DeleteProjectIntroduceImageService;
 import com.team5.funthing.user.service.projectIntroduceImageService.GetProjectIntroduceImageListService;
@@ -105,7 +107,9 @@ public class ProjectController {
    @Autowired
    private DeleteProjectIntroduceImageService deleteProjectIntroduceImageService;
    
-   
+   // MemberActivityService
+   @Autowired
+   private GetProjectLikeCountService getProjectLikeCountService;
 
    // ProjectBoard Service
    @Autowired
@@ -417,20 +421,29 @@ public class ProjectController {
    
    @RequestMapping(value="projectDetailsFromProjectBoard.udo", method = RequestMethod.GET)
    public String showProjectDetails(   @RequestParam int currentProjectNo,
-                              ProjectVO pvo, Model model) { // 이미지클릭시 프로젝트 상세 페이지로 이동
+
+                              ProjectVO pvo, MemberActivityVO mavo, Model model) { // �̹���Ŭ���� ����Ʈ �� ������� �̵�
+
       
       System.out.println("currentProjectNo : " + currentProjectNo);
       pvo.setProjectNo(currentProjectNo);
-      getProjectDetails(pvo, model);
+      getProjectDetails(pvo, mavo, model);
       
       return "p-project-details"; //프로젝트 상세페이지
    }
    
    @RequestMapping(value="projectDetails.udo", method = RequestMethod.GET)
-   public String showProjectDetails(ProjectVO pvo, Model model) { // 이미지클릭시 프로젝트 상세 페이지로 이동
 
-      getProjectDetails(pvo, model);
-      return "p-project-details"; //프로젝트 상세페이지
+   public String showProjectDetails(ProjectVO pvo, 
+		   							MemberActivityVO mavo, 
+		   							Model model,
+		   							@RequestParam(value="projectNo") String projectNo
+		   							) { // �̹���Ŭ���� ����Ʈ �� ������� �̵�
+	   mavo.setProjectNo(Integer.parseInt(projectNo));
+	   System.out.println(projectNo);
+	   getProjectDetails(pvo,mavo, model);
+	   
+	   return "p-project-details"; //����Ʈ ��������
    }
    
    
@@ -640,10 +653,14 @@ public class ProjectController {
    
    
    
-   public void getProjectDetails(ProjectVO pvo, Model model) {
+   public void getProjectDetails(ProjectVO pvo,MemberActivityVO mavo, Model model) {
       
       pvo = getProjectService.getProject(pvo);
       int projectNo = pvo.getProjectNo();
+      
+      mavo.setProjectNo(pvo.getProjectNo());
+	   int likeCount = getProjectLikeCountService.getProjectLikeCount(mavo);
+      
       
       projectBoardVO.setProjectNo(projectNo);
       List<ProjectBoardVO> getProjectBoardList = getEntireProjectBoardListService.getEntireProjectBoardList(projectBoardVO);
@@ -663,7 +680,7 @@ public class ProjectController {
       model.addAttribute("projectIntroduceImageList", projectIntroduceImageList);
       model.addAttribute("projectKeywordList", projectKeywordList);
       model.addAttribute("project", pvo);
-      
+      model.addAttribute("likeCount", likeCount);
       
    }
    

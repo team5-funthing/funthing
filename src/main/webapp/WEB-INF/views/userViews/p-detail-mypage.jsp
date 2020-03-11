@@ -62,25 +62,15 @@
                   <div class="d-flex justify-content-start">
                      <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                           <a class="nav-item nav-link active"
-                              id="nav-created-prj-list-tab" data-toggle="tab"
-                              href="#nav-created-prj-list" role="tab"
-                              aria-controls="nav-created-prj-list" aria-selected="true">만든
-                              프로젝트</a> <a class="nav-item nav-link"
-                              id="nav-sponsored-prj-list-tab" data-toggle="tab"
-                              href="#nav-sponsored-prj-list" role="tab"
-                              aria-controls="nav-sponsored-prj-list" aria-selected="false">후원한
-                              프로젝트</a> <a class="nav-item nav-link"
-                              id="nav-like-prj-list-tab" data-toggle="tab" 
-                              href="#nav-like-prj-list" role="tab"
-                              aria-controls="nav-like-prj-list" aria-selected="false">좋아요
-                              프로젝트</a><a class="nav-item nav-link" 
-                              id="nav-like-prj-list-tab"
-                              data-toggle="tab" href="#nav-reserved-prj-list" role="tab"
-                              aria-controls="nav-like-prj-list" aria-selected="false">예정중인 관심
-                              프로젝트</a><a class="nav-item nav-link" 
-                              id="nav-like-prj-list-tab"
-                              data-toggle="tab" href="#nav-report-prj-list" role="tab"
+                           <a class="nav-item nav-link active" id="nav-created-prj-list-tab" data-toggle="tab"
+                              href="#nav-created-prj-list" role="tab"  aria-controls="nav-created-prj-list" aria-selected="true">만든  프로젝트</a> 
+                           <a class="nav-item nav-link" id="nav-sponsored-prj-list-tab" data-toggle="tab"
+                              href="#nav-sponsored-prj-list" role="tab" aria-controls="nav-sponsored-prj-list" aria-selected="false">후원한  프로젝트</a> 
+                           <a class="nav-item nav-link" id="nav-like-prj-list-tab" data-toggle="tab" 
+                              href="#nav-like-prj-list" role="tab" aria-controls="nav-like-prj-list" aria-selected="false">좋아요  프로젝트</a>
+                           <a class="nav-item nav-link" id="nav-like-prj-list-tab" data-toggle="tab" 
+                           	  href="#nav-reserved-prj-list" role="tab" aria-controls="nav-like-prj-list" aria-selected="false">예정중인 관심 프로젝트</a>
+                           <a class="nav-item nav-link" id="nav-like-prj-list-tab" data-toggle="tab" href="#nav-report-prj-list" role="tab"
                               aria-controls="nav-report-prj-list" aria-selected="false">신고한 프로젝트</a>
                         </div>
                      </nav>
@@ -130,13 +120,8 @@
 				                                 			<c:when test="${myProject.status eq 'f'.charAt(0) }">
 					                                 			<h5><a href="javascript: return(0);" class="badge badge-danger m-1">승인 실패</a></h5>
 				                                 			</c:when>
-
 			                                 			</c:choose>
-		                                 			
-		                                 				
-		                                 			
-		                                 			</c:when>
-		                                 			
+		                                 			</c:when>	                                 			
 		                                 			<c:when test="${myProject.funding eq 'y'.charAt(0) }">
 		                                 			
 		                                 				<h5><a href="javascript: return(0);" class="badge badge-primary m-1">펀딩중</a></h5>
@@ -212,7 +197,7 @@
 													</div>
 		                                       </div>
 		                                       <div class="card-footer">
-		                                          <a href="getWritingProject.udo?currentProjectNo=${myProject.projectNo }">수정</a>
+		                                          <a href="getWritingProject.udo?currentProjectNo=${myProject.projectNo }&creator=${myProject.creator}">수정</a>
 		                                          <a href="deleteProject.udo?currentProjectNo=${myProject.projectNo }">삭제</a>
 		                                          
 		                                          <c:choose>
@@ -255,7 +240,7 @@
                      </div>
                <!--  카드모듈 끝    그대로 가져다  id 값만 변경해서 써 일단. -->
                
-               
+               		<!-- 후원한 프로젝트 시작 -->
                      <div class="tab-pane fade" id="nav-sponsored-prj-list"
                         role="tabpane" aria-labelledby="nav-sponsored-prj-list-tab">
                          <div class="container">
@@ -326,50 +311,117 @@
                                     </div>
                                 </div>
                               </c:if>
-
                         </div>
-                        
-                     </div>           
-                     <div class="tab-pane fade " id="nav-like-prj-list" role="tabpane"
-                        aria-labelledby="nav-like-prj-list-tab">
+                     </div>     
+                     <!-- 후원한 프로젝트 종료 -->
+                     
+                     <!-- 좋아요 프로젝트 시작 -->
+                     <div class="tab-pane fade " id="nav-like-prj-list" role="tabpane" aria-labelledby="nav-like-prj-list-tab">
                         <div class="container">
                            <section class="tiles">
-                           
                               <c:if test="${not empty projectLikeList }">
-                              <c:forEach var="project3" items="${projectLikeList }">
+                              <c:forEach var="likeProject" items="${projectLikeList }" varStatus="step">
                               <article>
                                  <div class="project">
+                                 <aside class="row ml-1">
+  	
+		                                 		<c:choose>
+		                                 			<c:when test="${likeProject.funding eq 'n'.charAt(0) }"> <!-- 펀징 진행 확인 -->
+			                                 			<c:choose>
+				                                 			<c:when test="${likeProject.status eq 'n'.charAt(0) }">  <!-- 제출 및 심사 확인 -->	
+					                                 			<c:choose>
+						                                 			<c:when test="${likeProject.writeStatus eq 'n'.charAt(0) }"> <!-- 작성 완료 확인 -->
+						                                 				<h5><a href="javascript: return(0);" class="badge badge-info m-1">작성중</a></h5>	
+						                                 			</c:when>
+						                                 			<c:when test="${likeProject.writeStatus eq 'y'.charAt(0) }">
+					                                 					<h5><a href="javascript: return(0);" class="badge badge-dark m-1">미제출</a></h5>
+						                                 				<h5><a href="javascript: return(0);" class="badge badge-success m-1">작성완료</a></h5>
+						                                 			</c:when>
+					                                 			</c:choose>		
+				                                 			</c:when>                              			
+				                                 			<c:when test="${likeProject.status eq 'w'.charAt(0) }">
+				                                 				<h5><a href="javascript: return(0);" class="badge badge-light m-1">심사중</a></h5>
+				                                 			</c:when>
+				                                 			<c:when test="${likeProject.status eq 'm'.charAt(0) }">
+					                                 			<h5><a href="javascript: return(0);" class="badge badge-warning m-1">수정 필요</a></h5>
+				                                 			</c:when>
+				                                 			<c:when test="${likeProject.status eq 'f'.charAt(0) }">
+					                                 			<h5><a href="javascript: return(0);" class="badge badge-danger m-1">승인 실패</a></h5>
+				                                 			</c:when>
+			                                 			</c:choose>
+		                                 			</c:when>	                                 			
+		                                 			<c:when test="${likeProject.funding eq 'y'.charAt(0) }">
+		                                 				<h5><a href="javascript: return(0);" class="badge badge-primary m-1">펀딩중</a></h5>
+		                                 			</c:when>
+		                                 		</c:choose>
+			                                 	
+		                                 	</aside>
                                     <div class="card">
                                        <div class="thumbnail-wrap">
                                           <div class="thumbnail ">
                                              <div class="centered">
-                                                 <%/*  <img src="${myProjectList.projectMainImage}"
-                                                   class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">  */ %>
-                                        <!-- 테스트용 -->            <img src="${pageContext.request.contextPath}/resources/user/img/test/2.jpg"
-                                                   class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+                                                 <c:choose>
+	                                             			<c:when test="${likeProject.funding == 'y'.charAt(0) }">
+	                                             				
+	                                             				<form id="likePreviewForm${step.count }" action="projectDetails.udo" method="GET">
+	                                             					<input type="hidden" name="projectNo" value="${likeProject.projectNo}">
+		                                             				<a href="javaScript: return(0);" onclick="document.getElementById('likePreviewForm${step.count }').submit()">
+				                                             			<c:choose>
+						                                             		<c:when test="${likeProject.projectMainImage eq '' }">
+						                                             				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
+						                                             					class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+						                                             		</c:when>
+						                                             		<c:when test="${likeProject.projectMainImage ne '' }">
+						                                             			<img src="${likeProject.projectMainImage }" class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+						                                             		</c:when>
+				                                             			</c:choose>  
+			                                             			</a>
+				                                             	</form>
+	                                             			</c:when>
+	                                             			<c:otherwise>
+	                                             			
+	                                             				<form id="previewForm${step.count }" action="showPreviewProject.udo?projectNo=${myProject.projectNo}" method="POST">
+		                                             				<a href="javaScript: return(0);" onclick="document.getElementById('previewForm${step.count }').submit()">
+				                                             			<c:choose>
+						                                             		<c:when test="${likeProject.projectMainImage eq '' }">
+						                                             				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
+						                                             					class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+						                                             		</c:when>
+						                                             		<c:when test="${likeProject.projectMainImage ne '' }">
+						                                             			<img src="${likeProject.projectMainImage }" class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+						                                             		</c:when>
+				                                             			</c:choose>  
+			                                             			</a>
+				                                             	</form>
+	                                             			</c:otherwise>
+	                                             		</c:choose>
                                              </div>
                                           </div>
                                        </div>
 
-                                       <div class="card-body">
-                                          <h5 class="card-title">${project3.projectTitle }</h5>
-                                          <ul>
-                                             <li>요약 설명 : ${project3.projectSummary }</li>
-                                             <li>목표 금액 : ${project3.goalMoney }</li>
-                                             <li>기간 : ${project3.startDate } ~ ${project3.endDate }</li>
-                                          </ul>
-
-                                          <p>현재 후원받은 금액 : ${project3.fundingMoney }원 ${(project3.fundingMoney div project3.goalMoney)*100 } %</p>
-                                          <div class="progress">
-                                             <div class="progress-bar color-3" role="progressbar"
-                                                style="width: 50%" aria-valuenow="30" aria-valuemin="0"
-                                                aria-valuemax="100"></div>
-                                          </div>
-                                       </div>
-
-                                       <div class="card-footer">
-                                          <a href="#">보러가기</a>
-                                       </div>
+		                                    <div class="card-body">
+		                                          <h5 class="card-title">${likeProject.projectTitle }</h5>
+		                                          <ul>
+		                                             <li>${likeProject.projectSummary }</li>
+		                                             <li>${likeProject.goalMoney }</li>
+		                                             <li>${likeProject.endDate }</li>
+		                                          </ul>
+													${likeProject.projectNo}
+		                                          <div class="percentage">
+														<fmt:formatNumber type="number" var="progressPercent"
+															value="${(likeProject.fundingMoney / likeProject.goalMoney)*100}"
+															pattern=".00" />
+														<fmt:formatNumber type="number" var="progress"
+															maxFractionDigits="3" value="${likeProject.fundingMoney}" />
+														<p>${progress}원${progressPercent}%진행중</p>
+					
+														<div class="progress">
+															<div class="progress-bar color-7" role="progressbar"
+																style="width: ${progressPercent}%" aria-valuenow="30"
+																aria-valuemin="0" aria-valuemax="100"></div>
+														</div>
+													</div>
+		                                       </div>
                                     </div>
                                  </div>
                               </article>
@@ -384,14 +436,11 @@
                                     </div>
                                     <div class="col-8 d-flex justify-content-center ">
                                         <div class="pt-5 pb-5 ">
-                                            <div >
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                                            </div>
-                                            <div class="h3">보낸 메시지가 없습니다</div>
+                                            <div class="h3">'좋아요' 누른 프로젝트가 없습니다</div>
                                             <div class="h5">
 
-					                                                프로젝트 페이지에서 '문의하기' 버튼을 눌러
-					                                                메시지를 보낼 수 있습니다.
+					                          	프로젝트 상세페이지로 이동하여 '좋아요' 버튼을 누르면
+												선호하는 프로젝트를 확인할 수 있습니다.
                                                 
                                             </div>
                                         </div>
@@ -402,10 +451,9 @@
                               </c:if>
                         </div>
                      </div>
+  					<!-- 좋아요 프로젝트 종료 -->
   
-  
-    				<!-- 카드 시작 -->
-          
+    				<!-- 관심 프로젝트 시작 -->
                      <div class="tab-pane fade" id="nav-reserved-prj-list"
                         role="tabpane" aria-labelledby="nav-reserved-prj-list-tab">
 
@@ -455,7 +503,7 @@
                           
                               <!-- 추가적으로 목록들 생길 시 JSTL로 반복 추가-->
                            </section>
-                               <c:if test="${empty projectReservationList }">
+                               <c:if test="${empty projectReservationList}">
                                 <div class="row">
                                     <div class="col">
                                     </div>
@@ -480,14 +528,9 @@
                         </div>
                      </div>
                <!--  카드모듈 끝    그대로 가져다  id 값만 변경해서 써 일단. -->
-   
-   
-   
-   
-   
-   
-   
-    				<!-- 카드 시작 -->
+   					<!-- 관심 프로젝트 종료 -->
+
+    				<!-- 신고 프로젝트 시작 -->
                      <div class="tab-pane fade" id="nav-report-prj-list"
                         role="tabpane" aria-labelledby="nav-report-prj-list-tab">
 
@@ -561,7 +604,7 @@
                               </c:if> 
                         </div>
                      </div>
-               <!--  카드모듈 끝    그대로 가져다  id 값만 변경해서 써 일단. -->
+               		<!-- 신고 프로젝트 종료 -->
                
                   </div>
                </div>

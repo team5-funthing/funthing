@@ -108,14 +108,9 @@
 						</form>
 					</div>
 					<div class="row d-flex justify-content-around m-0 ">
-						<a
-							class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2"
-							href="#">좋아요</a> <a
-							class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2"
-							href="showInsertwAskMessage.udo?projectNo=${project.projectNo }">문의하기</a> <a
-							class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2"
-							href="#">공유하기</a>
-
+						<a class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2" href="upCountLike.udo?projectNo=${project.projectNo }">좋아요   ${likeCount}</a> 
+						<a class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2" href="showInsertwAskMessage.udo?projectNo=${project.projectNo }">문의하기</a> 
+						<a class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2" href="#">공유하기</a>
 					</div>
 
 				</aside>
