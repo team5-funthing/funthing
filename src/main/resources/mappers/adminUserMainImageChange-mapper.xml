@@ -7,11 +7,11 @@
 
 	<!-- 이미지 교체 -->
 	<update id="updateUserMainImage" parameterType="adminUserMainImageChange">
-		UPDATE usermainimagechange set imagePath = #{imagePath}, imageName = #{imageName} where imageNo = #{imageNo}
+		UPDATE usermainimagechange set imagePath = #{imagePath} where imageNo = #{imageNo}
 	</update>
 	
 	<select id="getUserMainImageList" resultType="adminUserMainImageChange" >
-		select * from usermainimagechange
+		select * from usermainimagechange ORDER BY imageNo asc
 	</select>
 	
 	<!-- 이미지 삭제 -->

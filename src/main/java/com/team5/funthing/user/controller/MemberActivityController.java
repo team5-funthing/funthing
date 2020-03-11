@@ -25,6 +25,7 @@ import com.team5.funthing.user.service.memberActivityService.GetReportProjectNoL
 import com.team5.funthing.user.service.memberActivityService.GetReservationProjectNoListService;
 import com.team5.funthing.user.service.memberActivityService.InsertMemberActivityService;
 import com.team5.funthing.user.service.memberActivityService.UpdateMemberActivityService;
+import com.team5.funthing.user.service.paymentReserveService.GetPaymentReserveListByEmailService;
 import com.team5.funthing.user.service.paymentReserveService.GetPaymentReserveService;
 import com.team5.funthing.user.service.projectService.GetProjectListByEmailService;
 import com.team5.funthing.user.service.projectService.GetProjectService;
@@ -59,6 +60,7 @@ public class MemberActivityController {
 	private GetReservationProjectNoListService getReservationProjectNoListService;
 	
 
+
 	@RequestMapping(value="mypage.udo",method=RequestMethod.GET)
 	public String myPage(HttpSession session, MemberActivityVO vo, ProjectVO vo1, Model model, MemberVO vo2) {
 		
@@ -91,7 +93,7 @@ public class MemberActivityController {
 		
 		redirectAttributes.addAttribute("projectNo", projectNo);
 		
-		return "redirect:projectDetails.udo"; //ÇÁ·ÎÁ§Æ® »ó¼¼ÆäÀÌÁö
+		return "redirect:projectDetails.udo"; //Ã‡ÃÂ·ÃÃÂ§Ã†Â® Â»Ã³Â¼Â¼Ã†Ã¤Ã€ÃŒÃÃ¶
 	}
 
 	
@@ -114,11 +116,11 @@ public class MemberActivityController {
 	public void myLikeProjectList(HttpSession session,MemberActivityVO vo,ProjectVO vo1,Model model) {
 		List<ProjectVO> projectLikeList = new ArrayList<ProjectVO>();
 		MemberVO loginMember = (MemberVO) session.getAttribute("memberSession");
-		//System.out.println("·Î±×ÀÎ ¾ÆÀÌµğ °ª : " + loginMember.getEmail());
+		//System.out.println("Â·ÃÂ±Ã—Ã€Ã Â¾Ã†Ã€ÃŒÂµÃ° Â°Âª : " + loginMember.getEmail());
 		vo.setEmail(loginMember.getEmail());
-		//System.out.println("voÀÇ °ª : " +  vo.toString());
+		//System.out.println("voÃ€Ã‡ Â°Âª : " +  vo.toString());
 		List<MemberActivityVO> likeProjectList = getLikeProjectNoListService.getLikeProjectNoList(vo);
-		//System.out.println("È¸¿øÀÌ ÁÁ¾Æ¿ä ´©¸¥ °Å : " + likeProjectList);
+		//System.out.println("ÃˆÂ¸Â¿Ã¸Ã€ÃŒ ÃÃÂ¾Ã†Â¿Ã¤ Â´Â©Â¸Â¥ Â°Ã… : " + likeProjectList);
 		for(MemberActivityVO getProjectNo : likeProjectList) {
 			vo1.setProjectNo(getProjectNo.getProjectNo());
 			projectLikeList.add(getProjectService.getProject(vo1));
@@ -153,11 +155,15 @@ public class MemberActivityController {
 	@RequestMapping(value = "paymentReservationCheckList.udo", method = RequestMethod.POST )
 	public String myPaymentReservationCheckList(Model model, PaymentReserveVO prvo) {
 		
-		System.out.println("°áÁ¦³»¿ª º¸±â ÀÌµ¿");
+		System.out.println("Â°Ã¡ÃÂ¦Â³Â»Â¿Âª ÂºÂ¸Â±Ã¢ Ã€ÃŒÂµÂ¿");
 		
+		List<PaymentReserveVO> paymentReserveList = getPaymentReserveListByEmailService.getPaymentReserveListByEmail(prvo);
 		
-		prvo = getPaymentReserveService.getPaymentReserve(prvo);
-		
+		if(!paymentReserveList.isEmpty()) {
+			
+			model.addAttribute("paymentReserveList", paymentReserveList);
+			
+		}
 		
 		
 		return "p-payment-reservation-check";

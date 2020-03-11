@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!doctype html>
 
 <html class="no-js">
@@ -46,34 +48,31 @@
                                 <thead>
                                   <tr class="bg-info text-white">
                                     <th scope="col">no.</th>
-                                    <th scope="col">카테고리</th>
+                                    <th scope="col">주문번호</th>
                                     <th scope="col">프로젝트</th>
                                     <th scope="col">결제 상황</th>
-                                    <th scope="col">금액</th>
+                                    <th scope="col">결제 날짜</th>
+                                    <th scope="col">결제 수단</th>
+                                    <th scope="col">후원 금액</th>
+                                    <th scope="col">배송비</th>
+                                    <th scope="col">후원취소</th>
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                    <th scope="row">1</th>
-                                    <td>예술</td>
-                                    <td>테스트 제목</td>
-                                    <td>2020-02-07</td>
-                                    <td>94,000원</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                    <td>24,000원</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">3</th>
-                                    <td colspan="2">Larry the Bird</td>
-                                    <td>@twitter</td>
-                                    <td>53,000원</td>
-                                  </tr>
-                                </tbody>
+	                                <c:forEach var="payment" items="${paymentReserveList }" varStatus="cnt">
+		                                  <tr>
+		                                    <th scope="row">${cnt.count}</th>
+		                                    <td>${payment.orderNo }</td>
+		                                    <td>${payment.projectNo }</td>
+		                                    <td>${payment.paymentStatus }</td>
+		                                    <td>${payment.paymentReserveDate }</td>
+		                                    <td>${payment.paymentOption }</td>
+		                                    <td>${payment.fundingMoney }원</td>
+		                                    <td>${payment.shippingFee }원</td>
+		                                    <td>취소하기</td>
+		                                  </tr>
+	                                </c:forEach>
+	                            </tbody>
                               </table>
 
                         </div>

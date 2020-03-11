@@ -26,6 +26,10 @@ public class CreatorStatisticsDAO {
 		return SqlSessionTemplate.selectList("CreatorStatisticsDAO.getSumProjectAndPayment", currentProjectNo);
 	}
 
+	public List<PaymentReserveVO> getTodayFundingMoney(int currentProjectNo) {
+		return SqlSessionTemplate.selectList("CreatorStatisticsDAO.getTodayFundingMoney", currentProjectNo);
+	}
+
 
 
 }

@@ -18,7 +18,7 @@ public class GetUserMainImageListServiceImpl implements GetUserMainImageListServ
 	@Override
 	public List<AdminUserMainImageChangeVO> getUserMainImageList() {
 		
-		return adminUserMainImageChangeDAO.getUserMainImageChange();
+		return adminUserMainImageChangeDAO.getUserMainImageList();
 	}
 
 }

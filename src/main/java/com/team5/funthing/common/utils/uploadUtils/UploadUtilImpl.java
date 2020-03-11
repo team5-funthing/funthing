@@ -4,6 +4,7 @@ import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -85,7 +86,8 @@ public class UploadUtilImpl implements UploadUtil {
 			//DB에 저장할 경로
 			String completePath = File.separator + "funthing" + File.separator + "resources" + File.separator + "upload" + dirPath + File.separator + fileName;
 			uploadCompletePaths.add(completePath);
-
+			
+			
 		}
 		return uploadCompletePaths;
 	}

@@ -22,6 +22,9 @@
 <link
 	href="${pageContext.request.contextPath }/resources/admin/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css"
 	rel="stylesheet">
+	
+	
+
 <link
 	href="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/css/float-chart.css"
 	rel="stylesheet">
@@ -114,59 +117,59 @@
 										<div class="table-responsive">
 
 
-											<form action="userMainImageChange.ado"
-												id="userMainImageChangSetting" method="post"
-												enctype="multipart/form-data">
-												<c:forEach var="mainImageList"
-													items="${getUserMainImageChangeList}">
-												</c:forEach>
-											</form>
+											
 <!-- 코드 추가 시작00 -->
 
-
-/
-
-		  
 				<!-- projectIntroduceImage -->
+				
+				
+				<form action="userMainImageChange.ado"
+												id="userMainImageChangSetting" method="post"
+												enctype="multipart/form-data">
+				<div id="userMainImage">
 				<c:choose>
-					<c:when test="${projectIntroduceImageList eq null}">
-					
-						<input type="file" class="form-control-file select-project-image projectIntroduceImage">
+					<c:when test="${userMainImageList eq null}">
+						<input type="hidden">
+						<input type="file" class="form-control-file select-project-image userMainImage">
 						<hr>
 			           	<ul id="projectIntroduceImageUl">
 						</ul>
 			                
 					</c:when>
 					
-					<c:when test="${projectIntroduceImageList ne null}">
-						<input type="file" class="form-control-file select-project-image projectIntroduceImage">
+					<c:when test="${userMainImageList ne null}">
+						<input type="file" class="form-control-file select-project-image userMainImage">
 						<ul id="projectIntroduceImageUl">
-				
-							<c:forEach var="projectIntroduceImage" items="${getUserMainImageChangeList }" varStatus="step">
+			
+							<c:forEach var="userMainImage" items="${userMainImageList }" varStatus="step">
 							
 								<li id="projectIntroduceImageLi">
 									<div class="select_introduce_img m-3">
-										<input type="hidden" value="${projectIntroduceImage.imageNo }">
-										<img style="width: 200px; height: auto;" src="${projectIntroduceImage.imagePath }" />
+										<input type="hidden" value="${userMainImage.imageNo }">
+										<img style="width: 200px; height: auto;" src="${userMainImage.imagePath }" />
 										<a href="javaScript: return(0);" class='btn fas fa-times fa-2x imgRemoveBtn' type='button' ></a>
 									</div>
 									
 								</li>
 							</c:forEach>
+							
+					
+							
 						</ul>
 					</c:when>
 					
 				</c:choose>
-				
+				</div>
+				</form>
 				<script>
 				
-	            	$(document).on("change",".projectIntroduceImage", function(){
+	            	$(document).on("change",".userMainImage", function(){
 	            		var fileVal = $(this).val();
 	            		
 	            		if(fileVal != ""){
 	            			
-	            			$("#nav-images").prepend("<input type='file' class='form-control-file select-project-image projectIntroduceImage'>");
-	            			$(this).attr('name', 'projectIntroduceImageUpload'); 
+	            			$("#userMainImage").prepend("<input type='file' class='form-control-file select-project-image userMainImage'>");
+	            			$(this).attr('name', 'userMainUploadImage'); 
 	            			$(this).css('display', 'none');
 	            	       	
 	            			var idx = $('#projectIntroduceImageUl li').length;
@@ -177,7 +180,7 @@
 			           			reader.onload = function(data){
 			           				$("#projectIntroduceImageUl").append("<li id='projectIntroduceImageLi'>"
 			           						+	"<div class='select_introduce_img'>"
-			    							+	"<img id='img" + idx + "' style='width: 400px; height: auto;' src='' />"
+			    							+	"<img id='img" + idx + "' style='width: 200px; height:100px;' src='' />"
 			    							+	"<a class='btn fas fa-times fa-2x imgRemoveBtn' type='button' ></a>"
 			    							+	"</div>"
 			    							+	"</li>");
@@ -195,7 +198,8 @@
 					$(document).on("click", ".imgRemoveBtn", function(){
 						
 
-						$(this).siblings("input").attr("name", "projectIntroduceImageNo");
+						$(this).siblings("input").attr("name", "userMainImageNo");
+
 						$(this).closest("li").css('display', 'none');
 						
 					})
@@ -240,11 +244,11 @@
 
 											
 											
-
+											
 											<a
 												class="btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
 												href="javaScript:return(0);"
-												onclick="document.getElementById('userMainImageChangSetting').submit();">바꾸기</a>
+												onclick="document.getElementById('userMainImageChangSetting').submit();">적용하기</a>
 										</div>
 
 
@@ -321,6 +325,9 @@
 		src="${pageContext.request.contextPath }/resources/admin/dist/js/pages/chart/chart-page-init.js"></script>
 
 
+   
+
+
 	<script
 		src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
 	<script
@@ -333,6 +340,11 @@
              ****************************************/
             $('#zero_config').DataTable();
         </script>
+        
+   <script src="https://kit.fontawesome.com/7a424ad03a.js" crossorigin="anonymous"></script>
+
+
+        
 </body>
 
 </html>

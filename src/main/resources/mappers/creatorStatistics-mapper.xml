@@ -38,7 +38,7 @@
 
 		select projectNo,sumDate, sum(fundingMoney) as sumFundingMoney from
 		(select projectNo,fundingMoney, to_char(paymentReservedate,'yyyy-mm-dd')as sumDate from paymentReserve )
-		group by sumDate,projectNo having projectNo = #{currentProjectNo}
+		group by sumDate,projectNo having projectNo = #{currentProjectNo} order by sumDate asc
 
 
 	</select>
@@ -50,6 +50,15 @@
 		inner join rewardSelection R on P.orderNo = R.orderNo 
 		Inner Join reward W on W.rewardNo = R.rewardNo where w.projectNo = #{currentProjectNo}
 		order by paymentReservedate asc
+		
+	</select>
+	
+	<!-- 금일판매금액 가져오기  -->
+	<select id="getTodayFundingMoney" parameterType="int" resultType="paymentReserve">
+
+		select projectNo,sumDate,todayDate, sum(fundingMoney) as sumFundingMoney from
+		(select projectNo,fundingMoney, to_char(paymentReservedate,'yyyy-mm-dd')as sumDate ,TO_CHAR(SYSDATE, 'yyyy-mm-dd') as todayDate from paymentReserve )
+		group by sumDate,projectNo,todayDate having projectNo = #{currentProjectNo} and sumdate = todayDate
 		
 	</select>
 	

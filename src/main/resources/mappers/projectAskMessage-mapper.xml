@@ -6,8 +6,8 @@
  	
  	<!-- 프로젝트 문의글 등록 -->
  	<insert id="insertProjectAskContents"  parameterType="projectAskMessage">
-		INSERT INTO projectAskMessage(projectAskNo, email, creator,projectAskContentsTitle, projectAskContents, projectAskref, projectAskDate) 
-		VALUES(projectAskMessage_seq.nextval, #{email},#{creator},#{projectAskContentsTitle},#{projectAskContents}, projectAskMessage_seq.currval, sysdate )
+		INSERT INTO projectAskMessage(projectAskNo, email, creator,projectAskContentsTitle, projectAskContents, projectAskref, projectAskDate, projectNo) 
+		VALUES(projectAskMessage_seq.nextval, #{email},#{creator},#{projectAskContentsTitle},#{projectAskContents}, projectAskMessage_seq.currval, sysdate, #{projectNo} )
 	</insert>
 	
 	<!-- 답변글 등록 (업데이트로 해줘야해) 그러면서 답변상태도 변경 -->
@@ -54,9 +54,32 @@
 		select creator.creator,member.name, member.email from member join creator on creator.email = #{email} and member.email= #{email}
 	</select>
 	
+	<resultMap type="project" id="project">
+		<result column="projectNo" property="projectNo" />
+		<result column="proejctMainImage" property="proejctMainImage" />
+	</resultMap>
+
+	<resultMap type="projectAskMessage" id="projectAskMessage">
+		<result column="projectAskNo" property="projectAskNo" />
+		<result column="email" property="email" />
+		<result column="creator" property="creator" />
+		<result column="projectAskContents" property="projectAskContents" />
+		<result column="projectAskReplyStatus" property="projectAskReplyStatus" />
+		<result column="projectAskRef" property="projectAskRef" />
+		<result column="projectAskStep" property="projectAskStep" />
+		<result column="projectAskContentsTitle" property="projectAskContentsTitle" />
+		<result column="projectAskDate" property="projectAskDate" />
+		<result column="projectAskReplyContents" property="projectAskReplyContents" />
+		<result column="projectAskReplyDate" property="projectAskReplyDate" />
+		<result column="projectAskReplyContentsTitle" property="projectAskReplyContentsTitle" />
+		<result column="projectNo" property="projectNo" />
+		
+		<collection property="project" resultMap="project"></collection>
+	</resultMap>
+	
 	<!-- 메이커 관련 전체 문의글 가져오기 -->
 	<select id="getEntireProjectMakerAskMessageList" resultType="projectAskMessage" parameterType="projectAskMessage">
-		SELECT * FROM projectAskMessage where creator = #{creator}
+		SELECT projectAskMessage.*, project.proejctMainImage FROM projectAskMessage where creator = #{creator} 
 	
 	</select>
 	

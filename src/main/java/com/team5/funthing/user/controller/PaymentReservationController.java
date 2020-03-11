@@ -1,5 +1,6 @@
 package com.team5.funthing.user.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -13,21 +14,28 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.team5.funthing.user.api.kakaoPay.AmountVO;
+import com.team5.funthing.user.api.kakaoPay.CardVO;
+import com.team5.funthing.user.api.kakaoPay.KakaoPayService;
 import com.team5.funthing.user.model.vo.DeliveryAddressVO;
 import com.team5.funthing.user.model.vo.PaymentReserveVO;
 import com.team5.funthing.user.model.vo.RewardSelectionVO;
 import com.team5.funthing.user.model.vo.RewardVO;
 import com.team5.funthing.user.service.deliveryService.GetDeliveryAddressService;
 import com.team5.funthing.user.service.paymentReserveService.GetPaymentReserveService;
-import com.team5.funthing.user.service.paymentReserveService.InsertPaymentReserveService;
 import com.team5.funthing.user.service.rewardService.GetRewardService;
+
+import lombok.Setter;
+import lombok.extern.java.Log;
 
 @Controller
 @SessionAttributes("rewardSelection")
+@Log
 public class PaymentReservationController {
+
+	@Setter(onMethod_ = { @Autowired })
+	private KakaoPayService kakaoPayService;
 	
-	@Autowired
-	private InsertPaymentReserveService insertPaymentReserveService;
 	@Autowired
 	private GetRewardService getRewardService;
 	@Autowired
@@ -80,57 +88,52 @@ public class PaymentReservationController {
 	}	
 	
 	@RequestMapping(value = "/paymentReserve.udo", method = RequestMethod.POST)
-	public String attemptPaymentReserve(	HttpSession session,
-											RedirectAttributes redirectAttributes,
-											PaymentReserveVO prvo,
-											DeliveryAddressVO davo) {
+	public String attemptPaymentReserveByKaKaoPay(	HttpSession session,
+													PaymentReserveVO prvo,
+													DeliveryAddressVO davo) {
+		
 		
 		List<RewardSelectionVO> selectedRewardList = (List<RewardSelectionVO>)session.getAttribute("selectedRewardList");
 		int projectNo = selectedRewardList.get(0).getReward().getProjectNo();
 		
-		
-		
-		prvo = insertPaymentReserveService.insertPaymentReserve(prvo, davo, selectedRewardList, projectNo);
-		int orderNo = prvo.getOrderNo();
-		
 		session.removeAttribute("selectedRewardList");
 		session.removeAttribute("paymentReserve");
 		
-		redirectAttributes.addAttribute("orderNo", orderNo);
-		redirectAttributes.addAttribute("projectNo", projectNo);
-		
-		return "redirect:paymentResult.udo";
+		log.info("kakaoPay post............................................");
+        return "redirect:" + kakaoPayService.kakaoPayReady(prvo, davo, selectedRewardList, projectNo);
 	}
 	
-	
-	@RequestMapping(value = "/paymentResult.udo", method = RequestMethod.GET)
-	public String showPaymentResult(	@RequestParam int orderNo,
-										@RequestParam int projectNo,
+	@RequestMapping(value = "/kakaoPaySuccess.udo", method = RequestMethod.GET) 
+	public String paymentSuccessResult(	@RequestParam("orderNoStr") String orderNoStr, 
+										@RequestParam("pg_token") String pg_token, 
+										Model model,
 										PaymentReserveVO prvo,
-										DeliveryAddressVO davo,
-										Model model) {
-		
-		System.out.println("전 처리paymentReserve : " + prvo);
+										DeliveryAddressVO davo) { 
+		log.info("kakaoPaySuccess get............................................");
+		 
+		int orderNo = Integer.parseInt(orderNoStr);
 		
 		prvo.setOrderNo(orderNo);
+		System.out.println(orderNo);
 		prvo = getPaymentReserveService.getPaymentReserve(prvo);
 		davo.setDeliveryAddressNo(prvo.getDeliveryAddressNo());
 		davo = getDeliveryAddressService.getDeliveryAddress(davo);
 		
-		System.out.println("후 처리 paymentReserve : " + prvo);
-		
-		
 		model.addAttribute("deliveryAddress", davo);
 		model.addAttribute("paymentReserve", prvo);
-		model.addAttribute("projectNo", projectNo);
-		
+		model.addAttribute("projectNo", prvo.getProjectNo());
+
 		return "p-payment-result";
-	}
+//		return "kakaoPaySuccess";
+	}// 결제 내역 결과 보여주기
 	
-	@RequestMapping(value = "", method = RequestMethod.POST)
-	public String getPaymentReserveListByEmail() {
-		return null;
-	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

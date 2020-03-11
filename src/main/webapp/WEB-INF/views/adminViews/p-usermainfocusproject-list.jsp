@@ -154,6 +154,7 @@
 
 
 										</div>
+										<p>
 										<div align="center">
 											<a href="getUserMainProjectList.ado"><input type="button"
 												value="주목 프로젝트 추가하러 가기"></a>

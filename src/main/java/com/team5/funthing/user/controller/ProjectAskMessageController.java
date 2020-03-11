@@ -53,8 +53,6 @@ public class ProjectAskMessageController {
    
    
    @RequestMapping(value="showInsertwAskMessage.udo", method = RequestMethod.GET)
-
-
    public String showInsertwAskMessage(ProjectVO vo, Model model) { 
       
       System.out.println("문의하기 누르면 메세지입력창으로 이동");
@@ -99,12 +97,14 @@ public class ProjectAskMessageController {
          MemberVO getMakerMember = getMakerMemberCreatorService.getMakerMemberCreator(vo); 
          model.addAttribute("getMakerMember", getMakerMember);
          
-         System.out.println("뭐가찍히니 찍혀야돼" + getMakerMember);
          vo2.setCreator(getMakerMember.getCreator().getCreator());
          model.addAttribute("vo2",vo2);
    
          List<ProjectAskMessageVO>getEntireMakerMessageList = getEntireProjectMakerAskMessageListService.getEntireProjectMakerAskMessageList(vo2);
          model.addAttribute("messagelist", getEntireMakerMessageList);
+         
+         
+         
          
        
 //         2.내가 보낸 문의글 확인하기

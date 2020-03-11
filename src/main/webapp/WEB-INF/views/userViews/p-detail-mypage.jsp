@@ -199,7 +199,12 @@
 		                                       <div class="card-footer">
 		                                          <a href="getWritingProject.udo?currentProjectNo=${myProject.projectNo }&creator=${myProject.creator}">수정</a>
 		                                          <a href="deleteProject.udo?currentProjectNo=${myProject.projectNo }">삭제</a>
-		                                          <a href="getSatistics.udo?currentProjectNo=${myProject.projectNo }">통계</a>
+		                                          
+		                                          <c:choose>
+		                                 			<c:when test="${myProject.funding eq 'y'.charAt(0) || myProject.funding eq 'e'.charAt(0) }"> <!-- 펀징 진행중일때 -->
+		                                         		<a href="getSatistics.udo?currentProjectNo=${myProject.projectNo }">통계</a>
+		                                          	</c:when>
+		                                          </c:choose>
 		                                          
 		                                       </div>
 		                                    </div>

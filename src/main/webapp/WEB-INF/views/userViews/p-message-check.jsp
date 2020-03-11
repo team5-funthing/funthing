@@ -35,7 +35,7 @@
 						<div class="d-flex justify-content-start">
 							<nav>
 								<div class="nav nav-tabs" id="nav-tab" role="tablist">
-									<a class="nav-item nav-link active"	id="nav-created-prj-questions-tab" data-toggle="tab"	href="#nav-created-prj-questions"
+									<a class="nav-item nav-link active"	id="nav-created-prj-questions-tab" data-toggle="tab" href="#nav-created-prj-questions"
 									 role="tab"	aria-controls="nav-created-prj-questions" aria-selected="true">만든프로젝트</a> 
 									 
 									<a class="nav-item nav-link" id="nav-sponsored-prj-questions-tab" data-toggle="tab" href="#nav-sponsored-prj-questions" role="tab"
@@ -48,7 +48,7 @@
 						</div>
 
 						<br>
-
+						<!-- 만든프로젝트 탭  -->
 						<div class="tab-content" id="nav-check-msg-tab">
 							<div class="tab-pane fade show active"
 								id="nav-created-prj-questions" role="tabpanel"
@@ -56,43 +56,47 @@
 								<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
 									<li class="nav-item">
 										<c:choose>
-											<c:when test="${vo2.creator ne null }">
+											<c:when test="${vo2.creator ne null && empty messagelist}">
+													<div class="row">
+													<div class="col"></div>
+													<div class="col-8 d-flex justify-content-center ">
+														<div class="pt-5 pb-5 ">
+															<div>
+																<svg xmlns="http://www.w3.org/2000/svg" width="60"
+																	height="60" viewBox="0 0 24 24" fill="none"
+																	stroke="currentColor" stroke-width="1.5"
+																	stroke-linecap="round" stroke-linejoin="round"
+																	class="feather feather-mail">
+																				<path
+																		d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+																				<polyline points="22,6 12,13 2,6" />
+																			</svg>
+															</div>
+															<div class="h3">현재 프로젝트에 대한 '문의 메시지'가 없습니다</div>
+															<div class="h5">고객님의 프로젝트에 문의 메시지가 오면 확인할 수있습니다.</div>
+														</div>
+													</div>
+													<div class="col"></div>
+												</div>
+												</c:when>
 											
-											
-												<table id="myTable" class="display">
-		                                            <thead>
-														<tr>
-															<th>창작자</th>
-															<th>작성자</th>
-															<th style="width: 250px">메시지 제목</th>
-															<th>작성날짜</th>
-															<th>답변여부</th>
-														</tr>
-		                                            </thead>
-		                                            <tbody>
-														<c:forEach var="messagelist" items="${messagelist}">
-															<tr>
-																<td>${vo2.creator}</td>
-																<td>${messagelist.email }</td>
-																<td><a
-																	href="getChoiceProjectAskMessageC.udo?projectAskNo=${messagelist.projectAskNo }">
-																		${messagelist.projectAskContentsTitle} </a></td>
-																<td>${messagelist.projectAskDate}</td>
-																<td>${messagelist.projectAskReplyStatus}</td>
-															</tr>
-														</c:forEach>
-		                                            </tbody>
-		                                        </table>
-		                                        
-		                                        <script>
-		                                            $(document).ready( function () {
-		                                                $('#myTable').DataTable();
-		                                            } );
-		                                        </script>		
-	                                        
-											</c:when>
+											<c:when test="${vo2.creator ne null && not empty messagelist }">
+												<c:forEach var="messagelist" items="${messagelist}">
 
 
+												<div class="card" style="width: 18rem;">
+													<img src="" class="card-img-top" alt="...">
+													<div class="card-body">
+													<h5 class="card-title">프로젝트 번호 : ${messagelist.projectNo }</h5>
+														<p class="card-text">문의내용 : ${messagelist.projectAskContentsTitle }</p>
+														<a href="getChoiceProjectAskMessageC.udo?projectAskNo=${messagelist.projectAskNo }" 
+															class="btn btn-primary">${messagelist.projectAskReplyStatus}</a>
+													</div>
+												</div>
+												
+												</c:forEach>
+												</c:when>
+												
 											<c:when test="${vo2.creator eq null }">
 												<div class="row">
 													<div class="col"></div>
