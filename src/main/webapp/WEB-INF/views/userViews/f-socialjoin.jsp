@@ -42,22 +42,19 @@ function checkFunction(){
 		$("#registerButton").removeAttr("disabled");
 		$("#loginButton").removeAttr("disabled");
 	}else{
-		$("#email").val("").attr("disabled",true);
+		$("#email").attr("disabled",true);
 		$("#duplButton").attr("disabled",true);
-		$("#name").val("").attr("disabled",true);
-		$("#password").val("").attr("disabled",true);
+		$("#name").attr("disabled",true);
+		$("#password").attr("disabled",true);
 		$("#registerButton").attr("disabled",true);
 		$("#loginButton").attr("disabled",true);
 	}
 }
 $(document).ready(function(){
-	$("#email").val("").attr("disabled",true);
+	alert("이게1번");
 	$("#duplButton").attr("disabled",true);
-	$("#name").val("").attr("disabled",true);
-	$("#password").val("").attr("disabled",true);
 	$("#registerButton").attr("disabled",true);
 	$("#loginButton").attr("disabled",true);
-	
 	$("#registerTos1").hide();
 	$("#inputRegisterTos").hide();
 	$("#inputPersonalInfo").hide();
@@ -168,7 +165,7 @@ $(document).ready(function(){
 							<div class="mt-10">
 								<h5>이메일</h5>
 								<input type="email" id="email" name="email" placeholder="이메일 입력"
-									value="" onfocus="this.placeholder = ''"
+									onfocus="this.placeholder = ''" value="${param.email }"
 									onblur="this.placeholder = '이메일 입력'" required
 									class="single-input"> 
 									<!-- <input type="hidden" name="email2" id="email2"> -->
@@ -279,13 +276,13 @@ $(document).ready(function(){
 							<div class="mt-10">
 								<h5>이름</h5>
 								<input type="text" id="name" name="name" placeholder="이름"
-									value="" onfocus="this.placeholder = ''"
+									value="" onfocus="this.placeholder = ''" 
 									onblur="this.placeholder = '이름'" required class="single-input">
 							</div>
-							<input type="password" id="password" name="password" placeholder="비밀번호"
-									value="" onfocus="this.placeholder = ''"
+							<input type="hidden" id="password" name="password" placeholder="비밀번호"
+									value="" onfocus="this.placeholder = ''" 
 									onblur="this.placeholder = '비밀번호'" required class="single-input">
-
+`
 							<div id="checkRegisterException"></div>
 							<div class="col-xl-12 mt-10">
 								<button id="registerButton" type="button" onclick="join()" class="boxed-btn3">
@@ -325,6 +322,7 @@ $(document).ready(function(){
 	} 
    
 	$(document).ready(function(){
+		alert("이게2번");
 		if(getParam('eamil')!=null){
 			var daumEmail = getParam('email');
 			document.getElementById('email').value = daumEmail;
@@ -346,18 +344,21 @@ $(document).ready(function(){
 	 if(naver_id_login.getProfileData('email')!=null){
     var naverEemail = naver_id_login.getProfileData('email');
     document.getElementById("email").value = naverEemail;
-    document.getElementById("email2").value = naverEemail;
     var naverName = naver_id_login.getProfileData('name')
     document.getElementById("name").value = naverName;
  
     var naverId = naver_id_login.getProfileData('id');
     document.getElementById("password").value = naverId;
 	 }
-
-	
-	
-	
   }
+  
+  
+  
+  
+ $(document).ready(function(){
+	alert("이게3번"); 
+ });
+ 
 </script>
 
 
