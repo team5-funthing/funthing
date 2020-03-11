@@ -143,7 +143,11 @@
 
 
 										</div>
-
+										<p>
+										<div align="center">
+											<a href="getFocusProjectList.ado"><input type="button"
+												value="주목 프로젝트 목록으로"></a>
+										</div>
 									</div>
 								</div>
 							</div>
