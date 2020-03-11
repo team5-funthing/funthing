@@ -12,6 +12,29 @@
 
 <jsp:include page="./include/i-head-setting.jsp" />
 
+<style>
+.white-popup{
+  position: relative;
+  background: #FFF;
+  padding: 40px;
+  width: auto;
+  max-width: 600px;
+  margin: 20px auto;
+  text-align: center;
+}
+h6{
+	color:black;
+	font-size:75%;
+}
+</style>
+<script>
+$(document).ready(function(){
+	$(".showReport").magnificPopup({
+		type:'inline',
+		midClick:true
+	});
+});
+</script>
 </head>
 
 <body>
@@ -108,14 +131,9 @@
 						</form>
 					</div>
 					<div class="row d-flex justify-content-around m-0 ">
-						<a
-							class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2"
-							href="#">좋아요</a> <a
-							class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2"
-							href="showInsertwAskMessage.udo?projectNo=${project.projectNo }">문의하기</a> <a
-							class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2"
-							href="#">공유하기</a>
-
+						<a class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2" href="upCountLike.udo?projectNo=${project.projectNo }">좋아요   ${likeCount}</a> 
+						<a class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2" href="showInsertwAskMessage.udo?projectNo=${project.projectNo }">문의하기</a> 
+						<a class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2" href="#">공유하기</a>
 					</div>
 
 				</aside>
@@ -312,7 +330,7 @@
 										<h6 class="card-subtitle mb-2 text-muted">${reward.rewardName }</h6>
 										<p class="card-text">${reward.rewardContent }</p>
 										<p class="card-text">${reward.shippingNeed }</p>
-										<p class="card-text">${reward.rewardMonth }월  ${reward.rewardDay } 배송예정</p>
+										<p class="card-text">${reward.rewardMonth }  ${reward.rewardDay } 배송예정</p>
 										<c:forEach var="option" items="${reward.rewardOptionList }">
 											<p class="card-text">${option.rewardOptionKey } | ${option.rewardOptionValue }</p>
 										</c:forEach>
@@ -321,12 +339,129 @@
 								</div>
 							</c:forEach>
 							<!-- 리워드 반복 끝-->
+							
+							<div>
+								<div class="card mb-3" style="width: 18rem;">
+									<div class="p-2 bd-highlight mt-auto ml-0">
+										<h5>신고하기란?</h5>
+										<h6>해당 프로젝트에 허위내용 및 지적재산권을 침해하는 내용이 있다면 제보해주세요</h6>
+										<a class="showReport btn btn-lg btn-spon-prj d-none d-lg-inline-block pr-5 pl-5 mb-2"
+										   href="#showReportPage"> 프로젝트 신고하기</a>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</article>
 			</div>
 		</div>
 	</section>
+	
+	<div id="showReportPage" class="white-popup mfp-hide">
+		<form id="reports" action="insertReport.udo" method="POST">
+			<input type="hidden" value="${project.projectNo}" name="projectNo">
+			<input type="hidden" value="${project.email}" name="email">
+	        <div class="report_popup_box ">
+	            <div class="popup_inner ">
+	                <div class="container ">
+	                    <div class="row pb-1">
+	                        <h4>프로젝트 신고하기</h4>
+	                    </div>
+	                    <hr>
+	                    <div class="row">
+	                        <span>신고 이유가 무엇인가요?</span>
+	                    </div>
+	                    <div class="row d-flex align-items-center">
+	                        <div class="p-2 bd-highlight">
+	                            <div class="form-check primary-radio ">
+	                                <input class="form-check-input primary-radio checkbox" type="radio" name="reasonSelect"
+	                                    id="primary-radio1" value="스토리에 허위사실이 있습니다." checked>
+	                                <label for="primary-radio1"></label>
+	                            </div>
+	                        </div>
+	                        <div class="d-flex p-2 bd-highlight">스토리에 허위사실이 있습니다.</div>
+	                    </div>
+	                    <div class="row d-flex align-items-center">
+	                        <div class="p-2 bd-highlight">
+	                            <div class="form-check primary-radio ">
+	                                <input class="form-check-input primary-radio checkbox" type="radio" name="reasonSelect"
+	                                    id="primary-radio2" value="지적 재산권을 침해하고 있습니다." >
+	                                <label for="primary-radio2"></label>
+	                            </div>
+	                        </div>
+	                        <div class="d-flex p-2 bd-highlight">지적 재산권을 침해하고 있습니다.</div>
+	                    </div>
+	                    <div class="row d-flex align-items-center">
+	                        <div class="p-2 bd-highlight">
+	                            <div class="form-check primary-radio ">
+	                                <input class="form-check-input primary-radio checkbox" type="radio" name="reasonSelect"
+	                                    id="primary-radio3" value="다른 채널에서 판매되고 있는 제품입니다." >
+	                                <label for="primary-radio3"></label>
+	                            </div>
+	                        </div>
+	                        <div class="d-flex p-2 bd-highlight">다른 채널에서 판매되고 있는 제품입니다.</div>
+	                    </div>
+	                    <div class="row d-flex align-items-center">
+	                        <div class="p-2 bd-highlight">
+	                            <div class="form-check primary-radio ">
+	                                <input class="form-check-input primary-radio checkbox" type="radio" name="reasonSelect"
+	                                    id="primary-radio4" value="메이커와 오랫동안 연락이 되지 않습니다." >
+	                                <label for="primary-radio4"></label>
+	                            </div>
+	                        </div>
+	                        <div class="d-flex p-2 bd-highlight">메이커와 오랫동안 연락이 되지 않습니다.</div>
+	                    </div>
+	                    <div class="row d-flex align-items-center">
+	                        <div class="p-2 bd-highlight">
+	                            <div class="form-check primary-radio ">
+	                                <input class="form-check-input primary-radio checkbox" type="radio" name="reasonSelect"
+	                                    id="primary-radio5" value="사회적 공익을 저해할 우려가 있습니다.">
+	                                <label for="primary-radio5"></label>
+	                            </div>
+	                        </div>
+	                        <div class="d-flex p-2 bd-highlight">사회적 공익을 저해할 우려가 있습니다.</div>
+	                    </div>
+	                    <div class="row d-flex align-items-center">
+	                        <div class="p-2 bd-highlight">
+	                            <div class="form-check primary-radio ">
+	                                <input class="form-check-input primary-radio checkbox" type="radio" name="reasonSelect"
+	                                    id="primary-radio6" value="기타">
+	                                <label for="primary-radio6"></label>
+	                            </div>
+	                        </div>
+	                        <div class="d-flex p-2 bd-highlight">기타</div>
+	                    </div>
+	                    <div class="row mt-30">
+	                        <h6>상세내용을 작성해주세요.</h6>
+	                    </div>
+	                    <div class="row">
+	                        <div class="form-group col-12 ">
+	                            <textarea name="reason" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+	                        </div>
+	                    </div>
+	                    <div class="row">
+	                        <p>
+	                            - 신고/제보를 통해 접수된 의견은 와디즈 프로젝트 운영에 반영되며 별도로 제보자에게 회신드리지 않습니다.<br>
+	                            - 와디즈가 건전한 크라우드펀딩 생태계 조성을 할 수 있도록 도움을 주심에 감사드리며, 
+	                                                        근거 없는 비방 내용의 경우에는 법적 처벌대상이 될 수 있사오니 유의해주시기 바랍니다.
+	                        </p>
+	                    </div>
+	
+	                    <div class="row d-flex justify-content-end">
+	                        <div>
+	                            <a class="btn btn-lg btn-report-cancel d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
+	                                href="#">취소</a>
+	                        </div>
+	                        <div>
+	                            <a class="btn btn-lg btn-report-submit d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
+	                                href="javaScript:return(0);" onclick="javascript:document.getElementById('reports').submit();">제출하기</a>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </form>
+    </div>
 
 	<!-- footer -->
 	<footer class="footer"> </footer>

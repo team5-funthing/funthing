@@ -61,6 +61,10 @@ public class ProjectDAO {
 		return sqlSessionTemplate.selectList("getTodayClosedProjectList");
 	}
 	
+	public void updateProjectAfterPaymentCancel(ProjectVO vo) {
+		sqlSessionTemplate.update("updateProjectAfterPaymentCancel", vo);
+	}
+	
 	
 //===================================카테고리 검색==========================================
 

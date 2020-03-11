@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<footer class="footer text-center"> All Rights Reserved by
-	Matrix-admin. Designed and Developed by.여기는 푸터입니다. </footer>
-	
- <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/jquery/dist/jquery.min.js"></script>
+<footer class="footer text-center"> All Rights Reserved by funthing </footer>
+ 		<script src="${pageContext.request.contextPath }/resources/admin/assets/libs/jquery/dist/jquery-3.4.1.min.js"></script>
         <!-- Bootstrap tether Core JavaScript -->
         <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/popper.js/dist/umd/popper.min.js"></script>
         <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>

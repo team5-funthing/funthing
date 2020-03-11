@@ -59,18 +59,26 @@
 	
 	<resultMap type="paymentReserve" id="paymentReserve">
 	
-		<result column="orderNo" 			property="orderNo" />
-		<result column="email" 				property="email"/>
-		<result column="paymentReserveDate" property="paymentReserveDate" />
-		<result column="paymentOption" 		property="paymentOption" />
-		<result column="applyNo" 			property="applyNo"/>
-		<result column="paymentStatus" 		property="paymentStatus" />
-		<result column="deliveryAddressNo" 	property="deliveryAddressNo" />
-		<result column="fundingMoney" 		property="fundingMoney" />
-		<result column="additionalFundingMoney" 	property="additionalFundingMoney" />
-		<result column="shippingFee" 	property="shippingFee" />
-		<result column="privateName" 	property="privateName" />
+		<result column="orderNo" 				property="orderNo" />
+		<result column="projectNo" 				property="projectNo" />
+		<result column="email" 					property="email"/>
+		<result column="paymentReserveDate" 	property="paymentReserveDate" />
+		<result column="canceledDate" 	property="canceledDate" />
+		<result column="paymentOption" 			property="paymentOption" />
+		<result column="applyNo" 				property="applyNo"/>
+		<result column="paymentStatus" 			property="paymentStatus" />
+		<result column="deliveryAddressNo" 		property="deliveryAddressNo" />
+		<result column="fundingMoney" 			property="fundingMoney" />
+		<result column="aid" 					property="aid" />
+		<result column="tid" 					property="tid" />
+		
+		
+		<result column="additionalFundingMoney" property="additionalFundingMoney" />
+		<result column="shippingFee" 			property="shippingFee" />
+		<result column="privateName" 			property="privateName" />
 		<result column="privateFundingMoney" 	property="privateFundingMoney" />
+
+		
 		
 		<collection property="rewardSelectionList" resultMap="rewardSelection" />
 	
@@ -128,5 +136,31 @@
 		
 	</update>
 	
+		<update id="updateKaKaoPayCancelResult" parameterType="paymentReserve">
+
+        Update paymentReserve
+		SET canceledDate = #{canceledDate}, paymentStatus = '결제취소', aid = #{aid}, tid = #{tid}
+		WHERE orderNo = #{orderNo}
+		
+	</update>
+	
 	
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

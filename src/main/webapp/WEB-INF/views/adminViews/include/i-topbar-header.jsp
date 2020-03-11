@@ -109,6 +109,7 @@
                             </div>
                         </li>
                     </ul>
+                    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
                     <script>
                     	$(document).ready(function(){
                     		var sendData = {
@@ -134,7 +135,6 @@
                 </div>
             </nav>
         </header>
-        <script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
         <!-- ============================================================== -->
         <!-- End Topbar header -->
         <!-- ============================================================== -->

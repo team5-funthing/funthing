@@ -62,19 +62,6 @@ public class MemberController {
 	public String socialLogin() {   
 		return "f-socialjoin";
 	}
-	@RequestMapping(value="socialLoginSuccess.udo",method=RequestMethod.POST)
-	public String socialLoginSuccess(HttpServletRequest request,HttpSession session, MemberVO vo, Model model) throws IOException {   
-		System.out.println("socialLoginSuccess.udo ");
-		System.out.println(vo.toString());
-		if(getMemberService.getMember(vo) != null) { 
-			
-			model.addAttribute("result","1");
-			session.setAttribute("memberSession", vo);	 
-		}else {
-			model.addAttribute("result","2");
-		}
-		return "ajax/callback";
-	}
 
 
 	@RequestMapping(value="getMember.udo", method=RequestMethod.POST) 
@@ -232,6 +219,7 @@ public class MemberController {
 	public String duplicationCheck(MemberVO vo,String typedEmail,Model model) throws JsonProcessingException {
 		vo.setEmail(typedEmail);
 		System.out.println("¿Ã∏ﬁ¿œ ÆG!");
+		System.out.println(getMemberService.getMember(vo));
 		if(getMemberService.getMember(vo)==null) {
 			model.addAttribute("result", "1");      
 		}else {

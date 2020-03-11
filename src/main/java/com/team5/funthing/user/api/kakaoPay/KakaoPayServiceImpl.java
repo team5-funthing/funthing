@@ -41,6 +41,7 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 
 	private KakaoPayReadyVO kakaoPayReadyVO;
 	private KakaoPayApprovalVO kakaoPayApprovalVO;
+	private KakaoPayCancelVO kakaoPayCancelVO;
 
 	@Autowired
 	private DeliveryAddressDAO deliveryAddressDAO;
@@ -54,7 +55,7 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 	private RewardDAO rewardDAO;
 	@Autowired
 	private RewardVO rewardVO;
-	
+
 	@Autowired
 	private RewardOptionValueListVO rewardOptionValueListVO;
 	@Autowired
@@ -62,56 +63,58 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 	@Autowired
 	private PaymentReserveVO paymentReserveVO;
 
+
+
 	@Override
 	@Transactional
 	public String kakaoPayReady(PaymentReserveVO prvo, 
-								DeliveryAddressVO davo, 
-								List<RewardSelectionVO> selectedRewardList, 
-								int projectNo) {
-		
+			DeliveryAddressVO davo, 
+			List<RewardSelectionVO> selectedRewardList, 
+			int projectNo) {
+
 		String orderNoStr = null;
 		String orderEmail = null;
 		String orderItems = null;
 		String quantityStr = null; // 총갯수
 		String totalAmountStr = null; // 리워드 + 배송비
 		String taxFreeAmount = "0";
-		
+
 		//배송지 추가
 		davo = deliveryAddressDAO.insertDeleveryAddress(davo);
 		prvo.setDeliveryAddressNo(davo.getDeliveryAddressNo());
 		prvo.setProjectNo(projectNo);
 
 		System.out.println("프로젝트넘버 체크 : " + prvo.toString());
-		
+
 		//결제예약 테이블 추가
 		prvo = paymentReserveDAO.insertPaymentReserve(prvo);
 		int orderNo = prvo.getOrderNo();
-		
-		
+
+
 		//리워드선택(하나의 결제예약번호로 묶여진) 목록 추가
 		int cnt = -1;
 		int totalAmount = 0;
 		for(RewardSelectionVO rs : selectedRewardList) {
-			
+
 			totalAmount += rs.getOrderAmount();
-			
-			
+
+
 			rs.setOrderNo(orderNo);
 			rs = rewardSelectionDAO.insertRewardSelection(rs);
 
 			rs.setRewardOptionValue(new ArrayList<RewardOptionValueListVO>());
 			rewardOptionValueListVO.setSelectRewardNo(rs.getSelectRewardNo());
-			
+
 			rewardVO.setRewardNo(rs.getRewardNo());
 			rewardVO = rewardDAO.getReward(rewardVO);
 			int amount = rewardVO.getRewardAmount();
-			
+
 			if( orderItems == null ) {
 				orderItems = rewardVO.getRewardName();
 			}
 			cnt++;
-			
-			
+
+
 			if(amount <= 0 || amount < rs.getOrderAmount()) {
 				throw new NoRewardAmountException(); // 남아있는 수량이 없거나 주문량 보다 적을 때 예외 발생
 			}
@@ -124,16 +127,16 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 			}
 			rewardSelectionDAO.insertRewardSelectionList(rs.getRewardOptionValue());
 		}
-		
+
 		projectVO.setProjectNo(projectNo);
 		projectVO.setFundingMoney(prvo.getFundingMoney());
 		projectDAO.updateProjectFundingMoney(projectVO);
-		
-		
+
+
 		if(cnt > 0) {
 			orderItems = orderItems + " 외 " + cnt + "개";
 		}
-		
+
 		orderNoStr = String.valueOf(orderNo);
 		orderEmail = prvo.getEmail();
 		quantityStr = String.valueOf(totalAmount);
@@ -181,8 +184,8 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 
 	}
 
-	
-	@Override
+
+	@Override	
 	public KakaoPayApprovalVO kakaoPayInfo(String pg_token, int orderNo) {
 
 		log.info("KakaoPayInfoVO............................................");
@@ -190,6 +193,9 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 
 		paymentReserveVO.setOrderNo(orderNo);
 		paymentReserveVO = paymentReserveDAO.getPaymentReserve(paymentReserveVO);	
+
+		System.out.println("확인테스트 : " + paymentReserveVO.toString());
+
 
 		RestTemplate restTemplate = new RestTemplate();
 
@@ -209,23 +215,26 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 		params.add("partner_user_id", paymentReserveVO.getEmail());
 		params.add("pg_token", pg_token);
 		params.add("total_amount", String.valueOf(paymentReserveVO.getFundingMoney() + paymentReserveVO.getShippingFee()));
-		
+
 		HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 
 		try {
-			
+
 			kakaoPayApprovalVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/approve"), body, KakaoPayApprovalVO.class);
 			log.info("" + kakaoPayApprovalVO);
-			
+
 			paymentReserveVO.setAid(kakaoPayApprovalVO.getAid());
 			paymentReserveVO.setTid(kakaoPayApprovalVO.getTid());
 			paymentReserveVO.setPaymentReserveDate(kakaoPayApprovalVO.getApproved_at());
 			paymentReserveVO.setPaymentOption(kakaoPayApprovalVO.getPayment_method_type());
 
+
+			System.out.println("이게 실행돼야 함 " + paymentReserveVO.toString());
+
 			paymentReserveDAO.updateKakaoPayResultSet(paymentReserveVO);
-			
+
 			return kakaoPayApprovalVO;
-			
+
 
 		} catch (RestClientException e) {
 			e.printStackTrace();
@@ -238,8 +247,71 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 
 
 
+	@Override
+	@Transactional
+	public void kakaoPayCancel(PaymentReserveVO prvo) {
+
+		RestTemplate restTemplate = new RestTemplate();
+		
+		prvo = paymentReserveDAO.getPaymentReserve(prvo);
+		
+		System.out.println(prvo.toString());
+		
+		projectVO.setProjectNo(prvo.getProjectNo());
+		projectVO.setFundingMoney(prvo.getFundingMoney());
+		
+		
+
+		// 서버로 요청할 Header
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Authorization", "KakaoAK " + "18d8019e9d49a2411a907a3027792bfd");
+		headers.add("Accept", "application/x-www-form-urlencoded;charset=utf-8");
+		headers.add("Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=UTF-8");
+
+		// 서버로 요청할 Body
+		MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+		params.add("cid", "TC0ONETIME");
+		params.add("tid", prvo.getTid());
+		params.add("cancel_amount", String.valueOf(prvo.getFundingMoney() + prvo.getShippingFee()));
+		params.add("cancel_tax_free_amount", "0");
+
+		HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
+		try {
+
+			kakaoPayCancelVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/cancel"), body, KakaoPayCancelVO.class);
+			log.info("" + kakaoPayCancelVO);
+			
+			System.out.println("취소승인 날짜 : " + kakaoPayCancelVO.getCanceled_at());
 
 
+			prvo.setAid(kakaoPayCancelVO.getAid());
+			prvo.setTid(kakaoPayCancelVO.getTid());
+			prvo.setCanceledDate(kakaoPayCancelVO.getCanceled_at());
+			
+			System.out.println("취소승인 날짜 옮겨담기: " + prvo.getCanceledDate());
+			
+			paymentReserveDAO.updateKaKaoPayCancelResult(prvo);
+
+//			프로젝트 펀딩머니 수정, 
+			projectDAO.updateProjectAfterPaymentCancel(projectVO);
+//			리워드 수량 복구
+
+			
+			
+			for(RewardSelectionVO rewardSelection : prvo.getRewardSelectionList()) {
+				rewardVO.setRewardNo(rewardSelection.getRewardNo());
+				rewardVO.setRewardAmount(rewardSelection.getOrderAmount());
+				rewardDAO.updateRewardReturnQuantityAfterCancel(rewardVO);
+			}
+			
+
+		} catch (RestClientException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 
 }

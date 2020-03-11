@@ -22,6 +22,9 @@
 <link
 	href="${pageContext.request.contextPath }/resources/admin/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css"
 	rel="stylesheet">
+	
+	
+
 <link
 	href="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/css/float-chart.css"
 	rel="stylesheet">
@@ -241,11 +244,11 @@
 
 											
 											
-											<input type="button">
+											
 											<a
 												class="btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
 												href="javaScript:return(0);"
-												onclick="document.getElementById('userMainImageChangSetting').submit();">적용허가</a>
+												onclick="document.getElementById('userMainImageChangSetting').submit();">적용하기</a>
 										</div>
 
 
@@ -270,64 +273,12 @@
 		<!-- ============================================================== -->
 		<!-- End footer -->
 		<!-- ============================================================== -->
-	</div>
-	<!-- ============================================================== -->
-	<!-- End Page wrapper  -->
-	<!-- ============================================================== -->
-	</div>
 	<!-- ============================================================== -->
 	<!-- End Wrapper -->
 	<!-- ============================================================== -->
 	<!-- ============================================================== -->
 	<!-- All Jquery -->
 	<!-- ============================================================== -->
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/jquery/dist/jquery.min.js"></script>
-	<!-- Bootstrap tether Core JavaScript -->
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/popper.js/dist/umd/popper.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/sparkline/sparkline.js"></script>
-	<!--Wave Effects -->
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/dist/js/waves.js"></script>
-	<!--Menu sidebar -->
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/dist/js/sidebarmenu.js"></script>
-	<!--Custom JavaScript -->
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/dist/js/custom.min.js"></script>
-	<!--This page JavaScript -->
-	<!-- <script src="dist/js/pages/dashboards/dashboard1.js"></script> -->
-	<!-- Charts js Files -->
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/excanvas.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.pie.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.time.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.stack.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.crosshair.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/dist/js/pages/chart/chart-page-init.js"></script>
-
-
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/multicheck/jquery.multicheck.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/DataTables/datatables.min.js"></script>
 	<script>
             /****************************************
              *       Basic Table                   *
@@ -335,7 +286,7 @@
             $('#zero_config').DataTable();
         </script>
         
-  
+   <script src="https://kit.fontawesome.com/7a424ad03a.js" crossorigin="anonymous"></script>
 
 
         
