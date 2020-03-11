@@ -35,6 +35,12 @@
                         	</a>
                         </li>
                         <li class="sidebar-item"> 
+                        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="projectReportCheck.ado" aria-expanded="false">
+                        		<i class="mdi-apps"></i>
+                        		<span class="hide-menu">프로젝트 신고확인</span>
+                        	</a>
+                        </li>
+                        <li class="sidebar-item"> 
                         	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="customerService.ado" aria-expanded="false">
                                 <i class="mdi mdi-headset"></i>
                                 <span class="hide-menu">고객센터 </span>

@@ -25,48 +25,63 @@ import com.team5.funthing.admin.service.adminStatisticsService.GetFundingMoneyPe
 import com.team5.funthing.admin.service.adminStatisticsService.GetProjectSuccessRatioTotalYearService;
 import com.team5.funthing.admin.service.userMainImageChangeService.GetUserMainImageListService;
 import com.team5.funthing.user.model.vo.ProjectVO;
+import com.team5.funthing.user.model.vo.ReportVO;
 import com.team5.funthing.user.model.vo.TosVO;
 import com.team5.funthing.user.service.TosService.GetTosListService;
 import com.team5.funthing.user.service.personalInfoProcessingService.GetPersonalInfoProcessingListService;
 import com.team5.funthing.user.service.projectService.GetAllFundingProjectListService;
+import com.team5.funthing.user.service.reportService.GetReportListService;
 import com.team5.funthing.user.service.userMainImageChangeService.GetUserMainImageChangeListService;
 
 
 @Controller
 public class AdminHomeController {
 
+	//Notice Service
 	@Autowired
 	GetAdminNoticeBoardListService getAdminNoticeBoardListService;
+	
+	//Project Serivce
 	@Autowired
 	GetProjectCheckListService getProjectCheckListService;
-  
-	@Autowired 
-	GetUserMainImageChangeListService getUserMainImageChangeListService;
 	@Autowired
 	GetAllFundingProjectListService getAllFundingProjectListService;
   
-	@Autowired
-	GetTosListService getTosListService;
-	@Autowired
-	GetPersonalInfoProcessingListService getPersonalInfoProcessingListService;
-	@Autowired
-	GetRegisterTosListService getRegisterTosListService;
-	@Autowired
-	GetCategoryListService getCategoryListService;
-
+	//UserImageChage Service
+	@Autowired 
+	GetUserMainImageChangeListService getUserMainImageChangeListService;
 	@Autowired
 	GetUserMainImageListService getUserMainImageListService;
 	
+	//Tos Serivce
+	@Autowired
+	GetTosListService getTosListService;
+	@Autowired
+	GetRegisterTosListService getRegisterTosListService;
+	
+	//PersonalInfoProcessing Service
+	@Autowired
+	GetPersonalInfoProcessingListService getPersonalInfoProcessingListService;
+	
+	//Category Service
+	@Autowired
+	GetCategoryListService getCategoryListService;
+	
+	//AdminMainView Service
 	@Autowired
 	GetMainViewProjectStatusListService getMainViewProjectStatusListService;
 	@Autowired
 	GetMainViewProjectFundingListService getMainViewProjectFundingListService;
-
+	
+	//AdminStatistics Service
 	@Autowired
 	GetProjectSuccessRatioTotalYearService getProjectSuccessRatioTotalYearService;
 	@Autowired
 	GetFundingMoneyPerMonthService getFundingMoneyPerMonthService;
 	
+	//Report Service
+	@Autowired
+	GetReportListService getReportListService;
 	
 	@RequestMapping("adminIndex.ado")
 	public String showIndex(AdminStatisticsVO vo, AdminMainViewVO vo2,Model model) {
@@ -101,6 +116,13 @@ public class AdminHomeController {
 		model.addAttribute("CategoryList", CategoryList);
 		
 		return "f-category-management";
+	}
+	
+	@RequestMapping("projectReportCheck.ado")
+	public String projectReportCheck(ReportVO vo , Model model) {
+		
+		model.addAttribute("reportList", getReportListService.getReportList(vo));
+		return "b-report-list";
 	}
 	
 	@RequestMapping("memberManagement.ado")

@@ -42,6 +42,8 @@ public class MemberActivityController {
 	//PaymentReserve Service
 	@Autowired
 	private GetPaymentReserveService getPaymentReserveService;
+	@Autowired
+	private GetPaymentReserveListByEmailService getPaymentReserveListByEmailService;
 	
 	//MemberActivity Service
 	@Autowired
@@ -93,7 +95,7 @@ public class MemberActivityController {
 		
 		redirectAttributes.addAttribute("projectNo", projectNo);
 		
-		return "redirect:projectDetails.udo"; //ÇÁ·ÎÁ§Æ® »ó¼¼ÆäÀÌÁö
+		return "redirect:projectDetails.udo"; //횉횁쨌횓횁짠횈짰 쨩처쩌쩌횈채�횑횁철
 	}
 
 	
@@ -116,11 +118,11 @@ public class MemberActivityController {
 	public void myLikeProjectList(HttpSession session,MemberActivityVO vo,ProjectVO vo1,Model model) {
 		List<ProjectVO> projectLikeList = new ArrayList<ProjectVO>();
 		MemberVO loginMember = (MemberVO) session.getAttribute("memberSession");
-		//System.out.println("·Î±×ÀÎ ¾ÆÀÌµð °ª : " + loginMember.getEmail());
+		//System.out.println("쨌횓짹횞�횓 쩐횈�횑쨉챨 째짧 : " + loginMember.getEmail());
 		vo.setEmail(loginMember.getEmail());
-		//System.out.println("voÀÇ °ª : " +  vo.toString());
+		//System.out.println("vo�횉 째짧 : " +  vo.toString());
 		List<MemberActivityVO> likeProjectList = getLikeProjectNoListService.getLikeProjectNoList(vo);
-		//System.out.println("È¸¿øÀÌ ÁÁ¾Æ¿ä ´©¸¥ °Å : " + likeProjectList);
+		//System.out.println("횊쨍쩔첩�횑 횁횁쩐횈쩔채 쨈짤쨍짜 째횇 : " + likeProjectList);
 		for(MemberActivityVO getProjectNo : likeProjectList) {
 			vo1.setProjectNo(getProjectNo.getProjectNo());
 			projectLikeList.add(getProjectService.getProject(vo1));
@@ -152,4 +154,23 @@ public class MemberActivityController {
 		model.addAttribute("projectReservationList",projectReservationList);
 	}
 	
+
+	@RequestMapping(value = "paymentReservationCheckList.udo", method = RequestMethod.POST )
+	public String myPaymentReservationCheckList(Model model, PaymentReserveVO prvo) {
+		
+		System.out.println("째찼횁짝쨀쨩쩔짧 쨘쨍짹창 �횑쨉쩔");
+		
+		List<PaymentReserveVO> paymentReserveList = getPaymentReserveListByEmailService.getPaymentReserveListByEmail(prvo);
+		
+		if(!paymentReserveList.isEmpty()) {
+			
+			model.addAttribute("paymentReserveList", paymentReserveList);
+			
+		}
+		
+		
+		return "p-payment-reservation-check";
+	}
+	
+
 }
