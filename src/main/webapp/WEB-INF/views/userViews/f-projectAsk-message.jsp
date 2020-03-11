@@ -47,6 +47,7 @@
                                           <a href="#" name="name">${sessionScope.memberSession.name }</a>
                                           <input type="hidden" name="email" value="${sessionScope.memberSession.email}">
                                           <input type="hidden" name="creator" value="${vo.creator}">
+                                          <input type="hidden" name="projectNo" value="${vo.projectNo}">
                                           
                                        </h5>
                                     </div>
