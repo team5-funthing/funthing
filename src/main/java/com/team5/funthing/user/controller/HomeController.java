@@ -1,6 +1,7 @@
 package com.team5.funthing.user.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,14 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.team5.funthing.admin.model.vo.AdminUserMainImageChangeVO;
-import com.team5.funthing.admin.model.vo.AdminUserMainProjectVO;
-import com.team5.funthing.admin.service.adminUserMainProjectService.GetFocusProjectListService;
-
 import com.team5.funthing.admin.model.vo.AdminPersonalInfoProcessingVO;
 import com.team5.funthing.admin.model.vo.AdminRegisterTosVO;
+import com.team5.funthing.admin.model.vo.AdminUserMainImageChangeVO;
+import com.team5.funthing.admin.model.vo.AdminUserMainProjectVO;
 import com.team5.funthing.admin.service.adminRegisterTosService.GetRegisterTosListService;
-
+import com.team5.funthing.admin.service.adminUserMainProjectService.GetFocusProjectListService;
 import com.team5.funthing.user.model.vo.ProjectBoardVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.model.vo.TosVO;
@@ -26,11 +25,8 @@ import com.team5.funthing.user.service.homeService.GetDeadLineListService;
 import com.team5.funthing.user.service.homeService.GetLikeCountListService;
 import com.team5.funthing.user.service.homeService.GetMoneyPercentListService;
 import com.team5.funthing.user.service.homeService.GetProjectProgressListService;
-
-import com.team5.funthing.user.service.projectService.GetAllFundingProjectListService;
-
 import com.team5.funthing.user.service.personalInfoProcessingService.GetPersonalInfoProcessingListService;
-
+import com.team5.funthing.user.service.projectService.GetAllFundingProjectListService;
 import com.team5.funthing.user.service.projectService.GetProjectService;
 import com.team5.funthing.user.service.userMainImageChangeService.GetUserMainImageChangeListService;
 
@@ -124,8 +120,33 @@ public class HomeController {
     
 		//6.占쎌뵠沃섎챷占�	
 			List<AdminUserMainImageChangeVO> getUserMainImageChangeList = getUserMainImageChangeListService.getUserMainImageChangeList(vo3);
-			model.addAttribute("getUserMainImageChangeList",getUserMainImageChangeList);
-		
+			AdminUserMainImageChangeVO getUserMainImageChangeList2 = null;
+			List<AdminUserMainImageChangeVO> getUserMainImageChangeList3 = new ArrayList<AdminUserMainImageChangeVO>();
+			System.out.println("사이즈:"+getUserMainImageChangeList.size());
+			for(int i=0; i<getUserMainImageChangeList.size(); i++) {
+			
+				if(!getUserMainImageChangeList.isEmpty()) {
+					
+					getUserMainImageChangeList2=getUserMainImageChangeList.get(0);
+					
+				
+					if(getUserMainImageChangeList.size() > 1) {
+						
+						if(i!=0) {
+			
+							getUserMainImageChangeList3.add(getUserMainImageChangeList.get(i));
+
+							
+						}
+					}
+				}
+				
+			}
+			
+
+			model.addAttribute("getUserMainImageChangeList2",getUserMainImageChangeList2);
+			model.addAttribute("getUserMainImageChangeList3",getUserMainImageChangeList3);
+			
 			
 			
 			
@@ -143,13 +164,10 @@ public class HomeController {
 			}
 		}
 		
-		
+	
 		model.addAttribute("msg", msg);
 		model.addAttribute("userMainFocusList",userMainFocusList);
 			
-			
-		
-
 		return "p-index";
 	}
 	

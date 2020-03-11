@@ -80,7 +80,7 @@
 					<script>
 					
 						$(document).ready(function (){
-							var videoCheck = ${ projectPreview.projectIntroduceVideo eq null }
+							var videoCheck = ${ projectPreview.projectIntroduceVideo eq null };
 							
 							if(videoCheck){
 									

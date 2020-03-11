@@ -71,8 +71,11 @@ public class RewardController {
 	public String insertReward(	RedirectAttributes redirecAttributes,
 								RewardVO vo, 
 								RewardOptionVO rovo, 
+								@RequestParam(required=false) String creator,
 								@RequestParam(value="rewardoptionkey", required=false, defaultValue="") List<String> rewardOptionKeys, 
 								@RequestParam(value="rewardoptionvalue", required=false) List<String> rewardOptionValues) {
+		
+		System.out.println("insertReward로 넘어온 값 : " + creator);
 		
 		int currentProjectNo = vo.getProjectNo();
 		System.out.println("insertReward - currentProjectNo : " + currentProjectNo);
@@ -99,12 +102,13 @@ public class RewardController {
 		}
 		
 		redirecAttributes.addAttribute("currentProjectNo", currentProjectNo);
-		
+		redirecAttributes.addAttribute("creator", creator);
 		return "redirect:getWritingProject.udo";
 	}
 	
 	@RequestMapping(value="deleteReward.udo")
 	public String deleteReward(	RedirectAttributes redirecAttributes,
+								@RequestParam String creator,
 								RewardVO vo,
 								RewardOptionVO rovo) {
 
@@ -114,6 +118,7 @@ public class RewardController {
 		deleteRewardOptionSerivice.deleteRewardOption(rovo);
 		deleteRewardService.deleteReward(vo);
 		
+		redirecAttributes.addAttribute("creator", creator);
 		redirecAttributes.addAttribute("currentProjectNo", currentProjectNo);		
 		
 		return "redirect:getWritingProject.udo";
@@ -123,6 +128,7 @@ public class RewardController {
 	public String updateReward(	RedirectAttributes redirecAttributes,
 								RewardVO vo,
 								RewardOptionVO rovo,
+								@RequestParam(required=false) String creator,
 								@RequestParam(name="rewardoptionkey", required=false) List<String> rewardOptionKeys, 
 								@RequestParam(name="rewardoptionvalue", required=false) List<String> rewardOptionValues,
 								@RequestParam(name="rewardOptionNo", required=false) List<Integer> rewardOptionNos) {
@@ -149,6 +155,7 @@ public class RewardController {
 		System.out.println(vo.toString());
 		updateRewardService.updateReward(vo);
 		
+		redirecAttributes.addAttribute("creator", creator);
 		redirecAttributes.addAttribute("currentProjectNo", currentProjectNo);
 		
 		return "redirect:getWritingProject.udo";

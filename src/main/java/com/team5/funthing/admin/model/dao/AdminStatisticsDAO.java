@@ -1,7 +1,5 @@
 package com.team5.funthing.admin.model.dao;
 
-import java.util.List;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -21,7 +19,6 @@ public class AdminStatisticsDAO {
 	
 	public AdminStatisticsVO getProjectSuccessRatioPerYear(AdminStatisticsVO vo) {
 		System.out.println("프로젝트성공율  연  실행");
-		System.out.println(vo);
 		return st.selectOne("AdminStatisticsDAO.getProjectSuccessRatioPerYear",vo);
 	}
 	
@@ -30,4 +27,9 @@ public class AdminStatisticsDAO {
 		return st.selectOne("AdminStatisticsDAO.getFundingMoneyPerMonth",vo);
 	}
 	
+	public AdminStatisticsVO getProjectSuccessRatioTotalYear(AdminStatisticsVO vo) {
+		System.out.println("전체 성공/실패 실행");
+		return st.selectOne("AdminStatisticsDAO.getProjectSuccessRatioTotalYear",vo);
+				
+	}
 }

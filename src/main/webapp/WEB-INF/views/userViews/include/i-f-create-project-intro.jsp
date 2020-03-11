@@ -76,12 +76,12 @@
 		<c:choose>
 			<c:when test="${writingProject.projectSubTitle eq null}">
 				<input type="text" name="projectSubTitle" placeholder="소제목을 입력해주세요!"
-					onfocus="this.placeholder = ''" class="single-input">
+					onblur="this.placeholder = '소제목을 입력해주세요!'" class="single-input">
 			</c:when>
 			<c:when test="${writingProject.projectSubTitle ne null}">
 				<input type="text" name="projectSubTitle"
 					value="${writingProject.projectSubTitle }"
-					placeholder="소제목을 입력해주세요!" onfocus="this.placeholder = ''"
+					placeholder="소제목을 입력해주세요!" onblur="this.placeholder = '소제목을 입력해주세요!'"
 					class="single-input">
 			</c:when>
 		</c:choose>
@@ -156,10 +156,10 @@
 				</c:when>
 				<c:when test="${writingProject.endDate ne null }">
 					<div class="col-xl-6">
+
+						<!--<fmt:formatDate var="getEndDate" pattern="yyyy-MM-dd" value="${writingProject.endDate }" />-->
 						
-						<fmt:formatDate var="getEndDate" pattern="yyyy-MM-dd" value="${writingProject.endDate }" />
-						
-						<input type="text" id="endDate" value="${getEndDate }" class="datepicker-here" data-language='ko' data-position='right top'>
+						<input type="text" id="endDate" value="${writingProject.endDate}" class="datepicker-here" data-language='ko' data-position='right top'>
 						<p id="afterSelectDate">
 							펀딩 결제일 &nbsp;
 							<strong><span style="color: #2980b9">${writingProject.endDate }</span></strong>

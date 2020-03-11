@@ -1,6 +1,7 @@
 package com.team5.funthing.admin.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,61 +11,111 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.team5.funthing.admin.model.vo.AdminUserMainImageChangeVO;
+import com.team5.funthing.admin.service.userMainImageChangeService.DeleteUserMainImageService;
+import com.team5.funthing.admin.service.userMainImageChangeService.GetUserMainImageListService;
+import com.team5.funthing.admin.service.userMainImageChangeService.InsertUserMainImageService;
 import com.team5.funthing.admin.service.userMainImageChangeService.UpdateUserMainImageNullService;
 import com.team5.funthing.admin.service.userMainImageChangeService.UpdateUserMainImageService;
 import com.team5.funthing.common.utils.uploadUtils.UploadUtil;
 
+
 @Controller
 public class AdminUserMainImageChangeController {
-	
-	private String SAVE_PATH = "C:\\funthing\\project\\funthing\\src\\main\\webapp\\resources\\user\\img\\main\\";
-	
+
+
 	@Autowired
 	UpdateUserMainImageService updateUserMainImageService;
 	@Autowired
 	UpdateUserMainImageNullService updateUserMainImageNullService;
+	@Autowired
+	GetUserMainImageListService getUserMainImageListService;
+	@Autowired
+	DeleteUserMainImageService deleteUserMainImageService;
+	@Autowired
+	InsertUserMainImageService insertUserMainImageService;
+	@Autowired
+	AdminUserMainImageChangeVO adminUserMainImageChangeVO;
 
-	// ===================== À¯Æ¿ ÁÖÀÔ =====================
+	// ===================== ï¿½ì‘€ï¿½ë–¥ äºŒì‡±ì—¯ =====================
 
-		@Autowired
-		private UploadUtil uploadUtil;
-	
+	@Autowired
+	private UploadUtil uploadUtil;
 
 	@RequestMapping("userMainImageChange.ado")
-    public String upload(
-    		@RequestParam(name = "userMainUploadImage", required = false)List<MultipartFile> userMainUploadImage,AdminUserMainImageChangeVO vo) {
+	public String upload(
+			@RequestParam(name = "userMainImageNo", required = false)List<Integer> userMainImageNoList,
+			@RequestParam(name = "userMainUploadImage",required = false) List<MultipartFile> userMainUploadImage,
+			AdminUserMainImageChangeVO vo) {
 
-		vo.setImageNo(1);
-		vo.setImageName("imsi");
+		
 		try {
-			userMainImageUploader(userMainUploadImage, vo);
-			updateUserMainImageService.updateUserMainImage(vo);
+			userMainImageUploader(userMainUploadImage,vo, userMainImageNoList);
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-			return "redirect: userMainImageChangeForm.ado";
-        }
-	
-	
-public void userMainImageUploader(List<MultipartFile> toDoUploadList, AdminUserMainImageChangeVO vo) throws Exception{
 		
+		
+		return "redirect: userMainImageChangeForm.ado";
+	}
+
+	public void userMainImageUploader2(List<MultipartFile> toDoUploadList, AdminUserMainImageChangeVO vo)
+			throws Exception {
+
 		List<String> toRemoveFilePath = new ArrayList<String>();
 
-		
-		if(!toDoUploadList.get(0).isEmpty()) { // ¾÷·Îµå ½ÃÅ² ÆÄÀÏÀÌ ÀÌ¹Ì Á¸ÀçÇÏ´Â °æ¿ì ÆÄÀÏ ¼±ÅÃÀ» ´Ù½Ã ¾ÈÇÑ °æ¿ì¿¡ ³ª¿Ã ¼ö ÀÖ´Â »óÈ² Ã³¸®  
-			toRemoveFilePath.add(vo.getImagePath()); //Á¦°ÅµÉ ÆÄÀÏ°æ·Î¸¦ vo°´Ã¼¿¡¼­ °¡Á®¿À±â
+		if (!toDoUploadList.get(0).isEmpty()) { // ï¿½ë¾½æ¿¡ì’•ë±¶ ï¿½ë–†ï¿½ê¶“ ï¿½ë™†ï¿½ì”ªï¿½ì”  ï¿½ì” èª˜ï¿½ è­°ëŒì˜±ï¿½ë¸¯ï¿½ë’— å¯ƒìŒìŠ¦ ï¿½ë™†ï¿½ì”ª ï¿½ê½‘ï¿½ê¹®ï¿½ì“£ ï¿½ë–ï¿½ë–† ï¿½ë¸ï¿½ë¸³ å¯ƒìŒìŠ¦ï¿½ë¿‰ ï¿½êµ¹ï¿½ì‚± ï¿½ë‹” ï¿½ì—³ï¿½ë’— ï¿½ê¸½ï¿½ì†´ ï§£ì„â”
+			toRemoveFilePath.add(vo.getImagePath()); // ï¿½ì £å«„ê³•ë§† ï¿½ë™†ï¿½ì”ªå¯ƒìˆì¤ˆç‘œï¿½ voåª›ì•¹ê»œï¿½ë¿‰ï¿½ê½Œ åª›ï¿½ï¿½ì¡‡ï¿½ì‚¤æ¹²ï¿½
 			String voName = vo.getClass().getSimpleName();
 			List<String> toSettingPath = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);
-			if(toSettingPath == null) return;
+			if (toSettingPath == null)
+				return;
 
-			for(String toInsertImage : toSettingPath) {
+			for (String toInsertImage : toSettingPath) {
 				vo.setImagePath(toInsertImage);
 			}
 		}
-		
 	}
-    
+
+	public void userMainImageUploader(List<MultipartFile> toDoUploadList, AdminUserMainImageChangeVO vo,
+			List<Integer> toRemoveImageNoList) throws Exception {
+
+		List<String> toRemoveFilePath = new ArrayList<String>();
+		
+		String voName = vo.getClass().getSimpleName();
+		List<AdminUserMainImageChangeVO> userMainImageList = getUserMainImageListService.getUserMainImageList();
+
+		if (userMainImageList != null && toRemoveImageNoList != null) {
+			for (AdminUserMainImageChangeVO userMainImage : userMainImageList) {
+				for (int toRemoveImageNo : toRemoveImageNoList) {
+					if (userMainImage.getImageNo() == toRemoveImageNo) {
+						toRemoveFilePath.add(userMainImage.getImagePath());
+					}
+				}
+			}
+		}
+
+		deleteUserMainImageService.deleteUserMainImage(vo, toRemoveImageNoList);
+
+		if (toRemoveFilePath.isEmpty()) {
+			toRemoveFilePath.add(0, null);
+		}
+
+		if (!toDoUploadList.isEmpty()) { // ï¿½ë´½æ¿¡ì’–ì ¥ï¿½ë“ƒ ï¿½ëƒ¼åª›ï¿½ ï¿½ì” èª˜ëª„ï¿½ æ¹²ê³—ã€ˆï¿½ë¾½æ¿¡ì’•ë±¶ ï¿½ì £å«„ï¿½ è«›ï¿½ ï¿½ê¹‰ ï¿½ë¾½æ¿¡ì’•ë±¶, DB ç•°ë¶½ï¿½ ï¿½ì˜‰ï¿½ë¾½ ï§ë¶¿ê½Œï¿½ë±¶
+
+			List<String> tmpUploadList = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);
+			for(int i=0; i<tmpUploadList.size();i++) {
+			System.out.println("tmpUploadList:"+tmpUploadList.get(i));
+			}
+			Collections.reverse(tmpUploadList);
+			insertUserMainImageService.insertUserMainImage(adminUserMainImageChangeVO, tmpUploadList);
+
+		} else {
+			uploadUtil.removeUtil(voName, toRemoveFilePath);
+
+		}
+
+	}
 
 }
