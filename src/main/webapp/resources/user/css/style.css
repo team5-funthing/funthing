@@ -87,22 +87,29 @@ body {
     transform: translate(-50%, -50%);
 }
 
+
+.project .thumb-crop .portrait,
 .project_detail_tile .thumb-crop .portrait,
 .tiles .thumb-crop .portrait {
     width: 100%;
     height: auto;
 }
+
+.project .thumb-crop .auto,
 .project_detail_tile .thumb-crop .auto,
 .tiles .thumb-crop .auto {
     height: auto;
 }
 
+.project .thumbnail,
 .project_detail_tile .thumbnail,
 .tiles .thumbnail {
     position: relative;
     padding-top: 100%;
     overflow: hidden;
 }
+
+.project .thumbnail img,
 .project_detail_tile .thumbnail img,
 .tiles .thumbnail img {
     position: absolute;
@@ -110,6 +117,7 @@ body {
     left: 0;
 }
 
+.project .thumbnail .centered,
 .project_detail_tile .thumbnail .centered,
 .tiles .thumbnail .centered {
     position: absolute;
@@ -121,12 +129,15 @@ body {
     -ms-transform: translate(50%, 50%);
     transform: translate(50%, 50%);
 }
+.project .thumbnail .centered img,
 .project_detail_tile .thumbnail .centered img,
 .tiles .thumbnail .centered img {
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
+
+.project .thumbnail img.portrait,
 .project_detail_tile .thumbnail img.portrait,
 .tiles .thumbnail img.portrait {
     width: 100%;
@@ -134,6 +145,7 @@ body {
     height: auto;
 }
 
+.project .thumbnail img.landscape,
 .project_detail_tile .thumbnail img.landscape,
 .tiles .thumbnail img.landscape {
     width: auto;

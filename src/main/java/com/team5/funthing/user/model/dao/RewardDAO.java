@@ -34,5 +34,9 @@ public class RewardDAO {
 		return sqlSessionTemplate.delete("RewardDAO.deleteReward",vo);
 	}
 	
+	public void updateRewardReturnQuantityAfterCancel(RewardVO vo) {
+		sqlSessionTemplate.update("updateRewardReturnQuantityAfterCancel", vo);
+	}
+	
 	
 }

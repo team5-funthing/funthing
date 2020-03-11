@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
 <!doctype html>
 
@@ -20,72 +21,91 @@
 	<!-- ------------------ -->
 	
 	<hr>
-    <section class="main-wrapper pt-xl-5 ">
-        <div class="main-content">
-            <div class="container">
-                
-                <div class="row">
-                    <div class="col">
-                    </div>
-                    <div class="col-8">
-                        <div class="d-flex justify-content-between">
-                            <div class="h4">결제예약 내역 확인</div>
-                            <div class="p-2 bd-highlight">
-                                <select class="custom-select custom-select">
-                                    <option selected>ALL</option>
-                                    <option value="1">금액 높은순</option>
-                                    <option value="2">금액 낮은순</option>
-                                    <option value="3">최근 순서</option>
-                                    <option value="4">오래된 순서</option>
-                                  </select>
-                            </div>
-                        </div>
-
-
-
-                        <div class="d-flex justify-content-start">
-                            <table class="table table-hover border">
-                                <thead>
-                                  <tr class="bg-info text-white">
-                                    <th scope="col">no.</th>
-                                    <th scope="col">주문번호</th>
-                                    <th scope="col">프로젝트</th>
-                                    <th scope="col">결제 상황</th>
-                                    <th scope="col">결제 날짜</th>
-                                    <th scope="col">결제 수단</th>
-                                    <th scope="col">후원 금액</th>
-                                    <th scope="col">배송비</th>
-                                    <th scope="col">후원취소</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-	                                <c:forEach var="payment" items="${paymentReserveList }" varStatus="cnt">
-		                                  <tr>
-		                                    <th scope="row">${cnt.count}</th>
-		                                    <td>${payment.orderNo }</td>
-		                                    <td>${payment.projectNo }</td>
-		                                    <td>${payment.paymentStatus }</td>
-		                                    <td>${payment.paymentReserveDate }</td>
-		                                    <td>${payment.paymentOption }</td>
-		                                    <td>${payment.fundingMoney }원</td>
-		                                    <td>${payment.shippingFee }원</td>
-		                                    <td>취소하기</td>
-		                                  </tr>
-	                                </c:forEach>
-	                            </tbody>
-                              </table>
-
-                        </div>
-
-
-                    </div>
-                    <div class="col">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 	
+    <div class="container">
+		<c:forEach var="payment" items="${paymentReserveList }" varStatus="cnt">
+		
+			<c:set var="paymentItems" value="" />
+			<c:set var="quentity" value="0"/>
+			<c:forEach var="rewardSelection" items="${payment.rewardSelectionList}" varStatus="rsCnt">
+				<c:if test="${rsCnt.count eq 1 }">
+					<c:set var="paymentItems" value="${rewardSelection.reward.rewardName }"/>
+				</c:if>
+				<c:if test="${rsCnt.count > 1 &&  rsCnt.last }">
+					<c:set var="paymentItems" value="${paymentItems} 외  ${rsCnt.count -1 }개"/>
+				</c:if>
+				<c:set var="quentity" value="${ quentity + rewardSelection.orderAmount}"/>
+			</c:forEach>
+			
+			
+			<div class="w-50">
+				<div class="paymentDate">
+					${payment.paymentReserveDate }
+				</div>
+				
+	            <div class="card mb-3" style="max-width: 1140px;">
+				  	<div class="row no-gutters">
+				    <div class="col-md-4">
+					    <div class="project">
+ 							<div class="thumbnail-wrap">
+	                            <div class="thumbnail">
+	                                <div class="centered">
+										<form id="payment${cnt.count }" action="paymentReservationDetail.udo" method="POST">
+										    <input type="hidden" name="orderNo" value="${payment.orderNo}">
+                                       		<a href="#" onclick="document.getElementById('payment${cnt.count }').submit()">
+                                       			<img src="${payment.projectMainImage }" class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+                                       		</a>
+                                        </form>
+	                                </div>
+	                            </div>
+	                        </div>
+					    </div>
+				    </div>
+				    <div class="col-md-8">
+				    		
+				     	<div class="card-body">
+				     		<c:choose>
+				     			<c:when test="${payment.paymentStatus eq '결제취소' }">
+				     				<a href="javaScript: return(0);" class="badge badge-primary mb-2">결제취소</a>
+				     			</c:when>
+				     			<c:otherwise>
+				     				<a href="javaScript: return(0);" class="badge badge-primary mb-2">결제완료</a>
+				     			</c:otherwise>
+				     		</c:choose>
+					        <h5 class="card-title">${paymentItems }</h5>
+					        <p class="card-text">주문수량 ${quentity }개</p>
+					        <p class="card-text">${payment.fundingMoney }원을 후원하였습니다.</p>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+			</div>
+		</c:forEach>
+	</div>		
+		
+		
+<!-- 				<c:forEach var="rewardSelection" items="${paymentReserve.rewardSelectionList }" varStatus="cnt">
+						<c:set var="totalAmount" value="${ totalAmount + rewardSelection.paymentAmount }"/>
+						<div class="row">
+							<div class="col-8">
+								<h5 class="card-title">${rewardSelection.reward.rewardName }</h5>
+								<p class="card-text">${rewardSelection.reward.rewardContent }</p>
+								<p class="card-text">옵션: <br>
+								
+								<c:forEach var="option" items="${rewardSelection.rewardOptionValueList}">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${option }<br>
+								</c:forEach>
+								
+								</p>
+							</div>
+						</div>
+						<div class="d-flex justify-content-end">
+							<p class="card-text mr-3" style="font-weight: bold;">수량:${rewardSelection.orderAmount }개</p>
+							<p class="card-text" style="font-weight: bold;">${rewardSelection.paymentAmount }원</p>
+						</div>
+						<hr>
+					</c:forEach> -->
+					
 	<!-- -------------------- -->
 
 

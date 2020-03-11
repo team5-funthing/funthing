@@ -108,22 +108,7 @@ public class MemberActivityController {
 		model.addAttribute("projectReservationList",projectReservationList);
 	}
 	
-	@RequestMapping(value = "paymentReservationCheckList.udo", method = RequestMethod.POST )
-	public String myPaymentReservationCheckList(Model model, PaymentReserveVO prvo) {
-		
-		System.out.println("결제내역 보기 이동");
-		
-		List<PaymentReserveVO> paymentReserveList = getPaymentReserveListByEmailService.getPaymentReserveListByEmail(prvo);
-		
-		if(!paymentReserveList.isEmpty()) {
-			
-			model.addAttribute("paymentReserveList", paymentReserveList);
-			
-		}
-		
-		
-		return "p-payment-reservation-check";
-	}
+
 	
 	
 	
