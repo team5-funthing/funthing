@@ -24,6 +24,7 @@
 								receiveId : id
 							},
 							success:function(data){
+								$("#userAlarmList").empty();
 								$("#userAlarmList").append(data);							
 							},
 							error:function(request,status,error){

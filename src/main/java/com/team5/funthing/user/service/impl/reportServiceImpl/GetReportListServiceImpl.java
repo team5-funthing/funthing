@@ -1,24 +1,24 @@
-package com.team5.funthing.admin.service.impl.adminReportServiceImpl;
+package com.team5.funthing.user.service.impl.reportServiceImpl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.team5.funthing.admin.model.dao.AdminReportDAO;
-import com.team5.funthing.admin.service.adminReportService.GetReportListService;
+import com.team5.funthing.user.model.dao.ReportDAO;
 import com.team5.funthing.user.model.vo.ReportVO;
+import com.team5.funthing.user.service.reportService.GetReportListService;
 
 @Service
 public class GetReportListServiceImpl implements GetReportListService{
 
 	@Autowired
-	private AdminReportDAO adminReportDAO;
+	private ReportDAO reportDAO;
 
 	@Override
 	public List<ReportVO> getReportList(ReportVO vo) {
 		
-		return adminReportDAO.getReportList(vo);
+		return reportDAO.getReportList(vo);
 		
 	}
 	

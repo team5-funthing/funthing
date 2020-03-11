@@ -67,7 +67,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">report_detail</h4>
+                        <h4 class="page-title">프로젝트 신고확인</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
@@ -103,7 +103,7 @@
                         <table style="margin-bottom: 1%;margin-top: 1%;">
                             <tr>
                                 <th >신고 프로젝트명 </th>
-                                <td style="padding-top: 2%; padding-bottom: 2%;"><input type="text" size="50%;" readonly value="${projectVO.projectTitle}"></td>
+                                <td style="padding-top: 2%; padding-bottom: 2%;"><input type="text" size="50%;" readonly value="${projectTitle}"></td>
                             </tr>
                             <tr>
                                 <th>신고자</th>
@@ -115,7 +115,7 @@
                             </tr>
 	
                         </table>
-                        <div align="">
+                        <div>
                             <textarea style="width: 80%; height: 150px; overflow: auto; padding: 10px; white-space:pre-wrap; resize: none;"  readonly>
                             ${report.reason}
                             </textarea>

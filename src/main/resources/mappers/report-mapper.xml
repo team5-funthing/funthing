@@ -3,22 +3,18 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ReportDAO">
-
-	<!-- <select id="getSomething" parameterType="int" resultType="#package.#modelname">
-		
-	</select> -->
-
-	<!-- <resultMap type="#modelname" id="YourResultSet">
-		<id property="param1" column="columnname1" />
-		<result property="param2" column="columnname2" />
-		<result property="param3" column="columnname3" />
-	</resultMap> -->
 	
 	<insert id="insertReport" parameterType="report">
 		insert into report(reportNo,email,projectNo,reason,reasonSelect) 
-		values(report_seq.nextval,${email},${projectNo},${reason},${reasonSelect})
+		values(report_seq.nextval,#{email},#{projectNo},#{reason,jdbcType=VARCHAR},#{reasonSelect})
 	</insert>
 	
-	
+	<select id="getReportList" resultType="report">
+		SELECT * FROM report
+	</select>
+
+	<select id="getReport" parameterType="report" resultType="report">
+		SELECT * FROM report WHERE reportNo = #{reportNo}
+	</select>
 
 </mapper>
