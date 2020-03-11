@@ -20,10 +20,17 @@ public class ProjectAskMessageVO {
 	private Date projectAskReplyDate;
 	private int projectAskRef;
 	private int projectAskStep;
+	private int projectNo;
 	
 	
 	
 	
+	public int getProjectNo() {
+		return projectNo;
+	}
+	public void setProjectNo(int projectNo) {
+		this.projectNo = projectNo;
+	}
 	public String getProjectAskReplyContentsTitle() {
 		return projectAskReplyContentsTitle;
 	}
@@ -103,8 +110,9 @@ public class ProjectAskMessageVO {
 				+ ", projectAskReplyContentsTitle=" + projectAskReplyContentsTitle + ", projectAskReplyContents="
 				+ projectAskReplyContents + ", projectAskReplyStatus=" + projectAskReplyStatus + ", projectAskDate="
 				+ projectAskDate + ", projectAskReplyDate=" + projectAskReplyDate + ", projectAskRef=" + projectAskRef
-				+ ", projectAskStep=" + projectAskStep + "]";
+				+ ", projectAskStep=" + projectAskStep + ", projectNo=" + projectNo + "]";
 	}
+
 	
 
 	

@@ -383,6 +383,8 @@ var config = {
 	  	responsive: true
 	  }
 	};
+	
+
 //차트셋팅 끝 
 
 var myDoughnutChart = new Chart(ctx, config);   //차트 그리기 

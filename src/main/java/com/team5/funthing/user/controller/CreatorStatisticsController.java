@@ -20,6 +20,7 @@ import com.team5.funthing.user.model.vo.PaymentReserveVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.service.creatorStatisticsService.GetAllProjectAndPaymentService;
 import com.team5.funthing.user.service.creatorStatisticsService.GetFundingPaymentCountService;
+import com.team5.funthing.user.service.creatorStatisticsService.GetTodayFundingMoneyService;
 import com.team5.funthing.user.service.projectService.GetProjectService;
 
 
@@ -33,7 +34,8 @@ public class CreatorStatisticsController {
 	private GetProjectService getProjectService;
 	@Autowired
 	private GetFundingPaymentCountService getFundingPaymentCountService;
-	
+	@Autowired
+	private GetTodayFundingMoneyService getTodayFundingMoneyService;
 
 	
 // ===================== 메서드 =======================	
@@ -44,37 +46,66 @@ public class CreatorStatisticsController {
 		
 		vo.setProjectNo(currentProjectNo);
 		model.addAttribute("currentProjectNo",currentProjectNo);
-		//프로젝트 정보가져오기 
-		ProjectVO projectInformation = getProjectService.getProject(vo);
-		model.addAttribute("projectInformation",projectInformation);
 		
-
 		//총결제된 카운트 가져오기
 		int count= getFundingPaymentCountService.getFundingPaymentCount(currentProjectNo);
 		model.addAttribute("count", count);
 		
 		
+		//결제정보 보내기 JSON으로
+				Gson gson = new Gson();
+				JsonArray jArray = new JsonArray();
+				Gson gson2 = new Gson();
+				JsonArray jArray2 = new JsonArray();
+				Gson gson3 = new Gson();
+				JsonArray jArray3 = new JsonArray();
+				
 		
+				
+		//프로젝트 정보가져오기 
+		ProjectVO projectInformation = getProjectService.getProject(vo);
+		model.addAttribute("projectInformation",projectInformation);
+		
+		JsonObject object3 = new JsonObject();
+		
+		int accumulate = projectInformation.getFundingMoney();
+		object3.addProperty("accumulateMoney", accumulate);
+		jArray3.add(object3);
+		
+		String json3 = gson.toJson(jArray3);
+		model.addAttribute("json3", json3);
+		
+	
+		
+		//금일판매금액 가져오기 
+		List<PaymentReserveVO> getTodayFundingMoney = getTodayFundingMoneyService.getTodayFundingMoney(currentProjectNo);
+		
+		Iterator<PaymentReserveVO> it2 = getTodayFundingMoney.iterator();
+		while(it2.hasNext()) {
+			PaymentReserveVO todayFundingMoney = it2.next();
+			JsonObject object2 = new JsonObject();
+			
+			String today = todayFundingMoney.getTodayDate();
+			int Data2 = todayFundingMoney.getSumFundingMoney();
+			
+			object2.addProperty("labelTodayDate", today);
+			object2.addProperty("dataFundingMoney2", Data2);
+			jArray2.add(object2);
+		}
+		
+		String json2 = gson.toJson(jArray2);
+		model.addAttribute("json2", json2);
+		
+
 		//결제정보가져오기 
 		List<PaymentReserveVO> getSumProjectAndPayment = getAllProjectAndPaymentService.getSumProjectAndPayment(currentProjectNo);
-		
-		
-		//결제정보 보내기 JSON으로
-		Gson gson = new Gson();
-		JsonArray jArray = new JsonArray();
-
-
+			
 		Iterator<PaymentReserveVO> it = getSumProjectAndPayment.iterator();
 		while(it.hasNext()) {
 			PaymentReserveVO projectAndPayment = it.next();
 			JsonObject object = new JsonObject();
 	
-			//getPaymentReserveDate Date타입 -> String으로 변환 하는중
-//			Date from = projectAndPayment.getPaymentReserveDate();
-//			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
-//			String to = transFormat.format(from);
-			
-		
+
 			//getFundingMoney 
 			String to = projectAndPayment.getSumDate();
 			int Data = projectAndPayment.getSumFundingMoney();

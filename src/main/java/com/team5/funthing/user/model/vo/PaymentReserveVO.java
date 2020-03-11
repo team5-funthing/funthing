@@ -25,11 +25,25 @@ public class PaymentReserveVO {
 	private RewardVO reward;
 	private RewardSelectionVO rewardSelection;
 	
+//	계산할때필요한 항목들
 	private String sumDate; 
 	private int sumFundingMoney;
+	private String todayDate;
 	
 	
 	private List<RewardSelectionVO> rewardSelectionList;
+
+
+	
+	
+	public String getTodayDate() {
+		return todayDate;
+	}
+
+
+	public void setTodayDate(String todayDate) {
+		this.todayDate = todayDate;
+	}
 
 
 	public int getOrderNo() {
