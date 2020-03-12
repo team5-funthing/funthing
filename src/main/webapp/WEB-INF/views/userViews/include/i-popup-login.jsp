@@ -73,7 +73,8 @@
 						
                     <div class="col-xl-12 kakao_login_btn-wrapper mt-3">
                         <a class="kakao_login_btn" href="javascript:loginWithKakao()">
-                            <img class="landscape" src="${pageContext.request.contextPath}/resources/user/img/apiBtn/kakaoLoginBtn/kakao_account_login_btn_large_wide.png"/>
+                            <img class="landscape" src="${pageContext.request.contextPath}/resources/user/img/apiBtn/kakaoLoginBtn/kakao_account_login_btn_large_wide.png" 
+                            style="height:55px;width:277.5px;"/>
                         </a>
                     </div>
                     
