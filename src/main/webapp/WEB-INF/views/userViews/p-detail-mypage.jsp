@@ -127,6 +127,11 @@
 		                                 				<h5><a href="javascript: return(0);" class="badge badge-primary m-1">펀딩중</a></h5>
 		                                 			
 		                                 			</c:when>
+		                                 			<c:when test="${myProject.funding eq 'e'.charAt(0) }">
+		                                 			
+		                                 				<h5><a href="javascript: return(0);" class="badge badge-warning m-1">펀딩종료</a></h5>
+		                                 			
+		                                 			</c:when>
 		                                 		</c:choose>
 			                                 	
 		                                 	</aside>

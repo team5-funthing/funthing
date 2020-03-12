@@ -348,10 +348,27 @@ $('.popover-dismiss').popover({
 })
 
 
+$(window).resize(function() {
+	resizeYoutube();
+});
+
+$(function() {
+	resizeYoutube();
+});
+
+function resizeYoutube() {
+	$("iframe").each(function() {
+		if (/^https?:\/\/www.youtube.com\/embed\//g.test($(this).attr("src"))) {
+			$(this).css("width", "100%");
+			$(this).css("height", Math.ceil(parseInt($(this).css("width")) * 480 / 854) + "px");
+		}
+	});
+} 
 
 // 소개컨텐츠 동영상 링크 업로드 부분
 $(document).on("click","#urlBtn",function(){
 
+	
 	var sourceCode = $('#urlVideo').val();
 
 	function replaceAll(sourceCode, oldChar, newChar){
@@ -363,6 +380,7 @@ $(document).on("click","#urlBtn",function(){
 
 	if(sourceCode != ""){
 		$("#toAppendIframeDiv").append(sourceCode);
+//		$("iframe").attr("src", sourceCode);
 		$("#projectIntroduceVideoInput").attr("value", sourceCode);
 
 		var removeUrlBtn = "<div class='input-group-append urlBtn-remove'><a class='btn fas fa-times fa-2x' type='button' id='urlBtn'></a></div>";

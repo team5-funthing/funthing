@@ -53,46 +53,74 @@
 				</div>
 			</div>
 
+			
+			
+
 			<article class="row d-flex justify-content-center">
 				<aside id="project-main-img" class="col-8">
-				
-					<ul class="nav mb-3" id="pills-tab" role="tablist">
-					  <li class="nav-item">
-					    <a class="nav-link active" id="pills-image-tab" data-toggle="pill" href="#pills-image" role="tab" aria-controls="pills-image" aria-selected="true">소개 이미지</a>
-					  </li>
-					  <li class="nav-item">
-					    <a class="nav-link" id="pills-video-tab" data-toggle="pill" href="#pills-video" role="tab" aria-controls="pills-video" aria-selected="false">소개 영상</a>
-					  </li>
-					</ul>
+					<nav>
+					    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+					   		<a class="nav-item nav-link" id="nav-images-tab" data-toggle="tab" href="#nav-images" role="tab" aria-controls="nav-images" aria-selected="true">소개 이미지</a>
+				            <a class="nav-item nav-link active" id="nav-video-tab" data-toggle="tab" href="#nav-video" role="tab" aria-controls="nav-video" aria-selected="false" >소개 영상</a>
+				            
+					    
+					    </div>
+					</nav>
 					
-					<div class="tab-content" id="pills-tabContent">
-					
-						  <div class="tab-pane fade show active" id="pills-image" role="tabpanel" aria-labelledby="pills-image-tab">
-						  
-						  </div>
-						  <div class="tab-pane fade" id="pills-video" role="tabpanel" aria-labelledby="pills-video-tab">
-								<c:if test="${projectPreview.projectIntroduceVideo ne null }">
-									${projectPreview.projectIntroduceVideo }
-								</c:if>
-						  </div>
-					</div>
-					
-					<script>
-					
-						$(document).ready(function (){
-							var videoCheck = ${ projectPreview.projectIntroduceVideo eq null };
+					<div class="tab-content p-3" id="nav-tabContent">
+					    <div class="tab-pane fade show active" id="nav-images" role="tabpanel" aria-labelledby="nav-images-tab">
+					  		
+							<div id="carouselIntroduceImages" class="carousel slide">
 							
-							if(videoCheck){
+							    <ol class="carousel-indicators">
+							        <li data-target="#carouselIntroduceImages" data-slide-to="0" class="active"></li>
+							        <li data-target="#carouselIntroduceImages" data-slide-to="1"></li>
+							        <li data-target="#carouselIntroduceImages" data-slide-to="2"></li>
+							    </ol>
+								<div class="carousel-inner">
+									<c:forEach var="projectIntroduceImage" items="${projectIntroduceImageList }" varStatus="cnt">
+										<c:choose>
+											<c:when test="${cnt.first }">
+												<div class="carousel-item active">
+													<div class="thumbnail-wrap">
+							                            <div class="thumbnail">
+							                                <div class="centered">
+							                                	<img src="${projectIntroduceImage.projectIntroduceImage }" class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+							                                </div>
+							                            </div>
+							                        </div>
+												</div>
+											</c:when>
+											<c:otherwise>
+												<div class="carousel-item">
+													<div class="thumbnail-wrap">
+							                            <div class="thumbnail">
+							                                <div class="centered">
+							                                	<img src="${projectIntroduceImage.projectIntroduceImage }" class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+							                                </div>
+							                            </div>
+							                        </div>
+												</div>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
 									
-									$("#pills-video-tab").attr("class", "disabled");
-									
-							}
-						});
-					 	
-					</script>
-
+								</div>
+								<a class="carousel-control-prev" href="#carouselIntroduceImages" role="button" data-slide="prev">
+								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								<span class="sr-only">Previous</span>
+								</a>
+								<a class="carousel-control-next" href="#carouselIntroduceImages" role="button" data-slide="next">
+									<span class="carousel-control-next-icon" aria-hidden="true"></span>
+									<span class="sr-only">Next</span>
+								</a>
+							</div>		
+					    </div>
+					    <div class="tab-pane fade" id="nav-video" role="tabpanel" aria-labelledby="nav-video-tab">
+							${previewProject.projectIntroduceVideo }
+					    </div>
+					</div>			
 				</aside>
-				
 				<aside id="project-details-info"
 					class="col-4 align-items-start d-flex flex-column bd-highlight">
 					
