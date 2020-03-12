@@ -93,7 +93,7 @@
 						</div>
 					</div>
 					<hr>
-<input type="hidden" id="ok123" value="${ok }">
+					<input type="hidden" id="ok123" value="${ok }">
 			 		     <script>
 			 		    $(document).ready(function(){
 			 		   var ok=	document.getElementById("ok123").value;
@@ -136,45 +136,63 @@
                        });
 					  }
                        </script> 
-					<form id ="updateForm" name="updateForm" action = "updateMember.udo" method="post">
-					<div class="form-row">
+					<form id ="updateForm" name="updateForm" action="updateMember.udo" method="post">
+						<div class="form-row">
+							<div class="col-md-4 mb-3">
+								<label for="validationDefault01">이메일</label> 
+								<input type="text" class="form-control" id="email"  onfocus="this.placeholder = ''"	onblur="this.placeholder = '현재 비밀번호를 입력하세요'"
+									name="email" value="${member.email}" style="width:250px;" required readonly>
+							</div>
+						</div>
+						<div class="form-row">
 							<div class="col-md-4 mb-3">
 								<label for="validationDefault01">현재 비밀번호</label> <input
 									type="password" class="form-control" id="nowPassword" 
 									placeholder="현재 비밀번호를 입력하세요" onfocus="this.placeholder = ''"	onblur="this.placeholder = '현재 비밀번호를 입력하세요'"
-									name="nowPassword" required>
+									name="nowPassword" style="width:250px;" required>
 							</div>
 						</div>
+						<div id="nowPasswordCheck"></div>
 						<div class="form-row">
 							<div class="col-md-4 mb-3">
 								<label for="validationDefault01">비밀번호 변경하기</label> <input
 									type="password" class="form-control" id="password" 
 									placeholder="8자리이상 입력하세요" onfocus="this.placeholder = ''"	onblur="this.placeholder = '8자리이상 입력하세요'"
-									name="password" required>
+									name="password" style="width:250px;" required>
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="col-md-4 mb-3">
 								<label for="validationDefault01">비밀번호 확인</label> <input
 									type="password" class="form-control" id="passwordcheck"
-									placeholder="8자리이상 입력하세요" onfocus="this.placeholder = ''"	onblur="this.placeholder = '8자리이상 입력하세요'"
+									placeholder="8자리이상 입력하세요" style="width:250px;" onfocus="this.placeholder = ''"	onblur="this.placeholder = '8자리이상 입력하세요'"
 									required>
 							</div>
 						</div>
+						<div id="encodedPasswordCheck"></div>
+						<div class="form-row">
+							<div class="col-md-4 mb-3">
+								<label for="validationDefault01">이름</label> <input
+									type="text" class="form-control" id="name" 
+									placeholder="이름을 입력해주세요" onfocus="this.placeholder = ''"	onblur="this.placeholder = '현재 비밀번호를 입력하세요'"
+									name="name" style="width:250px;" value="${member.name}" required >
+							</div>
+						</div>
+						<div id="nameInputCheck"></div>
 						<div class="form-row">
 							<div class="col-md-4 mb-3">
 								<label for="validationDefault01">연락처</label> <input type="text"
 								placeholder=" - 없이 입력해주세요" onfocus="this.placeholder = ''"	onblur="this.placeholder = ' - 없이 입력해주세요'"
-									class="form-control" id="phone" name="phone" required>
+									class="form-control" style="width:250px;" id="phone" name="phone" value="${member.phone}" required>
 							</div>
 						</div>
-
+						<div id="phoneInputCheck"></div>
 
 						<div class="form-row">
 							<div class="form-group mb-3 w-100">
 								<label for="exampleFormControlTextarea1" class="mr-1">소개</label>
 								<textarea class="form-control" id="introduce" name="introduce" form="updateForm"
-									rows="3"></textarea>
+									rows="3">${member.introduce}</textarea>
 							</div>
 						</div>
 
@@ -209,7 +227,7 @@
 function cancel(){
 	location.href="mypage.udo";
 }	
-	
+//회원정보 삭제
 function delMember(){
 	var pwData = {"pw":document.getElementById("nowPassword").value};
   $.ajax({
@@ -231,6 +249,7 @@ function delMember(){
   });
 }
 
+//회원정보 가져오기
 function updateMember(){
 	var pwData = {"pw":document.getElementById("nowPassword").value};
   $.ajax({
@@ -239,22 +258,38 @@ function updateMember(){
 		data : pwData,
 		success : function(data) {
 			if (data == '1') {
+				$("#nowPasswordCheck").empty();
+				$("#nowPasswordCheck").append("비밀번호가 일치합니다.").css('color','MediumSeaGreen').css('font-size','80%');
 				if(document.getElementById("password").value==document.getElementById("passwordcheck").value){
+					$("#encodedPasswordCheck").empty();
+					$("#encodedPasswordCheck").append("변경할 비밀번호가 일치합니다.").css('color','MediumSeaGreen').css('font-size','80%');
 					if(document.getElementById("password").value.length >= 8){
-						if(!document.getElementById("phone").value.test("-") || document.getElementById("phone").value==null ){
+						if(!document.getElementById("phone").value.test("-")){
 							document.updateForm.submit();
 						}else{
-							alert("전화번호를 입력하실 때  '-'을 제외하고 입력해 주세요.");
+							$("#phoneInputCheck").empty();
+							$("#phoneInputCheck").append("전화번호를 입력하실 때  '-'을 제외하고 입력해 주세요.").css('color','Tomato').css('font-size','80%');
+							$("phone").focus();
+							return;
 						}
 					}else{
-						alert("비밀번호는 8자리 이상 입력해 주세요.");
+						$("#encodedPasswordCheck").empty();
+						$("#encodedPasswordCheck").append("비밀번호는 8자리 이상 입력해 주세요.").css('color','Tomato').css('font-size','80%');
+						$("#passwordcheck").focus();
+						return;
 					}
 				}else{
-					alert("변경할 비밀번호가 일치하지 않습니다.");
+					$("#encodedPasswordCheck").empty();
+					$("#encodedPasswordCheck").append("변경할 비밀번호가 일치하지 않습니다.").css('color','Tomato').css('font-size','80%');
+					$("#passwordcheck").focus();
+					return;
 				}
 				
 			} else {
-				alert("정보 수정을 위해서는 현재 비밀번호를 정확히 입력해 주세요.");
+				$("#nowPasswordCheck").empty();
+				$("#nowPasswordCheck").append("정보 수정을 위해서는 현재 비밀번호를 정확히 입력해 주세요.").css('color','Tomato').css('font-size','80%');
+				$("#nowPassword").focus();
+				return;
 			}
 		},
 		error : function() {

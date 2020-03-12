@@ -8,6 +8,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,10 +51,20 @@ public class MemberController2 {
 	
 	@RequestMapping(value = "updateMember.udo",method= RequestMethod.POST)
 		public String updateProfile(MemberVO vo,HttpSession session,Model model) {
+		//form으로부터 받아온 정보를 확인한다.
 		System.out.println(vo.toString());
-		MemberVO vo2 = (MemberVO) session.getAttribute("memberSession");
-		vo.setEmail(vo2.getEmail());
+		System.out.println("updateMember.udo 변경하려는 비밀번호 : " + vo.getPassword());
+		
+		//변경을 위해 입력한 비밀번호를 암호화한다.
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String encodedPassword = encoder.encode(vo.getPassword());
+		System.out.println("updateMember.udo 암호화된 비밀번호 : " + encodedPassword);
+		
+		//암호화한 비밀번호를 담은 객체를 통하여 회원정보를 변경한다.
+		vo.setPassword(encodedPassword);
 		updateMemberService.updateMember(vo);
+		//기존의 비밀번호에 대한 세션을 지우고 변경된 정보의 세션을 저장한다.
+		session.removeAttribute("memberSession");
 		session.setAttribute("memberSession", vo);
 		model.addAttribute("ok","1");
 		return "f-update-profile";
@@ -61,13 +72,19 @@ public class MemberController2 {
 	
 	@RequestMapping(value="updateCheck.udo",method=RequestMethod.POST)
 	public String pwCheck(String pw,Model model,MemberVO vo,HttpSession session){
+		//현재 db에 등록되어있는 비밀번호와 세션을 받아온다.
 		System.out.println("pw :"+pw);
-		MemberVO vo2 = (MemberVO) session.getAttribute("memberSession");
-		vo.setEmail(vo2.getEmail());
-		System.out.println("vo :"+vo.toString());
-		getMemberService.getMember(vo);
-		System.out.println("getMemberService.getMember(vo) :"+vo.toString());
-		if(getMemberService.getMember(vo).getPassword().equals(pw)) {
+		MemberVO insertedMember = (MemberVO) session.getAttribute("memberSession");
+		System.out.println("updateCheck.udo 세션으로 부터 얻어온 비밀번호 : " + insertedMember.getPassword());
+		
+		//세션의 비밀번호로부터 Member의 정보를 받아온다.
+//		vo.setEmail(insertedMember.getEmail());
+//		System.out.println("vo :"+vo.toString());
+//		getMemberService.getMember(vo);
+//		System.out.println("getMemberService.getMember(vo) :"+vo.toString());
+		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		if(encoder.matches(pw, insertedMember.getPassword())) {
 			model.addAttribute("result","1");
 			System.out.println("리턴으로 1감");
 		}else {
