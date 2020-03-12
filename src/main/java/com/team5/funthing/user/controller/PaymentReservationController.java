@@ -176,11 +176,7 @@ public class PaymentReservationController {
 	
 	
 	@RequestMapping(value = "paymentCancel.udo", method = RequestMethod.POST)
-	public String attemptPaymentReserveByKaKaoPay(	PaymentReserveVO prvo,
-													DeliveryAddressVO davo) {
-	
-		
-		
+	public String attemptPaymentReserveByKaKaoPay(	PaymentReserveVO prvo, DeliveryAddressVO davo) {
 		kakaoPayService.kakaoPayCancel(prvo);
 		
 		return "redirect: paymentReservationCheckList.udo";
