@@ -69,7 +69,7 @@
                            <a class="nav-item nav-link" id="nav-like-prj-list-tab" data-toggle="tab" 
                               href="#nav-like-prj-list" role="tab" aria-controls="nav-like-prj-list" aria-selected="false">좋아요  프로젝트</a>
                            <a class="nav-item nav-link" id="nav-like-prj-list-tab" data-toggle="tab" 
-                           	  href="#nav-reserved-prj-list" role="tab" aria-controls="nav-like-prj-list" aria-selected="false">예정중인 관심 프로젝트</a>
+                           	  href="#nav-reserved-prj-list" role="tab" aria-controls="nav-like-prj-list" aria-selected="false">준비중인 관심 프로젝트</a>
                            <a class="nav-item nav-link" id="nav-like-prj-list-tab" data-toggle="tab" href="#nav-report-prj-list" role="tab"
                               aria-controls="nav-report-prj-list" aria-selected="false">신고한 프로젝트</a>
                         </div>
@@ -222,14 +222,12 @@
                                     </div>
                                     <div class="col-8 d-flex justify-content-center ">
                                         <div class="pt-5 pb-5 ">
-                                            <div >
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                                            </div>
-                                            <div class="h3">보낸 메시지가 없습니다</div>
+                                           
+                                            <div class="h3">'만든' 프로젝트가 없습니다</div>
                                             <div class="h5">
 
-					                                                프로젝트 페이지에서 '문의하기' 버튼을 눌러
-					                                                메시지를 보낼 수 있습니다.
+					                                                상단 메뉴바에서 '프로젝트 올리기' 버튼을 눌러
+					                                                회원님의 아이디어를 제안할 수 있습니다.
                                                 
                                             </div>
                                         </div>
@@ -297,14 +295,12 @@
                                     </div>
                                     <div class="col-8 d-flex justify-content-center ">
                                         <div class="pt-5 pb-5 ">
-                                            <div >
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                                            </div>
-                                            <div class="h3">보낸 메시지가 없습니다</div>
+                                          
+                                            <div class="h3">'후원한' 프로젝트가 없습니다</div>
                                             <div class="h5">
 
-					                                                프로젝트 페이지에서 '문의하기' 버튼을 눌러
-					                                                메시지를 보낼 수 있습니다.
+					                                                프로젝트 페이지에서 '후원하기' 버튼을 눌러
+					                                                해당프로젝트의 리워드를 받아보실 수 있습니다.
                                                 
                                             </div>
                                         </div>
@@ -511,14 +507,12 @@
                                     </div>
                                     <div class="col-8 d-flex justify-content-center ">
                                         <div class="pt-5 pb-5 ">
-                                            <div >
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                                            </div>
-                                            <div class="h3">보낸 메시지가 없습니다</div>
+                                           
+                                            <div class="h3">'예약'한 프로젝트가 없습니다</div>
                                             <div class="h5">
 
-					                                                프로젝트 페이지에서 '문의하기' 버튼을 눌러
-					                                                메시지를 보낼 수 있습니다.
+					                                                프로젝트 페이지에서 '예약하기' 버튼을 눌러
+					                                                프로젝트가 시작되는 날짜를 받아보실 수 있습니다.
                                                 
                                             </div>
                                         </div>
@@ -588,14 +582,12 @@
                                     </div>
                                     <div class="col-8 d-flex justify-content-center ">
                                         <div class="pt-5 pb-5 ">
-                                            <div >
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                                            </div>
-                                            <div class="h3">보낸 메시지가 없습니다</div>
+                                           
+                                            <div class="h3">'신고'한 프로젝트가 없습니다</div>
                                             <div class="h5">
 
-					                                                프로젝트 페이지에서 '문의하기' 버튼을 눌러
-					                                                메시지를 보낼 수 있습니다.
+					                                                프로젝트 페이지에서 '신고하기' 버튼을 눌러
+					                                                해당 프로젝트에서 발생한 문제들을 공유하고 알릴 수 있습니다.
                                                 
                                             </div>
                                         </div>
