@@ -108,6 +108,7 @@
                                 <tr>
                                     <th style="width: 10%;">번호</th>
                                     <th >프로젝트 신고항목</th>
+                                    <th>신고 프로젝트명</th>
                                     <th style="width: 20%;">아이디</th>
                                     <th style="width: 10%;">날짜</th>
                                 </tr>
@@ -122,6 +123,7 @@
                                     <td>
                                     <a href="getReport.ado?reportNo=${list.reportNo}">${list.reasonSelect}</a>
                                     </td>
+                                    <td>${list.project.projectTitle}</td>
                                     <td>${list.email}</td>
                                     <td>${list.reportDate}</td>
                                 </tr>
@@ -131,11 +133,11 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>번호</th>
-                                    <th>프로젝트 번호</th>
-                                    <th>아이디</th>
-                                    <th>날짜</th>
-                                 
+                                   <th style="width: 10%;">번호</th>
+                                    <th >프로젝트 신고항목</th>
+                                    <th>신고 프로젝트명</th>
+                                    <th style="width: 20%;">아이디</th>
+                                    <th style="width: 10%;">날짜</th>
                                 </tr>
                             </tfoot>
                         </table>

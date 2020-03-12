@@ -6,8 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.team5.funthing.user.model.vo.AlarmVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.model.vo.ReportVO;
+import com.team5.funthing.user.service.AlarmService.InsertProjectReportAlarmService;
 import com.team5.funthing.user.service.projectService.GetProjectService;
 import com.team5.funthing.user.service.reportService.GetReportService;
 import com.team5.funthing.user.service.reportService.InsertReportService;
@@ -25,28 +27,33 @@ public class ReportController {
 	@Autowired
 	private GetProjectService getProjectService;
 	
+	//alarm Service
+	@Autowired
+	private InsertProjectReportAlarmService insertProjectReportAlarmService;
+	
 	@RequestMapping("insertReport.udo")
-	public String insertReport(RedirectAttributes redirectAttribute, ReportVO vo, Model model) {
+	public String insertReport(RedirectAttributes redirectAttribute, AlarmVO avo, ReportVO vo, Model model) {
 		insertReportService.insertReport(vo);
 		
 		ProjectVO pvo = new ProjectVO();
 		pvo.setProjectNo(vo.getProjectNo());
 		pvo = getProjectService.getProject(pvo);
 		
+		avo.setReadConfirm('n');
+		avo.setProjectNo(pvo.getProjectNo());
+		avo.setReceiveId("admin@funthing.com");
+		avo.setDetailAlarmType("신고");
+		avo.setAlarmType(pvo.getProjectTitle() + "프로젝트 신고");
+		insertProjectReportAlarmService.insertProjectReportAlarm(avo);
+		
 		redirectAttribute.addAttribute("projectNo", vo.getProjectNo());
 		return "redirect:projectDetails.udo";
 	}
 	
 	@RequestMapping("getReport.ado")
-	public String getReport(ReportVO vo, ProjectVO pvo, Model model) {
-		
-		ReportVO report = getReportService.getReport(vo);
+	public String getReport(ReportVO vo, Model model) {
 
-		pvo.setProjectNo(report.getProjectNo());
-		ProjectVO project = getProjectService.getProject(pvo);
-	
-		model.addAttribute("projectTitle", project.getProjectTitle());
-		model.addAttribute("report", report);
+		model.addAttribute("report", getReportService.getReport(vo));
 		return "p-report-detail";
 	}
 	
