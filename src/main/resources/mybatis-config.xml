@@ -100,7 +100,6 @@
 		<mapper resource="mappers/adminNoticeBoard-mapper.xml"/>
 		<mapper resource="mappers/adminLogin-mapper.xml"/>
  
- 		<mapper resource="mappers/adminReport-mapper.xml"/>
  		<mapper resource="mappers/adminMemberManagement-mapper.xml"/>
  		<mapper resource="mappers/adminProjectCheck-mapper.xml" />
 

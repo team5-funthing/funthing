@@ -1,4 +1,4 @@
-package com.team5.funthing.admin.service.adminReportService;
+package com.team5.funthing.user.service.reportService;
 
 import java.util.List;
 
@@ -6,6 +6,6 @@ import com.team5.funthing.user.model.vo.ReportVO;
 
 public interface GetReportListService {
 
-	List<ReportVO> getReportList(ReportVO vo);
+	public List<ReportVO> getReportList(ReportVO vo);
 	
 }

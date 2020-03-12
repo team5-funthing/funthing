@@ -67,7 +67,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">report</h4>
+                        <h4 class="page-title">프로젝트 신고확인</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
@@ -107,7 +107,8 @@
                             <thead>
                                 <tr>
                                     <th style="width: 10%;">번호</th>
-                                    <th >프로젝트 번호</th>
+                                    <th >프로젝트 신고항목</th>
+                                    <th>신고 프로젝트명</th>
                                     <th style="width: 20%;">아이디</th>
                                     <th style="width: 10%;">날짜</th>
                                 </tr>
@@ -120,8 +121,9 @@
                                 <tr>
                                     <td>${list.reportNo}</td>
                                     <td>
-                                    <a href="http://localhost:8080/funthing/getReport.ado?reportNo=${list.reportNo}&projectNo=${list.projectNo}">${list.reasonSelect} 관련 신고</a>
+                                    <a href="getReport.ado?reportNo=${list.reportNo}">${list.reasonSelect}</a>
                                     </td>
+                                    <td>${list.project.projectTitle}</td>
                                     <td>${list.email}</td>
                                     <td>${list.reportDate}</td>
                                 </tr>
@@ -131,11 +133,11 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>번호</th>
-                                    <th>프로젝트 번호</th>
-                                    <th>아이디</th>
-                                    <th>날짜</th>
-                                 
+                                   <th style="width: 10%;">번호</th>
+                                    <th >프로젝트 신고항목</th>
+                                    <th>신고 프로젝트명</th>
+                                    <th style="width: 20%;">아이디</th>
+                                    <th style="width: 10%;">날짜</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -173,34 +175,7 @@
         <!-- ============================================================== -->
         <!-- All Jquery -->
         <!-- ============================================================== -->
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/jquery/dist/jquery.min.js"></script>
-        <!-- Bootstrap tether Core JavaScript -->
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/popper.js/dist/umd/popper.min.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/sparkline/sparkline.js"></script>
-        <!--Wave Effects -->
-        <script src="${pageContext.request.contextPath }/resources/admin/dist/js/waves.js"></script>
-        <!--Menu sidebar -->
-        <script src="${pageContext.request.contextPath }/resources/admin/dist/js/sidebarmenu.js"></script>
-        <!--Custom JavaScript -->
-        <script src="${pageContext.request.contextPath }/resources/admin/dist/js/custom.min.js"></script>
-        <!--This page JavaScript -->
-        <!-- <script src="dist/js/pages/dashboards/dashboard1.js"></script> -->
-        <!-- Charts js Files -->
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/excanvas.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.pie.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.time.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.stack.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.crosshair.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/dist/js/pages/chart/chart-page-init.js"></script>
-
-
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/multicheck/jquery.multicheck.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/DataTables/datatables.min.js"></script>
+        
         <script>
             /****************************************
              *       Basic Table                   *

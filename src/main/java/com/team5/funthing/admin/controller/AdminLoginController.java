@@ -26,7 +26,7 @@ public class AdminLoginController {
 	}
 	
 	@RequestMapping("LoginCheck.ado")
-	public String LoginCheck(AdminMemberVO vo,HttpSession session,Model model) {
+	public String LoginCheck(AlarmVO avo, AdminMemberVO vo,HttpSession session,Model model) {
 		String getPassword = null;
 		System.out.println("로그인 시작");
 		if(getAdminPasswordService.getAdminPassword(vo)==null) {
@@ -35,7 +35,19 @@ public class AdminLoginController {
 			getPassword = getAdminPasswordService.getAdminPassword(vo);
 			if(getPassword.equals(vo.getAdminPassword())) {
 				session.setAttribute("adminSessionEmail", vo.getAdminId());
-				return "p-index";
+				
+				avo.setReadConfirm('n');
+				avo.setReceiveId(vo.getAdminId());
+				if(getNewestAlarmListService.getNewestAlarmList(avo).isEmpty()) {
+					System.out.println(getNewestAlarmListService.getNewestAlarmList(avo));
+					System.out.println("Aaaaaa");
+					session.setAttribute("alarmContain", "알람 없음");
+				}else {
+					System.out.println("bbbbb");
+					session.setAttribute("alarmContain", "알람 있음");
+				}
+//				System.out.println(getNewestAlarmListService.getNewestAlarmList(avo));
+				return "redirect:adminIndex.ado";
 			}else {
 				model.addAttribute("loginResult", "비밀번호가 일치하지 않습니다.");
 			}

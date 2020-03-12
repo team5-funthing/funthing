@@ -56,18 +56,6 @@
                         <!-- ============================================================== -->
                         <!-- create new -->
                         <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="d-none d-md-block">리스트 <i class="fa fa-angle-down"></i></span>
-                                <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">리스트1</a>
-                                <a class="dropdown-item" href="#">리스트2</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">리스트3</a>
-                            </div>
-                        </li>
                         <!-- ============================================================== -->
                         <!-- Search -->
                         <!-- ============================================================== -->
@@ -85,12 +73,13 @@
                         <!-- ============================================================== -->
                         <!-- Comment -->
                         <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown" style="width:150px;">
                             <a id="bell" class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
                             <i class="mdi mdi-bell font-24"></i>
-                            </a>
-                            <div id="alarmList" class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            </div>
+                            </a>   
+                            <span id="showState" style="width:75px;">${alarmContain}</span>
+	                            <div id="alarmList" style="width:200px;" class="dropdown-menu" aria-labelledby="navbarDropdown">
+	                            </div>
                         </li>
                         <!-- ============================================================== -->
                         <!-- End Comment -->
@@ -99,9 +88,11 @@
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="${pageContext.request.contextPath}/resources/admin/assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            	<img src="${pageContext.request.contextPath}/resources/admin/assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31">
+                            </a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated">
-                                <h3><div align="center">${sessionScope.adminSessionEmail}</div></h3>
+                                <h4><div align="center">${sessionScope.adminSessionEmail}</div></h4>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="Logout.ado"><i class="fa fa-power-off m-r-5 m-l-5"></i> 로그아웃</a>
                                 <div class="dropdown-divider"></div>
@@ -109,6 +100,7 @@
                             </div>
                         </li>
                     </ul>
+                    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
                     <script>
                     	$(document).ready(function(){
                     		var sendData = {
@@ -121,7 +113,15 @@
                         			url:"getAdminAlarmList.ado",
                         			data:sendData,
                         			success:function(data){
-                        				console.log(data);
+                        				console.log(data.trim());
+                        				if(data.trim()==''){
+                        					$("#showState").empty();
+                        					$("#showState").append("알람 없음");
+                        				}else{
+                        					$("#showState").empty();
+                        					$("#showState").append("알람 있음");
+                        				}
+                        				$("#alarmList").empty();
                         				$("#alarmList").append(data);
                         			},
                         			error:function(){
@@ -134,7 +134,6 @@
                 </div>
             </nav>
         </header>
-        <script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
         <!-- ============================================================== -->
         <!-- End Topbar header -->
         <!-- ============================================================== -->

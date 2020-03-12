@@ -3,16 +3,14 @@ package com.team5.funthing.user.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team5.funthing.user.model.vo.AlarmVO;
 import com.team5.funthing.user.service.AlarmService.GetNewestAlarmListService;
 import com.team5.funthing.user.service.AlarmService.UpdateReadConfirmAlarmService;
@@ -27,13 +25,13 @@ public class AlarmController {
 	
 	
 	@RequestMapping("alarmPaging.udo")
-	public String alarmPaging(AlarmVO vo, HttpServletRequest request) {
+	public String alarmPaging(AlarmVO avo, HttpServletRequest request, HttpSession session) {
 		
 		String requestUrl = null;
-		vo.setReadConfirm('y');
-		updateReadConfirmAlarmService.updateReadConfirmAlarm(vo);
+		avo.setReadConfirm('y');
+		updateReadConfirmAlarmService.updateReadConfirmAlarm(avo);
 		
-		String AlarmType = vo.getAlarmType();
+		String AlarmType = avo.getAlarmType();
 		System.out.println(AlarmType);
 		
 		if(AlarmType.contains("거부")) {
@@ -46,6 +44,8 @@ public class AlarmController {
 			requestUrl = "redirect:getProjectCheckList.ado";
 		}else if(AlarmType.contains("결과")) {
 			requestUrl = "redirect:mypage.udo";
+		}else if(AlarmType.contains("신고")) {
+			requestUrl = "redirect:projectReportCheck.ado";
 		}
 		
 		return requestUrl;

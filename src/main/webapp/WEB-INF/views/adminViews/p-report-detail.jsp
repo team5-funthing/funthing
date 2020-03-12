@@ -67,7 +67,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">report_detail</h4>
+                        <h4 class="page-title">프로젝트 신고확인</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
@@ -103,7 +103,7 @@
                         <table style="margin-bottom: 1%;margin-top: 1%;">
                             <tr>
                                 <th >신고 프로젝트명 </th>
-                                <td style="padding-top: 2%; padding-bottom: 2%;"><input type="text" size="50%;" readonly value="${projectVO.projectTitle}"></td>
+                                <td style="padding-top: 2%; padding-bottom: 2%;"><input type="text" size="50%;" readonly value="${report.project.projectTitle}"></td>
                             </tr>
                             <tr>
                                 <th>신고자</th>
@@ -115,16 +115,14 @@
                             </tr>
 	
                         </table>
-                        <div align="">
-                            <textarea style="width: 80%; height: 150px; overflow: auto; padding: 10px; white-space:pre-wrap; resize: none;"  readonly>
-                            ${report.reason}
-                            </textarea>
+                        <div>
+                            <textarea style="width: 80%; height: 150px; overflow: auto; padding: 10px; white-space:pre-wrap; resize: none;"  readonly>${report.reason}</textarea>
                         </div>
                        
                   
                         <div align="center" style="padding-top: 2%;">
                         	
-                            <a href="http://localhost:8080/funthing/getReportList.ado"><input type="button" value="뒤로"></a>
+                            <a href="projectReportCheck.ado"><input type="button" value="뒤로"></a>
                         </div>
                        
 
@@ -161,42 +159,6 @@
         <!-- ============================================================== -->
         <!-- All Jquery -->
         <!-- ============================================================== -->
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/jquery/dist/jquery.min.js"></script>
-        <!-- Bootstrap tether Core JavaScript -->
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/popper.js/dist/umd/popper.min.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/sparkline/sparkline.js"></script>
-        <!--Wave Effects -->
-        <script src="${pageContext.request.contextPath }/resources/admin/dist/js/waves.js"></script>
-        <!--Menu sidebar -->
-        <script src="${pageContext.request.contextPath }/resources/admin/dist/js/sidebarmenu.js"></script>
-        <!--Custom JavaScript -->
-        <script src="${pageContext.request.contextPath }/resources/admin/dist/js/custom.min.js"></script>
-        <!--This page JavaScript -->
-        <!-- <script src="dist/js/pages/dashboards/dashboard1.js"></script> -->
-        <!-- Charts js Files -->
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/excanvas.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.pie.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.time.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.stack.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.crosshair.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/dist/js/pages/chart/chart-page-init.js"></script>
-
-
-
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
-    <script src="${pageContext.request.contextPath }/resources/admin/dist/js/pages/mask/mask.init.js"></script>
-    <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/select2/dist/js/select2.full.min.js"></script>
-    <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/select2/dist/js/select2.min.js"></script>
-    <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/jquery-asColor/dist/jquery-asColor.min.js"></script>
-    <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/jquery-asGradient/dist/jquery-asGradient.js"></script>
-    <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/jquery-asColorPicker/dist/jquery-asColorPicker.min.js"></script>
-    <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/jquery-minicolors/jquery.minicolors.min.js"></script>
-    <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-    <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/quill/dist/quill.min.js"></script>
     <script>
         //***********************************//
         // For select 2
