@@ -39,6 +39,8 @@ public class AdminProjectCheckController {
 		
 		ProjectVO projectCheck = getProjectCheckService.getProjectCheck(vo);
 		
+		System.out.println(projectCheck.toString());
+		
 		String videoTag = projectCheck.getProjectIntroduceVideo();
 		String modifyVideoTag = videoTag.replace(videoTag.substring(15, 18),"520").replace(videoTag.substring(28, 31), "310");
 		projectCheck.setProjectIntroduceVideo(modifyVideoTag);

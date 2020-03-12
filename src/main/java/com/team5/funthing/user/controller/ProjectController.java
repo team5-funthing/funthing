@@ -2,6 +2,7 @@ package com.team5.funthing.user.controller;
 
 import java.beans.PropertyEditorSupport;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -154,15 +155,10 @@ public class ProjectController {
    @Autowired
    private CreatorVO creatorVO;
    
-   
-// ===================== �ƿ ���� =====================
-
    @Autowired
    private UploadUtil uploadUtil;
    
    
-   
-// ===================== initBinder ==================
    
    @InitBinder
    public void initBinder(WebDataBinder binder) {
@@ -175,8 +171,6 @@ public class ProjectController {
         });
    }
 
-// ===================== �޼��� =======================   
-   
    @RequestMapping(value="getAllFundingProjectList.udo", method = RequestMethod.GET)
    public String getAllFundingProjectList(Model model) {
       
@@ -195,8 +189,8 @@ public class ProjectController {
          return "p-index";
       }
       model.addAttribute("loginEmail", memberVO.getEmail()); 
-      return "p-start-project"; // �����ϱ� ������� �̵�����
-   } // �α��� �ÿ��� ����Ʈ ����� ��� �����ϵ��� �ϱ���� ���ǿ� ����� �� Ȯ�� �� ������ �̵�.
+      return "p-start-project";
+   }
    
    @RequestMapping(value="/getWritingProject.udo", method = RequestMethod.GET)
    public String getProject(   @RequestParam int currentProjectNo, 
@@ -204,8 +198,6 @@ public class ProjectController {
                         @RequestParam String creator,
                         AdminCategoryVO cvo, Model model) {
       
-	   
-	  System.out.println("�Ѿ�� �� : " + creator); 
 	  creatorVO.setCreator(creator);
 	  creatorVO = getCreatorService.getCreator(creatorVO);
 	  
@@ -228,11 +220,18 @@ public class ProjectController {
       if(!getRewardList.isEmpty()) {
          model.addAttribute("rewardList", getRewardList);
       }
+      SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+      String endDateStr = format.format(projectVO.getEndDate());
+      
+      System.out.println("endDateStr : " + endDateStr);
       
       model.addAttribute("categoryList", getCategoryListSerivce.getCategoryList(cvo));
       model.addAttribute("msg", msg);
       model.addAttribute("writingProject", projectVO);
-      model.addAttribute("writingCreator",creatorVO);
+      model.addAttribute("writingCreator", creatorVO);
+      model.addAttribute("endDateStr", endDateStr);
+      
+      
       
       return "f-create-project";
    }
@@ -261,10 +260,8 @@ public class ProjectController {
       
       model.addAttribute("basicProjectSetting", pvo);
       
-      return "f-create-project-basic"; // ����Ʈ �ۼ� ��
-   } // ����Ʈ ����� ���� ������� ����
-   
-   //����� ��Ͻÿ� ���� �߰��ϴ� �޼��� �߰��ؾ��Ѵ�()
+      return "f-create-project-basic";
+   }
   
    @RequestMapping(value = "/insertCreatorAndInsertProject.udo", method = RequestMethod.POST)
    public String insertProject(   
@@ -276,11 +273,9 @@ public class ProjectController {
                            AdminCategoryVO acvo,
                            Model model) throws Exception {
 
-      // ����Ʈ ��� ù ���۽ÿ��� ����
       ProjectVO checkVO = (ProjectVO)session.getAttribute("updatingProject");
 
 
-      // ��ΰ�ħ� �� ��쿡 �ݺ������ requestMapping �۾��� ����Ǵ� �κ�� �����ϱ� ��� �ڵ�
       if(checkVO == null) {
          pvo = insertProjectService.insertProject(pvo);
          creatorProfileImageUploader(creatorUploadImage, cvo);
@@ -296,7 +291,7 @@ public class ProjectController {
       model.addAttribute("writingProject", pvo);
 
       return "f-create-project";
-   } // ����Ʈ �ۼ� �����Ҷ� �޼��� 
+   } 
    
    @RequestMapping(value = "/updateCreatorAndInsertProject.udo", method = RequestMethod.POST)
    public String updateCreatorAndInsertProject(   @RequestParam(name = "creatorUploadImage", required = false)List<MultipartFile> creatorUploadImage,
@@ -309,11 +304,9 @@ public class ProjectController {
       
       System.out.println("cvo : " + cvo == null);
       
-      // ����Ʈ ��� ù ���۽ÿ��� ����
       ProjectVO checkVO = (ProjectVO)session.getAttribute("updatingProject");
 
 
-      // ��ΰ�ħ� �� ��쿡 �ݺ������ requestMapping �۾��� ����Ǵ� �κ�� �����ϱ� ��� �ڵ�
       if(checkVO == null) {
          pvo = insertProjectService.insertProject(pvo);
          creatorProfileImageUploader(creatorUploadImage, cvo);
@@ -329,9 +322,7 @@ public class ProjectController {
       model.addAttribute("writingProject", pvo);
 
       return "f-create-project";
-   } // ����Ʈ �ۼ� �����Ҷ� �޼��� 
-   
-   
+   }
    
    
    
@@ -345,19 +336,32 @@ public class ProjectController {
    }
    
    @RequestMapping(value = "/saveInputWritingProject.udo", method = RequestMethod.POST)
-   public String updateProject(   @RequestParam(name = "projectIntroduceImageNo", required = false)List<Integer> projectIntroduceImageNoList,
-                           @RequestParam(name = "uploadImage", required = false)List<MultipartFile> projectMainImageUpload,
-                           @RequestParam(name = "projectIntroduceImageUpload", required = false)List<MultipartFile> projectIntroduceImageUploadList,
-                           @RequestParam(name = "keywords", required = false)List<String> toAddKeywords,
-//                           @RequestParam(name = "creatorUploadImage", required = false)List<MultipartFile> creatorUploadImage,
-//                           @RequestParam(name = "businessUploadFile", required = false)List<MultipartFile> businessUploadFile,
-                           ProjectVO pvo,
-                           CreatorVO cvo,
-                           RedirectAttributes redirectAttributes,
-                           Model model) throws Exception { // ����Ʈ �ӽ����� �� ����Ǵ� �޼���
+   public String updateProject(    @RequestParam(name = "endDateStr", required = false)String endDateStr,
+		   						   @RequestParam(name = "projectIntroduceImageNo", required = false)List<Integer> projectIntroduceImageNoList,
+		                           @RequestParam(name = "uploadImage", required = false)List<MultipartFile> projectMainImageUpload,
+		                           @RequestParam(name = "projectIntroduceImageUpload", required = false)List<MultipartFile> projectIntroduceImageUploadList,
+		                           @RequestParam(name = "keywords", required = false)List<String> toAddKeywords,
+		//                         @RequestParam(name = "creatorUploadImage", required = false)List<MultipartFile> creatorUploadImage,
+		//                         @RequestParam(name = "businessUploadFile", required = false)List<MultipartFile> businessUploadFile,
+		                           ProjectVO pvo,
+		                           CreatorVO cvo,
+		                           RedirectAttributes redirectAttributes,
+		                           Model model) throws Exception {
 
-   
-	   System.out.println(cvo.toString());
+	   System.out.println("================ ��¥ ������ ===================");
+	   System.out.println(pvo.getEndDate());
+	   System.out.println("endDateStr : " + endDateStr);
+	   System.out.println("============== ======== ===================");
+	   
+	   
+	   if(pvo.getEndDate() == null) {
+
+		   SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		   java.util.Date endDate = format.parse(endDateStr);
+		   pvo.setEndDate(new Date(endDate.getTime()));
+	   }
+	   
+	   
       
       int ProjectNo = pvo.getProjectNo();
       
@@ -370,13 +374,13 @@ public class ProjectController {
       
       
       if(toAddKeywords != null) {
-         insertKeyword(toAddKeywords, keywordVO); //DB�� ��ο� Ű��� �߰� �޼���
-         deleteProjectKeyword(pvo); // ��� ����Ʈ�� �ִ� Ű���� ���
-         insertProjectKeyword(toAddKeywords, pvo.getProjectNo());//DB�� ����Ʈ�� ����Ǵ� Ű��带 �߰� �ϴ� �޼���
+         insertKeyword(toAddKeywords, keywordVO);
+         deleteProjectKeyword(pvo);
+         insertProjectKeyword(toAddKeywords, pvo.getProjectNo());
       }
       
       char checkResult = inputCompleteCheck(pvo);
-      pvo.setWriteStatus(checkResult); // �Է��ؾ��ϴ� �ۼ��κ� üũ
+      pvo.setWriteStatus(checkResult);
       updateProjectService.updateProject(pvo);
       
       if(checkResult == 'y') {
@@ -399,13 +403,8 @@ public class ProjectController {
       
       pvo = getProjectService.getProject(pvo);
       pvo.setStatus('w');
-      System.out.println("������� ����Ʈ ���� : " + pvo.toString());
-      updateProjectService.updateProject(pvo);
-      System.out.println("������� ����Ʈ ���� : " + pvo.toString());
-      
-      //////////////////////////////////////////////////////////////
 
-      avo.setAlarmType(pvo.getProjectTitle() + " �ɻ��û");
+      avo.setAlarmType(pvo.getProjectTitle() + " �˶� �޽��� ");
       avo.setReceiveId("admin@funthing.com");
       avo.setReadConfirm('n');
       avo.setProjectNo(pvo.getProjectNo());
@@ -414,19 +413,19 @@ public class ProjectController {
       insertProjectJudgeRequestAlarmService.insertProjectJudgeRequestAlarm(avo);
       
       redirectAttributes.addAttribute("creator", creator);
-      redirectAttributes.addAttribute("msg", "�ɻ��û� �Ϸ��Ͽ���ϴ�.");
+      redirectAttributes.addAttribute("msg", "");
       redirectAttributes.addAttribute("currentProjectNo", pvo.getProjectNo());
       return "redirect:getWritingProject.udo";
    }
    
    @RequestMapping(value="projectDetailsFromProjectBoard.udo", method = RequestMethod.GET)
    public String showProjectDetails(   @RequestParam int currentProjectNo,
-                              ProjectVO pvo, MemberActivityVO mavo, Model model) { // �̹���Ŭ���� ����Ʈ �� ������� �̵�
+                              ProjectVO pvo, MemberActivityVO mavo, Model model) {
       System.out.println("currentProjectNo : " + currentProjectNo);
       pvo.setProjectNo(currentProjectNo);
       getProjectDetails(pvo, mavo, model);
       
-      return "p-project-details"; //����Ʈ ��������
+      return "p-project-details";
    }
    
    @RequestMapping(value="projectDetails.udo", method = RequestMethod.GET)
@@ -434,18 +433,18 @@ public class ProjectController {
 		   							MemberActivityVO mavo, 
 		   							Model model,
 		   							@RequestParam(value="projectNo") String projectNo
-		   							) { // �̹���Ŭ���� ����Ʈ �� ������� �̵�
+		   							) { 
 	   mavo.setProjectNo(Integer.parseInt(projectNo));
 	   System.out.println(projectNo);
 	   getProjectDetails(pvo,mavo, model);
 	   
-	   return "p-project-details"; //����Ʈ ��������
+	   return "p-project-details";
    }
    
    
    
    @RequestMapping(value = "/showPreviewProject.udo", method = RequestMethod.POST)
-   public String showPreviewProject(ProjectVO pvo, Model model) throws Exception { // ����Ʈ �ӽ����� �� ����Ǵ� �޼���
+   public String showPreviewProject(ProjectVO pvo, Model model) throws Exception {
       pvo = getProjectService.getProject(pvo);
       int projectNo = pvo.getProjectNo();
       String creator = pvo.getCreator();
@@ -461,9 +460,18 @@ public class ProjectController {
       
       model.addAttribute("creator", creator);
       model.addAttribute("rewardList", rewardList);
+      
+      for(ProjectIntroduceImageVO projectIntroduceImage :projectIntroduceImageList) {
+    	  
+    	  System.out.println(projectIntroduceImage.getProjectIntroduceImage());
+      
+      }
+      
       model.addAttribute("projectIntroduceImageList", projectIntroduceImageList);
       model.addAttribute("previewProjectKeywordList", projectKeywordList);
       model.addAttribute("previewProject", pvo);
+      
+      System.out.println(pvo.toString());
       
       return "p-project-details-preview";
 
@@ -483,7 +491,7 @@ public class ProjectController {
             }
          }
    
-         //�Է��� Ű��� �߿� DB�� ����ϴ� Ű��尡 �ƴ϶�� Ű��� �߰�
+         
          if(!isExist) {
             kvo.setKeyword(toAddKeyword);
             insertKeywordService.insertKeyword(kvo);
@@ -525,8 +533,6 @@ public class ProjectController {
       return deleteCount;
    }
    
-   //=================== ��ε� �޼��� =================================
-
    public void projectIntroduceImageUploader(List<MultipartFile> toDoUploadList, ProjectIntroduceImageVO vo, int ProjectNo, List<Integer> toRemoveImageNoList) throws Exception {
       
       List<String> toRemoveFilePath = new ArrayList<String>();
@@ -550,7 +556,7 @@ public class ProjectController {
          toRemoveFilePath.add(0, null);
       }
       
-      if(!toDoUploadList.isEmpty()){ //����Ʈ �Ұ� �̹��� �����ε� ��� �� �� ��ε�, DB �߰� �۾� �޼���
+      if(!toDoUploadList.isEmpty()){
          
          List<String> tmpUploadList = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);
          insertProjectIntroduceImageService.insertProjectIntroduceImage(projectIntroduceImageVO, tmpUploadList);
@@ -569,8 +575,8 @@ public class ProjectController {
       
       List<String> toRemoveFilePath = new ArrayList<String>();
             
-      if(!toDoUploadList.get(0).isEmpty()) { // ��ε� ��Ų ������ �̹� ����ϴ� ��� ���� ����� �ٽ� ���� ��쿡 ���� �� �ִ� ��Ȳ ó��  
-         toRemoveFilePath.add(vo.getProjectMainImage()); //��ŵ� ���ϰ�θ� vo��ü���� ������
+      if(!toDoUploadList.get(0).isEmpty()) {
+         toRemoveFilePath.add(vo.getProjectMainImage());
          String voName = vo.getClass().getSimpleName();
          List<String> toSettingPath = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);
          if(toSettingPath == null) return;
@@ -585,8 +591,8 @@ public class ProjectController {
       List<String> toRemoveFilePath = new ArrayList<String>();
 
       
-      if(!toDoUploadList.get(0).isEmpty()) { // ��ε� ��Ų ������ �̹� ����ϴ� ��� ���� ����� �ٽ� ���� ��쿡 ���� �� �ִ� ��Ȳ ó��  
-         toRemoveFilePath.add(cvo.getCreatorProfileImage()); //��ŵ� ���ϰ�θ� vo��ü���� ������
+      if(!toDoUploadList.get(0).isEmpty()) {
+         toRemoveFilePath.add(cvo.getCreatorProfileImage());
          String voName = cvo.getClass().getSimpleName();
          List<String> toSettingPath = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);
          if(toSettingPath == null) return;
@@ -601,8 +607,8 @@ public class ProjectController {
       
       List<String> toRemoveFilePath = new ArrayList<String>();
 
-      if(!toDoUploadList.get(0).isEmpty()) { // ��ε� ��Ų ������ �̹� ����ϴ� ��� ���� ����� �ٽ� ���� ��쿡 ���� �� �ִ� ��Ȳ ó��  
-         toRemoveFilePath.add(cvo.getBusinessFileLink()); //��ŵ� ���ϰ�θ� vo��ü���� ������
+      if(!toDoUploadList.get(0).isEmpty()) {
+         toRemoveFilePath.add(cvo.getBusinessFileLink());
          String voName = "creatorBusinessFiles";
          List<String> toSettingPath = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);
          if(toSettingPath == null) return;
@@ -613,8 +619,8 @@ public class ProjectController {
       }
    }
    
-   // ���� OK - ��� �䱸��
-   public char inputCompleteCheck(ProjectVO vo) { //�ӽ� ����� ����Ʈ ��ĭ üũ
+   
+   public char inputCompleteCheck(ProjectVO vo) {
       
       System.out.println(vo.toString());
       
@@ -627,7 +633,7 @@ public class ProjectController {
             vo.getProjectTitle() == null || vo.getProjectTitle().equals("") ||
             vo.getProjectSubTitle() == null || vo.getProjectSubTitle().equals("") ||
             vo.getCategory() == null || vo.getCategory().equals("") ||
-//            vo.getStartDate() == null ||
+            vo.getStartDate() == null ||
             vo.getEndDate() == null ||
 
             vo.getProjectSummary() == null || vo.getProjectSummary().equals("") ||
@@ -635,7 +641,6 @@ public class ProjectController {
             vo.getProjectIntroduceVideo() == null || vo.getProjectIntroduceVideo().equals("") || 
             vo.getProjectStory() == null || vo.getProjectStory().equals("")
 //            vo.getInformationAgree() == 'n'
-            //����� üũ �߰� �ؾ��Ѵ�.
             
       ){
          
@@ -672,7 +677,7 @@ public class ProjectController {
       
       
       model.addAttribute("rewardList", rewardList);
-      model.addAttribute("getProjectBoardList", getProjectBoardList); //��ü��ϸ���Ʈ �̸��̶� ���� ����ؼ� ������
+      model.addAttribute("getProjectBoardList", getProjectBoardList);
       model.addAttribute("projectIntroduceImageList", projectIntroduceImageList);
       model.addAttribute("projectKeywordList", projectKeywordList);
       model.addAttribute("project", pvo);

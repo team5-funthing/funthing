@@ -13,53 +13,67 @@
 	<article class="mt-3">
 		<nav class="col">
 		  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-		    <a class="nav-item nav-link active" id="nav-video-tab" data-toggle="tab" href="#nav-video" role="tab" aria-controls="nav-video" aria-selected="true">동영상</a>
-		    <a class="nav-item nav-link" id="nav-images-tab" data-toggle="tab" href="#nav-images" role="tab" aria-controls="nav-images" aria-selected="false">사진</a>
+		    <a class="nav-item nav-link active" id="nav-images-tab" data-toggle="tab" href="#nav-images" role="tab" aria-controls="nav-images" aria-selected="true">사진</a>
+		    <a class="nav-item nav-link" id="nav-video-tab" data-toggle="tab" href="#nav-video" role="tab" aria-controls="nav-video" aria-selected="false">동영상</a>
 		  </div>
 		</nav>
 	
 		<div class="tab-content" id="nav-tabContent">
 		
-		  <div class="tab-pane fade show active" id="nav-video" role="tabpanel" aria-labelledby="nav-video-tab">
+		  <div class="tab-pane fade" id="nav-video" role="tabpanel" aria-labelledby="nav-video-tab">
 				<!-- ProjectVideo Youtube 영상 올리기 -->
-				<div class="input-group mt-2 mb-3">
+				<div class="d-flex flex-column bd-highlight mt-2 mb-3">
 					
-					<c:choose>
-						<c:when test="${writingProject.projectIntroduceVideo eq null || writingProject.projectIntroduceVideo eq ''}">
-			
-							<input type="text" id="urlVideo" class="form-control" placeholder="소개 영상으로 올리려는 영상 URL 주소를 입력하세요." aria-label="소개 영상으로 올리려는 영상 URL 주소를 입력하세요." aria-describedby="urlBtn">
-							<div class="input-group-append urlBtn-registry">
-								<button class="btn btn-outline-secondary" type="button" id="urlBtn">등록</button>
-							</div>
-							<div class="mt-3">
-								<div id="toAppendIframeDiv" class="form-group"></div>
-							</div>
-							<input type="hidden" id="projectIntroduceVideoInput" name="projectIntroduceVideo">
-						</c:when>
-						
-						<c:when test="${writingProject.projectIntroduceVideo ne null || writingProject.projectIntroduceVideo ne ''}">
-							
-							<input type="text" id="urlVideo" value="${writingProject.projectIntroduceVideo }" disabled  class="form-control" placeholder="소개 영상으로 올리려는 영상 URL 주소를 입력하세요." aria-label="소개 영상으로 올리려는 영상 URL 주소를 입력하세요." aria-describedby="urlBtn">
-							<div class="input-group-append urlBtn-registry">
-								<button class="btn btn-outline-secondary" type="button" id="urlBtn" disabled>등록</button>
-							</div>
-							<div class='input-group-append urlBtn-remove'>
-								<a class='btn fas fa-times fa-2x' type='button' id='urlBtn'></a>
-							</div>
-							<div class="m-4">
-								<div id="toAppendIframeDiv" class="form-group">
-									${writingProject.projectIntroduceVideo }
+						<c:choose>
+							<c:when test="${writingProject.projectIntroduceVideo eq null || writingProject.projectIntroduceVideo eq ''}">
+								<div class="input-group">
+									<input type="text" id="urlVideo" class="form-control d-flex p-2 bd-highlight" placeholder="소개 영상으로 올리려는 영상 URL 주소를 입력하세요." aria-label="소개 영상으로 올리려는 영상 URL 주소를 입력하세요." aria-describedby="urlBtn">
+									<div class="input-group-append urlBtn-registry">
+										<button class="btn btn-outline-secondary" type="button" id="urlBtn">등록</button>
+									</div>
 								</div>
-								<input type="hidden" id="projectIntroduceVideoInput"   name="projectIntroduceVideo" value="${writingProject.projectIntroduceVideo }">
-							</div>
-						
-						</c:when>
-					</c:choose>
-				</div>
+								
+								<div class="mt-4">
+									<div id="toAppendIframeDiv" class="form-group">
+										
+									</div>
+								</div>
+								<input type="hidden" id="projectIntroduceVideoInput" name="projectIntroduceVideo">
+							</c:when>
+							
+							<c:when test="${writingProject.projectIntroduceVideo ne null || writingProject.projectIntroduceVideo ne ''}">
+								<div class="input-group">
+									<input type="text" id="urlVideo" class="form-control d-flex p-2 bd-highlight" value="${writingProject.projectIntroduceVideo }"placeholder="소개 영상으로 올리려는 영상 URL 주소를 입력하세요." aria-label="소개 영상으로 올리려는 영상 URL 주소를 입력하세요." aria-describedby="urlBtn">
+									<div class="input-group-append urlBtn-registry">
+										<button class="btn btn-outline-secondary" type="button" id="urlBtn" disabled="true">등록</button>
+									</div>
+									<div class='input-group-append urlBtn-remove'>
+										<a class='btn fas fa-times fa-2x' type='button' id='urlBtn'></a>
+									</div>
+								</div>
+
+								
+								<div class="mt-4">
+									<div id="toAppendIframeDiv" class="form-group">
+										${writingProject.projectIntroduceVideo }
+									</div>
+									<input type="hidden" id="projectIntroduceVideoInput"   name="projectIntroduceVideo" value="${writingProject.projectIntroduceVideo }">
+								</div>
+								
+								<script>
+									
+									
+								</script>
+							
+							</c:when>
+						</c:choose>
+					</div>
 
 		  </div>
 		  
-		  <div class="tab-pane fade mt-2 mb-3" id="nav-images" role="tabpanel" aria-labelledby="nav-images-tab">
+
+		  
+		  <div class="tab-pane fade mt-2 mb-3  show active" id="nav-images" role="tabpanel" aria-labelledby="nav-images-tab">
 		  
 				<!-- projectIntroduceImage -->
 				<c:choose>
@@ -78,7 +92,7 @@
 				
 							<c:forEach var="projectIntroduceImage" items="${projectIntroduceImageList }" varStatus="step">
 							
-								<li id="projectIntroduceImageLi">
+								<li class="mt-1" id="projectIntroduceImageLi">
 									<div class="select_introduce_img m-3">
 										<input type="hidden" value="${projectIntroduceImage.projectIntroduceImageNo }">
 										<img style="width: 200px; height: auto;" src="${projectIntroduceImage.projectIntroduceImage }" />

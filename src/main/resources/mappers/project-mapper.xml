@@ -179,7 +179,7 @@
 		
 	<update id="updateProjectDeadline">
 		UPDATE project 
-		SET funding = 'n'
+		SET funding = 'e'
 		WHERE TO_CHAR(enddate, 'YYYYMMDD') = TO_CHAR(current_timestamp, 'YYYYMMDD') and funding = 'y'
 	</update>
 	
