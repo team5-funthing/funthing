@@ -186,7 +186,7 @@ public class ProjectController {
 
 
 
-         model.addAttribute("msg", "濡쒓렇�씤 �썑 �씠�슜 媛��뒫�빀�땲�떎.");
+         model.addAttribute("msg", "4");
          return "p-index";
       }
       model.addAttribute("loginEmail", memberVO.getEmail()); 
@@ -198,7 +198,11 @@ public class ProjectController {
                         @RequestParam(required = false)String msg, 
                         @RequestParam String creator,
                         AdminCategoryVO cvo, Model model) {
+	   
+	  System.out.println("creator :" + creator);
 
+	  System.out.println(creatorVO == null);
+	  
 	  creatorVO.setCreator(creator);
 	  creatorVO = getCreatorService.getCreator(creatorVO);
 	  
@@ -345,7 +349,7 @@ public class ProjectController {
 		                           RedirectAttributes redirectAttributes,
 		                           Model model) throws Exception {
 
-	   System.out.println("================ ��¥ ����� ===================");
+	   System.out.println("================ 占쏙옙짜 占쏙옙占쏙옙占� ===================");
 	   System.out.println(pvo.getEndDate());
 	   System.out.println("endDateStr : " + endDateStr);
 	   System.out.println("============== ======== ===================");
@@ -381,9 +385,9 @@ public class ProjectController {
       updateProjectService.updateProject(pvo);
       
       if(checkResult == 'y') {
-         redirectAttributes.addAttribute("msg", "�옉�꽦�씠 �셿猷� �릺�뿀�뒿�땲�떎.");
+         redirectAttributes.addAttribute("msg", "1");
       }else {
-         redirectAttributes.addAttribute("msg", "���옣 �릺�뿀�뒿�땲�떎");
+         redirectAttributes.addAttribute("msg", "2");
 
       }
       redirectAttributes.addAttribute("creator", cvo.getCreator());
@@ -401,19 +405,21 @@ public class ProjectController {
       
       pvo = getProjectService.getProject(pvo);
       pvo.setStatus('w');
-     
-      avo.setAlarmType(pvo.getProjectTitle() + " �˶� �޽��� ");
+      updateProjectService.updateProject(pvo);
+      
+      
+      avo.setAlarmType(pvo.getProjectTitle() + " 占싯띰옙 占쌨쏙옙占쏙옙 ");
       avo.setReceiveId("admin@funthing.com");
       avo.setReadConfirm('n');
       avo.setProjectNo(pvo.getProjectNo());
-      avo.setDetailAlarmType("�슂泥�");
+      avo.setDetailAlarmType("占쎌뒄筌ｏ옙");
 
       System.out.println(avo.toString());
       insertProjectJudgeRequestAlarmService.insertProjectJudgeRequestAlarm(avo);
       
       redirectAttributes.addAttribute("creator", creator);
 
-      redirectAttributes.addAttribute("msg", "");
+      redirectAttributes.addAttribute("msg", "3");
       redirectAttributes.addAttribute("currentProjectNo", pvo.getProjectNo());
       return "redirect:getWritingProject.udo";
    }
@@ -638,10 +644,13 @@ public class ProjectController {
    }
    
    public char inputCompleteCheck(ProjectVO vo) {
-
+	   
+	   
+	  System.out.println("==================inputCompleteCheck========================");
       System.out.println(vo.toString());
-      
-      if(      vo.getProjectNo() == -1 ||
+	  System.out.println("============================================================");
+	  
+      if(   vo.getProjectNo() == -1 ||
             vo.getCreator() == null || vo.getCreator().equals("") ||
             vo.getEmail() == null || vo.getEmail().equals("") ||
             
@@ -650,14 +659,11 @@ public class ProjectController {
             vo.getProjectTitle() == null || vo.getProjectTitle().equals("") ||
             vo.getProjectSubTitle() == null || vo.getProjectSubTitle().equals("") ||
             vo.getCategory() == null || vo.getCategory().equals("") ||
-            vo.getStartDate() == null ||
             vo.getEndDate() == null ||
 
             vo.getProjectSummary() == null || vo.getProjectSummary().equals("") ||
-//            vo.getProjectCaution() == null || vo.getProjectCaution().equals("") ||
             vo.getProjectIntroduceVideo() == null || vo.getProjectIntroduceVideo().equals("") || 
             vo.getProjectStory() == null || vo.getProjectStory().equals("")
-//            vo.getInformationAgree() == 'n'
 
       ){
          
