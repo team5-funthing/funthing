@@ -69,9 +69,8 @@
                            <a class="nav-item nav-link" id="nav-like-prj-list-tab" data-toggle="tab" 
                               href="#nav-like-prj-list" role="tab" aria-controls="nav-like-prj-list" aria-selected="false">좋아요  프로젝트</a>
                            <a class="nav-item nav-link" id="nav-like-prj-list-tab" data-toggle="tab" 
-                           	  href="#nav-reserved-prj-list" role="tab" aria-controls="nav-like-prj-list" aria-selected="false">준비중인 관심 프로젝트</a>
-                           <a class="nav-item nav-link" id="nav-like-prj-list-tab" data-toggle="tab" href="#nav-report-prj-list" role="tab"
-                              aria-controls="nav-report-prj-list" aria-selected="false">신고한 프로젝트</a>
+                           	  href="#nav-reserved-prj-list" role="tab" aria-controls="nav-like-prj-list" aria-selected="false">예정중인 관심 프로젝트</a>
+
                         </div>
                      </nav>
                   </div>
@@ -530,81 +529,6 @@
                      </div>
                <!--  카드모듈 끝    그대로 가져다  id 값만 변경해서 써 일단. -->
    					<!-- 관심 프로젝트 종료 -->
-
-    				<!-- 신고 프로젝트 시작 -->
-                     <div class="tab-pane fade" id="nav-report-prj-list"
-                        role="tabpane" aria-labelledby="nav-report-prj-list-tab">
-
-                        <div class="container">
-                           <section class="tiles">
-                              <!----------------만든 프로젝트 양식 -------------------->
-                             <c:if test="${not empty projectReportList }">
-                              <c:forEach var="project" items="${projectReportList }">
-                              <article>
-                                 <div class="project">
-                                    <div class="card">
-                                       <div class="thumbnail-wrap">
-                                          <div class="thumbnail ">
-                                             <div class="centered">
-                                              <%/*  <img src="${myProjectList.projectMainImage}"
-                                                   class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">  */ %>
-                                        <!-- 테스트용 -->            <img src="${pageContext.request.contextPath}/resources/user/img/test/2.jpg"
-                                                   class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
-                                             </div>
-                                          </div>
-                                       </div>
-
-                                       <div class="card-body">
-                                          <h5 class="card-title">${project.projectTitle }</h5>
-                                          <ul>
-                                             <li>요약 설명 : ${project.projectSummary }</li>
-                                             <li>목표 금액 : ${project.goalMoney }</li>
-                                             <li>기간 : ${project.startDate } ~ ${project.endDate }</li>
-                                          </ul>
-
-                                          <p>현재 후원받은 금액 : ${project.fundingMoney }원 ${(project.fundingMoney div project.goalMoney)*100 } %</p>
-                                          <div class="progress">
-                                             <div class="progress-bar color-3" role="progressbar"
-                                                style="width: 50%" aria-valuenow="30" aria-valuemin="0"
-                                                aria-valuemax="100"></div>
-                                          </div>
-                                       </div>
-
-                                       <div class="card-footer">
-                                          <a href="#">보러가기</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </article>
-                              </c:forEach>
-                              </c:if>
-                          
-                              <!-- 추가적으로 목록들 생길 시 JSTL로 반복 추가-->
-                           </section>
-                               <c:if test="${empty projectReportList }">
-                                <div class="row">
-                                    <div class="col">
-                                    </div>
-                                    <div class="col-8 d-flex justify-content-center ">
-                                        <div class="pt-5 pb-5 ">
-                                           
-                                            <div class="h3">'신고'한 프로젝트가 없습니다</div>
-                                            <div class="h5">
-
-					                                                프로젝트 페이지에서 '신고하기' 버튼을 눌러
-					                                                해당 프로젝트에서 발생한 문제들을 공유하고 알릴 수 있습니다.
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                    </div>
-                                </div>
-                              </c:if> 
-                        </div>
-                     </div>
-               		<!-- 신고 프로젝트 종료 -->
-               
                   </div>
                </div>
 

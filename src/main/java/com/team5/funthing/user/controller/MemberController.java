@@ -230,7 +230,12 @@ public class MemberController {
 
 
 	@RequestMapping(value="updateProfile.udo",method=RequestMethod.GET)
-	public String updateProfile() {
+	public String updateProfile(Model model,HttpSession session) {
+		
+		MemberVO member = (MemberVO)session.getAttribute("memberSession");
+		System.out.println(member.toString());
+		
+		model.addAttribute("member", member);
 		return "f-update-profile";
 	}
 
