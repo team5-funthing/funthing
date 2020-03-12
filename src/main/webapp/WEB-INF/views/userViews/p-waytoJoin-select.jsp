@@ -36,66 +36,67 @@
                             </div>
                         </div>
                         <hr />
- 					<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-                  <!-- 네이버아이디로로그인 버튼 노출 영역 -->
-                  <div id="naver_id_login"></div>
-                  <!-- //네이버아이디로로그인 버튼 노출 영역 -->
-                  <script type="text/javascript">
-                     var naver_id_login = new naver_id_login(
-                           "bm_Jr_lzbfVgnsh6sEyX", "http://localhost:8080/funthing/socialjoin.udo");
-                     var state = naver_id_login.getUniqState();
-                     naver_id_login.setButton("green", 1, 69);
-                     naver_id_login.setDomain("http://localhost:8080/");
-                     naver_id_login.setState(state);
-                     naver_id_login.init_naver_id_login();
-                   </script>
-                  <div class="col-xl-12 mt-10">
-                     	 <a id="custom-login-btn2" href="javascript:loginWithKakao()"> 
-                 		 	<img src="${pageContext.request.contextPath}/resources/user/img/apiBtn/kakaoLoginBtn/kakao69.png" width="68" />
-                 		 	카카오 아이디로 회원가입
-              		    </a>
-                  </div>
-					<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-            
-                  <script type='text/javascript'>
-                     
-                      var id;
-                      var name;
-                      var email;
-                      var url = 'http://localhost:8080/funthing/socialjoin.udo';
-               
-                     // 사용할 앱의 JavaScript 키를 설정해 주세요.
-                     Kakao.init('05602e69457875d5bc6718b74ef34eb9');
-                     function loginWithKakao() {
+ 				<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+				
+                   <div style="width:15px;"></div> <div id="naver_id_login" style="width:277.5;align:center;text-align:center;"></div>
+                    
+					<script type="text/javascript">
+						var naver_id_login = new naver_id_login(
+								"T6JggIUb0xG2LBu9Q7Pf", "http://localhost:8080/funthing/socialLogin.udo");
+						var state = naver_id_login.getUniqState();		
+						naver_id_login.setButton("green",3,60,"style='align:center'");
+						naver_id_login.setDomain("http://localhost:8080/funthing");
+						naver_id_login.setState(state);
+						naver_id_login.init_naver_id_login();
+					</script> 
+					
+                    <div class="col-xl-12 kakao_login_btn-wrapper mt-3"  style="align:center;text-align:center;">
+                        <a class="kakao_login_btn"  href="javascript:loginWithKakao()">
+                            <img class="landscape" src="${pageContext.request.contextPath}/resources/user/img/apiBtn/kakaoLoginBtn/kakao_account_login_btn_large_wide.png" 
+                            style="height:55px;width:277.5px;"/>
+                        </a>
+                    </div>
+                    
+                    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+					<script type='text/javascript'>
+							
+						    var id;
+						    var name;
+						    var email;
+						    var url = 'http://localhost:8080/funthing/socialjoin.udo';
+					
+							// 사용할 앱의 JavaScript 키를 설정해 주세요.
+							Kakao.init('05602e69457875d5bc6718b74ef34eb9');
+							function loginWithKakao() {
 
-                        // 로그인 창을 띄웁니다.
-                        Kakao.Auth.login({
-                           success : function(json) {
-                              //alert(json.access_token);
-                              Kakao.API.request({
-                                 url : '/v2/user/me',
-                                 success : function(res) {
-                                    //alert(JSON.stringify(res));
-                                 
-                                     id = res.id;
-                                     name = res.properties.nickname;
-                                     email = res.kakao_account.email;
-                                     location.href=url+'?email='+email+'&password='+id+'&name='+name;
-   
-                                 },
-                                 fail : function(error) {
-                                    alert(JSON.stringify(error));
-                                 }
-                              });
+								// 로그인 창을 띄웁니다.
+								Kakao.Auth.login({
+									success : function(json) {
+										//alert(json.access_token);
+										Kakao.API.request({
+											url : '/v2/user/me',
+											success : function(res) {
+												//alert(JSON.stringify(res));
+											
+												 id = res.id;
+												 name = res.properties.nickname;
+												 email = res.kakao_account.email;
+												 location.href=url+'?email='+email+'&password='+id+'&name='+name+'&check=1';
+	
+											},
+											fail : function(error) {
+												alert(JSON.stringify(error));
+											}
+										});
 
-                           },
-                           fail : function(err) {
-                              alert(JSON.stringify(err));
-                           }
-                        });
-                     };
-                     
-                  </script>
+									},
+									fail : function(err) {
+										alert(JSON.stringify(err));
+									}
+								});
+							};
+					</script>
+                
                   <hr>
                     </form>
                     <div class="mt-10">

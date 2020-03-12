@@ -6,7 +6,6 @@
 	
 	<select id="getAllFundingProjectList" resultType="project">
 		
-			<!-- 일단 test로 n으로 시작 -->
 			SELECT *
 			FROM project
 			WHERE funding = 'y'
@@ -95,6 +94,7 @@
 	    SELECT @@IDENTITY AS seq
 	</select> -->
 	
+	
 	<update id="updateProject" parameterType="project">
 		UPDATE project SET 
 		creator = #{creator}, projectTitle = #{projectTitle},  goalMoney = #{goalMoney}, 
@@ -179,7 +179,7 @@
 		
 	<update id="updateProjectDeadline">
 		UPDATE project 
-		SET funding = 'n'
+		SET funding = 'e'
 		WHERE TO_CHAR(enddate, 'YYYYMMDD') = TO_CHAR(current_timestamp, 'YYYYMMDD') and funding = 'y'
 	</update>
 	
@@ -198,15 +198,6 @@
 		WHERE projectNo = #{projectNo}
 	
 	</update>
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 
 </mapper>

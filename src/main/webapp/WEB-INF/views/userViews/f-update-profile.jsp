@@ -59,13 +59,27 @@
 						<div class="h4">프로필 변경 [프로필 설정]</div>
 						<hr>
 					</div>
-
+<form id="saveimage" action="saveimage2.udo" method="post" enctype="multipart/form-data">
 					<div class="d-flex justify-content-start mt-5">
-						<div class="col-3 mr-4">프로필 사진 </div>
+						<div class="col-3 mr-4">프로필 사진
+							<p></p>
+							<br>
+							<p></p>
+							<div>				
+								<input type="button"  class="genric-btn success medium" style="width: 110px;"	onclick="clickedBtn()" value="저장" />
+							</div>
+							<div class="mt-2">
+								<input type="submit" formaction="deleteimage.udo"
+								class="genric-btn success medium" style="width: 110px;"
+								value="삭제">
+							</div>
+						
+						
+						 </div>
 						<div class="col-10">
 							 
 								<div class="row">
-								<form id="saveimage" action="saveimage2.udo" method="post" enctype="multipart/form-data">
+								
 								     
 								         
 									<div class="col-5 align-self-center">
@@ -77,21 +91,15 @@
 										</label>
 									</div>
 									<div class="col align-self-center">
-										<div>							
-											 <input type="button"  class="genric-btn success medium" style="width: 110px;"	onclick="clickedBtn()" value="저장" />
-										</div>
-										<div class="mt-2">
-											<input type="submit" formaction="deleteimage.udo"
-												class="genric-btn success medium" style="width: 110px;"
-												value="삭제">
-										</div>
+									
 							
 									</div>
-									</form>
+								
 								</div>
 							
 						</div>
 					</div>
+						</form>
 					<hr>
 					<input type="hidden" id="ok123" value="${ok }">
 			 		     <script>
@@ -136,6 +144,7 @@
                        });
 					  }
                        </script> 
+
 					<form id ="updateForm" name="updateForm" action="updateMember.udo" method="post">
 						<div class="form-row">
 							<div class="col-md-4 mb-3">
@@ -151,23 +160,26 @@
 									placeholder="현재 비밀번호를 입력하세요" onfocus="this.placeholder = ''"	onblur="this.placeholder = '현재 비밀번호를 입력하세요'"
 									name="nowPassword" style="width:250px;" required>
 							</div>
+
 						</div>
 						<div id="nowPasswordCheck"></div>
 						<div class="form-row">
-							<div class="col-md-4 mb-3">
+							
 								<label for="validationDefault01">비밀번호 변경하기</label> <input
 									type="password" class="form-control" id="password" 
 									placeholder="8자리이상 입력하세요" onfocus="this.placeholder = ''"	onblur="this.placeholder = '8자리이상 입력하세요'"
+
 									name="password" style="width:250px;" required>
 							</div>
+
 						</div>
 						<div class="form-row">
-							<div class="col-md-4 mb-3">
+							
 								<label for="validationDefault01">비밀번호 확인</label> <input
 									type="password" class="form-control" id="passwordcheck"
 									placeholder="8자리이상 입력하세요" style="width:250px;" onfocus="this.placeholder = ''"	onblur="this.placeholder = '8자리이상 입력하세요'"
 									required>
-							</div>
+							
 						</div>
 						<div id="encodedPasswordCheck"></div>
 						<div class="form-row">
@@ -180,11 +192,13 @@
 						</div>
 						<div id="nameInputCheck"></div>
 						<div class="form-row">
-							<div class="col-md-4 mb-3">
+							
 								<label for="validationDefault01">연락처</label> <input type="text"
 								placeholder=" - 없이 입력해주세요" onfocus="this.placeholder = ''"	onblur="this.placeholder = ' - 없이 입력해주세요'"
+
 									class="form-control" style="width:250px;" id="phone" name="phone" value="${member.phone}" required>
 							</div>
+
 						</div>
 						<div id="phoneInputCheck"></div>
 

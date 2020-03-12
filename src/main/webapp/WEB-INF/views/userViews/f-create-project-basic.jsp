@@ -63,6 +63,8 @@
                         
                         $(document).on("propertychange change keyup paste input","#newCreator", function(){
                            
+                        	
+                        	
                                var jsonData = $("#newCreator").serializeObject();
                                
                                  $.ajax({
@@ -95,7 +97,7 @@
                      <div class="mt-30">
                         <h5>이메일</h5>
                         <input name="email" class="form-control form-control-lg" type="text"
-                           value="${basicProjectSetting.email }" class="single-input">
+                           value="${basicProjectSetting.email }" class="single-input" readonly>
                      </div>
                      
                      <div class="mt-30">
@@ -105,14 +107,16 @@
                                  <label for="creatorProfile">프로필에 사용할 사진을 선택해주세요.</label>
                                <input type="file" id="creatorProfile" name="creatorUploadImage" class="form-control-file">
                             </div>
-                           <div class="creator_select_img"><img src="" /></div>
+                            <div id="detail-mypage-profile-img" style="background: #BDBDBD;">
+                        		<img class="creator_select_img" src="">
+                     		</div>
                         </div>
                         <script>
                               $("#creatorProfile").change(function(){
                                  if(this.files && this.files[0]){
                                     var reader = new FileReader;
                                     reader.onload = function(data){
-                                       $(".creator_select_img img").attr("src", data.target.result).width(200);
+                                       $("#detail-mypage-profile-img img").attr("src", data.target.result).width(150);
                                     }
                                     reader.readAsDataURL(this.files[0]);
                                  }
@@ -121,9 +125,61 @@
                      </div>
                      <div class="mt-30">
                         <h5>문의 전화번호*</h5>
-                        <input name="makerPhone" class="form-control form-control-lg" type="text"
+                        <input name="makerPhone" class="form-control form-control-lg phone-number-check" type="text"
                            class="single-input" required>
-                     </div>
+
+							<script>
+	                        $(function(){
+	
+	                            $(".phone-number-check").on('keydown', function(e){
+	                               // 숫자만 입력받기
+	                                var trans_num = $(this).val().replace(/-/gi,'');
+	                        		var k = e.keyCode;
+	                        				
+		                        	if(trans_num.length >= 11 && ((k >= 48 && k <=126) || (k >= 12592 && k <= 12687 || k==32 || k==229 || (k>=45032 && k<=55203)) ))
+		                        	{
+		                          	    e.preventDefault();
+		                        	}
+		                            }).on('blur', function(){ // 포커스를 잃었을때 실행합니다.
+		                                if($(this).val() == '') return;
+		
+		                                // 기존 번호에서 - 를 삭제합니다.
+		                                var trans_num = $(this).val().replace(/-/gi,'');
+		                              
+		                                // 입력값이 있을때만 실행합니다.
+		                                if(trans_num != null && trans_num != '')
+		                                {
+		                                    // 총 핸드폰 자리수는 11글자이거나, 10자여야 합니다.
+		                                    if(trans_num.length==11 || trans_num.length==10) 
+		                                    {   
+		                                        // 유효성 체크
+		                                        var regExp_ctn = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})([0-9]{3,4})([0-9]{4})$/;
+		                                        if(regExp_ctn.test(trans_num))
+		                                        {
+		                                            /* // 유효성 체크에 성공하면 하이픈을 넣고 값을 바꿔줍니다.
+		                                            trans_num = trans_num.replace(/^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?([0-9]{3,4})-?([0-9]{4})$/, "$1-$2-$3");                  
+		                                            $(this).val(trans_num); */
+		                                        }
+		                                        else
+		                                        {
+		                                            alert("유효하지 않은 전화번호 입니다.");
+		                                            $(this).val("");
+		                                            $(this).focus();
+		                                        }
+		                                    }
+		                                    else 
+		                                    {
+		                                        alert("유효하지 않은 전화번호 입니다.");
+		                                        $(this).val("");
+		                                        $(this).focus();
+		                                    }
+		                              	}
+		                          	});  
+		                        });
+                        </script>
+
+
+							</div>
                      <div class="mt-30">
                         <h5>사업자번호</h5>
                         <input name="businessNumber" class="form-control form-control-lg" type="text"

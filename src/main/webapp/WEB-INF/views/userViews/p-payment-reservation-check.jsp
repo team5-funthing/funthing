@@ -84,32 +84,6 @@
 	</div>		
 		
 		
-<!-- 				<c:forEach var="rewardSelection" items="${paymentReserve.rewardSelectionList }" varStatus="cnt">
-						<c:set var="totalAmount" value="${ totalAmount + rewardSelection.paymentAmount }"/>
-						<div class="row">
-							<div class="col-8">
-								<h5 class="card-title">${rewardSelection.reward.rewardName }</h5>
-								<p class="card-text">${rewardSelection.reward.rewardContent }</p>
-								<p class="card-text">옵션: <br>
-								
-								<c:forEach var="option" items="${rewardSelection.rewardOptionValueList}">
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${option }<br>
-								</c:forEach>
-								
-								</p>
-							</div>
-						</div>
-						<div class="d-flex justify-content-end">
-							<p class="card-text mr-3" style="font-weight: bold;">수량:${rewardSelection.orderAmount }개</p>
-							<p class="card-text" style="font-weight: bold;">${rewardSelection.paymentAmount }원</p>
-						</div>
-						<hr>
-					</c:forEach> -->
-					
-	<!-- -------------------- -->
-
-
-
 
     <!-- footer -->
     <footer class="footer">
