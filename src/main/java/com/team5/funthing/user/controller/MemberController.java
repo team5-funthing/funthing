@@ -38,23 +38,12 @@ public class MemberController {
 
 	@Autowired
 	private SendMailUtil sendMailUtil;
-
 	@Autowired
 	private GetMemberService getMemberService;
-
-	@Autowired
-	private GetNewestAlarmListService getNewestAlarmListService;
-
 	@Autowired
 	private InsertMemberService insertMemberService;
 	@Autowired
-	private InsertSocialMemberService insertSocialMemberService;
-	@Autowired
-	private InsertImageService insertImageService;
-	@Autowired
 	private UpdateMemberService updateMemberService;
-	@Autowired
-	private UploadUtil upload;
 
 
 

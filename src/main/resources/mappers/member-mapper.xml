@@ -11,8 +11,8 @@
 	</select>
 	
 	<insert id="insertSocialMember" parameterType="member">
-		INSERT INTO member ( email, password, name )
-		VALUES (#{email},#{password},#{name})
+		INSERT INTO member ( email, password, name ,socialjoined)
+		VALUES (#{email},#{password},#{name},'Y')
 	</insert>
    
 	<insert id="insertMember" parameterType="member">
