@@ -22,6 +22,7 @@ import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.service.memberService.DeleteMemberService;
 import com.team5.funthing.user.service.memberService.GetMemberService;
 import com.team5.funthing.user.service.memberService.InsertImageService;
+import com.team5.funthing.user.service.memberService.InsertSocialMemberService;
 import com.team5.funthing.user.service.memberService.UpdateMemberService;
 
 @Controller
@@ -35,6 +36,8 @@ public class MemberController2 {
 	DeleteMemberService deleteMemberService;
 	@Autowired
 	InsertImageService insertImageService;
+	@Autowired
+	InsertSocialMemberService insertSocialMemberService;
 	@Autowired
 	UploadUtil upload;
 	
@@ -68,6 +71,16 @@ public class MemberController2 {
 		session.setAttribute("memberSession", vo);
 		model.addAttribute("ok","1");
 		return "f-update-profile";
+	}
+	@RequestMapping(value = "updateSocialMember.udo",method= RequestMethod.POST)
+	public String updateSocialProfile(MemberVO vo,HttpSession session) {
+		System.out.println(session.getAttribute("memberSession"));
+		MemberVO sessionpw = (MemberVO)session.getAttribute("memberSession");
+		vo.setPassword(sessionpw.getPassword());
+		updateMemberService.updateMember(vo);
+		session.removeAttribute("memberSession");
+		session.setAttribute("memberSession", vo);
+		return "1";
 	}
 	
 	@RequestMapping(value="updateCheck.udo",method=RequestMethod.POST)
@@ -164,6 +177,49 @@ public class MemberController2 {
 		}else {
 		}
 		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@RequestMapping(value="successSocialjoin.udo",method=RequestMethod.POST) 
+	public String successjoin(MemberVO vo,Model model,@RequestParam(name="email2",required=false)String email,HttpSession session) {
+		System.out.println("석세스조인 실행");
+		if(email!=null) {
+			vo.setEmail(email);
+		}
+		System.out.println(vo.toString());
+		if(vo.getEmail()!=null && vo.getName()!=null && vo.getPassword()!=null)    {
+			
+			//비밀번호 암호화를 하기 위한 BCryptPasswordEncoder 객체
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			System.out.println("암호화 전  : " + vo.getPassword());
+			
+			String encodePassword = encoder.encode(vo.getPassword());
+			
+			System.out.println("암호화 후 : " + encodePassword);
+			vo.setPassword(encodePassword);
+			
+			insertSocialMemberService.insertSocialMember(vo);
+			//성공,실패를 구분하는 result플래그
+			model.addAttribute("result","1");
+			//session.setAttribute("memberSession",getMemberService.getMember(vo));
+			//System.out.println("세션 확인!"+session.getAttribute("memberSession").toString());
+		}else {
+			//성공,실패를 구분하는 result플래그
+			model.addAttribute("result","2");
+		}
+
+		return "ajax/callback";
 	}
 	
 }
