@@ -7,7 +7,7 @@ public class AdminUserMainImageChangeVO {
 	
 	private int imageNo;
 	private String imagePath;
-	private String imageName;
+	private String imageContent;
 	
 	public int getImageNo() {
 		return imageNo;
@@ -21,17 +21,18 @@ public class AdminUserMainImageChangeVO {
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
 	}
-	public String getImageName() {
-		return imageName;
+	public String getImageContent() {
+		return imageContent;
 	}
-	public void setImageName(String imageName) {
-		this.imageName = imageName;
+	public void setImageContent(String imageContent) {
+		this.imageContent = imageContent;
 	}
 	@Override
 	public String toString() {
-		return "AdminUserMainImageChangeVO [imageNo=" + imageNo + ", imagePath=" + imagePath + ", imageName="
-				+ imageName + "]";
+		return "AdminUserMainImageChangeVO [imageNo=" + imageNo + ", imagePath=" + imagePath + ", imageContent="
+				+ imageContent + "]";
 	}
+	
 
 	
 	

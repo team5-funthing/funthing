@@ -16,15 +16,24 @@ public class InsertUserMainImageServiceImpl implements InsertUserMainImageServic
 	AdminUserMainImageChangeDAO adminUserMainImageChangeDAO;
 	
 	@Override
-	public void insertUserMainImage(AdminUserMainImageChangeVO vo,List<String> toInsertImageList) {
+	public void insertUserMainImage(AdminUserMainImageChangeVO vo,List<String> toInsertImageList,List<String> toInsertImageContentList) {
 
 		if(toInsertImageList != null) {
 			
-			for(String toInsertImage : toInsertImageList) {
-				vo.setImagePath(toInsertImage);
+			if(toInsertImageContentList != null) {
+			for(int i=0; i<toInsertImageList.size(); i++) {
+				vo.setImagePath(toInsertImageList.get(i));
+				vo.setImageContent(toInsertImageContentList.get(i));
 				adminUserMainImageChangeDAO.insertUserMainImage(vo);
-				
+
 			}
+			}else {
+				for(String toInsertImage : toInsertImageList) {
+					vo.setImagePath(toInsertImage);
+					adminUserMainImageChangeDAO.insertUserMainImagePath(vo);
+				}
+			}
+
 		}
 	}
 	

@@ -25,11 +25,17 @@
 
    <!-- slider_area_start -->
    <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
+
   <div class="carousel-inner">
 
      <c:if test="${not empty getUserMainImageChangeList2}">
    <div class="carousel-item active" data-interval="500">
       <img style="width: 100px; height: 300px;" src="${getUserMainImageChangeList2.imagePath}" class="d-block w-100" alt="...">
+   		<div class="carousel-caption d-none d-md-block">
+   		<c:if test="${not empty getUserMainImageChangeList2.imageContent}">
+        	<h5 style="color: black; margin-bottom: 10px;" align="left">${getUserMainImageChangeList2.imageContent}</h5>
+        </c:if>	
+     	 </div>
    </div>
    </c:if>
    
@@ -40,6 +46,11 @@
   
     <div class="carousel-item" data-interval="500">
       <img style="width: 100px; height: 300px;" src="${mainImageList.imagePath}" class="d-block w-100" alt="...">
+      	<div class="carousel-caption d-none d-md-block">
+      	<c:if test="${not empty mainImageList.imageContent}">
+        	<h5 style="color: black; margin-bottom: 10px;" align="left">${mainImageList.imageContent}</h5>
+        	</c:if>
+     	 </div>
     </div>
    </c:forEach>
    </c:if>
