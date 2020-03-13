@@ -68,11 +68,11 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">공지 글</h4>
+                        <h4 class="page-title">공지사항</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#C:\Users\pjh\Desktop\5jo\matrix-admin-master\index.html">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="admindex.ado">Home</a></li>
                                     <!--
                                     <li class="breadcrumb-item active" aria-current="page"></li>
                                     -->
@@ -98,7 +98,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title m-b-0" style="padding:20px;">공지사항</h4>
+                                <h4 class="card-title m-b-0" style="padding:20px;"></h4>
                         <!-- Create the editor container -->
                    	<form action="insertAdminNoticeBoard.ado">
                         <div style="padding-bottom: 5px;" >

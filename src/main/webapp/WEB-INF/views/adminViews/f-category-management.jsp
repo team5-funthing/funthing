@@ -62,10 +62,11 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
+                     <h4 class="page-title">카테고리 관리</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#C:\Users\pjh\Desktop\5jo\matrix-admin-master\index.html">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="admindex.ado">Home</a></li>
                                     <!--
                                     <li class="breadcrumb-item active" aria-current="page"></li>
                                     -->
@@ -84,7 +85,7 @@
             	<div class="row">
             		<div class="card">
 			            <div class="card-body">
-			                <h4 class="card-title m-b-0">카테고리 관리</h4>
+			                <h4 class="card-title m-b-0"></h4>
 			            </div>    
             		</div>
     			</div>

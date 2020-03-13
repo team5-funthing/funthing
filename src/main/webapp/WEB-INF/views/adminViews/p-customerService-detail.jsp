@@ -67,11 +67,11 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">customercenter_detail</h4>
+                        <h4 class="page-title">고객센터</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#C:\Users\pjh\Desktop\5jo\matrix-admin-master\index.html">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="admindex.ado">Home</a></li>
                                     <!--
                                     <li class="breadcrumb-item active" aria-current="page"></li>
                                     -->
@@ -97,7 +97,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title m-b-0">고객센터 상세보기</h4>
+                                <h4 class="card-title m-b-0"></h4>
                         <!-- Create the editor container -->
                         
                         <table style="margin-bottom: 1%;margin-top: 1%;">

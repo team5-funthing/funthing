@@ -72,7 +72,7 @@
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#C:\Users\pjh\Desktop\5jo\matrix-admin-master\index.html">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="admindex.ado">Home</a></li>
                                     <!--
                                     <li class="breadcrumb-item active" aria-current="page"></li>
                                     -->
@@ -104,7 +104,7 @@
                                 <div><h1>${personalInfoProcessing.infoTitle}</h1></div>
                                 	<form action="insertPersonalInfoProcessing.ado" method="post">
                         			<!-- Create the editor container -->
-                        			제목 :  <input type="text" name="infoTitle" value="${personalInfoProcessing.infoTitle}">
+                        			제목 :  <input type="text" name="infoTitle" size="60" style="margin-bottom: 10px" value="${personalInfoProcessing.infoTitle}">
                         			<input type="hidden" name="no" value="${personalInfoProcessing.infoNo}">
                         			<textarea name="editor1" rows = "7" cols = "50">${personalInfoProcessing.infoContent}</textarea>
 			                        <div align="center" style="padding-top: 15px;">
