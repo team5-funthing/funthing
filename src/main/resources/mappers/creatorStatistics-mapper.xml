@@ -38,7 +38,7 @@
 
 		select projectNo,sumDate, sum(fundingMoney) as sumFundingMoney from
 		(select projectNo,fundingMoney, to_char(paymentReservedate,'yyyy-mm-dd')as sumDate from paymentReserve )
-		group by sumDate,projectNo having projectNo = #{currentProjectNo} order by sumDate asc
+		group by sumDate,projectNo having projectNo = #{currentProjectNo} and paymentStatus='결제예약' order by sumDate asc
 
 
 	</select>

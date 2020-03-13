@@ -221,7 +221,7 @@ $(document).ready(function(){
 														<div class="d-flex justify-content-between">
 															<div class="d-flex align-items-center">
 																<h5>
-																	<a href="javaScript:return(0);">${b1.member.name }</a>
+																	<a href="http://localhost:8080/funthing/projectDetails.udo?projectNo=${project.projectNo }" onclick="window.open(this.href,'_blank','width=100px, height=100px, toolvars=no'); return false;">${b1.member.name }</a>
 																</h5>
 																<p class="date">${b1.projectBoardDate}</p>
 															</div>
@@ -262,10 +262,10 @@ $(document).ready(function(){
 							                                          <div class="single-comment justify-content-between d-flex">
 							                                             <div class="user justify-content-between d-flex p-3"
 							                                                style="background-color: whitesmoke;">
-							                                                <div class="thumb">
-							                                                   <img src="${pageContext.request.contextPath}/resources/user/img/comment/comment_2.png" alt="">
-							                                                </div>
-							                                                <div class="desc" style="width: 500px;">
+																				<div id="projectBoard-profile" class="thumb">
+																					<img class="profile" src="${b2.member.myImage }">
+																				</div>
+																				<div class="desc" style="width: 500px;">
 							                                                    <p class="comment">
 							                                                   		${b2.projectBoardContents}
 							                                                    </p>

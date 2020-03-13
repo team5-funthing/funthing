@@ -58,9 +58,15 @@ public class ProjectAskMessageController {
    
    
    @RequestMapping(value="showInsertwAskMessage.udo", method = RequestMethod.GET)
-   public String showInsertwAskMessage(ProjectVO vo, Model model) { 
+   public String showInsertwAskMessage(ProjectVO vo,MemberVO vo2, Model model, HttpSession session) { 
       
       System.out.println("문의하기 누르면 메세지입력창으로 이동");
+      
+      //이미지가져오려고 이메일 가져오기 
+      memberVO = (MemberVO)session.getAttribute("memberSession");
+	  vo2.setEmail(memberVO.getEmail());
+	  getMemberService.getMember(vo2);
+      model.addAttribute("getMember",getMemberService.getMember(vo2));
       
       vo.setProjectTitle(getProjectService.getProject(vo).getProjectTitle());//title 가져오기
       vo.setCreator(getProjectService.getProject(vo).getCreator());//creator 가져오기
