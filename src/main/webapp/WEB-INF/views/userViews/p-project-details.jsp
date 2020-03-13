@@ -12,6 +12,29 @@
 
 <jsp:include page="./include/i-head-setting.jsp" />
 
+<style>
+.white-popup{
+  position: relative;
+  background: #FFF;
+  padding: 40px;
+  width: auto;
+  max-width: 600px;
+  margin: 20px auto;
+  text-align: center;
+}
+h6{
+	color:black;
+	font-size:75%;
+}
+</style>
+<script>
+$(document).ready(function(){
+	$(".showReport").magnificPopup({
+		type:'inline',
+		midClick:true
+	});
+});
+</script>
 </head>
 
 <body>
@@ -55,10 +78,68 @@
 		
 			<article class="row d-flex justify-content-center">
 				<aside id="project-main-img" class="col-8">
-				
-					<c:if test="${project ne null }">
-						${project.projectIntroduceVideo }"
-					</c:if>
+					<nav>
+					    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+					   		<a class="nav-item nav-link active" id="nav-images-tab" data-toggle="tab" href="#nav-images" role="tab" aria-controls="nav-images" aria-selected="true">소개 이미지</a>
+				            <a class="nav-item nav-link" id="nav-video-tab" data-toggle="tab" href="#nav-video" role="tab" aria-controls="nav-video" aria-selected="false" >소개 영상</a>
+				            
+					    
+					    </div>
+					</nav>
+					
+					<div class="tab-content p-3" id="nav-tabContent">
+					    <div class="tab-pane fade show active" id="nav-images" role="tabpanel" aria-labelledby="nav-images-tab">
+					  		
+							<div id="carouselIntroduceImages" class="carousel slide">
+							
+							    <ol class="carousel-indicators">
+							        <li data-target="#carouselIntroduceImages" data-slide-to="0" class="active"></li>
+							        <li data-target="#carouselIntroduceImages" data-slide-to="1"></li>
+							        <li data-target="#carouselIntroduceImages" data-slide-to="2"></li>
+							    </ol>
+								<div class="carousel-inner">
+									<c:forEach var="projectIntroduceImage" items="${projectIntroduceImageList }" varStatus="cnt">
+										<c:choose>
+											<c:when test="${cnt.first }">
+												<div class="carousel-item active">
+													<div class="thumbnail-wrap">
+							                            <div class="thumbnail">
+							                                <div class="centered">
+							                                	<img src="${projectIntroduceImage.projectIntroduceImage }" class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+							                                </div>
+							                            </div>
+							                        </div>
+												</div>
+											</c:when>
+											<c:otherwise>
+												<div class="carousel-item">
+													<div class="thumbnail-wrap">
+							                            <div class="thumbnail">
+							                                <div class="centered">
+							                                	<img src="${projectIntroduceImage.projectIntroduceImage }" class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+							                                </div>
+							                            </div>
+							                        </div>
+												</div>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+									
+								</div>
+								<a class="carousel-control-prev" href="#carouselIntroduceImages" role="button" data-slide="prev">
+								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								<span class="sr-only">Previous</span>
+								</a>
+								<a class="carousel-control-next" href="#carouselIntroduceImages" role="button" data-slide="next">
+									<span class="carousel-control-next-icon" aria-hidden="true"></span>
+									<span class="sr-only">Next</span>
+								</a>
+							</div>		
+					    </div>
+					    <div class="tab-pane fade" id="nav-video" role="tabpanel" aria-labelledby="nav-video-tab">
+							${project.projectIntroduceVideo }
+					    </div>
+					</div>			
 				</aside>
 				
 				<aside id="project-details-info"
@@ -100,7 +181,7 @@
 						</div>
 					</div>
 					<div class="p-2 bd-highlight mt-auto ml-0">
-						<form id="supportProject" action="supportProject.udo" method="GET">
+						<form id="supportProject" action="supportProjectInterceptor.udo" method="GET">
 							<input type="hidden" name="projectNo" value="${project.projectNo }">
 							<a class="btn btn-lg btn-spon-prj d-none d-lg-inline-block pr-5 pl-5 mb-2"
 								href="javaScript: return(0);" onclick="document.getElementById('supportProject').submit();">
@@ -108,14 +189,9 @@
 						</form>
 					</div>
 					<div class="row d-flex justify-content-around m-0 ">
-						<a
-							class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2"
-							href="#">좋아요</a> <a
-							class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2"
-							href="showInsertwAskMessage.udo?projectNo=${project.projectNo }">문의하기</a> <a
-							class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2"
-							href="#">공유하기</a>
-
+						<a class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2" href="upCountLikeInterceptor.udo?projectNo=${project.projectNo }">좋아요   ${likeCount}</a> 
+						<a class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2" href="showInsertwAskMessageInterceptor.udo?projectNo=${project.projectNo }">문의하기</a> 
+						<a class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2" href="#">공유하기</a>
 					</div>
 
 				</aside>
@@ -152,7 +228,7 @@
 							<div class="comment-form">
 								<h4>리뷰 게시판 글 남기기</h4>
 								
-								<form class="form-contact comment_form" action="insertProjectBoard.udo" 
+								<form class="form-contact comment_form" action="insertProjectBoardInterceptor.udo" 
 												id="commentForm" method="get">
 									<input type="hidden" name="projectNo" value="${project.projectNo}">
 									<div class="row">
@@ -189,8 +265,7 @@
 								
 								<!-- projectBoard 시작 -->
 								<c:forEach var="b1" items="${getProjectBoardList}">
-									<c:if test="${b1.step eq 0}"> 
-										
+									<c:if test="${b1.step eq 0}"> 										
 										<div class="comment-list">
 											<div class="single-comment justify-content-between d-flex">
 												<div class="user justify-content-between d-flex">
@@ -204,7 +279,7 @@
 														<div class="d-flex justify-content-between">
 															<div class="d-flex align-items-center">
 																<h5>
-																	<a href="javaScript:return(0);">${b1.member.name }</a>
+																	<a href="http://localhost:8080/funthing/projectDetails.udo?projectNo=${project.projectNo }" onclick="window.open(this.href,'_blank','width=100px, height=100px, toolvars=no'); return false;">${b1.member.name }</a>
 																</h5>
 																<p class="date">${b1.projectBoardDate}</p>
 															</div>
@@ -245,10 +320,10 @@
 							                                          <div class="single-comment justify-content-between d-flex">
 							                                             <div class="user justify-content-between d-flex p-3"
 							                                                style="background-color: whitesmoke;">
-							                                                <div class="thumb">
-							                                                   <img src="${pageContext.request.contextPath}/resources/user/img/comment/comment_2.png" alt="">
-							                                                </div>
-							                                                <div class="desc" style="width: 500px;">
+																				<div id="projectBoard-profile" class="thumb">
+																					<img class="profile" src="${b2.member.myImage }">
+																				</div>
+																				<div class="desc" style="width: 500px;">
 							                                                    <p class="comment">
 							                                                   		${b2.projectBoardContents}
 							                                                    </p>
@@ -312,8 +387,7 @@
 										<h5 class="card-title">${reward.rewardPrice }</h5>
 										<h6 class="card-subtitle mb-2 text-muted">${reward.rewardName }</h6>
 										<p class="card-text">${reward.rewardContent }</p>
-										<p class="card-text">${reward.shippingNeed }</p>
-										<p class="card-text">${reward.rewardMonth }월  ${reward.rewardDay } 배송예정</p>
+										<p class="card-text">${reward.rewardMonth }  ${reward.rewardDay } 배송예정</p>
 										<c:forEach var="option" items="${reward.rewardOptionList }">
 											<p class="card-text">${option.rewardOptionKey } | ${option.rewardOptionValue }</p>
 										</c:forEach>
@@ -322,12 +396,129 @@
 								</div>
 							</c:forEach>
 							<!-- 리워드 반복 끝-->
+							
+							<div>
+								<div class="card mb-3" style="width: 18rem;">
+									<div class="p-2 bd-highlight mt-auto ml-0">
+										<h5>신고하기란?</h5>
+										<h6>해당 프로젝트에 허위내용 및 지적재산권을 침해하는 내용이 있다면 제보해주세요</h6>
+										<a class="showReport btn btn-lg btn-spon-prj d-none d-lg-inline-block pr-5 pl-5 mb-2"
+										   href="#showReportPage"> 프로젝트 신고하기</a>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</article>
 			</div>
 		</div>
 	</section>
+	
+	<div id="showReportPage" class="white-popup mfp-hide">
+		<form id="reports" action="insertReportInterceptor.udo" method="POST">
+			<input type="hidden" value="${project.projectNo}" name="projectNo">
+			<input type="hidden" value="${project.email}" name="email">
+	        <div class="report_popup_box ">
+	            <div class="popup_inner ">
+	                <div class="container ">
+	                    <div class="row pb-1">
+	                        <h4>프로젝트 신고하기</h4>
+	                    </div>
+	                    <hr>
+	                    <div class="row">
+	                        <span>신고 이유가 무엇인가요?</span>
+	                    </div>
+	                    <div class="row d-flex align-items-center">
+	                        <div class="p-2 bd-highlight">
+	                            <div class="form-check primary-radio ">
+	                                <input class="form-check-input primary-radio checkbox" type="radio" name="reasonSelect"
+	                                    id="primary-radio1" value="스토리에 허위사실이 있습니다." checked>
+	                                <label for="primary-radio1"></label>
+	                            </div>
+	                        </div>
+	                        <div class="d-flex p-2 bd-highlight">스토리에 허위사실이 있습니다.</div>
+	                    </div>
+	                    <div class="row d-flex align-items-center">
+	                        <div class="p-2 bd-highlight">
+	                            <div class="form-check primary-radio ">
+	                                <input class="form-check-input primary-radio checkbox" type="radio" name="reasonSelect"
+	                                    id="primary-radio2" value="지적 재산권을 침해하고 있습니다." >
+	                                <label for="primary-radio2"></label>
+	                            </div>
+	                        </div>
+	                        <div class="d-flex p-2 bd-highlight">지적 재산권을 침해하고 있습니다.</div>
+	                    </div>
+	                    <div class="row d-flex align-items-center">
+	                        <div class="p-2 bd-highlight">
+	                            <div class="form-check primary-radio ">
+	                                <input class="form-check-input primary-radio checkbox" type="radio" name="reasonSelect"
+	                                    id="primary-radio3" value="다른 채널에서 판매되고 있는 제품입니다." >
+	                                <label for="primary-radio3"></label>
+	                            </div>
+	                        </div>
+	                        <div class="d-flex p-2 bd-highlight">다른 채널에서 판매되고 있는 제품입니다.</div>
+	                    </div>
+	                    <div class="row d-flex align-items-center">
+	                        <div class="p-2 bd-highlight">
+	                            <div class="form-check primary-radio ">
+	                                <input class="form-check-input primary-radio checkbox" type="radio" name="reasonSelect"
+	                                    id="primary-radio4" value="메이커와 오랫동안 연락이 되지 않습니다." >
+	                                <label for="primary-radio4"></label>
+	                            </div>
+	                        </div>
+	                        <div class="d-flex p-2 bd-highlight">메이커와 오랫동안 연락이 되지 않습니다.</div>
+	                    </div>
+	                    <div class="row d-flex align-items-center">
+	                        <div class="p-2 bd-highlight">
+	                            <div class="form-check primary-radio ">
+	                                <input class="form-check-input primary-radio checkbox" type="radio" name="reasonSelect"
+	                                    id="primary-radio5" value="사회적 공익을 저해할 우려가 있습니다.">
+	                                <label for="primary-radio5"></label>
+	                            </div>
+	                        </div>
+	                        <div class="d-flex p-2 bd-highlight">사회적 공익을 저해할 우려가 있습니다.</div>
+	                    </div>
+	                    <div class="row d-flex align-items-center">
+	                        <div class="p-2 bd-highlight">
+	                            <div class="form-check primary-radio ">
+	                                <input class="form-check-input primary-radio checkbox" type="radio" name="reasonSelect"
+	                                    id="primary-radio6" value="기타">
+	                                <label for="primary-radio6"></label>
+	                            </div>
+	                        </div>
+	                        <div class="d-flex p-2 bd-highlight">기타</div>
+	                    </div>
+	                    <div class="row mt-30">
+	                        <h6>상세내용을 작성해주세요.</h6>
+	                    </div>
+	                    <div class="row">
+	                        <div class="form-group col-12 ">
+	                            <textarea name="reason" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+	                        </div>
+	                    </div>
+	                    <div class="row">
+	                        <p>
+	                            - 신고/제보를 통해 접수된 의견은 와디즈 프로젝트 운영에 반영되며 별도로 제보자에게 회신드리지 않습니다.<br>
+	                            - 와디즈가 건전한 크라우드펀딩 생태계 조성을 할 수 있도록 도움을 주심에 감사드리며, 
+	                                                        근거 없는 비방 내용의 경우에는 법적 처벌대상이 될 수 있사오니 유의해주시기 바랍니다.
+	                        </p>
+	                    </div>
+	
+	                    <div class="row d-flex justify-content-end">
+	                        <div>
+	                            <a class="btn btn-lg btn-report-cancel d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
+	                                href="#">취소</a>
+	                        </div>
+	                        <div>
+	                            <a class="btn btn-lg btn-report-submit d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
+	                                href="javaScript:return(0);" onclick="javascript:document.getElementById('reports').submit();">제출하기</a>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </form>
+    </div>
 
 	<!-- footer -->
 	<footer class="footer"> </footer>

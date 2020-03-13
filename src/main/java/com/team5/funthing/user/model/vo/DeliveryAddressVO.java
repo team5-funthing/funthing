@@ -1,5 +1,8 @@
 package com.team5.funthing.user.model.vo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class DeliveryAddressVO {
 
 	private int deliveryAddressNo;

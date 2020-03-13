@@ -25,8 +25,6 @@ public class ProjectDAO {
 	}
 	
 	public void updateProject(ProjectVO vo) {
-		System.out.println("updateProject");
-		System.out.println(vo.toString());
 		sqlSessionTemplate.update("updateProject", vo);
 	}
 	
@@ -59,6 +57,10 @@ public class ProjectDAO {
 	
 	public List<ProjectVO> getTodayClosedProjectList() {
 		return sqlSessionTemplate.selectList("getTodayClosedProjectList");
+	}
+	
+	public void updateProjectAfterPaymentCancel(ProjectVO vo) {
+		sqlSessionTemplate.update("updateProjectAfterPaymentCancel", vo);
 	}
 	
 	

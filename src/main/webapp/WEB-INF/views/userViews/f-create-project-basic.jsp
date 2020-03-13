@@ -18,7 +18,6 @@
    <jsp:include page="./include/i-popupover-mypage.jsp"/>
    <jsp:include page="./include/i-header.jsp"/>
 
-   <!-- 비밀번호 찾기 폼 -->
    <div class="wrap">
       <div class="container">
          <div class="row">
@@ -30,24 +29,26 @@
                   <form action="insertCreatorAndInsertProject.udo" id="inputProjectBasicSetting" method="post" enctype="multipart/form-data">
                      <div class="h2 col align-self-center mt-10">프로젝트 기본 설정</div>
                      <div class="mt-30">
-                     <c:choose>
-                        <c:when test="${empty getCreatorList}">
-
-                        </c:when>
-                        <c:when test="${not empty getCreatorList}">
-                           <div class="form-group">
-                               <label for="existCreator"><h5>기존 창작자 | 업체명</h5></label>
-                               <p>기존 생성한 창작자 또는 업체명을 통해 프로젝트를 만드시려면 선택해주세요.</p>
-                               <select class="form-control form-control-lg"  id="existCreator">
-                                  <option value="newCreator">선택 안함</option>
-                                  <c:forEach var="creatorList" items="${getCreatorList }">
-                                    <option value="${creatorList.creator }">${creatorList.creator }</option>
-                                 </c:forEach>
-                               </select>
-                           </div>
-                        </c:when>
-                     </c:choose>
+	                     <c:choose>
+	                        <c:when test="${empty getCreatorList}">
+	
+	                        </c:when>
+	                        <c:when test="${not empty getCreatorList}">
+	                           <div class="form-group">
+	                               <label for="existCreator"><h5>기존 창작자 | 업체명</h5></label>
+	                               <p>기존 생성한 창작자 또는 업체명을 통해 프로젝트를 만드시려면 선택해주세요.</p>
+	                               <select class="form-control form-control-lg"  id="existCreator">
+	                                  <option value="newCreator">선택 안함</option>
+	                                  <c:forEach var="creatorList" items="${getCreatorList }">
+	                                    <option value="${creatorList.creator }">${creatorList.creator }</option>
+	                                 </c:forEach>
+	                               </select>
+	                           </div>
+	                        </c:when>
+	                     </c:choose>
                      </div>
+                     
+                     
                      <div class="mt-30">
                         <label for="newCreator"><h5>창작자 | 업체명 *</h5></label>
                            <input name="creator" id="newCreator" class="form-control form-control-lg" type="text"
@@ -63,6 +64,8 @@
                         
                         $(document).on("propertychange change keyup paste input","#newCreator", function(){
                            
+                        	
+                        	
                                var jsonData = $("#newCreator").serializeObject();
                                
                                  $.ajax({
@@ -80,8 +83,6 @@
                                      }
                                      
                                   
-                                     
-                                     
                                   },
                                   error: function(errorThrown) {
                                       alert(errorThrown.statusText);
@@ -95,25 +96,30 @@
                      <div class="mt-30">
                         <h5>이메일</h5>
                         <input name="email" class="form-control form-control-lg" type="text"
-                           value="${basicProjectSetting.email }" class="single-input">
+                           value="${basicProjectSetting.email }" class="single-input" readonly>
                      </div>
                      
                      <div class="mt-30">
                         <h5>창작자 프로필 사진</h5>
                         <div class="input-group mt-2 mb-3">
                             <div class="form-group">
-                                 <label for="creatorProfile">프로필에 사용할 사진을 선택해주세요.</label>
-                               <input type="file" id="creatorProfile" name="creatorUploadImage" class="form-control-file">
+                                 <label for="creatorProfile">창작자 프로필에 사용할 사진을 선택해주세요.</label>
+                               <input type="file" id="creatorProfile" name="creatorUploadImage" 
+                               	onchange="ValidateSingleInput(this);"
+                                class="form-control-file">
                             </div>
-                           <div class="creator_select_img"><img src="" /></div>
+                            <div id="detail-mypage-profile-img" style="background: #BDBDBD;">
+                        		<img class="creator_select_img profile" src="">
+                     		</div>
                         </div>
                         <script>
                               $("#creatorProfile").change(function(){
                                  if(this.files && this.files[0]){
                                     var reader = new FileReader;
                                     reader.onload = function(data){
-                                       $(".creator_select_img img").attr("src", data.target.result).width(200);
+                                       $("#detail-mypage-profile-img img").attr("src", data.target.result).width(150);
                                     }
+                                    
                                     reader.readAsDataURL(this.files[0]);
                                  }
                               })
@@ -121,39 +127,19 @@
                      </div>
                      <div class="mt-30">
                         <h5>문의 전화번호*</h5>
-                        <input name="makerPhone" class="form-control form-control-lg" type="text"
+                        <input name="makerPhone" class="form-control form-control-lg phone-number-check" type="text"
                            class="single-input" required>
-                     </div>
-                     <div class="mt-30">
-                        <h5>사업자번호</h5>
-                        <input name="businessNumber" class="form-control form-control-lg" type="text"
-                           class="single-input">
-                     </div>
-                     <div class="mt-30">
-                        <h5>소재지</h5>
-                        <input name="businessAddress" class="form-control form-control-lg" type="text"
-                           class="single-input">
-                     </div>               
+
+					 </div>              
                      <div class="mt-30">
                         <h5>통장 사본*</h5>
                         <div class="input-group mt-2 mb-3">
                             <div class="form-group">
-                                 <label for="creatorProfile">프로필에 사용할 사진을 선택해주세요.</label>
-                               <input type="file" id="businessUpload" name="businessUploadFile" class="form-control-file">
+                                 <label for="creatorProfile">프로젝트 진행하기 위해서는 반드시 통장 사본이 확인되어야 합니다.</label>
+                               <input type="file" onchange="ValidateSingleDocumentFileInput(this);"
+                               id="businessUpload" name="businessUploadFile" class="form-control-file">
                             </div>
-                           <div class="business_select_img"><img src="" /></div>
                         </div>
-                        <script>
-                              $("#businessUpload").change(function(){
-                                 if(this.files && this.files[0]){
-                                    var reader = new FileReader;
-                                    reader.onload = function(data){
-                                       $(".business_select_img img").attr("src", data.target.result).width(400);
-                                    }
-                                    reader.readAsDataURL(this.files[0]);
-                                 }
-                              })
-                        </script>
                      </div>                        
                      
                      <hr>
@@ -184,7 +170,7 @@
        <form action ="mypage.udo" method="GET" id="exist-writingProject-popup" class="white-popup-block mfp-hide" >
            <div class="popup_box">
                <div class="popup_inner">
-               현재 작성 중인 프로젝트가 있습니다.
+              		 현재 작성 중인 프로젝트가 있습니다.
                     <p>작성 중인 프로젝트를 수정하거나 새로운 프로젝트를 시작할 수 있습니다.</p>
                     <div class="d-flex justify-content-around">
                         <a href="#" class="btn-lg btn-bd-purple d-none d-lg-inline-block m-1 popup-modal-dismiss">새로 만들기</a>
@@ -230,6 +216,7 @@
                if(val == "newCreator"){
                   
                   
+            	   
                   
                   $("#newCreator").attr("placeholder", "창작자 또는 업체명을 입력하세요.");
                   $("#newCreator").attr("onblur", "this.placeholder = '창작자 또는 업체명을 입력하세요.'");
@@ -247,10 +234,14 @@
                   $("#inputProjectBasicSetting").attr("action","");
                   $("#inputProjectBasicSetting").attr("action","insertCreatorAndInsertProject.udo");
                   
+                  $('#detail-mypage-profile-img').empty();
+                  $('#detail-mypage-profile-img').append("<img class='creator_select_img profile' src=''>");
+                  
 
                }
                
                else{
+            	   
                   $("#existCreator").attr("name","creator");
                   var jsonData = $("#existCreator").serializeObject();
                   
@@ -270,14 +261,20 @@
                             $("#newCreator").removeAttr("placeholder");
                             $("#newCreator").removeAttr("onblur");
                             
+                            
                             $("input[name='makerPhone']").attr("value", selectedCreator.makerPhone);
                             $("input[name='businessNumber']").attr("value", selectedCreator.businessNumber);
                             $("input[name='businessAddress']").attr("value", selectedCreator.businessAddress);
                             
                             $("#inputProjectBasicSetting").attr("action","");
                            $("#inputProjectBasicSetting").attr("action","updateCreatorAndInsertProject.udo");
-                            
-                            
+                           
+                           $('#detail-mypage-profile-img').empty();
+                           $('#detail-mypage-profile-img').append(	"<img class='creator_select_img profile' src=''>"
+                        		   								+	"<input type='hidden' id='creatorProfileImageInput'  name='creatorProfileImage'>");
+                           
+                           $("#creatorProfileImageInput").attr("value", selectedCreator.creatorProfileImage);
+                           $('.creator_select_img').attr("src", selectedCreator.creatorProfileImage);
                          },
                          error: function(errorThrown) {
                              console.log(errorThrown.statusText);

@@ -42,7 +42,6 @@ public class AdminStatisticsController {
 	
 	@RequestMapping(value ="statisticsManagement.ado",method=RequestMethod.POST)
 	public String showStatisticsManagement2(AdminStatisticsVO vo,Model model,String year) {
-		System.out.println(year);
 	    vo.setYearr(year);
 	    model.addAttribute("fundingMoneyPerMonth",fmpm.getFundingMoneyPerMonth(vo));
 	    model.addAttribute("successRatio",perYear.getProjectSuccessRatioPerYear(vo));

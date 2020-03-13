@@ -1,6 +1,5 @@
 package com.team5.funthing.user.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -14,14 +13,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.team5.funthing.user.api.kakaoPay.AmountVO;
-import com.team5.funthing.user.api.kakaoPay.CardVO;
+import com.team5.funthing.user.api.kakaoPay.KakaoPayCancelVO;
 import com.team5.funthing.user.api.kakaoPay.KakaoPayService;
 import com.team5.funthing.user.model.vo.DeliveryAddressVO;
+import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.model.vo.PaymentReserveVO;
+import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.model.vo.RewardSelectionVO;
 import com.team5.funthing.user.model.vo.RewardVO;
 import com.team5.funthing.user.service.deliveryService.GetDeliveryAddressService;
+import com.team5.funthing.user.service.paymentReserveService.GetPaymentReserveListByEmailService;
 import com.team5.funthing.user.service.paymentReserveService.GetPaymentReserveService;
 import com.team5.funthing.user.service.rewardService.GetRewardService;
 
@@ -36,12 +37,22 @@ public class PaymentReservationController {
 	@Setter(onMethod_ = { @Autowired })
 	private KakaoPayService kakaoPayService;
 	
+	
+	
 	@Autowired
 	private GetRewardService getRewardService;
 	@Autowired
 	private GetPaymentReserveService getPaymentReserveService;
 	@Autowired
 	private GetDeliveryAddressService getDeliveryAddressService;
+
+	@Autowired
+	private GetPaymentReserveListByEmailService getPaymentReserveListByEmailService;
+	
+	@Autowired
+	private DeliveryAddressVO deliveryAddressVO;
+	@Autowired
+	private MemberVO memberVO;
 	
 	
 	@RequestMapping(value = "/insertselectedReward.udo", method= RequestMethod.POST)
@@ -51,6 +62,7 @@ public class PaymentReservationController {
 										Model model,
 										HttpSession session) {
 		
+		@SuppressWarnings("unchecked")
 		List<RewardSelectionVO> selectedRewardList = (List<RewardSelectionVO>)session.getAttribute("selectedRewardList");
 		
 		if(selectedRewardList == null || selectedRewardList.isEmpty()) {
@@ -59,6 +71,7 @@ public class PaymentReservationController {
 			
 			return "redirect:supportProject.udo";
 		}
+		
 		
 		session.setAttribute("paymentReserve", prvo);
 		
@@ -70,6 +83,8 @@ public class PaymentReservationController {
 										Model model,
 										RewardVO rvo,
 										DeliveryAddressVO davo) {
+		
+		@SuppressWarnings("unchecked")
 		List<RewardSelectionVO> selectedRewardList = (List<RewardSelectionVO>)session.getAttribute("selectedRewardList");
 
 		for(RewardSelectionVO rs : selectedRewardList) {
@@ -93,6 +108,7 @@ public class PaymentReservationController {
 													DeliveryAddressVO davo) {
 		
 		
+		@SuppressWarnings("unchecked")
 		List<RewardSelectionVO> selectedRewardList = (List<RewardSelectionVO>)session.getAttribute("selectedRewardList");
 		int projectNo = selectedRewardList.get(0).getReward().getProjectNo();
 		
@@ -110,12 +126,14 @@ public class PaymentReservationController {
 										PaymentReserveVO prvo,
 										DeliveryAddressVO davo) { 
 		log.info("kakaoPaySuccess get............................................");
-		 
+		
 		int orderNo = Integer.parseInt(orderNoStr);
 		
 		prvo.setOrderNo(orderNo);
 		System.out.println(orderNo);
 		prvo = getPaymentReserveService.getPaymentReserve(prvo);
+		kakaoPayService.kakaoPayInfo(pg_token, orderNo);
+		
 		davo.setDeliveryAddressNo(prvo.getDeliveryAddressNo());
 		davo = getDeliveryAddressService.getDeliveryAddress(davo);
 		
@@ -124,14 +142,51 @@ public class PaymentReservationController {
 		model.addAttribute("projectNo", prvo.getProjectNo());
 
 		return "p-payment-result";
-//		return "kakaoPaySuccess";
 	}// 결제 내역 결과 보여주기
 	
 	
+	@RequestMapping(value = "paymentReservationCheckList.udo", method = RequestMethod.POST )
+	public String myPaymentReservationCheckList(HttpSession session,
+												Model model, PaymentReserveVO prvo) {
+		
+		System.out.println("결제내역 보기 이동");
+		
+		memberVO = (MemberVO)session.getAttribute("memberSession");
+		
+		prvo.setEmail(memberVO.getEmail());
+		
+		
+		List<PaymentReserveVO> paymentReserveList = getPaymentReserveListByEmailService.getPaymentReserveListByEmail(prvo);
+		model.addAttribute("paymentReserveList", paymentReserveList);
+		
+		return "p-payment-reservation-check";
+	}
+	
+	@RequestMapping(value = "paymentReservationDetail.udo", method = RequestMethod.POST )
+	public String paymentReservationDetail(Model model, PaymentReserveVO prvo) {
+		
+		
+		prvo = getPaymentReserveService.getPaymentReserve(prvo);
+		
+		System.out.println("결제내역 상세보기 이동");
+		model.addAttribute("paymentReserve", prvo);
+		
+		deliveryAddressVO.setDeliveryAddressNo(prvo.getDeliveryAddressNo());
+		deliveryAddressVO = getDeliveryAddressService.getDeliveryAddress(deliveryAddressVO);
+		
+		model.addAttribute("deliveryAddress", deliveryAddressVO);
+		
+		return "p-payment-reservation-detail";
+	}
 	
 	
-	
-	
+	@RequestMapping(value = "paymentCancel.udo", method = RequestMethod.POST)
+	public String attemptPaymentReserveByKaKaoPay(	PaymentReserveVO prvo, DeliveryAddressVO davo) {
+		kakaoPayService.kakaoPayCancel(prvo);
+		
+		return "redirect: paymentReservationCheckList.udo";
+        
+	}
 	
 	
 	

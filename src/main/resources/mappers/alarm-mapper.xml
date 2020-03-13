@@ -19,6 +19,13 @@
 		VALUES(alarm_seq.nextval,#{alarmType},#{detailAlarmType,jdbcType=VARCHAR},#{receiveId},#{alarmMessage,jdbcType=VARCHAR},#{readConfirm},#{projectNo})
 	</insert>
 
+	<!-- report alarm -->
+	<!-- 신고하기 실행후에 발생하는 쿼리 -->
+	<insert id="insertProjectReportAlarm" parameterType="alarm">
+		INSERT INTO alarm(alarmNo, alarmType, detailAlarmType, receiveId, alarmMessage, readConfirm, projectNo) 
+		VALUES(alarm_seq.nextval,#{alarmType},#{detailAlarmType,jdbcType=VARCHAR},#{receiveId},#{alarmMessage,jdbcType=VARCHAR},#{readConfirm},#{projectNo})
+	</insert>
+	
 	<!-- common alarm -->
 	<!-- 해당 알람을 확인 한 경우 -->
 	<update id="updateReadConfirmAlarm" parameterType="alarm">

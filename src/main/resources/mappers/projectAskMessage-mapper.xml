@@ -27,7 +27,7 @@
 	
 	<!-- 그아이디 관련 전체 문의글 가져오기 -->
 	<select id="getEntireProjectAskMessageList" resultType="projectAskMessage" parameterType="projectAskMessage">
-		SELECT * FROM projectAskMessage where email = #{email}
+		SELECT * FROM projectAskMessage where email = #{email} order by projectAskDate desc
 	
 	</select>
 	
@@ -56,7 +56,9 @@
 	
 	<resultMap type="project" id="project">
 		<result column="projectNo" property="projectNo" />
-		<result column="proejctMainImage" property="proejctMainImage" />
+		<result column="projectMainImage" property="projectMainImage" />
+		<result column="projectTitle" property="projectTitle" />
+		
 	</resultMap>
 
 	<resultMap type="projectAskMessage" id="projectAskMessage">
@@ -78,9 +80,8 @@
 	</resultMap>
 	
 	<!-- 메이커 관련 전체 문의글 가져오기 -->
-	<select id="getEntireProjectMakerAskMessageList" resultType="projectAskMessage" parameterType="projectAskMessage">
-		SELECT projectAskMessage.*, project.proejctMainImage FROM projectAskMessage where creator = #{creator} 
-	
+	<select id="getEntireProjectMakerAskMessageList" parameterType="projectAskMessage"  resultMap="projectAskMessage">
+		select pm.*, p.* from projectAskMessage pm join project p on p.projectNo = pm.projectNo where pm.creator = #{creator} order by projectAskDate desc
 	</select>
 	
 

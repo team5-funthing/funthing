@@ -348,10 +348,27 @@ $('.popover-dismiss').popover({
 })
 
 
+$(window).resize(function() {
+	resizeYoutube();
+});
+
+$(function() {
+	resizeYoutube();
+});
+
+function resizeYoutube() {
+	$("iframe").each(function() {
+		if (/^https?:\/\/www.youtube.com\/embed\//g.test($(this).attr("src"))) {
+			$(this).css("width", "100%");
+			$(this).css("height", Math.ceil(parseInt($(this).css("width")) * 480 / 854) + "px");
+		}
+	});
+} 
 
 // 소개컨텐츠 동영상 링크 업로드 부분
 $(document).on("click","#urlBtn",function(){
 
+	
 	var sourceCode = $('#urlVideo').val();
 
 	function replaceAll(sourceCode, oldChar, newChar){
@@ -363,6 +380,7 @@ $(document).on("click","#urlBtn",function(){
 
 	if(sourceCode != ""){
 		$("#toAppendIframeDiv").append(sourceCode);
+//		$("iframe").attr("src", sourceCode);
 		$("#projectIntroduceVideoInput").attr("value", sourceCode);
 
 		var removeUrlBtn = "<div class='input-group-append urlBtn-remove'><a class='btn fas fa-times fa-2x' type='button' id='urlBtn'></a></div>";
@@ -567,11 +585,101 @@ $(document).on("click",".clickKeyword",function(){
 
 });
 
+$(function(){
+	$(".phone-number-check").on('keydown', function(e){
+		// 숫자만 입력받기
+		var trans_num = $(this).val().replace(/-/gi,'');
+		var k = e.keyCode;
+
+		if(trans_num.length >= 11 && ((k >= 48 && k <=126) || (k >= 12592 && k <= 12687 || k==32 || k==229 || (k>=45032 && k<=55203)) ))
+		{
+			e.preventDefault();
+		}
+	}).on('blur', function(){ // 포커스를 잃었을때 실행합니다.
+		if($(this).val() == '') return;
+
+		// 기존 번호에서 - 를 삭제합니다.
+		var trans_num = $(this).val().replace(/-/gi,'');
+
+		// 입력값이 있을때만 실행합니다.
+		if(trans_num != null && trans_num != '')
+		{
+			// 총 핸드폰 자리수는 11글자이거나, 10자여야 합니다.
+			if(trans_num.length==11 || trans_num.length==10) 
+			{   
+				// 유효성 체크
+				var regExp_ctn = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})([0-9]{3,4})([0-9]{4})$/;
+				if(regExp_ctn.test(trans_num))
+				{
+					/* // 유효성 체크에 성공하면 하이픈을 넣고 값을 바꿔줍니다.
+                        trans_num = trans_num.replace(/^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?([0-9]{3,4})-?([0-9]{4})$/, "$1-$2-$3");                  
+                        $(this).val(trans_num); */
+				}
+				else
+				{
+					alert("유효하지 않은 전화번호 입니다.");
+					$(this).val("");
+					$(this).focus();
+				}
+			}
+			else 
+			{
+				alert("유효하지 않은 전화번호 입니다.");
+				$(this).val("");
+				$(this).focus();
+			}
+		}
+	});  
+});
 
 
+var _validFileExtensions = [".jpg", ".jpeg", ".bmp", ".gif", ".png"];    
+function ValidateSingleInput(oInput) {
+    if (oInput.type == "file") {
+        var sFileName = oInput.value;
+         if (sFileName.length > 0) {
+            var blnValid = false;
+            for (var j = 0; j < _validFileExtensions.length; j++) {
+                var sCurExtension = _validFileExtensions[j];
+                if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                    blnValid = true;
+                    break;
+                }
+            }
+             
+            if (!blnValid) {
+                alert(sFileName + "은 올바른 확장자 파일이 아닙니다." + _validFileExtensions.join(", "));
+                oInput.value = "";
+                return false;
+            }
+        }
+    }
+    return true;
+}
 
-
-
+var _validDocumentFileExtensions = [".hwp", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pdf", ".jpg", ".jpeg", ".bmp", ".gif", ".png"];    
+function ValidateSingleDocumentFileInput(oInput) {
+    if (oInput.type == "file") {
+        var sFileName = oInput.value;
+         if (sFileName.length > 0) {
+            var blnValid = false;
+            for (var j = 0; j < _validFileExtensions.length; j++) {
+                var sCurExtension = _validFileExtensions[j];
+                if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                    blnValid = true;
+                    break;
+                }
+            }
+             
+            if (!blnValid) {
+                alert(sFileName + "은 올바른 확장자 파일이 아닙니다. [" + _validDocumentFileExtensions.join(", ") + "]");
+                oInput.value = "";
+                return false;
+            }
+        }
+    }
+    return true;
+}
 
 
 

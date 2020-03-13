@@ -30,54 +30,25 @@ public class ProjectVO {
 	private Date startDate;
 	private Date endDate; 
 	private String projectSummary="";
-	private String projectCaution="";
-//	private List<String> projectIntroduceImage;
 	private String projectIntroduceVideo="";
 	private String projectStory="";
 
-
+	private List<ProjectIntroduceImageVO> projectIntroduceImage;
 
 	private char writeStatus = 'n'; 
 	private char status = 'n';
 	private String statusReplyMessage = "";
 	private char funding = 'n'; 
 
-	private int fundingMoney; 
-	private String supporters; 
-	private char informationAgree = 'n'; 
-
+	private int fundingMoney;
+	private int shippingFee;
+	
+	
 	private int percent;
 	
 	private MemberActivityVO memberActivity;
 	private SearchKeywordVO searchKeyword;
 	private List<RewardVO> reward;
-	
-
-	public List<RewardVO> getReward() {
-		return reward;
-	}
-	public void setReward(List<RewardVO> reward) {
-		this.reward = reward;
-	}
-	public SearchKeywordVO getSearchKeyword() {
-		return searchKeyword;
-	}
-	public void setSearchKeyword(SearchKeywordVO searchKeyword) {
-		this.searchKeyword = searchKeyword;
-	}
-
-	public MemberActivityVO getMemberActivity() {
-		return memberActivity;
-	}
-	public void setMemberActivity(MemberActivityVO memberActivity) {
-		this.memberActivity = memberActivity;
-	}
-	public char getFunding() {
-		return funding;
-	}
-	public void setFunding(char funding) {
-		this.funding = funding;
-	}
 	public Integer getProjectNo() {
 		return projectNo;
 	}
@@ -144,12 +115,6 @@ public class ProjectVO {
 	public void setProjectSummary(String projectSummary) {
 		this.projectSummary = projectSummary;
 	}
-	public String getProjectCaution() {
-		return projectCaution;
-	}
-	public void setProjectCaution(String projectCaution) {
-		this.projectCaution = projectCaution;
-	}
 	public String getProjectIntroduceVideo() {
 		return projectIntroduceVideo;
 	}
@@ -162,29 +127,11 @@ public class ProjectVO {
 	public void setProjectStory(String projectStory) {
 		this.projectStory = projectStory;
 	}
-	public String getSupporters() {
-		return supporters;
+	public List<ProjectIntroduceImageVO> getProjectIntroduceImage() {
+		return projectIntroduceImage;
 	}
-	public void setSupporters(String supporters) {
-		this.supporters = supporters;
-	}
-	public int getFundingMoney() {
-		return fundingMoney;
-	}
-	public void setFundingMoney(int fundingMoney) {
-		this.fundingMoney = fundingMoney;
-	}
-	public char getStatus() {
-		return status;
-	}
-	public void setStatus(char status) {
-		this.status = status;
-	}
-	public char getInformationAgree() {
-		return informationAgree;
-	}
-	public void setInformationAgree(char informationAgree) {
-		this.informationAgree = informationAgree;
+	public void setProjectIntroduceImage(List<ProjectIntroduceImageVO> projectIntroduceImage) {
+		this.projectIntroduceImage = projectIntroduceImage;
 	}
 	public char getWriteStatus() {
 		return writeStatus;
@@ -192,11 +139,35 @@ public class ProjectVO {
 	public void setWriteStatus(char writeStatus) {
 		this.writeStatus = writeStatus;
 	}
+	public char getStatus() {
+		return status;
+	}
+	public void setStatus(char status) {
+		this.status = status;
+	}
 	public String getStatusReplyMessage() {
 		return statusReplyMessage;
 	}
 	public void setStatusReplyMessage(String statusReplyMessage) {
 		this.statusReplyMessage = statusReplyMessage;
+	}
+	public char getFunding() {
+		return funding;
+	}
+	public void setFunding(char funding) {
+		this.funding = funding;
+	}
+	public int getFundingMoney() {
+		return fundingMoney;
+	}
+	public void setFundingMoney(int fundingMoney) {
+		this.fundingMoney = fundingMoney;
+	}
+	public int getShippingFee() {
+		return shippingFee;
+	}
+	public void setShippingFee(int shippingFee) {
+		this.shippingFee = shippingFee;
 	}
 	public int getPercent() {
 		return percent;
@@ -204,19 +175,38 @@ public class ProjectVO {
 	public void setPercent(int percent) {
 		this.percent = percent;
 	}
-	
+	public MemberActivityVO getMemberActivity() {
+		return memberActivity;
+	}
+	public void setMemberActivity(MemberActivityVO memberActivity) {
+		this.memberActivity = memberActivity;
+	}
+	public SearchKeywordVO getSearchKeyword() {
+		return searchKeyword;
+	}
+	public void setSearchKeyword(SearchKeywordVO searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
+	public List<RewardVO> getReward() {
+		return reward;
+	}
+	public void setReward(List<RewardVO> reward) {
+		this.reward = reward;
+	}
 	@Override
 	public String toString() {
 		return "ProjectVO [projectNo=" + projectNo + ", creator=" + creator + ", email=" + email + ", goalMoney="
 				+ goalMoney + ", projectMainImage=" + projectMainImage + ", projectTitle=" + projectTitle
 				+ ", projectSubTitle=" + projectSubTitle + ", category=" + category + ", startDate=" + startDate
-				+ ", endDate=" + endDate + ", projectSummary=" + projectSummary + ", projectCaution=" + projectCaution
-				+ ", projectIntroduceVideo=" + projectIntroduceVideo + ", projectStory=" + projectStory
-				+ ", writeStatus=" + writeStatus + ", status=" + status + ", statusReplyMessage=" + statusReplyMessage
-				+ ", funding=" + funding + ", fundingMoney=" + fundingMoney + ", supporters=" + supporters
-				+ ", informationAgree=" + informationAgree + ", percent=" + percent + ", memberActivity="
+				+ ", endDate=" + endDate + ", projectSummary=" + projectSummary + ", projectIntroduceVideo="
+				+ projectIntroduceVideo + ", projectStory=" + projectStory + ", projectIntroduceImage="
+				+ projectIntroduceImage + ", writeStatus=" + writeStatus + ", status=" + status
+				+ ", statusReplyMessage=" + statusReplyMessage + ", funding=" + funding + ", fundingMoney="
+				+ fundingMoney + ", shippingFee=" + shippingFee + ", percent=" + percent + ", memberActivity="
 				+ memberActivity + ", searchKeyword=" + searchKeyword + ", reward=" + reward + "]";
 	}
-
 	
+	
+		
+
 }

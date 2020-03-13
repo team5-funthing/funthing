@@ -3,22 +3,37 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ReportDAO">
-
-	<!-- <select id="getSomething" parameterType="int" resultType="#package.#modelname">
-		
-	</select> -->
-
-	<!-- <resultMap type="#modelname" id="YourResultSet">
-		<id property="param1" column="columnname1" />
-		<result property="param2" column="columnname2" />
-		<result property="param3" column="columnname3" />
-	</resultMap> -->
+	
+	<resultMap type="project" id="project">
+		<result column="projectNo" property="projectNo"/>
+		<result column="projectTitle" property="projectTitle"/>
+	</resultMap>
+	
+	<resultMap type="report" id="report">
+		<result column="reportNo" property="reportNo"/>
+		<result column="email" property="email"/>
+		<result column="reason" property="reason"/>
+		<result column="reasonSelect" property="reasonSelect"/>
+		<result column="reportDate" property="reportDate"/>
+		<result column="projectNo" property="projectNo"/>
+		<collection property="project" resultMap="project"/>
+	</resultMap>
 	
 	<insert id="insertReport" parameterType="report">
 		insert into report(reportNo,email,projectNo,reason,reasonSelect) 
-		values(report_seq.nextval,${email},${projectNo},${reason},${reasonSelect})
+		values(report_seq.nextval,#{email},#{projectNo},#{reason,jdbcType=VARCHAR},#{reasonSelect})
 	</insert>
 	
-	
+	<select id="getReportList" resultMap="report">
+		SELECT reportNo, report.email, reason, reasonSelect, reportDate, projectTitle, projectNo 
+		FROM report JOIN project 
+		USING(projectNo)
+	</select>
+
+	<select id="getReport" parameterType="report" resultMap="report">
+		SELECT reportNo, report.email, reason, reasonSelect, reportDate, projectTitle, projectNo 
+		FROM report JOIN project 
+		USING(projectNo) WHERE reportNo = #{reportNo}
+	</select>
 
 </mapper>

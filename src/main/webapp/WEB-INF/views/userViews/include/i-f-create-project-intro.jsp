@@ -133,14 +133,11 @@
 				});
 			</script>
 			<select id="categorySelectBox" name="category" class="custom-select" >
-				<!-- <option value="book">도서</option>
-				<option value="publish">출판</option>
-				<option value="performance">공연</option>
-				<option value="art">예술</option> -->
 				<c:forEach var="category" items="${categoryList}">
 					<option value="${category.categoryName}">${category.categoryName}</option>
 				</c:forEach>
 			</select>
+			
 	</div>
 	
 	<div class="p-2 bd-highlight mb-2">
@@ -159,7 +156,10 @@
 
 						<!--<fmt:formatDate var="getEndDate" pattern="yyyy-MM-dd" value="${writingProject.endDate }" />-->
 						
-						<input type="text" id="endDate" value="${writingProject.endDate}" class="datepicker-here" data-language='ko' data-position='right top'>
+						<input type="text" id="endDate" class="datepicker-here" data-language='ko' data-position='right top'>
+						
+						<input type="hidden" name="endDateStr" value="${endDateStr}">
+						
 						<p id="afterSelectDate">
 							펀딩 결제일 &nbsp;
 							<strong><span style="color: #2980b9">${writingProject.endDate }</span></strong>

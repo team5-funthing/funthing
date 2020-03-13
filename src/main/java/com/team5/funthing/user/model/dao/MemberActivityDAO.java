@@ -13,47 +13,49 @@ import com.team5.funthing.user.model.vo.MemberActivityVO;
 @Repository
 public class MemberActivityDAO {
 	@Autowired
-	SqlSessionTemplate st;
+	SqlSessionTemplate sqlSessionTemplate;
 
 	public MemberActivityVO getMemberActivityProjectList(MemberActivityVO vo) {
-		vo.setProjectReportCount(st.selectOne("MeberActivityDAO.projectLikeCount").toString());
-		vo.setProjectLikeCount(st.selectOne("MeberActivityDAO.projectReportCount").toString());
-		vo.setProjectReservationCount(st.selectOne("MeberActivityDAO.projectReservationCount").toString());
+		//vo.setProjectReportCount(sqlSessionTemplate.selectOne("MeberActivityDAO.projectLikeCount").toString());
+		//vo.setProjectLikeCount(sqlSessionTemplate.selectOne("MeberActivityDAO.projectReportCount").toString());
+		//vo.setProjectReservationCount(sqlSessionTemplate.selectOne("MeberActivityDAO.projectReservationCount").toString());
 		return vo;
 	}
 
 	public MemberActivityVO getMemberActivityMemberList(MemberActivityVO vo) {
-		vo.setMemberLikeCount(st.selectOne("MeberActivityDAO.memberLikeCount").toString());
-		vo.setMemberReportCount(st.selectOne("MeberActivityDAO.memberReportCount").toString());
-		vo.setMemberReservationCount(st.selectOne("MeberActivityDAO.memberReservationCount").toString());
+		//vo.setMemberLikeCount(sqlSessionTemplate.selectOne("MeberActivityDAO.memberLikeCount").toString());
+		//vo.setMemberReportCount(sqlSessionTemplate.selectOne("MeberActivityDAO.memberReportCount").toString());
+		//vo.setMemberReservationCount(sqlSessionTemplate.selectOne("MeberActivityDAO.memberReservationCount").toString());
 
 		return vo;
 	}
 
-	public List<MemberActivityVO> getLikeProjectnoList(MemberActivityVO vo){
-
-		return st.selectList("MemberActivityDAO.getLikeProjectno", vo);
+	public List<MemberActivityVO> getLikeProjectNoList(MemberActivityVO vo){
+		return sqlSessionTemplate.selectList("MemberActivityDAO.getLikeProjectNoList", vo);
 	}
-	public List<MemberActivityVO> getReportProjectnoList(MemberActivityVO vo){
-
-		return st.selectList("MemberActivityDAO.getReportProjectno", vo);
+	
+	public List<MemberActivityVO> getReportProjectNoList(MemberActivityVO vo){
+		return sqlSessionTemplate.selectList("MemberActivityDAO.getReportProjectNoList", vo);
 	}
-	public List<MemberActivityVO> getReservationProjectnoList(MemberActivityVO vo){
-
-		return st.selectList("MemberActivityDAO.getReservationProjectno", vo);
+	
+	public List<MemberActivityVO> getReservationProjectNoList(MemberActivityVO vo){
+		return sqlSessionTemplate.selectList("MemberActivityDAO.getReservationProjectNoList", vo);
 	}
 
 	public void insertMemberActivity(MemberActivityVO vo) {
-		st.insert("MemberActivityDAO.insertMemberActivity",vo);
+		sqlSessionTemplate.insert("MemberActivityDAO.insertMemberActivity",vo);
 	}
 
 	public void updateMemberActivity(MemberActivityVO vo) {
-		st.update("MemberActivityDAO.updateMemberActivity",vo);
+		sqlSessionTemplate.update("MemberActivityDAO.updateMemberActivity",vo);
 	}
 
 	public void deleteMemberActivity(MemberActivityVO vo){
-		st.delete("MemberActivityDAO.deleteMemberActivity",vo);
+		sqlSessionTemplate.delete("MemberActivityDAO.deleteMemberActivity",vo);
 	}
 
+	public int getProjectLikeCount(MemberActivityVO vo) {
+		return sqlSessionTemplate.selectOne("MemberActivityDAO.projectLikeCount",vo);
+	}
 
 }

@@ -16,8 +16,6 @@
 	<result column="rewardContent" property="rewardContent"/>
 	<result column="rewardAmount" property="rewardAmount"/>
 	<result column="rewardPrice" property="rewardPrice"/>
-	<result column="shippingFee" property="shippingFee"/>
-	<result column="shippingNeed" property="shippingNeed"/>
 	<result column="rewardMonth" property="rewardMonth"/>
 	<result column="rewardDay" property="rewardDay"/>
 </resultMap>
@@ -36,11 +34,11 @@
 	<result column="projectStory" property="projectStory"/>
 	<result column="fundingMoney" property="fundingMoney"/>
 	<result column="status" property="status"/>
-	<result column="informationAgree" property="informationAgree"/>
 	<result column="startDate" property="startDate"/>
 	<result column="endDate" property="endDate"/>
 	<result column="writeStatus" property="writeStatus"/>
 	<result column="funding" property="funding"/>
+	<result column="shippingFee" property="shippingFee"/>
 	<collection property="reward" resultMap="reward"/>
 </resultMap>
 

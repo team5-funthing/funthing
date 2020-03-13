@@ -13,22 +13,18 @@ public class AdminStatisticsDAO {
 	SqlSessionTemplate st;
 
 	public AdminStatisticsVO getProjectSuccessRatioPerMonth(AdminStatisticsVO vo) {
-		System.out.println("프로젝트 성공   월    실행");
 		return st.selectOne("AdminStatisticsDAO.getProjectSuccessRatioPerMonth",vo);
 	}
 	
 	public AdminStatisticsVO getProjectSuccessRatioPerYear(AdminStatisticsVO vo) {
-		System.out.println("프로젝트성공율  연  실행");
 		return st.selectOne("AdminStatisticsDAO.getProjectSuccessRatioPerYear",vo);
 	}
 	
 	public AdminStatisticsVO getFundingMoneyPerMonth(AdminStatisticsVO vo) {
-		System.out.println("펀딩머니 월 실행");
 		return st.selectOne("AdminStatisticsDAO.getFundingMoneyPerMonth",vo);
 	}
 	
 	public AdminStatisticsVO getProjectSuccessRatioTotalYear(AdminStatisticsVO vo) {
-		System.out.println("전체 성공/실패 실행");
 		return st.selectOne("AdminStatisticsDAO.getProjectSuccessRatioTotalYear",vo);
 				
 	}

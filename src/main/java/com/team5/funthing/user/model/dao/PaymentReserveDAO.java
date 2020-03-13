@@ -41,6 +41,9 @@ public class PaymentReserveDAO {
 		sqlSessionTemplate.update("updateKakaoPayResultSet", vo);
 	}
 	
+	public void updateKaKaoPayCancelResult(PaymentReserveVO vo) {
+		sqlSessionTemplate.update("updateKaKaoPayCancelResult", vo);
+	}
 	
 	
 }

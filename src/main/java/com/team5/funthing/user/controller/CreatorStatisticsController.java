@@ -55,10 +55,10 @@ public class CreatorStatisticsController {
 		//결제정보 보내기 JSON으로
 				Gson gson = new Gson();
 				JsonArray jArray = new JsonArray();
-				Gson gson2 = new Gson();
-				JsonArray jArray2 = new JsonArray();
-				Gson gson3 = new Gson();
-				JsonArray jArray3 = new JsonArray();
+//				Gson gson2 = new Gson();
+//				JsonArray jArray2 = new JsonArray();
+//				Gson gson3 = new Gson();
+//				JsonArray jArray3 = new JsonArray();
 				
 		
 				
@@ -66,35 +66,28 @@ public class CreatorStatisticsController {
 		ProjectVO projectInformation = getProjectService.getProject(vo);
 		model.addAttribute("projectInformation",projectInformation);
 		
-		JsonObject object3 = new JsonObject();
-		
-		int accumulate = projectInformation.getFundingMoney();
-		object3.addProperty("accumulateMoney", accumulate);
-		jArray3.add(object3);
-		
-		String json3 = gson.toJson(jArray3);
-		model.addAttribute("json3", json3);
+//		JsonObject object3 = new JsonObject();
 		
 	
 		
 		//금일판매금액 가져오기 
 		List<PaymentReserveVO> getTodayFundingMoney = getTodayFundingMoneyService.getTodayFundingMoney(currentProjectNo);
 		
-		Iterator<PaymentReserveVO> it2 = getTodayFundingMoney.iterator();
-		while(it2.hasNext()) {
-			PaymentReserveVO todayFundingMoney = it2.next();
-			JsonObject object2 = new JsonObject();
-			
-			String today = todayFundingMoney.getTodayDate();
-			int Data2 = todayFundingMoney.getSumFundingMoney();
-			
-			object2.addProperty("labelTodayDate", today);
-			object2.addProperty("dataFundingMoney2", Data2);
-			jArray2.add(object2);
-		}
-		
-		String json2 = gson.toJson(jArray2);
-		model.addAttribute("json2", json2);
+//		Iterator<PaymentReserveVO> it2 = getTodayFundingMoney.iterator();
+//		while(it2.hasNext()) {
+//			PaymentReserveVO todayFundingMoney = it2.next();
+//			JsonObject object2 = new JsonObject();
+//			
+//			String today = todayFundingMoney.getTodayDate();
+//			int Data2 = todayFundingMoney.getSumFundingMoney();
+//			
+//			object2.addProperty("labelTodayDate", today);
+//			object2.addProperty("dataFundingMoney2", Data2);
+//			jArray2.add(object2);
+//		}
+//		
+//		String json2 = gson.toJson(jArray2);
+//		model.addAttribute("json2", json2);
 		
 
 		//결제정보가져오기 

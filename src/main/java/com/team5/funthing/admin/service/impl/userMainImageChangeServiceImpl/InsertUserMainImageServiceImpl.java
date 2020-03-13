@@ -25,6 +25,7 @@ public class InsertUserMainImageServiceImpl implements InsertUserMainImageServic
 				vo.setImagePath(toInsertImageList.get(i));
 				vo.setImageContent(toInsertImageContentList.get(i));
 				adminUserMainImageChangeDAO.insertUserMainImage(vo);
+
 			}
 			}else {
 				for(String toInsertImage : toInsertImageList) {
@@ -32,8 +33,7 @@ public class InsertUserMainImageServiceImpl implements InsertUserMainImageServic
 					adminUserMainImageChangeDAO.insertUserMainImagePath(vo);
 				}
 			}
-			
-			
+
 		}
 	}
 	

@@ -265,7 +265,7 @@ table, tr, td{
 		            	<input type="hidden" name="rewardNo" value="${reward.rewardNo }">
 						<input type="hidden" name="email" value="${sessionScope.memberSession.email }">
 						<input type="hidden" name="paymentAmount" value="${reward.rewardPrice }">
-						<input type='hidden' name='rewardOptionValueList' value=''>
+						<input type='hidden' id="tempRewardOptionValueList" name='rewardOptionValueList' value=''>
 						
 		                <!-- 리워드 선택 박스 1 [ 리워드 품목 등록 수 만큼 반복 ]-->
 		                <!-- !!! 선택 체크박스 클릭시 수량 및 옵션항목이 나오는 부분에 대한 문제점 처리 해야한다 -->
@@ -320,21 +320,29 @@ table, tr, td{
 						if(currentVal == elementsLength){}
 						else if(currentVal > elementsLength) {
 							for(i = elementsLength ; i < currentVal; i++){
-								$('#selectBox${cnt.count }').append(	"<c:if test='${reward.rewardOptionList[0].rewardOptionKey eq null}'>"
-									                            	+		"<div class='form-group'>"
-									                                +			"<input type='text' name='rewardOptionValueList' class='form-control reward${cnt.count }' placeholder=''>"
-									                              	+		"</div>"
-									                            	+	"</c:if>"
+								$('#selectBox${cnt.count }').append(	"<c:if test='${empty reward.rewardOptionList}'>"
+									                        		+		"<div id='selectBox${cnt.count }' class='col-5 to-remove-tag mt-2'>"
+									                        		+			"<input type='hidden' name='rewardOptionValueList' value='none' class='form-control reward${cnt.count }' placeholder=''>"
+									                        		+		"</div>"
+									                        		+	"</c:if>"
+									                        		
+									                        		+	"<c:if test='${not empty reward.rewardOptionList}'>"
+																	+		"<c:if test='${reward.rewardOptionList[0].rewardOptionKey eq null}'>"
+									                            	+			"<div class='form-group'>"
+									                                +				"<input type='text' name='rewardOptionValueList' class='form-control reward${cnt.count }' placeholder=''>"
+									                              	+			"</div>"
+									                            	+		"</c:if>"
 									                            	
-									                            	+	"<c:if test='${reward.rewardOptionList[0].rewardOptionKey ne null}'>"
-									                            	+		"<div class='form-group'>"
-									                            	+			"<select class='form-control reward${cnt.count }' name='rewardOptionValueList'>"
-									                                +				"<c:forEach var='option' items='${reward.rewardOptionList }' varStatus='opCnt'>"
-									                                +					"<option value='${option.rewardOptionValue }'> ${option.rewardOptionValue }</option>"
-									                                +				"</c:forEach>"
-									                            	+			"</select>"
-															        +       "</div>"
-									                            	+	"</c:if>");
+									                            	+		"<c:if test='${reward.rewardOptionList[0].rewardOptionKey ne null}'>"
+									                            	+			"<div class='form-group'>"
+									                            	+				"<select class='form-control reward${cnt.count }' name='rewardOptionValueList'>"
+									                                +					"<c:forEach var='option' items='${reward.rewardOptionList }' varStatus='opCnt'>"
+									                                +						"<option value='${option.rewardOptionValue }'> ${option.rewardOptionValue }</option>"
+									                                +					"</c:forEach>"
+									                            	+				"</select>"
+															        +   	    "</div>"
+									                            	+		"</c:if>"
+																	+	"</c:if>");
 							}
 						}else{
 							for(i = elementsLength; i > currentVal; i--){
@@ -343,6 +351,7 @@ table, tr, td{
 						}
 	                });
 	                
+					//리워드 체크박스 클릭시
                 	$(document).on("click", "input[id='select-reward${cnt.count }']", function(){
                 		
                 		var jsonData = $("#reward${cnt.count }").serializeObject();
@@ -359,32 +368,42 @@ table, tr, td{
 									                                +	"<a id='plus${cnt.count }' href='#'> <i class='fas fa-plus'></i></a>"
 									                            	+	"</div>" 
 									                        		+"</div>"
-									                        		
-									                        		+"<div id='selectBox${cnt.count }' class='col-5 to-remove-tag mt-2'>"
-									                            	+	"<p class='card-text m-auto'>옵션</p>"
-									                            	+	"<c:if test='${reward.rewardOptionList[0].rewardOptionKey eq null}'>"
-									                            	+		"<div class='form-group'>"
-									                                +			"<label for='inputOption'>${reward.rewardOptionList[0].rewardOptionValue }</label>"
-									                                +			"<input type='text' name='rewardOptionValueList' value='' class='form-control reward${cnt.count }' placeholder=''>"
+									                        		+"<c:if test='${empty reward.rewardOptionList}'>"
+									                        		+	"<div id='selectBox${cnt.count }' class='col-5 to-remove-tag mt-2'>"
+									                        		+		"<p class='card-text m-auto'>옵션이 없는 리워드 입니다.</p>"
+									                        		+		"<input type='hidden' name='rewardOptionValueList' value='none' class='form-control reward${cnt.count }' placeholder=''>"
+									                        		+	"</div>"
+									                        		+"</c:if>"
+									                        											                        		
+									                        		+"<c:if test='${not empty reward.rewardOptionList}'>"
+									                        		+	"<div id='selectBox${cnt.count }' class='col-5 to-remove-tag mt-2'>"
+									                            	+		"<p class='card-text m-auto'>옵션</p>"
+									                            	+		"<c:if test='${reward.rewardOptionList[0].rewardOptionKey eq null}'>"
+									                            	+			"<div class='form-group'>"
+									                                +				"<label for='inputOption'>${reward.rewardOptionList[0].rewardOptionValue }</label>"
+									                                +				"<input type='text' name='rewardOptionValueList' value='' class='form-control reward${cnt.count }' placeholder=''>"
 
-									                              	+		"</div>"
-									                            	+	"</c:if>"
+									                              	+			"</div>"
+									                            	+		"</c:if>"
 									                            	
-									                            	+	"<c:if test='${reward.rewardOptionList[0].rewardOptionKey ne null}'>"
-									                            	+		"<div class='form-group'>"
-									                            	+			"<label for='rewardOptionSelectBox'>${reward.rewardOptionList[0].rewardOptionKey }</label>"
-									                            	+			"<select class='form-control reward${cnt.count }' name='rewardOptionValueList'>"
-									                                +				"<c:forEach var='option' items='${reward.rewardOptionList }' varStatus='opCnt'>"
-									                                +					"<option value='${option.rewardOptionValue }'> ${option.rewardOptionValue }</option>"
-									                                +				"</c:forEach>"
-									                            	+			"</select>"
-															        +       "</div>"
-									                            	+	"</c:if>"
-									                        		+"</div>");
+									                            	+		"<c:if test='${reward.rewardOptionList[0].rewardOptionKey ne null}'>"
+									                            	+			"<div class='form-group'>"
+									                            	+				"<label for='rewardOptionSelectBox'>${reward.rewardOptionList[0].rewardOptionKey }</label>"
+									                            	+				"<select class='form-control reward${cnt.count }' name='rewardOptionValueList'>"
+									                                +					"<c:forEach var='option' items='${reward.rewardOptionList }' varStatus='opCnt'>"
+									                                +						"<option value='${option.rewardOptionValue }'> ${option.rewardOptionValue }</option>"
+									                                +						"</c:forEach>"
+									                            	+				"</select>"
+															        +	       "</div>"
+									                            	+		"</c:if>"
+									                        		+	"</div>"
+									                        		+"</c:if>");
                 		}else{
                 			
                 			console.log(jsonData);
-                			
+                			var additionalFundingMoneyStr = $("#additionalFundingMoney").val();
+                    		var additionalFundingMoney = parseInt(additionalFundingMoneyStr);
+                    		
                 			$.ajax({
     						    url: "removeSelectReward.udo",
     						    type: "post",
@@ -394,7 +413,7 @@ table, tr, td{
     						    	
        								var rewardSelection = JSON.parse(data);
        								
-       								var paymentAmount = 0;
+       								var paymentAmount = additionalFundingMoney;
          							$.each(rewardSelection, function(index, value){
        									paymentAmount += value.paymentAmount;
          							});
@@ -418,6 +437,9 @@ table, tr, td{
                 	$(document).on("propertychange change keyup paste input","input.reward${cnt.count }", function(){
 
                 		var jsonData = $("#reward${cnt.count }").serializeObject();
+                		var additionalFundingMoneyStr = $("#additionalFundingMoney").val();
+                		var additionalFundingMoney = parseInt(additionalFundingMoneyStr);
+                		
                			$.ajax({
    						    url: "addSelectReward.udo",
    						    type: "post",
@@ -428,7 +450,7 @@ table, tr, td{
    								var rewardSelection = JSON.parse(data);
    								
    								
-   								var paymentAmount = 0;
+   								var paymentAmount = additionalFundingMoney;
      							$.each(rewardSelection, function(index, value ){
      								
    									paymentAmount += value.paymentAmount;
@@ -452,7 +474,8 @@ table, tr, td{
                 		var jsonData = $("form[name='reward${cnt.count }']").serializeObject();
                 		
                 		console.log(jsonData);
-                		
+                		var additionalFundingMoneyStr = $("#additionalFundingMoney").val();
+                		var additionalFundingMoney = parseInt(additionalFundingMoneyStr);
                 		
                			$.ajax({
    						    url: "addSelectReward.udo",
@@ -464,7 +487,7 @@ table, tr, td{
    								var rewardSelection = JSON.parse(data);
    								
    								
-   								var paymentAmount = 0;
+   								var paymentAmount = additionalFundingMoney;
      							$.each(rewardSelection, function(index, value ){
      								
    									paymentAmount += value.paymentAmount;
@@ -509,11 +532,11 @@ table, tr, td{
 	                </div>
 	                <div class="col-9">
                     	<c:choose>
-                    		<c:when test="${getRewardList[0].shippingFee ne 0 }">
+                    		<c:when test="${project.shippingFee ne 0 }">
                     			<p>수량과 지역에 따라 배송비가 달라질 수 있습니다.</p>
                     			<div class="row">
                     				<input type="text" name="shippingFee" 
-                    						value="${getRewardList[0].shippingFee }" 
+                    						value="${project.shippingFee }" 
                     						class="form-control ml-2 mr-2" 
                     						style="width:200px;" readonly>
                     				<span>원</span>
@@ -538,12 +561,13 @@ table, tr, td{
 	                <div class="col-9">
 	                    <p>후원금을 더하여 펀딩할 수 있습니다. 추가 후원금을 입력하시겠습니까?</p>
 	                    <div class="row">
-	                        <input type="text" name="additionalFundingMoney" value="0" class="form-control ml-2 mr-2" style="width:200px;" placeholder="0">
+	                        <input type="text" name="additionalFundingMoney" id="additionalFundingMoney" value="0" class="form-control ml-2 mr-2" style="width:200px;" placeholder="0">
 	                        <span>원을 추가로 후원합니다.</span>
 	                    </div>
 	                </div>
 	            </div>
 	        </article>
+
 			<hr>
 	        <article>
 	            <div class="row">

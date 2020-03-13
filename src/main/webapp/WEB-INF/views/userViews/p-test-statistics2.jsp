@@ -30,17 +30,36 @@
 							<th scope="col">주문자ID</th>
 							<th scope="col">주문날짜</th>
 							<th scope="col">주문금액</th>
+							<th scope="col">결제상태</th>
+							
 						</tr>
 					</thead>
 					<c:forEach var="b1" items="${getAllProjectAndPayment}">
+					<c:choose>
+						<c:when test="${b1.paymentStatus eq '결제예약' }">
 						<tbody>
 							<tr style="color:gray;">
 								<td>${b1.orderNo}</td>
 								<td>${b1.email}</td>
 								<td>${b1.paymentReserveDate}</td>
 								<td>${b1.fundingMoney}</td>
+								<td>${b1.paymentStatus }</td>
 							</tr>
 						</tbody>
+						</c:when>
+					
+						<c:when test="${b1.paymentStatus eq '결제취소' }">
+						<tbody>
+							<tr style="color:gray;">
+								<td>${b1.orderNo}</td>
+								<td>${b1.email}</td>
+								<td>${b1.paymentReserveDate}</td>
+								<td>${b1.fundingMoney}</td>
+								<td style="color:red;">${b1.paymentStatus }</td>
+							</tr>
+						</tbody>
+						</c:when>
+						</c:choose>
 					</c:forEach>
 
 				</table>

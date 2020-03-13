@@ -40,8 +40,6 @@ public class AdminUserMainImageChangeController {
 	@Autowired
 	UpdateUserMainImageContentService updateUserMainImageContentService;
 
-	
-
 	@Autowired
 	private UploadUtil uploadUtil;
 
@@ -92,6 +90,7 @@ public class AdminUserMainImageChangeController {
 
 		if (!toDoUploadList.isEmpty()) {
 			List<String> tmpUploadList = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);
+
 			Collections.reverse(tmpUploadList);
 
 			insertUserMainImageService.insertUserMainImage(adminUserMainImageChangeVO, tmpUploadList,

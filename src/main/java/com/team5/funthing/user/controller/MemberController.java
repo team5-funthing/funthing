@@ -1,6 +1,7 @@
 package com.team5.funthing.user.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -19,61 +20,40 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.team5.funthing.common.utils.SendMailUtil;
-import com.team5.funthing.common.utils.uploadUtils.UploadUtil;
 import com.team5.funthing.user.model.vo.AlarmVO;
 import com.team5.funthing.user.model.vo.MemberVO;
+
+import com.team5.funthing.user.service.deletememberService.GetDeleteMemberService;
+
 import com.team5.funthing.user.service.AlarmService.GetNewestAlarmListService;
+
 import com.team5.funthing.user.service.memberService.GetMemberService;
-import com.team5.funthing.user.service.memberService.InsertImageService;
 import com.team5.funthing.user.service.memberService.InsertMemberService;
-import com.team5.funthing.user.service.memberService.InsertSocialMemberService;
 import com.team5.funthing.user.service.memberService.UpdateMemberService;
 
 @Controller
 @SessionAttributes("member")
 public class MemberController {
 
-	//   @Autowired
-	//   private CertificationEmailService certificationEmailService;
-
-	@Autowired
-	private SendMailUtil sendMailUtil;
-
-	@Autowired
-	private GetMemberService getMemberService;
-
+	//Alarm Serivce
 	@Autowired
 	private GetNewestAlarmListService getNewestAlarmListService;
-
+	
+	@Autowired
+	private SendMailUtil sendMailUtil;
+	@Autowired
+	private GetMemberService getMemberService;
 	@Autowired
 	private InsertMemberService insertMemberService;
 	@Autowired
-	private InsertSocialMemberService insertSocialMemberService;
-	@Autowired
-	private InsertImageService insertImageService;
-	@Autowired
 	private UpdateMemberService updateMemberService;
 	@Autowired
-	private UploadUtil upload;
-
+	private GetDeleteMemberService getDeleteMemberService;
 
 
 	@RequestMapping(value="socialLogin.udo",method=RequestMethod.GET)
 	public String socialLogin() {   
 		return "f-socialjoin";
-	}
-	@RequestMapping(value="socialLoginSuccess.udo",method=RequestMethod.POST)
-	public String socialLoginSuccess(HttpServletRequest request,HttpSession session, MemberVO vo, Model model) throws IOException {   
-		System.out.println("socialLoginSuccess.udo ");
-		System.out.println(vo.toString());
-		if(getMemberService.getMember(vo) != null) { 
-			
-			model.addAttribute("result","1");
-			session.setAttribute("memberSession", vo);	 
-		}else {
-			model.addAttribute("result","2");
-		}
-		return "ajax/callback";
 	}
 
 
@@ -82,21 +62,11 @@ public class MemberController {
 
 		MemberVO loginMember = getMemberService.getMember(vo);
 		if(loginMember == null) {
-			model.addAttribute("loginFail", "µî·ÏµÈ È¸¿øÀÌ ¾Æ´Õ´Ï´Ù.");
+			model.addAttribute("loginFail", "ï¿½ë²‘æ¿¡ì•¸ë§‚ ï¿½ì‰¶ï¿½ìï¿½ì”  ï¿½ë¸˜ï¿½ë–ƒï¿½ë•²ï¿½ë–.");
 			return "forward:member.udo";
 		}
-		System.out.println(loginMember.toString());
-		
-		//ÀÌ¸ŞÀÏ·Î °ªÀ» ¹Ş¾Æ¿Â´Ù. 
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-			
-		System.out.println(encoder.encode(vo.getPassword()));
-		System.out.println(encoder.matches(vo.getPassword(), loginMember.getPassword()));
-			//ºñ¹Ğ¹øÈ£°¡ °°À¸¸é Ã³¸®ÇÒ°Í
 			if(encoder.matches(vo.getPassword(), loginMember.getPassword())) { 
-				System.out.println("°ª :"+request.getParameter("confirm-switch"));
-				
-				//ÀÔ·Â¾ÆÀÌµğ ¹öÆ°¿¡ »óÅÂ¿¡µû¶ó¼­ Ã³¸®
 				if(request.getParameter("confirm-switch")==null) {
 					Cookie cookieid = new Cookie("funthingCookieId",null);
 					cookieid.setMaxAge(0);  /// kill the cookie 
@@ -112,18 +82,29 @@ public class MemberController {
 					response.addCookie(cookieid);
 					response.addCookie(cookiepw);
 				}
-				session.setAttribute("memberSession", getMemberService.getMember(vo));
+				MemberVO loginMemberVO = getMemberService.getMember(vo);
+				
+				avo.setReceiveId(loginMemberVO.getEmail());
+				avo.setReadConfirm('n');
+				
+				List<AlarmVO> userAlarmList = getNewestAlarmListService.getNewestAlarmList(avo);
+				System.out.println(userAlarmList.toString());
+				System.out.println(userAlarmList.isEmpty());
+				if(userAlarmList.isEmpty()) {
+					model.addAttribute("userAlarmList", "ì•ŒëŒ ì—†ìŒ");
+				}else {
+					model.addAttribute("userAlarmList", "ì•ŒëŒ ìˆìŒ");
+				}
+				session.setAttribute("memberSession", loginMemberVO);
 				System.out.println(session.getAttribute("memberSession"));
 				return "forward:member.udo";
-			//¸¸ÀÏ ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê´Â °æ¿ì
 			}
-			model.addAttribute("loginFail", "ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+			model.addAttribute("loginFail", "ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 			return "forward:member.udo";
 	}
-
+	
 	@RequestMapping(value="joinselect.udo" ,method=RequestMethod.GET)
 	public String login(HttpSession session) {
-
 		return "p-waytoJoin-select";
 	}
 
@@ -141,29 +122,16 @@ public class MemberController {
 
 	@RequestMapping(value="successjoin.udo",method=RequestMethod.POST) 
 	public String successjoin(MemberVO vo,Model model,@RequestParam(name="email2",required=false)String email,HttpSession session) {
-		System.out.println("¼®¼¼½ºÁ¶ÀÎ ½ÇÇà");
 		if(email!=null) {
 			vo.setEmail(email);
 		}
-		System.out.println(vo.toString());
 		if(vo.getEmail()!=null && vo.getName()!=null && vo.getPassword()!=null)    {
-			
-			//ºñ¹Ğ¹øÈ£ ¾ÏÈ£È­¸¦ ÇÏ±â À§ÇÑ BCryptPasswordEncoder °´Ã¼
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-			System.out.println("¾ÏÈ£È­ Àü  : " + vo.getPassword());
-			
-			String encodePassword = encoder.encode(vo.getPassword());
-			
-			System.out.println("¾ÏÈ£È­ ÈÄ : " + encodePassword);
-			vo.setPassword(encodePassword);
-			
+			String encodePassword = encoder.encode(vo.getPassword());			
+			vo.setPassword(encodePassword);			
 			insertMemberService.insertMember(vo);
-			//¼º°ø,½ÇÆĞ¸¦ ±¸ºĞÇÏ´Â resultÇÃ·¡±×
 			model.addAttribute("result","1");
-			//session.setAttribute("memberSession",getMemberService.getMember(vo));
-			//System.out.println("¼¼¼Ç È®ÀÎ!"+session.getAttribute("memberSession").toString());
 		}else {
-			//¼º°ø,½ÇÆĞ¸¦ ±¸ºĞÇÏ´Â resultÇÃ·¡±×
 			model.addAttribute("result","2");
 		}
 
@@ -180,38 +148,35 @@ public class MemberController {
 		try {
 			vo.setEmail(email);
 			String certificationCode = sendMailUtil.createCertificationCode(50);
-			sendMailUtil.sendMail("[Funthing] ÀÎÁõÄÚµå ÀÔ´Ï´Ù.", "ÀÎÁõÄÚµå : ["+certificationCode+"]", vo.getEmail());   
+			sendMailUtil.sendMail("[Funthing] ï¿½ì”¤ï§ì•¹í«ï¿½ë±¶ ï¿½ì—¯ï¿½ë•²ï¿½ë–.", "ï¿½ì”¤ï§ì•¹í«ï¿½ë±¶ : ["+certificationCode+"]", vo.getEmail());   
 			model.addAttribute("certificationCode",certificationCode);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return "ajax/certificationCodeCallback";
 	}
-
-    @RequestMapping(value="pwSuccess.udo",method=RequestMethod.POST)
-    @ResponseBody
-    public String updatePw(MemberVO vo,String email) {
-    	String result = "2";
-    	try {
-			vo.setEmail(email);
-			System.out.println(vo.toString());
-			if(getMemberService.getMember(vo)!=null) {
-				System.out.println(getMemberService.getMember(vo).toString());
-			String password = sendMailUtil.createCertificationCode(50);
-			sendMailUtil.sendMail("[Funthing] ÀÓÀÇ·Î »ı¼ºµÈ ºñ¹Ğ¹øÈ£ ÀÔ´Ï´Ù.", "¹ß¼ÛµÈ ºñ¹Ğ¹øÈ£·Î ·Î±×ÀÎÀ» ÇÏ½Ã°í ²À "
-					+ "¸¶ÀÌÆäÀÌÁö - È¸¿øÁ¤º¸¼öÁ¤ ¿¡¼­ ºñ¹Ğ¹øÈ£¸¦ º¯°æÇÏ¿© ÀÌ¿ë¿¡ ºÒÆíÇÔÀÌ ¾øÀ¸½Ã±æ ¹Ù¶ø´Ï´Ù. "
-					+ "ºñ¹Ğ¹øÈ£ : ["+password+"]", vo.getEmail());
-			MemberVO vo2 = getMemberService.getMember(vo);
-			vo2.setPassword(password);
-			System.out.println(vo2.toString());
-			updateMemberService.updateMember(vo2);
-			result="1";
+	
+	 @RequestMapping(value="pwSuccess.udo",method=RequestMethod.POST)
+	    @ResponseBody
+	    public String updatePw(MemberVO vo,String email) {
+	    	String result = "2";
+	    	try {
+				vo.setEmail(email);
+				if(getMemberService.getMember(vo)!=null) {
+				String password = sendMailUtil.createCertificationCode(50);
+				sendMailUtil.sendMail("[Funthing] ï¿½ì—«ï¿½ì“½æ¿¡ï¿½ ï¿½ê¹®ï¿½ê½¦ï¿½ë§‚ é®ê¾¨ï¿½è¸°ëŠìƒ‡ ï¿½ì—¯ï¿½ë•²ï¿½ë–.", "è«›ì’–ë„šï¿½ë§‚ é®ê¾¨ï¿½è¸°ëŠìƒ‡æ¿¡ï¿½ æ¿¡ì’“ë ‡ï¿½ì”¤ï¿½ì“£ ï¿½ë¸¯ï¿½ë–†æ€¨ï¿½ ç‘—ï¿½ "
+						+ "ï§ë‰ì” ï¿½ëŸ¹ï¿½ì” ï§ï¿½ - ï¿½ì‰¶ï¿½ìï¿½ì ™è¹‚ëŒë‹”ï¿½ì ™ ï¿½ë¿‰ï¿½ê½Œ é®ê¾¨ï¿½è¸°ëŠìƒ‡ç‘œï¿½ è¹‚ï¿½å¯ƒì€ë¸¯ï¿½ë¿¬ ï¿½ì” ï¿½ìŠœï¿½ë¿‰ éºëŠë ªï¿½ë¸¿ï¿½ì”  ï¿½ë¾¾ï¿½ì‘ï¿½ë–†æ¹²ï¿½ è«›ë¶¾ì—»ï¿½ë•²ï¿½ë–. "
+						+ "é®ê¾¨ï¿½è¸°ëŠìƒ‡ : ["+password+"]", vo.getEmail());
+				MemberVO vo2 = getMemberService.getMember(vo);
+				vo2.setPassword(password);
+				updateMemberService.updateMember(vo2);
+				result="1";
+				}
+	    	}catch(Exception e) {
+				e.printStackTrace();
 			}
-    	}catch(Exception e) {
-			e.printStackTrace();
-		}
-    	return result;
-    }
+	    	return result;
+	    }
 
 	@RequestMapping(value="imageUpload.udo",method=RequestMethod.GET)
 	public String imageUpload() {
@@ -231,18 +196,24 @@ public class MemberController {
 	@RequestMapping(value="emailCheck.udo",method=RequestMethod.GET)
 	public String duplicationCheck(MemberVO vo,String typedEmail,Model model) throws JsonProcessingException {
 		vo.setEmail(typedEmail);
-		System.out.println("ÀÌ¸ŞÀÏ ®G!");
+		if(getDeleteMemberService.getDeleteMemberTableMember(vo)!=null) {
+			model.addAttribute("result","3");
+			return "ajax/callback";
+		}
 		if(getMemberService.getMember(vo)==null) {
 			model.addAttribute("result", "1");      
 		}else {
 			model.addAttribute("result","2");
 		}
+
 		return "ajax/callback";
 	}
 
 
 	@RequestMapping(value="updateProfile.udo",method=RequestMethod.GET)
-	public String updateProfile() {
+	public String updateProfile(Model model,HttpSession session) {
+		MemberVO member = (MemberVO)session.getAttribute("memberSession");	
+		model.addAttribute("member", member);
 		return "f-update-profile";
 	}
 

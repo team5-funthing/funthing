@@ -22,6 +22,10 @@ public class AlarmDAO {
 		return sqlSessionTemplate.insert("AlarmDAO.insertProjectJudgeRequestAlarm", vo);
 	}
 	
+	public int insertProjectReportAlarm(AlarmVO vo) {
+		return sqlSessionTemplate.insert("AlarmDAO.insertProjectReportAlarm",vo);
+	}
+	
 	public int updateReadConfirmAlarm(AlarmVO vo) {
 		return sqlSessionTemplate.update("AlarmDAO.updateReadConfirmAlarm", vo);
 	}
