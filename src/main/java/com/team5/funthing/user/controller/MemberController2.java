@@ -99,10 +99,10 @@ public class MemberController2 {
 	   @ResponseBody
 	   public String saveImage(@RequestParam(name ="imgname") List<MultipartFile> uploadFile,MemberVO vo,HttpSession session) throws Exception {
 		   System.out.println("세이브이미지 실행 ");
-		   System.out.println("비었느냐:" +uploadFile.get(0).getOriginalFilename());
-		   MemberVO vo2 = (MemberVO) session.getAttribute("memberSession");
-		   vo.setEmail(vo2.getEmail());
-	       memberImageUploader(uploadFile, vo);
+		   System.out.println("비었느냐:" + uploadFile.get(0).getOriginalFilename());			//파일의 이름을 받아오는 메서드
+		   MemberVO vo2 = (MemberVO) session.getAttribute("memberSession");					
+		   vo.setEmail(vo2.getEmail());														
+	       memberImageUploader(uploadFile, vo);												
 	        insertImageService.insertImage(vo);
 	        session.setAttribute("memberSession", getMemberService.getMember(vo));
 	        
@@ -146,8 +146,7 @@ public class MemberController2 {
 	public void memberImageUploader(List<MultipartFile> toDoUploadList, MemberVO vo) throws Exception {
 		System.out.println("memberImageUploader 실행");
 		List<String> toRemoveFilePath = new ArrayList<String>();
-          
-				
+        		
 		if(!toDoUploadList.get(0).isEmpty()) { // 업로드 시킨 파일이 이미 존재하는 경우 파일 선택을 다시 안한 경우에 나올 수 있는 상황 처리  
 			toRemoveFilePath.add(vo.getMyImage()); //제거될 파일경로를 vo객체에서 가져오기
 			String voName = vo.getClass().getSimpleName();

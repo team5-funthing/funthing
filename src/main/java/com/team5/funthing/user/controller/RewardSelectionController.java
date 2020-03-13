@@ -36,7 +36,7 @@ public class RewardSelectionController {
 	private RewardOptionVO rewardOptionVO;
 	
 	
-	@RequestMapping(value="/supportProject.udo", method= RequestMethod.GET)
+	@RequestMapping(value="/supportProjectInterceptor.udo", method= RequestMethod.GET)
 	public String supportProject(	@RequestParam(required = false)int projectNo,
 									@RequestParam(required = false)String msg,
 									RewardVO rvo, 

@@ -57,27 +57,27 @@ public class ProjectAskMessageController {
    private MemberVO memberVO;
    
    
-   @RequestMapping(value="showInsertwAskMessage.udo", method = RequestMethod.GET)
+   @RequestMapping(value="showInsertwAskMessageInterceptor.udo", method = RequestMethod.GET)
    public String showInsertwAskMessage(ProjectVO vo, Model model) { 
       
-      System.out.println("¹®ÀÇÇÏ±â ´©¸£¸é ¸Þ¼¼ÁöÀÔ·ÂÃ¢À¸·Î ÀÌµ¿");
+      System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ï¿½Ô·ï¿½Ã¢ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½");
       
-      vo.setProjectTitle(getProjectService.getProject(vo).getProjectTitle());//title °¡Á®¿À±â
-      vo.setCreator(getProjectService.getProject(vo).getCreator());//creator °¡Á®¿À±â
+      vo.setProjectTitle(getProjectService.getProject(vo).getProjectTitle());//title ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+      vo.setCreator(getProjectService.getProject(vo).getCreator());//creator ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
       
       model.addAttribute("vo",vo);
       
-      System.out.println("¿©±âÂïÈ÷´Ï ¾Ö¹Ì³ªÀÌ¾ß"+getProjectService.getProject(vo).toString());
+      System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¹Ì³ï¿½ï¿½Ì¾ï¿½"+getProjectService.getProject(vo).toString());
       
-      return "f-projectAsk-message"; //¹®ÀÇÇÏ±â ÀÔ·ÂÃ¢À¸·Î 
+      return "f-projectAsk-message"; //ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½Ô·ï¿½Ã¢ï¿½ï¿½ï¿½ï¿½ 
          
    }
    @RequestMapping(value="insertProjectAskContents.udo", method = RequestMethod.POST)
-   public String insertProjectAskContents(ProjectAskMessageVO vo) { //Âü¿©ÀÚ°¡ => ¸ÞÀÌÄ¿¿¡°Ô ¹®ÀÇÇÏ±â ÀÔ·Â
+   public String insertProjectAskContents(ProjectAskMessageVO vo) { //ï¿½ï¿½ï¿½ï¿½ï¿½Ú°ï¿½ => ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½Ô·ï¿½
       
-      insertProjectAskContentsService.insertProjectAskContents(vo); //¹®ÀÇÇÏ±â ÀÔ·Â 
+      insertProjectAskContentsService.insertProjectAskContents(vo); //ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½Ô·ï¿½ 
       
-      return "p-project-details"; //ÇÁ·ÎÁ§Æ® ÆäÀÌÁö·Î ÀÌµ¿ 
+      return "p-project-details"; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ 
 
 
          
@@ -86,7 +86,7 @@ public class ProjectAskMessageController {
    
 
 
-//--------------------------------¸¶ÀÌÆäÀÌÁö¿¡¼­ ¸Þ¼¼Áö Å¬¸¯½Ã µé¾î¿À´Â°÷------------------------------------(¿©±âÀÖ¾î¾ßµÇ´Â°Ç°¡?)
+//--------------------------------ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â°ï¿½------------------------------------(ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾ï¿½ßµÇ´Â°Ç°ï¿½?)
    
    
    @RequestMapping(value="showDetailMyPage.udo",method = RequestMethod.GET)
@@ -96,49 +96,49 @@ public class ProjectAskMessageController {
 	  vo.setEmail(memberVO.getEmail());
 
       
-      if(getMakerMemberCreatorService.getMakerMemberCreator(vo) != null) { //¸ÞÀÌÄ¿ ÀÏ¶§
+      if(getMakerMemberCreatorService.getMakerMemberCreator(vo) != null) { //ï¿½ï¿½ï¿½ï¿½Ä¿ ï¿½Ï¶ï¿½
 
-//       1.memberÅ×ÀÌºí°ú creatorÅ×ÀÌºí Á¶ÀÎÇØ¼­ creator°¡Á®¿À±â
+//       1.memberï¿½ï¿½ï¿½Ìºï¿½ï¿½ creatorï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ creatorï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
          MemberVO getMakerMember = getMakerMemberCreatorService.getMakerMemberCreator(vo); 
-         System.out.println("Å©¸®¿¡ÀÌÅÍ ÂïÇô¾ßÇØ"+getMakerMember.toString());
+         System.out.println("Å©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"+getMakerMember.toString());
          model.addAttribute("getMakerMember", getMakerMember);
          
-//       creator¸¦ ³Ö±â ÁÖÀÔ
+//       creatorï¿½ï¿½ ï¿½Ö±ï¿½ ï¿½ï¿½ï¿½ï¿½
          vo2.setCreator(getMakerMember.getCreator().getCreator());
          model.addAttribute("vo2",vo2);
          
-//       2.projectAskMessageÅ×ÀÌºí¿¡¼­ creator°¡ ¸Â´Â¾ÖÀÇ ¸ðµç Á¤º¸¸¦ °¡Á®¿À±â (¿©±â¼­ project¿Í Á¶ÀÎÇØ¼­ projectMainImageµµ °°ÀÌ °¡Á®¿À±â) 
+//       2.projectAskMessageï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ creatorï¿½ï¿½ ï¿½Â´Â¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½â¼­ projectï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ projectMainImageï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) 
    
          List<ProjectAskMessageVO>getEntireMakerMessageList = getEntireProjectMakerAskMessageListService.getEntireProjectMakerAskMessageList(vo2);
-         System.out.println("¿©±âÂïÇô"+getEntireMakerMessageList.toString());
+         System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"+getEntireMakerMessageList.toString());
          model.addAttribute("messagelist", getEntireMakerMessageList);
                 
          
          
-       // 3. °ü¸®ÀÚ¿¡°Ô ¹®ÀÇÇÏ±â 
+       // 3. ï¿½ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ 
          vo3.setEmail(memberVO.getEmail());
          System.out.println("vo3 : "+ vo3);
          
          List<CSBoardVO> csboardList = getCSBoardListService.getCSBoardList(vo3);
-         System.out.println("¿©±â¿¡ ´äº¯»óÅÂ ÂïÈ÷´ÂÁöº¸·Å : "+ csboardList.toString());
+         System.out.println("ï¿½ï¿½ï¿½â¿¡ ï¿½äº¯ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ : "+ csboardList.toString());
          model.addAttribute("askAdminList",csboardList);
          
          getMemberService.getMember(vo);
          model.addAttribute("getMember",getMemberService.getMember(vo));
          
-         return "p-message-check"; //¸Þ¼¼Áö ¸®½ºÆ®·Î 
+         return "p-message-check"; //ï¿½Þ¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ 
          
-      }else { //¸ÞÀÌÄ¿°¡ ¾Æ´Ò¶§ 
+      }else { //ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ ï¿½Æ´Ò¶ï¿½ 
          
-         System.out.println("¸ÞÀÌÄ¿°¡ ¾Æ´Õ´Ï´Ù.");
+         System.out.println("ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ ï¿½Æ´Õ´Ï´ï¿½.");
             
-//       ³»°¡ º¸³½ ¹®ÀÇ±Û È®ÀÎÇÏ±â
+//       ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç±ï¿½ È®ï¿½ï¿½ï¿½Ï±ï¿½
          vo2.setEmail(memberVO.getEmail());
          List<ProjectAskMessageVO> getEntireProjectAskMessageList = getEntireProjectAskMessageListService.getEntireProjectAskMessageList(vo2);
          model.addAttribute("getMessageList",getEntireProjectAskMessageList);
          
 
-         //    °ü¸®ÀÚ¿¡°Ô ¹®ÀÇÇÏ±â 
+         //    ï¿½ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ 
          vo3.setEmail(memberVO.getEmail());
          System.out.println("vo3 : "+ vo3);
          
@@ -153,9 +153,9 @@ public class ProjectAskMessageController {
    }
    
 
-   //Å©¸®¿¡ÀÌÅÍ°¡ º¸´Â ¸Þ¼¼Áö »ó¼¼ÆäÀÌÁö 
-   @RequestMapping(value="getChoiceProjectAskMessageC.udo", method = RequestMethod.GET) //¹®ÀÇ¹øÈ£ ¹°°í µé¾î¿À±â 
-   public String getChoiceProjectAskMessageC(ProjectAskMessageVO vo, MemberVO vo2, CreatorVO vo3, Model model, HttpSession session) { //¸®½ºÆ®Áß ¼±ÅÃÇÑ ¹®ÀÇ¸Þ¼¼Áö »ó¼¼ÆäÀÌÁö·Î ÀÌµ¿
+   //Å©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+   @RequestMapping(value="getChoiceProjectAskMessageC.udo", method = RequestMethod.GET) //ï¿½ï¿½ï¿½Ç¹ï¿½È£ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+   public String getChoiceProjectAskMessageC(ProjectAskMessageVO vo, MemberVO vo2, CreatorVO vo3, Model model, HttpSession session) { //ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç¸Þ¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
       
       
 
@@ -168,36 +168,36 @@ public class ProjectAskMessageController {
       vo3.setCreator(getMakerMember.getCreator().getCreator());
       model.addAttribute("vo3",vo3);
     
-      return "f-projectAsk-message-reply-creator"; //Å©¸®¿¡ÀÌÅÍ°¡ ´äº¯´Ù´Â °÷
+      return "f-projectAsk-message-reply-creator"; //Å©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½äº¯ï¿½Ù´ï¿½ ï¿½ï¿½
          
    }
    
 
-   //Å©¸®¿¡ÀÌÅÍ ¾Æ´Ñ ÀÏ¹ÝÈ¸¿øÀÌ º¸´Â ¸Þ¼¼Áö »ó¼¼ÆäÀÌÁö
-   @RequestMapping(value="getChoiceProjectAskMessage.udo", method = RequestMethod.GET) //¹®ÀÇ¹øÈ£ ¹°°í µé¾î¿À±â 
-   public String getChoiceProjectAskMessage(ProjectAskMessageVO vo, Model model) { //¸®½ºÆ®Áß ¼±ÅÃÇÑ ¹®ÀÇ¸Þ¼¼Áö »ó¼¼ÆäÀÌÁö·Î ÀÌµ¿
+   //Å©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´ï¿½ ï¿½Ï¹ï¿½È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+   @RequestMapping(value="getChoiceProjectAskMessage.udo", method = RequestMethod.GET) //ï¿½ï¿½ï¿½Ç¹ï¿½È£ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+   public String getChoiceProjectAskMessage(ProjectAskMessageVO vo, Model model) { //ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç¸Þ¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
       
       ProjectAskMessageVO getChoiceProjectAskMessage = getChoiceProjectAskMessageService.getChoiceProjectAskMessage(vo); 
       model.addAttribute("choiceProjectAskMessage", getChoiceProjectAskMessage);
 
-      return "f-projectAsk-message-reply"; //Å©¸®¿¡ÀÌÅÍ°¡ ´äº¯´Ù´Â °÷
+      return "f-projectAsk-message-reply"; //Å©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½äº¯ï¿½Ù´ï¿½ ï¿½ï¿½
 
 
          
    }
    
    @RequestMapping(value="updateProjectAskReplyContentsStatus.udo", method = RequestMethod.GET)
-   public String updateProjectAskReplyContentsStatus(ProjectAskMessageVO vo) { //´äº¯À» ´Þ¸é ¼öÁ¤À¸·Î µé¾î°£´Ù
+   public String updateProjectAskReplyContentsStatus(ProjectAskMessageVO vo) { //ï¿½äº¯ï¿½ï¿½ ï¿½Þ¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½î°£ï¿½ï¿½
       
       updateProjectAskReplyContentsStatusService.updateProjectAskReplyContentsStatus(vo);
-      System.out.println("´äº¯À» ´Þ¾Ò½À´Ï´Ù.");
+      System.out.println("ï¿½äº¯ï¿½ï¿½ ï¿½Þ¾Ò½ï¿½ï¿½Ï´ï¿½.");
       
       
       return "redirect: showDetailMyPage.udo"; 
    }
 
    @RequestMapping(value="getEntireProjectAskMessageList.udo", method = RequestMethod.POST)
-   public String getEntireProjectAskMessageList(ProjectAskMessageVO vo, Model model) { //³»¾ÆÀÌµð·Î º¸³½¸Þ¼¼ÁöÃ£±â
+   public String getEntireProjectAskMessageList(ProjectAskMessageVO vo, Model model) { //ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Þ¼ï¿½ï¿½ï¿½Ã£ï¿½ï¿½
       
       
       List<ProjectAskMessageVO> getEntireProjectAskMessageList = getEntireProjectAskMessageListService.getEntireProjectAskMessageList(vo);

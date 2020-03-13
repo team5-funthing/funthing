@@ -75,7 +75,7 @@ public class MemberActivityController {
 		return "p-detail-mypage";
 	}  
 	
-	@RequestMapping("upCountLike.udo")
+	@RequestMapping("upCountLikeInterceptor.udo")
 	public String upCountLike(MemberActivityVO mavo, 
 							Model model,
 							RedirectAttributes redirectAttributes,
