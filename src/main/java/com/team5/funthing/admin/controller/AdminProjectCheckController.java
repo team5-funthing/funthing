@@ -1,7 +1,5 @@
 package com.team5.funthing.admin.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,8 +37,6 @@ public class AdminProjectCheckController {
 		
 		ProjectVO projectCheck = getProjectCheckService.getProjectCheck(vo);
 		
-		System.out.println(projectCheck.toString());
-		
 		String videoTag = projectCheck.getProjectIntroduceVideo();
 		String modifyVideoTag = videoTag.replace(videoTag.substring(15, 18),"520").replace(videoTag.substring(28, 31), "310");
 		projectCheck.setProjectIntroduceVideo(modifyVideoTag);
@@ -54,24 +50,24 @@ public class AdminProjectCheckController {
 	@RequestMapping("updateProjectCheckApproval.ado")
 	public String updateProjectCheckApproval(ProjectVO vo, AlarmVO avo, Model model) {
 	
-		updateProjectCheckApprovalService.updateProjectCheckApproval(vo);			//ÇÁ·ÎÁ§Æ®ÀÇ »óÅÂ¸¦ º¯°æ
+		updateProjectCheckApprovalService.updateProjectCheckApproval(vo);			
 		vo.setStatusReplyMessage("");
-		updateStatusReplyMessageService.updateStatusReplyMessage(vo);				//»çÀ¯ ±âÀç »óÅÂ¸¦ º¯°æ
+		updateStatusReplyMessageService.updateStatusReplyMessage(vo);				
 		
-		insertProjectJudgeResultAlarm(vo,avo,"½ÂÀÎ");
+		insertProjectJudgeResultAlarm(vo,avo,"ê¸€ì”¨ê¹¨ì§ìœ¼ë¡œì¸í•´ì„œ ë¹„ì›Œë†“ìŒ");
 		
 		return "redirect:getProjectCheckList.ado";
 
 	}
 	
-	//º¸³½ÈÄ¿¡ ´Ù½Ã ±× ÆäÀÌÁö·Î ÀÌµ¿
+	
 	@RequestMapping("updateProjectCheckDeny.ado")
 	public String updateProjectCheckDeny(ProjectVO vo, AlarmVO avo, Model model) {
 
 		updateProjectCheckDenyService.updateProjectCheckDeny(vo);
 		updateStatusReplyMessageService.updateStatusReplyMessage(vo);
 		
-		insertProjectJudgeResultAlarm(vo,avo,"°ÅºÎ");
+		insertProjectJudgeResultAlarm(vo,avo,"ê¸€ì”¨ê¹¨ì§ìœ¼ë¡œì¸í•´ì„œ ë¹„ì›Œë†“ìŒ");
 		
 		return "redirect:getProjectCheckList.ado";
 	}
@@ -80,7 +76,7 @@ public class AdminProjectCheckController {
 	public String updateProjectCheckDefer(ProjectVO vo, AlarmVO avo, Model model) {
 		
 		updateProjectCheckDeferService.updateProjectCheckDefer(vo);
-		insertProjectJudgeResultAlarm(vo,avo,"¹İ·Á");
+		insertProjectJudgeResultAlarm(vo,avo,"ê¸€ì”¨ê¹¨ì§ìœ¼ë¡œì¸í•´ì„œ ë¹„ì›Œë†“ìŒ");
 		updateStatusReplyMessageService.updateStatusReplyMessage(vo);
 		
 		return "redirect:getProjectCheckList.ado";
@@ -90,15 +86,15 @@ public class AdminProjectCheckController {
 	//===============================================================================
 	
 	public void insertProjectJudgeResultAlarm(ProjectVO vo, AlarmVO avo, String state) {
-		//¾Ë¶÷À» º¸³»±âÀ§ÇØ¼­ µ¥ÀÌÅÍ¸¦ db¿¡ ³Ö´Â ºÎºĞ
-		avo.setAlarmType(vo.getProjectTitle() + " ½É»ç°á°ú");
+		
+		avo.setAlarmType(vo.getProjectTitle() + " ");
 		avo.setDetailAlarmType(state);
 		avo.setReceiveId(vo.getEmail());
 		avo.setReadConfirm('n');
 		avo.setAlarmMessage(vo.getStatusReplyMessage());
 		avo.setProjectNo(vo.getProjectNo());
 						
-		System.out.println("ÀÔ·Â avo »óÅÂ : " + avo.toString());
+
 		insertProjectJudgeResultAlarmService.insertProjectJudgeResultAlarm(avo);
 	}
 	

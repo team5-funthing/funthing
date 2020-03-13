@@ -53,7 +53,7 @@ public class AdminCSBoardController {
    @RequestMapping("insertAdminCSBoard.ado")
    public String insertAdminCSBoard(AdminCSBoardVO avo,CSBoardVO cvo) throws UnsupportedEncodingException, MessagingException{
       
-      avo.setAdminCSTitle("[ë‹µë³€]re:"+cvo.getCsTitle());   
+      avo.setAdminCSTitle("[¹®ÀÇ ´äº¯]re:"+cvo.getCsTitle());   
       avo.setAdminID("admin");
       
       insertAdminCSBoardService.insertAdminCSBoard(avo);
@@ -75,8 +75,4 @@ public class AdminCSBoardController {
       mav.setViewName("p-customerService-detail");
       return mav; 
    }
-   
-   
-   
-   
 }

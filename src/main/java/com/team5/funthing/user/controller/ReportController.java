@@ -42,8 +42,8 @@ public class ReportController {
 		avo.setReadConfirm('n');
 		avo.setProjectNo(pvo.getProjectNo());
 		avo.setReceiveId("admin@funthing.com");
-		avo.setDetailAlarmType("Ω≈∞Ì");
-		avo.setAlarmType(pvo.getProjectTitle() + "«¡∑Œ¡ß∆Æ Ω≈∞Ì");
+		avo.setDetailAlarmType("Ïã†Í≥†");
+		avo.setAlarmType(pvo.getProjectTitle() + "ÌîÑÎ°úÏ†ùÌä∏ Ïã†Í≥†");
 		insertProjectReportAlarmService.insertProjectReportAlarm(avo);
 		
 		redirectAttribute.addAttribute("projectNo", vo.getProjectNo());
