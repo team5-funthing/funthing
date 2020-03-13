@@ -34,6 +34,11 @@ $(document).ready(function(){
 		midClick:true
 	});
 });
+
+
+
+
+
 </script>
 </head>
 
@@ -279,8 +284,13 @@ $(document).ready(function(){
 														<div class="d-flex justify-content-between">
 															<div class="d-flex align-items-center">
 																<h5>
-																	<a href="http://localhost:8080/funthing/projectDetails.udo?projectNo=${project.projectNo }" onclick="window.open(this.href,'_blank','width=100px, height=100px, toolvars=no'); return false;">${b1.member.name }</a>
+																	
+																	<a href="nameProfile.udo?email=${b1.email}&name=${b1.member.name}" onclick="window.open(this.href,'_blank', toolvars=no'); return false;">${b1.member.name }</a>
+																	
 																</h5>
+																
+																
+
 																<p class="date">${b1.projectBoardDate}</p>
 															</div>
 															<c:choose>
@@ -330,7 +340,8 @@ $(document).ready(function(){
 							                                                    <div class="d-flex justify-content-between">
 							                                                       <div class="d-flex align-items-center">
 							                                                          <h5>
-							                                                             <a href="javaScript: retrun(0);">${b2.member.name}</a>
+							                                                          <a href="nameProfile.udo?email=${b2.email}&name=${b2.member.name}" onclick="window.open(this.href,'_blank', toolvars=no'); return false;">${b2.member.name }</a>
+							                                                             
 							                                                          </h5>
 							                                                          <p class="date">${b2.projectBoardDate}</p>
 							                                                       </div>
@@ -526,6 +537,9 @@ $(document).ready(function(){
 	<jsp:include page="./include/i-popup-login.jsp"></jsp:include>
 	<jsp:include page="./include/i-popup-search.jsp"></jsp:include>
 	<jsp:include page="./include/i-body-js.jsp"></jsp:include>
+	
+	
+	
 
 </body>
 </html>

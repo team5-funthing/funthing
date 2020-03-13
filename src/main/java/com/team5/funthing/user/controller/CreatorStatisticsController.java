@@ -1,7 +1,5 @@
 package com.team5.funthing.user.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -16,11 +14,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.model.vo.PaymentReserveVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.service.creatorStatisticsService.GetAllProjectAndPaymentService;
 import com.team5.funthing.user.service.creatorStatisticsService.GetFundingPaymentCountService;
 import com.team5.funthing.user.service.creatorStatisticsService.GetTodayFundingMoneyService;
+import com.team5.funthing.user.service.memberService.GetMemberService;
 import com.team5.funthing.user.service.projectService.GetProjectService;
 
 
@@ -36,6 +36,8 @@ public class CreatorStatisticsController {
 	private GetFundingPaymentCountService getFundingPaymentCountService;
 	@Autowired
 	private GetTodayFundingMoneyService getTodayFundingMoneyService;
+	@Autowired
+	private GetMemberService getMemberService;
 
 	
 // ===================== 메서드 =======================	
@@ -46,6 +48,9 @@ public class CreatorStatisticsController {
 		
 		vo.setProjectNo(currentProjectNo);
 		model.addAttribute("currentProjectNo",currentProjectNo);
+		
+
+		
 		
 		//총결제된 카운트 가져오기
 		int count= getFundingPaymentCountService.getFundingPaymentCount(currentProjectNo);
@@ -122,7 +127,7 @@ public class CreatorStatisticsController {
 	
 	@RequestMapping(value="getAllProjectAndPayment.udo", method = RequestMethod.GET)
 	public String getAllProjectAndPayment(@RequestParam int currentProjectNo,
-											Model model, ProjectVO vo, PaymentReserveVO vo2 ) {
+											Model model, ProjectVO vo, PaymentReserveVO vo2) {
 		vo.setProjectNo(currentProjectNo);
 //		결제정보가져오기 
 		List<PaymentReserveVO> getAllProjectAndPayment = getAllProjectAndPaymentService.getAllProjectAndPayment(currentProjectNo);
@@ -130,6 +135,8 @@ public class CreatorStatisticsController {
 		
 		int count= getFundingPaymentCountService.getFundingPaymentCount(currentProjectNo);
 		model.addAttribute("count", count);
+		
+//		model.addAttribute("getMember",getMemberService.getMember(vo3));
 		
 		return "p-test-statistics2";
 	}

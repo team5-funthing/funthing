@@ -25,6 +25,7 @@ import com.team5.funthing.user.service.memberActivityService.GetReportProjectNoL
 import com.team5.funthing.user.service.memberActivityService.GetReservationProjectNoListService;
 import com.team5.funthing.user.service.memberActivityService.InsertMemberActivityService;
 import com.team5.funthing.user.service.memberActivityService.UpdateMemberActivityService;
+import com.team5.funthing.user.service.memberService.GetMemberService;
 import com.team5.funthing.user.service.paymentReserveService.GetPaymentReserveListByEmailService;
 import com.team5.funthing.user.service.paymentReserveService.GetPaymentReserveService;
 import com.team5.funthing.user.service.projectService.GetProjectListByEmailService;
@@ -38,6 +39,8 @@ public class MemberActivityController {
 	private GetProjectListByEmailService getProjectServiceByEmailService;
 	@Autowired
 	private GetProjectService getProjectService;
+	@Autowired
+	private GetMemberService getMemberService;
 	
 	//PaymentReserve Service
 	//MemberActivity Service
@@ -62,7 +65,66 @@ public class MemberActivityController {
 		return "p-detail-mypage";
 	}  
 	
+
+	//네임클릭했을때 넘어가는 페이지 
+	@RequestMapping(value="nameProfile.udo",method=RequestMethod.GET)
+	public String nameProfile(HttpSession session, 
+			@RequestParam(value="email") String email,@RequestParam(value="name") String name, MemberActivityVO vo, ProjectVO vo1, Model model, MemberVO vo2) {
+		
+		vo.setEmail(email);
+		model.addAttribute("vo",vo);
+		
+		vo2.setEmail(email);
+		model.addAttribute("getMember",getMemberService.getMember(vo2));
+		
+		//내가 만든 프로젝트 리스트
+		model.addAttribute("myProjectList",getProjectServiceByEmailService.getProjectListByEmail(vo1));
+		
+		//내가 좋아요 프로젝트 리스트 
+		List<ProjectVO> projectLikeList = new ArrayList<ProjectVO>();
+//		MemberVO loginMember = (MemberVO) session.getAttribute("memberSession");
+		
+		List<MemberActivityVO> likeProjectList = getLikeProjectNoListService.getLikeProjectNoList(vo);
+
+		for(MemberActivityVO getProjectNo : likeProjectList) {
+			vo1.setProjectNo(getProjectNo.getProjectNo());
+			projectLikeList.add(getProjectService.getProject(vo1));
+		}
+		//System.out.println(projectLikeList.toString());
+		
+		model.addAttribute("projectLikeList", projectLikeList);
+		
+		//내가 후원한 리스트 
+		
+		List<ProjectVO> projectReportList = new Vector<ProjectVO>();
+//		MemberVO vo2 = (MemberVO) session.getAttribute("memberSession");
+//		vo.setEmail(vo2.getEmail());
+		for(MemberActivityVO list: getReportProjectNoListService.getReportProjectNoList(vo)) {
+			vo1.setProjectNo(list.getProjectNo());
+			projectReportList.add(getProjectService.getProject(vo1));
+		}
+		model.addAttribute("projectReportList",projectReportList);
+		
+		
+		//예정중인 리스트
+		List<ProjectVO> projectReservationList = new Vector<ProjectVO>();
+//		MemberVO vo2 = (MemberVO) session.getAttribute("memberSession");
+//		vo.setEmail(vo2.getEmail());
+		for(MemberActivityVO list: getReservationProjectNoListService.getReservationProjectNoList(vo)) {
+			vo1.setProjectNo(list.getProjectNo());
+			projectReservationList.add(getProjectService.getProject(vo1));
+		}
+		model.addAttribute("projectReservationList",projectReservationList);
+		
+
+		return "p-name-profile";
+	}  
+	
+	
+	
+
 	@RequestMapping("upCountLikeInterceptor.udo")
+
 	public String upCountLike(MemberActivityVO mavo, 
 							Model model,
 							RedirectAttributes redirectAttributes,
