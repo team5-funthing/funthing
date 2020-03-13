@@ -186,7 +186,7 @@ $(document).ready(function(){
 						</div>
 					</div>
 					<div class="p-2 bd-highlight mt-auto ml-0">
-						<form id="supportProject" action="supportProject.udo" method="GET">
+						<form id="supportProject" action="supportProjectInterceptor.udo" method="GET">
 							<input type="hidden" name="projectNo" value="${project.projectNo }">
 							<a class="btn btn-lg btn-spon-prj d-none d-lg-inline-block pr-5 pl-5 mb-2"
 								href="javaScript: return(0);" onclick="document.getElementById('supportProject').submit();">
@@ -194,8 +194,8 @@ $(document).ready(function(){
 						</form>
 					</div>
 					<div class="row d-flex justify-content-around m-0 ">
-						<a class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2" href="upCountLike.udo?projectNo=${project.projectNo }">좋아요   ${likeCount}</a> 
-						<a class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2" href="showInsertwAskMessage.udo?projectNo=${project.projectNo }">문의하기</a> 
+						<a class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2" href="upCountLikeInterceptor.udo?projectNo=${project.projectNo }">좋아요   ${likeCount}</a> 
+						<a class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2" href="showInsertwAskMessageInterceptor.udo?projectNo=${project.projectNo }">문의하기</a> 
 						<a class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2" href="#">공유하기</a>
 					</div>
 
@@ -233,7 +233,7 @@ $(document).ready(function(){
 							<div class="comment-form">
 								<h4>리뷰 게시판 글 남기기</h4>
 								
-								<form class="form-contact comment_form" action="insertProjectBoard.udo" 
+								<form class="form-contact comment_form" action="insertProjectBoardInterceptor.udo" 
 												id="commentForm" method="get">
 									<input type="hidden" name="projectNo" value="${project.projectNo}">
 									<div class="row">
@@ -426,7 +426,7 @@ $(document).ready(function(){
 	</section>
 	
 	<div id="showReportPage" class="white-popup mfp-hide">
-		<form id="reports" action="insertReport.udo" method="POST">
+		<form id="reports" action="insertReportInterceptor.udo" method="POST">
 			<input type="hidden" value="${project.projectNo}" name="projectNo">
 			<input type="hidden" value="${project.email}" name="email">
 	        <div class="report_popup_box ">

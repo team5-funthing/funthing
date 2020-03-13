@@ -115,10 +115,7 @@
 										<h5 class="card-title m-b-0">이미지파일 업로드</h5>
 										<hr>
 										<div class="table-responsive">
-
-
-											
-<!-- 코드 추가 시작00 -->
+								
 
 				<!-- projectIntroduceImage -->
 				
@@ -129,7 +126,7 @@
 				<div id="userMainImage">
 				<c:choose>
 					<c:when test="${userMainImageList eq null}">
-						<input type="hidden">
+						
 						<input type="file" class="form-control-file select-project-image userMainImage">
 						<hr>
 			           	<ul id="projectIntroduceImageUl">
@@ -145,12 +142,15 @@
 							
 								<li id="projectIntroduceImageLi">
 									<div class="select_introduce_img m-3">
-										<input type="hidden" value="${userMainImage.imageNo }">
-										<img style="width: 200px; height: auto;" src="${userMainImage.imagePath }" />
-										<a href="javaScript: return(0);" class='btn fas fa-times fa-2x imgRemoveBtn' type='button' ></a>
+											<input class="imageNo1" type="hidden" value="${userMainImage.imageNo }">
+											<input class="imageNo2" type="hidden" value="${userMainImage.imageNo }">
+											<img style="width: 200px; height: auto;" src="${userMainImage.imagePath }" />
+											<a href="javaScript: return(0);" class='btn fas fa-times fa-2x imgRemoveBtn' type='button' ></a>
+										<textarea class="imageContentC" style=" width: 40%; height: 75px; overflow: auto; padding: 10px; white-space:pre-wrap; resize: none;">${userMainImage.imageContent }</textarea>		
 									</div>
-									
+									<hr>
 								</li>
+							
 							</c:forEach>
 							
 					
@@ -169,83 +169,86 @@
 	            		if(fileVal != ""){
 	            			
 	            			$("#userMainImage").prepend("<input type='file' class='form-control-file select-project-image userMainImage'>");
-	            			$(this).attr('name', 'userMainUploadImage'); 
+	            			$(this).attr('name', 'userMainUploadImage');
 	            			$(this).css('display', 'none');
+	            			
 	            	       	
 	            			var idx = $('#projectIntroduceImageUl li').length;
-
+	            			
+	            			$(this).attr('id', "ho"+idx);
+	            			
 	            	       	alert(fileVal);
 							if(this.files && this.files[0]){
 			           			var reader = new FileReader;
 			           			reader.onload = function(data){
 			           				$("#projectIntroduceImageUl").append("<li id='projectIntroduceImageLi'>"
 			           						+	"<div class='select_introduce_img'>"
-			    							+	"<img id='img" + idx + "' style='width: 200px; height:100px;' src='' />"
-			    							+	"<a class='btn fas fa-times fa-2x imgRemoveBtn' type='button' ></a>"
+			    							+	"<img id='img" + idx + "' style='width: 100%; height:100px;' src='' />"
+			    							+	"<a class='btn fas fa-times fa-2x imgRemoveBtn2' id='"+idx+"' type='button' ></a>"
+			    							+	"<textarea class='imageContentC2' style='width: 40%; height: 75px; overflow: auto; padding: 10px; white-space:pre-wrap; resize: none;'></textarea>"
 			    							+	"</div>"
 			    							+	"</li>");
-			           				
+			           						
 			           				$("img[id='img" + idx + "']").attr("src", data.target.result).width(200);
-			           				
 			           				
 			           			}; 
 			           			reader.readAsDataURL(this.files[0]);
 			           		}
 	            		}
 	            		
+	         
 	            	});
 	            	
+					
 					$(document).on("click", ".imgRemoveBtn", function(){
 						
-
-						$(this).siblings("input").attr("name", "userMainImageNo");
-
+						$(this).siblings(".imageNo1").attr("name", "userMainImageNo");
+						
+						$(this).siblings(".imageContentC").attr("name", "a");
+						
 						$(this).closest("li").css('display', 'none');
+						
+	
+					})
+					
+					$(document).on("keydown", ".imageContentC", function(){
+						
+						$(this).siblings(".imageNo2").attr("name", "userMainImageNo2");
+						
+						$(this).attr("name", "userMainImageContent");
+						
+					})
+					
+					$(document).on("keydown", ".imageContentC2", function(){
+						
+						$(this).attr("name", "userMainImageContent2");
 						
 					})
 
-	            	
+					
+					$(document).on("click", ".imgRemoveBtn2", function(){
+							
+						
+						var ida = $(this).attr("id");
+						var ho1 = "ho"+ida ;
+						
+						
+						var te2 = document.getElementById(ho1).getAttribute('id');
+						
+						$(this).closest("li").css('display', 'none');
+						$(("#"+te2)).remove();
+										
+						
+						$(this).siblings(".imageContentC").attr("name", "a");
+						
+
+					})
+
 			    </script>		
 		  </div>
-
-<!-- 코드 추가 끝 00 -->
-
-
-
-
-
-
-
-													<!-- 첫번째 시작 
-													<div class="mt-30">
-														<div class="input-group mt-2 mb-3">
-															<div class="form-group">
-																<label for="creatorProfile">이미지를 선택해주세요.</label> <input
-																	type="file" id="userMainImageBt"
-																	name="userMainUploadImage" class="form-control-file">
-															</div>
-															<div class="userMain_select_img">
-																<img src="" />
-															</div>
-														</div>
-														<script>
-					            	$("#userMainImageBt").change(function(){
-					            		if(this.files && this.files[0]){
-					            			var reader = new FileReader;
-					            			reader.onload = function(data){
-					            				$(".userMain_select_img img").attr("src", data.target.result).width(200);
-					            			}
-					            			reader.readAsDataURL(this.files[0]);
-					            		}
-					            	})
-								</script>
-													</div>
-													 첫번째 끝 -->
-
+			
 											
-											
-											
-											<a
+												<a
 												class="btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
 												href="javaScript:return(0);"
 												onclick="document.getElementById('userMainImageChangSetting').submit();">적용하기</a>

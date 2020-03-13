@@ -34,4 +34,16 @@ public class AdminUserMainImageChangeDAO {
 		sqlSessionTemplate.insert("UserMainImageChangeDAO.insertUserMainImage",vo);
 	}
 	
+	public void insertUserMainImagePath(AdminUserMainImageChangeVO vo) {
+		sqlSessionTemplate.insert("UserMainImageChangeDAO.insertUserMainImagePath",vo);
+	}
+	
+	public void updateUserMainImageContent(AdminUserMainImageChangeVO vo) {
+		sqlSessionTemplate.update("UserMainImageChangeDAO.updateUserMainImageContent",vo);
+	}
+	
+	public void updateUserMainImageContentNull(AdminUserMainImageChangeVO vo) {
+		sqlSessionTemplate.update("UserMainImageChangeDAO.updateUserMainImageContentNull",vo);
+	}
+	
 }

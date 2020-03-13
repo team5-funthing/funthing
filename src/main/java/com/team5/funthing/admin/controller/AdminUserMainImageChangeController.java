@@ -13,15 +13,15 @@ import org.springframework.web.multipart.MultipartFile;
 import com.team5.funthing.admin.model.vo.AdminUserMainImageChangeVO;
 import com.team5.funthing.admin.service.userMainImageChangeService.DeleteUserMainImageService;
 import com.team5.funthing.admin.service.userMainImageChangeService.GetUserMainImageListService;
+import com.team5.funthing.admin.service.userMainImageChangeService.InsertUserMainImagePathService;
 import com.team5.funthing.admin.service.userMainImageChangeService.InsertUserMainImageService;
+import com.team5.funthing.admin.service.userMainImageChangeService.UpdateUserMainImageContentService;
 import com.team5.funthing.admin.service.userMainImageChangeService.UpdateUserMainImageNullService;
 import com.team5.funthing.admin.service.userMainImageChangeService.UpdateUserMainImageService;
 import com.team5.funthing.common.utils.uploadUtils.UploadUtil;
 
-
 @Controller
 public class AdminUserMainImageChangeController {
-
 
 	@Autowired
 	UpdateUserMainImageService updateUserMainImageService;
@@ -35,53 +35,40 @@ public class AdminUserMainImageChangeController {
 	InsertUserMainImageService insertUserMainImageService;
 	@Autowired
 	AdminUserMainImageChangeVO adminUserMainImageChangeVO;
+	@Autowired
+	InsertUserMainImagePathService insertUserMainImagePathService;
+	@Autowired
+	UpdateUserMainImageContentService updateUserMainImageContentService;
 
-	
 	@Autowired
 	private UploadUtil uploadUtil;
 
 	@RequestMapping("userMainImageChange.ado")
-	public String upload(
-			@RequestParam(name = "userMainImageNo", required = false)List<Integer> userMainImageNoList,
-			@RequestParam(name = "userMainUploadImage",required = false) List<MultipartFile> userMainUploadImage,
+	public String upload(@RequestParam(name = "userMainImageNo", required = false) List<Integer> userMainImageNoList,
+			@RequestParam(name = "userMainUploadImage", required = false) List<MultipartFile> userMainUploadImage,
+			@RequestParam(name = "userMainImageContent", required = false) List<String> userMainImageContentList,
+			@RequestParam(name = "userMainImageContent2", required = false) List<String> userMainImageContentList2,
+			@RequestParam(name = "userMainImageNo2", required = false) List<Integer> userMainImageNoContentList,
+
 			AdminUserMainImageChangeVO vo) {
 
-		
 		try {
-			userMainImageUploader(userMainUploadImage,vo, userMainImageNoList);
-			
+			userMainImageUploader(userMainUploadImage, vo, userMainImageNoList, userMainImageContentList,
+					userMainImageNoContentList, userMainImageContentList2);
+
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 		return "redirect: userMainImageChangeForm.ado";
 	}
 
-	public void userMainImageUploader2(List<MultipartFile> toDoUploadList, AdminUserMainImageChangeVO vo)
-			throws Exception {
-
-		List<String> toRemoveFilePath = new ArrayList<String>();
-
-		if (!toDoUploadList.get(0).isEmpty()) { // �뾽濡쒕뱶 �떆�궓 �뙆�씪�씠 �씠誘� 議댁옱�븯�뒗 寃쎌슦 �뙆�씪 �꽑�깮�쓣 �떎�떆 �븞�븳 寃쎌슦�뿉 �굹�삱 �닔 �엳�뒗 �긽�솴 泥섎━
-			toRemoveFilePath.add(vo.getImagePath()); // �젣嫄곕맆 �뙆�씪寃쎈줈瑜� vo媛앹껜�뿉�꽌 媛��졇�삤湲�
-			String voName = vo.getClass().getSimpleName();
-			List<String> toSettingPath = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);
-			if (toSettingPath == null)
-				return;
-
-			for (String toInsertImage : toSettingPath) {
-				vo.setImagePath(toInsertImage);
-			}
-		}
-	}
-
 	public void userMainImageUploader(List<MultipartFile> toDoUploadList, AdminUserMainImageChangeVO vo,
-			List<Integer> toRemoveImageNoList) throws Exception {
+			List<Integer> toRemoveImageNoList, List<String> userMainImageContentList,
+			List<Integer> userMainImageNoContentList, List<String> userMainImageContentList2) throws Exception {
 
 		List<String> toRemoveFilePath = new ArrayList<String>();
-		
+
 		String voName = vo.getClass().getSimpleName();
 		List<AdminUserMainImageChangeVO> userMainImageList = getUserMainImageListService.getUserMainImageList();
 
@@ -101,17 +88,19 @@ public class AdminUserMainImageChangeController {
 			toRemoveFilePath.add(0, null);
 		}
 
-		if (!toDoUploadList.isEmpty()) { // �봽濡쒖젥�듃 �냼媛� �씠誘몄� 湲곗〈�뾽濡쒕뱶 �젣嫄� 諛� �깉 �뾽濡쒕뱶, DB 異붽� �옉�뾽 硫붿꽌�뱶
-
+		if (!toDoUploadList.isEmpty()) {
 			List<String> tmpUploadList = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);
-			for(int i=0; i<tmpUploadList.size();i++) {
-			}
-			Collections.reverse(tmpUploadList);
-			insertUserMainImageService.insertUserMainImage(adminUserMainImageChangeVO, tmpUploadList);
 
+			Collections.reverse(tmpUploadList);
+
+			insertUserMainImageService.insertUserMainImage(adminUserMainImageChangeVO, tmpUploadList,
+					userMainImageContentList2);
+			updateUserMainImageContentService.updateUserMainImageContent(vo, userMainImageContentList,
+					userMainImageNoContentList);
 		} else {
 			uploadUtil.removeUtil(voName, toRemoveFilePath);
-
+			updateUserMainImageContentService.updateUserMainImageContent(vo, userMainImageContentList,
+					userMainImageNoContentList);
 		}
 
 	}

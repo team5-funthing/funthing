@@ -4,8 +4,6 @@
 
 <mapper namespace="UserMainImageChangeDAO">
 
-
-	<!-- 이미지 교체 -->
 	<update id="updateUserMainImage" parameterType="adminUserMainImageChange">
 		UPDATE usermainimagechange set imagePath = #{imagePath} where imageNo = #{imageNo}
 	</update>
@@ -14,7 +12,6 @@
 		select * from usermainimagechange ORDER BY imageNo asc
 	</select>
 	
-	<!-- 이미지 삭제 -->
 	<update id="updateUserMainImageNull" parameterType="adminUserMainImageChange">
 		UPDATE usermainimagechange set imagePath = '', imageName = '' where imageNo = #{imageNo}
 	</update>
@@ -24,10 +21,19 @@
 	</delete>
 	
 	<insert id="insertUserMainImage" parameterType="adminUserMainImageChange">
+		INSERT into usermainimagechange(imageNo,imagePath,imageContent) values(usermainimagechange_seq.nextval,#{imagePath},#{imageContent})
+	</insert>
+	
+	<insert id="insertUserMainImagePath" parameterType="adminUserMainImageChange">
 		INSERT into usermainimagechange(imageNo,imagePath) values(usermainimagechange_seq.nextval,#{imagePath})
 	</insert>
 	
+	<update id="updateUserMainImageContent" parameterType="adminUserMainImageChange">
+		update usermainimagechange set imageContent = #{imageContent} where imageNo = #{imageNo} 
+	</update>
 	
+	<update id="updateUserMainImageContentNull" parameterType="adminUserMainImageChange">
+		update usermainimagechange set imageContent = null where imageNo = #{imageNo} 
+	</update>
 	
-
 </mapper>

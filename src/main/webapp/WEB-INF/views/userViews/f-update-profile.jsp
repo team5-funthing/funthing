@@ -46,7 +46,6 @@
 
 	<hr>
 
-	<div class="container">
 		<div class="row">
 			<div class="col-2"></div>
 			<div class="col-6">
@@ -57,6 +56,7 @@
 						<div class="h4">프로필 변경 [프로필 설정]</div>
 						<hr>
 					</div>
+
 					<form id="saveimage" action="saveimage2.udo" method="post"
 						enctype="multipart/form-data">
 						<div class="d-flex justify-content-start mt-5">
@@ -150,6 +150,7 @@
 
 					<form id="updateForm" name="updateForm" action="updateMember.udo"
 						method="post">
+
 						<div class="form-row">
 							<div class="col-md-4 mb-3">
 								<label for="validationDefault01">이메일</label> <input type="text"
@@ -158,6 +159,7 @@
 									value="${member.email}" style="width: 250px;" required readonly>
 							</div>
 						</div>
+
 						<c:if test="${ member.socialjoined eq 'Y'}">
 
 							<div class="form-row">
@@ -248,6 +250,7 @@
 						<div id="nameInputCheck"></div>
 						<div class="form-row">
 							<div class="col-md-4 mb-3">
+
 								<label for="validationDefault01">연락처</label> <input type="text"
 									placeholder=" - 없이 입력해주세요" onfocus="this.placeholder = ''"
 									onblur="this.placeholder = ' - 없이 입력해주세요'" class="form-control"
@@ -316,7 +319,6 @@
 
 			</div>
 
-		</div>
 
 		<div class="col-2"></div>
 

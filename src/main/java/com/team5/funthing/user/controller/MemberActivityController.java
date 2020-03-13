@@ -65,6 +65,7 @@ public class MemberActivityController {
 		return "p-detail-mypage";
 	}  
 	
+
 	//네임클릭했을때 넘어가는 페이지 
 	@RequestMapping(value="nameProfile.udo",method=RequestMethod.GET)
 	public String nameProfile(HttpSession session, 
@@ -121,7 +122,9 @@ public class MemberActivityController {
 	
 	
 	
-	@RequestMapping("upCountLike.udo")
+
+	@RequestMapping("upCountLikeInterceptor.udo")
+
 	public String upCountLike(MemberActivityVO mavo, 
 							Model model,
 							RedirectAttributes redirectAttributes,
