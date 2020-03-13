@@ -16,7 +16,6 @@ public class KeywordDAO {
 	
 	
 	public void insertKeyword(KeywordVO vo) {
-		System.out.println("insertKeyword 실행전 vo값: " + vo);
 		sqlsessionTemplate.selectOne("insertKeyword", vo);
 	}
 	
