@@ -31,7 +31,7 @@ public class SendMailUtilImpl implements SendMailUtil{
 		messageHelper = new MimeMessageHelper(message,true,"UTF-8");
 		messageHelper.setSubject(emailTitle);
 		messageHelper.setText(emailContent);
-		messageHelper.setFrom("funthing@gmail.com","°ü¸®ÀÚ");
+		messageHelper.setFrom("funthing@gmail.com","ê´€ë¦¬ì");
 		messageHelper.setTo(receiverEmailAddress);
 		mailSender.send(message);
 	}

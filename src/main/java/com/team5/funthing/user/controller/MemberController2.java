@@ -22,6 +22,7 @@ import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.service.memberService.DeleteMemberService;
 import com.team5.funthing.user.service.memberService.GetMemberService;
 import com.team5.funthing.user.service.memberService.InsertImageService;
+import com.team5.funthing.user.service.memberService.InsertSocialMemberService;
 import com.team5.funthing.user.service.memberService.UpdateMemberService;
 
 @Controller
@@ -35,6 +36,8 @@ public class MemberController2 {
 	DeleteMemberService deleteMemberService;
 	@Autowired
 	InsertImageService insertImageService;
+	@Autowired
+	InsertSocialMemberService insertSocialMemberService;
 	@Autowired
 	UploadUtil upload;
 	
@@ -51,45 +54,36 @@ public class MemberController2 {
 	
 	@RequestMapping(value = "updateMember.udo",method= RequestMethod.POST)
 		public String updateProfile(MemberVO vo,HttpSession session,Model model) {
-		//formÀ¸·ÎºÎÅÍ ¹Ş¾Æ¿Â Á¤º¸¸¦ È®ÀÎÇÑ´Ù.
-		System.out.println(vo.toString());
-		System.out.println("updateMember.udo º¯°æÇÏ·Á´Â ºñ¹Ğ¹øÈ£ : " + vo.getPassword());
-		
-		//º¯°æÀ» À§ÇØ ÀÔ·ÂÇÑ ºñ¹Ğ¹øÈ£¸¦ ¾ÏÈ£È­ÇÑ´Ù.
+
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		String encodedPassword = encoder.encode(vo.getPassword());
-		System.out.println("updateMember.udo ¾ÏÈ£È­µÈ ºñ¹Ğ¹øÈ£ : " + encodedPassword);
-		
-		//¾ÏÈ£È­ÇÑ ºñ¹Ğ¹øÈ£¸¦ ´ãÀº °´Ã¼¸¦ ÅëÇÏ¿© È¸¿øÁ¤º¸¸¦ º¯°æÇÑ´Ù.
 		vo.setPassword(encodedPassword);
 		updateMemberService.updateMember(vo);
-		//±âÁ¸ÀÇ ºñ¹Ğ¹øÈ£¿¡ ´ëÇÑ ¼¼¼ÇÀ» Áö¿ì°í º¯°æµÈ Á¤º¸ÀÇ ¼¼¼ÇÀ» ÀúÀåÇÑ´Ù.
 		session.removeAttribute("memberSession");
 		session.setAttribute("memberSession", vo);
 		model.addAttribute("ok","1");
 		return "f-update-profile";
 	}
+	@RequestMapping(value = "updateSocialMember.udo",method= RequestMethod.POST)
+	public String updateSocialProfile(MemberVO vo,HttpSession session) {
+		System.out.println(session.getAttribute("memberSession"));
+		MemberVO sessionpw = (MemberVO)session.getAttribute("memberSession");
+		vo.setPassword(sessionpw.getPassword());
+		updateMemberService.updateMember(vo);
+		session.removeAttribute("memberSession");
+		session.setAttribute("memberSession", vo);
+		return "1";
+	}
 	
 	@RequestMapping(value="updateCheck.udo",method=RequestMethod.POST)
 	public String pwCheck(String pw,Model model,MemberVO vo,HttpSession session){
-		//ÇöÀç db¿¡ µî·ÏµÇ¾îÀÖ´Â ºñ¹Ğ¹øÈ£¿Í ¼¼¼ÇÀ» ¹Ş¾Æ¿Â´Ù.
-		System.out.println("pw :"+pw);
-		MemberVO insertedMember = (MemberVO) session.getAttribute("memberSession");
-		System.out.println("updateCheck.udo ¼¼¼ÇÀ¸·Î ºÎÅÍ ¾ò¾î¿Â ºñ¹Ğ¹øÈ£ : " + insertedMember.getPassword());
-		
-		//¼¼¼ÇÀÇ ºñ¹Ğ¹øÈ£·ÎºÎÅÍ MemberÀÇ Á¤º¸¸¦ ¹Ş¾Æ¿Â´Ù.
-//		vo.setEmail(insertedMember.getEmail());
-//		System.out.println("vo :"+vo.toString());
-//		getMemberService.getMember(vo);
-//		System.out.println("getMemberService.getMember(vo) :"+vo.toString());
-		
+		MemberVO insertedMember = (MemberVO) session.getAttribute("memberSession");		
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		if(encoder.matches(pw, insertedMember.getPassword())) {
 			model.addAttribute("result","1");
-			System.out.println("¸®ÅÏÀ¸·Î 1°¨");
 		}else {
 			model.addAttribute("result","2");
-			System.out.println(vo.getPassword());
+
 		}
 		return "ajax/callback";
 	}
@@ -98,11 +92,10 @@ public class MemberController2 {
 	   @RequestMapping(value="saveimage.udo",method=RequestMethod.POST)
 	   @ResponseBody
 	   public String saveImage(@RequestParam(name ="imgname") List<MultipartFile> uploadFile,MemberVO vo,HttpSession session) throws Exception {
-		   System.out.println("¼¼ÀÌºêÀÌ¹ÌÁö ½ÇÇà ");
-		   System.out.println("ºñ¾ú´À³Ä:" + uploadFile.get(0).getOriginalFilename());			//ÆÄÀÏÀÇ ÀÌ¸§À» ¹Ş¾Æ¿À´Â ¸Ş¼­µå
-		   MemberVO vo2 = (MemberVO) session.getAttribute("memberSession");					
-		   vo.setEmail(vo2.getEmail());														
-	       memberImageUploader(uploadFile, vo);												
+		   MemberVO vo2 = (MemberVO) session.getAttribute("memberSession");
+		   vo.setEmail(vo2.getEmail());
+	       memberImageUploader(uploadFile, vo);
+
 	        insertImageService.insertImage(vo);
 	        session.setAttribute("memberSession", getMemberService.getMember(vo));
 	        
@@ -111,8 +104,6 @@ public class MemberController2 {
 
 	   @RequestMapping(value="saveimage2.udo",method=RequestMethod.POST)
 	   public String saveImage2(@RequestParam(name ="imgname") List<MultipartFile> uploadFile,MemberVO vo,HttpSession session) throws Exception {
-		   System.out.println("¼¼ÀÌºêÀÌ¹ÌÁö ½ÇÇà ");
-		   System.out.println("ºñ¾ú´À³Ä:" +uploadFile.get(0).getOriginalFilename());
 		   MemberVO vo2 = (MemberVO) session.getAttribute("memberSession");
 		   vo.setEmail(vo2.getEmail());
 	       memberImageUploader(uploadFile, vo);
@@ -137,23 +128,21 @@ public class MemberController2 {
 	      return "f-update-profile";
 	   }
 
-//
-	   
 
 	   
 	   
-	   
 	public void memberImageUploader(List<MultipartFile> toDoUploadList, MemberVO vo) throws Exception {
-		System.out.println("memberImageUploader ½ÇÇà");
+
 		List<String> toRemoveFilePath = new ArrayList<String>();
-        		
-		if(!toDoUploadList.get(0).isEmpty()) { // ¾÷·Îµå ½ÃÅ² ÆÄÀÏÀÌ ÀÌ¹Ì Á¸ÀçÇÏ´Â °æ¿ì ÆÄÀÏ ¼±ÅÃÀ» ´Ù½Ã ¾ÈÇÑ °æ¿ì¿¡ ³ª¿Ã ¼ö ÀÖ´Â »óÈ² Ã³¸®  
-			toRemoveFilePath.add(vo.getMyImage()); //Á¦°ÅµÉ ÆÄÀÏ°æ·Î¸¦ vo°´Ã¼¿¡¼­ °¡Á®¿À±â
+
+				
+		if(!toDoUploadList.get(0).isEmpty()) { 
+			toRemoveFilePath.add(vo.getMyImage()); 
+
 			String voName = vo.getClass().getSimpleName();
 			List<String> toSettingPath = upload.upload(toDoUploadList, voName, toRemoveFilePath);
-            System.out.println("¸®ÅÏÀº µé¾î¿ÀÁö? ¤·¤·"+upload.upload(toDoUploadList, voName, toRemoveFilePath));
-			
-			if(toSettingPath == null) { System.out.println("ÀÌ¹ÌÁö ¾÷·Îµå ¾ÈµÊ"); return;}
+
+			if(toSettingPath == null) { System.out.println("Ã€ÃŒÂ¹ÃŒÃÃ¶ Â¾Ã·Â·ÃÂµÃ¥ Â¾ÃˆÂµÃŠ"); return;}
 			
 			int cnt = 1;
 			for(String toInsertImage : toSettingPath) {
@@ -163,6 +152,33 @@ public class MemberController2 {
 		}else {
 		}
 		
+	}
+	
+	
+
+	
+	
+	@RequestMapping(value="successSocialjoin.udo",method=RequestMethod.POST) 
+	public String successjoin(MemberVO vo,Model model,@RequestParam(name="email2",required=false)String email,HttpSession session) {
+		if(email!=null) {
+			vo.setEmail(email);
+		}
+		System.out.println(vo.toString());
+		if(vo.getEmail()!=null && vo.getName()!=null && vo.getPassword()!=null)    {
+			
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();			
+			String encodePassword = encoder.encode(vo.getPassword());
+			vo.setPassword(encodePassword);			
+			insertSocialMemberService.insertSocialMember(vo);
+
+			model.addAttribute("result","1");
+
+		}else {
+
+			model.addAttribute("result","2");
+		}
+
+		return "ajax/callback";
 	}
 	
 }

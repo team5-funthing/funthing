@@ -18,7 +18,6 @@ public class InitRealPathController {
 	@PostConstruct
 	public void initController() {
 		this.realPath = context.getRealPath("/resources/upload");
-		System.out.println( "InitRealPath : " + realPath );
 	}
 
 	public String getRealPath() {

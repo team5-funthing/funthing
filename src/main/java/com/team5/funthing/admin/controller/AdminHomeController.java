@@ -123,8 +123,6 @@ public class AdminHomeController {
 	public String projectReportCheck(ReportVO vo , Model model) {
 		
 		List<ReportVO> reportList = getReportListService.getReportList(vo);
-		System.out.println(reportList.toString());
-		
 		model.addAttribute("reportList", reportList);
 		return "b-report-list";
 	}
@@ -177,8 +175,6 @@ public class AdminHomeController {
 	public String getProjectCheckList(ProjectVO vo,Model model) {
 		
 		List<ProjectVO> projectCheckList = getProjectCheckListService.getProjectCheckList(vo);
-		System.out.println(projectCheckList.toString());
-		
 		model.addAttribute("projectCheckList",projectCheckList);
 		return "b-project-check-list";
 	}

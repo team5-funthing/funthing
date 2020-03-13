@@ -36,8 +36,7 @@ public class AdminUserMainImageChangeController {
 	@Autowired
 	AdminUserMainImageChangeVO adminUserMainImageChangeVO;
 
-	// ===================== �쑀�떥 二쇱엯 =====================
-
+	
 	@Autowired
 	private UploadUtil uploadUtil;
 
@@ -106,7 +105,6 @@ public class AdminUserMainImageChangeController {
 
 			List<String> tmpUploadList = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);
 			for(int i=0; i<tmpUploadList.size();i++) {
-			System.out.println("tmpUploadList:"+tmpUploadList.get(i));
 			}
 			Collections.reverse(tmpUploadList);
 			insertUserMainImageService.insertUserMainImage(adminUserMainImageChangeVO, tmpUploadList);

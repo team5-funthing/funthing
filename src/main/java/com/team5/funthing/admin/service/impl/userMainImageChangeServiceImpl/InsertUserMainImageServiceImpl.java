@@ -24,7 +24,7 @@ public class InsertUserMainImageServiceImpl implements InsertUserMainImageServic
 				vo.setImagePath(toInsertImage);
 				adminUserMainImageChangeDAO.insertUserMainImage(vo);
 				
-			} // 소개 이미지 경로 DB에 추가
+			}
 		}
 	}
 	

@@ -75,23 +75,21 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 		String orderNoStr = null;
 		String orderEmail = null;
 		String orderItems = null;
-		String quantityStr = null; // ÃÑ°¹¼ö
-		String totalAmountStr = null; // ¸®¿öµå + ¹è¼Ûºñ
+		String quantityStr = null; 
+		String totalAmountStr = null;
 		String taxFreeAmount = "0";
 
-		//¹è¼ÛÁö Ãß°¡
+	
 		davo = deliveryAddressDAO.insertDeleveryAddress(davo);
 		prvo.setDeliveryAddressNo(davo.getDeliveryAddressNo());
 		prvo.setProjectNo(projectNo);
 
-		System.out.println("ÇÁ·ÎÁ§Æ®³Ñ¹ö Ã¼Å© : " + prvo.toString());
 
-		//°áÁ¦¿¹¾à Å×ÀÌºí Ãß°¡
+
 		prvo = paymentReserveDAO.insertPaymentReserve(prvo);
 		int orderNo = prvo.getOrderNo();
 
 
-		//¸®¿öµå¼±ÅÃ(ÇÏ³ªÀÇ °áÁ¦¿¹¾à¹øÈ£·Î ¹­¿©Áø) ¸ñ·Ï Ãß°¡
 		int cnt = -1;
 		int totalAmount = 0;
 		for(RewardSelectionVO rs : selectedRewardList) {
@@ -116,11 +114,11 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 
 
 			if(amount <= 0 || amount < rs.getOrderAmount()) {
-				throw new NoRewardAmountException(); // ³²¾ÆÀÖ´Â ¼ö·®ÀÌ ¾ø°Å³ª ÁÖ¹®·® º¸´Ù ÀûÀ» ¶§ ¿¹¿Ü ¹ß»ý
+				throw new NoRewardAmountException(); // ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Å³ï¿½ ï¿½Ö¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½
 			}
 			rewardSelectionDAO.updateRewardAmount(rs);
 
-			//¼±ÅÃÇÑ ¸®¿öµåÀÇ ¼ö·®¿¡ µû¸¥ ¿É¼Ç ¸ñ·Ï Ãß°¡
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½É¼ï¿½ ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 			for(String value: rs.getRewardOptionValueList()) {
 				rewardOptionValueListVO.setRewardOptionValue(value);
 				rs.getRewardOptionValue().add(rewardOptionValueListVO);
@@ -134,7 +132,7 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 
 
 		if(cnt > 0) {
-			orderItems = orderItems + " ¿Ü " + cnt + "°³";
+			orderItems = orderItems + " ï¿½ï¿½ " + cnt + "ï¿½ï¿½";
 		}
 
 		orderNoStr = String.valueOf(orderNo);
@@ -144,22 +142,20 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 
 		RestTemplate restTemplate = new RestTemplate();
 
-		// ¼­¹ö·Î ¿äÃ»ÇÒ Header
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Authorization", "KakaoAK " + "18d8019e9d49a2411a907a3027792bfd");
 		headers.add("Accept", "application/x-www-form-urlencoded;charset=utf-8");
 		headers.add("Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=UTF-8");
 
-		// ¼­¹ö·Î ¿äÃ»ÇÒ Body
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 
 		params.add("cid", "TC0ONETIME");
 
 		params.add("partner_order_id", orderNoStr); // orderNo 
-		params.add("partner_user_id", orderEmail); // È¸¿ø ÀÌ¸ÞÀÏ (id)
-		params.add("item_name", orderItems); // ÇÁ·ÎÁ§Æ®¸í
-		params.add("quantity", quantityStr); // ¸®¿öµå ÃÑ ¼ö·®
-		params.add("total_amount", totalAmountStr); // ÃÑ ±Ý¾×
+		params.add("partner_user_id", orderEmail); // È¸ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ (id)
+		params.add("item_name", orderItems); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½
+		params.add("quantity", quantityStr); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		params.add("total_amount", totalAmountStr); // ï¿½ï¿½ ï¿½Ý¾ï¿½
 		params.add("tax_free_amount", taxFreeAmount);
 		params.add("approval_url", "http://localhost:8080/funthing/kakaoPaySuccess.udo?orderNoStr=" + orderNoStr);
 		params.add("cancel_url",  "http://localhost:8080/funthing/kakaoPayCancel.udo");
@@ -173,14 +169,12 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 			return kakaoPayReadyVO.getNext_redirect_pc_url();
 
 		}catch(RestClientException e){
-			System.out.println("RestClientException ¹ß»ý");
 			e.printStackTrace();
 		}catch(URISyntaxException e) {
-			System.out.println("URISyntaxException ¹ß»ý");
 			e.printStackTrace();
 		}
 
-		return "failedUrl·Î °¡¾ßÇÔ"; // redirect Url ½ÇÆÐ ½Ã
+		return "failedUrlï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"; 
 
 	}
 
@@ -194,20 +188,16 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 		paymentReserveVO.setOrderNo(orderNo);
 		paymentReserveVO = paymentReserveDAO.getPaymentReserve(paymentReserveVO);	
 
-		System.out.println("È®ÀÎÅ×½ºÆ® : " + paymentReserveVO.toString());
-
 
 		RestTemplate restTemplate = new RestTemplate();
 
-		// ¼­¹ö·Î ¿äÃ»ÇÒ Header
+
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Authorization", "KakaoAK " + "18d8019e9d49a2411a907a3027792bfd");
 		headers.add("Accept", "application/x-www-form-urlencoded;charset=utf-8");
 		headers.add("Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=UTF-8");
 
-		System.out.println(kakaoPayReadyVO.getTid());
 
-		// ¼­¹ö·Î ¿äÃ»ÇÒ Body
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 		params.add("cid", "TC0ONETIME");
 		params.add("tid", kakaoPayReadyVO.getTid());
@@ -228,8 +218,6 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 			paymentReserveVO.setPaymentReserveDate(kakaoPayApprovalVO.getApproved_at());
 			paymentReserveVO.setPaymentOption(kakaoPayApprovalVO.getPayment_method_type());
 
-
-			System.out.println("ÀÌ°Ô ½ÇÇàµÅ¾ß ÇÔ " + paymentReserveVO.toString());
 
 			paymentReserveDAO.updateKakaoPayResultSet(paymentReserveVO);
 
@@ -255,20 +243,18 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 		
 		prvo = paymentReserveDAO.getPaymentReserve(prvo);
 		
-		System.out.println(prvo.toString());
+	
 		
 		projectVO.setProjectNo(prvo.getProjectNo());
 		projectVO.setFundingMoney(prvo.getFundingMoney());
 		
 		
 
-		// ¼­¹ö·Î ¿äÃ»ÇÒ Header
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Authorization", "KakaoAK " + "18d8019e9d49a2411a907a3027792bfd");
 		headers.add("Accept", "application/x-www-form-urlencoded;charset=utf-8");
 		headers.add("Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=UTF-8");
 
-		// ¼­¹ö·Î ¿äÃ»ÇÒ Body
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 		params.add("cid", "TC0ONETIME");
 		params.add("tid", prvo.getTid());
@@ -281,20 +267,16 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 			kakaoPayCancelVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/cancel"), body, KakaoPayCancelVO.class);
 			log.info("" + kakaoPayCancelVO);
 			
-			System.out.println("Ãë¼Ò½ÂÀÎ ³¯Â¥ : " + kakaoPayCancelVO.getCanceled_at());
-
 
 			prvo.setAid(kakaoPayCancelVO.getAid());
 			prvo.setTid(kakaoPayCancelVO.getTid());
 			prvo.setCanceledDate(kakaoPayCancelVO.getCanceled_at());
 			
-			System.out.println("Ãë¼Ò½ÂÀÎ ³¯Â¥ ¿Å°Ü´ã±â: " + prvo.getCanceledDate());
-			
+
 			paymentReserveDAO.updateKaKaoPayCancelResult(prvo);
 
-//			ÇÁ·ÎÁ§Æ® ÆÝµù¸Ó´Ï ¼öÁ¤, 
 			projectDAO.updateProjectAfterPaymentCancel(projectVO);
-//			¸®¿öµå ¼ö·® º¹±¸
+
 
 			
 			

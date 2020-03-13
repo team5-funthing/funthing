@@ -13,33 +13,27 @@ public class MemberDAO {
    private SqlSessionTemplate sqlSessionTemplate;
    
    public MemberVO getMember(MemberVO vo) {
-      System.out.println("getMember ����");
       return sqlSessionTemplate.selectOne("MemberDAO.getMember", vo);
    }
    
    public void insertSocialMember(MemberVO vo) {
-      System.out.println("insertSocialMember ½ÇÇà");
       sqlSessionTemplate.insert("MemberDAO.insertSocialMember",vo);
    }
    
       
       public void insertMember (MemberVO vo) {
-            System.out.println("insertMember ½ÇÇà");
             sqlSessionTemplate.insert("MemberDAO.insertMember", vo);
          }
    
       public void saveImage(MemberVO vo) {
-         System.out.println("saveImage ½ÇÇà");
          sqlSessionTemplate.insert("MemberDAO.saveImage",vo);
       }
       
       public void updateMember(MemberVO vo) {
-    	  System.out.println("updateMember ½ÇÇà ");
     	  sqlSessionTemplate.update("MemberDAO.updateMember",vo);
       }
       
       public void deleteMember(MemberVO vo) {
-    	  System.out.println("deleteMember ½ÇÇà");
     	  sqlSessionTemplate.delete("MemberDAO.deleteMember", vo);
       }
 }

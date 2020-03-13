@@ -29,8 +29,9 @@
 		SET 
 		makerPhone = #{makerPhone }, 
 		businessNumber = #{businessNumber }, 
-		businessAddress= #{businessAddress }, 
-		businessFileLink= #{businessFileLink }
+		businessAddress = #{businessAddress }, 
+		businessFileLink = #{businessFileLink },
+		creatorProfileImage = #{creatorProfileImage }
 		
 		WHERE creator = #{creator}
 	</update>

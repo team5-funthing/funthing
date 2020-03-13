@@ -13,9 +13,7 @@ public class RewardVO {
 	private String rewardName;
 	private String rewardContent;
 	private String rewardOption;
-	private int shippingFee;
 	private int rewardAmount;
-	private String shippingNeed;
 	private String rewardMonth;
 	private String rewardDay;
 
@@ -69,28 +67,12 @@ public class RewardVO {
 		this.rewardOption = rewardOption;
 	}
 
-	public int getShippingFee() {
-		return shippingFee;
-	}
-
-	public void setShippingFee(int shippingFee) {
-		this.shippingFee = shippingFee;
-	}
-
 	public int getRewardAmount() {
 		return rewardAmount;
 	}
 
 	public void setRewardAmount(int rewardAmount) {
 		this.rewardAmount = rewardAmount;
-	}
-
-	public String getShippingNeed() {
-		return shippingNeed;
-	}
-
-	public void setShippingNeed(String shippingNeed) {
-		this.shippingNeed = shippingNeed;
 	}
 
 	public String getRewardMonth() {
@@ -121,11 +103,11 @@ public class RewardVO {
 	public String toString() {
 		return "RewardVO [rewardPrice=" + rewardPrice + ", rewardNo=" + rewardNo + ", projectNo=" + projectNo
 				+ ", rewardName=" + rewardName + ", rewardContent=" + rewardContent + ", rewardOption=" + rewardOption
-				+ ", shippingFee=" + shippingFee + ", rewardAmount=" + rewardAmount + ", shippingNeed=" + shippingNeed
-				+ ", rewardMonth=" + rewardMonth + ", rewardDay=" + rewardDay + ", rewardOptionList=" + rewardOptionList
-				+ "]";
+				+ ", rewardAmount=" + rewardAmount + ", rewardMonth=" + rewardMonth + ", rewardDay=" + rewardDay
+				+ ", rewardOptionList=" + rewardOptionList + "]";
 	}
 
-
-
+	
+	
+	
 }

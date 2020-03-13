@@ -12,7 +12,7 @@ public class MemberVO {
 	private String introduce;
 	private String myImage;
 	private String report;
-
+	private String socialjoined;
 
 	private String position;
 
@@ -94,12 +94,21 @@ public class MemberVO {
 		this.creator = creator;
 	}
 
+	public String getSocialjoined() {
+		return socialjoined;
+	}
+
+	public void setSocialjoined(String socialjoined) {
+		this.socialjoined = socialjoined;
+	}
+
 	@Override
 	public String toString() {
 		return "MemberVO [email=" + email + ", password=" + password + ", name=" + name + ", phone=" + phone
-				+ ", introduce=" + introduce + ", myImage=" + myImage + ", report=" + report + ", position=" + position
-				+ ", creator=" + creator + "]";
+				+ ", introduce=" + introduce + ", myImage=" + myImage + ", report=" + report + ", socialjoined="
+				+ socialjoined + ", position=" + position + ", creator=" + creator + "]";
 	}
+
 
 	
 

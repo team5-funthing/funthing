@@ -50,24 +50,17 @@ public class InsertPaymentReserveServiceImpl implements InsertPaymentReserveServ
 													List<RewardSelectionVO> selectedRewardList, 
 													int projectNo) throws NoRewardAmountException {
 		
-		//배송지 추가
 		davo = deliveryAddressDAO.insertDeleveryAddress(davo);
 		prvo.setDeliveryAddressNo(davo.getDeliveryAddressNo());
 		prvo.setProjectNo(projectNo);
 		
 		
 						
-		//결제예약 테이블 추가
 		prvo = paymentReserveDAO.insertPaymentReserve(prvo);
 		int orderNo = prvo.getOrderNo();
-		System.out.println("==========================================");
 		
 		
-		
-		//리워드선택(하나의 결제예약번호로 묶여진) 목록 추가
 		for(RewardSelectionVO rs : selectedRewardList) {
-			
-			System.out.println(rs);
 			
 			rs.setOrderNo(orderNo);
 			rs = rewardSelectionDAO.insertRewardSelection(rs);
@@ -81,32 +74,25 @@ public class InsertPaymentReserveServiceImpl implements InsertPaymentReserveServ
 			int amount = rewardVO.getRewardAmount();
 			
 			if(amount <= 0 || amount < rs.getOrderAmount()) {
-				throw new NoRewardAmountException(); // 남아있는 수량이 없거나 주문량 보다 적을 때 예외 발생
+				throw new NoRewardAmountException();
 			}
 			
 			rewardSelectionDAO.updateRewardAmount(rs);
-			
-			//선택한 리워드의 수량에 따른 옵션 목록 추가
+
 			for(String value: rs.getRewardOptionValueList()) {
 				rewardOptionValueListVO.setRewardOptionValue(value);
 				rs.getRewardOptionValue().add(rewardOptionValueListVO);
 			}
 			rewardSelectionDAO.insertRewardSelectionList(rs.getRewardOptionValue());
 		}
-		
-		System.out.println("==========================================");
-		
-		
-		
+
 		
 		
 		
 //=====================================================================================	
-		
-		//프로젝트에 펀딩 금액 반영.
+
 		projectVO.setProjectNo(projectNo);
-		
-		System.out.println("prvo.getFundingMoney() : " + prvo.getFundingMoney());
+
 		
 		projectVO.setFundingMoney(prvo.getFundingMoney());
 		projectDAO.updateProjectFundingMoney(projectVO);

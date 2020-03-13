@@ -47,7 +47,7 @@ public class InsertPaymentReserveServiceImpl2 implements InsertPaymentReserveSer
 													int projectNo) throws NoRewardAmountException {
 		
 		
-//		//프로젝트에 펀딩 금액 반영.
+
 //		projectVO.setProjectNo(projectNo);
 //		System.out.println("prvo.getFundingMoney() : " + prvo.getFundingMoney());
 //		

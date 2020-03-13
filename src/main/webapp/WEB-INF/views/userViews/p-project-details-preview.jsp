@@ -60,8 +60,8 @@
 				<aside id="project-main-img" class="col-8">
 					<nav>
 					    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-					   		<a class="nav-item nav-link" id="nav-images-tab" data-toggle="tab" href="#nav-images" role="tab" aria-controls="nav-images" aria-selected="true">소개 이미지</a>
-				            <a class="nav-item nav-link active" id="nav-video-tab" data-toggle="tab" href="#nav-video" role="tab" aria-controls="nav-video" aria-selected="false" >소개 영상</a>
+					   		<a class="nav-item nav-link active" id="nav-images-tab" data-toggle="tab" href="#nav-images" role="tab" aria-controls="nav-images" aria-selected="true">소개 이미지</a>
+				            <a class="nav-item nav-link" id="nav-video-tab" data-toggle="tab" href="#nav-video" role="tab" aria-controls="nav-video" aria-selected="false" >소개 영상</a>
 				            
 					    
 					    </div>
@@ -254,7 +254,6 @@
 										<h5 class="card-title">${reward.rewardPrice }</h5>
 										<h6 class="card-subtitle mb-2 text-muted">${reward.rewardName }</h6>
 										<p class="card-text">${reward.rewardContent }</p>
-										<p class="card-text">${reward.shippingNeed }</p>
 										<p class="card-text">${reward.rewardMonth }월  ${reward.rewardDay } 배송예정</p>
 										<c:forEach var="option" items="${reward.rewardOptionList }">
 											<p class="card-text">${option.rewardOptionKey } | ${option.rewardOptionValue }</p>
