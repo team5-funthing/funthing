@@ -28,7 +28,7 @@ public class AdminLoginController {
 	@RequestMapping("LoginCheck.ado")
 	public String LoginCheck(AlarmVO avo, AdminMemberVO vo,HttpSession session,Model model) {
 		String getPassword = null;
-		System.out.println("로그인 시작");
+
 		if(getAdminPasswordService.getAdminPassword(vo)==null) {
 			model.addAttribute("loginResult", "등록되지 않은 회원입니다.");
 		}else {
@@ -39,11 +39,8 @@ public class AdminLoginController {
 				avo.setReadConfirm('n');
 				avo.setReceiveId(vo.getAdminId());
 				if(getNewestAlarmListService.getNewestAlarmList(avo).isEmpty()) {
-					System.out.println(getNewestAlarmListService.getNewestAlarmList(avo));
-					System.out.println("Aaaaaa");
 					session.setAttribute("alarmContain", "알람 없음");
 				}else {
-					System.out.println("bbbbb");
 					session.setAttribute("alarmContain", "알람 있음");
 				}
 //				System.out.println(getNewestAlarmListService.getNewestAlarmList(avo));

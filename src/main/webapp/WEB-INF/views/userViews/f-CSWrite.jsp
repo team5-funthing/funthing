@@ -82,7 +82,7 @@
 					<div class="form-group">
 					<c:if test="${empty askForAdmin }">
 						<c:if test="${empty sessionScope.memberSession.email }">
-							<input type="submit"
+							<button type="submit"
 								class="button button-contactForm btn_1 boxed-btn" formaction="insertCSBoard.udo">작성하기</button>
 						</c:if>
 						<c:if test="${not empty sessionScope.memberSession.email }">

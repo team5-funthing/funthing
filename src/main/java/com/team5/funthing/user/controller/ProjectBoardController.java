@@ -41,7 +41,7 @@ public class ProjectBoardController {
 	
 
 	
-	@RequestMapping(value = "insertProjectBoard.udo", method = RequestMethod.GET )
+	@RequestMapping(value = "insertProjectBoardInterceptor.udo", method = RequestMethod.GET )
 	public String insertProjectBoard(	ProjectBoardVO vo,
 										RedirectAttributes redirectAttributes) { //새글등록하기
 		
