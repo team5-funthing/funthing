@@ -78,10 +78,68 @@ $(document).ready(function(){
 		
 			<article class="row d-flex justify-content-center">
 				<aside id="project-main-img" class="col-8">
-				
-					<c:if test="${project ne null }">
-						${project.projectIntroduceVideo }"
-					</c:if>
+					<nav>
+					    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+					   		<a class="nav-item nav-link active" id="nav-images-tab" data-toggle="tab" href="#nav-images" role="tab" aria-controls="nav-images" aria-selected="true">소개 이미지</a>
+				            <a class="nav-item nav-link" id="nav-video-tab" data-toggle="tab" href="#nav-video" role="tab" aria-controls="nav-video" aria-selected="false" >소개 영상</a>
+				            
+					    
+					    </div>
+					</nav>
+					
+					<div class="tab-content p-3" id="nav-tabContent">
+					    <div class="tab-pane fade show active" id="nav-images" role="tabpanel" aria-labelledby="nav-images-tab">
+					  		
+							<div id="carouselIntroduceImages" class="carousel slide">
+							
+							    <ol class="carousel-indicators">
+							        <li data-target="#carouselIntroduceImages" data-slide-to="0" class="active"></li>
+							        <li data-target="#carouselIntroduceImages" data-slide-to="1"></li>
+							        <li data-target="#carouselIntroduceImages" data-slide-to="2"></li>
+							    </ol>
+								<div class="carousel-inner">
+									<c:forEach var="projectIntroduceImage" items="${projectIntroduceImageList }" varStatus="cnt">
+										<c:choose>
+											<c:when test="${cnt.first }">
+												<div class="carousel-item active">
+													<div class="thumbnail-wrap">
+							                            <div class="thumbnail">
+							                                <div class="centered">
+							                                	<img src="${projectIntroduceImage.projectIntroduceImage }" class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+							                                </div>
+							                            </div>
+							                        </div>
+												</div>
+											</c:when>
+											<c:otherwise>
+												<div class="carousel-item">
+													<div class="thumbnail-wrap">
+							                            <div class="thumbnail">
+							                                <div class="centered">
+							                                	<img src="${projectIntroduceImage.projectIntroduceImage }" class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+							                                </div>
+							                            </div>
+							                        </div>
+												</div>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+									
+								</div>
+								<a class="carousel-control-prev" href="#carouselIntroduceImages" role="button" data-slide="prev">
+								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								<span class="sr-only">Previous</span>
+								</a>
+								<a class="carousel-control-next" href="#carouselIntroduceImages" role="button" data-slide="next">
+									<span class="carousel-control-next-icon" aria-hidden="true"></span>
+									<span class="sr-only">Next</span>
+								</a>
+							</div>		
+					    </div>
+					    <div class="tab-pane fade" id="nav-video" role="tabpanel" aria-labelledby="nav-video-tab">
+							${project.projectIntroduceVideo }
+					    </div>
+					</div>			
 				</aside>
 				
 				<aside id="project-details-info"
@@ -123,7 +181,7 @@ $(document).ready(function(){
 						</div>
 					</div>
 					<div class="p-2 bd-highlight mt-auto ml-0">
-						<form id="supportProject" action="supportProject.udo" method="GET">
+						<form id="supportProject" action="supportProjectInterceptor.udo" method="GET">
 							<input type="hidden" name="projectNo" value="${project.projectNo }">
 							<a class="btn btn-lg btn-spon-prj d-none d-lg-inline-block pr-5 pl-5 mb-2"
 								href="javaScript: return(0);" onclick="document.getElementById('supportProject').submit();">
@@ -131,8 +189,8 @@ $(document).ready(function(){
 						</form>
 					</div>
 					<div class="row d-flex justify-content-around m-0 ">
-						<a class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2" href="upCountLike.udo?projectNo=${project.projectNo }">좋아요   ${likeCount}</a> 
-						<a class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2" href="showInsertwAskMessage.udo?projectNo=${project.projectNo }">문의하기</a> 
+						<a class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2" href="upCountLikeInterceptor.udo?projectNo=${project.projectNo }">좋아요   ${likeCount}</a> 
+						<a class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2" href="showInsertwAskMessageInterceptor.udo?projectNo=${project.projectNo }">문의하기</a> 
 						<a class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2" href="#">공유하기</a>
 					</div>
 
@@ -170,7 +228,7 @@ $(document).ready(function(){
 							<div class="comment-form">
 								<h4>리뷰 게시판 글 남기기</h4>
 								
-								<form class="form-contact comment_form" action="insertProjectBoard.udo" 
+								<form class="form-contact comment_form" action="insertProjectBoardInterceptor.udo" 
 												id="commentForm" method="get">
 									<input type="hidden" name="projectNo" value="${project.projectNo}">
 									<div class="row">
@@ -221,7 +279,7 @@ $(document).ready(function(){
 														<div class="d-flex justify-content-between">
 															<div class="d-flex align-items-center">
 																<h5>
-																	<a href="javaScript:return(0);">${b1.member.name }</a>
+																	<a href="http://localhost:8080/funthing/projectDetails.udo?projectNo=${project.projectNo }" onclick="window.open(this.href,'_blank','width=100px, height=100px, toolvars=no'); return false;">${b1.member.name }</a>
 																</h5>
 																<p class="date">${b1.projectBoardDate}</p>
 															</div>
@@ -262,10 +320,10 @@ $(document).ready(function(){
 							                                          <div class="single-comment justify-content-between d-flex">
 							                                             <div class="user justify-content-between d-flex p-3"
 							                                                style="background-color: whitesmoke;">
-							                                                <div class="thumb">
-							                                                   <img src="${pageContext.request.contextPath}/resources/user/img/comment/comment_2.png" alt="">
-							                                                </div>
-							                                                <div class="desc" style="width: 500px;">
+																				<div id="projectBoard-profile" class="thumb">
+																					<img class="profile" src="${b2.member.myImage }">
+																				</div>
+																				<div class="desc" style="width: 500px;">
 							                                                    <p class="comment">
 							                                                   		${b2.projectBoardContents}
 							                                                    </p>
@@ -329,7 +387,6 @@ $(document).ready(function(){
 										<h5 class="card-title">${reward.rewardPrice }</h5>
 										<h6 class="card-subtitle mb-2 text-muted">${reward.rewardName }</h6>
 										<p class="card-text">${reward.rewardContent }</p>
-										<p class="card-text">${reward.shippingNeed }</p>
 										<p class="card-text">${reward.rewardMonth }  ${reward.rewardDay } 배송예정</p>
 										<c:forEach var="option" items="${reward.rewardOptionList }">
 											<p class="card-text">${option.rewardOptionKey } | ${option.rewardOptionValue }</p>
@@ -358,7 +415,7 @@ $(document).ready(function(){
 	</section>
 	
 	<div id="showReportPage" class="white-popup mfp-hide">
-		<form id="reports" action="insertReport.udo" method="POST">
+		<form id="reports" action="insertReportInterceptor.udo" method="POST">
 			<input type="hidden" value="${project.projectNo}" name="projectNo">
 			<input type="hidden" value="${project.email}" name="email">
 	        <div class="report_popup_box ">

@@ -104,6 +104,7 @@ public class MemberController2 {
 		   MemberVO vo2 = (MemberVO) session.getAttribute("memberSession");
 		   vo.setEmail(vo2.getEmail());
 	       memberImageUploader(uploadFile, vo);
+
 	        insertImageService.insertImage(vo);
 	        session.setAttribute("memberSession", getMemberService.getMember(vo));
 	        
@@ -142,14 +143,19 @@ public class MemberController2 {
 	public void memberImageUploader(List<MultipartFile> toDoUploadList, MemberVO vo) throws Exception {
 
 		List<String> toRemoveFilePath = new ArrayList<String>();
-          
+
 				
 		if(!toDoUploadList.get(0).isEmpty()) { 
 			toRemoveFilePath.add(vo.getMyImage()); 
+
 			String voName = vo.getClass().getSimpleName();
 			List<String> toSettingPath = upload.upload(toDoUploadList, voName, toRemoveFilePath);
 
+
 			if(toSettingPath == null) { System.out.println("�̹��� ���ε� �ȵ�"); return;}
+
+			if(toSettingPath == null) { System.out.println("ÀÌ¹ÌÁö ¾÷·Îµå ¾ÈµÊ"); return;}
+
 			
 			int cnt = 1;
 			for(String toInsertImage : toSettingPath) {

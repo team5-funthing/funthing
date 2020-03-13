@@ -50,12 +50,14 @@
 						<div style="color:red;">결과 : 진행중</div>
 					</c:when>
 					<c:when test="${projectInformation.funding eq 'e'.charAt(0) }">
-						<c:when test="${projectInformation.fundingMoney >= projectInformation.goalMoney }">
+					<c:choose>
+						<c:when test="${projectInformation.fundingMoney ge projectInformation.goalMoney }">
 						<div>결과 : 성공</div>
 						</c:when>
-						<c:when test="${projectInformation.fundingMoney >= projectInformation.goalMoney }">
+						<c:when test="${projectInformation.fundingMoney lt projectInformation.goalMoney }">
 						<div>결과 : 실패</div>
 						</c:when>
+					</c:choose>
 					</c:when>
 				</c:choose>
 			<!-- 펀딩 결과 끝 -->					

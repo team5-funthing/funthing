@@ -62,7 +62,7 @@ public class MemberActivityController {
 		return "p-detail-mypage";
 	}  
 	
-	@RequestMapping("upCountLike.udo")
+	@RequestMapping("upCountLikeInterceptor.udo")
 	public String upCountLike(MemberActivityVO mavo, 
 							Model model,
 							RedirectAttributes redirectAttributes,
@@ -77,7 +77,9 @@ public class MemberActivityController {
 		
 		redirectAttributes.addAttribute("projectNo", projectNo);
 		
+
 		return "redirect:projectDetails.udo";
+
 	}
 
 	
@@ -97,8 +99,10 @@ public class MemberActivityController {
 	public void myLikeProjectList(HttpSession session,MemberActivityVO vo,ProjectVO vo1,Model model) {
 		List<ProjectVO> projectLikeList = new ArrayList<ProjectVO>();
 		MemberVO loginMember = (MemberVO) session.getAttribute("memberSession");
+
 		vo.setEmail(loginMember.getEmail());
 		List<MemberActivityVO> likeProjectList = getLikeProjectNoListService.getLikeProjectNoList(vo);
+
 		for(MemberActivityVO getProjectNo : likeProjectList) {
 			vo1.setProjectNo(getProjectNo.getProjectNo());
 			projectLikeList.add(getProjectService.getProject(vo1));
@@ -129,5 +133,6 @@ public class MemberActivityController {
 		}
 		model.addAttribute("projectReservationList",projectReservationList);
 	}
+
 
 }

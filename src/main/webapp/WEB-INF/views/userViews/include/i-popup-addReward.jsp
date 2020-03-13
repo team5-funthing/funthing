@@ -27,7 +27,7 @@
 				$("input[name=rewardName]").val("");
 				$("textarea[name=rewardContent]").val("");
 				$("#categorySelectBox").val("옵션 선택").prop("selected",true);
-				$("input[name=shippingFee]").val("");
+				/* $("input[name=shippingFee]").val(""); */
 				$("input[name=rewardAmount]").val("");
 				$("input[name=rewardNo]").val("");
 				$("#appendTag").empty();
@@ -103,7 +103,7 @@
 						$("input[name=rewardName]").val(rewardVO.rewardName);
 						$("textarea[name=rewardContent]").val(rewardVO.rewardContent);
 						$("#categorySelectBox").val(rewardVO.rewardOption).prop("selected",true);
-						$("input[name=shippingFee]").val(rewardVO.shippingFee);
+						/* $("input[name=shippingFee]").val(rewardVO.shippingFee); */
 						$("input[name=rewardAmount]").val(rewardVO.rewardAmount);
 						$("input[name=rewardNo]").val(rewardVO.rewardNo);
 						$("select[name=rewardDay]").val(rewardVO.rewardDay).prop("selected",true);
@@ -140,7 +140,7 @@
 							$("textarea[name=rewardoptionvalue]").val(rewardVO.rewardOptionList[0].rewardOptionValue);
 						}
 						//입력당시의 '배송조건'에 대한 입력값을 입력폼에 설정해주는 부분이다.
-						if(rewardVO.shippingNeed=="배송 필요"){
+/* 						if(rewardVO.shippingNeed=="배송 필요"){
 							$("#primary-radio1").prop("checked", true);
 							$("input[name=shippingFee]").show();
 							$("input[name=shippingFee]").removeAttr("disabled");
@@ -150,7 +150,7 @@
 							$("input[name=shippingFee]").hide();
 							$("input[name=shippingFee]").attr("disabled",true);
 							$(".aa").hide();
-						}
+						} */
 						$(".add").click(function(){
 							$("#appendTag").append(appendTag);
 							return;
@@ -167,7 +167,7 @@
 			
 			//리워딩 입력시에 배송필요 라디오버튼을 누르면 배송료 입력창을 보여준다.
 			//리워딩 입력시에 배송불필요 라디오버튼을 누르면 배송료 입력창을 숨긴다.
-			$("input:radio[name=shippingNeed]").click(function(){
+/* 			$("input:radio[name=shippingNeed]").click(function(){
 				if($(this).val()=="배송 필요"){
 					console.log('aaa');
 					$("input[name=shippingFee]").show();
@@ -178,7 +178,7 @@
 					$("input[name=shippingFee]").attr("disabled",true);
 					$(".aa").hide();
 				}
-			});
+			}); */
 			
 			
 
@@ -246,7 +246,7 @@
                        <div class="col-1"></div>
                    </div>
                    <!-- 배송조건 -->
-                   <div class="row p-3">
+                   <!-- <div class="row p-3">
                         <div class="col-4" style="font-weight: bold; color: darkslateblue;">배송조건</div>
                        <div class="col-7">
                            <div class="row d-flex align-items-center">
@@ -257,13 +257,13 @@
                                        <label for="primary-radio1"></label>
                                    </div>
                                </div>
-                           		<div class="d-flex p-2 bd-highlight">배송이 필요한 리워드입니다.</div>
+                           	   <div class="d-flex p-2 bd-highlight">배송이 필요한 리워드입니다.</div>
                            </div>
                            <div class="row d-flex align-items-center" id="shipping">
                                <div class="col-3 aa" >
                                    <label for="formGroupExampleInput">배송료</label>
                                </div>
-                               <!-- String인 shippingFee를 number로 바꾸어주는 코드 -->
+                               String인 shippingFee를 number로 바꾸어주는 코드
                                <div class="col-7 p-1">
                                    <input type="text" name="shippingFee" class="form-control">
                                </div>
@@ -282,7 +282,7 @@
 
                        </div>
                        <div class="col-1"></div>
-                   </div>
+                   </div> -->
                    <!-- 배송조건 끝 -->
                    <div class="row p-3">
                         <div class="col-4" style="font-weight: bold; color: darkslateblue">제한수량</div>

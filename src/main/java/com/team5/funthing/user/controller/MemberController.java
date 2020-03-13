@@ -1,6 +1,7 @@
 package com.team5.funthing.user.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +22,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.team5.funthing.common.utils.SendMailUtil;
 import com.team5.funthing.user.model.vo.AlarmVO;
 import com.team5.funthing.user.model.vo.MemberVO;
+
 import com.team5.funthing.user.service.deletememberService.GetDeleteMemberService;
+
+import com.team5.funthing.user.service.AlarmService.GetNewestAlarmListService;
+
 import com.team5.funthing.user.service.memberService.GetMemberService;
 import com.team5.funthing.user.service.memberService.InsertMemberService;
 import com.team5.funthing.user.service.memberService.UpdateMemberService;
@@ -30,7 +35,10 @@ import com.team5.funthing.user.service.memberService.UpdateMemberService;
 @SessionAttributes("member")
 public class MemberController {
 
-
+	//Alarm Serivce
+	@Autowired
+	private GetNewestAlarmListService getNewestAlarmListService;
+	
 	@Autowired
 	private SendMailUtil sendMailUtil;
 	@Autowired
@@ -54,7 +62,7 @@ public class MemberController {
 
 		MemberVO loginMember = getMemberService.getMember(vo);
 		if(loginMember == null) {
-			model.addAttribute("loginFail", "등록된 회원이 아닙니다.");
+			model.addAttribute("loginFail", "�벑濡앸맂 �쉶�썝�씠 �븘�떃�땲�떎.");
 			return "forward:member.udo";
 		}
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -74,7 +82,20 @@ public class MemberController {
 					response.addCookie(cookieid);
 					response.addCookie(cookiepw);
 				}
-				session.setAttribute("memberSession", getMemberService.getMember(vo));
+				MemberVO loginMemberVO = getMemberService.getMember(vo);
+				
+				avo.setReceiveId(loginMemberVO.getEmail());
+				avo.setReadConfirm('n');
+				
+				List<AlarmVO> userAlarmList = getNewestAlarmListService.getNewestAlarmList(avo);
+				System.out.println(userAlarmList.toString());
+				System.out.println(userAlarmList.isEmpty());
+				if(userAlarmList.isEmpty()) {
+					model.addAttribute("userAlarmList", "알람 없음");
+				}else {
+					model.addAttribute("userAlarmList", "알람 있음");
+				}
+				session.setAttribute("memberSession", loginMemberVO);
 				System.out.println(session.getAttribute("memberSession"));
 				return "forward:member.udo";
 			}
@@ -127,7 +148,7 @@ public class MemberController {
 		try {
 			vo.setEmail(email);
 			String certificationCode = sendMailUtil.createCertificationCode(50);
-			sendMailUtil.sendMail("[Funthing] 인증코드 입니다.", "인증코드 : ["+certificationCode+"]", vo.getEmail());   
+			sendMailUtil.sendMail("[Funthing] �씤利앹퐫�뱶 �엯�땲�떎.", "�씤利앹퐫�뱶 : ["+certificationCode+"]", vo.getEmail());   
 			model.addAttribute("certificationCode",certificationCode);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -143,9 +164,9 @@ public class MemberController {
 				vo.setEmail(email);
 				if(getMemberService.getMember(vo)!=null) {
 				String password = sendMailUtil.createCertificationCode(50);
-				sendMailUtil.sendMail("[Funthing] 임의로 생성된 비밀번호 입니다.", "발송된 비밀번호로 로그인을 하시고 꼭 "
-						+ "마이페이지 - 회원정보수정 에서 비밀번호를 변경하여 이용에 불편함이 없으시길 바랍니다. "
-						+ "비밀번호 : ["+password+"]", vo.getEmail());
+				sendMailUtil.sendMail("[Funthing] �엫�쓽濡� �깮�꽦�맂 鍮꾨�踰덊샇 �엯�땲�떎.", "諛쒖넚�맂 鍮꾨�踰덊샇濡� 濡쒓렇�씤�쓣 �븯�떆怨� 瑗� "
+						+ "留덉씠�럹�씠吏� - �쉶�썝�젙蹂댁닔�젙 �뿉�꽌 鍮꾨�踰덊샇瑜� 蹂�寃쏀븯�뿬 �씠�슜�뿉 遺덊렪�븿�씠 �뾾�쑝�떆湲� 諛붾엻�땲�떎. "
+						+ "鍮꾨�踰덊샇 : ["+password+"]", vo.getEmail());
 				MemberVO vo2 = getMemberService.getMember(vo);
 				vo2.setPassword(password);
 				updateMemberService.updateMember(vo2);
