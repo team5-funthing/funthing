@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
-<html>
+<html class="no-js">
 <head>
 <meta charset="UTF-8">
 
@@ -40,7 +40,7 @@
 						<tbody>
 							<tr style="color:gray;">
 								<td>${b1.orderNo}</td>
-								<td>${b1.email}</td>
+								<td><a href="nameProfile.udo?email=${b1.email}&name=" onclick="window.open(this.href,'_blank', toolvars=no'); return false;">${b1.email}</a></td>
 								<td>${b1.paymentReserveDate}</td>
 								<td>${b1.fundingMoney}</td>
 								<td>${b1.paymentStatus }</td>
@@ -52,7 +52,7 @@
 						<tbody>
 							<tr style="color:gray;">
 								<td>${b1.orderNo}</td>
-								<td>${b1.email}</td>
+								<td><a href="nameProfile.udo?email=${b1.email}&name=" onclick="window.open(this.href,'_blank', toolvars=no'); return false;">${b1.email}</a></td>
 								<td>${b1.paymentReserveDate}</td>
 								<td>${b1.fundingMoney}</td>
 								<td style="color:red;">${b1.paymentStatus }</td>
