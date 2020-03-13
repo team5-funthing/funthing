@@ -140,22 +140,22 @@
 									<td style="width:7.5%;text-align:center;"> 10월 </td>
 									<td style="width:7.5%;text-align:center;"> 11월 </td>
 									<td style="width:7.5%;text-align:center;"> 12월 </td>
-									<td> <input type="text" readonly value="합계" class="form-control" style="text-align:center;background-color:white;"></td>
+									<td style="width:7.5%;text-align:center;"> 합계</td>
 									</tr>
 									<tr>
-									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m1 } </td>
-									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m2 } </td>
-									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m3 } </td>
-									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m4 } </td>
-									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m5 } </td>
-									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m6 } </td>
-									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m7 } </td>
-									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m8 } </td>
-									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m9 } </td>
-									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m10 } </td>
-									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m11 } </td>
-									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m12 } </td>
-									<td> <input type="text" readonly	id="fundingMoneySum" class="form-control" style="text-align:center;background-color:white;font-size:10px;"> </td>
+									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m1 } 원</td>
+									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m2 } 원</td>
+									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m3 } 원</td>
+									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m4 } 원</td>
+									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m5 } 원</td>
+									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m6 } 원</td>
+									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m7 } 원</td>
+									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m8 } 원</td>
+									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m9 } 원</td>
+									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m10 } 원</td>
+									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m11 } 원</td>
+									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.m12 } 원</td>
+									<td style="width:7.5%;text-align:center;font-size:10px;"> ${fundingMoneyPerMonth.sumfunding } 원</td>
 									</tr>
 									</table>
 									</div>
@@ -241,8 +241,6 @@
 	    config2.data.datasets[0].data[10]=${fundingMoneyPerMonth.m11};
 	    config2.data.datasets[0].data[11]=${fundingMoneyPerMonth.m12};
 	    $("#fundingMoneySum").val('${fundingMoneyPerMonth.sumfunding}'); 
-	    
-
 		myChart2.update();
 		
 	});
