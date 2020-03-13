@@ -62,6 +62,7 @@ public class PaymentReservationController {
 										Model model,
 										HttpSession session) {
 		
+		@SuppressWarnings("unchecked")
 		List<RewardSelectionVO> selectedRewardList = (List<RewardSelectionVO>)session.getAttribute("selectedRewardList");
 		
 		if(selectedRewardList == null || selectedRewardList.isEmpty()) {
@@ -70,6 +71,7 @@ public class PaymentReservationController {
 			
 			return "redirect:supportProject.udo";
 		}
+		
 		
 		session.setAttribute("paymentReserve", prvo);
 		
@@ -81,6 +83,8 @@ public class PaymentReservationController {
 										Model model,
 										RewardVO rvo,
 										DeliveryAddressVO davo) {
+		
+		@SuppressWarnings("unchecked")
 		List<RewardSelectionVO> selectedRewardList = (List<RewardSelectionVO>)session.getAttribute("selectedRewardList");
 
 		for(RewardSelectionVO rs : selectedRewardList) {
@@ -104,6 +108,7 @@ public class PaymentReservationController {
 													DeliveryAddressVO davo) {
 		
 		
+		@SuppressWarnings("unchecked")
 		List<RewardSelectionVO> selectedRewardList = (List<RewardSelectionVO>)session.getAttribute("selectedRewardList");
 		int projectNo = selectedRewardList.get(0).getReward().getProjectNo();
 		

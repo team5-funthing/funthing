@@ -46,7 +46,9 @@
 				<div class="row">
 					<div class="col"></div>
 					<div class="col-10">
+					
 						<h3 class="mb-4">프로젝트 등록 폼</h3>
+						
 						<form action="saveInputWritingProject.udo" id="tempStorageForm" method="POST" enctype="multipart/form-data">
 					<!-- <form action="insertProject.udo" id="tempStorageForm" method="POST" enctype="multi/form-data"> -->
 							<input type="hidden" name="projectNo" value="${writingProject.projectNo }">

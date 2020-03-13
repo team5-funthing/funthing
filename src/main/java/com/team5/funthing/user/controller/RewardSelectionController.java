@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.model.vo.RewardOptionVO;
 import com.team5.funthing.user.model.vo.RewardSelectionVO;
 import com.team5.funthing.user.model.vo.RewardVO;
+import com.team5.funthing.user.service.projectService.GetProjectService;
 import com.team5.funthing.user.service.rewardOptionService.GetRewardOptionListService;
 import com.team5.funthing.user.service.rewardService.GetRewardListService;
 
@@ -31,6 +33,8 @@ public class RewardSelectionController {
 	private GetRewardListService getRewardListService;
 	@Autowired
 	private GetRewardOptionListService getRewardOptionListService;
+	@Autowired
+	private GetProjectService getProjectService;
 	
 	@Autowired
 	private RewardOptionVO rewardOptionVO;
@@ -39,9 +43,13 @@ public class RewardSelectionController {
 	@RequestMapping(value="/supportProject.udo", method= RequestMethod.GET)
 	public String supportProject(	@RequestParam(required = false)int projectNo,
 									@RequestParam(required = false)String msg,
+									ProjectVO pvo,
 									RewardVO rvo, 
 									Model model, 
 									HttpSession session) {
+		
+		
+		pvo = getProjectService.getProject(pvo);
 		
 		
 		if(rvo.getProjectNo() == -1 || rvo.getProjectNo() == 0) {
@@ -53,9 +61,20 @@ public class RewardSelectionController {
 		List<RewardVO> getRewardList = getRewardListService.getRewardList(rvo);
 		setRewardOption(getRewardList);
 		
+		System.out.println("=======================================");
+		for(RewardVO getReward: getRewardList) {
+			System.out.println(getReward.toString());
+			if(getReward.getRewardOptionList().isEmpty()) {
+				System.out.println("府况靛 可记 府胶飘啊 null牢 府况靛No : " + getReward.getRewardNo());
+			}
+		}
+		System.out.println("=======================================");
+		
 		model.addAttribute("msg", msg);
 		model.addAttribute("getRewardList", getRewardList);
+		model.addAttribute("project", pvo);
 		model.addAttribute("projectNoOfRewardList", rvo.getProjectNo());
+		
 		return "f-select-reward";
 	}
 	
@@ -68,6 +87,7 @@ public class RewardSelectionController {
 		
 		rsvo.setPaymentAmount(rsvo.getPaymentAmount() * rsvo.getOrderAmount());
 		
+		@SuppressWarnings("unchecked")
 		List<RewardSelectionVO> selectedRewardList = (List<RewardSelectionVO>)session.getAttribute("selectedRewardList");
 
 		if(selectedRewardList == null){
@@ -89,15 +109,6 @@ public class RewardSelectionController {
 		}
 		selectedRewardList.add(rsvo);
 		
-		
-		for(int i = 0; i < selectedRewardList.size(); i++) {
-			
-			if(selectedRewardList.get(i).getRewardOptionValueList().get(0).trim() == "") {
-				selectedRewardList.get(i).getRewardOptionValueList().remove(0);
-			}
-		}
-
-		
 		ObjectMapper mapper = new ObjectMapper();
 		
 		String selectionRewardToJSON = mapper.writeValueAsString(selectedRewardList);
@@ -111,10 +122,13 @@ public class RewardSelectionController {
 										HttpSession session,
 										Model model) throws JsonProcessingException {
 		
+		@SuppressWarnings("unchecked")
 		List<RewardSelectionVO> selectedRewardList = (List<RewardSelectionVO>)session.getAttribute("selectedRewardList");
 		
-		if(selectedRewardList == null) {
-			return null;
+		if(selectedRewardList == null){
+			System.out.println("selectedRewardList 技记 檬扁 积己");
+			selectedRewardList = new ArrayList<RewardSelectionVO>();
+			session.setAttribute("selectedRewardList", selectedRewardList);
 		}
 		
 		for(int i = 0; i < selectedRewardList.size(); i++) {
