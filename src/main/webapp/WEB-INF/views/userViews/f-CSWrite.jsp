@@ -32,13 +32,13 @@
 
 					<c:if test="${empty askForAdmin }">
 					<h5>문의 제목</h5>
-					<input type="text" name="csTitle"	id="csTitle"		placeholder="Title">
+					<input type="text" name="csTitle"	id="csTitle"	 class="form-control"	placeholder="Title">
 					<p class="comment h3"></p>
 					</c:if>
 					
 					<c:if test="${not empty askForAdmin }">
 					<h5>문의 제목</h5>
-					<input type="text" name="csTitle"	id="csTitle"	value="${askForAdmin.csTitle }"	placeholder="Title" disabled="disabled">
+					<input type="text" name="csTitle"	id="csTitle"	 class="form-control" value="${askForAdmin.csTitle }"	placeholder="Title" readonly>
 					<p class="comment h3"></p>
 					</c:if>
 					
@@ -47,7 +47,7 @@
 
 					<c:if test="${empty sessionScope.memberSession.email }">
 						<h5>
-							작성자 아이디 <input type="text" id="email" name="email" value=""
+							작성자 아이디 <input type="text" id="email" name="email" value=""  class="form-control"
 								placeholder="답변받을 email을 기재하세요">
 
 						</h5>
@@ -55,7 +55,7 @@
 					<c:if test="${not empty sessionScope.memberSession.email }">
 						<h5>작성자 아이디</h5>
 						<input type="text" id="email" name="email"
-							value="${sessionScope.memberSession.email }" disabled="disabled">
+							value="${sessionScope.memberSession.email }" disabled="disabled"  class="form-control">
 
 					</c:if>
 
@@ -66,8 +66,9 @@
 							<div class="form-group">
 							<c:if test="${empty askForAdmin }">
 								<textarea class="form-control w-100" form="askForm"
-									name="csContent" id="csContent" cols="30"
-									rows="9" >문의사항에 대한 답변은  작성자의  Email로 발송해드리니, Email에서 확인 바랍니다.</textarea>
+									name="csContent" id="csContent" cols="30" 
+									placeholder="문의사항에 대한 답변은  작성자의  Email로 발송해드리니, Email에서 확인 바랍니다."
+									rows="9" ></textarea>
 							</c:if>
 							
 							<c:if test="${not empty askForAdmin }">

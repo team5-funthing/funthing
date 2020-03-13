@@ -12,7 +12,7 @@
 
                         <li class="sidebar-item"> 
                         	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="adminIndex.ado" aria-expanded="false">
-                        		<i class="mdi-apps"></i>
+                        		<i class="mdi mdi-reorder-horizontal"></i>
                         		<span class="hide-menu">메인</span>
                         	</a>
                         </li>
@@ -36,7 +36,7 @@
                         </li>
                         <li class="sidebar-item"> 
                         	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="projectReportCheck.ado" aria-expanded="false">
-                        		<i class="mdi-apps"></i>
+                        		<i class="mdi mdi-message-alert"></i>
                         		<span class="hide-menu">프로젝트 신고확인</span>
                         	</a>
                         </li>

@@ -1,5 +1,6 @@
 package com.team5.funthing.admin.controller;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -121,7 +122,8 @@ public class AdminHomeController {
 	@RequestMapping("projectReportCheck.ado")
 	public String projectReportCheck(ReportVO vo , Model model) {
 		
-		model.addAttribute("reportList", getReportListService.getReportList(vo));
+		List<ReportVO> reportList = getReportListService.getReportList(vo);
+		model.addAttribute("reportList", reportList);
 		return "b-report-list";
 	}
 	
@@ -173,8 +175,6 @@ public class AdminHomeController {
 	public String getProjectCheckList(ProjectVO vo,Model model) {
 		
 		List<ProjectVO> projectCheckList = getProjectCheckListService.getProjectCheckList(vo);
-		System.out.println(projectCheckList.toString());
-		
 		model.addAttribute("projectCheckList",projectCheckList);
 		return "b-project-check-list";
 	}

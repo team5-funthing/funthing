@@ -41,7 +41,6 @@ public class CKEditorFileUploadController {
 		List<String> SettingPathList = new ArrayList<String>(); 
 		
 		if(!upload.isEmpty()) {  
-			//제거될 파일경로를 vo객체에서 가져오기 
 			
 			List<MultipartFile> uploadList = new ArrayList<MultipartFile>();
 			List<String> toRemoveFilePath = new ArrayList<String>();   
@@ -56,8 +55,6 @@ public class CKEditorFileUploadController {
 		printWriter = response.getWriter();
 		response.setContentType("text/html");
 	
-		// json 데이터로 등록
-		// ex ==> {"uploaded" : 1, "uploadName" : "test.jpg", "url" : "/img/text.jpg"}
 		json.addProperty("uploaded", 1);
 		json.addProperty("uploadName", uploadName);
 		json.addProperty("url", SettingPath);

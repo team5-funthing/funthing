@@ -25,13 +25,11 @@ public class UpdateProjectDeadlineServiceImpl implements UpdateProjectDeadlineSe
 	@Scheduled(cron= "1 0 0 * * ?")
 	public void updateProjectDeadline() {
 		
-		// 1.진행중인 프로젝트 중에서 자정이 된 날짜와 endDate 가 일치하는 프로젝트의 funding = 'n' 으로 변경
 		projectDAO.updateProjectDeadline();
 		
 		List<ProjectVO> todayClosedProjectList = projectDAO.getTodayClosedProjectList();
 		
 		
-		// 2. 마감이 된 프로젝트들 중에서 성공과 실패 구분
 		List<ProjectVO> successProjectList = new ArrayList<ProjectVO>();
 		List<ProjectVO> failedProjectList = new ArrayList<ProjectVO>();
 		for(ProjectVO todayClosedProject : todayClosedProjectList) {
@@ -44,15 +42,11 @@ public class UpdateProjectDeadlineServiceImpl implements UpdateProjectDeadlineSe
 				failedProjectList.add(todayClosedProject);
 			}
 		}
-		System.out.println("실행");
-		// 3. 마감이 된 성공한 프로젝트의 결제예약 처리 ==> 1.결제 예약을 결제 완료로 변경 처리(송금처리), 그에 따른 수수료 처리(10%)
 		for(ProjectVO successProject : successProjectList) {
 			paymentReserveDAO.updatePaymentComplete(successProject.getProjectNo());
-			System.out.println("성공한 프로젝트 : " + successProject.getProjectNo());
 		}
 		for(ProjectVO failedProject : failedProjectList) {
 			paymentReserveDAO.updatePaymentCancel(failedProject.getProjectNo());
-			System.out.println("실패한 프로젝트 : " + failedProject.getProjectNo());
 		}
 	}
 

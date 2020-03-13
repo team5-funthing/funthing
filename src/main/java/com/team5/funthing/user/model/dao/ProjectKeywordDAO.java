@@ -16,9 +16,6 @@ public class ProjectKeywordDAO {
 	
 	
 	public void insertProjectKeyword(ProjectKeywordVO vo) {
-		
-		System.out.println("insertProjectKeyword ½ÇÇà Àü : " + vo.toString());
-		
 		sqlSessionTemplate.insert("insertProjectKeyword", vo);
 	}
 	

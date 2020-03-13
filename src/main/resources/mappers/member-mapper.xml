@@ -11,8 +11,8 @@
 	</select>
 	
 	<insert id="insertSocialMember" parameterType="member">
-		INSERT INTO member ( email, password, name )
-		VALUES (#{email},#{password},#{name})
+		INSERT INTO member ( email, password, name ,socialjoined)
+		VALUES (#{email},#{password},#{name},'Y')
 	</insert>
    
 	<insert id="insertMember" parameterType="member">
@@ -30,7 +30,7 @@
    
    <update id="updateMember" parameterType="member">
    	UPDATE member
-   	SET password = #{password} , phone= #{ phone , jdbcType=VARCHAR } , introduce= #{ introduce , jdbcType=VARCHAR } 
+   	SET name = #{name}, password = #{password} , phone= #{ phone , jdbcType=VARCHAR } , introduce= #{ introduce , jdbcType=VARCHAR } 
    	WHERE email=#{email}
    
    </update>

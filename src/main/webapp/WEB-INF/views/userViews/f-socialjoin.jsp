@@ -275,7 +275,7 @@ a{text-decoration:none;}
        		
        		if(checking){
        		 $.ajax({ type:"POST",
-                    url:"successjoin.udo",
+                    url:"successSocialjoin.udo",
                     data:loginData,
                     success:function(data){   
                        if(data=='1'){

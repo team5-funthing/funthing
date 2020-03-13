@@ -45,7 +45,6 @@ public class AdminPersonalInfoProcessingController {
 	public String insertPersonalInfoProcessing(AdminPersonalInfoProcessingVO vo, Model model, HttpServletRequest request) {
 		
 		vo.setInfoContent(request.getParameter("editor1"));
-		System.out.println(vo.toString());
 		insertPersonalInfoProcessingService.insertPersonalInfoProcessing(vo);
 		
 		model.addAttribute("PersonalInfoProcessing", getPersonalInfoProcessingListService.getPersonalInfoProcessingList(vo));

@@ -25,8 +25,6 @@ public class ProjectDAO {
 	}
 	
 	public void updateProject(ProjectVO vo) {
-		System.out.println("updateProject");
-		System.out.println(vo.toString());
 		sqlSessionTemplate.update("updateProject", vo);
 	}
 	
