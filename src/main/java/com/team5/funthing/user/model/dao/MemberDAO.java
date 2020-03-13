@@ -36,4 +36,16 @@ public class MemberDAO {
       public void deleteMember(MemberVO vo) {
     	  sqlSessionTemplate.delete("MemberDAO.deleteMember", vo);
       }
+      
+      public void insertDeleteMember(MemberVO vo) {
+    	  sqlSessionTemplate.insert("MemberDAO.insertabledeletemember",vo);
+      }
+      public MemberVO getDeleteMemberTableMember(MemberVO vo) {
+    	  return sqlSessionTemplate.selectOne( "MemberDAO.getDeleteMember",vo);
+      }
+      
+      public void deleteDeleteMemberTableMember() {
+    	  sqlSessionTemplate.delete( "MemberDAO.deleteDeleteMemberTableMember");
+      }
+        
 }

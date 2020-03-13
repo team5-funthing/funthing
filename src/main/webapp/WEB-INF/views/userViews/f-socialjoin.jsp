@@ -232,18 +232,23 @@ a{text-decoration:none;}
               	$.ajax({ type:"GET",
                  url:"emailCheck.udo",
                  data:typedEmail,
-                 success:function(data){   
-                    if(data=='1'){
-                   	$("#duplicateResult").empty();
-                      	$("#duplicateResult").append("사용 가능한 이메일입니다.").css('color','MediumSeaGreen').css('font-size','75%');
-                      	document.getElementById('email2').disabled=true;
-                         checking=true;
-                    }else{
-                   	$("#duplicateResult").empty();
-                       $("#duplicateResult").append("이미 가입된 메일입니다.").css('color','Tomato').css('font-size','75%');
-                       document.getElementById('email2').value="";
-                    }
-                 },error:function(){
+                 success : function(data) {
+ 					if (data == '1') {
+ 						$("#inputEmail").empty();
+ 						$("#inputEmail").append("사용 가능한 메일입니다.").css('color','MediumSeaGreen').css('font-size','75%');
+ 						document.getElementById('email').disabled = true;
+ 						checking = true;
+ 					} else if(data=='2'){
+ 						$("#inputEmail").empty();
+ 						$("#inputEmail").append("이미 가입된 메일입니다.").css('color','Tomato').css('font-size','75%');
+ 						document.getElementById('email').value = "";
+ 					} else if(data=='3'){
+ 						$("#inputEmail").empty();
+ 						$("#inputEmail").append("탈퇴한 회원입니다. 다른 이메일을 이용하여 주세요.").css('color','Tomato').css('font-size','75%');
+ 						document.getElementById('email').value = "";
+ 					}
+ 				},
+ 				error:function(){
                     alert("연결에 문제가 있습니다. 인터넷 환경을 확인 후 다시 시도해 주세요.");
                  }
               });   
@@ -367,6 +372,8 @@ a{text-decoration:none;}
 					
 	        		loginsubmit.submit();
 
+	           }else if(data=='3'){
+	        	  alert("탈퇴한 회원 입니다. 다른 이메일을 이용해 주세요.");
 	           }else{
 	              alert("가입되지 않은 이메일 입니다. 회원가입을 먼저 해 주세요.");
 	           }
@@ -430,6 +437,8 @@ a{text-decoration:none;}
 			        		loginsubmit.submit();
 			        		
 
+			           }else if(data=='3'){
+				        	  alert("탈퇴한 회원 입니다. 다른 이메일을 이용해 주세요.");
 			           }else{
 			              alert("가입되지 않은 이메일 입니다. 회원가입을 먼저 해 주세요.");
 			           }

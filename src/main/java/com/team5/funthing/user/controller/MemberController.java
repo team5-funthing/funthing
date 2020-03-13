@@ -22,7 +22,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.team5.funthing.common.utils.SendMailUtil;
 import com.team5.funthing.user.model.vo.AlarmVO;
 import com.team5.funthing.user.model.vo.MemberVO;
+
+import com.team5.funthing.user.service.deletememberService.GetDeleteMemberService;
+
 import com.team5.funthing.user.service.AlarmService.GetNewestAlarmListService;
+
 import com.team5.funthing.user.service.memberService.GetMemberService;
 import com.team5.funthing.user.service.memberService.InsertMemberService;
 import com.team5.funthing.user.service.memberService.UpdateMemberService;
@@ -43,7 +47,8 @@ public class MemberController {
 	private InsertMemberService insertMemberService;
 	@Autowired
 	private UpdateMemberService updateMemberService;
-
+	@Autowired
+	private GetDeleteMemberService getDeleteMemberService;
 
 
 	@RequestMapping(value="socialLogin.udo",method=RequestMethod.GET)
@@ -120,7 +125,6 @@ public class MemberController {
 		if(email!=null) {
 			vo.setEmail(email);
 		}
-		System.out.println(vo.toString());
 		if(vo.getEmail()!=null && vo.getName()!=null && vo.getPassword()!=null)    {
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			String encodePassword = encoder.encode(vo.getPassword());			
@@ -192,11 +196,16 @@ public class MemberController {
 	@RequestMapping(value="emailCheck.udo",method=RequestMethod.GET)
 	public String duplicationCheck(MemberVO vo,String typedEmail,Model model) throws JsonProcessingException {
 		vo.setEmail(typedEmail);
+		if(getDeleteMemberService.getDeleteMemberTableMember(vo)!=null) {
+			model.addAttribute("result","3");
+			return "ajax/callback";
+		}
 		if(getMemberService.getMember(vo)==null) {
 			model.addAttribute("result", "1");      
 		}else {
 			model.addAttribute("result","2");
 		}
+
 		return "ajax/callback";
 	}
 
