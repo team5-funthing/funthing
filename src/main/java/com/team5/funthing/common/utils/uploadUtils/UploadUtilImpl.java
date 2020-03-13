@@ -4,6 +4,7 @@ import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,11 +18,11 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * 
  * 
- * 		// ¾÷·Îµå ½ÃÅ² ÆÄÀÏÀÌ ÀÌ¹Ì Á¸ÀçÇÏ´Â °æ¿ì ÆÄÀÏ ¼±ÅÃÀ» ´Ù½Ã ¾ÈÇÑ °æ¿ì¿¡ ³ª¿Ã ¼ö ÀÖ´Â »óÈ² Ã³¸®
- *		// ¾÷·Îµå ÀÌ¹ÌÁö¸¦ º¯°æÇÒ °æ¿ì
+ * 		// ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½Å² ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ì¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½È² Ã³ï¿½ï¿½
+ *		// ï¿½ï¿½ï¿½Îµï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
  *		if(!uploadFile.isEmpty()) { 
  *			
- *			//Á¦°ÅµÉ ÆÄÀÏ°æ·Î¸¦ vo°´Ã¼¿¡¼­ °¡Á®¿À±â
+ *			//ï¿½ï¿½ï¿½Åµï¿½ ï¿½ï¿½ï¿½Ï°ï¿½Î¸ï¿½ voï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  *			String toRemoveFilePath = vo.getProjectMainImage();
  *			
  *			String voName = vo.getClass().getSimpleName();
@@ -47,65 +48,60 @@ public class UploadUtilImpl implements UploadUtil {
 	
 	@Override
 	public List<String> upload(List<MultipartFile> uploadFiles, String voName, List<String> toRemoveFilePath) throws Exception {
-		
+
 		List<String> uploadCompletePaths = new ArrayList<String>();
 		
-		String realPath = initRealPathController.getRealPath(); // ¾÷·Îµå ÆÄÀÏÀÇ ½ÇÁ¦ ÀúÀåµÉ °æ·Î 
+		String realPath = initRealPathController.getRealPath(); // ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 
 		String temp = voName.replace("VO", "");
-		String dirName = File.separator + temp.substring(0, 1).toLowerCase() + temp.substring(1); // vo Å¬·¡½º ³×ÀÓÀ» Æú´õ ¸íÀ¸·Î »ç¿ëÇÏ±â À§ÇÑ º¯¼ö ex) ProjectVO ---> project
+		String dirName = File.separator + temp.substring(0, 1).toLowerCase() + temp.substring(1); // vo Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ex) ProjectVO ---> project
 		String dirPath = calcPath(realPath, dirName);
 		String fileName = null;
 				
-				
-		//ÀÌ¹ÌÁö ¹Ù²Ù±â ½Ã¿¡ ¼öÇà µÇ´Â ¸Þ¼­µå
+
 		if(toRemoveFilePath.get(0) != null) {
 			
 			for(String removePath : toRemoveFilePath) {
-				System.out.println("removePath : " + removePath);
 				remove(removePath, dirName);
 			}
-		}
-		
-		for(MultipartFile uploadFile : uploadFiles) {
 			
-			//°æ·Î¿¡ µû¸¥ Æú´õ ¹× ÆÄÀÏ »ý¼º ÄÚµå
+		}
+
+		for(MultipartFile uploadFile : uploadFiles) {
+
 			if(uploadFile != null) {
 				String originalFileName = uploadFile.getOriginalFilename().trim();
+
 				if( originalFileName != "") {
-					
 					fileName = fileUpload(realPath, uploadFile.getOriginalFilename(), uploadFile.getBytes(), dirPath);
 					
 				}else {
 					return null;
 				}
 			}else {
-				System.out.println("¾÷·Îµå ÇÒ ÆÄÀÏ ¾øÀÌ ½ÇÇà ");
 				return null;
 			}
-			
-			//DB¿¡ ÀúÀåÇÒ °æ·Î
+			//DBï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 			String completePath = File.separator + "funthing" + File.separator + "resources" + File.separator + "upload" + dirPath + File.separator + fileName;
 			uploadCompletePaths.add(completePath);
-
+			
+			
 		}
-		
 		return uploadCompletePaths;
 	}
 
 	@Override
 	public String fileUpload(String realPath, String fileName, byte[] fileData, String dirPath) throws Exception{
 
-		// UUID '-' Á¦°ÅÇÏ¿© º¯¼ö¿¡ ÀúÀå
+
 		String uuid = UUID.randomUUID().toString().replace("-", "");
 
-		String newFileName = uuid + "_" + fileName; // ¾÷·Îµå ½Ã »ç¿ëÇÒ ÆÄÀÏ¸í ¼³Á¤ 
-		String imgPath = realPath + dirPath; // Æú´õ °æ·Î¸¦ year, month, day·Î ¼ÂÆÃ
+		String newFileName = uuid + "_" + fileName; 
+		String imgPath = realPath + dirPath; 
 		
 		File image = new File(imgPath + File.separator + newFileName);
-		FileCopyUtils.copy(fileData, image); // ÀÌ¹ÌÁö°¡ µé¾î°¡´Â °æ·Î·Î ÆÄÀÏ »ý¼º
+		FileCopyUtils.copy(fileData, image); 
 		
 		if (image.exists()) {
-			System.out.println("¾÷·Îµå ¼º°ø");
 		}
 		
 		return newFileName; 
@@ -120,16 +116,14 @@ public class UploadUtilImpl implements UploadUtil {
 		String monthPath = yearPath + File.separator + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
 		String datePath = monthPath + File.separator + new DecimalFormat("00").format(cal.get(Calendar.DATE));
 
-		makeDir(realPath, dirName, yearPath, monthPath, datePath); // ÇÁ·ÎÁ§Æ® ¸ÞÀÎ ÀÌ¹ÌÁö¿ë
+		makeDir(realPath, dirName, yearPath, monthPath, datePath); 
 
 		return datePath;
 	}
 
 
-	//Æú´õ »ý¼º ÇØÁÖ´Â ¸Þ¼­µå
 	@Override
 	public void makeDir(String realPath, String... paths) {
-
 		if(new File(paths[paths.length - 1]).exists()) {
 			return; 
 		}
@@ -143,11 +137,22 @@ public class UploadUtilImpl implements UploadUtil {
 
 	}
 	
-	//ÆÄÀÏ »èÁ¦ ¸Þ¼­µå remove('»èÁ¦ÇÒ ÆÄÀÏ path', '¾÷·ÎµåÇÑ °æ·Î°¡ ÀÖ´Â Æú´õÀÌ¸§')
+	@Override
+	public void removeUtil(String voName, List<String> toRemoveFilePath) throws Exception {
+
+		String temp = voName.replace("VO", "");
+		String dirName = File.separator + temp.substring(0, 1).toLowerCase() + temp.substring(1); // vo Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ex) ProjectVO ---> project
+		if(toRemoveFilePath.get(0) != null) {
+			for(String removePath : toRemoveFilePath) {
+				remove(removePath, dirName);
+			}
+		}
+
+	}
+	
 	@Override
 	public void remove(String filePath, String voName) {
 		
-		// dirIndex¿¡ -1ÀÌ µé¾î¿À¸é ¾÷·Îµå¸¦ Ã³À½ ¿äÃ»ÇÏ´Â »óÈ²ÀÌ¹Ç·Î  ¹Ù·Î return: ¸Þ¼­µå Á¾·á
 		
 		if(filePath == null){
 			return;
@@ -155,22 +160,22 @@ public class UploadUtilImpl implements UploadUtil {
 		
 		int dirIndex = filePath.indexOf(voName);
 		if (dirIndex == -1 ) {
-			System.out.println("¾÷·Îµå Ã¹ ¿äÃ»");
+			System.out.println("ï¿½ï¿½ï¿½Îµï¿½ Ã¹ ï¿½ï¿½Ã»");
 			return;
 		}
 		
 		String fixedPath = initRealPathController.getRealPath() + filePath.substring(dirIndex);
-		System.out.println("fixedPath : " + fixedPath);
+	
 		
 		
 		File toRemoveFile = new File(fixedPath);
 		if(toRemoveFile.exists()) {
 			if(toRemoveFile.delete()) {
-				System.out.println("»èÁ¦ ¿Ï·á");
+			
 			}
 		}
 		else {
-			System.out.println("°æ·Î¿¡ ÆÄÀÏÀÌ ¾ø½À´Ï´Ù.");
+
 		}
 		
 		

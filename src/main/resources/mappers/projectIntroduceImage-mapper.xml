@@ -20,6 +20,11 @@
 		
 	</select>
 
+	<select id="deleteProjectIntroduceImage" parameterType="projectIntroduceImage">
+	
+		delete projectIntroduceImage where projectIntroduceImageNo = ${projectIntroduceImageNo} 
+		
+	</select>
 
 
 </mapper>

@@ -22,6 +22,7 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 </head>
 
 <body>
@@ -93,59 +94,97 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title m-b-0"></h5>
-            <div class="col-lg-4">
+            
                 <div class="row">
 
                     <div class="col-6">
-                        <div class="bg-dark p-10 text-white text-center">
+                        <div class="bg-dark p-10 text-white text-center" >
                             <i class="fas fa-check-circle m-b-5 font-16"></i>
-                            <h5 class="m-b-0 m-t-5">470</h5>
-                            <small class="font-light">성공</small>
+
+                            <h5 class="m-b-0 m-t-5">${totalSuccess.successtotal } 건</h5>
+                            <small class="font-light">지금까지 성공한 프로젝트 </small>
+
                         </div>
                     </div>
 
                     <div class="col-6">
-                        <div class="bg-dark p-10 text-white text-center">
+                        <div class="bg-dark p-10 text-white text-center" >
                             <i class="fas fa-times m-b-5 font-16"></i>
-                            <h5 class="m-b-0 m-t-5">76</h5>
-                            <small class="font-light">실패</small>
+
+                            <h5 class="m-b-0 m-t-5">${totalSuccess.failtotal } 건</h5>
+                            <small class="font-light">지금까지 실패한 프로젝트</small>
                         </div>
                     </div>
 
+                   
+
                     <div class="col-6 m-t-15">
-                        <div class="bg-dark p-10 text-white text-center">
+
+                        <div class="bg-dark p-10 text-white text-center" >
                             <i class="fas fa-comment-dots m-b-5 font-16"></i>
-                            <h5 class="m-b-0 m-t-5">2</h5>
-                            <small class="font-light">심사</small>
+                            <h5 class="m-b-0 m-t-5">${fundingYListCount} 건</h5>
+                            <small class="font-light">프로젝트 진행중</small>
+
+                        </div>
+                    </div>
+                    
+					<div class="col-6 m-t-15">
+                        <div class="bg-dark p-10 text-white text-center" >
+                           <i class="fas fa-exclamation-triangle m-b-5 font-16"></i>
+                           <h5 class="m-b-0 m-t-5">${statusWListCount} 건</h5>
+                           <small class="font-light">심사 진행중</small>
                         </div>
                     </div>
 
                     <div class="col-6 m-t-15">
-                        <div class="bg-dark p-10 text-white text-center">
-                            <i class="fas fa-exclamation-triangle m-b-5 font-16"></i>
-                            <h5 class="m-b-0 m-t-5">17</h5>
-                            <small class="font-light">반려</small>
-                        </div>
-                    </div>
-
-                    <div class="col-6 m-t-15">
-                        <div class="bg-dark p-10 text-white text-center">
+                        <div class="bg-dark p-10 text-white text-center" >
                             <i class="fa fa-table m-b-5 font-16"></i>
-                            <h5 class="m-b-0 m-t-5">100원</h5>
-                            <small class="font-light">이번달</small>
+                            <h5 class="m-b-0 m-t-5" ><input type="text" readonly style="border:none;background-color:#343A40;color:white;width:100%;text-align:center;" id="thisMonth"></h5>
+                            <small class="font-light">이번달 펀딩모금액</small>
                         </div>
                     </div>
-
+					<script>
+					$(document).ready(function(){
+					var thismonth = new Date().getMonth();
+					var use2 = thismonth +1;
+					if(use2==1){
+						$("#thisMonth").val('${fundingMoney.m1} 원');
+					}else if(use2==2){
+						document.getElementById("thisMonth").value = '${fundingMoney.m2} 원';
+					}else if(use2==3){						
+						$("#thisMonth").val('${fundingMoney.m3} 원');
+					}else if(use2==4){
+						document.getElementById("thisMonth").value = '${fundingMoney.m4} 원';
+					}else if(use2==5){
+						document.getElementById("thisMonth").value = '${fundingMoney.m5} 원';
+					}else if(use2==6){
+						document.getElementById("thisMonth").value = '${fundingMoney.m6} 원';
+					}else if(use2==7){
+						document.getElementById("thisMonth").value = '${fundingMoney.m7} 원';
+					}else if(use2==8){
+						document.getElementById("thisMonth").value = '${fundingMoney.m8} 원';
+					}else if(use2==9){
+						document.getElementById("thisMonth").value = '${fundingMoney.m9} 원';
+					}else if(use2==10){
+						document.getElementById("thisMonth").value = '${fundingMoney.m10} 원';
+					}else if(use2==11){
+						document.getElementById("thisMonth").value = '${fundingMoney.m11} 원';
+					}else if(use2==12){
+						document.getElementById("thisMonth").value = '${fundingMoney.m12} 원';
+					}
+					
+					});
+					</script>
                     <div class="col-6 m-t-15">
-                        <div class="bg-dark p-10 text-white text-center">
+                        <div class="bg-dark p-10 text-white text-center" >
                             <i class="fab fa-y-combinator m-b-5 font-16"></i>
-                            <h5 class="m-b-0 m-t-5">8540원</h5>
-                            <small class="font-light">올해</small>
+                            <h5 class="m-b-0 m-t-5">${fundingMoney.sumfunding } 원</h5>
+                            <small class="font-light">올해 펀딩모금액</small>
                         </div>
                     </div>
 
                 </div>
-            </div>
+            
 
 
 
@@ -160,7 +199,7 @@
                         <div class="card card-hover">
                             <div class="box bg-cyan text-center">
                                 <h1 class="font-light text-white"><i class="mdi mdi-file-find"></i></h1>
-                                <h6 class="text-white"><a href="C:\Users\pjh\Desktop\5jo\matrix-admin-master\project_list.html">심사 프로젝트</a></h6>
+                                <h6 class="text-white"><a href="getProjectCheckList.ado">심사 프로젝트</a></h6>
                             </div>
                         </div>
                     </div>
@@ -229,29 +268,6 @@
         <!-- ============================================================== -->
         <!-- All Jquery -->
         <!-- ============================================================== -->
-        <script src="${pageContext.request.contextPath}/resources/admin/assets/libs/jquery/dist/jquery.min.js"></script>
-        <!-- Bootstrap tether Core JavaScript -->
-        <script src="${pageContext.request.contextPath}/resources/admin/assets/libs/popper.js/dist/umd/popper.min.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/admin/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/admin/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/admin/assets/extra-libs/sparkline/sparkline.js"></script>
-        <!--Wave Effects -->
-        <script src="${pageContext.request.contextPath}/resources/admin/dist/js/waves.js"></script>
-        <!--Menu sidebar -->
-        <script src="${pageContext.request.contextPath}/resources/admin/dist/js/sidebarmenu.js"></script>
-        <!--Custom JavaScript -->
-        <script src="${pageContext.request.contextPath}/resources/admin/dist/js/custom.min.js"></script>
-        <!--This page JavaScript -->
-        <!-- <script src="dist/js/pages/dashboards/dashboard1.js"></script> -->
-        <!-- Charts js Files -->
-        <script src="${pageContext.request.contextPath}/resources/admin/assets/libs/flot/excanvas.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/admin/assets/libs/flot/jquery.flot.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/admin/assets/libs/flot/jquery.flot.pie.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/admin/assets/libs/flot/jquery.flot.time.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/admin/assets/libs/flot/jquery.flot.stack.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/admin/assets/libs/flot/jquery.flot.crosshair.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/admin/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/admin/dist/js/pages/chart/chart-page-init.js"></script>
 
 </body>
 

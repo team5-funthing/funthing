@@ -15,22 +15,20 @@
 									<li><a href="javaScript: return(0);">프로젝트 보기 <i class="ti-angle-down"></i></a>
 										<ul class="submenu">
 											<li><a href="getAllFundingProjectList.udo">모든 프로젝트</a></li>
-											<li><a href="#">리워드 프로젝트</a></li>
-											<li><a href="#">후원 프로젝트</a></li>
 											<hr>
 											<li><a href="getAllLikeCountList.udo">인기 프로젝트</a></li>
 											<li><a href="getDeadLineList.udo">마감임박 프로젝트</a></li>
 											<li><a href="getAllNewProjectList.udo">신규 프로젝트</a></li>
 											<hr>
-											<li><a href="#">기획전 보러가기</a></li>
+											<li><a href="javaScript: return(0);">기획전 보러가기[미구현]</a></li>
 										</ul>
-									<li><a href="showStartProjectPage.udo">프로젝트 올리기</a></li>
-									<li><a href="#">더 보기 <i class="ti-angle-down"></i></a>
+									<li><a href="showStartProjectPageInterceptor.udo">프로젝트 올리기</a></li>
+									<li><a href="javaScript: return(0);">더 보기 <i class="ti-angle-down"></i></a>
 										<ul class="submenu">
-											<li><a href="#"></a></li>
+											<li><a href="javaScript: return(0);"></a></li>
 											<li><a href="getNoticeBoardList.udo">공지</a></li>
-											<li><a href="#">알림</a></li>
-											<li><a href="#">이벤트</a></li>
+											<li><a href="getNoticeBoardList.udo">알림</a></li>
+											<li><a href="getNoticeBoardList.udo">이벤트</a></li>
 										</ul>
 									</li>
 								</ul>
@@ -59,3 +57,31 @@
 	</div>
 </header>
 <!-- header-end -->
+
+
+	<script>
+		
+	
+	
+		/*
+		$('.clickKeyword').on("click", function() {
+			
+			var idx = $keyword.index(this); // <- 변경된 코드
+			alert(idx);
+			$("'#test"+ idx + "'").submit();  
+			
+			
+			  
+		});
+		*/
+		
+	</script>
+	
+	
+	
+	
+	
+	
+	
+	
+	

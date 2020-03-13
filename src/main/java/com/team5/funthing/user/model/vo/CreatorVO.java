@@ -1,13 +1,17 @@
 package com.team5.funthing.user.model.vo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class CreatorVO {
 	
 	private String creator;
 	private String email;
+
 	private String creatorProfileImage = "";
-	private String makerPhone;
-	private String businessNumber;
-	private String businessAddress;
+	private String makerPhone = "";
+	private String businessNumber = "";
+	private String businessAddress = "";
 	private String businessFileLink = "";
 	private String lv;			
 	
@@ -92,7 +96,5 @@ public class CreatorVO {
 				+ businessAddress + ", businessFileLink=" + businessFileLink + ", lv=" + lv + ", projectAskMessage="
 				+ projectAskMessage + "]";
 	}
-
-
-
+	
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
@@ -55,18 +56,6 @@
                         <!-- ============================================================== -->
                         <!-- create new -->
                         <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="d-none d-md-block">리스트 <i class="fa fa-angle-down"></i></span>
-                                <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">리스트1</a>
-                                <a class="dropdown-item" href="#">리스트2</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">리스트3</a>
-                            </div>
-                        </li>
                         <!-- ============================================================== -->
                         <!-- Search -->
                         <!-- ============================================================== -->
@@ -79,99 +68,69 @@
                     <!-- ============================================================== -->
                     <!-- Right side toggle and nav items -->
                     <!-- ============================================================== -->
+                    
                     <ul class="navbar-nav float-right">
                         <!-- ============================================================== -->
                         <!-- Comment -->
                         <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-bell font-24"></i>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">항목1</a>
-                                <a class="dropdown-item" href="#">항목2</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">항목3</a>
-                            </div>
+                        <li class="nav-item dropdown" style="width:150px;">
+                            <a id="bell" class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+                            <i class="mdi mdi-bell font-24"></i>
+                            </a>   
+                            <span id="showState" style="width:75px;">${alarmContain}</span>
+	                            <div id="alarmList" style="width:200px;" class="dropdown-menu" aria-labelledby="navbarDropdown">
+	                            </div>
                         </li>
                         <!-- ============================================================== -->
                         <!-- End Comment -->
                         <!-- ============================================================== -->
                         <!-- ============================================================== -->
-                        <!-- Messages -->
-                        <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="font-24 mdi mdi-comment-processing"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown" aria-labelledby="2">
-                                <ul class="list-style-none">
-                                    <li>
-                                        <div class="">
-                                            <!-- Message -->
-                                            <a href="javascript:void(0)" class="link border-top">
-                                                <div class="d-flex no-block align-items-center p-10">
-                                                    <span class="btn btn-success btn-circle"><i class="ti-calendar"></i></span>
-                                                    <div class="m-l-10">
-                                                        <h5 class="m-b-0">항목1</h5>
-                                                        <span class="mail-desc">설명1</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="javascript:void(0)" class="link border-top">
-                                                <div class="d-flex no-block align-items-center p-10">
-                                                    <span class="btn btn-info btn-circle"><i class="ti-settings"></i></span>
-                                                    <div class="m-l-10">
-                                                        <h5 class="m-b-0">항목2</h5>
-                                                        <span class="mail-desc">설명2</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="javascript:void(0)" class="link border-top">
-                                                <div class="d-flex no-block align-items-center p-10">
-                                                    <span class="btn btn-primary btn-circle"><i class="ti-user"></i></span>
-                                                    <div class="m-l-10">
-                                                        <h5 class="m-b-0">항목3</h5>
-                                                        <span class="mail-desc">설명3</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="javascript:void(0)" class="link border-top">
-                                                <div class="d-flex no-block align-items-center p-10">
-                                                    <span class="btn btn-danger btn-circle"><i class="fa fa-link"></i></span>
-                                                    <div class="m-l-10">
-                                                        <h5 class="m-b-0">항목4</h5>
-                                                        <span class="mail-desc">설명4</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <!-- ============================================================== -->
-                        <!-- End Messages -->
-                        <!-- ============================================================== -->
-
-                        <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="${pageContext.request.contextPath}/resources/admin/assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            	<img src="${pageContext.request.contextPath}/resources/admin/assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31">
+                            </a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated">
-                                <h3><div align="center">${sessionScope.adminSessionEmail}</div></h3>
+                                <h4><div align="center">${sessionScope.adminSessionEmail}</div></h4>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="Logout.ado"><i class="fa fa-power-off m-r-5 m-l-5"></i> 로그아웃</a>
                                 <div class="dropdown-divider"></div>
                                 
                             </div>
                         </li>
-                        <!-- ============================================================== -->
-                        <!-- User profile and search -->
-                        <!-- ============================================================== -->
                     </ul>
+                    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+                    <script>
+                    	$(document).ready(function(){
+                    		var sendData = {
+                    				status : "n",
+                    				receiveId : "admin@funthing.com"
+                    			};
+                    		$("#bell").click(function(){
+                    			$.ajax({
+                        			type:"post",
+                        			url:"getAdminAlarmList.ado",
+                        			data:sendData,
+                        			success:function(data){
+                        				console.log(data.trim());
+                        				if(data.trim()==''){
+                        					$("#showState").empty();
+                        					$("#showState").append("알람 없음");
+                        				}else{
+                        					$("#showState").empty();
+                        					$("#showState").append("알람 있음");
+                        				}
+                        				$("#alarmList").empty();
+                        				$("#alarmList").append(data);
+                        			},
+                        			error:function(){
+                        				alert('실패');
+                        			}
+                        		});
+                    		});
+                    	}); 
+                    </script>
                 </div>
             </nav>
         </header>

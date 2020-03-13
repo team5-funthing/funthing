@@ -37,6 +37,10 @@ public class ProjectDAO {
 		return sqlSessionTemplate.selectOne("getProject", vo);
 	}
 	
+	public void updateProjectFundingMoney(ProjectVO vo) {
+		sqlSessionTemplate.selectOne("updateProjectFundingMoney", vo);
+	}
+	
 	
 	public List<ProjectVO> getProjectListByEmail(ProjectVO vo){
 		return sqlSessionTemplate.selectList("getProjectListByEmail",vo);
@@ -46,6 +50,20 @@ public class ProjectDAO {
 		return sqlSessionTemplate.selectList("getAllFundingProjectList");
 	}
 
+	public void updateProjectDeadline(){
+		sqlSessionTemplate.update("updateProjectDeadline");
+	}
+	
+	
+	public List<ProjectVO> getTodayClosedProjectList() {
+		return sqlSessionTemplate.selectList("getTodayClosedProjectList");
+	}
+	
+	public void updateProjectAfterPaymentCancel(ProjectVO vo) {
+		sqlSessionTemplate.update("updateProjectAfterPaymentCancel", vo);
+	}
+	
+	
 //===================================카테고리 검색==========================================
 
 	public List<ProjectVO> getShowCategorySubList(ProjectVO vo) {

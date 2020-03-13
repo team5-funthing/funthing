@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.team5.funthing.user.model.vo.DeliveryAddressVO;
 import com.team5.funthing.user.model.vo.MemberVO;
-import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.service.deliveryService.GetDeliveryAddressService;
 import com.team5.funthing.user.service.deliveryService.InsertDeliveryAddressService;
 import com.team5.funthing.user.service.deliveryService.UpdateDeliveryAddressService;
@@ -30,7 +29,6 @@ public class DeliveryAddressController {
 	   public String insertDeliveryAddress(DeliveryAddressVO vo,HttpSession session) {
 		   memberVo = (MemberVO)session.getAttribute("memberSession");
 		   vo.setEmail(memberVo.getEmail());
-		   ///   주소정보 관련해서   input태그   해당 vo와 이름맞춘다.   zipcode  address1  address2
 		   insertDeliveryAddressService.insertDeliveryAddress(vo);
 		   return "#";
 	   }

@@ -46,7 +46,9 @@
 				<div class="row">
 					<div class="col"></div>
 					<div class="col-10">
+					
 						<h3 class="mb-4">프로젝트 등록 폼</h3>
+						
 						<form action="saveInputWritingProject.udo" id="tempStorageForm" method="POST" enctype="multipart/form-data">
 					<!-- <form action="insertProject.udo" id="tempStorageForm" method="POST" enctype="multi/form-data"> -->
 							<input type="hidden" name="projectNo" value="${writingProject.projectNo }">
@@ -67,9 +69,9 @@
 											href="#v-pills-settings" role="tab" aria-controls="v-pills-settings"
 											aria-selected="false">리워드 설계</a>
 											
-										<button type="submit" id="inputSaveBtn" class="btn btn-secondary btn-lg btn-block mt-5">저장하기</button>
-										<button type="submit" id="inputCompleteBtn" class="btn btn-secondary btn-lg btn-block" formaction="requestCheckProject.udo" >
-											
+										<button type="submit" id="inputSaveBtn" class="btn btn-outline-primary btn-lg btn-block mt-5">저장하기</button>
+										<button type="submit" id="inputCompleteBtn" class="btn btn-light btn-lg mt-2" formaction="requestCheckProject.udo?creator=${writingCreator.creator}" >
+
 											<c:choose>
 												<c:when test="${writingProject.status eq 'w'.charAt(0) }">
 													심사중
@@ -84,12 +86,12 @@
 													거부
 												</c:when>
 												<c:otherwise>
-													작성완료
+													제출하기
 												</c:otherwise>
 											</c:choose>	
 										
 										</button>
-										<button type="submit" class="btn btn-secondary btn-lg btn-block mt-5" formaction="showPreviewProject.udo">미리보기</button>
+										<button type="submit" class="btn btn-light btn-lg btn-block mt-5" formaction="showPreviewProject.udo">미리보기</button>
 									</div>
 								</div>
 
@@ -135,10 +137,7 @@
 	    <c:if test="${writingProject.writeStatus eq 'y'.charAt(0)  }">
 	    	<script>
 			  $(function() {
-				    $("#inputCompleteBtn")
-				      	.click(function() {
-				    	})
-				      	.prop("disabled", false);
+				    $("#inputCompleteBtn").click(function() {}).prop("disabled", false);
 				});
 			  
 			  $(function() {
@@ -152,10 +151,9 @@
 	    	<script>
 				$(document).on("change keyup", 'input:text', function(){
 					  
-					  $("#inputSaveBtn")
-				    	.click(function() {
-				  	})
-				    	.prop("disabled", false);
+					  $("#inputSaveBtn").click(function() {
+						  
+					  }).prop("disabled", false);
 					  
 					  $(function() {
 						    $("#inputCompleteBtn")
@@ -179,7 +177,6 @@
 		   		});
 	    	</script>
 	    </c:if>
-
 
 
 </body>

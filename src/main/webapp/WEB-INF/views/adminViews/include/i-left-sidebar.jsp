@@ -12,15 +12,39 @@
 
                         <li class="sidebar-item"> 
                         	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="adminIndex.ado" aria-expanded="false">
-                        		<i class="mdi-apps"></i>
+                        		<i class="mdi mdi-reorder-horizontal"></i>
                         		<span class="hide-menu">메인</span>
                         	</a>
                         </li>
+ 						<li class="sidebar-item"> 
+                        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="adminNoticeInput.ado" aria-expanded="false">
+                                <i class="mdi mdi-bell-ring-outline"></i>
+                                <span class="hide-menu">공지사항 목록 </span>
+                            </a>
+                        </li>
                         <li class="sidebar-item"> 
-                        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="projectManagement.ado" aria-expanded="false">
+                        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="getProjectCheckList.ado" aria-expanded="false">
+                                <i class="mdi mdi-file-powerpoint"></i>
+                                <span class="hide-menu">프로젝트 심사 </span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item"> 
+                        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="projectCategoryManagement.ado" aria-expanded="false">
                         		<i class="mdi mdi-file-document"></i>
-                        		<span class="hide-menu">프로젝트관리</span>
+                        		<span class="hide-menu">프로젝트 카테고리관리</span>
                         	</a>
+                        </li>
+                        <li class="sidebar-item"> 
+                        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="projectReportCheck.ado" aria-expanded="false">
+                        		<i class="mdi mdi-message-alert"></i>
+                        		<span class="hide-menu">프로젝트 신고확인</span>
+                        	</a>
+                        </li>
+                        <li class="sidebar-item"> 
+                        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="customerService.ado" aria-expanded="false">
+                                <i class="mdi mdi-headset"></i>
+                                <span class="hide-menu">고객센터 </span>
+                            </a>
                         </li>
                         <li class="sidebar-item"> 
                         	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="getMemberList.ado" aria-expanded="false">
@@ -35,36 +59,34 @@
                             </a>
                         </li>
                         <li class="sidebar-item"> 
-                        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="customerService.ado" aria-expanded="false">
-                                <i class="mdi mdi-headset"></i>
-                                <span class="hide-menu">고객센터 </span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item"> 
                        		<a class="sidebar-link waves-effect waves-dark sidebar-link" href="termsOfService.ado" aria-expanded="false">
                                 <i class="mdi mdi-feather"></i>
-                                    <span class="hide-menu">약관입력 </span>
+                                    <span class="hide-menu">약관관리 </span>
                             </a>
                         </li>
                         <li class="sidebar-item"> 
-                        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="adminNoticeInput.ado" aria-expanded="false">
-                                <i class="mdi mdi-bell-ring-outline"></i>
-                                <span class="hide-menu">공지사항 목록 </span>
+                        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="registerTos.ado" aria-expanded="false">
+                                <i class="mdi mdi-message-text-outline"></i>
+                                <span class="hide-menu">회원가입 약관 관리 </span>
                             </a>
                         </li>
                         <li class="sidebar-item"> 
                         	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="infoProcessingInput.ado" aria-expanded="false">
                                 <i class="mdi mdi-account-card-details"></i>
-                                <span class="hide-menu">개인정보 처리방침 </span>
+                                <span class="hide-menu">개인정보 처리방침 관리 </span>
                             </a>
-
                         </li>
                         <li class="sidebar-item"> 
-                        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="getProjectCheckList.ado" aria-expanded="false">
-                                <i class="mdi mdi-account-card-details"></i>
-                                <span class="hide-menu">심사하기 </span>
+                        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="getFocusProjectList.ado" aria-expanded="false">
+                                <i class="mdi mdi-checkbox-multiple-marked-outline"></i>
+                                <span class="hide-menu">유저 메인 주목 프로젝트 설정 </span>
                             </a>
-
+                        </li>
+                        <li class="sidebar-item">
+                        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="userMainImageChangeForm.ado" aria-expanded="false">
+                                <i class="mdi mdi-folder-multiple-image"></i>
+                                <span class="hide-menu">유저 메인 배너 이미지 설정 </span>
+                            </a>
                         </li>
                         
                     </ul>

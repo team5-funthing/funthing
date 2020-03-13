@@ -4,7 +4,7 @@
 	<!-- 로그인 팝업페이지-->
 
     <form id="login-popup" class="white-popup-block mfp-hide" action="getMember.udo" method="post">
-        <div class="popup_box ">
+        <div class="popup_box">
             <div class="popup_inner">
                 <h3>로그인</h3>
             		
@@ -49,18 +49,18 @@
                         </div>
 
                     </div>
-
+					<div id="loginProcessingResult">${loginFail}</div>
                     <div class="col-xl-12 mt-10">
                         
-                        <input type="submit" class="boxed-btn3" value="로그인하기"> 
+                        <input onclick="inputCheck()" type="button" class="boxed-btn3" value="로그인하기"> 
                     </div>
 
                     <hr/>
-					<div class="col-xl-12 mt-10 naver_login_btn-wrapper">
-                    	<a href="javaScript: return(0);" class="naver_id_login" id="naver_id_login" style="width: 300px; height: 50px;"></a>
-                    </div>
                     
                  	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+				
+                    <div id="naver_id_login"></div>
+                    
 					<script type="text/javascript">
 						var naver_id_login = new naver_id_login(
 								"T6JggIUb0xG2LBu9Q7Pf", "http://localhost:8080/funthing/socialLogin.udo");
@@ -73,7 +73,8 @@
 						
                     <div class="col-xl-12 kakao_login_btn-wrapper mt-3">
                         <a class="kakao_login_btn" href="javascript:loginWithKakao()">
-                            <img class="landscape" src="${pageContext.request.contextPath}/resources/user/img/apiBtn/kakaoLoginBtn/kakao_account_login_btn_large_wide.png"/>
+                            <img class="landscape" src="${pageContext.request.contextPath}/resources/user/img/apiBtn/kakaoLoginBtn/kakao_account_login_btn_large_wide.png" 
+                            style="height:55px;width:277.5px;"/>
                         </a>
                     </div>
                     
@@ -101,7 +102,7 @@
 												 id = res.id;
 												 name = res.properties.nickname;
 												 email = res.kakao_account.email;
-												 location.href=url+'?email='+email+'&password='+id+'&name='+name;
+												 location.href=url+'?email='+email+'&password='+id+'&name='+name+'&check=1';
 	
 											},
 											fail : function(error) {
@@ -115,6 +116,26 @@
 									}
 								});
 							};
+							
+							function inputCheck(){								
+								var email = document.getElementById("email").value;
+								var password = document.getElementById("password").value;
+								
+								console.log(email);
+								console.log(password);
+								
+								if(email == ""){
+									$("#loginProcessingResult").empty();
+									$("#loginProcessingResult").append("아이디를 입력하세요").css('color','Tomato').css('font-size','75%');
+									return;
+								}else if(password == ""){
+									$("#loginProcessingResult").empty();
+									$("#loginProcessingResult").append("비밀번호를 입력하세요").css('color','Tomato').css('font-size','75%');
+									return;
+								}else{
+									document.getElementById('login-popup').submit();
+								}
+							}
 						</script>
                     <div class="mt-10">
                         	아직 회원이 아니신가요?

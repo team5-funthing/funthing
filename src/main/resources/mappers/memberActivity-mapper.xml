@@ -3,20 +3,18 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="MemberActivityDAO">
-	<!-- 한개의 projectno 가 가지고있는 좋아요 , 시고 , 예약 숫자   -->
-	<select id="projectLikeCount" parameterType="memberActivity"
-		resultType="_int">
-		SELECT COUNT (likecount)
+	<!-- 한개의 projectNo 가 가지고있는 좋아요 , 시고 , 예약 숫자   -->
+	<select id="projectLikeCount" parameterType="memberActivity" resultType="int">
+		SELECT COUNT (distinct email) as projectLikeCount
 		FROM memberactivity
-		WHERE (likecount='y' AND projectno = #{projectno})
-
+		WHERE (likecount='y' AND projectNo = #{projectNo})
 	</select>
 
 	<select id="projectReportCount" parameterType="memberActivity"
 		resultType="_int">
-		SELECT COUNT (reportcoun)
+		SELECT COUNT (reportcount)
 		FROM memberactivity
-		WHERE (reportcount='y' AND projectno = #{projectno})
+		WHERE (reportcount='y' AND projectNo = #{projectNo})
 
 	</select>
 
@@ -24,8 +22,7 @@
 		parameterType="memberActivity" resultType="_int">
 		SELECT COUNT (reservationcount)
 		FROM memberactivity
-		WHERE (reservationcount='y' projectno = AND #{projectno})
-
+		WHERE (reservationcount='y' AND projectNo = #{projectNo})
 	</select>
 	<!-- -->
 
@@ -34,66 +31,63 @@
 		resultType="_int">
 		SELECT COUNT (likecount)
 		FROM memberactivity
-		WHERE (likecount='y' AND email = #{eamil})
+		WHERE (likecount='y' AND email = #{email})
 	</select>
 
 	<select id="memberReportCount" parameterType="memberActivity"
 		resultType="_int">
 		SELECT COUNT (reportcount)
 		FROM memberactivity
-		WHERE (reportcount='y' AND email = #{eamil})
+		WHERE (reportcount='y' AND email = #{email})
 	</select>
 
 	<select id="memberReservationCount"
 		parameterType="memberActivity" resultType="_int">
 		SELECT COUNT (reservationcount)
 		FROM memberactivity
-		WHERE (reservationcount='y' AND email = #{eamil})
+		WHERE (reservationcount='y' AND email = #{email})
 	</select>
 <!--  -->  
 
 
   <!-- 한개의 email이  좋아요,신고,예약을  행한 프로젝트 번호  -->
 
-	<select id="getLikeProjectno" parameterType="memberActivity" resultType="memberActivity">
-		SELECT projectno 
+	<select id="getLikeProjectNoList" parameterType="memberActivity" resultType="memberActivity">
+		SELECT DISTINCT projectNo 
 		FROM memberactivity
 		WHERE (likecount='y' AND email = #{email})
-	
 	</select>
 	
-	<select id="getReportProjectno" parameterType="memberActivity" resultType="memberActivity">
-		SELECT projectno 
+	<select id="getReportProjectNoList" parameterType="memberActivity" resultType="memberActivity">
+		SELECT DISTINCT projectNo 
 		FROM memberactivity
 		WHERE (reportcount='y' AND email = #{email})
-	
 	</select>
-		<select id="getReservationProjectno" parameterType="memberActivity" resultType="memberActivity">
-		SELECT projectno 
+	
+	<select id="getReservationProjectNoList" parameterType="memberActivity" resultType="memberActivity">
+		SELECT projectNo 
 		FROM memberactivity
 		WHERE (reservationcount='y' AND email = #{email})
 	</select>
 	
-	<insert id="insertMemberActivity"
-		parameterType="memberActivity">
-		INSERT INTO memberactivity
-		VALUES
-		(#{email},#{projectno},#{likeCount},#{reportCount},#{reservationCount})
+	<insert id="insertMemberActivity" parameterType="memberActivity">
+		INSERT INTO memberactivity(email,projectNo,likecount)
+		VALUES(#{email},#{projectNo},#{likeCount})
 	</insert>
     
 
 	<update id="updateMemberActivity"
 		parameterType="memberActivity">
 		UPDATE memberActivity
-		SET (likeCount=#{likeCount}, reprotCount=#{reportCount} ,
-		reservationCount=#{reservationCount})
-		WHERE (email=#{email} AND projectno=${projectno})
+		SET likeCount=#{likeCount}, reprotCount=#{reportCount} ,
+		reservationCount=#{reservationCount}
+		WHERE (email=#{email} AND projectNo=${projectNo})
 	</update>
 
 	<delete id="deleteMemberActivity"
 		parameterType="memberActivity">
 		DELETE memberActivity
-		WHERE (email=#{email} AND projectno=${projectno})
+		WHERE (email=#{email} AND projectNo=${projectNo})
 
 	</delete>
 </mapper>

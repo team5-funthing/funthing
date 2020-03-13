@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserMainImageChangeDAO">
+
+	<update id="updateUserMainImage" parameterType="adminUserMainImageChange">
+		UPDATE usermainimagechange set imagePath = #{imagePath} where imageNo = #{imageNo}
+	</update>
+	
+	<select id="getUserMainImageList" resultType="adminUserMainImageChange" >
+		select * from usermainimagechange ORDER BY imageNo asc
+	</select>
+	
+	<update id="updateUserMainImageNull" parameterType="adminUserMainImageChange">
+		UPDATE usermainimagechange set imagePath = '', imageName = '' where imageNo = #{imageNo}
+	</update>
+	
+	<delete id="deleteUserMainImage" parameterType="adminUserMainImageChange">
+		DELETE 	usermainimagechange where imageNo = #{imageNo}	
+	</delete>
+	
+	<insert id="insertUserMainImage" parameterType="adminUserMainImageChange">
+		INSERT into usermainimagechange(imageNo,imagePath,imageContent) values(usermainimagechange_seq.nextval,#{imagePath},#{imageContent})
+	</insert>
+	
+	<insert id="insertUserMainImagePath" parameterType="adminUserMainImageChange">
+		INSERT into usermainimagechange(imageNo,imagePath) values(usermainimagechange_seq.nextval,#{imagePath})
+	</insert>
+	
+	<update id="updateUserMainImageContent" parameterType="adminUserMainImageChange">
+		update usermainimagechange set imageContent = #{imageContent} where imageNo = #{imageNo} 
+	</update>
+	
+	<update id="updateUserMainImageContentNull" parameterType="adminUserMainImageChange">
+		update usermainimagechange set imageContent = null where imageNo = #{imageNo} 
+	</update>
+	
+</mapper>

@@ -37,7 +37,7 @@
 		<result column="lv" property="lv" />
 	</resultMap>
 	
-		<resultMap type="member" id="member">
+	<resultMap type="member" id="member">
 		<result column="email" property="email" />
 		<result column="password" property="password" />
 		<result column="name" property="name" />

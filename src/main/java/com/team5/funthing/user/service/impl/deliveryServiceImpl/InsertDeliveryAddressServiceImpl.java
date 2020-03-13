@@ -11,11 +11,11 @@ import com.team5.funthing.user.service.deliveryService.InsertDeliveryAddressServ
 public class InsertDeliveryAddressServiceImpl implements InsertDeliveryAddressService {
 
 	@Autowired
-	DeliveryAddressDAO deliveryAddressDAO;
+	private DeliveryAddressDAO deliveryAddressDAO;
 	
 	@Override
-	public void insertDeliveryAddress(DeliveryAddressVO vo) {
-		deliveryAddressDAO.insertDeleveryAddress(vo);
+	public DeliveryAddressVO insertDeliveryAddress(DeliveryAddressVO vo) {
+		return deliveryAddressDAO.insertDeleveryAddress(vo);
 
 	}
 

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PaymentReserveDAO">
+
+	<insert id="insertPaymentReserve" parameterType="paymentReserve">
+	
+		<selectKey keyProperty="orderNo" resultType="int" order="AFTER">
+			SELECT orderno_seq.currval FROM dual
+		</selectKey>
+	
+		INSERT INTO paymentReserve (orderNo, email, projectNo, paymentOption, applyNo, deliveryAddressNo, fundingMoney, additionalFundingMoney, shippingFee, privateName, privateFundingMoney)                                           
+		VALUES (orderno_seq.nextval, #{email}, #{projectNo}, #{paymentOption }, #{applyNo }, #{deliveryAddressNo }, #{fundingMoney }, #{additionalFundingMoney }, #{shippingFee }, #{privateName },  #{privateFundingMoney })
+	
+	</insert>
+	
+	<select id="getAllPaymentReserveList" parameterType="paymentReserve">
+	
+		SELECT * 
+		FROM paymentReserve
+	
+	</select>
+	
+	
+ 	<resultMap type="reward" id="reward">
+	
+		<result column="rewardPrice" 	property="rewardPrice" />
+		<result column="projectNo" 		property="projectNo" />
+		<result column="rewardNo" 		property="rewardNo" />
+		<result column="rewardName" 	property="rewardName" />
+		<result column="rewardContent" 	property="rewardContent" />
+		<result column="rewardOption" 	property="rewardOption" />
+		<result column="shippingNeed" 	property="shippingNeed" />
+		<result column="rewardMonth" 	property="rewardMonth" />
+		<result column="rewardDay" 		property="rewardDay" />
+		
+	</resultMap>
+	
+	 <resultMap type="rewardOptionValueList" id="rewardOptionValueList">
+	
+		<result column="selectRewardNo" 	property="selectRewardNo" />
+		<result column="rewardOptionValue" 	property="rewardOptionValue" />
+		
+	</resultMap>
+	
+	<resultMap type="rewardSelection" id="rewardSelection">
+	
+		<result column="selectRewardNo" property="selectRewardNo" />
+		<result column="orderNo" 		property="orderNo"/>
+		<result column="rewardNo" 		property="rewardNo" />
+		<result column="paymentAmount" 	property="paymentAmount" />
+		<result column="orderAmount" 	property="orderAmount"/>
+		
+		<collection property="rewardOptionValue" resultMap="rewardOptionValueList" />
+		<collection property="reward" 	resultMap="reward" />
+		
+	</resultMap>
+	
+	<resultMap type="paymentReserve" id="paymentReserve">
+	
+		<result column="orderNo" 				property="orderNo" />
+		<result column="projectNo" 				property="projectNo" />
+		<result column="email" 					property="email"/>
+		<result column="paymentReserveDate" 	property="paymentReserveDate" />
+		<result column="canceledDate" 	property="canceledDate" />
+		<result column="paymentOption" 			property="paymentOption" />
+		<result column="applyNo" 				property="applyNo"/>
+		<result column="paymentStatus" 			property="paymentStatus" />
+		<result column="deliveryAddressNo" 		property="deliveryAddressNo" />
+		<result column="fundingMoney" 			property="fundingMoney" />
+		<result column="aid" 					property="aid" />
+		<result column="tid" 					property="tid" />
+		
+		
+		<result column="additionalFundingMoney" property="additionalFundingMoney" />
+		<result column="shippingFee" 			property="shippingFee" />
+		<result column="privateName" 			property="privateName" />
+		<result column="privateFundingMoney" 	property="privateFundingMoney" />
+
+		
+		
+		<collection property="rewardSelectionList" resultMap="rewardSelection" />
+	
+	</resultMap>
+	
+	<select id="getPaymentReserve" parameterType="paymentReserve" resultMap="paymentReserve">
+	
+		SELECT paymentReserve.*, rewardselection.*, reward.*
+		FROM paymentReserve
+		INNER JOIN ((rewardselection
+		LEFT OUTER JOIN reward
+		ON rewardselection.rewardNo = reward.rewardNo)
+		LEFT OUTER JOIN RewardOptionValueList
+		ON rewardselection.selectRewardNo = RewardOptionValueList.selectRewardNo)
+		ON paymentReserve.orderNo = rewardselection.orderNo
+		WHERE paymentReserve.orderNo = #{orderNo}
+	
+	</select>
+	
+	<select id="getPaymentReserveListByEmail" parameterType="paymentReserve" resultMap="paymentReserve">
+	
+		SELECT paymentReserve.*, rewardselection.*, reward.*
+		FROM paymentReserve
+		INNER JOIN ((rewardselection
+		LEFT OUTER JOIN reward
+		ON rewardselection.rewardNo = reward.rewardNo)
+		LEFT OUTER JOIN RewardOptionValueList
+		ON rewardselection.selectRewardNo = RewardOptionValueList.selectRewardNo)
+		ON paymentReserve.orderNo = rewardselection.orderNo
+		WHERE paymentReserve.email = #{email}
+	
+	</select>
+	
+	<update id="updatePaymentComplete" parameterType="int">
+
+        Update paymentReserve
+		SET paymentStatus = '결제완료'
+		WHERE projectNo = #{projectNo} and paymentStatus = '결제예약'
+		
+	</update>
+	
+	<update id="updatePaymentCancel" parameterType="int">
+
+        Update paymentReserve
+		SET paymentStatus = '결제취소'
+		WHERE projectNo = #{projectNo} and paymentStatus = '결제예약'
+		
+	</update>
+	
+	<update id="updateKakaoPayResultSet" parameterType="paymentReserve">
+
+        Update paymentReserve
+		SET paymentReserveDate = #{paymentReserveDate}, paymentOption = #{paymentOption}, paymentStatus = '결제예약', aid = #{aid}, tid = #{tid}
+		WHERE orderNo = #{orderNo}
+		
+	</update>
+	
+		<update id="updateKaKaoPayCancelResult" parameterType="paymentReserve">
+
+        Update paymentReserve
+		SET canceledDate = #{canceledDate}, paymentStatus = '결제취소', aid = #{aid}, tid = #{tid}
+		WHERE orderNo = #{orderNo}
+		
+	</update>
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

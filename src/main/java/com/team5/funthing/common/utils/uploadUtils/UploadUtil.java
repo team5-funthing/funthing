@@ -10,6 +10,8 @@ public interface UploadUtil {
 	public String fileUpload(String uploadPath, String fileName, byte[] fileData, String ymdPath) throws Exception;
 	public String calcPath(String uploadPath, String dirName);
 	public void makeDir(String uploadPath, String... paths);
+	public void removeUtil(String voName, List<String> toRemoveFilePath) throws Exception;
+	
 	
 	public void remove(String toRemoveFilePath, String voName);
 	

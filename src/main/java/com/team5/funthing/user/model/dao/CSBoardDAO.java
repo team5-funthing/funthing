@@ -15,17 +15,14 @@ public class CSBoardDAO {
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	public void insertCSBoard(CSBoardVO vo) {
-		System.out.println("고객문의 게시판에 글 입력");
 		sqlSessionTemplate.insert("CSBoardDAO.insertCSBoard", vo);
 	}
 	
 	public List<CSBoardVO> getCSBoardList(CSBoardVO vo) {
-		System.out.println( "getCSBoardList");
 		return sqlSessionTemplate.selectList("CSBoardDAO.getUserCSBoardList", vo);
 	}
 	
 	public CSBoardVO getCSBoard(CSBoardVO vo) {
-		System.out.println("getCSBoard");
 		return sqlSessionTemplate.selectOne("CSBoardDAO.getUserCSBoard", vo);
 	}
 }

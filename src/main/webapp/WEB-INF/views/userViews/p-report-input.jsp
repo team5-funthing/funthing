@@ -245,7 +245,6 @@
                                 <input class="form-check-input primary-radio checkbox" type="radio" name="exampleRadios"
                                     id="primary-radio1" value="option1" checked>
                                 <label for="primary-radio1"></label>
-                                </label>
                             </div>
                         </div>
                         <div class="d-flex p-2 bd-highlight">스토리에 허위사실이 있습니다.</div>
@@ -256,7 +255,6 @@
                                 <input class="form-check-input primary-radio checkbox" type="radio" name="exampleRadios"
                                     id="primary-radio2" value="option1" checked>
                                 <label for="primary-radio2"></label>
-                                </label>
                             </div>
                         </div>
                         <div class="d-flex p-2 bd-highlight">지적 재산권을 침해하고 있습니다.</div>
@@ -267,7 +265,6 @@
                                 <input class="form-check-input primary-radio checkbox" type="radio" name="exampleRadios"
                                     id="primary-radio3" value="option1" checked>
                                 <label for="primary-radio3"></label>
-                                </label>
                             </div>
                         </div>
                         <div class="d-flex p-2 bd-highlight">다른 채널에서 판매되고 있는 제품입니다.</div>
@@ -278,7 +275,6 @@
                                 <input class="form-check-input primary-radio checkbox" type="radio" name="exampleRadios"
                                     id="primary-radio4" value="option1" checked>
                                 <label for="primary-radio4"></label>
-                                </label>
                             </div>
                         </div>
                         <div class="d-flex p-2 bd-highlight">메이커와 오랫동안 연락이 되지 않습니다.</div>
@@ -289,7 +285,6 @@
                                 <input class="form-check-input primary-radio checkbox" type="radio" name="exampleRadios"
                                     id="primary-radio5" value="option1" checked>
                                 <label for="primary-radio5"></label>
-                                </label>
                             </div>
                         </div>
                         <div class="d-flex p-2 bd-highlight">사회적 공익을 저해할 우려가 있습니다.</div>
@@ -300,7 +295,6 @@
                                 <input class="form-check-input primary-radio checkbox" type="radio" name="exampleRadios"
                                     id="primary-radio6" value="option1" checked>
                                 <label for="primary-radio6"></label>
-                                </label>
                             </div>
                         </div>
                         <div class="d-flex p-2 bd-highlight">기타</div>
@@ -333,6 +327,7 @@
                     </div>
                 </div>
             </div>
+        </div>
     </form>
     <!-- ---------- -->
 

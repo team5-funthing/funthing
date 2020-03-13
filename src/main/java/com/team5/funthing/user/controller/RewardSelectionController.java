@@ -1,0 +1,160 @@
+package com.team5.funthing.user.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.team5.funthing.user.model.vo.ProjectVO;
+import com.team5.funthing.user.model.vo.RewardOptionVO;
+import com.team5.funthing.user.model.vo.RewardSelectionVO;
+import com.team5.funthing.user.model.vo.RewardVO;
+import com.team5.funthing.user.service.projectService.GetProjectService;
+import com.team5.funthing.user.service.rewardOptionService.GetRewardOptionListService;
+import com.team5.funthing.user.service.rewardService.GetRewardListService;
+
+@Controller
+@SessionAttributes("reward")
+public class RewardSelectionController {
+
+	@Autowired
+	private GetRewardListService getRewardListService;
+	@Autowired
+	private GetRewardOptionListService getRewardOptionListService;
+	@Autowired
+	private GetProjectService getProjectService;
+	
+	@Autowired
+	private RewardOptionVO rewardOptionVO;
+	
+	
+	@RequestMapping(value="/supportProjectInterceptor.udo", method= RequestMethod.GET)
+	public String supportProject(	@RequestParam(required = false)int projectNo,
+									@RequestParam(required = false)String msg,
+									ProjectVO pvo,
+									RewardVO rvo, 
+									Model model, 
+									HttpSession session) {
+		
+		
+		pvo = getProjectService.getProject(pvo);
+		
+		
+		if(rvo.getProjectNo() == -1 || rvo.getProjectNo() == 0) {
+			rvo.setProjectNo(projectNo);
+		}
+		
+		session.removeAttribute("selectedRewardList");
+
+		List<RewardVO> getRewardList = getRewardListService.getRewardList(rvo);
+		setRewardOption(getRewardList);
+		
+		System.out.println("=======================================");
+		for(RewardVO getReward: getRewardList) {
+			System.out.println(getReward.toString());
+			if(getReward.getRewardOptionList().isEmpty()) {
+				System.out.println("府况靛 可记 府胶飘啊 null牢 府况靛No : " + getReward.getRewardNo());
+			}
+		}
+		System.out.println("=======================================");
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("getRewardList", getRewardList);
+		model.addAttribute("project", pvo);
+		model.addAttribute("projectNoOfRewardList", rvo.getProjectNo());
+		
+		return "f-select-reward";
+	}
+	
+	@RequestMapping(value = "/addSelectReward.udo", method = RequestMethod.POST)
+	@ResponseBody
+	public String addSelectReword(	@RequestBody RewardSelectionVO rsvo,
+												RewardVO rvo,
+												HttpSession session,
+												Model model) throws JsonProcessingException {
+		
+		rsvo.setPaymentAmount(rsvo.getPaymentAmount() * rsvo.getOrderAmount());
+		
+		@SuppressWarnings("unchecked")
+		List<RewardSelectionVO> selectedRewardList = (List<RewardSelectionVO>)session.getAttribute("selectedRewardList");
+
+		if(selectedRewardList == null){
+			System.out.println("selectedRewardList 技记 檬扁 积己");
+			selectedRewardList = new ArrayList<RewardSelectionVO>();
+			session.setAttribute("selectedRewardList", selectedRewardList);
+		}
+		
+		
+		for(int i = 0; i < selectedRewardList.size(); i++) {
+			
+			if(selectedRewardList.get(i).getRewardOptionValueList().get(0).trim() == "") {
+				selectedRewardList.get(i).getRewardOptionValueList().remove(0);
+			}
+			
+			if(selectedRewardList.get(i).getRewardNo() == rsvo.getRewardNo()) {
+				selectedRewardList.remove(i);
+			}
+		}
+		selectedRewardList.add(rsvo);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		
+		String selectionRewardToJSON = mapper.writeValueAsString(selectedRewardList);
+		
+		return selectionRewardToJSON;		
+	}
+	
+	@RequestMapping(value = "/removeSelectReward.udo", method = RequestMethod.POST)
+	@ResponseBody
+	public String removeSelectReword(	@RequestBody RewardSelectionVO rsvo,
+										HttpSession session,
+										Model model) throws JsonProcessingException {
+		
+		@SuppressWarnings("unchecked")
+		List<RewardSelectionVO> selectedRewardList = (List<RewardSelectionVO>)session.getAttribute("selectedRewardList");
+		
+		if(selectedRewardList == null){
+			System.out.println("selectedRewardList 技记 檬扁 积己");
+			selectedRewardList = new ArrayList<RewardSelectionVO>();
+			session.setAttribute("selectedRewardList", selectedRewardList);
+		}
+		
+		for(int i = 0; i < selectedRewardList.size(); i++) {
+			
+			if(selectedRewardList.get(i).getRewardNo() == rsvo.getRewardNo()) {
+				selectedRewardList.remove(i);
+			}
+		}
+		
+		ObjectMapper mapper = new ObjectMapper();
+		String selectionRewardToJSON = mapper.writeValueAsString(selectedRewardList);
+		
+		return selectionRewardToJSON;		
+	}
+	
+	
+	public void setRewardOption(List<RewardVO> getRewardList){
+		
+		for(RewardVO reward: getRewardList) {
+			rewardOptionVO.setRewardNo(reward.getRewardNo());
+			reward.setRewardOptionList(getRewardOptionListService.getRewardOptionList(rewardOptionVO));
+		}
+	}
+	
+	
+	
+	
+	
+}

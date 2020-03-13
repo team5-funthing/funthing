@@ -1,20 +1,34 @@
 package com.team5.funthing.user.controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.team5.funthing.admin.model.vo.AdminPersonalInfoProcessingVO;
+import com.team5.funthing.admin.model.vo.AdminRegisterTosVO;
+import com.team5.funthing.admin.model.vo.AdminUserMainImageChangeVO;
+import com.team5.funthing.admin.model.vo.AdminUserMainProjectVO;
+import com.team5.funthing.admin.service.adminRegisterTosService.GetRegisterTosListService;
+import com.team5.funthing.admin.service.adminUserMainProjectService.GetFocusProjectListService;
 import com.team5.funthing.user.model.vo.ProjectBoardVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
+import com.team5.funthing.user.model.vo.TosVO;
+import com.team5.funthing.user.service.TosService.GetTosListService;
 import com.team5.funthing.user.service.homeService.GetAttentionProjectService;
 import com.team5.funthing.user.service.homeService.GetDeadLineListService;
 import com.team5.funthing.user.service.homeService.GetLikeCountListService;
 import com.team5.funthing.user.service.homeService.GetMoneyPercentListService;
 import com.team5.funthing.user.service.homeService.GetProjectProgressListService;
+import com.team5.funthing.user.service.personalInfoProcessingService.GetPersonalInfoProcessingListService;
+import com.team5.funthing.user.service.projectService.GetAllFundingProjectListService;
 import com.team5.funthing.user.service.projectService.GetProjectService;
+import com.team5.funthing.user.service.userMainImageChangeService.GetUserMainImageChangeListService;
 
 @Controller
 public class HomeController {
@@ -31,65 +45,147 @@ public class HomeController {
 	@Autowired
 	private GetMoneyPercentListService getMoneyPercentListService;
 	@Autowired
+	private GetUserMainImageChangeListService getUserMainImageChangeListService;
+	@Autowired
+	private GetFocusProjectListService getFocusProjectListService;
+	@Autowired
+	private GetAllFundingProjectListService getAllFundingProjectListService;
+	@Autowired
 	private GetDeadLineListService getDeadLineListService;
 	
+	//=====================å ìˆíŠ‹ï¿½ê½´å ï¿½,æ¶ì†ë®‡ï¿½ëµ¥å ìŒì Ÿç™°ê·£ë˜»è‘ê·ëµ³ï¿½ë¯ì»©ç‡ì‚¼ì˜™ ï¿½ê½´å ì™ì˜™ï¿½ì¡ƒ å ì„í£ï¿½ëœ®è¢â‘¸ë®=========================
+	
+	@Autowired
+	private GetTosListService getTosListService;
+	@Autowired
+	private GetPersonalInfoProcessingListService getPersonalInfoProcessingListService;
+	@Autowired
+	private GetRegisterTosListService getRegisterTosListService;
+
+	
 	@RequestMapping("*.udo") 
-	public String showindex(ProjectBoardVO vo, ProjectVO vo2, Model model) { //¸ÇÃ³À½ ¸ŞÀÎÆäÀÌÁö µé¾î¿À´Â
+	public String showindex(	@RequestParam(value = "msg", required = false) String msg,
+								ProjectBoardVO vo, ProjectVO vo2,AdminUserMainImageChangeVO vo3, Model model) { //ç­Œë¯ë«è‘ê·¨ì˜™ï¿½ë²‰ ç­Œë¡«ë—„ï¿½ëµ¥å ìˆì‚å ìŒëµ ç­Œìš‘ì˜™ å ìˆêµ¶å ìˆì„ å ìŒê¶å ìˆë®‰
 		
-		//1.ÁÖ¸ñÇÒ¸¸ÇÑ ÇÁ·ÎÁ§Æ® (¼º°ø¸øÇÔ)
-		List<ProjectBoardVO> attentionProject = getAttentionProjectService.getAttentionProjectList(vo); //1.´ñ±Û °¡Àå ¸¹ÀÌ ¼ø¼­´ë·Î °¡Á®¿À±â 
+		//1.é›…ëš¯ëˆ–ï¿½ê± å ìˆë§‰ç­Œë¾ìŠ¦é‡‰ï¿½ å ìˆëŠ„åš¥â‰ªë®‡ï¿½ì °å ìˆë±œ (å ì„ì‰ï¿½â‘¤ë²‰ï¿½ê±µå ìˆë§™)
+		List<ProjectBoardVO> attentionProject = getAttentionProjectService.getAttentionProjectList(vo); //1.å ìˆì†Šç–«ë€ì˜™ æ¶ì‰ì˜™å ìŒì‚¢ ç­Œë¾â€˜ï¿½ëµ  å ìˆë–„å ì„í£å ì™ì˜™åš¥âˆ½ì˜™ æ¶ì‰ì˜™å ìŒì£¬å ìŒê¶ç–«ë€ì˜™ 
 		model.addAttribute("attentionProject",attentionProject);
 		
 //		vo2.setProjectNo(Integer.parseInt(((ProjectBoardVO) getAttentionProjectService.getAttentionProjectList(vo)).getProjectNo());
-		ProjectVO getProject = getProjectService.getProject(vo2); //projectNoÀ¸·Î °¡Á®¿À±â 
+		ProjectVO getProject = getProjectService.getProject(vo2); //projectNoå ìŒëªµåš¥âˆ½ì˜™ æ¶ì‰ì˜™å ìŒì£¬å ìŒê¶ç–«ë€ì˜™ 
 		model.addAttribute("getProject",getProject);
 		
-		//2.ÁøÇàÁßÀÎ ÇÁ·ÎÁ§Æ® 
-		List<ProjectVO> progressList = getProjectProgressListService.getProjectProgressList(vo2); //2. ÁøÇàÁßÀÎ ÇÁ·ÎÁ§Æ® °¡Á®¿À±â
+		//2.ç­ŒìšŠì‘µï§‘ì–Œë¹³è‡¾ë¯ªëµ¥ å ìˆëŠ„åš¥â‰ªë®‡ï¿½ì °å ìˆë±œ 
+		List<ProjectVO> progressList = getProjectProgressListService.getProjectProgressList(vo2); //2. ç­ŒìšŠì‘µï§‘ì–Œë¹³è‡¾ë¯ªëµ¥ å ìˆëŠ„åš¥â‰ªë®‡ï¿½ì °å ìˆë±œ æ¶ì‰ì˜™å ìŒì£¬å ìŒê¶ç–«ë€ì˜™
 		model.addAttribute("progressList", progressList);
-			//2¹øÂ° ½½¶óÀÌµå
-			List<ProjectVO> progressList2 = getProjectProgressListService.getProjectProgressList2(vo2); //2. ÁøÇàÁßÀÎ ÇÁ·ÎÁ§Æ® °¡Á®¿À±â
+			//2ç”•ê³•ëœ†ï¿½ëŸ® å ìˆë®©å ìŒëµ¬å ìŒëµ å ìˆêµ¡
+			List<ProjectVO> progressList2 = getProjectProgressListService.getProjectProgressList2(vo2); //2. ç­ŒìšŠì‘µï§‘ì–Œë¹³è‡¾ë¯ªëµ¥ å ìˆëŠ„åš¥â‰ªë®‡ï¿½ì °å ìˆë±œ æ¶ì‰ì˜™å ìŒì£¬å ìŒê¶ç–«ë€ì˜™
 			model.addAttribute("progressList2",progressList2);
-			//3¹øÂ° ½½¶óÀÌµå
-			List<ProjectVO> progressList3 = getProjectProgressListService.getProjectProgressList3(vo2); //2. ÁøÇàÁßÀÎ ÇÁ·ÎÁ§Æ® °¡Á®¿À±â
+			//3ç”•ê³•ëœ†ï¿½ëŸ® å ìˆë®©å ìŒëµ¬å ìŒëµ å ìˆêµ¡
+			List<ProjectVO> progressList3 = getProjectProgressListService.getProjectProgressList3(vo2); //2. ç­ŒìšŠì‘µï§‘ì–Œë¹³è‡¾ë¯ªëµ¥ å ìˆëŠ„åš¥â‰ªë®‡ï¿½ì °å ìˆë±œ æ¶ì‰ì˜™å ìŒì£¬å ìŒê¶ç–«ë€ì˜™
 			model.addAttribute("progressList3", progressList3);
 			
-		//3.ÀÎ±âÇÁ·ÎÁ§Æ®
+		//3.å ìŒëµ¥ç–«ê¿¸í€¬éŠì¸ì—ï¿½ë®‡ï¿½ì °å ìˆë±œ
 		List<ProjectVO> likeCountList = getLikeCountListService.getLikeCountList(vo2);
 		model.addAttribute("likeCountList",likeCountList);
-			//2¹øÂ° ½½¶óÀÌµå 
+			//2ç”•ê³•ëœ†ï¿½ëŸ® å ìˆë®©å ìŒëµ¬å ìŒëµ å ìˆêµ¡ 
 			List<ProjectVO> likeCountList2 = getLikeCountListService.getLikeCountList2(vo2);
 			model.addAttribute("likeCountList2",likeCountList2);
-			//3¹øÂ° ½½¶óÀÌµå 
+			//3ç”•ê³•ëœ†ï¿½ëŸ® å ìˆë®©å ìŒëµ¬å ìŒëµ å ìˆêµ¡ 
 			List<ProjectVO> likeCountList3 = getLikeCountListService.getLikeCountList3(vo2);
 			model.addAttribute("likeCountList3",likeCountList3);
 		
-		//4.¼º°øÀÓ¹ÚÇÁ·ÎÁ§Æ®
+		//4.å ì„ì‰ï¿½â‘¤ë²Šï¿½ë¿«ç„ì…ë²¤éŠì¸ì—ï¿½ë®‡ï¿½ì °å ìˆë±œ
 		List<ProjectVO> moneyPercentList = getMoneyPercentListService.getMoneyPercentList(vo2);
 		model.addAttribute("moneyPercentList",moneyPercentList);
 		
-			//2¹øÂ° ½½¶óÀÌµå
+			//2ç”•ê³•ëœ†ï¿½ëŸ® å ìˆë®©å ìŒëµ¬å ìŒëµ å ìˆêµ¡
 			List<ProjectVO> moneyPercentList2 = getMoneyPercentListService.getMoneyPercentList2(vo2);
 			model.addAttribute("moneyPercentList2",moneyPercentList2);
-			//3¹øÂ° ½½¶óÀÌµå
+			//3ç”•ê³•ëœ†ï¿½ëŸ® å ìˆë®©å ìŒëµ¬å ìŒëµ å ìˆêµ¡
 			List<ProjectVO> moneyPercentList3 = getMoneyPercentListService.getMoneyPercentList3(vo2);
 			model.addAttribute("moneyPercentList3",moneyPercentList3);
+
 		
-		//5.¸¶°¨ÀÓ¹ÚÇÁ·ÎÁ§Æ®
+		//5.ç­Œë¾ëœƒè€Œã†ì˜™ï¿½ë¿«ç„ì…ë²¤éŠì¸ì—ï¿½ë®‡ï¿½ì °å ìˆë±œ
 		List<ProjectVO> deadLineList = getDeadLineListService.getDeadLineList(vo2);
 		model.addAttribute("deadLineList",deadLineList);
 		
-			//2¹øÂ° ½½¶óÀÌµå
+			//2ç”•ê³•ëœ†ï¿½ëŸ® å ìˆë®©å ìŒëµ¬å ìŒëµ å ìˆêµ¡
 			List<ProjectVO> deadLineList2 = getDeadLineListService.getDeadLineList2(vo2);
 			model.addAttribute("deadLineList2",deadLineList2);
-			//3¹øÂ° ½½¶óÀÌµå
+			//3ç”•ê³•ëœ†ï¿½ëŸ® å ìˆë®©å ìŒëµ¬å ìŒëµ å ìˆêµ¡
 			List<ProjectVO> deadLineList3 = getDeadLineListService.getDeadLineList3(vo2);
 			model.addAttribute("deadLineList3",deadLineList3);
-		
+    
+		//6.å ìŒëµ æ²ƒì„ì±·å ï¿½	
+			List<AdminUserMainImageChangeVO> getUserMainImageChangeList = getUserMainImageChangeListService.getUserMainImageChangeList(vo3);
+			AdminUserMainImageChangeVO getUserMainImageChangeList2 = null;
+			List<AdminUserMainImageChangeVO> getUserMainImageChangeList3 = new ArrayList<AdminUserMainImageChangeVO>();
+			System.out.println("ì‚¬ì´ì¦ˆ:"+getUserMainImageChangeList.size());
+			for(int i=0; i<getUserMainImageChangeList.size(); i++) {
+			
+				if(!getUserMainImageChangeList.isEmpty()) {
+					
+					getUserMainImageChangeList2=getUserMainImageChangeList.get(0);
+					
+				
+					if(getUserMainImageChangeList.size() > 1) {
+						
+						if(i!=0) {
+			
+							getUserMainImageChangeList3.add(getUserMainImageChangeList.get(i));
+
+							
+						}
+					}
+				}
+				
+			}
+			
+
+			model.addAttribute("getUserMainImageChangeList2",getUserMainImageChangeList2);
+			model.addAttribute("getUserMainImageChangeList3",getUserMainImageChangeList3);
 			
 			
+			
+			
+		//7.é›…ëš¯ëˆ–ï¿½ê± å ìˆëŠ„åš¥â‰ªë®‡ï¿½ì °å ìˆë±œ
+		List<AdminUserMainProjectVO> focusList = getFocusProjectListService.getFocusProjectList(vo2);
+		List<ProjectVO> projectList = getAllFundingProjectListService.getAllFundingProjectList();
+		List<ProjectVO> userMainFocusList = new ArrayList<ProjectVO>();
+		for (int j = 0; j < focusList.size(); j++) {
+			for (int i = 0; i < projectList.size(); i++) {
+
+				if (focusList.get(j).getProjectNo() == projectList.get(i).getProjectNo()) {
+					userMainFocusList.add(projectList.get(i));
+				}
+
+			}
+		}
 		
+	
+		model.addAttribute("msg", msg);
+		model.addAttribute("userMainFocusList",userMainFocusList);
+			
 		return "p-index";
 	}
+	
+	@RequestMapping("TosAndPolicy.udo")
+	public String showTosAndPolicyPage(AdminRegisterTosVO rtvo, TosVO tvo, AdminPersonalInfoProcessingVO pvo, Model model) {
+		
+		model.addAttribute("getTosList", getTosListService.getTosList(tvo));
+		model.addAttribute("getPersonalInfoProcessing", getPersonalInfoProcessingListService.getPersonalInfoProcessingList(pvo));
+		model.addAttribute("getRegisterTosList",getRegisterTosListService.getRegisterTosList(rtvo));
+		
+		return "p-tosAndPolicy";
+	}
+	
 
 }
+
+
+
+
+
+

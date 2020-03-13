@@ -4,6 +4,6 @@ import com.team5.funthing.user.model.vo.RewardSelectionVO;
 
 public interface InsertRewardSelectionService {
 
-	public RewardSelectionVO insertRewardSelection(RewardSelectionVO vo);
+	public void insertRewardSelection(RewardSelectionVO vo);
 	
 }

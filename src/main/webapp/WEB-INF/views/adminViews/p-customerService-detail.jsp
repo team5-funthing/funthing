@@ -120,7 +120,7 @@
                        <textarea name="adminCSContent" placeholder="답글 적는 부분" style="width: 80%; height: 150px; overflow: auto; padding: 10px; white-space:pre-wrap; resize: none;"></textarea>
                         <input type="hidden" name="csTitle" value="${getCSBoard.csTitle}">
                         <input type="hidden" name="email" value="${getCSBoard.email}">
-                        <input type="hidden" name="CSID" value="${getCSBoard.CSID}">
+                        <input type="hidden" name="csid" value="${getCSBoard.csid}">
                   
                         <div align="center" style="padding-top: 2%;">
                         	<input type="submit" value="확인">

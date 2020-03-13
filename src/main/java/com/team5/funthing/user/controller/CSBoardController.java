@@ -26,8 +26,6 @@ public class CSBoardController {
 
 	@RequestMapping(value="CSWrite.udo")   
 	public String userAskGo(HttpServletRequest request,Model model,CSBoardVO vo) {
-		System.out.println(request.getParameter("csid"));
-		///  게시판을 따로 만들지 않기로 해서,  관리자문의하기는  글쓰기 페이지에   집어넣음.
 		if(request.getParameter("csid")==null) {
 			return "f-CSWrite";
 			
@@ -43,10 +41,8 @@ public class CSBoardController {
 
 	@RequestMapping(value="insertCSBoard.udo",method=RequestMethod.POST)
 	public String insertCSBoard(CSBoardVO vo,HttpSession session) {
-		System.out.println(vo);
 	MemberVO vo2 =	(MemberVO)session.getAttribute("memberSession");
 		vo.setEmail(vo2.getEmail());
-		//폼에 입력한 값 DB에 넣은 후 다시 폼으로 이동
 		insertCSBoardService.insertCSBoard(vo);
 		return "f-CSWrite";
 	}

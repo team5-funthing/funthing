@@ -325,8 +325,6 @@ function mailChimp() {
 
 mailChimp();
 
-
-
         // Search Toggle
         $("#search_input_box").hide();
         $("#search").on("click", function () {
@@ -350,10 +348,27 @@ $('.popover-dismiss').popover({
 })
 
 
+$(window).resize(function() {
+	resizeYoutube();
+});
+
+$(function() {
+	resizeYoutube();
+});
+
+function resizeYoutube() {
+	$("iframe").each(function() {
+		if (/^https?:\/\/www.youtube.com\/embed\//g.test($(this).attr("src"))) {
+			$(this).css("width", "100%");
+			$(this).css("height", Math.ceil(parseInt($(this).css("width")) * 480 / 854) + "px");
+		}
+	});
+} 
 
 // 소개컨텐츠 동영상 링크 업로드 부분
 $(document).on("click","#urlBtn",function(){
 
+	
 	var sourceCode = $('#urlVideo').val();
 
 	function replaceAll(sourceCode, oldChar, newChar){
@@ -365,6 +380,7 @@ $(document).on("click","#urlBtn",function(){
 
 	if(sourceCode != ""){
 		$("#toAppendIframeDiv").append(sourceCode);
+//		$("iframe").attr("src", sourceCode);
 		$("#projectIntroduceVideoInput").attr("value", sourceCode);
 
 		var removeUrlBtn = "<div class='input-group-append urlBtn-remove'><a class='btn fas fa-times fa-2x' type='button' id='urlBtn'></a></div>";
@@ -419,18 +435,251 @@ $(document).on("click",".urlBtn-remove",function(){
 //
 
 
+$.fn.serializeObject = function() {
+	  "use strict";
+	   var result = {}
+	   var extend = function(i, element) {
+		  var node = result[element.name];
+		  if ("undefined" !== typeof node && node !== null) {
+		      if ($.isArray(node)) {
+		        node.push(element.value);
+		      	} else {
+		        result[element.name] = [node, element.value];
+		    	}
+		   } else {
+		      result[element.name] = element.value;
+		   }
+		}
+
+	$.each(this.serializeArray(), extend);
+	return result;
+}
 
 
 
+function findPostcode() {
+	new daum.Postcode(
+		{
+		oncomplete : function(data) {
+			// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+			// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+			// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+			var roadAddr = data.roadAddress; // 도로명 주소 변수
+			var extraRoadAddr = ''; // 참고 항목 변수
+
+			// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+			// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+			if (data.bname !== ''
+					&& /[동|로|가]$/g
+							.test(data.bname)) {
+				extraRoadAddr += data.bname;
+			}
+			// 건물명이 있고, 공동주택일 경우 추가한다.
+			if (data.buildingName !== ''
+					&& data.apartment === 'Y') {
+				extraRoadAddr += (extraRoadAddr !== '' ? ', '
+						+ data.buildingName
+						: data.buildingName);
+			}
+			// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+			if (extraRoadAddr !== '') {
+				extraRoadAddr = ' ('
+						+ extraRoadAddr
+						+ ')';
+			}
+
+			// 우편번호와 주소 정보를 해당 필드에 넣는다.
+			document
+					.getElementById('postcode').value = data.zonecode;
+			document
+					.getElementById("roadAddress").value = roadAddr;
+			// document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+
+			// 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+			if (roadAddr !== '') {
+				document
+						.getElementById("detailAddress").value = extraRoadAddr;
+			} else {
+				document
+						.getElementById("detailAddress").value = '';
+			}
+
+			var guideTextBox = document
+					.getElementById("guide");
+			// 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+			if (data.autoRoadAddress) {
+				var expRoadAddr = data.autoRoadAddress
+						+ extraRoadAddr;
+				guideTextBox.innerHTML = '(예상 도로명 주소 : '
+						+ expRoadAddr
+						+ ')';
+				guideTextBox.style.display = 'block';
+
+			} else if (data.autoJibunAddress) {
+				var expJibunAddr = data.autoJibunAddress;
+				guideTextBox.innerHTML = '(예상 지번 주소 : '
+						+ expJibunAddr
+						+ ')';
+				guideTextBox.style.display = 'block';
+			} else {
+				guideTextBox.innerHTML = '';
+				guideTextBox.style.display = 'none';
+			}
+		}
+	}).open();
+}
 
 
+$(document).on("click", '#search', function(){
+	
+	
+	
+	$.ajax({
+		url : "getKeywordFiveList.udo",
+		type : "get",
+		contentType : "application/json",
 
 
+		success : function(data) {
+			
+			var fiveList = JSON.parse(data);
+
+			$("#keywordFiveList").empty();
+
+			for (var i = 0; i <5; i++) {
+				
+				var elId = "test" + i;
+				
+				$("#skytest").append("<form action='getClickKeywordList.udo' method='GET' id='"+ elId +"'>"
+						+"<input type='hidden' name='searchKeywordStr' value='" + fiveList[i].keyword + "'>"
+						+"</form>");
+				
+				console.log(elId);
+				$("#keywordFiveList").append("<li><a class='btn btn-outline-secondary btn-search d-none d-inline-block ml-2 mb-1 clickKeyword' href='#'>" + fiveList[i].keyword + "</a></li>");
+				
+				
+				
+			}
+
+		},
 
 
+		error : function(errorThrown) {
+			alert(errorThrown.statusText);
+		}
+	});
+	
+});
 
 
+$(document).on("click",".clickKeyword",function(){ 
+	
+	var idx = $(".clickKeyword").index(this);
+	
+	var keyword = "test" + idx;
+	alert(keyword);
+    $("form[id='"+keyword+"']").submit();
+    
 
+
+});
+
+$(function(){
+	$(".phone-number-check").on('keydown', function(e){
+		// 숫자만 입력받기
+		var trans_num = $(this).val().replace(/-/gi,'');
+		var k = e.keyCode;
+
+		if(trans_num.length >= 11 && ((k >= 48 && k <=126) || (k >= 12592 && k <= 12687 || k==32 || k==229 || (k>=45032 && k<=55203)) ))
+		{
+			e.preventDefault();
+		}
+	}).on('blur', function(){ // 포커스를 잃었을때 실행합니다.
+		if($(this).val() == '') return;
+
+		// 기존 번호에서 - 를 삭제합니다.
+		var trans_num = $(this).val().replace(/-/gi,'');
+
+		// 입력값이 있을때만 실행합니다.
+		if(trans_num != null && trans_num != '')
+		{
+			// 총 핸드폰 자리수는 11글자이거나, 10자여야 합니다.
+			if(trans_num.length==11 || trans_num.length==10) 
+			{   
+				// 유효성 체크
+				var regExp_ctn = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})([0-9]{3,4})([0-9]{4})$/;
+				if(regExp_ctn.test(trans_num))
+				{
+					/* // 유효성 체크에 성공하면 하이픈을 넣고 값을 바꿔줍니다.
+                        trans_num = trans_num.replace(/^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?([0-9]{3,4})-?([0-9]{4})$/, "$1-$2-$3");                  
+                        $(this).val(trans_num); */
+				}
+				else
+				{
+					alert("유효하지 않은 전화번호 입니다.");
+					$(this).val("");
+					$(this).focus();
+				}
+			}
+			else 
+			{
+				alert("유효하지 않은 전화번호 입니다.");
+				$(this).val("");
+				$(this).focus();
+			}
+		}
+	});  
+});
+
+
+var _validFileExtensions = [".jpg", ".jpeg", ".bmp", ".gif", ".png"];    
+function ValidateSingleInput(oInput) {
+    if (oInput.type == "file") {
+        var sFileName = oInput.value;
+         if (sFileName.length > 0) {
+            var blnValid = false;
+            for (var j = 0; j < _validFileExtensions.length; j++) {
+                var sCurExtension = _validFileExtensions[j];
+                if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                    blnValid = true;
+                    break;
+                }
+            }
+             
+            if (!blnValid) {
+                alert(sFileName + "은 올바른 확장자 파일이 아닙니다." + _validFileExtensions.join(", "));
+                oInput.value = "";
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+var _validDocumentFileExtensions = [".hwp", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pdf", ".jpg", ".jpeg", ".bmp", ".gif", ".png"];    
+function ValidateSingleDocumentFileInput(oInput) {
+    if (oInput.type == "file") {
+        var sFileName = oInput.value;
+         if (sFileName.length > 0) {
+            var blnValid = false;
+            for (var j = 0; j < _validFileExtensions.length; j++) {
+                var sCurExtension = _validFileExtensions[j];
+                if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                    blnValid = true;
+                    break;
+                }
+            }
+             
+            if (!blnValid) {
+                alert(sFileName + "은 올바른 확장자 파일이 아닙니다. [" + _validDocumentFileExtensions.join(", ") + "]");
+                oInput.value = "";
+                return false;
+            }
+        }
+    }
+    return true;
+}
 
 
 
