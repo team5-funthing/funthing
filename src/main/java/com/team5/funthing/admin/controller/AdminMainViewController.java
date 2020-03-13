@@ -22,19 +22,19 @@ public class AdminMainViewController {
 	
 	@RequestMapping("getMainViewProjectStatusList.ado")
 	public String getMainViewProjectStatusList(AdminMainViewVO vo, Model model) {
-		//½ÂÀÎ ÈÄ Æİµù ÁøÇàÁß
+		//ìŠ¹ì¸ í›„ í€ë”© ì§„í–‰ì¤‘
 		vo.setStatus('p');
 		List<ProjectVO> statusPList = getMainViewProjectStatusListService.getMainViewProjectStatusList(vo);
 		int statusPListCount = statusPList.size();
-		//°ÅºÎ
+		//ê±°ë¶€
 		vo.setStatus('f');
 		List<ProjectVO> statusFList = getMainViewProjectStatusListService.getMainViewProjectStatusList(vo);
 		int statusFListCount = statusFList.size();
 		
-		//½É»çÁß
+		//ì‹¬ì‚¬ì¤‘
 		
 		
-		//º¸·ù
+		//ë³´ë¥˜
 		vo.setStatus('m');
 		List<ProjectVO> statusMList = getMainViewProjectStatusListService.getMainViewProjectStatusList(vo);
 		int statusMListCount = statusMList.size();
