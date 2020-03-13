@@ -24,7 +24,7 @@ public class InsertProjectIntroduceImageServiceImpl implements InsertProjectIntr
 				vo.setProjectIntroduceImage(toInsertImage);
 				projectIntroduceImageDAO.insertProjectIntroduceImage(vo);
 				
-			} // 소개 이미지 경로 DB에 추가
+			} 
 		}
 	}
 

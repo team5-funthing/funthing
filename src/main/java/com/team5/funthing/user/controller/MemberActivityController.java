@@ -40,20 +40,9 @@ public class MemberActivityController {
 	private GetProjectService getProjectService;
 	
 	//PaymentReserve Service
-	@Autowired
-	private GetPaymentReserveService getPaymentReserveService;
-	@Autowired
-	private GetPaymentReserveListByEmailService getPaymentReserveListByEmailService;
-	
 	//MemberActivity Service
 	@Autowired
 	private InsertMemberActivityService insertMemberActivityService;
-	@Autowired
-	private DeleteMemberActivityService deleteMemberActivityService;
-	@Autowired
-	private GetMemberActivityListService getMemberActivityService;
-	@Autowired
-	private UpdateMemberActivityService updateMemberActivityService;
 	@Autowired
 	private GetLikeProjectNoListService getLikeProjectNoListService;
 	@Autowired
@@ -65,8 +54,6 @@ public class MemberActivityController {
 
 	@RequestMapping(value="mypage.udo",method=RequestMethod.GET)
 	public String myPage(HttpSession session, MemberActivityVO vo, ProjectVO vo1, Model model, MemberVO vo2) {
-		
-		System.out.println(":"+session.getAttribute("memberSession").toString());
 		myProjectList(vo1, model, session);
 		myLikeProjectList(session, vo, vo1, model);
 		myReportProjectList(session, vo, vo1, model);
@@ -83,19 +70,14 @@ public class MemberActivityController {
 							HttpSession session) {
 		
 		MemberVO clickLikeMember = (MemberVO) session.getAttribute("memberSession");
-		System.out.println(clickLikeMember.getEmail());
-		
 		mavo.setEmail(clickLikeMember.getEmail());
 		mavo.setProjectNo(Integer.parseInt(projectNo));
 		mavo.setLikeCount('y');
-		
-		System.out.println(mavo.toString());
-		
 		insertMemberActivityService.insertMemberActivity(mavo);
 		
 		redirectAttributes.addAttribute("projectNo", projectNo);
 		
-		return "redirect:projectDetails.udo"; //횉횁쨌횓횁짠횈짰 쨩처쩌쩌횈채�횑횁철
+		return "redirect:projectDetails.udo";
 	}
 
 	
@@ -108,9 +90,6 @@ public class MemberActivityController {
 
 		MemberVO vo2 = (MemberVO) session.getAttribute("memberSession");
 		vo.setEmail(vo2.getEmail());
-		System.out.println("myprojectVO email :"+vo.getEmail());
-
-        System.out.println(getProjectServiceByEmailService.getProjectListByEmail(vo).toString());
 		model.addAttribute("myProjectList",getProjectServiceByEmailService.getProjectListByEmail(vo));
 	}
 	
@@ -118,11 +97,8 @@ public class MemberActivityController {
 	public void myLikeProjectList(HttpSession session,MemberActivityVO vo,ProjectVO vo1,Model model) {
 		List<ProjectVO> projectLikeList = new ArrayList<ProjectVO>();
 		MemberVO loginMember = (MemberVO) session.getAttribute("memberSession");
-		//System.out.println("쨌횓짹횞�횓 쩐횈�횑쨉챨 째짧 : " + loginMember.getEmail());
 		vo.setEmail(loginMember.getEmail());
-		//System.out.println("vo�횉 째짧 : " +  vo.toString());
 		List<MemberActivityVO> likeProjectList = getLikeProjectNoListService.getLikeProjectNoList(vo);
-		//System.out.println("횊쨍쩔첩�횑 횁횁쩐횈쩔채 쨈짤쨍짜 째횇 : " + likeProjectList);
 		for(MemberActivityVO getProjectNo : likeProjectList) {
 			vo1.setProjectNo(getProjectNo.getProjectNo());
 			projectLikeList.add(getProjectService.getProject(vo1));
