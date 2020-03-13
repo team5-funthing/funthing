@@ -31,10 +31,18 @@ public class GetPaymentReserveListByEmailServiceImpl implements GetPaymentReserv
 
 			for(PaymentReserveVO paymentReserve : paymentReserveList) {
 				
-				projectVO.setProjectNo(paymentReserve.getProjectNo());
-				projectVO = projectDAO.getProject(projectVO);
-	
-				paymentReserve.setProjectMainImage(projectVO.getProjectMainImage());
+				if(paymentReserve != null) {
+					System.out.println(projectVO == null);
+					
+					if(projectVO != null) {
+						projectVO.setProjectNo(paymentReserve.getProjectNo());
+						projectVO = projectDAO.getProject(projectVO);
+						if(projectVO != null) {
+							paymentReserve.setProjectMainImage(projectVO.getProjectMainImage());
+						}
+					}
+				}
+
 			}
 
 		
