@@ -95,6 +95,7 @@
 		<result column="shippingFee" 			property="shippingFee" />
 		<result column="privateName" 			property="privateName" />
 		<result column="privateFundingMoney" 	property="privateFundingMoney" />
+		<result column="shipmentComplete" 		property="shipmentComplete" />
 
 		
 		<collection property="member" resultMap="member" />
@@ -194,7 +195,13 @@
 		
 	</update>
 	
-	
+	<update id="updateShipmentComplete" parameterType="paymentReserve">
+
+        Update paymentReserve
+		SET shipmentComplete = 'y'
+		WHERE orderNo = #{orderNo}
+		
+	</update>
 
 	
 	

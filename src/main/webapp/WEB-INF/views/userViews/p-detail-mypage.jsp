@@ -212,7 +212,7 @@
 		                                          	</c:when>
 		                                          </c:choose>
 		                                          
-		                                          <form action="rewardSupportCheck.udo" method="post" id="rewardSupportCheck${step.count }">
+		                                          <form action="rewardSupportCheck.udo" method="GET" id="rewardSupportCheck${step.count }">
 		                                          	<input type="hidden" name="projectNo" value="${myProject.projectNo}">
 		                                          	<a href="javaScript: return(0);" onclick="document.getElementById('rewardSupportCheck${step.count }').submit()">후원내역</a>
 		                                          </form>

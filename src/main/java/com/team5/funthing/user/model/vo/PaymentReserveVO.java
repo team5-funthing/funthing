@@ -25,6 +25,7 @@ public class PaymentReserveVO {
 	private int shippingFee;
 	private String privateName = "off";
 	private String privateFundingMoney = "off";
+	private char shipmentComplete;
 	
 	private RewardVO reward;
 	private RewardSelectionVO rewardSelection;
@@ -33,19 +34,9 @@ public class PaymentReserveVO {
 	private int sumFundingMoney;
 	private String todayDate;
 
-	
 	private ProjectVO project;
 	private MemberVO member;
 	private List<RewardSelectionVO> rewardSelectionList;
-	
-	
-	
-	public MemberVO getMember() {
-		return member;
-	}
-	public void setMember(MemberVO member) {
-		this.member = member;
-	}
 	public int getOrderNo() {
 		return orderNo;
 	}
@@ -142,6 +133,12 @@ public class PaymentReserveVO {
 	public void setPrivateFundingMoney(String privateFundingMoney) {
 		this.privateFundingMoney = privateFundingMoney;
 	}
+	public char getShipmentComplete() {
+		return shipmentComplete;
+	}
+	public void setShipmentComplete(char shipmentComplete) {
+		this.shipmentComplete = shipmentComplete;
+	}
 	public RewardVO getReward() {
 		return reward;
 	}
@@ -178,13 +175,18 @@ public class PaymentReserveVO {
 	public void setProject(ProjectVO project) {
 		this.project = project;
 	}
+	public MemberVO getMember() {
+		return member;
+	}
+	public void setMember(MemberVO member) {
+		this.member = member;
+	}
 	public List<RewardSelectionVO> getRewardSelectionList() {
 		return rewardSelectionList;
 	}
 	public void setRewardSelectionList(List<RewardSelectionVO> rewardSelectionList) {
 		this.rewardSelectionList = rewardSelectionList;
 	}
-	
 	@Override
 	public String toString() {
 		return "PaymentReserveVO [orderNo=" + orderNo + ", projectNo=" + projectNo + ", email=" + email
@@ -192,26 +194,13 @@ public class PaymentReserveVO {
 				+ paymentOption + ", applyNo=" + applyNo + ", paymentStatus=" + paymentStatus + ", deliveryAddressNo="
 				+ deliveryAddressNo + ", fundingMoney=" + fundingMoney + ", aid=" + aid + ", tid=" + tid
 				+ ", additionalFundingMoney=" + additionalFundingMoney + ", shippingFee=" + shippingFee
-				+ ", privateName=" + privateName + ", privateFundingMoney=" + privateFundingMoney + ", reward=" + reward
-				+ ", rewardSelection=" + rewardSelection + ", sumDate=" + sumDate + ", sumFundingMoney="
-				+ sumFundingMoney + ", todayDate=" + todayDate + ", project=" + project + ", member=" + member
-				+ ", rewardSelectionList=" + rewardSelectionList + ", getMember()=" + getMember() + ", getOrderNo()="
-				+ getOrderNo() + ", getProjectNo()=" + getProjectNo() + ", getEmail()=" + getEmail()
-				+ ", getPaymentReserveDate()=" + getPaymentReserveDate() + ", getCanceledDate()=" + getCanceledDate()
-				+ ", getPaymentOption()=" + getPaymentOption() + ", getApplyNo()=" + getApplyNo()
-				+ ", getPaymentStatus()=" + getPaymentStatus() + ", getDeliveryAddressNo()=" + getDeliveryAddressNo()
-				+ ", getFundingMoney()=" + getFundingMoney() + ", getAid()=" + getAid() + ", getTid()=" + getTid()
-				+ ", getAdditionalFundingMoney()=" + getAdditionalFundingMoney() + ", getShippingFee()="
-				+ getShippingFee() + ", getPrivateName()=" + getPrivateName() + ", getPrivateFundingMoney()="
-				+ getPrivateFundingMoney() + ", getReward()=" + getReward() + ", getRewardSelection()="
-				+ getRewardSelection() + ", getSumDate()=" + getSumDate() + ", getSumFundingMoney()="
-				+ getSumFundingMoney() + ", getTodayDate()=" + getTodayDate() + ", getProject()=" + getProject()
-				+ ", getRewardSelectionList()=" + getRewardSelectionList() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+				+ ", privateName=" + privateName + ", privateFundingMoney=" + privateFundingMoney
+				+ ", shipmentComplete=" + shipmentComplete + ", reward=" + reward + ", rewardSelection="
+				+ rewardSelection + ", sumDate=" + sumDate + ", sumFundingMoney=" + sumFundingMoney + ", todayDate="
+				+ todayDate + ", project=" + project + ", member=" + member + ", rewardSelectionList="
+				+ rewardSelectionList + "]";
 	}
 	
 	
-
-
-			
+	
 }

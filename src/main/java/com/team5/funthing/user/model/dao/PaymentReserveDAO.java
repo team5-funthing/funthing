@@ -49,5 +49,8 @@ public class PaymentReserveDAO {
 		return sqlSessionTemplate.selectList("getPaymentReserveListByProjectNo", vo);
 	}
 	
+	public void updateShipmentComplete(PaymentReserveVO vo) {
+		sqlSessionTemplate.update("updateShipmentComplete", vo);
+	}
 	
 }
