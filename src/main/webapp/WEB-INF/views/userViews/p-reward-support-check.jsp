@@ -144,18 +144,41 @@
 									</td>
 									<td scope="col" class="align-self-center">
 										${payment.paymentStatus }
-								    	<fmt:formatDate var="paymentReserveDate" value="${payment.paymentReserveDate }" pattern="yyyy-MM-dd HH:mm:ss"/>    	
-				        				<p>${paymentReserveDate }</p>
+								    	<fmt:formatDate var="paymentReserveDate" value="${payment.paymentReserveDate }" pattern="yyyy-MM-dd HH:mm:ss"/>
+								    	<fmt:formatDate var="paymentCanceledDate" value="${payment.canceledDate }" pattern="yyyy-MM-dd HH:mm:ss"/>    	
+				        				<p>${paymentReserveDate }
+				        					<c:if test="${payment.canceledDate ne null }">
+				        					(취소날짜 : ${paymentCanceledDate})
+				        				</c:if>
+				        				</p>
 									</td>
 									<td scope="col" class="align-self-center">${payment.paymentOption }</td>
 									<td scope="col" class="align-self-center">
 										<c:if test="${payment.deliveryAddressNo ne -1 }">
 											입력됨
 										</c:if>
-										<p><a class="address" href="javaScript: return(0);">배송주소 보기</a></p>
+										
+										<p>
+											<input type="hidden" name="deliveryAddressNo" value="${payment.deliveryAddressNo}">
+											<a class="address" href="#" >배송주소 보기</a>
+										</p>
 									</td>
 									<td scope="col" class="align-self-center">
-										<button type="button" class="btn btn-light">미발송</button>
+										<c:if test="${payment.shippingFee ne 0 || payment.canceledDate eq null }">
+											<c:choose>
+												<c:when test="${payment.shipmentComplete eq 'y'.charAt(0) }">
+													<a href="javaScript: return(0);" class="btn-sm btn-bd-purple d-none d-lg-inline-block m-1">발송완료</a>
+												</c:when>
+												<c:otherwise>
+													<form id="updateShipmentComplete${cnt.count }" action="updateShipmentComplete.udo" method="POST">
+														<input type="hidden" name="projectNo" value="${payment.projectNo }">
+														<input type="hidden" name="orderNo" value="${payment.orderNo }">
+														<a href="#" class="deliveryBtn btn-sm btn-bd-purple d-none d-lg-inline-block m-1">미발송</a>
+													</form>
+												</c:otherwise>
+											</c:choose>
+										</c:if>
+
 									</td>
 								</tr>
 							</c:forEach>
@@ -175,18 +198,42 @@
        <form action ="#" method="POST" id="showDeliveryAddress" class="white-popup-block mfp-hide" >
            <div class="popup_box">
                <div class="popup_inner">
-              		 현재 작성 중인 프로젝트가 있습니다.
-                    <p>작성 중인 프로젝트를 수정하거나 새로운 프로젝트를 시작할 수 있습니다.</p>
 					<div class="table-responsive-md sponsorship">
 						<table class="table table-hover">
 							<thead>
 								<tr>
-									<th span scope="col">배송지</th>
-									<th scope="col">이름 </th>
+									<th colspan="2" scope="col" class="text-center">배송정보</th>
 								</tr>
 							</thead>
 							<tbody>
-									
+								<tr>
+									<th scope="col">배송지명</th>
+									<td scope="col" id="deliveryAddressName"></td>
+								</tr>
+								<tr>
+									<th  scope="col">주문자</th>
+									<td scope="col" id="name"></td>
+								</tr>
+								<tr>
+									<th  scope="col">연락처</th>
+									<td scope="col" id="phone"></td>
+								</tr>
+								<tr>
+									<th  scope="col">우편번호</th>
+									<td scope="col" id="zipcode"></td>
+								</tr>
+								<tr>
+									<th  scope="col">도로명 주소</th>
+									<td scope="col" id="roadAddress"></td>
+								</tr>					
+								<tr>
+									<th  scope="col">상세 주소</th>
+									<td scope="col" id="detailedAddress"></td>
+								</tr>			
+								<tr>
+									<th  scope="col">요청 사항</th>
+									<td scope="col" id="shippingNote"></td>
+								</tr>										
 							</tbody>
 						</table>            
 		            </div>
@@ -198,24 +245,95 @@
            </div>
        </form>
     
-     <script>
-	     $(document).on("click", ".address", function () {
-	        $.magnificPopup.open({
-	            items: {
-	                src: '#showDeliveryAddress' 
-	            },
-	            type: 'inline',
-	            preloader: false,
-	            modal: true
-	            
-	        });
-	        
-	        $(document).on('click', '.popup-modal-dismiss', function (e) {
-	           e.preventDefault();
-	           $.magnificPopup.close();
-	        });
-	     });   
-   </script>
+    	<form action ="#" method="POST" id="updateShipmentComplete" class="white-popup-block mfp-hide" >
+           <div class="popup_box">
+               <div class="popup_inner">
+              		<p>정말 리워드 발송을 하셨습니까?</p>
+                    <div class="d-flex justify-content-center mt-3">
+                        <a href="#" class="deliveryOKBtn btn-lg btn-bd-purple d-none d-lg-inline-block m-1 popup-modal-dismiss pl-4 pr-4">확인</a>
+                        <a href="javaScript:return(0);" class="btn-lg btn-bd-purple d-none d-lg-inline-block m-1 popup-modal-dismiss pl-4 pr-4">취소</a>
+                    </div>
+               </div>
+           </div>
+       </form>
+    
+    
+	   <script>
+	   
+	   
+	   		 $(document).on("click", ".deliveryBtn", function(){
+	   			 
+	   			 var okBtn = $(this);
+	   			 
+		   			$.magnificPopup.open({
+			            items: {
+			                src: '#updateShipmentComplete' 
+			            },
+			            type: 'inline',
+			            preloader: false,
+			            modal: true
+			            
+			        });
+			        
+			        $(document).on('click', '.popup-modal-dismiss', function (e) {
+			           e.preventDefault();
+			           $.magnificPopup.close();
+			        });
+			        
+			  	    $(document).on("click", ".deliveryOKBtn", function(){
+ 			  	    	okBtn.closest("form").submit();
+			  	    	alert(okBtn);
+				  	});
+	   			 
+	   		 });
+	   
+		     
+		     $(document).on("click", ".address", function () {
+		    	 
+			        $.magnificPopup.open({
+			            items: {
+			                src: '#showDeliveryAddress' 
+			            },
+			            type: 'inline',
+			            preloader: false,
+			            modal: true
+			            
+			        });
+			        
+			        $(document).on('click', '.popup-modal-dismiss', function (e) {
+			           e.preventDefault();
+			           $.magnificPopup.close();
+			        });
+		        
+					var jsonData = $(this).siblings("input").serializeObject();
+					console.log(jsonData);
+					
+					$.ajax({
+                        url: "selectDeliveryAddressCheck.udo",
+                        type: "POST",
+                        data: JSON.stringify(jsonData),
+                        contentType: "application/json;",
+                        success: function(data) {
+                        	
+                             var selectedDeliveryAddress = JSON.parse(data);
+                             console.log(selectedDeliveryAddress);
+                             	$("#deliveryAddressName").text(selectedDeliveryAddress.deliveryAddressName);
+                             	$("#name").text(selectedDeliveryAddress.name);
+                             	$("#phone").text(selectedDeliveryAddress.phone);
+                             	$("#zipcode").text(selectedDeliveryAddress.zipcode);
+                             	$("#roadAddress").text(selectedDeliveryAddress.roadAddress);
+                             	$("#detailedAddress").text(selectedDeliveryAddress.detailedAddress);
+                             	$("#shippingNote").text(selectedDeliveryAddress.shippingNote);
+							
+                        },
+                        error: function(errorThrown) {
+                            console.log(errorThrown.statusText);
+                        }
+                    });   
+		     });   
+	   </script>
+      
+
       
    </c:if>  
 

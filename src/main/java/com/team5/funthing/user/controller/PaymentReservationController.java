@@ -21,7 +21,6 @@ import com.team5.funthing.user.api.kakaoPay.KakaoPayService;
 import com.team5.funthing.user.model.vo.DeliveryAddressVO;
 import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.model.vo.PaymentReserveVO;
-import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.model.vo.RewardSelectionVO;
 import com.team5.funthing.user.model.vo.RewardVO;
 import com.team5.funthing.user.service.deliveryService.GetDeliveryAddressListByEmailService;
@@ -29,6 +28,7 @@ import com.team5.funthing.user.service.deliveryService.GetDeliveryAddressService
 import com.team5.funthing.user.service.paymentReserveService.GetPaymentReserveListByEmailService;
 import com.team5.funthing.user.service.paymentReserveService.GetPaymentReserveListByProjectNoService;
 import com.team5.funthing.user.service.paymentReserveService.GetPaymentReserveService;
+import com.team5.funthing.user.service.paymentReserveService.UpdateShipmentCompleteService;
 import com.team5.funthing.user.service.rewardService.GetRewardService;
 
 import lombok.Setter;
@@ -43,7 +43,8 @@ public class PaymentReservationController {
 	private KakaoPayService kakaoPayService;
 	
 	
-	
+	@Autowired
+	private UpdateShipmentCompleteService updateShipmentCompleteService;
 	@Autowired
 	private GetRewardService getRewardService;
 	@Autowired
@@ -226,8 +227,17 @@ public class PaymentReservationController {
 	}
 	
 	
-	@RequestMapping(value = "rewardSupportCheck.udo", method = RequestMethod.POST)
-	public String rewardOrderCheck(PaymentReserveVO prvo, Model model) {
+	@RequestMapping(value = "rewardSupportCheck.udo", method = RequestMethod.GET)
+	public String rewardOrderCheck(	HttpSession session, PaymentReserveVO prvo, Model model) {
+		
+		PaymentReserveVO tempVO = (PaymentReserveVO)session.getAttribute("redirectPrvo");
+		
+
+		if(tempVO != null) {
+			System.out.println("테스트 : " + tempVO.toString());
+			prvo = tempVO;
+			session.removeAttribute("redirectPrvo");
+		}
 		
 		List<PaymentReserveVO> paymentReserveList = getPaymentReserveListByProjectNoService.getPaymentReserveListByProjectNo(prvo);
 		
@@ -242,13 +252,21 @@ public class PaymentReservationController {
 	}
 	
 	
+	@RequestMapping(value = "updateShipmentComplete.udo", method = RequestMethod.POST)
+	public String updateShipmentComplete(HttpSession session, PaymentReserveVO prvo, Model model) {
+		
+		
+		System.out.println("실행-=====");
+		System.out.println(prvo.toString());
+		updateShipmentCompleteService.updateShipmentComplete(prvo);
+		
+		session.setAttribute("redirectPrvo", prvo);
+		
+		return "redirect: rewardSupportCheck.udo";
+	}
 	
 	
-	
-	
-	
-	
-	
+
 	
 	
 	

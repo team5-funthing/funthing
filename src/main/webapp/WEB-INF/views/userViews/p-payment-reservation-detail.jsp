@@ -51,23 +51,28 @@
 								
 								</p>
 							</div>
-						</div>
+						</div>                    
+
+                        <fmt:formatNumber type="number" var="paymentAmount" maxFractionDigits="3" value="${rewardSelection.paymentAmount }" />
 						<div class="d-flex justify-content-end">
 							<p class="card-text mr-3" style="font-weight: bold;">수량:${rewardSelection.orderAmount }개</p>
-							<p class="card-text" style="font-weight: bold;">${rewardSelection.paymentAmount }원</p>
+							<p class="card-text" style="font-weight: bold;">${paymentAmount }원</p>
 						</div>
 						<hr>
 					</c:forEach>
                     <hr>
                     
-
+	
                     <div class="d-flex justify-content-between">
+                    
                         <div class="p-2 bd-highlight"> 추가 펀딩금액</div>
-                        <div class="p-2 bd-highlight"> ${paymentReserve.additionalFundingMoney }원</div>
+                        <fmt:formatNumber type="number" var="additionalFundingMoney" maxFractionDigits="3" value="${paymentReserve.additionalFundingMoney }" />     
+                        <div class="p-2 bd-highlight"> ${additionalFundingMoney }원</div>
                     </div>
                     <div class="d-flex justify-content-between">
+                    	<fmt:formatNumber type="number" var="totalAmountDigited" maxFractionDigits="3" value="${totalAmount }" />
                         <div class="p-2 bd-highlight"> 총 펀딩금액 [리워드 + 추가 펀딩금액]</div>
-                        <div class="p-2 bd-highlight"> ${totalAmount }원</div>
+                        <div class="p-2 bd-highlight"> ${totalAmountDigited }원</div>
                     </div>
 
                     <div class="d-flex justify-content-between">
@@ -97,9 +102,11 @@
                         <div class="p-2 bd-highlight"> ${deliveryAddress.shippingNote }</div>
                     </div>
                     <hr>
+                    <fmt:formatNumber type="number" var="fundingMoney"
+                                    maxFractionDigits="3" value="${totalAmount + paymentReserve.shippingFee }" />
                     <div class="d-flex justify-content-end">
                         <div class="p-2 bd-highlight h3"> 총 결제 금액</div>
-                        <div class="p-2 bd-highlight h3"> ${totalAmount + paymentReserve.shippingFee } 원</div>
+                        <div class="p-2 bd-highlight h3"> ${fundingMoney } 원</div>
                     </div>
                 </div>
             </div>
@@ -108,18 +115,17 @@
         	<input type="hidden" name="orderNo" value="${paymentReserve.orderNo }">
 	        <article class="p-2 d-flex justify-content-center">
 	            <div class="d-inline-flex p-2 bd-highlight">
-	                <a href="javaScript: return(0);" class="btn btn-primary" onclick="document.getElementById('paymentReservationCheckListForm').submit()">
-	                	뒤로가기</a>
+	                <a href="javaScript: return(0);" onclick="document.getElementById('paymentReservationCheckListForm').submit()" 
+	                	class="deliveryOKBtn btn-lg btn-bd-purple d-none d-lg-inline-block m-1 popup-modal-dismiss pl-4 pr-4">뒤로가기</a>
 	            </div>
 	            <div class="d-inline-flex p-2 bd-highlight">
-	                <a href="javaScript: return(0);"class="btn btn-primary" onclick="document.getElementById('paymentCancelForm').submit()">결제 취소하기</a>
+	                <a href="javaScript:return(0);" onclick="document.getElementById('paymentCancelForm').submit()" 
+	                	class="btn-lg btn-bd-purple d-none d-lg-inline-block m-1 popup-modal-dismiss pl-4 pr-4">결제 취소하기</a>
 	            </div>
 	        </article>
 	    </form>  
 
     </section>
-
-
 
 
     <!-- footer -->

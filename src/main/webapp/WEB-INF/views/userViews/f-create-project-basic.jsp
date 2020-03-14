@@ -63,33 +63,31 @@
                         
                         
                         $(document).on("propertychange change keyup paste input","#newCreator", function(){
-                           
                         	
-                        	
-                               var jsonData = $("#newCreator").serializeObject();
-                               
-                                 $.ajax({
-                                  url: "existCreatorCheck.udo",
-                                  type: "POST",
-                                  data: JSON.stringify(jsonData),
-                                  contentType: "application/json;",
-                                  success: function(data) {
-                                     
-                                     $("#creatorInputMsg").empty();
-                                     if(data == "space"){
-                                        $("#creatorInputMsg").empty();
-                                     }else{
-                                        $("#creatorInputMsg").append(data);
-                                     }
-                                     
-                                  
-                                  },
-                                  error: function(errorThrown) {
-                                      alert(errorThrown.statusText);
-                                  }
-                              });   
+                             var jsonData = $("#newCreator").serializeObject();
+                             
+                               $.ajax({
+                                url: "existCreatorCheck.udo",
+                                type: "POST",
+                                data: JSON.stringify(jsonData),
+                                contentType: "application/json;",
+                                success: function(data) {
+                                   
+                                   $("#creatorInputMsg").empty();
+                                   if(data == "space"){
+                                      $("#creatorInputMsg").empty();
+                                   }else{
+                                      $("#creatorInputMsg").append(data);
+                                   }
+                                   
+                                
+                                },
+                                error: function(errorThrown) {
+                                    alert(errorThrown.statusText);
+                                }
+                            });   
                                  
-                            });
+                        });
                         
                      </script>
 

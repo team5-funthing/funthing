@@ -578,7 +578,6 @@ $(document).on("click",".clickKeyword",function(){
 	var idx = $(".clickKeyword").index(this);
 	
 	var keyword = "test" + idx;
-	alert(keyword);
     $("form[id='"+keyword+"']").submit();
     
 

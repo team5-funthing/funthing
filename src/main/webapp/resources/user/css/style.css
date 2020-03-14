@@ -4588,6 +4588,9 @@ h6 {
     color: #009DFF;
 }
 
+
+#updateShipmentComplete .white-popup-block input,
+#showDeliveryAddress .white-popup-block input,
 #exist-writingProject-popup .white-popup-block input,
 #reward-popup .white-popup-block input,
 #report-popup .white-popup-block input,
@@ -4596,6 +4599,8 @@ h6 {
     height: 50px
 }
 
+#updateShipmentComplete,
+#showDeliveryAddress,
 #exist-writingProject-popup,
 #reward-popup,
 #report-popup,
@@ -4612,6 +4617,8 @@ h6 {
     transform: translate(-50%, -50%)
 }
 
+#updateShipmentComplete .mfp-close-btn-in .mfp-close,
+#showDeliveryAddress .mfp-close-btn-in .mfp-close,
 #exist-writingProject-popup .mfp-close-btn-in .mfp-close,
 #reward-popup .mfp-close-btn-in .mfp-close,
 #report-popup .mfp-close-btn-in .mfp-close,
@@ -4620,6 +4627,8 @@ h6 {
     display: none !important
 }
 
+#updateShipmentComplete button.mfp-close,
+#showDeliveryAddress button.mfp-close,
 #exist-writingProject-popup button.mfp-close,
 #reward-popup button.mfp-close,
 #report-popup button.mfp-close,
@@ -5463,17 +5472,6 @@ img.landscape {
 	font-weight: 500;
 	
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
