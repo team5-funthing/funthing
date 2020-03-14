@@ -90,16 +90,12 @@
 						</div>
 					</div>
 				</div>
-
 				<!-- ============================================================== -->
 				<!-- End Bread crumb and right sidebar toggle -->
 				<!-- ============================================================== -->
 				<!-- ============================================================== -->
 				<!-- Container fluid  -->
 				<!-- ============================================================== -->
-
-
-
 				<!-- 여기에 들어갈거-->
 				<div class="card">
 					<div class="p-20">
@@ -107,12 +103,8 @@
 							<div class="col-12">
 								<div class="card">
 									<div class="card-body">
-
 										<h5 class="card-title m-b-0">주목할만한 포커스 프로젝트</h5>
-
 										<div class="table-responsive">
-
-
 											<table id="zero_config"
 												class="table table-striped table-bordered">
 												<thead>
@@ -121,8 +113,6 @@
 														<th>창작자/업체명</th>
 														<th>카테고리</th>
 														<th>목표금액</th>
-
-
 													</tr>
 												</thead>
 												<tbody>
@@ -133,12 +123,8 @@
 															<td>${list.creator}</td>
 															<td>${list.category}</td>
 															<td>${list.goalMoney}</td>
-
 														</tr>
-
 													</c:forEach>
-
-
 												</tbody>
 												<tfoot>
 													<tr>
@@ -146,18 +132,13 @@
 														<th>창작자/업체명</th>
 														<th>카테고리</th>
 														<th>목표금액</th>
-
 													</tr>
 												</tfoot>
 											</table>
-
-
-
 										</div>
 										<p>
 										<div align="center">
-											<a href="getUserMainProjectList.ado"><input type="button"
-												value="주목 프로젝트 추가하러 가기"></a>
+											<a href="getUserMainProjectList.ado"><input type="button" value="주목 프로젝트 추가하러 가기"></a>
 										</div>
 									</div>
 								</div>
@@ -190,59 +171,39 @@
 	<!-- ============================================================== -->
 	<!-- All Jquery -->
 	<!-- ============================================================== -->
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/jquery/dist/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/admin/assets/libs/jquery/dist/jquery.min.js"></script>
 	<!-- Bootstrap tether Core JavaScript -->
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/popper.js/dist/umd/popper.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/sparkline/sparkline.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/admin/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/admin/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/admin/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/sparkline/sparkline.js"></script>
 	<!--Wave Effects -->
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/dist/js/waves.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/admin/dist/js/waves.js"></script>
 	<!--Menu sidebar -->
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/dist/js/sidebarmenu.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/admin/dist/js/sidebarmenu.js"></script>
 	<!--Custom JavaScript -->
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/dist/js/custom.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/admin/dist/js/custom.min.js"></script>
 	<!--This page JavaScript -->
 	<!-- <script src="dist/js/pages/dashboards/dashboard1.js"></script> -->
 	<!-- Charts js Files -->
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/excanvas.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.pie.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.time.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.stack.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.crosshair.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/dist/js/pages/chart/chart-page-init.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/excanvas.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.pie.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.time.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.stack.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.crosshair.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/admin/dist/js/pages/chart/chart-page-init.js"></script>
 
-
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/multicheck/jquery.multicheck.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/DataTables/datatables.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/multicheck/jquery.multicheck.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/DataTables/datatables.min.js"></script>
 	<script>
             /****************************************
              *       Basic Table                   *
              ****************************************/
             $('#zero_config').DataTable();
-        </script>
+    </script>
 </body>
 
 </html>

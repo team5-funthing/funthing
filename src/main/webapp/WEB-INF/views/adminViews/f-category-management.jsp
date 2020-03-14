@@ -94,12 +94,32 @@
     				<form method="post" action="insertCategory.ado">
     					<div>
 	    					<p class="alert alert-secondary" style="display:flex;"><input type="text" readonly value="  입력할 카테고리  :" class="form-control" style="width:45%;background-color:#E2E3E5;" >&nbsp;
-	    					<input type="text" name="categoryName" class="form-control" style="width:35%;background-color:white;">
+	    					<input type="text" name="categoryName" class="form-control" id="inputCategory" style="width:35%;background-color:white;">
 	    					&nbsp;<input class="btn btn-outline-dark" type="submit" value="입력">
 	    					</p>				
     					</div>
+    					<div id="CategoryDuplicateCheck"></div>
     					
     				</form>
+    				<script>
+    					$(document).ready(function(){
+    						$("input[name='categoryName']").blur(function(){
+    							$.ajax({
+    								url:"checkDuplicateCategory.ado",
+    								data:{ inputCategory : $(this).val()},
+    								type:"get",
+    								success:function(data){
+    									console.log(data);
+    									$("#CategoryDuplicateCheck").empty();
+    									$("#CategoryDuplicateCheck").append(data).css('font-size','90%');
+    								},
+    								error:function(){
+    									console.log('apple');
+    								}
+    							});
+    						});
+    					});
+    				</script>
     			</div>
     			<div class="categoryArea">
     				<h5>현재 카테고리 목록</h5>

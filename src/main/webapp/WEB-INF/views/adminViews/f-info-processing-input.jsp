@@ -111,7 +111,9 @@
 			                        <c:if test="${personalInfoProcessing.infoNo ne null}">
 			                        	<input type="submit" formaction="updatePersonalInfoProcessing.ado" value="수정">
 			                        </c:if>
+			                        <c:if test="${personalInfoProcessing.infoNo eq null}">
 			                            <input type="submit" value="입력" >
+			                        </c:if>
 			                            <a href="deletePersonalInfoProcessing.ado?infoNo=${personalInfoProcessing.infoNo}"><input type="button" value="삭제"></a>
 			                        </div>
 			                        </form>

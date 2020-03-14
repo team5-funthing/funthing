@@ -51,7 +51,13 @@ public class AdminUserMainProjectController {
 	public String getProject(ProjectVO vo, Model model) {
 
 		ProjectVO userMainProject = getProjectService.getProject(vo);
-
+		
+		String videoTag = userMainProject.getProjectIntroduceVideo();
+		String modifyVideoTag = videoTag.replace(videoTag.substring(15, 18),"520").replace(videoTag.substring(28, 31), "310");
+		userMainProject.setProjectIntroduceVideo(modifyVideoTag);
+		
+		System.out.println(userMainProject.toString());
+		
 		model.addAttribute("userMainProject", userMainProject);
 
 		return "p-usermainproject-detail";
@@ -85,6 +91,10 @@ public class AdminUserMainProjectController {
 	public String getFocusProject(ProjectVO vo, Model model) {
 
 		ProjectVO focusProject = getProjectService.getProject(vo);
+		
+		String videoTag = focusProject.getProjectIntroduceVideo();
+		String modifyVideoTag = videoTag.replace(videoTag.substring(15, 18),"520").replace(videoTag.substring(28, 31), "310");
+		focusProject.setProjectIntroduceVideo(modifyVideoTag);
 
 		model.addAttribute("focusProject", focusProject);
 

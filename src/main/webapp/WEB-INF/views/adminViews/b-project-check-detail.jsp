@@ -12,27 +12,16 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <!-- Favicon icon -->
-<link rel="icon" type="image/png" sizes="16x16"
-	href="${pageContext.request.contextPath }/resources/admin/assets/images/favicon.png">
-<title>Matrix Template - The Ultimate Multipurpose admin
-	template</title>
+<link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath }/resources/admin/assets/images/favicon.png">
+<title>Matrix Template - The Ultimate Multipurpose admin template</title>
 <!-- Custom CSS -->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/multicheck/multicheck.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/user/css/magnific-popup.css">
-<link
-	href="${pageContext.request.contextPath }/resources/admin/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css"
-	rel="stylesheet">
-<link
-	href="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/css/float-chart.css"
-	rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/multicheck/multicheck.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/magnific-popup.css">
+<link href="${pageContext.request.contextPath }/resources/admin/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/css/float-chart.css" rel="stylesheet">
 <!-- Custom CSS -->
-<link
-	href="${pageContext.request.contextPath }/resources/admin/dist/css/style.min.css"
-	rel="stylesheet">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link href="${pageContext.request.contextPath }/resources/admin/dist/css/style.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -92,8 +81,7 @@
 						<div class="ml-auto text-right">
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a
-										href="#C:\Users\pjh\Desktop\5jo\matrix-admin-master\index.html">Home</a></li>
+									<li class="breadcrumb-item"></li>
 									<!--
                                     <li class="breadcrumb-item active" aria-current="page"></li>
                                     -->
@@ -182,16 +170,7 @@
 																			<div>${projectCheck.projectStory}</div>
 																		</div>
 																	</div>
-																	<div class="project-author">
-																		<div class="media align-items-center">
-																			<img src="img/project_check/author.png" alt="">
-																			<div class="media-body">
-																				<a href="#">
-																					<h4></h4>
-																				</a>	
-																			</div>
-																		</div>
-																	</div>
+																	
 																	<hr>
 																	<form action="updateProjectCheckApproval.ado" method="POST">
 																		<div align="center">
@@ -210,8 +189,7 @@
 																			<input type="button" value="거부"></a> -->
 																			<!-- 보류 버튼 아직 미완료 상태 -->
 																			<input type="submit" formaction="updateProjectCheckDefer.ado" value="보류">
-																			<a href="http://localhost:8080/funthing/getProjectCheckList.ado">
-																			<input type="button" value="뒤로"></a>
+																			<a href="getProjectCheckList.ado"><input type="button" value="뒤로"></a>
 
 																		</div>
 																	</form>
@@ -367,8 +345,8 @@
 																<script>
 																	$(document).ready(function() {
 																		$(".openRewardPopup").magnificPopup({
-																					src : "#rewardPopup",
-																					type : 'inline'																						
+																				src : "#rewardPopup",
+																				type : 'inline'																						
 																		});
 													
 																		$("a.card-link").click(function(){
