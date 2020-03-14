@@ -128,7 +128,7 @@
 		                                 			</c:when>
 		                                 			<c:when test="${myProject.funding eq 'e'.charAt(0) }">
 		                                 			
-		                                 				<h5><a href="javascript: return(0);" class="badge badge-warning m-1">펀딩종료</a></h5>
+		                                 				<button type="button" class="btn btn-sm btn-outline-secondary">펀딩마감</button>
 		                                 			
 		                                 			</c:when>
 		                                 		</c:choose>
@@ -211,6 +211,11 @@
 		                                         		<a href="getSatistics.udo?currentProjectNo=${myProject.projectNo }">통계</a>
 		                                          	</c:when>
 		                                          </c:choose>
+		                                          
+		                                          <form action="rewardSupportCheck.udo" method="post" id="rewardSupportCheck${step.count }">
+		                                          	<input type="hidden" name="projectNo" value="${myProject.projectNo}">
+		                                          	<a href="javaScript: return(0);" onclick="document.getElementById('rewardSupportCheck${step.count }').submit()">후원내역</a>
+		                                          </form>
 		                                          
 		                                       </div>
 		                                    </div>

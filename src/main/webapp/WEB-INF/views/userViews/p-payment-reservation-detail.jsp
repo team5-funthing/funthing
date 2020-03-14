@@ -25,7 +25,7 @@
     <section id="select-reward" class="container w-50">
 		    <article class="back-story">
 		            <i class="fas fa-chevron-left"></i>
-		            <a href="javaScript: return(0);" onclick="document.getElementById('paymentReservationCheckListForm').submit()" >결제내역으로 돌아가기</a>
+		            <a href="javaScript: return(0);" onclick="document.getElementById('paymentReservationCheckListForm').submit()">결제내역으로 돌아가기</a>
 	        </article>
         <hr>
 

@@ -98,29 +98,6 @@
 	</servlet-mapping>
 
 
-	<!-- ******** -->
-	<!-- CKFinder -->
-	<!-- ******** -->
-<!--
-	<servlet>
-		<servlet-name>ConnectorServlet</servlet-name>
-		<serlvet-class>com.ckfinder.connector.ConnectorServlet</serlvet-class>
-		<init-param>
-			<param-name>XMLConfig</param-name>
-			<param-value>/WEB-INF/config/ckfinder-config.xml</param-value>
-		</init-param>
-		<init-param>
-			<param-name>debug</param-name>
-			<param-value>false</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	
-	<servlet-mapping>
-		<servlet-name>ConnectorServlet</servlet-name>
-		<url-pattern>/ckfinder/core/connector/java/connector.java</url-pattern>
-	</servlet-mapping>
- -->
 
 </web-app>
 

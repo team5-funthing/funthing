@@ -207,6 +207,7 @@
    
    
       <script>
+      
             $(document).on("change", '#existCreator', function(){
                
                var val = $(this).val();
@@ -214,9 +215,6 @@
                
                
                if(val == "newCreator"){
-                  
-                  
-            	   
                   
                   $("#newCreator").attr("placeholder", "창작자 또는 업체명을 입력하세요.");
                   $("#newCreator").attr("onblur", "this.placeholder = '창작자 또는 업체명을 입력하세요.'");
@@ -280,7 +278,6 @@
                              console.log(errorThrown.statusText);
                          }
                      });   
-                  
                   
                }
             })
