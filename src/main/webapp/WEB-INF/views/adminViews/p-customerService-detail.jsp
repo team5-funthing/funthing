@@ -112,9 +112,7 @@
 
                         </table>
                         
-                            <textarea style="width: 80%; height: 150px; overflow: auto; padding: 10px; white-space:pre-wrap; resize: none;"  readonly>
-                            ${getCSBoard.csContent}
-                            </textarea>
+                            <textarea style="width: 80%; height: 150px; overflow: auto; padding: 10px; white-space:pre-wrap; resize: none;"  readonly>${getCSBoard.csContent}</textarea>
                         
                        <form method="POST" action="insertAdminCSBoard.ado">
                        <textarea name="adminCSContent" placeholder="답글 적는 부분" style="width: 80%; height: 150px; overflow: auto; padding: 10px; white-space:pre-wrap; resize: none;"></textarea>
@@ -124,7 +122,7 @@
                   
                         <div align="center" style="padding-top: 2%;">
                         	<input type="submit" value="확인">
-                            <a href="http://localhost:8080/funthing/getAdminCSBoardList.ado"><input type="button" value="뒤로"></a>
+                            <a href="getAdminCSBoardList.ado"><input type="button" value="뒤로"></a>
                         </div>
                         </form>
 

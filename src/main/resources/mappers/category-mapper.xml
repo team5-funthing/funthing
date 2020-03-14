@@ -4,8 +4,12 @@
 
 <mapper namespace="CategoryDAO">
 	
+	<select id="getCategory" parameterType="category" resultType="category">
+		SELECT * FROM categorys WHERE categoryName = #{categoryName}
+	</select>
+	
 	<select id="getCategoryList" parameterType="category" resultType="category">
-		SELECT * FROM categorys
+		SELECT * FROM categorys 
 	</select>
 
 	<insert id="insertCategory" parameterType="category">

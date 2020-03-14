@@ -86,11 +86,6 @@ public class AdminHomeController {
 	@RequestMapping("adminIndex.ado")
 	public String showIndex(AdminStatisticsVO vo, AdminMainViewVO vo2,Model model) {
 		model.addAttribute("totalSuccess",getProjectSuccessRatioTotalYearService.getProjectSuccessRatioTotalYear(vo));
-		Calendar cal = Calendar.getInstance();
-		int year = cal.get(cal.YEAR)-2000;
-		String parse = Integer.toString(year);
-		vo.setYearr(parse);
-		model.addAttribute("fundingMoney",getFundingMoneyPerMonthService.getFundingMoneyPerMonth(vo));
 		
 		vo2.setStatus('w');
 		List<ProjectVO> statusWList = getMainViewProjectStatusListService.getMainViewProjectStatusList(vo2);

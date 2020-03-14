@@ -18,6 +18,10 @@ public class AdminCategoryDAO {
 		return sqlSessionTemplate.selectList("CategoryDAO.getCategoryList", vo);
 	}
 	
+	public AdminCategoryVO getCategory(AdminCategoryVO vo) {
+		return sqlSessionTemplate.selectOne("CategoryDAO.getCategory", vo);
+	}
+	
 	public int deleteCategory(AdminCategoryVO vo) {
 		return sqlSessionTemplate.delete("CategoryDAO.deleteCategory", vo);
 	}
