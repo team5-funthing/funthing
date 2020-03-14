@@ -45,5 +45,9 @@ public class PaymentReserveDAO {
 		sqlSessionTemplate.update("updateKaKaoPayCancelResult", vo);
 	}
 	
+	public List<PaymentReserveVO> getPaymentReserveListByProjectNo(PaymentReserveVO vo) {
+		return sqlSessionTemplate.selectList("getPaymentReserveListByProjectNo", vo);
+	}
+	
 	
 }

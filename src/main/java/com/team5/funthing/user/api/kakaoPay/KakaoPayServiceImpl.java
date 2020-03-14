@@ -79,12 +79,21 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 		String totalAmountStr = null;
 		String taxFreeAmount = "0";
 
-	
-		davo = deliveryAddressDAO.insertDeleveryAddress(davo);
+		System.out.println("============결제전 배송 정보 확인==================");
+		System.out.println(davo.toString());
+		System.out.println("============================================");
+		
+		if(davo.getDeliveryAddressNo() == -1 ) {
+			System.out.println("배송지 새로 등록");
+			davo = deliveryAddressDAO.insertDeleveryAddress(davo);
+
+		}else {
+			System.out.println("기존 배송지 수정");
+			deliveryAddressDAO.updateDeliveryAddress(davo);
+		}
+
 		prvo.setDeliveryAddressNo(davo.getDeliveryAddressNo());
 		prvo.setProjectNo(projectNo);
-
-
 
 		prvo = paymentReserveDAO.insertPaymentReserve(prvo);
 		int orderNo = prvo.getOrderNo();
@@ -114,11 +123,10 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 
 
 			if(amount <= 0 || amount < rs.getOrderAmount()) {
-				throw new NoRewardAmountException(); // �����ִ� ������ ���ų� �ֹ��� ���� ���� �� ���� �߻�
+				throw new NoRewardAmountException();
 			}
 			rewardSelectionDAO.updateRewardAmount(rs);
 
-			//������ �������� ������ ���� �ɼ� ��� �߰�
 			for(String value: rs.getRewardOptionValueList()) {
 				rewardOptionValueListVO.setRewardOptionValue(value);
 				rs.getRewardOptionValue().add(rewardOptionValueListVO);
@@ -132,7 +140,7 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 
 
 		if(cnt > 0) {
-			orderItems = orderItems + " �� " + cnt + "��";
+			orderItems = orderItems + " 외 " + cnt + "개";
 		}
 
 		orderNoStr = String.valueOf(orderNo);
@@ -151,11 +159,11 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 
 		params.add("cid", "TC0ONETIME");
 
-		params.add("partner_order_id", orderNoStr); // orderNo 
-		params.add("partner_user_id", orderEmail); // ȸ�� �̸��� (id)
-		params.add("item_name", orderItems); // ������Ʈ��
-		params.add("quantity", quantityStr); // ������ �� ����
-		params.add("total_amount", totalAmountStr); // �� �ݾ�
+		params.add("partner_order_id", orderNoStr); 
+		params.add("partner_user_id", orderEmail);
+		params.add("item_name", orderItems);
+		params.add("quantity", quantityStr); 
+		params.add("total_amount", totalAmountStr);
 		params.add("tax_free_amount", taxFreeAmount);
 		params.add("approval_url", "http://localhost:8080/funthing/kakaoPaySuccess.udo?orderNoStr=" + orderNoStr);
 		params.add("cancel_url",  "http://localhost:8080/funthing/kakaoPayCancel.udo");
@@ -174,7 +182,7 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 			e.printStackTrace();
 		}
 
-		return "failedUrl�� ������"; 
+		return "111"; 
 
 	}
 

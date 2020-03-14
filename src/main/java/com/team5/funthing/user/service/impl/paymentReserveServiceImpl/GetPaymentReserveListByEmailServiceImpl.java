@@ -27,26 +27,20 @@ public class GetPaymentReserveListByEmailServiceImpl implements GetPaymentReserv
 		
 		List<PaymentReserveVO> paymentReserveList = paymentReserveDAO.getPaymentReserveListByEmail(vo);
 
-		if(!paymentReserveList.isEmpty()) {
-
-			for(PaymentReserveVO paymentReserve : paymentReserveList) {
-				
-				if(paymentReserve != null) {
-					System.out.println(projectVO == null);
-					
-					if(projectVO != null) {
-						projectVO.setProjectNo(paymentReserve.getProjectNo());
-						projectVO = projectDAO.getProject(projectVO);
-						if(projectVO != null) {
-							paymentReserve.setProjectMainImage(projectVO.getProjectMainImage());
-						}
-					}
-				}
-
-			}
-
-		
-		}
+//		if(!paymentReserveList.isEmpty()) {
+//
+//			for(PaymentReserveVO paymentReserve : paymentReserveList) {
+//				ProjectVO pvo = projectVO;
+//				
+//				if(paymentReserve != null) {
+//					pvo.setProjectNo(paymentReserve.getProjectNo());
+//					pvo = projectDAO.getProject(pvo);
+//					if(pvo != null) {
+//						paymentReserve.setProjectMainImage(pvo.getProjectMainImage());
+//					}
+//				}
+//			}
+//		}
 
 		return paymentReserveList;
 		

@@ -109,7 +109,7 @@
 							<div class="p-2 bd-highlight">이름 비공개</div>
 							<div class="p-2 bd-highlight">
 								<c:choose>
-									<c:when test="${paymentReserve.privateName eq null }">
+									<c:when test="${paymentReserve.privateName eq on }">
 										비공개
 									</c:when>
 									<c:otherwise>
@@ -122,7 +122,7 @@
 							<div class="p-2 bd-highlight">펀딩금액 비공개</div>
 							<div class="p-2 bd-highlight">
 								<c:choose>
-									<c:when test="${paymentReserve.privateFundingMoney eq null }">
+									<c:when test="${paymentReserve.privateFundingMoney eq on }">
 										비공개
 									</c:when>
 									<c:otherwise>
@@ -185,36 +185,27 @@
 								<div class="form-group">
 									<label for="formGroupExampleInput">이름</label> 
 									<input type="text" class="form-control" id="formGroupExampleInput" 
-										name="name" value="${memberSession.name }"
-										placeholder="">
+										value="${memberSession.name }"
+										placeholder="" readonly>
 								</div>
 								<div class="form-group">
 									<label for="formGroupExampleInput">이메일</label>
-									<c:choose>
-										<c:when test="${memberSession ne null }">
-											<input type="text" class="form-control" id="formGroupExampleInput" 
-												name="email" value="${memberSession.email }"
-												placeholder="" readonly>
-										</c:when>
-										<c:otherwise>
-											<input type="text" class="form-control" id="formGroupExampleInput" 
-												name="email"
-												placeholder="">
-										</c:otherwise>
-									</c:choose>
+									<input type="text" class="form-control" id="formGroupExampleInput" 
+										name="email" value="${memberSession.email }"
+										placeholder="" readonly>
 								</div>
 								<div class="form-group">
 									<label for="formGroupExampleInput">연락처</label> 
 									<input type="text" class="form-control" id="formGroupExampleInput" 
-										name="phone" value="${memberSession.phone }"
-										placeholder="">
+										value="${memberSession.phone }"
+										placeholder="" readonly>
 								</div>
 								<hr>
 								<div class="custom-control custom-checkbox">
 									<input type="checkbox" class="custom-control-input"
 										id="customCheck1"> <label class="custom-control-label"
 										for="customCheck1">
-										<p class="card-text" style="font-weight: bolder;">(필수) 펀딩
+										<p class="card-text" style = "font-weight: bolder;">(필수) 펀딩
 											진행에 대한 새소식 및 결제 관련 안내를 받습니다.</p>
 									</label>
 								</div>
@@ -227,39 +218,28 @@
 						<hr class="" style="color: whitesmoke;">
 						<div class="card" style="border: 0px;">
 						
-							<div class="card-body">
-								<div class="row">
-									<div class="col-5">
-										<div class="custom-control custom-radio">
-											<input type="radio" name="radioDisabled"
-												id="customRadioDisabled2" class="custom-control-input" checked
-												disabled> <label class="custom-control-label"
-												for="customRadioDisabled2">새로입력
-											</label>
-										</div>
-									</div>
-									<div class="col-5">
-										<div class="custom-control custom-radio">
-											<input type="radio" name="radioDisabled"
-												id="customRadioDisabled2" class="custom-control-input"
-												disabled> <label class="custom-control-label"
-												for="customRadioDisabled2">기존 배송지
-											</label>
-										</div>
-									
-									</div>
-								</div>
-							</div>
+			                     <div class="mt-30">
+		                           <div class="form-group">
+		                               <label for="existDeliveryAddress"><h5>배송지 입력</h5></label>
+		                               <p>기존 입력한 배송지를 사용하시려면 선택해 주세요.</p>
+		                               <select class="form-control" id="existDeliveryAddress">
+		                                  <option value="newDeliveryAddress">새로운 배송지 입력</option>
+		                                  <c:forEach var="deliveryAddress" items="${deliveryAddressList }">
+		                                    <option value="${deliveryAddress.deliveryAddressNo }">${deliveryAddress.deliveryAddressName }</option>
+		                                 </c:forEach>
+		                               </select>
+		                           </div>
+			                     </div>
 							
 								<div class="form-group">
 									<label for="formGroupExampleInput">배송지 이름</label> 
-									<input type="text" class="form-control" id="formGroupExampleInput" 
+									<input type="text" class="form-control" id="newDeliveryAddressName" 
 										name="deliveryAddressName"
 										placeholder="">
 								</div>
 	
 								<div class="form-group">
-									<label for="formGroupExampleInput">이름</label> 
+									<label for="formGroupExampleInput">받으시는 분</label> 
 									<input type="text" class="form-control" id="formGroupExampleInput" 
 										name="name" value="${memberSession.name }"
 										placeholder="">
@@ -294,8 +274,8 @@
 										<input type="text" class="form-control" id="detailAddress" 
 											name="detailedAddress" placeholder="상세주소">
 									</div>
-	
 								</div>
+								
 								<hr>
 								<div class="form-group">
 									<label for="shippingNote">배송요청사항</label> 
@@ -306,6 +286,69 @@
 					</div>
 				</div>
 			</article>
+			
+			<script>
+			
+				$(document).on("change", '#existDeliveryAddress', function(){
+		               
+				   console.log("여기");
+				
+	               var val = $(this).val();
+	               /* $("#newDeliveryAddressName").val(""); */
+	               
+	               if(val == "newDeliveryAddress"){
+	            	   
+	            	   $("#existDeliveryAddress").attr("name","");
+	            	   
+	            	   $("input[name='deliveryAddressName']").attr("value", "");
+	            	   $("input[name='name']").attr("value", "");
+	            	   $("input[name='email']").attr("value", "");
+	            	   $("input[name='phone']").attr("value", "");
+	            	   $("input[name='zipcode']").attr("value", "");
+	            	   $("input[name='roadAddress']").attr("value", "");
+	            	   $("input[name='detailedAddress']").attr("value", "");
+	            	   $("input[name='shippingNote']").attr("value", "");
+	            	   
+	            	   $("#newDeliveryAddressName").focus();
+	            	   
+	               }else{
+	            	   
+	                   $("#existDeliveryAddress").attr("name","deliveryAddressNo");
+	                   
+	                   var jsonData = $("#existDeliveryAddress").serializeObject();
+	                   
+	                         $.ajax({
+	                          url: "selectDeliveryAddressCheck.udo",
+	                          type: "POST",
+	                          data: JSON.stringify(jsonData),
+	                          contentType: "application/json;",
+	                          success: function(data) {
+	                             
+	                        	  
+	                               var selectedDeliveryAddress = JSON.parse(data);
+	                               console.log(selectedDeliveryAddress);
+	                               
+		                           $("input[name='deliveryAddressName']").attr("value", selectedDeliveryAddress.deliveryAddressName);
+		  		            	   $("input[name='name']").attr("value", selectedDeliveryAddress.name);
+		  		            	   $("input[name='email']").attr("value", selectedDeliveryAddress.email);
+		  		            	   $("input[name='phone']").attr("value", selectedDeliveryAddress.phone);
+		  		            	   $("input[name='zipcode']").attr("value", selectedDeliveryAddress.zipcode);
+		  		            	   $("input[name='roadAddress']").attr("value", selectedDeliveryAddress.roadAddress);
+		  		            	   $("input[name='detailedAddress']").attr("value", selectedDeliveryAddress.detailedAddress);
+		  		            	   $("input[name='shippingNote']").attr("value", selectedDeliveryAddress.shippingNote);
+	                             
+	                          },
+	                          error: function(errorThrown) {
+	                              console.log(errorThrown.statusText);
+	                          }
+	                      });   
+	                } 
+				});       
+			
+			</script>
+
+               
+			
 	
 			<hr>
 	<!-- 

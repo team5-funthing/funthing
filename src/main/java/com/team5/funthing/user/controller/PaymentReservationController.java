@@ -7,13 +7,16 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.team5.funthing.user.api.kakaoPay.KakaoPayCancelVO;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team5.funthing.user.api.kakaoPay.KakaoPayService;
 import com.team5.funthing.user.model.vo.DeliveryAddressVO;
 import com.team5.funthing.user.model.vo.MemberVO;
@@ -21,8 +24,10 @@ import com.team5.funthing.user.model.vo.PaymentReserveVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.model.vo.RewardSelectionVO;
 import com.team5.funthing.user.model.vo.RewardVO;
+import com.team5.funthing.user.service.deliveryService.GetDeliveryAddressListByEmailService;
 import com.team5.funthing.user.service.deliveryService.GetDeliveryAddressService;
 import com.team5.funthing.user.service.paymentReserveService.GetPaymentReserveListByEmailService;
+import com.team5.funthing.user.service.paymentReserveService.GetPaymentReserveListByProjectNoService;
 import com.team5.funthing.user.service.paymentReserveService.GetPaymentReserveService;
 import com.team5.funthing.user.service.rewardService.GetRewardService;
 
@@ -45,6 +50,8 @@ public class PaymentReservationController {
 	private GetPaymentReserveService getPaymentReserveService;
 	@Autowired
 	private GetDeliveryAddressService getDeliveryAddressService;
+	@Autowired
+	private GetDeliveryAddressListByEmailService getDeliveryAddressListByEmailService;
 
 	@Autowired
 	private GetPaymentReserveListByEmailService getPaymentReserveListByEmailService;
@@ -53,6 +60,9 @@ public class PaymentReservationController {
 	private DeliveryAddressVO deliveryAddressVO;
 	@Autowired
 	private MemberVO memberVO;
+	
+	@Autowired
+	private GetPaymentReserveListByProjectNoService getPaymentReserveListByProjectNoService;
 	
 	
 	@RequestMapping(value = "/insertselectedReward.udo", method= RequestMethod.POST)
@@ -66,7 +76,7 @@ public class PaymentReservationController {
 		List<RewardSelectionVO> selectedRewardList = (List<RewardSelectionVO>)session.getAttribute("selectedRewardList");
 		
 		if(selectedRewardList == null || selectedRewardList.isEmpty()) {
-			redirectAttributes.addAttribute("msg", "∏ÆøˆµÂ∏¶ º±≈√«ÿ¡÷ººø‰.");
+			redirectAttributes.addAttribute("msg", "Î¶¨ÏõåÎìúÎ•º ÏÑ†ÌÉù ÌõÑ ÏßÑÌñâÌïòÏãúÍ∏∞ Î∞îÎûçÎãàÎã§.");
 			redirectAttributes.addAttribute("projectNo", projectNo);
 			
 			return "redirect:supportProject.udo";
@@ -86,7 +96,19 @@ public class PaymentReservationController {
 		
 		@SuppressWarnings("unchecked")
 		List<RewardSelectionVO> selectedRewardList = (List<RewardSelectionVO>)session.getAttribute("selectedRewardList");
-
+		MemberVO memberVO = (MemberVO)session.getAttribute("memberSession");
+		
+		List<DeliveryAddressVO> deliveryAddressList = getDeliveryAddressListByEmailService.getDeliveryAddressListByEmail(memberVO);
+		
+		if(!deliveryAddressList.isEmpty()) {
+			model.addAttribute("deliveryAddressList", deliveryAddressList);
+		}
+		
+		for(DeliveryAddressVO deliveryAddress : deliveryAddressList) {
+			System.out.println("Î∞∞ÏÜ°ÏßÄÎ™Ö : " + deliveryAddress.getDeliveryAddressName() );
+		}
+		
+		
 		for(RewardSelectionVO rs : selectedRewardList) {
 			
 			getRewardService.getReward(rvo);
@@ -142,19 +164,18 @@ public class PaymentReservationController {
 		model.addAttribute("projectNo", prvo.getProjectNo());
 
 		return "p-payment-result";
-	}// ∞·¡¶ ≥ªø™ ∞·∞˙ ∫∏ø©¡÷±‚
+	}
 	
 	
 	@RequestMapping(value = "paymentReservationCheckList.udo", method = RequestMethod.POST )
 	public String myPaymentReservationCheckList(HttpSession session,
 												Model model, PaymentReserveVO prvo) {
 		
-		System.out.println("∞·¡¶≥ªø™ ∫∏±‚ ¿Ãµø");
-		
+
 		memberVO = (MemberVO)session.getAttribute("memberSession");
-		
 		prvo.setEmail(memberVO.getEmail());
 		
+		System.out.println("Î©§Î≤ÑÏÑ∏ÏÖò ÌôïÏù∏ : " + memberVO.getEmail());
 		
 		List<PaymentReserveVO> paymentReserveList = getPaymentReserveListByEmailService.getPaymentReserveListByEmail(prvo);
 		model.addAttribute("paymentReserveList", paymentReserveList);
@@ -168,7 +189,7 @@ public class PaymentReservationController {
 		
 		prvo = getPaymentReserveService.getPaymentReserve(prvo);
 		
-		System.out.println("∞·¡¶≥ªø™ ªÛºº∫∏±‚ ¿Ãµø");
+		
 		model.addAttribute("paymentReserve", prvo);
 		
 		deliveryAddressVO.setDeliveryAddressNo(prvo.getDeliveryAddressNo());
@@ -187,6 +208,55 @@ public class PaymentReservationController {
 		return "redirect: paymentReservationCheckList.udo";
         
 	}
+	
+	
+	
+	@RequestMapping(value="selectDeliveryAddressCheck.udo", method = RequestMethod.POST, produces ="application/text; charset=utf8")
+	@ResponseBody
+	public String selectCreatorCheck(@RequestBody DeliveryAddressVO davo) throws JsonProcessingException {
+
+		davo = getDeliveryAddressService.getDeliveryAddress(davo);
+		
+		System.out.println(davo.toString());
+		
+		ObjectMapper mapper = new ObjectMapper();
+		String selectedCreatorToJSON = mapper.writeValueAsString(davo);
+	
+		return selectedCreatorToJSON;
+	}
+	
+	
+	@RequestMapping(value = "rewardSupportCheck.udo", method = RequestMethod.POST)
+	public String rewardOrderCheck(PaymentReserveVO prvo, Model model) {
+		
+		List<PaymentReserveVO> paymentReserveList = getPaymentReserveListByProjectNoService.getPaymentReserveListByProjectNo(prvo);
+		
+		if(!paymentReserveList.isEmpty()) {
+			model.addAttribute("project", paymentReserveList.get(0).getProject());
+			model.addAttribute("paymentReserveList", paymentReserveList);
+		}
+		
+		System.out.println(prvo.getProjectNo());
+		
+		return "p-reward-support-check";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
