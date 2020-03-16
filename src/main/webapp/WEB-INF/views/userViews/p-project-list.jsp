@@ -43,12 +43,9 @@
 								<!-- category고르는곳 -->
 								<select class="form-control" id="category" name="category">
 									<option value="no">카테고리</option>
-									<option value="태크/가전">태크/가전</option>
-									<option value="패션/잡화">패션/잡화</option>
-									<option value="뷰티">뷰티</option>
-									<option value="식품">식품</option>
-									<option value="도서/출판">도서/출판</option>
-									<option value="예술/공연">예술/공연</option>
+										<c:forEach var="category" items="${getAllCategoryList}">										
+											<option value="${category.categoryName}">${category.categoryName}</option>
+										</c:forEach>
 								</select>
 
 							</div>
