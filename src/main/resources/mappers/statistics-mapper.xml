@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="StatisticsDAO">
+
+	<select id="getProjectRegStatistics" parameterType="statisticsDate" resultType="projectRegStatistics">
+	
+		SELECT statisticsDate, count(statisticsDate) as projectRegCount
+		FROM (select to_char(startDate,'yyyy-mm-dd') statisticsDate, startDate  from project where startDate is not null 
+
+			<choose>
+				<when test = "'ing'.equals(status)">
+					<![CDATA[
+			 			AND funding = #{funding}
+			 		]]>
+			 	</when>
+			 	<when test = "'end'.equals(status)">
+					<![CDATA[
+			 			AND funding = #{funding}
+			 		]]>
+			 	</when>
+			 	<otherwise></otherwise>
+			</choose>
+			
+			<choose> <!-- 펀딩 성공 실패 중인지 -->
+				<when test = "'success'.equals(status)">
+					<![CDATA[
+			 			AND goalmoney <= fundingmoney
+			 		]]>
+			 	</when>
+			 	<when test = "'fail'.equals(status)">
+					<![CDATA[
+			 			AND goalmoney > fundingmoney
+			 		]]>
+			 	</when>
+			 	<otherwise></otherwise>
+			</choose>
+			
+			<if test='statisticsStartDate != null and statisticsEndDate != null'>
+				<![CDATA[
+					AND startDate  >= TO_DATE(#{statisticsStartDate }, 'YYYY-MM-DD')
+		            AND startDate < TO_DATE(#{statisticsEndDate }, 'YYYY-MM-DD')  + 0.99999)
+		        ]]>
+		    </if>
+		    
+		GROUP BY statisticsDate ORDER BY statisticsDate ASC
+		
+	</select>
+	
+	
+	<select id="getProjectRegCategryStatistics" parameterType="statisticsDate" resultType="projectRegCategryStatistics">
+	
+		<![CDATA[
+			SELECT rnum, category, projectRegCount
+			FROM (	SELECT rownum rnum, category, projectRegCount
+	            	FROM (  SELECT category, count(category) projectRegCount
+	                         FROM (select category from project 
+	                         WHERE startDate is not null 
+	                                    AND category is not null
+	                                    AND startDate 	>= 	TO_DATE(#{statisticsStartDate }, 'YYYY-MM-DD')
+	                                    AND startDate 	< 	TO_DATE(#{statisticsEndDate }, 'YYYY-MM-DD')  + 0.99999)
+	                         GROUP BY category order by projectRegCount desc)
+	        WHERE  rownum <= 10)
+		]]>
+	</select>
+	
+	<select id="getSupportStatistics" parameterType="statisticsDate" resultType="supportStatistics">
+	
+		SELECT  statisticsDate, sum(fundingmoney) as fundingMoney         
+		FROM  (SELECT  statisticsDate, paymentreservedate, sum(fundingmoney) as fundingMoney
+		            FROM  (SELECT to_char(statisticsDate.statisticsdate,'yyyy-mm-dd') as statisticsDate , paymentreserve.orderNo, paymentreserve.paymentreservedate as paymentreservedate, paymentreserve.fundingmoney as fundingmoney
+		                    FROM (  SELECT to_date(#{statisticsStartDate }, 'yyyy-mm-dd') + level-1 as statisticsDate
+		                                 FROM dual
+		                                 CONNECT BY to_date(#{statisticsStartDate },'yyyy-mm-dd') + level-1 <![CDATA[<=]]> to_date(#{statisticsEndDate },'yyyy-mm-dd')) statisticsDate
+		                    FULL JOIN (SELECT orderNo, paymentreservedate, fundingmoney, paymentstatus 
+	                                   FROM paymentreserve
+	                                <choose>
+		                              	<when test= "'all'.equals(paymentStatus)">
+		                              	</when>	                 
+		                              	<when test= "paymentStatus != null">
+		                              		WHERE paymentstatus = #{paymentStatus}
+		                              	</when>		                              	               
+	                                </choose>
+	                                   ) paymentreserve
+		                    ON to_char(statisticsdate.statisticsdate, 'yyyy-mm-dd') = to_char(paymentreserve.paymentreservedate, 'yyyy-mm-dd'))
+		        
+		             GROUP BY statisticsDate, paymentreservedate)
+		
+		GROUP BY statisticsDate
+		ORDER BY statisticsDate
+		
+	</select>
+		
+		
+	<select id="getSupportCategoryStatistics" parameterType="statisticsDate" resultType="supportCategoryStatistics">
+	
+		SELECT category, sum(fundingmoney) as fundingMoney
+		FROM (     SELECT paymentreserve.orderno, paymentreserve.paymentreservedate, paymentreserve.fundingmoney, project.category as category
+		           FROM (      			SELECT orderNo, projectNo, paymentreservedate, fundingmoney 
+		                                FROM paymentreserve
+		                                WHERE paymentreservedate is not null 
+		                                AND paymentreservedate  <![CDATA[>=]]> TO_DATE(#{statisticsStartDate }, 'YYYY-MM-DD')
+		                                AND paymentreservedate <![CDATA[<]]> TO_DATE(#{statisticsEndDate }, 'YYYY-MM-DD')  + 0.99999) paymentreserve
+		                                                    
+		           LEFT JOIN (SELECT category, projectNo FROM project) project
+		           ON paymentreserve.projectno = project.projectno)
+		GROUP BY category
+		ORDER BY fundingMoney DESC
+		
+	</select>		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+		
+		
+		
+		
+</mapper>

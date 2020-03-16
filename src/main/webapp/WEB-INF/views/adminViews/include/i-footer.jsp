@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <footer class="footer text-center"> All Rights Reserved by funthing </footer>
- 		<script src="${pageContext.request.contextPath }/resources/admin/assets/libs/jquery/dist/jquery-3.4.1.min.js"></script>
+ 		
         <!-- Bootstrap tether Core JavaScript -->
         <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/popper.js/dist/umd/popper.min.js"></script>
         <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -29,3 +29,4 @@
         <script src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
         <script src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/multicheck/jquery.multicheck.js"></script>
         <script src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/DataTables/datatables.min.js"></script>
+        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
