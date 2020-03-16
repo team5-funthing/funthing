@@ -31,7 +31,7 @@ public class ReportController {
 	@Autowired
 	private InsertProjectReportAlarmService insertProjectReportAlarmService;
 	
-	@RequestMapping("insertReportInterceptor.udo")
+	@RequestMapping("insertReport.udo")
 	public String insertReport(RedirectAttributes redirectAttribute, AlarmVO avo, ReportVO vo, Model model) {
 		insertReportService.insertReport(vo);
 		

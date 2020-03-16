@@ -58,21 +58,15 @@ public class ProjectAskMessageController {
    
    
 
-   @RequestMapping(value="showInsertwAskMessageInterceptor.udo", method = RequestMethod.GET)
+   @RequestMapping(value="showInsertwAskMessage.udo", method = RequestMethod.GET)
    public String showInsertwAskMessage(ProjectVO vo, Model model) { 
-
-      
-      System.out.println("테스트1");
-      
 
       vo.setProjectTitle(getProjectService.getProject(vo).getProjectTitle());//title 占쏙옙占쏙옙占쏙옙占쏙옙
       vo.setCreator(getProjectService.getProject(vo).getCreator());//creator 占쏙옙占쏙옙占쏙옙占쏙옙
 
       
       model.addAttribute("vo",vo);
-      
-      System.out.println("테스트2"+getProjectService.getProject(vo).toString());
-      
+
       return "f-projectAsk-message"; //占쏙옙占쏙옙占싹깍옙 占쌉뤄옙창占쏙옙占쏙옙 
          
    }

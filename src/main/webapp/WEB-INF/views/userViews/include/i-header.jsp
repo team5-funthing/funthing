@@ -22,7 +22,7 @@
 											<hr>
 											<li><a href="javaScript: return(0);">기획전 보러가기[미구현]</a></li>
 										</ul>
-									<li><a href="showStartProjectPageInterceptor.udo">프로젝트 올리기</a></li>
+									<li><a href="showStartProjectPage.udo">프로젝트 올리기</a></li>
 									<li><a href="javaScript: return(0);">더 보기 <i class="ti-angle-down"></i></a>
 										<ul class="submenu">
 											<li><a href="javaScript: return(0);"></a></li>

@@ -314,8 +314,8 @@ a{text-decoration:none;}
 	}
    
 
-   
-   var naver_id_login = new naver_id_login("bm_Jr_lzbfVgnsh6sEyX", "http://localhost:8080/funthing/.udo");
+  var naver_id_login = new naver_id_login("bm_Jr_lzbfVgnsh6sEyX", "http://ec2-54-180-105-174.ap-northeast-2.compute.amazonaws.com/.udo");
+   //var naver_id_login = new naver_id_login("bm_Jr_lzbfVgnsh6sEyX", "http://localhost:8080/funthing/.udo");
   // 접근 토큰 값 출력
  // alert(naver_id_login.oauthParams.access_token);
   // 네이버 사용자 프로필 조회
