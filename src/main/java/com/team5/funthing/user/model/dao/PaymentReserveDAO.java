@@ -30,10 +30,13 @@ public class PaymentReserveDAO {
 	
 	
 	public void updatePaymentComplete(int projectNo) {
+		
+		System.out.println("펀딩 성공으로 후원 확정");
 		sqlSessionTemplate.update("updatePaymentComplete", projectNo);
 	}
 	
 	public void updatePaymentCancel(int projectNo) {
+		System.out.println("펀딩 실패로 후원 취소");
 		sqlSessionTemplate.update("updatePaymentCancel", projectNo);
 	}
 	

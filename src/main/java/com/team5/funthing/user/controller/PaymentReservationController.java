@@ -1,5 +1,6 @@
 package com.team5.funthing.user.controller;
 
+import java.net.URISyntaxException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -20,6 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team5.funthing.user.api.kakaoPay.KakaoPayService;
 import com.team5.funthing.user.model.vo.DeliveryAddressVO;
 import com.team5.funthing.user.model.vo.MemberVO;
+import com.team5.funthing.user.model.vo.NoRewardAmountException;
 import com.team5.funthing.user.model.vo.PaymentReserveVO;
 import com.team5.funthing.user.model.vo.RewardSelectionVO;
 import com.team5.funthing.user.model.vo.RewardVO;
@@ -128,8 +130,7 @@ public class PaymentReservationController {
 	@RequestMapping(value = "/paymentReserve.udo", method = RequestMethod.POST)
 	public String attemptPaymentReserveByKaKaoPay(	HttpSession session,
 													PaymentReserveVO prvo,
-													DeliveryAddressVO davo) {
-		
+													DeliveryAddressVO davo) throws NoRewardAmountException, URISyntaxException {
 		
 		@SuppressWarnings("unchecked")
 		List<RewardSelectionVO> selectedRewardList = (List<RewardSelectionVO>)session.getAttribute("selectedRewardList");
@@ -171,7 +172,6 @@ public class PaymentReservationController {
 	@RequestMapping(value = "paymentReservationCheckList.udo", method = RequestMethod.POST )
 	public String myPaymentReservationCheckList(HttpSession session,
 												Model model, PaymentReserveVO prvo) {
-		
 
 		memberVO = (MemberVO)session.getAttribute("memberSession");
 		prvo.setEmail(memberVO.getEmail());
@@ -203,7 +203,7 @@ public class PaymentReservationController {
 	
 	
 	@RequestMapping(value = "paymentCancel.udo", method = RequestMethod.POST)
-	public String attemptPaymentReserveByKaKaoPay(	PaymentReserveVO prvo, DeliveryAddressVO davo) {
+	public String attemptPaymentReserveByKaKaoPay(	PaymentReserveVO prvo, DeliveryAddressVO davo) throws URISyntaxException {
 		kakaoPayService.kakaoPayCancel(prvo);
 		
 		return "redirect: paymentReservationCheckList.udo";

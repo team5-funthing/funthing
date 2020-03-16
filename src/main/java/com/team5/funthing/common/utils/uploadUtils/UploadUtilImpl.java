@@ -42,8 +42,6 @@ public class UploadUtilImpl implements UploadUtil {
 	@Autowired
 	private InitRealPathController initRealPathController;
 	
-//	static final int THUMB_WIDTH = 300;
-//	static final int THUMB_HEIGHT = 300;
 
 	
 	@Override
@@ -51,9 +49,9 @@ public class UploadUtilImpl implements UploadUtil {
 
 		List<String> uploadCompletePaths = new ArrayList<String>();
 		
-		String realPath = initRealPathController.getRealPath(); // ���ε� ������ ���� ����� ��� 
+		String realPath = initRealPathController.getRealPath();
 		String temp = voName.replace("VO", "");
-		String dirName = File.separator + temp.substring(0, 1).toLowerCase() + temp.substring(1); // vo Ŭ���� ������ ���� ������ ����ϱ� ���� ���� ex) ProjectVO ---> project
+		String dirName = File.separator + temp.substring(0, 1).toLowerCase() + temp.substring(1);
 		String dirPath = calcPath(realPath, dirName);
 		String fileName = null;
 				
@@ -80,8 +78,7 @@ public class UploadUtilImpl implements UploadUtil {
 			}else {
 				return null;
 			}
-			//DB�� ������ ���
-			String completePath = File.separator + "funthing" + File.separator + "resources" + File.separator + "upload" + dirPath + File.separator + fileName;
+			String completePath = File.separator + "resources" + File.separator + "upload" + dirPath + File.separator + fileName;
 			uploadCompletePaths.add(completePath);
 			
 			
@@ -141,7 +138,7 @@ public class UploadUtilImpl implements UploadUtil {
 	public void removeUtil(String voName, List<String> toRemoveFilePath) throws Exception {
 
 		String temp = voName.replace("VO", "");
-		String dirName = File.separator + temp.substring(0, 1).toLowerCase() + temp.substring(1); // vo Ŭ���� ������ ���� ������ ����ϱ� ���� ���� ex) ProjectVO ---> project
+		String dirName = File.separator + temp.substring(0, 1).toLowerCase() + temp.substring(1);
 		if(toRemoveFilePath.get(0) != null) {
 			for(String removePath : toRemoveFilePath) {
 				remove(removePath, dirName);
@@ -160,7 +157,6 @@ public class UploadUtilImpl implements UploadUtil {
 		
 		int dirIndex = filePath.indexOf(voName);
 		if (dirIndex == -1 ) {
-			System.out.println("���ε� ù ��û");
 			return;
 		}
 		

@@ -61,8 +61,10 @@
                      <!-- 홈 통계 탭 -->
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                         
-                           <div class="col-8">.col-4<br>Since 9 + 4 = 13 &gt; 12, this 4-column-wide div gets wrapped onto a new line as one contiguous unit.</div>
-                           <div class="col-4">.col-6<br>Subsequent columns continue along the new line.</div>
+                           <div class="col-8">
+                           </div>
+                           <div class="col-4">
+                           </div>
                         
                         </div>
                         
@@ -71,7 +73,7 @@
                            
                            <div class="row">
                               <div class="col-8">
-
+								
                               	  <div class="col-9">
                               	  	  <div class="row">
 	                              	  	  <form id="searchProjectStatisticsForm">
@@ -108,12 +110,10 @@
 				                              	</div>
 			                              </form>       
                               	  	  </div>
-                             	  	
                               	  </div>
 	                              <div class="col-12 mt-5">
 	                              	  	<canvas id="barChart"></canvas>
-	                              </div>                              	  
-                              	  
+	                              </div>    
                               </div>
 
                               <div class="col-4">
@@ -128,11 +128,10 @@
                            
                            <div class="row">
                               <div class="col-8">
-
-                              	  <div class="col-9">
+                              	   <div class="col-9">
                               	  	  <div class="row">
 	                              	  	  <form id="searchSupportStatisticsForm">
-		 									  <div class="input-group row">
+		 									  <div class="input-group row mr-4">
 	 									  			<input type="text" class="form-control statisticsStartDate" name="statisticsStartDate" placeholder="시작날짜">
 			                                    	<div class="input-group-append datepicker">
 			                                        	<span class="input-group-text"><i class="fa fa-calendar "></i></span>
@@ -144,7 +143,7 @@
 				                                    </div>
 				                                </div>
 				                                   
-				                                <div class="row mt-2">
+				                                <div class="row mt-2 mr-2">
 													<select name='paymentStatus' class="select2 form-control custom-select select2-hidden-accessible mb-1" style="width: 100%; height:36px;" data-select2-id="1" tabindex="-1" aria-hidden="true">
 			                                            <option value='all' data-select2-id="3">진행 모두</option>
 			                                            <option value='결제예약' data-select2-id="3">결제예약건</option>
@@ -157,10 +156,14 @@
 			                                    <div class="col d-flex justify-content-end mt-3">
 				                              		<button type="button" id="searchSupportStatistics"  class="btn btn-info btn">검색</button>
 				                              	</div>
-			                              </form>       
+			                              </form>
+
                               	  	  </div>
-                             	  	
-                              	  </div>
+                             	  	  	
+                              	    </div>
+                              	    
+                              	  
+                              	  
 	                              <div class="col-12 mt-5">
 	                              	  	<canvas id="supportBarChart"></canvas>
 	                              </div>                              	  
@@ -204,21 +207,15 @@
 			
 	    });
 		
-/* 		$(document).("change", ".statisticsStartDate", function{
-			
-			$(this).siblings(".statisticsEndDate").focus();
-			
-			
-		}) */
 		
 		
 		
-  		var barLabelList = new Array();
-		var barValueList = new Array();
-		var pieLabelList = new Array();
-		var pieValueList = new Array();
+  	  var barLabelList = new Array();
+	  var barValueList = new Array();
+	  var pieLabelList = new Array();
+	  var pieValueList = new Array();
 
-      // 우선 컨텍스트를 가져옵니다. 
+	  
       var barCtx = document.getElementById("barChart").getContext('2d');
       var pieCtx = document.getElementById("pieChart").getContext('2d'); 
 
@@ -229,7 +226,7 @@
         	  
               labels: barLabelList,
               datasets: [{
-                  /* label: '# of Votes', */
+                  label: '등록된 프로젝트 현황',
                   data: barValueList,
                 	  
                   backgroundColor: [
@@ -301,7 +298,7 @@
         	  
               labels: barLabelList,
               datasets: [{
-                  /* label: '# of Votes', */
+                  label: '후원 금액 현황',
                   data: barValueList,
                 	  
                   backgroundColor: [
@@ -522,12 +519,9 @@ $.fn.serializeObject = function() {
 	$.each(this.serializeArray(), extend);
 	return result;
 }
-
 </script>    
     
     
-    
-
 </body>
 
 </html>

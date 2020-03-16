@@ -12,12 +12,12 @@
 			<choose>
 				<when test = "'ing'.equals(status)">
 					<![CDATA[
-			 			AND funding = #{funding}
+			 			AND funding = 'y'
 			 		]]>
 			 	</when>
 			 	<when test = "'end'.equals(status)">
 					<![CDATA[
-			 			AND funding = #{funding}
+			 			AND funding = 'e'
 			 		]]>
 			 	</when>
 			 	<otherwise></otherwise>

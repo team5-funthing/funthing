@@ -21,22 +21,21 @@
             <div class="row">
                 <div class="col">
                 </div>
-                <div class="col">
+                <div class="col d-flex justify-content-center">
                     <form action="#">
                         <div class=" col align-self-center mt-10">
-                            <h2>회원가입</h2>
+                            <h2 style=" color: black;">회원가입</h2>
                         </div>
+                        
+                        <div class="col-xl-12 mt-4">
+	                        <a href="emailJoin.udo"
+	                        class="deliveryOKBtn btn-lg btn-bd-purple d-none d-lg-inline-block m-1 popup-modal-dismiss pl-4 pr-4">
+	                       		 이메일로 가입하기
+	                        </a>
+                        </div>
+                        
                         <hr>
-                        <div class="col-xl-12">
-                            <a class="btn btn-registry-way d-none d-lg-inline-block p-4 mb-3 w-100"
-                                href="emailJoin.udo">이메일로 가입하기</a>
-                        </div>
-                        <div class="d-flex align-self-center mt-10 w-100">
-                            <div class="d-flex align-content-center">
-                            </div>
-                        </div>
-                        <hr />
- 				<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+ 					<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 				
                    <div style="width:15px;"></div> <div id="naver_id_login" style="width:277.5;align:center;text-align:center;"></div>
                     
