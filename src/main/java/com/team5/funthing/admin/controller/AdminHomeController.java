@@ -37,148 +37,148 @@ import com.team5.funthing.user.service.userMainImageChangeService.GetUserMainIma
 @Controller
 public class AdminHomeController {
 
-	//Notice Service
-	@Autowired
-	GetAdminNoticeBoardListService getAdminNoticeBoardListService;
-	
-	//Project Serivce
-	@Autowired
-	GetProjectCheckListService getProjectCheckListService;
-	@Autowired
-	GetAllFundingProjectListService getAllFundingProjectListService;
+   //Notice Service
+   @Autowired
+   GetAdminNoticeBoardListService getAdminNoticeBoardListService;
+   
+   //Project Serivce
+   @Autowired
+   GetProjectCheckListService getProjectCheckListService;
+   @Autowired
+   GetAllFundingProjectListService getAllFundingProjectListService;
   
-	//UserImageChage Service
-	@Autowired 
-	GetUserMainImageChangeListService getUserMainImageChangeListService;
-	@Autowired
-	GetUserMainImageListService getUserMainImageListService;
-	
-	//Tos Serivce
-	@Autowired
-	GetTosListService getTosListService;
-	@Autowired
-	GetRegisterTosListService getRegisterTosListService;
-	
-	//PersonalInfoProcessing Service
-	@Autowired
-	GetPersonalInfoProcessingListService getPersonalInfoProcessingListService;
-	
-	//Category Service
-	@Autowired
-	GetCategoryListService getCategoryListService;
-	
-	//AdminMainView Service
-	@Autowired
-	GetMainViewProjectStatusListService getMainViewProjectStatusListService;
-	@Autowired
-	GetMainViewProjectFundingListService getMainViewProjectFundingListService;
-	
-	//AdminStatistics Service
-	@Autowired
-	GetProjectSuccessRatioTotalYearService getProjectSuccessRatioTotalYearService;
-	@Autowired
-	GetFundingMoneyPerMonthService getFundingMoneyPerMonthService;
-	
-	//Report Service
-	@Autowired
-	GetReportListService getReportListService;
-	
-	@RequestMapping("adminIndex.ado")
-	public String showIndex(AdminStatisticsVO vo, AdminMainViewVO vo2,Model model) {
-		model.addAttribute("totalSuccess",getProjectSuccessRatioTotalYearService.getProjectSuccessRatioTotalYear(vo));
-		
-		vo2.setStatus('w');
-		List<ProjectVO> statusWList = getMainViewProjectStatusListService.getMainViewProjectStatusList(vo2);
-		int statusWListCount = statusWList.size();
-	
-		vo2.setFunding("y");
-		List<ProjectVO> fundingYList = getMainViewProjectFundingListService.getMainViewProjectFundingList(vo2);
-		System.out.println("fundingYList:"+fundingYList);
-		int fundingYListCount = fundingYList.size();
-		System.out.println("fundingYListCount:"+fundingYListCount);
-		
-		model.addAttribute("fundingYListCount",fundingYListCount);
-		model.addAttribute("statusWListCount",statusWListCount);
-		
-		return "p-index";
+   //UserImageChage Service
+   @Autowired 
+   GetUserMainImageChangeListService getUserMainImageChangeListService;
+   @Autowired
+   GetUserMainImageListService getUserMainImageListService;
+   
+   //Tos Serivce
+   @Autowired
+   GetTosListService getTosListService;
+   @Autowired
+   GetRegisterTosListService getRegisterTosListService;
+   
+   //PersonalInfoProcessing Service
+   @Autowired
+   GetPersonalInfoProcessingListService getPersonalInfoProcessingListService;
+   
+   //Category Service
+   @Autowired
+   GetCategoryListService getCategoryListService;
+   
+   //AdminMainView Service
+   @Autowired
+   GetMainViewProjectStatusListService getMainViewProjectStatusListService;
+   @Autowired
+   GetMainViewProjectFundingListService getMainViewProjectFundingListService;
+   
+   //AdminStatistics Service
+   @Autowired
+   GetProjectSuccessRatioTotalYearService getProjectSuccessRatioTotalYearService;
+   @Autowired
+   GetFundingMoneyPerMonthService getFundingMoneyPerMonthService;
+   
+   //Report Service
+   @Autowired
+   GetReportListService getReportListService;
+   
+   @RequestMapping("adminIndex.ado")
+   public String showIndex(AdminStatisticsVO vo, AdminMainViewVO vo2,Model model) {
+      model.addAttribute("totalSuccess", getProjectSuccessRatioTotalYearService.getProjectSuccessRatioTotalYear(vo));
+      
+      vo2.setStatus('w');
+      List<ProjectVO> statusWList = getMainViewProjectStatusListService.getMainViewProjectStatusList(vo2);
+      int statusWListCount = statusWList.size();
+   
+      vo2.setFunding("y");
+      List<ProjectVO> fundingYList = getMainViewProjectFundingListService.getMainViewProjectFundingList(vo2);
+      System.out.println("fundingYList:"+fundingYList);
+      int fundingYListCount = fundingYList.size();
+      System.out.println("fundingYListCount:"+fundingYListCount);
+      
+      model.addAttribute("fundingYListCount",fundingYListCount);
+      model.addAttribute("statusWListCount",statusWListCount);
+      
+      return "p-index";
 
-	}
-	
-	@RequestMapping("projectCategoryManagement.ado")
-	public String showProjectCategoryManagement(AdminCategoryVO vo, Model model) {
-		
-		List<AdminCategoryVO> CategoryList = getCategoryListService.getCategoryList(vo);
-		model.addAttribute("CategoryList", CategoryList);
-		
-		return "f-category-management";
-	}
-	
-	@RequestMapping("projectReportCheck.ado")
-	public String projectReportCheck(ReportVO vo , Model model) {
-		
-		List<ReportVO> reportList = getReportListService.getReportList(vo);
-		model.addAttribute("reportList", reportList);
-		return "b-report-list";
-	}
-	
-	@RequestMapping("memberManagement.ado")
-	public String showMemberManagement() {
-		return "b-member-list";
-	}
-	
-	
-	
-	@RequestMapping("customerService.ado")
-	public String showCustomerServiceBoard() {
-		return "redirect:getAdminCSBoardList.ado";
-	}
-	
-	@RequestMapping("termsOfService.ado")
-	public String showTermsOfService(TosVO vo, Model model) {
-		List<TosVO> getTosList = getTosListService.getTosList(vo);
-		
-		model.addAttribute("TosList", getTosList);
-		return "b-tos-list";
-	}
-	
-	@RequestMapping("adminNoticeInput.ado")
-	public String showInputNotice(AdminNoticeBoardVO vo, Model model) {
-		List<AdminNoticeBoardVO> entireBoardList = getAdminNoticeBoardListService.getNoticeBoardList(vo);
-		
-		model.addAttribute("entireBoardList", entireBoardList);
-		return "b-notice-list";
-	}
-	
-	@RequestMapping("infoProcessingInput.ado")
-	public String showInputInfoProcessing(AdminPersonalInfoProcessingVO vo, Model model) {
-		
-		model.addAttribute("PersonalInfoProcessing", getPersonalInfoProcessingListService.getPersonalInfoProcessingList(vo));
-		
-		return "b-personalInfoProcessing-list";
-	}
-	
-	@RequestMapping("registerTos.ado")
-	public String showRegisterTos(AdminRegisterTosVO vo, Model model) {
-		
-		model.addAttribute("RegisterTosList", getRegisterTosListService.getRegisterTosList(vo));
-		
-		return "b-regitos-list";
-	}
+   }
+   
+   @RequestMapping("projectCategoryManagement.ado")
+   public String showProjectCategoryManagement(AdminCategoryVO vo, Model model) {
+      
+      List<AdminCategoryVO> CategoryList = getCategoryListService.getCategoryList(vo);
+      model.addAttribute("CategoryList", CategoryList);
+      
+      return "f-category-management";
+   }
+   
+   @RequestMapping("projectReportCheck.ado")
+   public String projectReportCheck(ReportVO vo , Model model) {
+      
+      List<ReportVO> reportList = getReportListService.getReportList(vo);
+      model.addAttribute("reportList", reportList);
+      return "b-report-list";
+   }
+   
+   @RequestMapping("memberManagement.ado")
+   public String showMemberManagement() {
+      return "b-member-list";
+   }
+   
+   
+   
+   @RequestMapping("customerService.ado")
+   public String showCustomerServiceBoard() {
+      return "redirect:getAdminCSBoardList.ado";
+   }
+   
+   @RequestMapping("termsOfService.ado")
+   public String showTermsOfService(TosVO vo, Model model) {
+      List<TosVO> getTosList = getTosListService.getTosList(vo);
+      
+      model.addAttribute("TosList", getTosList);
+      return "b-tos-list";
+   }
+   
+   @RequestMapping("adminNoticeInput.ado")
+   public String showInputNotice(AdminNoticeBoardVO vo, Model model) {
+      List<AdminNoticeBoardVO> entireBoardList = getAdminNoticeBoardListService.getNoticeBoardList(vo);
+      
+      model.addAttribute("entireBoardList", entireBoardList);
+      return "b-notice-list";
+   }
+   
+   @RequestMapping("infoProcessingInput.ado")
+   public String showInputInfoProcessing(AdminPersonalInfoProcessingVO vo, Model model) {
+      
+      model.addAttribute("PersonalInfoProcessing", getPersonalInfoProcessingListService.getPersonalInfoProcessingList(vo));
+      
+      return "b-personalInfoProcessing-list";
+   }
+   
+   @RequestMapping("registerTos.ado")
+   public String showRegisterTos(AdminRegisterTosVO vo, Model model) {
+      
+      model.addAttribute("RegisterTosList", getRegisterTosListService.getRegisterTosList(vo));
+      
+      return "b-regitos-list";
+   }
 
-	@RequestMapping("getProjectCheckList.ado")
-	public String getProjectCheckList(ProjectVO vo,Model model) {
-		
-		List<ProjectVO> projectCheckList = getProjectCheckListService.getProjectCheckList(vo);
-		model.addAttribute("projectCheckList",projectCheckList);
-		return "b-project-check-list";
-	}
-	
-	@RequestMapping("userMainImageChangeForm.ado")
-	public String userMainImageForm(AdminUserMainImageChangeVO vo, Model model) {
-		List<AdminUserMainImageChangeVO> userMainImageList =getUserMainImageListService.getUserMainImageList();
-		
-		model.addAttribute("userMainImageList",userMainImageList);
-		return "f-usermainimage-input";
-	}
-		
+   @RequestMapping("getProjectCheckList.ado")
+   public String getProjectCheckList(ProjectVO vo,Model model) {
+      
+      List<ProjectVO> projectCheckList = getProjectCheckListService.getProjectCheckList(vo);
+      model.addAttribute("projectCheckList",projectCheckList);
+      return "b-project-check-list";
+   }
+   
+   @RequestMapping("userMainImageChangeForm.ado")
+   public String userMainImageForm(AdminUserMainImageChangeVO vo, Model model) {
+      List<AdminUserMainImageChangeVO> userMainImageList =getUserMainImageListService.getUserMainImageList();
+      
+      model.addAttribute("userMainImageList",userMainImageList);
+      return "f-usermainimage-input";
+   }
+      
 }

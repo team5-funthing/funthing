@@ -42,6 +42,9 @@ public class UpdateProjectDeadlineServiceImpl implements UpdateProjectDeadlineSe
 				failedProjectList.add(todayClosedProject);
 			}
 		}
+		
+		
+		
 		for(ProjectVO successProject : successProjectList) {
 			paymentReserveDAO.updatePaymentComplete(successProject.getProjectNo());
 		}
