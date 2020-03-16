@@ -166,7 +166,7 @@
 	<update id="updatePaymentComplete" parameterType="int">
 
         Update paymentReserve
-		SET paymentStatus = '결제완료'
+		SET paymentStatus = '결제확정'
 		WHERE projectNo = #{projectNo} and paymentStatus = '결제예약'
 		
 	</update>
