@@ -161,16 +161,16 @@
 
 								<!-- 보낸 메세지 있을경우 포문돌리기 -->
 								<c:choose>
-									<c:when test="${not empty messagelist}">
+									<c:when test="${not empty privateMessagelist}">
 								<section class="tiles ml-1 mt-3 row row-cols-1 row-cols-md-3">
 													<div class="row row-cols-1 row-cols-md-3">
-														<c:forEach var="messagelist" items="${messagelist}">
+														<c:forEach var="privateMessagelist" items="${privateMessagelist}">
 															<div class="card ml-3 mt-3" style="width: 18rem;">
 																<div class="thumbnail-wrap">
 										                            <div class="thumbnail">
 										                                <div class="centered">
 								                                       		<a href="#">
-									                                         	<img src="${messagelist.project.projectMainImage }" class="card-img-top portrait" alt="내가만든 프로젝트 대표이미지">
+									                                         	<img src="${privateMessagelist.project.projectMainImage }" class="card-img-top portrait" alt="내가만든 프로젝트 대표이미지">
 								                                       		</a>
 										                                </div>
 										                            </div>
@@ -186,19 +186,19 @@
 													
 													
 													<div class="card-body">
-													<h6 class="card-title">NO.${messagelist.projectAskNo } )${messagelist.projectAskContentsTitle }</h6>
-														<p class="card-text">보낸날짜 : ${messagelist.projectAskDate}</p>
+													<h6 class="card-title">NO.${privateMessagelist.projectAskNo } )${privateMessagelist.projectAskContentsTitle }</h6>
+														<p class="card-text">보낸날짜 : ${privateMessagelist.projectAskDate}</p>
 														
 														
 														
-														<c:if test="${messagelist.projectAskReplyStatus eq '미답변'}">
-														<a href="getChoiceProjectAskMessage.udo?projectAskNo=${messagelist.projectAskNo }" 
-															class="btn btn-success">${messagelist.projectAskReplyStatus}</a>
+														<c:if test="${privateMessagelist.projectAskReplyStatus eq '미답변'}">
+														<a href="getChoiceProjectAskMessage.udo?projectAskNo=${privateMessagelist.projectAskNo }" 
+															class="btn btn-success">${privateMessagelist.projectAskReplyStatus}</a>
 														</c:if>
 														
-														<c:if test="${messagelist.projectAskReplyStatus eq '답변완료'}">
-														<a href="getChoiceProjectAskMessage.udo?projectAskNo=${messagelist.projectAskNo }" 
-															class="btn btn-danger">${messagelist.projectAskReplyStatus}</a>
+														<c:if test="${privateMessagelist.projectAskReplyStatus eq '답변완료'}">
+														<a href="getChoiceProjectAskMessage.udo?projectAskNo=${privateMessagelist.projectAskNo }" 
+															class="btn btn-danger">${privateMessagelist.projectAskReplyStatus}</a>
 														</c:if>
 														
 														
@@ -212,7 +212,7 @@
 										</c:when>
 							
 		
-									<c:when test="${empty messagelist }">
+									<c:when test="${empty privateMessagelist }">
 
 										<div class="row">
 											<div class="col"></div>
@@ -285,10 +285,7 @@
 																<p class="card-text">
 																	답변이 정상등록 되었습니다.<br>이메일을 확인하여 주세요.
 																</p>
-																<p class="card-text">
-																	<small class="text-muted">${askAdminList.csRegdate}
-																		이부분바꾸기</small>
-																</p>
+																
 															</div>
 														</div>
 													</div>
@@ -332,10 +329,7 @@
 																<p class="card-text">
 																	답변이 아직 등록 되지않았습니다.<br>최대한 빨리 답변드리겠습니다.
 																</p>
-																<p class="card-text">
-																	<small class="text-muted">${askAdminList.csRegdate}
-																		이부분바꾸기</small>
-																</p>
+																
 															</div>
 														</div>
 													</div>
