@@ -76,10 +76,10 @@
                     
 					<script type="text/javascript">
 						var naver_id_login = new naver_id_login(
-								"T6JggIUb0xG2LBu9Q7Pf", "http://localhost:8080/funthing/socialLogin.udo");
+								"T6JggIUb0xG2LBu9Q7Pf", "http://ec2-54-180-105-174.ap-northeast-2.compute.amazonaws.com/socialjoin.udo");
 						var state = naver_id_login.getUniqState();		
 						naver_id_login.setButton("green",3,60);
-						naver_id_login.setDomain("http://localhost:8080/funthing");
+						naver_id_login.setDomain("http://ec2-54-180-105-174.ap-northeast-2.compute.amazonaws.com");
 						naver_id_login.setState(state);
 						naver_id_login.init_naver_id_login();
 					</script> 
@@ -97,7 +97,8 @@
 						    var id;
 						    var name;
 						    var email;
-						    var url = 'http://localhost:8080/funthing/socialjoin.udo';
+						    //var url = 'http://localhost:8080/funthing/socialjoin.udo';
+						    var url = 'http://ec2-54-180-105-174.ap-northeast-2.compute.amazonaws.com/socialjoin.udo';
 					
 							// 사용할 앱의 JavaScript 키를 설정해 주세요.
 							Kakao.init('05602e69457875d5bc6718b74ef34eb9');
@@ -115,7 +116,7 @@
 												 id = res.id;
 												 name = res.properties.nickname;
 												 email = res.kakao_account.email;
-												 location.href=url+'?email='+email+'&password='+id+'&name='+name+'&check=1';
+												 location.href=url+'?email='+email+'&password='+id+'&name='+name;
 	
 											},
 											fail : function(error) {

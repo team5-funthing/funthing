@@ -78,11 +78,7 @@
 
 							</div>
 							<div class="col-10">
-
 								<div class="row">
-
-
-
 									<div class="col-5 align-self-center">
 										<label for="image2">
 											<div id="detail-mypage-profile-img" class="">
@@ -94,7 +90,6 @@
 										</label>
 									</div>
 									<div class="col align-self-center"></div>
-
 								</div>
 
 							</div>
@@ -128,10 +123,8 @@
 
 						function clickedBtn() {
 
-							var form = new FormData(document
-									.getElementById("saveimage"));
-							$
-									.ajax({
+							var form = new FormData(document.getElementById("saveimage"));
+							$.ajax({
 										url : "saveimage.udo",
 										data : form,
 										type : "POST",
@@ -160,47 +153,6 @@
 							</div>
 						</div>
 
-						<c:if test="${ member.socialjoined eq 'Y'}">
-
-							<div class="form-row">
-								<div class="col-md-4 mb-3">
-									<a
-										class="hideButton btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
-										style="width: 250px;" href="javascript:popup()">인증번호 보내기</a> <label
-										for="validationDefault01">인증번호 입력</label> <input type="text"
-										class="form-control" id="certification"
-										placeholder="발송된 인증번호를 입력하세요" onfocus="this.placeholder = ''"
-										onblur="this.placeholder = '발송된 인증번호를 입력하세요'"
-										style="width: 250px;" required>
-								</div>
-
-							</div>
-
-							<script>
-								function popup() {
-
-									var emailData = {
-										"email" : document
-												.getElementById('email').value
-									};
-
-									$
-											.ajax({
-												type : "GET",
-												url : "certification.udo",
-												data : emailData,
-												success : function(data) {
-													alert("인증코드가 이메일로 발송되었습니다!");
-													document
-															.getElementById("sessionCode").value = data;
-												},
-												error : function() {
-													alert("연결에 문제가 있습니다. 인터넷 환경을 확인 후 다시 시도해 주세요.")
-												}
-											});
-								}
-							</script>
-						</c:if>
 
 						<c:if test="${ member.socialjoined eq 'N'}">
 
@@ -209,7 +161,7 @@
 									<label for="validationDefault01">현재 비밀번호</label> <input
 										type="password" class="form-control" id="nowPassword"
 										placeholder="현재 비밀번호를 입력하세요" onfocus="this.placeholder = ''"
-										onblur="this.placeholder = '현재 비밀번호를 입력하세요'"
+										onblur="this.placeholder = '현재 비밀번호를 입력하세요'" value=""
 										name="nowPassword" style="width: 250px;" required>
 								</div>
 
@@ -236,7 +188,6 @@
 								</div>
 							</div>
 							<div id="encodedPasswordCheck"></div>
-						</c:if>
 
 						<div class="form-row">
 							<div class="col-md-4 mb-3">
@@ -244,7 +195,7 @@
 									class="form-control" id="name" placeholder="이름을 입력해주세요"
 									onfocus="this.placeholder = ''" readonly
 									onblur="this.placeholder = '현재 비밀번호를 입력하세요'" name="name"
-									style="width: 250px;" value="${member.name}" required>
+									style="width: 250px;" value="${sessionScope.memberSession.name}" required>
 							</div>
 						</div>
 						<div id="nameInputCheck"></div>
@@ -255,7 +206,7 @@
 									placeholder=" - 없이 입력해주세요" onfocus="this.placeholder = ''"
 									onblur="this.placeholder = ' - 없이 입력해주세요'" class="form-control"
 									style="width: 250px;" id="phone" name="phone"
-									value="${member.phone}" required>
+									value="${sessionScope.memberSession.phone}" required>
 							</div>
 						</div>
 						<div id="phoneInputCheck"></div>
@@ -266,16 +217,15 @@
 
 							<label for="exampleFormControlTextarea1" class="mr-1">소개</label>
 							<textarea class="form-control" id="introduce" name="introduce"
-								form="updateForm" rows="3">${member.introduce}</textarea>
+								form="updateForm" rows="3">${sessionScope.memberSession.introduce}</textarea>
 
 						</div>
 
-
+					</c:if>
 
 						<hr>
 
 						<div class="form-inline pb-5 justify-content-center">
-							<c:if test="${ member.socialjoined eq 'N'}">
 								<div class="mt-10">
 									<input type="button" value="회원탈퇴"
 										class="btn btn-registry-way-cancel d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
@@ -286,33 +236,14 @@
 										class="btn btn-registry-way-cancel d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
 										onclick="cancel()">
 								</div>
-								<div class="mt-10">
-									<button
-										class="btn btn-registry-way-cancel d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
-										onclick="updateMember()">저장</button>
-								</div>
-							</c:if>
-
-
-
-							<c:if test="${ member.socialjoined eq 'Y'}">
-								<div class="mt-10">
-									<input type="button" value="회원탈퇴"
-										class="btn btn-registry-way-cancel d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
-										onclick="delSocialMember()">
-								</div>
-								<div class="mt-10">
-									<input type="button" value="취소"
-										class="btn btn-registry-way-cancel d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
-										onclick="cancel()">
-								</div>
-								<div class="mt-10">
-									<button
-										class="btn btn-registry-way-cancel d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
-										onclick="updateSocialMember()">저장</button>
-								</div>
-							</c:if>
-
+								
+								<c:if test="${ member.socialjoined eq 'N'}">
+									<div class="mt-10">
+										<button
+											class="btn btn-registry-way-cancel d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
+											onclick="updateMember()">저장</button>
+									</div>
+								</c:if>
 						</div>
 					</form>
 				</div>
@@ -329,37 +260,6 @@
 
 
 	<script>
-		function delSocialMember() {
-			if ($('#sessionCode').val() == $('#certification').val()) {
-				location.href = "deleteMember.udo";
-			} else {
-				alert("인증번호를 다시 확인하신 후 입력해주세요.");
-			}
-		}
-
-		function updateSocialMember() {
-			if ($('#sessionCode').val() == $('#certification').val()) {
-				var updatedata = {
-					"phone" : $('#phone').val(),
-					"introduce" : $('#introduce').val()
-				};
-				$.ajax({
-					type : "POST",
-					url : "updateSocialMember.udo",
-					data : updatedata,
-					success : function(data) {
-						if (data == '1') {
-							alert("회원정보가 수정되었습니다.");
-						}
-					},
-					error : function() {
-						alert("연결에 문제가 있습니다. 인터넷 환경을 확인 후 다시 시도해 주세요.");
-					}
-				});
-			} else {
-				alert("인증번호를 다시 확인하신 후 입력해주세요.");
-			}
-		}
 
 		function cancel() {
 			location.href = "mypage.udo";
@@ -387,69 +287,47 @@
 
 			});
 		}
-
+		
 		//회원정보 가져오기
 		function updateMember() {
 			var pwData = {
 				"pw" : document.getElementById("nowPassword").value
 			};
-			$
-					.ajax({
-						type : "POST",
-						url : "updateCheck.udo",
-						data : pwData,
-						success : function(data) {
-							if (data == '1') {
-								$("#nowPasswordCheck").empty();
-								$("#nowPasswordCheck").append("비밀번호가 일치합니다.")
-										.css('color', 'MediumSeaGreen').css(
-												'font-size', '80%');
-								if (document.getElementById("password").value == document
-										.getElementById("passwordcheck").value) {
-									$("#encodedPasswordCheck").empty();
-									$("#encodedPasswordCheck").append(
-											"변경할 비밀번호가 일치합니다.").css('color',
-											'MediumSeaGreen').css('font-size',
-											'80%');
-									if (document.getElementById("password").value.length >= 8) {
-										if (!document.getElementById("phone").value
-												.test("-")) {
+			$.ajax({
+				type : "POST",
+				url : "updateCheck.udo",
+				data : pwData,
+				success : function(data) {
+					if (data == '1') {
+						$("#nowPasswordCheck").empty();
+						$("#nowPasswordCheck").append("비밀번호가 일치합니다.").css('color', 'MediumSeaGreen').css('font-size', '80%');
+						if (document.getElementById("password").value == document.getElementById("passwordcheck").value) {
+							$("#encodedPasswordCheck").empty();
+							$("#encodedPasswordCheck").append("변경할 비밀번호가 일치합니다.").css('color','MediumSeaGreen').css('font-size','80%');
+							if (document.getElementById("password").value.length >= 8) {
+								if (!document.getElementById("phone").value.test("-")) {
 											document.updateForm.submit();
 										} else {
 											$("#phoneInputCheck").empty();
-											$("#phoneInputCheck")
-													.append(
-															"전화번호를 입력하실 때  '-'을 제외하고 입력해 주세요.")
-													.css('color', 'Tomato')
-													.css('font-size', '80%');
+											$("#phoneInputCheck").append("전화번호를 입력하실 때  '-'을 제외하고 입력해 주세요.").css('color', 'Tomato').css('font-size', '80%');
 											$("phone").focus();
 											return;
 										}
 									} else {
 										$("#encodedPasswordCheck").empty();
-										$("#encodedPasswordCheck").append(
-												"비밀번호는 8자리 이상 입력해 주세요.").css(
-												'color', 'Tomato').css(
-												'font-size', '80%');
+										$("#encodedPasswordCheck").append("비밀번호는 8자리 이상 입력해 주세요.").css('color', 'Tomato').css('font-size', '80%');
 										$("#passwordcheck").focus();
 										return;
 									}
 								} else {
 									$("#encodedPasswordCheck").empty();
-									$("#encodedPasswordCheck").append(
-											"변경할 비밀번호가 일치하지 않습니다.").css(
-											'color', 'Tomato').css('font-size',
-											'80%');
+									$("#encodedPasswordCheck").append("변경할 비밀번호가 일치하지 않습니다.").css('color', 'Tomato').css('font-size','80%');
 									$("#passwordcheck").focus();
 									return;
 								}
-
 							} else {
 								$("#nowPasswordCheck").empty();
-								$("#nowPasswordCheck").append(
-										"정보 수정을 위해서는 현재 비밀번호를 정확히 입력해 주세요.")
-										.css('color', 'Tomato').css(
-												'font-size', '80%');
+								$("#nowPasswordCheck").append("정보 수정을 위해서는 현재 비밀번호를 정확히 입력해 주세요.").css('color', 'Tomato').css('font-size', '80%');
 								$("#nowPassword").focus();
 								return;
 							}
@@ -459,7 +337,7 @@
 						}
 
 					});
-		}
+				}
 	</script>
 
 	<jsp:include page="./include/i-footer.jsp"></jsp:include>
