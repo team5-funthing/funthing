@@ -9,24 +9,34 @@
                 <h3>로그인</h3>
             		
                     <div class="mt-10">
-                    <c:if test="${not empty cookie.funthingCookieId.value }">
-                        <input type="text" name="email" id="email" placeholder="이메일 아이디" onfocus="this.placeholder = ''"
-                            onblur="this.placeholder = '이메일 아이디'" value="${cookie.funthingCookieId.value }" required class="single-input">
-                    </c:if>
-                     <c:if test="${ empty cookie.funthingCookieId.value }">
-                    <input type="text" name="email" id="email" placeholder="이메일 아이디" onfocus="this.placeholder = ''"
-                            onblur="this.placeholder = '이메일 아이디'"  required class="single-input">
-                     </c:if>
+	                    <c:if test="${not empty cookie.funthingCookieId.value }">
+	                          <input name="email" id="email" class="form-control form-control-lg" type="text"
+	                             placeholder="이메일 아이디" onfocus="this.placeholder = '이메일 아이디'"
+	                             onblur="this.placeholder = '이메일 아이디'" value="${cookie.funthingCookieId.value }"
+	                             class="single-input" required>
+	
+	                    </c:if>
+	                    
+	                    <c:if test="${ empty cookie.funthingCookieId.value }">
+		                       <input name="email" id="email" class="form-control form-control-lg" type="text"
+		                             placeholder="이메일 아이디" onfocus="this.placeholder = '이메일 아이디'"
+		                             onblur="this.placeholder = '이메일 아이디'"
+		                             class="single-input" required>
+	                    </c:if>
                     </div>
                     <div class="mt-10">
-                    <c:if test="${not empty cookie.funthingCookiePw.value }">
-                        <input type="password" name="password" id="password" placeholder="비밀번호" onfocus="this.placeholder = ''"
-                            onblur="this.placeholder = '비밀번호'" value="${cookie.funthingCookiePw.value }"  required class="single-input">
-                    </c:if>
-                    <c:if test="${empty cookie.funthingCookiePw.value }">
-                     <input type="password" name="password" id="password" placeholder="비밀번호" onfocus="this.placeholder = ''"
-                            onblur="this.placeholder = '비밀번호'" value=""  required class="single-input">
-                    </c:if>
+	                    <c:if test="${not empty cookie.funthingCookiePw.value }">
+	                       		<input name="password" id="password" class="form-control form-control-lg" type="password"
+		                             placeholder="비밀번호를 입력하세요." onfocus="this.placeholder = '비밀번호를 입력하세요'"
+		                             onblur="this.placeholder = '비밀번호를 입력하세요.'" value="${cookie.funthingCookiePw.value }"
+		                             class="single-input" required>
+	                    </c:if>
+	                    <c:if test="${empty cookie.funthingCookiePw.value }">
+                       		<input name="password" id="password" class="form-control form-control-lg" type="password"
+	                             placeholder="비밀번호를 입력하세요." onfocus="this.placeholder = '비밀번호를 입력하세요'"
+	                             onblur="this.placeholder = '비밀번호를 입력하세요.'"
+	                             class="single-input" required>
+		                </c:if>
                     </div>
 
                     <div class="mt-10">
@@ -51,8 +61,11 @@
                     </div>
 					<div id="loginProcessingResult">${loginFail}</div>
                     <div class="col-xl-12 mt-10">
-                        
-                        <input onclick="inputCheck()" type="button" class="boxed-btn3" value="로그인하기"> 
+                        <div class="mt-30 d-flex justify-content-center">
+							<a href="javascript: return(0);" onclick="inputCheck()"
+								class="deliveryOKBtn btn-lg btn-bd-purple d-none d-lg-inline-block m-1 popup-modal-dismiss pl-4 pr-4">
+								로그인하기 </a>
+						</div>
                     </div>
 
                     <hr/>
@@ -139,8 +152,8 @@
 						</script>
                     <div class="mt-10">
                         	아직 회원이 아니신가요?
-                        <p class="registry-p">
-                            <a href="joinselect.udo" class="line-button">FunThing 가입하기</a>
+                        <p class="registry-p" style=" color: gray;" >
+                            <a href="joinselect.udo" style=" color: gray;" class="line-button">FunThing 가입하기</a>
                         </p>
                     </div>
             </div>
