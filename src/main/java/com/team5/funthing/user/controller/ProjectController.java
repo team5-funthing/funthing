@@ -178,7 +178,7 @@ public class ProjectController {
       return "p-project-list";
    }
    
-   @RequestMapping(value="/showStartProjectPageInterceptor.udo", method = RequestMethod.GET)
+   @RequestMapping(value="/showStartProjectPage.udo", method = RequestMethod.GET)
    public String startProject(HttpSession session, Model model) {
       
       memberVO = (MemberVO)session.getAttribute("memberSession");

@@ -60,7 +60,12 @@
 	
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/*Interceptor.udo"/>
+			<mvc:mapping path="/showStartProjectPage.udo"/>
+			<mvc:mapping path="/supportProject.udo"/>
+			<mvc:mapping path="/insertProjectBoard.udo"/>
+			<mvc:mapping path="/insertReport.udo"/>
+			<mvc:mapping path="/upCountLike.udo"/>
+			<mvc:mapping path="/showInsertwAskMessage.udo"/>
 			<beans:bean class="com.team5.funthing.common.controller.UserInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>

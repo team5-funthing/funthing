@@ -123,7 +123,7 @@ public class MemberActivityController {
 	
 	
 
-	@RequestMapping("upCountLikeInterceptor.udo")
+	@RequestMapping("upCountLike.udo")
 
 	public String upCountLike(MemberActivityVO mavo, 
 							Model model,
