@@ -40,9 +40,10 @@ public class CSBoardController {
 	}
 
 	@RequestMapping(value="insertCSBoard.udo",method=RequestMethod.POST)
-	public String insertCSBoard(CSBoardVO vo,HttpSession session) {
+	public String insertCSBoard(CSBoardVO vo,HttpSession session, Model model) {
 	MemberVO vo2 =	(MemberVO)session.getAttribute("memberSession");
 		vo.setEmail(vo2.getEmail());
+		model.addAttribute("vo2",vo2);
 		insertCSBoardService.insertCSBoard(vo);
 		return "f-CSWrite";
 	}

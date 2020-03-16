@@ -98,31 +98,38 @@ public class ProjectAskMessageController {
 	   
 	  memberVO = (MemberVO)session.getAttribute("memberSession");
 	  vo.setEmail(memberVO.getEmail());
-	  
-	  System.out.println("확인할 코드");
-	  
+
+	  vo2.setEmail(memberVO.getEmail());
+
       
-      if(getMakerMemberCreatorService.getMakerMemberCreator(vo) != null) {
+      if(getMakerMemberCreatorService.getMakerMemberCreator(vo) != null) { 
+    	  
+    	  System.out.println("나는 크리에이터");
 
          MemberVO getMakerMember = getMakerMemberCreatorService.getMakerMemberCreator(vo); 
-         System.out.println("테스트12123"+getMakerMember.toString());
+         System.out.println("메이커멤버 확인"+getMakerMember.toString());
+
          model.addAttribute("getMakerMember", getMakerMember);
          
          vo2.setCreator(getMakerMember.getCreator().getCreator());
          model.addAttribute("vo2",vo2);
-          
+
    
          List<ProjectAskMessageVO>getEntireMakerMessageList = getEntireProjectMakerAskMessageListService.getEntireProjectMakerAskMessageList(vo2);
-         System.out.println("占쏙옙占쏙옙占쏙옙占쏙옙"+getEntireMakerMessageList.toString());
+         System.out.println("여기에 리스트가 다찍혀야해"+getEntireMakerMessageList.toString());
          model.addAttribute("messagelist", getEntireMakerMessageList);
-                
+        
+      // 그아이디가 보낸 메세지 리스트 띄어주기 
+         List<ProjectAskMessageVO>privateMessagelist = getEntireProjectAskMessageListService.getEntireProjectAskMessageList(vo2);
+         System.out.println("여기에는?"+privateMessagelist.toString());
+         model.addAttribute("privateMessagelist", privateMessagelist);
          
          
          vo3.setEmail(memberVO.getEmail());
          System.out.println("vo3 : "+ vo3);
          
          List<CSBoardVO> csboardList = getCSBoardListService.getCSBoardList(vo3);
-         System.out.println("占쏙옙占썩에 占썰변占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 : "+ csboardList.toString());
+         System.out.println(" : "+ csboardList.toString());
          model.addAttribute("askAdminList",csboardList);
          
          getMemberService.getMember(vo);
@@ -130,14 +137,20 @@ public class ProjectAskMessageController {
          
          return "p-message-check"; 
          
-      }else {
+
+      }else { 
+
          
-         System.out.println("占쏙옙占쏙옙커占쏙옙 占싣닙니댐옙.");
+    	  System.out.println("나는 그냥 구매자");
             
          vo2.setEmail(memberVO.getEmail());
          List<ProjectAskMessageVO> getEntireProjectAskMessageList = getEntireProjectAskMessageListService.getEntireProjectAskMessageList(vo2);
          model.addAttribute("getMessageList",getEntireProjectAskMessageList);
          
+         // 그아이디가 보낸 메세지 리스트 띄어주기 
+         List<ProjectAskMessageVO>privateMessagelist = getEntireProjectAskMessageListService.getEntireProjectAskMessageList(vo2);
+         System.out.println("여기에는?"+privateMessagelist.toString());
+         model.addAttribute("privateMessagelist", privateMessagelist);
 
          vo3.setEmail(memberVO.getEmail());
          System.out.println("vo3 : "+ vo3);
