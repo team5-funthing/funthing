@@ -47,7 +47,7 @@
 
 					<c:if test="${empty sessionScope.memberSession.email }">
 						<h5>
-							작성자 아이디 <input type="text" id="email" name="email" value=""  class="form-control"
+							작성자 아이디 <input type="text" id="email" name="email" value="${vo2.email }"  class="form-control"
 								placeholder="답변받을 email을 기재하세요">
 
 						</h5>

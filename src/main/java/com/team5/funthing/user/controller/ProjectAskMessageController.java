@@ -98,25 +98,29 @@ public class ProjectAskMessageController {
 	   
 	  memberVO = (MemberVO)session.getAttribute("memberSession");
 	  vo.setEmail(memberVO.getEmail());
+	  vo2.setEmail(memberVO.getEmail());
 
       
-      if(getMakerMemberCreatorService.getMakerMemberCreator(vo) != null) { //占쏙옙占쏙옙커 占싹띰옙
+      if(getMakerMemberCreatorService.getMakerMemberCreator(vo) != null) { 
+    	  
+    	  System.out.println("나는 크리에이터");
 
-//       1.member占쏙옙占싱븝옙占 creator占쏙옙占싱븝옙 占쏙옙占쏙옙占쌔쇽옙 creator占쏙옙占쏙옙占쏙옙占쏙옙
          MemberVO getMakerMember = getMakerMemberCreatorService.getMakerMemberCreator(vo); 
-         System.out.println("크占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙"+getMakerMember.toString());
+         System.out.println("메이커멤버 확인"+getMakerMember.toString());
          model.addAttribute("getMakerMember", getMakerMember);
          
-//       creator占쏙옙 占쌍깍옙 占쏙옙占쏙옙
          vo2.setCreator(getMakerMember.getCreator().getCreator());
          model.addAttribute("vo2",vo2);
          
-//       2.projectAskMessage占쏙옙占싱븝옙占쏙옙 creator占쏙옙 占승는억옙占쏙옙 占쏙옙占 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 (占쏙옙占썩서 project占쏙옙 占쏙옙占쏙옙占쌔쇽옙 projectMainImage占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙) 
    
          List<ProjectAskMessageVO>getEntireMakerMessageList = getEntireProjectMakerAskMessageListService.getEntireProjectMakerAskMessageList(vo2);
-         System.out.println("占쏙옙占쏙옙占쏙옙占쏙옙"+getEntireMakerMessageList.toString());
+         System.out.println("여기에 리스트가 다찍혀야해"+getEntireMakerMessageList.toString());
          model.addAttribute("messagelist", getEntireMakerMessageList);
-                
+        
+      // 그아이디가 보낸 메세지 리스트 띄어주기 
+         List<ProjectAskMessageVO>privateMessagelist = getEntireProjectAskMessageListService.getEntireProjectAskMessageList(vo2);
+         System.out.println("여기에는?"+privateMessagelist.toString());
+         model.addAttribute("privateMessagelist", privateMessagelist);
          
          
        // 3. 占쏙옙占쏙옙占쌘울옙占쏙옙 占쏙옙占쏙옙占싹깍옙 
@@ -124,23 +128,27 @@ public class ProjectAskMessageController {
          System.out.println("vo3 : "+ vo3);
          
          List<CSBoardVO> csboardList = getCSBoardListService.getCSBoardList(vo3);
-         System.out.println("占쏙옙占썩에 占썰변占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 : "+ csboardList.toString());
+         System.out.println(" : "+ csboardList.toString());
          model.addAttribute("askAdminList",csboardList);
          
          getMemberService.getMember(vo);
          model.addAttribute("getMember",getMemberService.getMember(vo));
          
-         return "p-message-check"; //占쌨쇽옙占쏙옙 占쏙옙占쏙옙트占쏙옙 
+         return "p-message-check"; 
          
-      }else { //占쏙옙占쏙옙커占쏙옙 占싣닐띰옙 
+      }else { 
          
-         System.out.println("占쏙옙占쏙옙커占쏙옙 占싣닙니댐옙.");
+    	  System.out.println("나는 그냥 구매자");
             
 //       占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占실깍옙 확占쏙옙占싹깍옙
          vo2.setEmail(memberVO.getEmail());
          List<ProjectAskMessageVO> getEntireProjectAskMessageList = getEntireProjectAskMessageListService.getEntireProjectAskMessageList(vo2);
          model.addAttribute("getMessageList",getEntireProjectAskMessageList);
          
+         // 그아이디가 보낸 메세지 리스트 띄어주기 
+         List<ProjectAskMessageVO>privateMessagelist = getEntireProjectAskMessageListService.getEntireProjectAskMessageList(vo2);
+         System.out.println("여기에는?"+privateMessagelist.toString());
+         model.addAttribute("privateMessagelist", privateMessagelist);
 
          //    占쏙옙占쏙옙占쌘울옙占쏙옙 占쏙옙占쏙옙占싹깍옙 
          vo3.setEmail(memberVO.getEmail());
