@@ -47,7 +47,6 @@
 											<option value="${category.categoryName}">${category.categoryName}</option>
 										</c:forEach>
 								</select>
-
 							</div>
 							<!-- /btn-group -->
 

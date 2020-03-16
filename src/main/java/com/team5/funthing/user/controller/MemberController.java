@@ -166,7 +166,7 @@ public class MemberController {
 		try {
 			vo.setEmail(email);
 			String certificationCode = sendMailUtil.createCertificationCode(50);
-			sendMailUtil.sendMail("[Funthing] �씤利앹퐫�뱶 �엯�땲�떎.", "�씤利앹퐫�뱶 : ["+certificationCode+"]", vo.getEmail());   
+			sendMailUtil.sendMail("[Funthing] 인증번호를 전송합니다.", "인증번호 : ["+certificationCode+"]", vo.getEmail());   
 			model.addAttribute("certificationCode",certificationCode);
 		} catch (Exception e) {
 			e.printStackTrace();

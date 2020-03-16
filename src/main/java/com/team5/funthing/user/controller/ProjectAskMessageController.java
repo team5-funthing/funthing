@@ -62,7 +62,7 @@ public class ProjectAskMessageController {
    public String showInsertwAskMessage(ProjectVO vo, Model model) { 
 
       
-      System.out.println("占쏙옙占쏙옙占싹깍옙 占쏙옙占쏙옙占쏙옙 占쌨쇽옙占쏙옙占쌉뤄옙창占쏙옙占쏙옙 占싱듸옙");
+      System.out.println("테스트1");
       
 
       vo.setProjectTitle(getProjectService.getProject(vo).getProjectTitle());//title 占쏙옙占쏙옙占쏙옙占쏙옙
@@ -71,7 +71,7 @@ public class ProjectAskMessageController {
       
       model.addAttribute("vo",vo);
       
-      System.out.println("占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 占쌍미놂옙占싱억옙"+getProjectService.getProject(vo).toString());
+      System.out.println("테스트2"+getProjectService.getProject(vo).toString());
       
       return "f-projectAsk-message"; //占쏙옙占쏙옙占싹깍옙 占쌉뤄옙창占쏙옙占쏙옙 
          
@@ -98,6 +98,7 @@ public class ProjectAskMessageController {
 	   
 	  memberVO = (MemberVO)session.getAttribute("memberSession");
 	  vo.setEmail(memberVO.getEmail());
+
 	  vo2.setEmail(memberVO.getEmail());
 
       
@@ -107,11 +108,12 @@ public class ProjectAskMessageController {
 
          MemberVO getMakerMember = getMakerMemberCreatorService.getMakerMemberCreator(vo); 
          System.out.println("메이커멤버 확인"+getMakerMember.toString());
+
          model.addAttribute("getMakerMember", getMakerMember);
          
          vo2.setCreator(getMakerMember.getCreator().getCreator());
          model.addAttribute("vo2",vo2);
-         
+
    
          List<ProjectAskMessageVO>getEntireMakerMessageList = getEntireProjectMakerAskMessageListService.getEntireProjectMakerAskMessageList(vo2);
          System.out.println("여기에 리스트가 다찍혀야해"+getEntireMakerMessageList.toString());
@@ -123,7 +125,6 @@ public class ProjectAskMessageController {
          model.addAttribute("privateMessagelist", privateMessagelist);
          
          
-       // 3. 占쏙옙占쏙옙占쌘울옙占쏙옙 占쏙옙占쏙옙占싹깍옙 
          vo3.setEmail(memberVO.getEmail());
          System.out.println("vo3 : "+ vo3);
          
@@ -136,11 +137,12 @@ public class ProjectAskMessageController {
          
          return "p-message-check"; 
          
+
       }else { 
+
          
     	  System.out.println("나는 그냥 구매자");
             
-//       占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占실깍옙 확占쏙옙占싹깍옙
          vo2.setEmail(memberVO.getEmail());
          List<ProjectAskMessageVO> getEntireProjectAskMessageList = getEntireProjectAskMessageListService.getEntireProjectAskMessageList(vo2);
          model.addAttribute("getMessageList",getEntireProjectAskMessageList);
@@ -150,7 +152,6 @@ public class ProjectAskMessageController {
          System.out.println("여기에는?"+privateMessagelist.toString());
          model.addAttribute("privateMessagelist", privateMessagelist);
 
-         //    占쏙옙占쏙옙占쌘울옙占쏙옙 占쏙옙占쏙옙占싹깍옙 
          vo3.setEmail(memberVO.getEmail());
          System.out.println("vo3 : "+ vo3);
          
@@ -165,9 +166,8 @@ public class ProjectAskMessageController {
    }
    
 
-   //크占쏙옙占쏙옙占쏙옙占싶곤옙 占쏙옙占쏙옙 占쌨쇽옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 
-   @RequestMapping(value="getChoiceProjectAskMessageC.udo", method = RequestMethod.GET) //占쏙옙占실뱄옙호 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 
-   public String getChoiceProjectAskMessageC(ProjectAskMessageVO vo, MemberVO vo2, CreatorVO vo3, Model model, HttpSession session) { //占쏙옙占쏙옙트占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占실메쇽옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 占싱듸옙
+   @RequestMapping(value="getChoiceProjectAskMessageC.udo", method = RequestMethod.GET) 
+   public String getChoiceProjectAskMessageC(ProjectAskMessageVO vo, MemberVO vo2, CreatorVO vo3, Model model, HttpSession session) {
       
       
 
@@ -180,27 +180,24 @@ public class ProjectAskMessageController {
       vo3.setCreator(getMakerMember.getCreator().getCreator());
       model.addAttribute("vo3",vo3);
     
-      return "f-projectAsk-message-reply-creator"; //크占쏙옙占쏙옙占쏙옙占싶곤옙 占썰변占쌕댐옙 占쏙옙
+      return "f-projectAsk-message-reply-creator";
          
    }
    
-
-   //크占쏙옙占쏙옙占쏙옙占쏙옙 占싣댐옙 占싹뱄옙회占쏙옙占쏙옙 占쏙옙占쏙옙 占쌨쇽옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙
-   @RequestMapping(value="getChoiceProjectAskMessage.udo", method = RequestMethod.GET) //占쏙옙占실뱄옙호 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 
-   public String getChoiceProjectAskMessage(ProjectAskMessageVO vo, Model model) { //占쏙옙占쏙옙트占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占실메쇽옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 占싱듸옙
+   @RequestMapping(value="getChoiceProjectAskMessage.udo", method = RequestMethod.GET)  
+   public String getChoiceProjectAskMessage(ProjectAskMessageVO vo, Model model) {
       
       ProjectAskMessageVO getChoiceProjectAskMessage = getChoiceProjectAskMessageService.getChoiceProjectAskMessage(vo); 
       model.addAttribute("choiceProjectAskMessage", getChoiceProjectAskMessage);
 
-      return "f-projectAsk-message-reply"; //크占쏙옙占쏙옙占쏙옙占싶곤옙 占썰변占쌕댐옙 占쏙옙
+      return "f-projectAsk-message-reply";
 
 
          
    }
    
    @RequestMapping(value="updateProjectAskReplyContentsStatus.udo", method = RequestMethod.GET)
-   public String updateProjectAskReplyContentsStatus(ProjectAskMessageVO vo) { //占썰변占쏙옙 占쌨몌옙 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙載ｏ옙占
-      
+   public String updateProjectAskReplyContentsStatus(ProjectAskMessageVO vo) {
       updateProjectAskReplyContentsStatusService.updateProjectAskReplyContentsStatus(vo);
       System.out.println("占썰변占쏙옙 占쌨았쏙옙占싹댐옙.");
       
@@ -209,7 +206,7 @@ public class ProjectAskMessageController {
    }
 
    @RequestMapping(value="getEntireProjectAskMessageList.udo", method = RequestMethod.POST)
-   public String getEntireProjectAskMessageList(ProjectAskMessageVO vo, Model model) { //占쏙옙占쏙옙占싱듸옙占 占쏙옙占쏙옙占쌨쇽옙占쏙옙찾占쏙옙
+   public String getEntireProjectAskMessageList(ProjectAskMessageVO vo, Model model) {
       
       
       List<ProjectAskMessageVO> getEntireProjectAskMessageList = getEntireProjectAskMessageListService.getEntireProjectAskMessageList(vo);
