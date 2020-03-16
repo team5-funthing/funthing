@@ -18,11 +18,11 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * 
  * 
- * 		// ���ε� ��Ų ������ �̹� �����ϴ� ��� ���� ������ �ٽ� ���� ��쿡 ���� �� �ִ� ��Ȳ ó��
- *		// ���ε� �̹����� ������ ���
+ * 		// 占쏙옙占싸듸옙 占쏙옙킨 占쏙옙占쏙옙占쏙옙 占싱뱄옙 占쏙옙占쏙옙占싹댐옙 占쏙옙占� 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쌕쏙옙 占쏙옙占쏙옙 占쏙옙荑� 占쏙옙占쏙옙 占쏙옙 占쌍댐옙 占쏙옙황 처占쏙옙
+ *		// 占쏙옙占싸듸옙 占싱뱄옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占�
  *		if(!uploadFile.isEmpty()) { 
  *			
- *			//���ŵ� ���ϰ�θ� vo��ü���� ��������
+ *			//占쏙옙占신듸옙 占쏙옙占싹곤옙罐占� vo占쏙옙체占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙
  *			String toRemoveFilePath = vo.getProjectMainImage();
  *			
  *			String voName = vo.getClass().getSimpleName();
@@ -78,7 +78,7 @@ public class UploadUtilImpl implements UploadUtil {
 			}else {
 				return null;
 			}
-			String completePath = File.separator + "resources" + File.separator + "upload" + dirPath + File.separator + fileName;
+			String completePath = File.separator + "funthing" + File.separator + "resources" + File.separator + "upload" + dirPath + File.separator + fileName;
 			uploadCompletePaths.add(completePath);
 			
 			

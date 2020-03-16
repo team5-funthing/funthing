@@ -6,14 +6,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class InterceptorController {
 
-	@RequestMapping("needLogin.udo")
+	@RequestMapping("/needLogin.udo")
 	public String needLogin() {
 		return "needLogin";
 	}
 	
-	@RequestMapping("adminNeedLogin.ado")
+	@RequestMapping("/adminNeedLogin.ado")
 	public String adminLoginPage() {
-		System.out.println("페이지 이동 전입니다.");
 		return "adminNeedLoginPage";
 	}
 	

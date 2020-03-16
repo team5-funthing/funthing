@@ -149,8 +149,6 @@ public class ProjectController {
    private RewardVO rewardVO;
    @Autowired
    private ProjectBoardVO projectBoardVO;
-   @Autowired
-   private CreatorVO creatorVO;
    
 
    @Autowired
@@ -194,6 +192,8 @@ public class ProjectController {
 	   
 	  System.out.println("creator :" + creator);
 
+	  CreatorVO creatorVO = new CreatorVO();
+	  
 	  System.out.println(creatorVO == null);
 	  
 	  creatorVO.setCreator(creator);

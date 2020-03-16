@@ -54,7 +54,7 @@ public class AdminProjectCheckController {
 		vo.setStatusReplyMessage("");
 		updateStatusReplyMessageService.updateStatusReplyMessage(vo);				
 		
-		insertProjectJudgeResultAlarm(vo,avo,"글씨깨짐으로인해서 비워놓음");
+		insertProjectJudgeResultAlarm(vo,avo,"승인입니다.");
 		
 		return "redirect:getProjectCheckList.ado";
 
@@ -67,7 +67,7 @@ public class AdminProjectCheckController {
 		updateProjectCheckDenyService.updateProjectCheckDeny(vo);
 		updateStatusReplyMessageService.updateStatusReplyMessage(vo);
 		
-		insertProjectJudgeResultAlarm(vo,avo,"글씨깨짐으로인해서 비워놓음");
+		insertProjectJudgeResultAlarm(vo,avo,"거부입니다.");
 		
 		return "redirect:getProjectCheckList.ado";
 	}
@@ -76,7 +76,7 @@ public class AdminProjectCheckController {
 	public String updateProjectCheckDefer(ProjectVO vo, AlarmVO avo, Model model) {
 		
 		updateProjectCheckDeferService.updateProjectCheckDefer(vo);
-		insertProjectJudgeResultAlarm(vo,avo,"글씨깨짐으로인해서 비워놓음");
+		insertProjectJudgeResultAlarm(vo,avo,"보류입니다.");
 		updateStatusReplyMessageService.updateStatusReplyMessage(vo);
 		
 		return "redirect:getProjectCheckList.ado";
@@ -87,7 +87,7 @@ public class AdminProjectCheckController {
 	
 	public void insertProjectJudgeResultAlarm(ProjectVO vo, AlarmVO avo, String state) {
 		
-		avo.setAlarmType(vo.getProjectTitle() + " ");
+		avo.setAlarmType(vo.getProjectTitle() + " 심사결과");
 		avo.setDetailAlarmType(state);
 		avo.setReceiveId(vo.getEmail());
 		avo.setReadConfirm('n');
