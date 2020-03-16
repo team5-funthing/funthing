@@ -112,7 +112,7 @@
                                 <tr>
                                     <td>${list.name}</td>
                                     <td>
-                                    <a href="http://localhost:8080/funthing/getMember.ado?email=${list.email}">${list.email}</a>
+                                    <a href="getMember.ado?email=${list.email}">${list.email}</a>
                                     </td>
                                     <td>${list.creator.creator}</td>
                                     <td>${list.creator.lv}</td>

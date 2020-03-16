@@ -281,10 +281,6 @@ $(document).ready(function(){
 						$("#inputEmail").empty();
 						$("#inputEmail").append("이미 가입된 메일입니다.").css('color','Tomato').css('font-size','75%');
 						document.getElementById('email').value = "";
-					} else if(data=='3'){
-						$("#inputEmail").empty();
-						$("#inputEmail").append("탈퇴한 회원입니다. 다른 이메일을 이용하여 주세요.").css('color','Tomato').css('font-size','75%');
-						document.getElementById('email').value = "";
 					}
 				},
 				error : function() {

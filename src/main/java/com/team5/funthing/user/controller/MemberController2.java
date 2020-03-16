@@ -61,6 +61,7 @@ public class MemberController2 {
 		return "p-index";
 	}
 	
+	//
 	@RequestMapping(value = "updateMember.udo",method= RequestMethod.POST)
 		public String updateProfile(MemberVO vo,HttpSession session,Model model) {
 
@@ -102,6 +103,11 @@ public class MemberController2 {
 	   @ResponseBody
 	   public String saveImage(@RequestParam(name ="imgname") List<MultipartFile> uploadFile,MemberVO vo,HttpSession session) throws Exception {
 		   MemberVO vo2 = (MemberVO) session.getAttribute("memberSession");
+		   File file = new File(vo2.getMyImage());
+			 if(file.exists()) {
+				 file.delete();
+			 }
+			 vo2.setMyImage("");
 		   vo.setEmail(vo2.getEmail());
 	       memberImageUploader(uploadFile, vo);
 
@@ -114,6 +120,11 @@ public class MemberController2 {
 	   @RequestMapping(value="saveimage2.udo",method=RequestMethod.POST)
 	   public String saveImage2(@RequestParam(name ="imgname") List<MultipartFile> uploadFile,MemberVO vo,HttpSession session) throws Exception {
 		   MemberVO vo2 = (MemberVO) session.getAttribute("memberSession");
+		   File file = new File(vo2.getMyImage());
+			 if(file.exists()) {
+				 file.delete();
+			 }
+			 vo2.setMyImage("");
 		   vo.setEmail(vo2.getEmail());
 	       memberImageUploader(uploadFile, vo);
 	        insertImageService.insertImage(vo);
@@ -152,9 +163,9 @@ public class MemberController2 {
 			List<String> toSettingPath = upload.upload(toDoUploadList, voName, toRemoveFilePath);
 
 
-			if(toSettingPath == null) { System.out.println("�̹��� ���ε� �ȵ�"); return;}
+			if(toSettingPath == null) { System.out.println("占싱뱄옙占쏙옙 占쏙옙占싸듸옙 占싫듸옙"); return;}
 
-			if(toSettingPath == null) { System.out.println("ÀÌ¹ÌÁö ¾÷·Îµå ¾ÈµÊ"); return;}
+			if(toSettingPath == null) { System.out.println("�횑쨔횑횁철 쩐첨쨌횓쨉책 쩐횊쨉횎"); return;}
 
 			
 			int cnt = 1;
