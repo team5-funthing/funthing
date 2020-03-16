@@ -86,11 +86,9 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 		try {
 			
 			if(davo.getDeliveryAddressNo() == -1 ) {
-				System.out.println("배송지 새로 등록");
 				davo = deliveryAddressDAO.insertDeleveryAddress(davo);
 
 			}else {
-				System.out.println("기존 배송지 수정");
 				deliveryAddressDAO.updateDeliveryAddress(davo);
 			}
 
@@ -167,12 +165,12 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 			params.add("quantity", quantityStr); 
 			params.add("total_amount", totalAmountStr);
 			params.add("tax_free_amount", taxFreeAmount);
-			params.add("approval_url", "http://localhost:8080/funthing/kakaoPaySuccess.udo?orderNoStr=" + orderNoStr);
-			params.add("cancel_url",  "http://localhost:8080/funthing/kakaoPayCancel.udo");
-			params.add("fail_url", "http://localhost:8080/funthing/kakaoPaySuccessFail.udo");
-//			params.add("approval_url", "http://ec2-54-180-105-174.ap-northeast-2.compute.amazonaws.com/kakaoPaySuccess.udo?orderNoStr=" + orderNoStr);
-//			params.add("cancel_url",  "http://ec2-54-180-105-174.ap-northeast-2.compute.amazonaws.com/kakaoPayCancel.udo");
-//			params.add("fail_url", "http://ec2-54-180-105-174.ap-northeast-2.compute.amazonaws.com/kakaoPaySuccessFail.udo");
+//			params.add("approval_url", "http://localhost:8080/funthing/kakaoPaySuccess.udo?orderNoStr=" + orderNoStr);
+//			params.add("cancel_url",  "http://localhost:8080/funthing/kakaoPayCancel.udo");
+//			params.add("fail_url", "http://localhost:8080/funthing/kakaoPaySuccessFail.udo");
+			params.add("approval_url", "http://ec2-54-180-105-174.ap-northeast-2.compute.amazonaws.com/kakaoPaySuccess.udo?orderNoStr=" + orderNoStr);
+			params.add("cancel_url",  "http://ec2-54-180-105-174.ap-northeast-2.compute.amazonaws.com/kakaoPayCancel.udo");
+			params.add("fail_url", "http://ec2-54-180-105-174.ap-northeast-2.compute.amazonaws.com/kakaoPaySuccessFail.udo");
 
 			HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);			
 			
