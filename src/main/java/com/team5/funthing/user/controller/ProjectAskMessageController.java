@@ -193,9 +193,6 @@ public class ProjectAskMessageController {
    @RequestMapping(value="updateProjectAskReplyContentsStatus.udo", method = RequestMethod.GET)
    public String updateProjectAskReplyContentsStatus(ProjectAskMessageVO vo) {
       updateProjectAskReplyContentsStatusService.updateProjectAskReplyContentsStatus(vo);
-      System.out.println("占썰변占쏙옙 占쌨았쏙옙占싹댐옙.");
-      
-      
       return "redirect: showDetailMyPage.udo"; 
    }
 
