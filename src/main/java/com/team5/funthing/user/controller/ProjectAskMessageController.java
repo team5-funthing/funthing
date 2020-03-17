@@ -113,7 +113,7 @@ public class ProjectAskMessageController {
          System.out.println("여기에 리스트가 다찍혀야해"+getEntireMakerMessageList.toString());
          model.addAttribute("messagelist", getEntireMakerMessageList);
         
-      // 그아이디가 보낸 메세지 리스트 띄어주기 
+         // 그아이디가 보낸 메세지 리스트 띄어주기 
          List<ProjectAskMessageVO>privateMessagelist = getEntireProjectAskMessageListService.getEntireProjectAskMessageList(vo2);
          System.out.println("여기에는?"+privateMessagelist.toString());
          model.addAttribute("privateMessagelist", privateMessagelist);
