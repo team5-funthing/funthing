@@ -30,7 +30,7 @@
 
      <c:if test="${not empty getUserMainImageChangeList2}">
    		<div class="carousel-item active" data-interval="500">
-      <img style="width: 100px; height: 300px;" src="${getUserMainImageChangeList2.imagePath}" class="d-block w-100" alt="...">
+      <img style="width: 100px; height: 750px;" src="${getUserMainImageChangeList2.imagePath}" class="d-block w-100" alt="...">
    		<div class="carousel-caption d-none d-md-block">
    		<c:if test="${not empty getUserMainImageChangeList2.imageContent}">
         	<h5 style="color: black; margin-bottom: 10px;" align="left">${getUserMainImageChangeList2.imageContent}</h5>
@@ -45,7 +45,7 @@
    <c:forEach var="mainImageList" items="${getUserMainImageChangeList3}">
   
     <div class="carousel-item" data-interval="500">
-      <img style="width: 100px; height: 300px;" src="${mainImageList.imagePath}" class="d-block w-100" alt="...">
+      <img style="width: 100px; height: 750px;" src="${mainImageList.imagePath}" class="d-block w-100" alt="...">
       	<div class="carousel-caption d-none d-md-block">
       	<c:if test="${not empty mainImageList.imageContent}">
         	<h5 style="color: black; margin-bottom: 10px;" align="left">${mainImageList.imageContent}</h5>
@@ -54,8 +54,8 @@
     </div>
    </c:forEach>
    </c:if>
-
-    
+   
+   
   </div>
   
   <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
@@ -106,7 +106,7 @@
 	                            </div>
 	                        </div>
 	                        
-	                        <div class="h5 p-2" style="color: black; font-weight: 500;">${fundingProject.projectTitle }</div>
+	                        <div class="h5 p-2" style="color: black; font-weight: 500; min-height:70px; ">${fundingProject.projectTitle }</div>
 	                        <ul>
 	                            <li style="color: gray;">by ${fundingProject.creator }</li>
 	                        </ul>
@@ -180,7 +180,7 @@
 		                            </div>
 		                        </div>
 		                        
-		                        <div class="h5 p-2" style="color: black; font-weight: 500;">${fundingProject.projectTitle }</div>
+		                        <div class="h5 p-2" style="color: black; font-weight: 500; min-height:70px; ">${fundingProject.projectTitle }</div>
 		                        <ul>
 		                            <li style="color: gray;">by ${fundingProject.creator }</li>
 		                        </ul>
@@ -235,7 +235,7 @@
 		                            </div>
 		                        </div>
 		                        
-		                        <div class="h5 p-2" style="color: black; font-weight: 500;">${fundingProject.projectTitle }</div>
+		                        <div class="h5 p-2" style="color: black; font-weight: 500; min-height:70px; ">${fundingProject.projectTitle }</div>
 		                        <ul>
 		                            <li style="color: gray;">by ${fundingProject.creator }</li>
 		                        </ul>
@@ -290,7 +290,7 @@
 		                            </div>
 		                        </div>
 		                        
-		                        <div class="h5 p-2" style="color: black; font-weight: 500;">${fundingProject.projectTitle }</div>
+		                        <div class="h5 p-2" style="color: black; font-weight: 500; min-height:70px; ">${fundingProject.projectTitle }</div>
 		                        <ul>
 		                            <li style="color: gray;">by ${fundingProject.creator }</li>
 		                        </ul>
@@ -366,7 +366,7 @@
 		                            </div>
 		                        </div>
 		                        
-		                        <div class="h5 p-2" style="color: black; font-weight: 500;">${fundingProject.projectTitle }</div>
+		                        <div class="h5 p-2" style="color: black; font-weight: 500; min-height:70px; ">${fundingProject.projectTitle }</div>
 		                        <ul>
 		                            <li style="color: gray;">by ${fundingProject.creator }</li>
 		                        </ul>
@@ -419,7 +419,7 @@
 		                            </div>
 		                        </div>
 		                        
-		                        <div class="h5 p-2" style="color: black; font-weight: 500;">${fundingProject.projectTitle }</div>
+		                        <div class="h5 p-2" style="color: black; font-weight: 500; min-height:70px; ">${fundingProject.projectTitle }</div>
 		                        <ul>
 		                            <li style="color: gray;">by ${fundingProject.creator }</li>
 		                        </ul>
@@ -472,7 +472,7 @@
 		                            </div>
 		                        </div>
 		                        
-		                        <div class="h5 p-2" style="color: black; font-weight: 500;">${fundingProject.projectTitle }</div>
+		                        <div class="h5 p-2" style="color: black; font-weight: 500; min-height:70px; ">${fundingProject.projectTitle }</div>
 		                        <ul>
 		                            <li style="color: gray;">by ${fundingProject.creator }</li>
 		                        </ul>
@@ -547,7 +547,7 @@
 		                            </div>
 		                        </div>
 		                        
-		                        <div class="h5 p-2" style="color: black; font-weight: 500;">${fundingProject.projectTitle }</div>
+		                        <div class="h5 p-2" style="color: black; font-weight: 500; min-height:70px; ">${fundingProject.projectTitle }</div>
 		                        <ul>
 		                            <li style="color: gray;">by ${fundingProject.creator }</li>
 		                        </ul>
@@ -599,7 +599,7 @@
 		                            </div>
 		                        </div>
 		                        
-		                        <div class="h5 p-2" style="color: black; font-weight: 500;">${fundingProject.projectTitle }</div>
+		                        <div class="h5 p-2" style="color: black; font-weight: 500; min-height:70px; ">${fundingProject.projectTitle }</div>
 		                        <ul>
 		                            <li style="color: gray;">by ${fundingProject.creator }</li>
 		                        </ul>
@@ -652,7 +652,7 @@
 		                            </div>
 		                        </div>
 		                        
-		                        <div class="h5 p-2" style="color: black; font-weight: 500;">${fundingProject.projectTitle }</div>
+		                        <div class="h5 p-2" style="color: black; font-weight: 500; min-height:70px; ">${fundingProject.projectTitle }</div>
 		                        <ul>
 		                            <li style="color: gray;">by ${fundingProject.creator }</li>
 		                        </ul>
@@ -725,7 +725,7 @@
 		                            </div>
 		                        </div>
 		                        
-		                        <div class="h5 p-2" style="color: black; font-weight: 500;">${fundingProject.projectTitle }</div>
+		                        <div class="h5 p-2" style="color: black; font-weight: 500; min-height:70px; ">${fundingProject.projectTitle }</div>
 		                        <ul>
 		                            <li style="color: gray;">by ${fundingProject.creator }</li>
 		                        </ul>
@@ -778,7 +778,7 @@
 		                            </div>
 		                        </div>
 		                        
-		                        <div class="h5 p-2" style="color: black; font-weight: 500;">${fundingProject.projectTitle }</div>
+		                        <div class="h5 p-2" style="color: black; font-weight: 500; min-height:70px; ">${fundingProject.projectTitle }</div>
 		                        <ul>
 		                            <li style="color: gray;">by ${fundingProject.creator }</li>
 		                        </ul>
@@ -830,7 +830,7 @@
 		                            </div>
 		                        </div>
 		                        
-		                        <div class="h5 p-2" style="color: black; font-weight: 500;">${fundingProject.projectTitle }</div>
+		                        <div class="h5 p-2" style="color: black; font-weight: 500; min-height:70px; ">${fundingProject.projectTitle }</div>
 		                        <ul>
 		                            <li style="color: gray;">by ${fundingProject.creator }</li>
 		                        </ul>

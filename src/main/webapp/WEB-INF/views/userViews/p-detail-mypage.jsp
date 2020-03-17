@@ -134,9 +134,10 @@
 		                                 		</c:choose>
 			                                 	
 		                                 	</aside>
-		                                    <div class="card">
+		                                    <div class="card" style="border-radius: 10px;">
 		                                       <div class="thumbnail-wrap">
-		                                          <div class="thumbnail ">
+		                                          <div class="thumbnail " style="border-top-left-radius: 10px 10px;
+																										border-top-right-radius: 10px 10px;">
 		                                             <div class="centered">
 	                                             		<c:choose>
 	                                             			<c:when test="${myProject.funding == 'y'.charAt(0) }">
@@ -177,28 +178,28 @@
 		                                          </div>
 		                                       </div>
 												
-		                                       <div class="card-body">
-		                                          <h5 class="card-title">${myProject.projectTitle }</h5>
+		                                       <div class="card-body" style=" min-height:220px;">
+		                                          <h5 class="card-title ">${myProject.projectTitle }</h5>
 		                                          <ul>
 		                                             <li>${myProject.projectSummary }</li>
 		                                             <li>${myProject.goalMoney }</li>
 		                                             <li>${project.endDate }</li>
 		                                          </ul>
-													${myProject.projectNo}
-		                                          <div class="percentage">
+												<div class="mt-auto bd-highlight">
+													<div class="percentage">
 														<fmt:formatNumber type="number" var="progressPercent"
 															value="${(myProject.fundingMoney / myProject.goalMoney)*100}"
 															pattern=".00" />
 														<fmt:formatNumber type="number" var="progress"
 															maxFractionDigits="3" value="${myProject.fundingMoney}" />
 														<p>${progress}원${progressPercent}%진행중</p>
-					
-														<div class="progress">
-															<div class="progress-bar color-7" role="progressbar"
-																style="width: ${progressPercent}%" aria-valuenow="30"
+														<div class="progress" style=" height: 7px;">
+															<div class="progress-bar" role="progressbar"
+																style="width: ${progressPercent}%; background-color: #ff9999;" aria-valuenow="30"
 																aria-valuemin="0" aria-valuemax="100"></div>
 														</div>
 													</div>
+												</div>
 		                                       </div>				
 		                                       <div class="card-footer">
 

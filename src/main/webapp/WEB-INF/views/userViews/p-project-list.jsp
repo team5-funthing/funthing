@@ -144,7 +144,7 @@
 	                            </div>
 	                        </div>
 	                        
-	                        <div class="h5 p-2" style="color: black; font-weight: 500;">${fundingProject.projectTitle }</div>
+	                        <div class="h5 p-2" style="color: black; font-weight: 500; min-height:70px; ">${fundingProject.projectTitle }</div>
 	                        <ul>
 	                            <li style="color: gray;">by ${fundingProject.creator }</li>
 	                        </ul>

@@ -7,14 +7,12 @@
         <div class="popup_box">
             <div class="popup_inner">
                 <h3>로그인</h3>
-            		
                     <div class="mt-10">
 	                    <c:if test="${not empty cookie.funthingCookieId.value }">
 	                          <input name="email" id="email" class="form-control form-control-lg" type="text"
 	                             placeholder="이메일 아이디" onfocus="this.placeholder = '이메일 아이디'"
 	                             onblur="this.placeholder = '이메일 아이디'" value="${cookie.funthingCookieId.value }"
 	                             class="single-input" required>
-	
 	                    </c:if>
 	                    
 	                    <c:if test="${ empty cookie.funthingCookieId.value }">
@@ -60,11 +58,14 @@
 
                     </div>
 					<div id="loginProcessingResult">${loginFail}</div>
-                    <div class="col-xl-12 mt-10">
+                    <div class="col-xl-12 mt-3">
                         <div class="mt-30 d-flex justify-content-center">
 							<a href="javascript: return(0);" onclick="inputCheck()"
-								class="deliveryOKBtn btn-lg btn-bd-purple d-none d-lg-inline-block m-1 popup-modal-dismiss pl-4 pr-4">
-								로그인하기 </a>
+								class="deliveryOKBtn btn-lg btn-bd-purple d-none d-lg-inline-block m-1 popup-modal-dismiss pl-2 pr-2">
+								로그인 </a>
+								<a href="javascript: return(0);"
+								class="deliveryOKBtn btn-lg btn-bd-purple d-none d-lg-inline-block m-1 popup-modal-dismiss pl-2 pr-2">
+								취소 </a>
 						</div>
                     </div>
 
@@ -79,7 +80,7 @@
 								"T6JggIUb0xG2LBu9Q7Pf", "http://ec2-54-180-105-174.ap-northeast-2.compute.amazonaws.com/funthing/socialjoin.udo");
 						var state = naver_id_login.getUniqState();		
 						naver_id_login.setButton("green",3,60);
-						naver_id_login.setDomain("http://ec2-54-180-105-174.ap-northeast-2.compute.amazonaws.com");
+						naver_id_login.setDomain("http://localhost:8080/funthing");
 						naver_id_login.setState(state);
 						naver_id_login.init_naver_id_login();
 					</script> 
@@ -97,6 +98,7 @@
 						    var id;
 						    var name;
 						    var email;
+
 						    //var url = 'http://localhost:8080/funthing/socialjoin.udo';
 						    var url = 'http://ec2-54-180-105-174.ap-northeast-2.compute.amazonaws.com/funthing/socialjoin.udo';
 					
@@ -116,7 +118,7 @@
 												 id = res.id;
 												 name = res.properties.nickname;
 												 email = res.kakao_account.email;
-												 location.href=url+'?email='+email+'&password='+id+'&name='+name;
+												 location.href=url+'?email='+email+'&password='+id+'&name='+name+'&check=1';
 	
 											},
 											fail : function(error) {
@@ -150,6 +152,9 @@
 									document.getElementById('login-popup').submit();
 								}
 							}
+							    
+
+							
 						</script>
                     <div class="mt-10">
                         	아직 회원이 아니신가요?

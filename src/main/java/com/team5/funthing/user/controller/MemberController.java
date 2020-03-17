@@ -1,5 +1,6 @@
 package com.team5.funthing.user.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -83,6 +84,15 @@ public class MemberController {
 					response.addCookie(cookiepw);
 				}
 				MemberVO loginMemberVO = getMemberService.getMember(vo);
+				
+				if (loginMemberVO.getMyImage() == null) {
+					
+					String noneImage = File.separator + "funthing" + File.separator + "resources" + File.separator + "user" + File.separator + "img" + File.separator + "non-profile.png";
+					loginMemberVO.setMyImage(noneImage);
+					
+				}
+				
+				
 				
 				avo.setReceiveId(loginMemberVO.getEmail());
 				avo.setReadConfirm('n');

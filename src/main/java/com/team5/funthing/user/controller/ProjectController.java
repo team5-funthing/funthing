@@ -378,12 +378,6 @@ public class ProjectController {
       updateProjectService.updateProject(pvo);
       updateCreatorService.updateCreator(cvo);
       
-      if(checkResult == 'y') {
-         redirectAttributes.addAttribute("msg", "1");
-      }else {
-         redirectAttributes.addAttribute("msg", "2");
-
-      }
       redirectAttributes.addAttribute("creator", cvo.getCreator());
       redirectAttributes.addAttribute("currentProjectNo", pvo.getProjectNo());
       
@@ -476,17 +470,9 @@ public class ProjectController {
       model.addAttribute("creator", creator);
       model.addAttribute("rewardList", rewardList);
       
-      for(ProjectIntroduceImageVO projectIntroduceImage :projectIntroduceImageList) {
-    	  
-    	  System.out.println(projectIntroduceImage.getProjectIntroduceImage());
-      
-      }
-      
       model.addAttribute("projectIntroduceImageList", projectIntroduceImageList);
       model.addAttribute("previewProjectKeywordList", projectKeywordList);
       model.addAttribute("previewProject", pvo);
-      
-      System.out.println(pvo.toString());
       
       return "p-project-details-preview";
 
@@ -572,8 +558,7 @@ public class ProjectController {
       }
       
       if(!toDoUploadList.isEmpty()){
-
-         
+    	  
          List<String> tmpUploadList = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);
          insertProjectIntroduceImageService.insertProjectIntroduceImage(projectIntroduceImageVO, tmpUploadList);
          

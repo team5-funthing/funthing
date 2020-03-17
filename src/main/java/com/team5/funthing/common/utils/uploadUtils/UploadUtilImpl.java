@@ -4,7 +4,6 @@ import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -12,29 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
-
-//import net.coobird.thumbnailator.Thumbnails;
-
-/**
- * 
- * 
- * 		// 占쏙옙占싸듸옙 占쏙옙킨 占쏙옙占쏙옙占쏙옙 占싱뱄옙 占쏙옙占쏙옙占싹댐옙 占쏙옙占� 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쌕쏙옙 占쏙옙占쏙옙 占쏙옙荑� 占쏙옙占쏙옙 占쏙옙 占쌍댐옙 占쏙옙황 처占쏙옙
- *		// 占쏙옙占싸듸옙 占싱뱄옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占�
- *		if(!uploadFile.isEmpty()) { 
- *			
- *			//占쏙옙占신듸옙 占쏙옙占싹곤옙罐占� vo占쏙옙체占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙
- *			String toRemoveFilePath = vo.getProjectMainImage();
- *			
- *			String voName = vo.getClass().getSimpleName();
- *			String toSettingPath = projectMainImageUploadUtils.upload(uploadFile, voName, toRemoveFilePath);
- *			
- *			vo.setProjectMainImage(toSettingPath);
- *		}
- * 
- * 
- * 
- * 
- */
 
 @Component
 public class UploadUtilImpl implements UploadUtil {
