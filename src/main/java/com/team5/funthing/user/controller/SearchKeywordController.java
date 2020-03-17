@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team5.funthing.admin.model.vo.AdminCategoryVO;
-import com.team5.funthing.admin.service.adminCategoryService.GetCategoryService;
+import com.team5.funthing.admin.service.adminCategoryService.GetCategoryListService;
 import com.team5.funthing.user.model.vo.KeywordVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.service.searchKeywordService.GetKeywordFiveListService;
@@ -27,7 +27,7 @@ public class SearchKeywordController {
 	
 	//Category Service
 	@Autowired
-	private GetCategoryService getCategoryService;
+	private GetCategoryListService getCategoryListService;
 	
 	@Autowired
 	private GetSearchKeywordService getSearchKeywordService;
@@ -87,7 +87,7 @@ public class SearchKeywordController {
 		}
 		
 		model.addAttribute("getAllFundingProjectList",getAllFundingProjectList);
-		model.addAttribute("getAllCategoryList", getCategoryService.getCategory(acvo));
+		model.addAttribute("getAllCategoryList", getCategoryListService.getCategoryList(acvo));
 
 		return "p-project-list";
 		
@@ -102,7 +102,7 @@ public class SearchKeywordController {
 		List<ProjectVO> getAllFundingProjectList = getSearchKeywordByKeywordService.getSearchKeywordByKeywordShap(searchKeyword);
 			
 		model.addAttribute("getAllFundingProjectList",getAllFundingProjectList);
-		model.addAttribute("getAllCategoryList", getCategoryService.getCategory(acvo));
+		model.addAttribute("getAllCategoryList", getCategoryListService.getCategoryList(acvo));
 
 		return "p-project-list";
 		
