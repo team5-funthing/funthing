@@ -152,6 +152,8 @@
 		<div class="tab-content" id="myTabContent">
 			<div class="tab-pane fade show active" id="exhibition1" role="tabpanel"
 				aria-labelledby="exhibition1-tab">
+				
+				
 				<section class="tiles pt-0 mt-0">
 					<c:forEach var="fundingProject" items="${progressList }" varStatus="step">
                 
@@ -160,9 +162,9 @@
 		                        <div class="thumbnail-wrap m-2">
 		                            <div class="thumbnail">
 		                                <div class="centered">
-											<form id="projecImage${step.count }" action="projectDetails.udo" method="GET">
+											<form id="progress1${step.count }" action="projectDetails.udo" method="GET">
 											    <input type="hidden" name="projectNo" value="${fundingProject.projectNo}">
-	                                       		<a href="#" onclick="document.getElementById('projecImage${step.count }').submit()">
+	                                       		<a href="#" onclick="document.getElementById('progress1${step.count }').submit()">
 	                                       			<c:choose>
 		                                         		<c:when test="${fundingProject.projectMainImage eq '' }">
 		                                         				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
@@ -201,6 +203,10 @@
 		                </article>
                 	</c:forEach>
 				</section>
+				
+				
+				
+				
 			</div>
 
 
@@ -214,9 +220,9 @@
 		                        <div class="thumbnail-wrap m-2">
 		                            <div class="thumbnail">
 		                                <div class="centered">
-											<form id="projecImage${step.count }" action="projectDetails.udo" method="GET">
+											<form id="progress2${step.count }" action="projectDetails.udo" method="GET">
 											    <input type="hidden" name="projectNo" value="${fundingProject.projectNo}">
-	                                       		<a href="#" onclick="document.getElementById('projecImage${step.count }').submit()">
+	                                       		<a href="#" onclick="document.getElementById('progress2${step.count }').submit()">
 	                                       			<c:choose>
 		                                         		<c:when test="${fundingProject.projectMainImage eq '' }">
 		                                         				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
@@ -262,15 +268,15 @@
 			<div class="tab-pane fade" id="exhibition3" role="tabpanel"
 				aria-labelledby="exhibition3-tab">
 				<section class="tiles pt-0 mt-0">
-			        <c:forEach var="fundingProject" items="${likeCountList }" varStatus="step">
+			        <c:forEach var="fundingProject" items="${progressList3 }" varStatus="step">
 		                <article class="js-slidein block">
 		                    <div class="project">
 		                        <div class="thumbnail-wrap m-2">
 		                            <div class="thumbnail">
 		                                <div class="centered">
-											<form id="projecImage${step.count }" action="projectDetails.udo" method="GET">
+											<form id="progress3${step.count }" action="projectDetails.udo" method="GET">
 											    <input type="hidden" name="projectNo" value="${fundingProject.projectNo}">
-	                                       		<a href="#" onclick="document.getElementById('projecImage${step.count }').submit()">
+	                                       		<a href="#" onclick="document.getElementById('progress3${step.count }').submit()">
 	                                       			<c:choose>
 		                                         		<c:when test="${fundingProject.projectMainImage eq '' }">
 		                                         				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
@@ -343,9 +349,9 @@
 		                        <div class="thumbnail-wrap m-2">
 		                            <div class="thumbnail">
 		                                <div class="centered">
-											<form id="projecImage${step.count }" action="projectDetails.udo" method="GET">
+											<form id="like1${step.count }" action="projectDetails.udo" method="GET">
 											    <input type="hidden" name="projectNo" value="${fundingProject.projectNo}">
-	                                       		<a href="#" onclick="document.getElementById('projecImage${step.count }').submit()">
+	                                       		<a href="#" onclick="document.getElementById('like1${step.count }').submit()">
 	                                       			<c:choose>
 		                                         		<c:when test="${fundingProject.projectMainImage eq '' }">
 		                                         				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
@@ -395,9 +401,9 @@
 		                        <div class="thumbnail-wrap m-2">
 		                            <div class="thumbnail">
 		                                <div class="centered">
-											<form id="projecImage${step.count }" action="projectDetails.udo" method="GET">
+											<form id="like2${step.count }" action="projectDetails.udo" method="GET">
 											    <input type="hidden" name="projectNo" value="${fundingProject.projectNo}">
-	                                       		<a href="#" onclick="document.getElementById('projecImage${step.count }').submit()">
+	                                       		<a href="#" onclick="document.getElementById('like2${step.count }').submit()">
 	                                       			<c:choose>
 		                                         		<c:when test="${fundingProject.projectMainImage eq '' }">
 		                                         				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
@@ -447,9 +453,9 @@
 		                        <div class="thumbnail-wrap m-2">
 		                            <div class="thumbnail">
 		                                <div class="centered">
-											<form id="projecImage${step.count }" action="projectDetails.udo" method="GET">
+											<form id="like3${step.count }" action="projectDetails.udo" method="GET">
 											    <input type="hidden" name="projectNo" value="${fundingProject.projectNo}">
-	                                       		<a href="#" onclick="document.getElementById('projecImage${step.count }').submit()">
+	                                       		<a href="#" onclick="document.getElementById('like3${step.count }').submit()">
 	                                       			<c:choose>
 		                                         		<c:when test="${fundingProject.projectMainImage eq '' }">
 		                                         				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
@@ -521,9 +527,9 @@
 		                        <div class="thumbnail-wrap m-2">
 		                            <div class="thumbnail">
 		                                <div class="centered">
-											<form id="projecImage${step.count }" action="projectDetails.udo" method="GET">
+											<form id="money1${step.count }" action="projectDetails.udo" method="GET">
 											    <input type="hidden" name="projectNo" value="${fundingProject.projectNo}">
-	                                       		<a href="#" onclick="document.getElementById('projecImage${step.count }').submit()">
+	                                       		<a href="#" onclick="document.getElementById('money1${step.count }').submit()">
 	                                       			<c:choose>
 		                                         		<c:when test="${fundingProject.projectMainImage eq '' }">
 		                                         				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
@@ -572,9 +578,9 @@
 		                        <div class="thumbnail-wrap m-2">
 		                            <div class="thumbnail">
 		                                <div class="centered">
-											<form id="projecImage${step.count }" action="projectDetails.udo" method="GET">
+											<form id="money2${step.count }" action="projectDetails.udo" method="GET">
 											    <input type="hidden" name="projectNo" value="${fundingProject.projectNo}">
-	                                       		<a href="#" onclick="document.getElementById('projecImage${step.count }').submit()">
+	                                       		<a href="#" onclick="document.getElementById('money2${step.count }').submit()">
 	                                       			<c:choose>
 		                                         		<c:when test="${fundingProject.projectMainImage eq '' }">
 		                                         				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
@@ -624,9 +630,9 @@
 		                        <div class="thumbnail-wrap m-2">
 		                            <div class="thumbnail">
 		                                <div class="centered">
-											<form id="projecImage${step.count }" action="projectDetails.udo" method="GET">
+											<form id="money3${step.count }" action="projectDetails.udo" method="GET">
 											    <input type="hidden" name="projectNo" value="${fundingProject.projectNo}">
-	                                       		<a href="#" onclick="document.getElementById('projecImage${step.count }').submit()">
+	                                       		<a href="#" onclick="document.getElementById('money3${step.count }').submit()">
 	                                       			<c:choose>
 		                                         		<c:when test="${fundingProject.projectMainImage eq '' }">
 		                                         				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
@@ -696,9 +702,9 @@
 		                        <div class="thumbnail-wrap m-2">
 		                            <div class="thumbnail">
 		                                <div class="centered">
-											<form id="projecImage${step.count }" action="projectDetails.udo" method="GET">
+											<form id="deadline1${step.count }" action="projectDetails.udo" method="GET">
 											    <input type="hidden" name="projectNo" value="${fundingProject.projectNo}">
-	                                       		<a href="#" onclick="document.getElementById('projecImage${step.count }').submit()">
+	                                       		<a href="#" onclick="document.getElementById('deadline1${step.count }').submit()">
 	                                       			<c:choose>
 		                                         		<c:when test="${fundingProject.projectMainImage eq '' }">
 		                                         				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
@@ -748,9 +754,9 @@
 		                        <div class="thumbnail-wrap m-2">
 		                            <div class="thumbnail">
 		                                <div class="centered">
-											<form id="projecImage${step.count }" action="projectDetails.udo" method="GET">
+											<form id="deadline2${step.count }" action="projectDetails.udo" method="GET">
 											    <input type="hidden" name="projectNo" value="${fundingProject.projectNo}">
-	                                       		<a href="#" onclick="document.getElementById('projecImage${step.count }').submit()">
+	                                       		<a href="#" onclick="document.getElementById('deadline2${step.count }').submit()">
 	                                       			<c:choose>
 		                                         		<c:when test="${fundingProject.projectMainImage eq '' }">
 		                                         				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
@@ -799,9 +805,9 @@
 		                        <div class="thumbnail-wrap m-2">
 		                            <div class="thumbnail">
 		                                <div class="centered">
-											<form id="projecImage${step.count }" action="projectDetails.udo" method="GET">
+											<form id="deadline3${step.count }" action="projectDetails.udo" method="GET">
 											    <input type="hidden" name="projectNo" value="${fundingProject.projectNo}">
-	                                       		<a href="#" onclick="document.getElementById('projecImage${step.count }').submit()">
+	                                       		<a href="#" onclick="document.getElementById('deadline3${step.count }').submit()">
 	                                       			<c:choose>
 		                                         		<c:when test="${fundingProject.projectMainImage eq '' }">
 		                                         				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
