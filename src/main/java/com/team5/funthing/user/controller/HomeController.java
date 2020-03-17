@@ -63,21 +63,21 @@ public class HomeController {
 	
 	@RequestMapping("*.udo") 
 	public String showindex(	@RequestParam(value = "msg", required = false) String msg,
-								ProjectBoardVO vo, ProjectVO vo2,AdminUserMainImageChangeVO vo3, Model model) { //筌띯뫁荑귨옙�벉 筌롫뗄�뵥占쎈읂占쎌뵠筌욑옙 占쎈굶占쎈선占쎌궎占쎈뮉
+								ProjectBoardVO vo, ProjectVO vo2,AdminUserMainImageChangeVO vo3, Model model) {
 		
 		
-		List<ProjectBoardVO> attentionProject = getAttentionProjectService.getAttentionProjectList(vo); //1.占쎈솊疫뀐옙 揶쏉옙占쎌삢 筌띾‘�뵠 占쎈떄占쎄퐣占쏙옙嚥∽옙 揶쏉옙占쎌죬占쎌궎疫뀐옙 
+		List<ProjectBoardVO> attentionProject = getAttentionProjectService.getAttentionProjectList(vo);
 		model.addAttribute("attentionProject",attentionProject);
 		
 		
 		ProjectVO getProject = getProjectService.getProject(vo2);
 		model.addAttribute("getProject",getProject);
 		
-		List<ProjectVO> progressList = getProjectProgressListService.getProjectProgressList(vo2); //2. 筌욊쑵六얌빳臾믪뵥 占쎈늄嚥≪뮇�젰占쎈뱜 揶쏉옙占쎌죬占쎌궎疫뀐옙
+		List<ProjectVO> progressList = getProjectProgressListService.getProjectProgressList(vo2); 
 		model.addAttribute("progressList", progressList);
-			List<ProjectVO> progressList2 = getProjectProgressListService.getProjectProgressList2(vo2); //2. 筌욊쑵六얌빳臾믪뵥 占쎈늄嚥≪뮇�젰占쎈뱜 揶쏉옙占쎌죬占쎌궎疫뀐옙
+			List<ProjectVO> progressList2 = getProjectProgressListService.getProjectProgressList2(vo2);
 			model.addAttribute("progressList2",progressList2);
-			List<ProjectVO> progressList3 = getProjectProgressListService.getProjectProgressList3(vo2); //2. 筌욊쑵六얌빳臾믪뵥 占쎈늄嚥≪뮇�젰占쎈뱜 揶쏉옙占쎌죬占쎌궎疫뀐옙
+			List<ProjectVO> progressList3 = getProjectProgressListService.getProjectProgressList3(vo2);
 			model.addAttribute("progressList3", progressList3);
 			
 			
