@@ -33,6 +33,7 @@ public class UpdateProjectDeadlineServiceImpl implements UpdateProjectDeadlineSe
 		List<ProjectVO> successProjectList = new ArrayList<ProjectVO>();
 		List<ProjectVO> failedProjectList = new ArrayList<ProjectVO>();
 		for(ProjectVO todayClosedProject : todayClosedProjectList) {
+			
 			int goalMoney = todayClosedProject.getGoalMoney();
 			int fundingMoney = todayClosedProject.getFundingMoney();
 			
@@ -42,6 +43,9 @@ public class UpdateProjectDeadlineServiceImpl implements UpdateProjectDeadlineSe
 				failedProjectList.add(todayClosedProject);
 			}
 		}
+		
+		
+		
 		for(ProjectVO successProject : successProjectList) {
 			paymentReserveDAO.updatePaymentComplete(successProject.getProjectNo());
 		}

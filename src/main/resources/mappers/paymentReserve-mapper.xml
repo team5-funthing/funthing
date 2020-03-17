@@ -56,6 +56,24 @@
 		<collection property="reward" 	resultMap="reward" />
 		
 	</resultMap>
+	<resultMap type="project" id="project">
+
+		<result column="projectMainImage" 	property="projectMainImage" />
+		<result column="funding" 			property="funding"/>
+		<result column="creator" 			property="creator" />
+		<result column="fundingMoney" 		property="fundingMoney" />
+		<result column="projectTitle" 		property="projectTitle" />
+		<result column="goalMoney" 			property="goalMoney" />
+		<result column="endDate" 			property="endDate" />
+		<result column="projectSummary" 	property="projectSummary" />
+		
+	</resultMap>
+	
+	<resultMap type="member" id="member">
+
+		<result column="name" 		property="name" />
+		<result column="myImage" 	property="myImage"/>
+	</resultMap>
 	
 	<resultMap type="paymentReserve" id="paymentReserve">
 	
@@ -77,45 +95,78 @@
 		<result column="shippingFee" 			property="shippingFee" />
 		<result column="privateName" 			property="privateName" />
 		<result column="privateFundingMoney" 	property="privateFundingMoney" />
+		<result column="shipmentComplete" 		property="shipmentComplete" />
 
 		
-		
+		<collection property="member" resultMap="member" />
+		<collection property="project" resultMap="project" />
 		<collection property="rewardSelectionList" resultMap="rewardSelection" />
 	
 	</resultMap>
 	
+	
+	
+	
+	
 	<select id="getPaymentReserve" parameterType="paymentReserve" resultMap="paymentReserve">
 	
-		SELECT paymentReserve.*, rewardselection.*, reward.*
-		FROM paymentReserve
-		INNER JOIN ((rewardselection
-		LEFT OUTER JOIN reward
-		ON rewardselection.rewardNo = reward.rewardNo)
-		LEFT OUTER JOIN RewardOptionValueList
-		ON rewardselection.selectRewardNo = RewardOptionValueList.selectRewardNo)
-		ON paymentReserve.orderNo = rewardselection.orderNo
+	    SELECT paymentReserve.*, project.projectmainimage, project.funding, project.creator, project.fundingmoney, project.projecttitle, rewardselection.*, reward.*
+	    FROM (paymentReserve
+	    INNER JOIN ((rewardselection
+	    LEFT OUTER JOIN reward
+	    ON rewardselection.rewardNo = reward.rewardNo)
+	    LEFT OUTER JOIN RewardOptionValueList
+	    ON rewardselection.selectRewardNo = RewardOptionValueList.selectRewardNo)
+	    ON paymentReserve.orderNo = rewardselection.orderNo)
+	    INNER JOIN project
+	    ON paymentreserve.projectNo = project.projectNo
 		WHERE paymentReserve.orderNo = #{orderNo}
 	
 	</select>
 	
 	<select id="getPaymentReserveListByEmail" parameterType="paymentReserve" resultMap="paymentReserve">
 	
-		SELECT paymentReserve.*, rewardselection.*, reward.*
-		FROM paymentReserve
-		INNER JOIN ((rewardselection
-		LEFT OUTER JOIN reward
-		ON rewardselection.rewardNo = reward.rewardNo)
-		LEFT OUTER JOIN RewardOptionValueList
-		ON rewardselection.selectRewardNo = RewardOptionValueList.selectRewardNo)
-		ON paymentReserve.orderNo = rewardselection.orderNo
+        select paymentReserve.*, project.*, rewardselection.*, reward.*, member.name, member.myimage
+        from ((paymentreserve
+        left outer join member
+        on paymentreserve.email = member.email)
+        INNER JOIN ((rewardselection
+	    LEFT OUTER JOIN reward
+	    ON rewardselection.rewardNo = reward.rewardNo)
+	    LEFT OUTER JOIN RewardOptionValueList
+	    ON rewardselection.selectRewardNo = RewardOptionValueList.selectRewardNo)
+	    ON paymentReserve.orderNo = rewardselection.orderNo)
+        inner Join project
+	    ON paymentreserve.projectNo = project.projectNo
 		WHERE paymentReserve.email = #{email}
+		ORDER BY paymentReserve.paymentReserveDate DESC
 	
 	</select>
+	
+	<select id="getPaymentReserveListByProjectNo" parameterType="paymentReserve" resultMap="paymentReserve">
+	
+        select paymentReserve.*, project.*, rewardselection.*, reward.*, member.name, member.myimage
+        from ((paymentreserve
+        left outer join member
+        on paymentreserve.email = member.email)
+        INNER JOIN ((rewardselection
+	    LEFT OUTER JOIN reward
+	    ON rewardselection.rewardNo = reward.rewardNo)
+	    LEFT OUTER JOIN RewardOptionValueList
+	    ON rewardselection.selectRewardNo = RewardOptionValueList.selectRewardNo)
+	    ON paymentReserve.orderNo = rewardselection.orderNo)
+        inner Join project
+	    ON paymentreserve.projectNo = project.projectNo
+		WHERE paymentReserve.projectNo = #{projectNo}
+		ORDER BY paymentReserve.paymentReserveDate DESC
+	
+	</select>
+	
 	
 	<update id="updatePaymentComplete" parameterType="int">
 
         Update paymentReserve
-		SET paymentStatus = '결제완료'
+		SET paymentStatus = '결제확정'
 		WHERE projectNo = #{projectNo} and paymentStatus = '결제예약'
 		
 	</update>
@@ -143,6 +194,15 @@
 		WHERE orderNo = #{orderNo}
 		
 	</update>
+	
+	<update id="updateShipmentComplete" parameterType="paymentReserve">
+
+        Update paymentReserve
+		SET shipmentComplete = 'y'
+		WHERE orderNo = #{orderNo}
+		
+	</update>
+
 	
 	
 </mapper>

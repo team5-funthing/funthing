@@ -43,14 +43,10 @@
 								<!-- category고르는곳 -->
 								<select class="form-control" id="category" name="category">
 									<option value="no">카테고리</option>
-									<option value="태크/가전">태크/가전</option>
-									<option value="패션/잡화">패션/잡화</option>
-									<option value="뷰티">뷰티</option>
-									<option value="식품">식품</option>
-									<option value="도서/출판">도서/출판</option>
-									<option value="예술/공연">예술/공연</option>
+										<c:forEach var="category" items="${getAllCategoryList}">										
+											<option value="${category.categoryName}">${category.categoryName}</option>
+										</c:forEach>
 								</select>
-
 							</div>
 							<!-- /btn-group -->
 
@@ -119,14 +115,8 @@
 
 	<hr>
        <div class="container">
-        
-        
-        
            
-            <section class="tiles">
-                <!-- 올라온 프로젝트들 목록 표시-->
-                <!-- 기본셋팅은 목록에는 진행중인 프로젝트 전체 목록 표시-->
-                <!---------- 일반 펀딩 목록 보는 양식------ img class 에 가로가 긴 이미지면 landscape 세로가 길면 portrait -->
+            <section class="tiles pl-5 pr-5 " >
 
 	<!-- --------------------------------------------------전체보기------------------------------------------------------------------ -->
                 <c:forEach var="fundingProject" items="${getAllFundingProjectList }" varStatus="step">
@@ -153,10 +143,10 @@
 	                                </div>
 	                            </div>
 	                        </div>
-	                        <h5>${fundingProject.projectTitle }</h5>
+	                        
+	                        <div class="h5 p-2" style="color: black; font-weight: 500; min-height:70px; ">${fundingProject.projectTitle }</div>
 	                        <ul>
-	                            <li>${fundingProject.projectSummary }</li>
-	                            <li>by ${fundingProject.creator }</li>
+	                            <li style="color: gray;">by ${fundingProject.creator }</li>
 	                        </ul>
 	                        <div class="mt-10">
 								<div class="percentage">
@@ -167,9 +157,9 @@
 										maxFractionDigits="3" value="${fundingProject.fundingMoney}" />
 									<p>${progress}원${progressPercent}%진행중</p>
 
-									<div class="progress">
-										<div class="progress-bar color-7" role="progressbar"
-											style="width: ${progressPercent}%" aria-valuenow="30"
+									<div class="progress" style=" height: 7px;">
+										<div class="progress-bar" role="progressbar"
+											style="width: ${progressPercent}%; background-color: #ff9999;" aria-valuenow="30"
 											aria-valuemin="0" aria-valuemax="100"></div>
 									</div>
 								</div>

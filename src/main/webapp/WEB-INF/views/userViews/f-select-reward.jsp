@@ -76,7 +76,9 @@ table, tr, td{
 			],
 			closeOnBgClick:false,
 			showCloseBtn:false,
-			closeBtnInside:false
+			closeBtnInside:false,
+			preloader:false,
+			modal:true
 		});
 		
 		$("#detailPolicy").click(function(){

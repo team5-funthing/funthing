@@ -23,7 +23,11 @@
     <link href="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/css/float-chart.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="${pageContext.request.contextPath }/resources/admin/dist/css/style.min.css" rel="stylesheet">
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+    
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/admin/assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/admin/assets/libs/bootstrap-datepicker/dist/locales/bootstrap-datepicker.kr.min.js">
+
+	
 </head>
 <body>
 

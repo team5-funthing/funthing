@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.team5.funthing.admin.model.vo.AdminCategoryVO;
+import com.team5.funthing.admin.service.adminCategoryService.GetCategoryService;
 import com.team5.funthing.user.model.vo.KeywordVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.service.searchKeywordService.GetKeywordFiveListService;
@@ -22,6 +24,10 @@ import com.team5.funthing.user.service.searchKeywordService.UpdateKeywordCountSe
 
 @Controller
 public class SearchKeywordController {
+	
+	//Category Service
+	@Autowired
+	private GetCategoryService getCategoryService;
 	
 	@Autowired
 	private GetSearchKeywordService getSearchKeywordService;
@@ -68,9 +74,10 @@ public class SearchKeywordController {
 	
 	@RequestMapping(value="getSearchKeywordList.udo", method = RequestMethod.GET)
 	public String getSearchKeywordList(@RequestParam(value="searchKeywordStr", required = false)String searchKeyword,
-										ProjectVO vo, Model model) {
+										ProjectVO vo, AdminCategoryVO acvo, Model model) {
 		
 		updateKeywordCountService.updateKeywordCount(searchKeyword); //업데이트 키워드 (키워드 카운트+1)
+		
 		
 		List<ProjectVO> getAllFundingProjectList = getSearchKeywordService.getSearchKeyword(searchKeyword);
 		List<ProjectVO> getAllFundingProjectListByKeyword = getSearchKeywordByKeywordService.getSearchKeywordByKeyword(searchKeyword);
@@ -80,7 +87,7 @@ public class SearchKeywordController {
 		}
 		
 		model.addAttribute("getAllFundingProjectList",getAllFundingProjectList);
-		
+		model.addAttribute("getAllCategoryList", getCategoryService.getCategory(acvo));
 
 		return "p-project-list";
 		
@@ -89,13 +96,13 @@ public class SearchKeywordController {
 	
 	@RequestMapping(value="getClickKeywordList.udo", method = RequestMethod.GET)
 	public String getClickKeywordList(@RequestParam(value="searchKeywordStr", required = false)String searchKeyword,
-										ProjectVO vo, Model model) {
+										ProjectVO vo, AdminCategoryVO acvo, Model model) {
 		System.out.println("searchKeyword :" + searchKeyword);
 		updateKeywordCountService.updateKeywordCountShap(searchKeyword);
 		List<ProjectVO> getAllFundingProjectList = getSearchKeywordByKeywordService.getSearchKeywordByKeywordShap(searchKeyword);
 			
 		model.addAttribute("getAllFundingProjectList",getAllFundingProjectList);
-		
+		model.addAttribute("getAllCategoryList", getCategoryService.getCategory(acvo));
 
 		return "p-project-list";
 		

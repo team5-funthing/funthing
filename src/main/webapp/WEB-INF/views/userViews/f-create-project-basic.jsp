@@ -63,33 +63,31 @@
                         
                         
                         $(document).on("propertychange change keyup paste input","#newCreator", function(){
-                           
                         	
-                        	
-                               var jsonData = $("#newCreator").serializeObject();
-                               
-                                 $.ajax({
-                                  url: "existCreatorCheck.udo",
-                                  type: "POST",
-                                  data: JSON.stringify(jsonData),
-                                  contentType: "application/json;",
-                                  success: function(data) {
-                                     
-                                     $("#creatorInputMsg").empty();
-                                     if(data == "space"){
-                                        $("#creatorInputMsg").empty();
-                                     }else{
-                                        $("#creatorInputMsg").append(data);
-                                     }
-                                     
-                                  
-                                  },
-                                  error: function(errorThrown) {
-                                      alert(errorThrown.statusText);
-                                  }
-                              });   
+                             var jsonData = $("#newCreator").serializeObject();
+                             
+                               $.ajax({
+                                url: "existCreatorCheck.udo",
+                                type: "POST",
+                                data: JSON.stringify(jsonData),
+                                contentType: "application/json;",
+                                success: function(data) {
+                                   
+                                   $("#creatorInputMsg").empty();
+                                   if(data == "space"){
+                                      $("#creatorInputMsg").empty();
+                                   }else{
+                                      $("#creatorInputMsg").append(data);
+                                   }
+                                   
+                                
+                                },
+                                error: function(errorThrown) {
+                                    alert(errorThrown.statusText);
+                                }
+                            });   
                                  
-                            });
+                        });
                         
                      </script>
 
@@ -207,6 +205,7 @@
    
    
       <script>
+      
             $(document).on("change", '#existCreator', function(){
                
                var val = $(this).val();
@@ -214,9 +213,6 @@
                
                
                if(val == "newCreator"){
-                  
-                  
-            	   
                   
                   $("#newCreator").attr("placeholder", "창작자 또는 업체명을 입력하세요.");
                   $("#newCreator").attr("onblur", "this.placeholder = '창작자 또는 업체명을 입력하세요.'");
@@ -280,7 +276,6 @@
                              console.log(errorThrown.statusText);
                          }
                      });   
-                  
                   
                }
             })

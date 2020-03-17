@@ -94,16 +94,40 @@
     				<form method="post" action="insertCategory.ado">
     					<div>
 	    					<p class="alert alert-secondary" style="display:flex;"><input type="text" readonly value="  입력할 카테고리  :" class="form-control" style="width:45%;background-color:#E2E3E5;" >&nbsp;
-	    					<input type="text" name="categoryName" class="form-control" style="width:35%;background-color:white;">
-	    					&nbsp;<input class="btn btn-outline-dark" type="submit" value="입력">
+	    					<input type="text" name="categoryName" class="form-control" id="inputCategory" style="width:35%;background-color:white;">
+	    					&nbsp;<input class="btn btn-outline-dark" id="inputCategoryButton" type="submit" value="입력">
 	    					</p>				
     					</div>
+    					<div id="CategoryDuplicateCheck"></div>
     					
     				</form>
+    				<script>
+    					$(document).ready(function(){
+    						$("input[name='categoryName']").blur(function(){
+    							$.ajax({
+    								url:"checkDuplicateCategory.ado",
+    								data:{ inputCategory : $(this).val()},
+    								type:"get",
+    								success:function(data){
+    									console.log(data);
+    									$("#inputCategoryButton").removeAttr("disabled");
+    									$("#CategoryDuplicateCheck").empty();
+    									$("#CategoryDuplicateCheck").append(data).css('font-size','90%');
+    									if(data.trim()=="중복된 카테고리가 있습니다."){
+    										$("#inputCategoryButton").attr("disabled",true);
+    									}
+    								},
+    								error:function(){
+    									console.log('apple');
+    								}
+    							});
+    						});
+    					});
+    				</script>
     			</div>
     			<div class="categoryArea">
     				<h5>현재 카테고리 목록</h5>
-    				<div style="overflow-x:hidden;">
+    				<div style="overflow-x:hidden;height:400px;">
     				<ul>
     					<c:forEach var="category" items="${CategoryList}">
     						<li class="alert alert-secondary">${category.categoryName}<a href="deleteCategory.ado?categoryName=${category.categoryName}" class="badge badge-dark" style="float:right;height:auto;" >삭제</a></li>

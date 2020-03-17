@@ -48,14 +48,14 @@
 			</script>
 			
 			<div id="alarmArea" style="width:80px;">
-				<span id="showAlarmState" style="width:50px;font-size:70%;">${userAlarmList}</span>
+				<span id="showAlarmState" style="width:50px;font-size:70%;">${sessionScope.userAlarmList}</span>
 				<a id="${sessionScope.memberSession.email}" class="headerBtn userId" style="padding:0 10px;">
 					<i class="far fa-bell fa-2x pr-1"></i>
 				</a>
 			</div>
 	        <div class="d-none d-lg-block pl-3 pr-3">
 	            <a type="button" href="#" id="mypage-btn" data-popover="popover-mypage-menu">
-	                <img id="gogoimage2" class="profile" src="${sessionScope.memberSession.myImage }"></a>
+	                <img id="gogoimage2" class="profile" src="${sessionScope.memberSession.myImage}"></a>
 	        </div>
 	    </div>
 	</div>

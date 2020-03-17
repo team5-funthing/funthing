@@ -15,11 +15,11 @@ public class ProjectDAO {
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	
-	public void createProject(ProjectVO vo) { // 프로젝트 생성 폼 전체 작성 완료시 실행 될 메서드
+	public void createProject(ProjectVO vo) {
 		
 	}
 	
-	public ProjectVO insertProject(ProjectVO vo) { // 입력|임시 저장 시에 사용 될 메서드
+	public ProjectVO insertProject(ProjectVO vo) {
 		sqlSessionTemplate.insert("insertProject", vo);
 		return vo;
 	}
@@ -64,7 +64,7 @@ public class ProjectDAO {
 	}
 	
 	
-//===================================카테고리 검색==========================================
+//===================================카占쌓곤옙 占싯삼옙==========================================
 
 	public List<ProjectVO> getShowCategorySubList(ProjectVO vo) {
 		return sqlSessionTemplate.selectList("getShowCategorySubList",vo);

@@ -177,7 +177,7 @@
                             
                             <div align="center" style="padding: 10px;">
                                 <input type="submit" value="확인">
-                                <a href="http://localhost:8080/funthing/getMemberList.ado"><input type="button" value="취소"></a>
+                                <a href="getMemberList.ado"><input type="button" value="취소"></a>
                             </div>
                             </form>
                             

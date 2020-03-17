@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * 
  * @author qpara
  *
- *	ÇÑ°¡Áö ¸®¿öµå¿¡ ´ëÇÑ ÁÖ¹® ¾ç°ú °¡°Ý
+ *	ï¿½Ñ°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½å¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
  */
 
 @Component
@@ -18,8 +18,8 @@ public class RewardSelectionVO {
 	private int selectRewardNo;
 	private int orderNo;
 	private int rewardNo;
-	private int paymentAmount; // ÁöºÒ°¡°Ý?
-	private int orderAmount; // ÁÖ¹® ¾ç
+	private int paymentAmount;
+	private int orderAmount; 
 	
 	private List<String> rewardOptionValueList;
 	private List<RewardOptionValueListVO> rewardOptionValue;

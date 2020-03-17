@@ -32,9 +32,7 @@ a{text-decoration:none;}
 </script>
 </head>
 <body>
-	<script type="text/javascript"
-		src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
-		charset="utf-8"></script>
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 	<jsp:include page="./include/i-popupover-mypage.jsp" />
@@ -313,11 +311,11 @@ a{text-decoration:none;}
 	        if ([temp[0]] == sname) { sval = temp[1]; }
 	    }
 	    return sval;
-	} 
+	}
    
 
-   
-   var naver_id_login = new naver_id_login("bm_Jr_lzbfVgnsh6sEyX", "http://localhost:8080/funthing/.udo");
+  var naver_id_login = new naver_id_login("bm_Jr_lzbfVgnsh6sEyX", "http://ec2-54-180-105-174.ap-northeast-2.compute.amazonaws.com/.udo");
+   //var naver_id_login = new naver_id_login("bm_Jr_lzbfVgnsh6sEyX", "http://localhost:8080/funthing/.udo");
   // 접근 토큰 값 출력
  // alert(naver_id_login.oauthParams.access_token);
   // 네이버 사용자 프로필 조회
@@ -330,13 +328,13 @@ a{text-decoration:none;}
     document.getElementById("email2").value = naverEmail;
     var naverName = naver_id_login.getProfileData('name')
     document.getElementById("name").value = naverName;
- 
     var naverId = naver_id_login.getProfileData('id');
     document.getElementById("password2").value = naverId;
 	 }
 	 
 	 
-	 var typedEmail = {"typedEmail":document.getElementById("email2").value}; 
+	 var typedEmail = {"typedEmail":document.getElementById("email2").value};
+	 
 	  $.ajax({type:"GET",
 	        url:"emailCheck.udo",
 	        data:typedEmail,
@@ -393,10 +391,13 @@ a{text-decoration:none;}
 		if(getParam('check')==1){
            
 			var daumEmail = getParam('email');
+			console.log(daumEmail);
 			document.getElementById('email2').value = daumEmail;
 			var daumPassword = getParam('password');
+			console.log(daumPassword);
 			document.getElementById('password2').value = daumPassword;
 			var daumName = decodeURIComponent(getParam('name'));
+			console.log(daumName);
 			document.getElementById('name').value = daumName;	
 			var typedEmail = {"typedEmail":document.getElementById("email2").value}; 
 			
