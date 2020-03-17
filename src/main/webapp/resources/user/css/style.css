@@ -94,7 +94,6 @@ body {
     transform: translate(-50%, -50%);
 }
 
-
 .project .thumb-crop .portrait,
 .project_detail_tile .thumb-crop .portrait,
 .tiles .thumb-crop .portrait {
@@ -161,7 +160,54 @@ body {
     height: 100%;
 }
 
+<!----------------------------------------------------------->
 
+.main-banner .thumbnail-wrappper {
+    width: 100%;
+    overflow: hidden;
+}
+
+.main-banner .thumbnail-wrappper .thumbnail {
+    position: relative;
+    padding-top: 0%;
+    overflow: hidden;
+}
+.main-banner .thumbnail-wrappper .thumbnail img { 
+	max-width: 100%; 
+	height: auto; 
+}
+
+/* .main-banner .thumbnail .centered {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-transform: translate(50%, 50%);
+    -ms-transform: translate(50%, 50%);
+    transform: translate(50%, 50%);
+}
+
+.main-banner .thumbnail .centered img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: 100%;
+    height: auto;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+} */
+
+
+/* .main-banner img.landscape { 
+	width: auto; 
+	height: 50%; 
+}
+ */
+
+
+<!------------------------------------------------------------->
 
 .thumbnail-wrappper {
     width: 25%;

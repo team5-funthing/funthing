@@ -74,7 +74,7 @@
 							<div class="mt-10">
 								이미 회원가입을 하셨나요?
 								<p class="registry-p">
-									<a class="popup-with-form" href="#login-popup">로그인 하러가기</a>
+									<a class="popup-with-form" id="login-popup-btn" href="javascript: return(0);">로그인 하러가기</a>
 								</p>
 							</div>
 						</div>
@@ -85,11 +85,6 @@
 			</div>
 		</div>
 	</div>
-
-
-	<jsp:include page="./include/i-popup-login.jsp"></jsp:include>
-	<jsp:include page="./include/i-popup-search.jsp"></jsp:include>
-	<jsp:include page="./include/i-body-js.jsp"></jsp:include>
 
 
 	<script type="text/javascript">
@@ -156,8 +151,12 @@
 					});
 		};
 	</script>
-
-=======
+	
+	
+   <jsp:include page="./include/i-popup-login.jsp"></jsp:include>
+   <jsp:include page="./include/i-popup-search.jsp"></jsp:include>
+   <jsp:include page="./include/i-body-js.jsp"></jsp:include>
+   
 </body>
 
 </html>

@@ -12,8 +12,27 @@
 	        </div>
 	
 	        <div class="login_btn d-none d-lg-block pr-3">
-	            <a class="btn d-none d-lg-inline-block pl-3 pr-3 mb-3 mb-md-0 ml-md-3 popup-with-form" href="#login-popup">로그인 | 회원가입</a>
+	            <a class="btn d-none d-lg-inline-block pl-3 pr-3 mb-3 mb-md-0 ml-md-3 popup-with-form" id="login-popup-btn" href="javascript: return(0);">로그인 | 회원가입</a>
 	        </div>
 	    </div>
 	</div>
 	
+<script>
+	$(document).on("click", "#login-popup-btn",function() {
+	    $.magnificPopup.open({
+	        items: {
+	            src: '#login-popup' 
+	        },
+	        type: 'inline',
+	        preloader: false,
+	        modal: true
+	        
+	    });
+	    
+	    $(document).on('click', '.popup-modal-dismiss', function (e) {
+	       e.preventDefault();
+	       $.magnificPopup.close();
+	    });
+	 }); 
+
+</script>

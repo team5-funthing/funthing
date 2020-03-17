@@ -4,7 +4,6 @@ import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -12,29 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
-
-//import net.coobird.thumbnailator.Thumbnails;
-
-/**
- * 
- * 
- * 		// ���ε� ��Ų ������ �̹� �����ϴ� ��� ���� ������ �ٽ� ���� ��쿡 ���� �� �ִ� ��Ȳ ó��
- *		// ���ε� �̹����� ������ ���
- *		if(!uploadFile.isEmpty()) { 
- *			
- *			//���ŵ� ���ϰ�θ� vo��ü���� ��������
- *			String toRemoveFilePath = vo.getProjectMainImage();
- *			
- *			String voName = vo.getClass().getSimpleName();
- *			String toSettingPath = projectMainImageUploadUtils.upload(uploadFile, voName, toRemoveFilePath);
- *			
- *			vo.setProjectMainImage(toSettingPath);
- *		}
- * 
- * 
- * 
- * 
- */
 
 @Component
 public class UploadUtilImpl implements UploadUtil {
@@ -78,7 +54,7 @@ public class UploadUtilImpl implements UploadUtil {
 			}else {
 				return null;
 			}
-			String completePath = File.separator + "resources" + File.separator + "upload" + dirPath + File.separator + fileName;
+			String completePath = File.separator + "funthing" + File.separator + "resources" + File.separator + "upload" + dirPath + File.separator + fileName;
 			uploadCompletePaths.add(completePath);
 			
 			

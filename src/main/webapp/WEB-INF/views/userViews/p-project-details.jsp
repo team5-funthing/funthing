@@ -129,7 +129,6 @@ $(document).ready(function(){
 											</c:otherwise>
 										</c:choose>
 									</c:forEach>
-									
 								</div>
 								<a class="carousel-control-prev" href="#carouselIntroduceImages" role="button" data-slide="prev">
 								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
