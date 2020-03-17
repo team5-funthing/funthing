@@ -5522,10 +5522,19 @@ img.landscape {
 
 
 
+.project {
+	
+	border-width: 1px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.05);
+    border-image: initial;
+	border-radius: 5px;
+	
+}
 
-
-
-
+.project:hover {
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 14px -3px;
+}
 
 
 

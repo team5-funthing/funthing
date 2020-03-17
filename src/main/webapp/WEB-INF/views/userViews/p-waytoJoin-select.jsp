@@ -24,38 +24,41 @@
 				<form action="#">
 					<div class="col">
 						<div class="col align-self-center">
-							<div class=" col d-flex justify-content-center">
+							<div class="col d-flex justify-content-center">
 								<h2 style="color: black;">회원가입</h2>
 							</div>
 
 
 							<div class="mt-30 d-flex justify-content-center">
 								<a href="emailJoin.udo" 
-									class="deliveryOKBtn btn-lg btn-bd-purple d-none d-lg-inline-block m-1 popup-modal-dismiss">
+									class="btn-lg btn-block btn-bd-purple d-none d-lg-inline-block mb-2" style="text-align: center; ">
 									이메일로 가입하기 </a>
+																	
 							</div>
 
 							<hr>
+							
 							<script type="text/javascript"
-								src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
-								charset="utf-8"></script>
-
-							<div style="width: 15px;"></div>
-							<div id="naver_id_login"
-								style="width: 277.5; align: center; text-align: center;"></div>
-
-							<script type="text/javascript">
-							var naver_id_login = new naver_id_login(
-									"T6JggIUb0xG2LBu9Q7Pf",
-									"http://ec2-54-180-105-174.ap-northeast-2.compute.amazonaws.com/funthing/socialLogin.udo");
-							var state = naver_id_login.getUniqState();
-							naver_id_login.setButton("green", 3, 60,
-									"style='align:center'");
-							naver_id_login
-									.setDomain("http://ec2-54-180-105-174.ap-northeast-2.compute.amazonaws.com");
-							naver_id_login.setState(state);
-							naver_id_login.init_naver_id_login();
-						</script>
+									src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
+									charset="utf-8"></script>
+	
+								<div style="width: 15px;"></div>
+								<div id="naver_id_login"
+									style="width: 277.5; align: center; text-align: center;"></div>
+	
+								<script type="text/javascript">
+								var naver_id_login = new naver_id_login(
+										"T6JggIUb0xG2LBu9Q7Pf",
+										"http://ec2-54-180-105-174.ap-northeast-2.compute.amazonaws.com/funthing/socialLogin.udo");
+								var state = naver_id_login.getUniqState();
+								naver_id_login.setButton("green", 3, 60,
+										"style='align:center'");
+								naver_id_login
+										.setDomain("http://ec2-54-180-105-174.ap-northeast-2.compute.amazonaws.com");
+								naver_id_login.setState(state);
+								naver_id_login.init_naver_id_login();
+								
+							</script>
 
 							<div class="col-xl-12 kakao_login_btn-wrapper mt-3"
 								style="align: center; text-align: center;">

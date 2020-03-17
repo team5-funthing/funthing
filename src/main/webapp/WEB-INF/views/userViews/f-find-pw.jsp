@@ -52,9 +52,10 @@
                                     
                             </div>
                             <hr>
-                            <div class="col-xl-12 mt-10" id="hideBtn" style="display:none">
-                                <a id="changepassword" class="btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
-                                    href="javascript:changePassword()" >확 인</a>
+                            <!-- btn-lg btn-bd-purple d-none d-lg-inline-block m-1 popup-modal-dismiss pl-2 pr-2 -->
+                            <div class="mt-10" id="hideBtn" style="display:none">
+                                <a id="changepassword" class="btn-lg btn-block btn-bd-purple d-none d-lg-inline-block pr-5 pl-5 mb-2"
+                                    href="javascript:changePassword()" style="text-align: center;" >확인</a>
                                     
                                     
                                     <script>                                    
@@ -88,9 +89,9 @@
                                        } // changePassword() 종료                                        
                                     </script>
                                     </div>
-                               <div class="col-xl-12 mt-10">
+                               <div class=" mt-10">
                                     
-                                <a class="btn btn-lg btn-block btn-spon-prj d-none d-lg-inline-block pr-5 pl-5 mb-2"
+                                <a class="mt-10 btn btn-lg btn-block btn-spon-prj d-none d-lg-inline-block pr-5 pl-5 mb-2"
                                     href="javascript: history.go(-1)">뒤로가기</a>
                             </div>
                         </form>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!doctype html>
 
@@ -103,7 +104,8 @@
 	
 						<div class="d-flex justify-content-between">
 							<div class="p-2 bd-highlight">추가 펀딩금액</div>
-							<div class="p-2 bd-highlight">${paymentReserve.additionalFundingMoney }원</div>
+							<fmt:formatNumber type="number" var="additionalAmountfmt" maxFractionDigits="3" value="${paymentReserve.additionalFundingMoney }" />
+							<div class="p-2 bd-highlight">${additionalAmountfmt }원</div>
 						</div>
 						<div class="d-flex justify-content-between">
 							<div class="p-2 bd-highlight">이름 비공개</div>
@@ -150,7 +152,8 @@
 								<p class="card-text" style="font-weight: bold;">펀딩금액</p>
 							</div>
 							<div class="p-2 bd-highlight">
-								<p class="card-text " >${totalAmount }원</p>
+								<fmt:formatNumber type="number" var="totalAmountfmt" maxFractionDigits="3" value="${totalAmount + paymentReserve.shippingFee }" />
+								<p class="card-text " >${totalAmountfmt }원</p>
 							</div>
 						</div>
 
@@ -166,8 +169,11 @@
 							<div class="p-2 bd-highlight">
 								<p class="card-text h6" style="font-weight: bold;">최종결제 금액</p>
 							</div>
+							
+							 <fmt:formatNumber type="number" var="totalAmount" maxFractionDigits="3" value="${totalAmount + paymentReserve.shippingFee }" />
+							
 							<div class="p-2 bd-highlight">
-								<p class="card-text h5">${totalAmount + paymentReserve.shippingFee }원</p>
+								<p class="card-text h5">${totalAmount}원</p>
 							</div>
 						</div>
 					</div>
