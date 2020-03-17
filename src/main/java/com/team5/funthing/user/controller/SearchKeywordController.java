@@ -1,6 +1,7 @@
 package com.team5.funthing.user.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team5.funthing.admin.model.vo.AdminCategoryVO;
-import com.team5.funthing.admin.service.adminCategoryService.GetCategoryService;
+import com.team5.funthing.admin.service.adminCategoryService.GetCategoryListService;
 import com.team5.funthing.user.model.vo.KeywordVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
 import com.team5.funthing.user.service.searchKeywordService.GetKeywordFiveListService;
@@ -27,7 +28,7 @@ public class SearchKeywordController {
 	
 	//Category Service
 	@Autowired
-	private GetCategoryService getCategoryService;
+	private GetCategoryListService getCategoryListService;
 	
 	@Autowired
 	private GetSearchKeywordService getSearchKeywordService;
@@ -37,7 +38,7 @@ public class SearchKeywordController {
 	private GetKeywordFiveListService getKeywordFiveListService;
 	@Autowired
 	private GetSearchKeywordByKeywordService getSearchKeywordByKeywordService;
-	
+
 	
 	@RequestMapping(value="/getSearchKeyword.udo" , method=RequestMethod.GET, produces = "application/text;charset=utf-8")
 	@ResponseBody
@@ -76,18 +77,28 @@ public class SearchKeywordController {
 	public String getSearchKeywordList(@RequestParam(value="searchKeywordStr", required = false)String searchKeyword,
 										ProjectVO vo, AdminCategoryVO acvo, Model model) {
 		
-		updateKeywordCountService.updateKeywordCount(searchKeyword); //업데이트 키워드 (키워드 카운트+1)
-		
+		updateKeywordCountService.updateKeywordCount(searchKeyword);
 		
 		List<ProjectVO> getAllFundingProjectList = getSearchKeywordService.getSearchKeyword(searchKeyword);
 		List<ProjectVO> getAllFundingProjectListByKeyword = getSearchKeywordByKeywordService.getSearchKeywordByKeyword(searchKeyword);
+
+
+		List<ProjectVO> searchedProjectList = new ArrayList<ProjectVO>();
+		boolean check = false;
 		
-		for(ProjectVO pvo : getAllFundingProjectListByKeyword) {
-			getAllFundingProjectList.add(pvo);
+		for(ProjectVO pvo : getAllFundingProjectList) {
+			check = false;
+			for(ProjectVO pvobk : getAllFundingProjectListByKeyword) {
+				if(pvo.getProjectNo().equals(pvobk.getProjectNo())) {
+					check = true;
+				}
+			}
+			if(check) searchedProjectList.add(pvo);
 		}
 		
-		model.addAttribute("getAllFundingProjectList",getAllFundingProjectList);
-		model.addAttribute("getAllCategoryList", getCategoryService.getCategory(acvo));
+		
+		model.addAttribute("getAllFundingProjectList", searchedProjectList);
+		model.addAttribute("getAllCategoryList", getCategoryListService.getCategoryList(acvo));
 
 		return "p-project-list";
 		
@@ -102,7 +113,7 @@ public class SearchKeywordController {
 		List<ProjectVO> getAllFundingProjectList = getSearchKeywordByKeywordService.getSearchKeywordByKeywordShap(searchKeyword);
 			
 		model.addAttribute("getAllFundingProjectList",getAllFundingProjectList);
-		model.addAttribute("getAllCategoryList", getCategoryService.getCategory(acvo));
+		model.addAttribute("getAllCategoryList", getCategoryListService.getCategoryList(acvo));
 
 		return "p-project-list";
 		

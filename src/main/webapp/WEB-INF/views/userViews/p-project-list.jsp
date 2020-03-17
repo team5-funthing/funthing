@@ -149,17 +149,20 @@
 	                            <li style="color: gray;">by ${fundingProject.creator }</li>
 	                        </ul>
 	                        <div class="m-2">
+                        		<fmt:formatNumber type="number" var="progressPercent"
+									value="${(fundingProject.fundingMoney / fundingProject.goalMoney)*100}"
+									pattern=".00" />
+								<fmt:formatNumber type="number" var="progress"
+									maxFractionDigits="3" value="${fundingProject.fundingMoney}" />
+                       			<fmt:formatNumber type="number" var="progressPercent"
+								value="${(fundingProject.fundingMoney / fundingProject.goalMoney)*100}"
+								pattern=".00" />
 								<div class="percentage">
 									<div class="progress" style=" height: 7px;">
 										<div class="progress-bar" role="progressbar"
 											style="width: ${progressPercent}%; background-color: #ff9999;" aria-valuenow="30"
 											aria-valuemin="0" aria-valuemax="100"></div>
 									</div>
-									<fmt:formatNumber type="number" var="progressPercent"
-										value="${(fundingProject.fundingMoney / fundingProject.goalMoney)*100}"
-										pattern=".00" />
-									<fmt:formatNumber type="number" var="progress"
-										maxFractionDigits="3" value="${fundingProject.fundingMoney}" />
 									<p>${progress}원${progressPercent}%진행중</p>
 								</div>
 							</div>
