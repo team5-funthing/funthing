@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="tab-pane fade show active" id="nav-event" role="tabpanel" aria-labelledby="nav-event-tab">
-	<div>${totalBoard / 5}</div>
 	<c:forEach var="list" items="${eventNoticeList}">
 		<div class="h4">
 			<p>공지 알림 [뱃지 형식]</p>
