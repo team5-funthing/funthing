@@ -170,10 +170,10 @@
 								<p class="card-text h6" style="font-weight: bold;">최종결제 금액</p>
 							</div>
 							
-							 <fmt:formatNumber type="number" var="totalAmount" maxFractionDigits="3" value="${totalAmount + paymentReserve.shippingFee }" />
+							 <fmt:formatNumber type="number" var="totalAmountfmt" maxFractionDigits="3" value="${totalAmount + paymentReserve.shippingFee }" />
 							
 							<div class="p-2 bd-highlight">
-								<p class="card-text h5">${totalAmount}원</p>
+								<p class="card-text h5">${totalAmountfmt}원</p>
 							</div>
 						</div>
 					</div>
@@ -300,7 +300,6 @@
 				   console.log("여기");
 				
 	               var val = $(this).val();
-	               /* $("#newDeliveryAddressName").val(""); */
 	               
 	               if(val == "newDeliveryAddress"){
 	            	   
@@ -468,7 +467,7 @@
 					<!-- <a href="javaScript: return(0);" onclick="document.getElementById('paymentReserveForm').submit();" class="btn btn-primary">결제 예약하기</a> -->
 				</div>
 			</article>
-			<input type="hidden" name="fundingMoney" value="${totalAmount }">
+			<input type="hidden" name="fundingMoney" value="${totalAmount + paymentReserve.shippingFee }">
 		</form>
 
 
