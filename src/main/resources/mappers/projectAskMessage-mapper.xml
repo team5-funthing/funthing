@@ -83,8 +83,8 @@
 	</select>
 	
 	<!-- 그아이디 관련 전체 문의글 가져오기 -->
-	<select id="getEntireProjectAskMessageList" resultType="projectAskMessage" parameterType="projectAskMessage">
-	select p.projectmainimage, pm.* from projectAskMessage pm join project p on p.projectNo = pm.projectNo where pm.email = #{email} order by projectAskDate desc 
+	<select id="getEntireProjectAskMessageList" resultMap="projectAskMessage" parameterType="projectAskMessage">
+		select pm.*, p.* from projectAskMessage pm join project p on p.projectNo = pm.projectNo where pm.email = #{email} order by projectAskDate desc
 	
 	</select>
 	
