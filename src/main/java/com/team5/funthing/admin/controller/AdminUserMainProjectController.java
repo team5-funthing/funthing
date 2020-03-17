@@ -104,6 +104,8 @@ public class AdminUserMainProjectController {
 	@RequestMapping("deleteFocusProject.ado")
 	public String deleteFocusProject(ProjectVO vo) {
 
+		System.out.println(vo.getProjectNo());
+		
 		deleteFocusProjectService.deleteFocusProject(vo);
 
 		return "redirect: getFocusProjectList.ado";
