@@ -96,7 +96,6 @@ public class SearchKeywordController {
 			if(check) searchedProjectList.add(pvo);
 		}
 		
-		
 		model.addAttribute("getAllFundingProjectList", searchedProjectList);
 		model.addAttribute("getAllCategoryList", getCategoryListService.getCategoryList(acvo));
 

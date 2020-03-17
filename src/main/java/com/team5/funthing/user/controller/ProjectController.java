@@ -397,11 +397,10 @@ public class ProjectController {
       updateProjectService.updateProject(pvo);
       
       
-      avo.setAlarmType(pvo.getProjectTitle() + " 1 ");
+      avo.setAlarmType(pvo.getProjectTitle() + " 프로젝트 심사 요청 ");
       avo.setReceiveId("admin@funthing.com");
       avo.setReadConfirm('n');
       avo.setProjectNo(pvo.getProjectNo());
-      avo.setDetailAlarmType("2");
 
       System.out.println(avo.toString());
       insertProjectJudgeRequestAlarmService.insertProjectJudgeRequestAlarm(avo);
