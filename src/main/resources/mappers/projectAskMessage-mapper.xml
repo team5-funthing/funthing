@@ -25,11 +25,12 @@
 		SELECT * FROM projectAskMessage WHERE projectAskNo = #{projectAskNo}
 	</select>
 	
-	<!-- 그아이디 관련 전체 문의글 가져오기 -->
+	<!-- 그아이디 관련 전체 문의글 가져오기 
 	<select id="getEntireProjectAskMessageList" resultType="projectAskMessage" parameterType="projectAskMessage">
 		SELECT * FROM projectAskMessage where email = #{email} order by projectAskDate desc
 	
 	</select>
+	-->
 	
 	<!-- projectAskMessage테이블 전체리스트 가져오기 -->
 	<select id="getProjectAskMessage" resultType="projectAskMessage" parameterType="projectAskMessage">
@@ -82,6 +83,12 @@
 	<!-- 메이커 관련 전체 문의글 가져오기 -->
 	<select id="getEntireProjectMakerAskMessageList" parameterType="projectAskMessage"  resultMap="projectAskMessage">
 		select pm.*, p.* from projectAskMessage pm join project p on p.projectNo = pm.projectNo where pm.creator = #{creator} order by projectAskDate desc
+	</select>
+	
+	<!-- 그아이디 관련 전체 문의글 가져오기 -->
+	<select id="getEntireProjectAskMessageList" resultType="projectAskMessage" parameterType="projectAskMessage">
+	select p.projectmainimage, pm.* from projectAskMessage pm join project p on p.projectNo = pm.projectNo where pm.email = #{email} order by projectAskDate desc 
+	
 	</select>
 	
 
