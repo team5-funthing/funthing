@@ -168,10 +168,11 @@ public class ProjectController {
    }
 
    @RequestMapping(value="getAllFundingProjectList.udo", method = RequestMethod.GET)
-   public String getAllFundingProjectList(Model model) {
+   public String getAllFundingProjectList(Model model, AdminCategoryVO vo) {
       
       List<ProjectVO> getAllFundingProjectList = getAllFundingProjectListService.getAllFundingProjectList();
       model.addAttribute("getAllFundingProjectList", getAllFundingProjectList);
+      model.addAttribute("getAllCategoryList", getCategoryListSerivce.getCategoryList(vo));
       
       return "p-project-list";
    }
