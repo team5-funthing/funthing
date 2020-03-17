@@ -27,7 +27,7 @@
 				<form id="getProgressSelectList" action="getShowCategoryList.udo"
 					method="GET">
 					<div class="col py-3 d-flex justify-content-start">
-						<div class="input-group ">
+						<div class="input-group">
 
 
 							<div class="input-group-btn">
@@ -116,14 +116,14 @@
 	<hr>
        <div class="container">
            
-            <section class="tiles pl-5 pr-5 " >
+            <section class="tiles pl-5 pr-5">
 
 	<!-- --------------------------------------------------전체보기------------------------------------------------------------------ -->
                 <c:forEach var="fundingProject" items="${getAllFundingProjectList }" varStatus="step">
                 
 	                <article class="js-slidein block">
-	                    <div class="project">
-	                        <div class="thumbnail-wrap">
+	                    <div class="project" >
+	                        <div class="thumbnail-wrap m-2">
 	                            <div class="thumbnail">
 	                                <div class="centered">
 										<form id="projecImage${step.count }" action="projectDetails.udo" method="GET">
@@ -143,28 +143,27 @@
 	                                </div>
 	                            </div>
 	                        </div>
-	                        
-	                        <div class="h5 p-2" style="color: black; font-weight: 500; min-height:70px; ">${fundingProject.projectTitle }</div>
-	                        <ul>
+		                        
+	                        <div class="h5 m-2" style="color: black; font-weight: 500; min-height:70px; ">${fundingProject.projectTitle }</div>
+	                        <ul class="m-2">
 	                            <li style="color: gray;">by ${fundingProject.creator }</li>
 	                        </ul>
-	                        <div class="mt-10">
+	                        <div class="m-2">
 								<div class="percentage">
+									<div class="progress" style=" height: 7px;">
+										<div class="progress-bar" role="progressbar"
+											style="width: ${progressPercent}%; background-color: #ff9999;" aria-valuenow="30"
+											aria-valuemin="0" aria-valuemax="100"></div>
+									</div>
 									<fmt:formatNumber type="number" var="progressPercent"
 										value="${(fundingProject.fundingMoney / fundingProject.goalMoney)*100}"
 										pattern=".00" />
 									<fmt:formatNumber type="number" var="progress"
 										maxFractionDigits="3" value="${fundingProject.fundingMoney}" />
 									<p>${progress}원${progressPercent}%진행중</p>
-
-									<div class="progress" style=" height: 7px;">
-										<div class="progress-bar" role="progressbar"
-											style="width: ${progressPercent}%; background-color: #ff9999;" aria-valuenow="30"
-											aria-valuemin="0" aria-valuemax="100"></div>
-									</div>
 								</div>
 							</div>
-	                    </div>
+		                </div>
 	                </article>
                 </c:forEach>
 	<!-- ----------------------------------------------------------------------------------------------------------------------- -->

@@ -82,16 +82,14 @@
                      <div class="tab-pane fade show active " id="nav-created-prj-list"
                         role="tabpane" aria-labelledby="nav-created-prj-list-tab">
 						
-                        <div class="container">
+                        <div class="container pt-4">
                            <section class="tiles">
                            
                               <!----------------만든 프로젝트 양식 -------------------->
                               <c:if test="${not empty myProjectList }">
 	                              <c:forEach var="myProject" items="${myProjectList }" varStatus="step" >
 		                              <article>
-		                                 <div class="project">
-		                                 	<aside class="row ml-1">
-		                                 	
+		                              		<aside class="row ml-1 mb-0 pb-0">
 		                                 		<c:choose>
 		                                 			<c:when test="${myProject.funding eq 'n'.charAt(0) }"> <!-- 펀징 진행 확인 -->
 		                                 			
@@ -100,38 +98,38 @@
 				                                 				
 					                                 			<c:choose>
 						                                 			<c:when test="${myProject.writeStatus eq 'n'.charAt(0) }"> <!-- 작성 완료 확인 -->
-						                                 				<h5><a href="javascript: return(0);" class="badge badge-info m-1">작성중</a></h5>	
+						                                 				<h5><a href="javascript: return(0);" class="btn btn-sm btn-outline-secondary">작성중</a></h5>	
 						                                 			</c:when>
 						                                 			<c:when test="${myProject.writeStatus eq 'y'.charAt(0) }">
-					                                 					<h5><a href="javascript: return(0);" class="badge badge-dark m-1">미제출</a></h5>
-						                                 				<h5><a href="javascript: return(0);" class="badge badge-success m-1">작성완료</a></h5>
+					                                 					<h5><a href="javascript: return(0);" class="btn btn-sm btn-outline-light">미제출</a></h5>
+						                                 				<h5><a href="javascript: return(0);" class="btn btn-sm btn-outline-info">작성완료</a></h5>
 						                                 			</c:when>
 					                                 			</c:choose>		
 				                                 			</c:when>                              			
 				                                 			<c:when test="${myProject.status eq 'w'.charAt(0) }">
-				                                 				<h5><a href="javascript: return(0);" class="badge badge-light m-1">심사중</a></h5>
+				                                 				<h5><a href="javascript: return(0);" class="btn btn-sm btn-outline-secondary">심사중</a></h5>
 				                                 			</c:when>
 				                                 			<c:when test="${myProject.status eq 'm'.charAt(0) }">
-					                                 			<h5><a href="javascript: return(0);" class="badge badge-warning m-1">수정 필요</a></h5>
+					                                 			<h5><a href="javascript: return(0);" class="btn btn-sm btn-outline-warning">수정 요구</a></h5>
 				                                 			</c:when>
 				                                 			<c:when test="${myProject.status eq 'f'.charAt(0) }">
-					                                 			<h5><a href="javascript: return(0);" class="badge badge-danger m-1">승인 실패</a></h5>
+					                                 			<h5><a href="javascript: return(0);" class="btn btn-sm btn-outline-danger">승인 거절</a></h5>
 				                                 			</c:when>
 			                                 			</c:choose>
 		                                 			</c:when>	                                 			
 		                                 			<c:when test="${myProject.funding eq 'y'.charAt(0) }">
 		                                 			
-		                                 				<h5><a href="javascript: return(0);" class="badge badge-primary m-1">펀딩중</a></h5>
+		                                 				<h5><a href="javascript: return(0);" class="btn btn-sm btn-outline-primary">펀딩중</a></h5>
 		                                 			
 		                                 			</c:when>
 		                                 			<c:when test="${myProject.funding eq 'e'.charAt(0) }">
 		                                 			
-		                                 				<button type="button" class="btn btn-sm btn-outline-secondary">펀딩마감</button>
+		                                 				<button type="button" class="btn btn-sm btn-outline-dark">펀딩마감</button>
 		                                 			
 		                                 			</c:when>
 		                                 		</c:choose>
-			                                 	
 		                                 	</aside>
+		                                 <div class="project pt-0 mt-0">
 		                                    <div class="card" style="border-radius: 10px;">
 		                                       <div class="thumbnail-wrap">
 		                                          <div class="thumbnail " style="border-top-left-radius: 10px 10px;

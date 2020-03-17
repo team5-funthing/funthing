@@ -39,7 +39,7 @@
 
                     <div class="mt-10">
                         <div class="row">
-                            <div class="col-5">
+                            <div class="col-6">
                                 <div class="switch-wrap d-flex justify-content-start ml-3">
                                     <div class="confirm-switch mr-1">
                                         <input type="checkbox" id="confirm-switch" name="confirm-switch" checked>
@@ -48,7 +48,7 @@
                                     <p>아이디 기억하기</p>
                                 </div>
                             </div>
-                            <div class="col-2">
+                            <div class="col-1">
 
                             </div>
                             <div class="col-5">
@@ -58,13 +58,13 @@
 
                     </div>
 					<div id="loginProcessingResult">${loginFail}</div>
-                    <div class="col-xl-12 mt-3">
+                    <div class="mb-3">
                         <div class="mt-30 d-flex justify-content-center">
-							<a href="javascript: return(0);" onclick="inputCheck()"
-								class="deliveryOKBtn btn-lg btn-bd-purple d-none d-lg-inline-block m-1 popup-modal-dismiss pl-2 pr-2">
+							<a href="javascript: return(0);" onclick="inputCheck()" style="width: 100px;"
+								class="btn-lg btn-bd-purple d-none d-lg-inline-block m-1 popup-modal-dismiss pl-2 pr-2">
 								로그인 </a>
-								<a href="javascript: return(0);"
-								class="deliveryOKBtn btn-lg btn-bd-purple d-none d-lg-inline-block m-1 popup-modal-dismiss pl-2 pr-2">
+								<a href="javascript: return(0);" style="width: 100px;"
+								class="btn-lg btn-bd-purple d-none d-lg-inline-block m-1 popup-modal-dismiss pl-2 pr-2">
 								취소 </a>
 						</div>
                     </div>
