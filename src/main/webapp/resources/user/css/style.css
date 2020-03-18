@@ -14,7 +14,7 @@
 }
 
 body {
-    font-family: 'Raleway', sans-serif;
+	font-family: 'SpoqaHanSans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
     font-weight: normal;
     font-style: normal
 }
@@ -1773,30 +1773,30 @@ h3 {
 }
 
 .footer {
-    background: rgb(62, 101, 126);
+    background: rgb(250, 250, 250);
 }
 
 .footer .footer_top {
-    padding-top: 145px;
-    padding-bottom: 129px
+    padding-top: 100px;
+    padding-bottom: 80px
 }
 
 @media (max-width: 767px) {
     .footer .footer_top {
-        padding-top: 60px;
-        padding-bottom: 30px
+        padding-top: 50px;
+        padding-bottom: 20px
     }
 }
 
 @media (max-width: 767px) {
     .footer .footer_top .footer_widget {
-        margin-bottom: 30px
+        margin-bottom: 20px
     }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
     .footer .footer_top .footer_widget {
-        margin-bottom: 30px
+        margin-bottom: 20px
     }
 }
 
@@ -1810,7 +1810,7 @@ h3 {
 
 @media (max-width: 767px) {
     .footer .footer_top .footer_widget .footer_title {
-        margin-bottom: 20px
+        margin-bottom: 10px
     }
 }
 
@@ -4636,6 +4636,7 @@ h6 {
 }
 
 
+#deleteProjectConfirmPopup .white-popup-block input,
 #updateShipmentComplete .white-popup-block input,
 #showDeliveryAddress .white-popup-block input,
 #exist-writingProject-popup .white-popup-block input,
@@ -4646,6 +4647,7 @@ h6 {
     height: 50px
 }
 
+#deleteProjectConfirmPopup,
 #updateShipmentComplete,
 #showDeliveryAddress,
 #exist-writingProject-popup,
@@ -4664,6 +4666,7 @@ h6 {
     transform: translate(-50%, -50%)
 }
 
+#deleteProjectConfirmPopup .mfp-close-btn-in .mfp-close,
 #updateShipmentComplete .mfp-close-btn-in .mfp-close,
 #showDeliveryAddress .mfp-close-btn-in .mfp-close,
 #exist-writingProject-popup .mfp-close-btn-in .mfp-close,
@@ -4674,6 +4677,7 @@ h6 {
     display: none !important
 }
 
+#deleteProjectConfirmPopup button.mfp-close,
 #updateShipmentComplete button.mfp-close,
 #showDeliveryAddress button.mfp-close,
 #exist-writingProject-popup button.mfp-close,

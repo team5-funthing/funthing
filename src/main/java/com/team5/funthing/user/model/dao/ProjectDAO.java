@@ -50,8 +50,8 @@ public class ProjectDAO {
 		return sqlSessionTemplate.selectList("getAllFundingProjectList");
 	}
 
-	public void updateProjectDeadline(){
-		sqlSessionTemplate.update("updateProjectDeadline");
+	public int updateProjectDeadline(){
+		return sqlSessionTemplate.update("updateProjectDeadline");
 	}
 	
 	

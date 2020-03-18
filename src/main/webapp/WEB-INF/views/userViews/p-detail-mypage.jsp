@@ -126,8 +126,8 @@
 		                                 			</c:when>
 		                                 		</c:choose>
 		                                 	</aside>
-		                                 <div class="project pt-0 mt-0">
-		                                    <div class="card" style="min-width: 265px; border-radius: 10px;">
+		                                 <div class="project pt-0 mt-0" style="min-width: 265px;">
+		                                    <div class="card" style=" border-radius: 10px;">
 		                                       <div class="thumbnail-wrap">
 		                                          <div class="thumbnail " style="border-top-left-radius: 10px 10px;
 																										border-top-right-radius: 10px 10px;">
@@ -198,8 +198,18 @@
 											   		<div class="d-flex justify-content-center">
 				                                          <a class="btn btn-sm btn-outline-secondary m-1" 
 				                                          	href="getWritingProject.udo?creator=${myProject.creator}&currentProjectNo=${myProject.projectNo }">수정</a>
-				                                          <a class="btn btn-sm btn-outline-secondary m-1" 
-				                                          	href="deleteProject.udo?currentProjectNo=${myProject.projectNo }">삭제</a>             
+				                                          	
+				                                          	
+				                                          	
+				                                          <form action="deleteProject.udo" method="GET" id="deleteProjectForm">	
+				                                          	  <input type="hidden" name="currentProjectNo" value="${myProject.projectNo}">	
+				                                          	  <a class="btn btn-sm btn-outline-secondary m-1" id="deleteProjectBtn"
+					                                          	  href="javascript:return(0);">삭제</a>
+					                                      </form>
+					                                      
+					                                      	
+					                                      	
+					                                          	             
 				                                          <c:choose>
 				                                 			<c:when test="${myProject.funding eq 'y'.charAt(0) || myProject.funding eq 'e'.charAt(0) }"> <!-- 펀징 진행중일때 -->
 				                                         		<a class="btn btn-sm btn-outline-secondary m-1" 
@@ -386,8 +396,53 @@
          </div>
       </div>
    </section>
+   
+   
+  	<form action ="#" method="POST" id="deleteProjectConfirmPopup" class="white-popup-block mfp-hide" >
+         <div class="popup_box">
+             <div class="popup_inner">
+            		<p>프로젝트를 정말 삭제하시겠습니까?</p>
+                  <div class="d-flex justify-content-center mt-3">
+                      <a href="javaScript:return(0);" class="deleteProjectOKBtn btn-lg btn-bd-purple d-none d-lg-inline-block m-1 popup-modal-dismiss pl-4 pr-4">확인</a>
+                      <a href="javaScript:return(0);" class="btn-lg btn-bd-purple d-none d-lg-inline-block m-1 popup-modal-dismiss pl-4 pr-4">취소</a>
+                  </div>
+             </div>
+         </div>
+     </form>
 
-   <jsp:include page="./include/i-footer.jsp"></jsp:include>
+	<script>
+		$(document).on("click", "#deleteProjectBtn", function() {
+
+			var okBtn = $(this);
+
+			$.magnificPopup.open({
+				items : {
+					src : '#deleteProjectConfirmPopup'
+				},
+				type : 'inline',
+				preloader : false,
+				modal : true
+
+			});
+
+			$(document).on('click', '.popup-modal-dismiss', function(e) {
+				e.preventDefault();
+				$.magnificPopup.close();
+			});
+
+			$(document).on("click", ".deleteProjectOKBtn", function() {
+				okBtn.closest("form").submit();
+			});
+
+		})
+	</script>
+
+
+
+
+
+
+	<jsp:include page="./include/i-footer.jsp"></jsp:include>
    <jsp:include page="./include/i-popup-login.jsp"></jsp:include>
    <jsp:include page="./include/i-popup-search.jsp"></jsp:include>
    <jsp:include page="./include/i-body-js.jsp"></jsp:include>

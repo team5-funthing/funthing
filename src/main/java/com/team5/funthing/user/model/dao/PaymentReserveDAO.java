@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.team5.funthing.user.model.vo.PaymentReserveVO;
+import com.team5.funthing.user.model.vo.ProjectVO;
 
 @Repository
 public class PaymentReserveDAO {
@@ -26,8 +27,6 @@ public class PaymentReserveDAO {
 	public List<PaymentReserveVO> getPaymentReserveListByEmail(PaymentReserveVO vo) {
 		return sqlSessionTemplate.selectList("getPaymentReserveListByEmail", vo);
 	}
-	
-	
 	
 	public void updatePaymentComplete(int projectNo) {
 		
@@ -54,6 +53,10 @@ public class PaymentReserveDAO {
 	
 	public void updateShipmentComplete(PaymentReserveVO vo) {
 		sqlSessionTemplate.update("updateShipmentComplete", vo);
+	}
+	
+	public List<PaymentReserveVO> getToCancelOrderList(ProjectVO vo) {
+		return sqlSessionTemplate.selectList("getToCancelOrderList", vo);
 	}
 	
 }

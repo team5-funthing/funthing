@@ -132,7 +132,7 @@
 					
 					
 					<div class="p-2 bd-highlight">
-						<div class="h4">모인 금액</div>
+						<div class="h4" style="color: gray;">모인 금액</div>
 						<div class="h2" style="color: #000000">
 								${progress} 원
 							
@@ -148,17 +148,25 @@
 					</div>
 					
 					<jsp:useBean id="now" class="java.util.Date" />
-					<fmt:formatDate var="today" value="${now}" pattern="yyyyMMdd" />
+					<fmt:formatDate var="today" value="${now }" pattern="yyyyMMdd" />
 					<fmt:formatDate var="endDate" value="${projectPreview.endDate}" pattern="yyyyMMdd" />
 
 					
 					<div class="p-2 bd-highlight">
-						<div class="h4">남은 날짜</div>
-						<div class="h2" style="color: #000000">
-							${endDate - today } 일
+						<div class="h4" style="color: gray; font-weight: 400;">남은 날짜</div>
+						<div class="h2" style="color: black; font-weight: 500;">
+						<c:choose>
+							<c:when test="${endDate - today < 1 }">
+								마감
+							</c:when>
+							<c:otherwise>
+								${endDate - today } 일
+							</c:otherwise>
+						</c:choose>
 							<div class="h5" style="color: #000000"></div>
 						</div>
 					</div>
+					
 					<div class="p-2 bd-highlight mt-auto ml-0">
 						<form id="supportProject" action="supportprojectPreview.udo" method="GET">
 							<input type="hidden" name="projectNo" value="${projectPreview.projectNo }">
@@ -187,61 +195,17 @@
 
 				<article>
 					<div class="row">
-						<div class="col-lg-10 posts-list">
+						<div class="col-lg-10">
 							<div class="single-project-details">
-								<div class="feature-img">
-									<img class="img-fluid" src="#" alt="">
-								</div>
 								<div class="blog_details">
 									<h3>${previewProject.projectSubTitle }</h3>
-									<ul class="project-info-link mt-3 mb-4">
-										<li><a href="#"><i class="fa fa-user"></i> ${previewProject.category }</a></li>
-										<li><a href="#"><i class="fa fa-comments"></i> previewProjectsupporters
-												후원한사람들</a></li>
-									</ul>
 									<c:if test="${previewProject ne null }">
 										
 										${previewProject.projectStory}
 									
 									</c:if> 
-									
 								</div>
 							</div>
-							
-							<!-- projectBoard form 시작 -->
-							<div class="comment-form">
-								<h4>리뷰 게시판 글 남기기</h4>
-								
-								<form class="form-contact comment_form" action="insertProjectBoard.udo" 
-												id="commentForm" method="post">
-									<div class="row">
-										<div class="col-12">
-											<div class="form-group">
-												<textarea class="form-control w-100" name="projectBoardContents" 
-													id="projectBoardContents" cols="30" rows="9"></textarea>
-											</div>
-										</div>
-										<div class="col-sm-6">
-											<div class="form-group">
-												<input class="form-control" name="name" id="name" type="text" 
-													value="${sessionScope.memberSessionName}">
-											</div>
-										</div>
-										<div class="col-sm-6">
-											<div class="form-group">
-		                                    <input class="form-control" name="email" id="email" type="email" 
-		                                       value="${sessionScope.memberSessionEmail}">
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<button type="submit" 
-											class="button button-contactForm btn_1 boxed-btn">글 남기기</button>
-									</div>
-								</form>
-							</div>
-							<!-- projectBoard form 끝 -->
-							
 						</div>
 						<!-- 프로젝트 디테일 페이지 스토리 및 게시글 끝 [왼쪽] -->
 

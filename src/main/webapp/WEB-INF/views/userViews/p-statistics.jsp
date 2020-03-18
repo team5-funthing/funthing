@@ -129,7 +129,7 @@
 									<h3>${count}회</h3>
 									</p>
 									<a
-										href="getAllProjectAndPayment.udo?currentProjectNo=${currentProjectNo}"
+										href="rewardSupportCheck.udo?projectNo=${currentProjectNo}"
 										class="card-link" style="color:gray;"><ins>자세히보기</ins></a>
 
 								</div>

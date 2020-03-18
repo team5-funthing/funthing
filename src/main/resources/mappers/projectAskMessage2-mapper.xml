@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="projectAskMessageDAO2">
+ 	
+
+	<!-- 멤버테이블과 메이커멤버테이블을 조인하여 메이커(창작자명) 가져오기 -->
+	
+	<resultMap type="creator" id="creatorVO">
+		<result column="creator" property="creator" />
+		<result column="creatoremail" property="email" />
+	</resultMap>
+
+	<resultMap type="projectAskMessage" id="projectAskMessage">
+		<result column="projectAskNo" property="projectAskNo" />
+		<result column="email" property="email" />
+		<result column="creator" property="creator" />
+		<result column="projectAskContents" property="projectAskContents" />
+		<result column="projectAskReplyStatus" property="projectAskReplyStatus" />
+		<result column="projectAskRef" property="projectAskRef" />
+		<result column="projectAskStep" property="projectAskStep" />
+		<result column="projectAskContentsTitle" property="projectAskContentsTitle" />
+		<result column="projectAskDate" property="projectAskDate" />
+		<result column="projectAskReplyContents" property="projectAskReplyContents" />
+		<result column="projectAskReplyDate" property="projectAskReplyDate" />
+		<result column="projectAskReplyContentsTitle" property="projectAskReplyContentsTitle" />
+		<result column="projectNo" property="projectNo" />
+		
+		<collection property="creatorVO" resultMap="creatorVO"></collection>
+	</resultMap>
+	
+	<!-- 메이커 관련 전체 문의글 가져오기 -->
+	<select id="getEntireProjectMakerAskMessageList" parameterType="projectAskMessage"  resultMap="projectAskMessage">
+		select c.email as creatoremail, pm.* from projectAskMessage pm 
+		join creator c on c.creator = pm.creator 
+		where c.email = #{email } order by projectAskDate desc
+	</select>	
+	
+	
+ </mapper>

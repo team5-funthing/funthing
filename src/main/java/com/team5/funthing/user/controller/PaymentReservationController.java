@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,6 +33,7 @@ import com.team5.funthing.user.service.paymentReserveService.GetPaymentReserveLi
 import com.team5.funthing.user.service.paymentReserveService.GetPaymentReserveService;
 import com.team5.funthing.user.service.paymentReserveService.UpdateShipmentCompleteService;
 import com.team5.funthing.user.service.rewardService.GetRewardService;
+import com.team5.funthing.user.service.schedulingService.UpdateProjectDeadlineService;
 
 import lombok.Setter;
 import lombok.extern.java.Log;
@@ -66,6 +68,10 @@ public class PaymentReservationController {
 	
 	@Autowired
 	private GetPaymentReserveListByProjectNoService getPaymentReserveListByProjectNoService;
+	
+	@Autowired
+	private UpdateProjectDeadlineService updateProjectDeadlineService;
+	
 	
 	
 	@RequestMapping(value = "/insertselectedReward.udo", method= RequestMethod.POST)
@@ -154,7 +160,6 @@ public class PaymentReservationController {
 		int orderNo = Integer.parseInt(orderNoStr);
 		
 		prvo.setOrderNo(orderNo);
-		System.out.println(orderNo);
 		prvo = getPaymentReserveService.getPaymentReserve(prvo);
 		kakaoPayService.kakaoPayInfo(pg_token, orderNo);
 		
@@ -176,7 +181,6 @@ public class PaymentReservationController {
 		memberVO = (MemberVO)session.getAttribute("memberSession");
 		prvo.setEmail(memberVO.getEmail());
 		
-		System.out.println("멤버세션 확인 : " + memberVO.getEmail());
 		
 		List<PaymentReserveVO> paymentReserveList = getPaymentReserveListByEmailService.getPaymentReserveListByEmail(prvo);
 		model.addAttribute("paymentReserveList", paymentReserveList);
@@ -234,7 +238,6 @@ public class PaymentReservationController {
 		
 
 		if(tempVO != null) {
-			System.out.println("테스트 : " + tempVO.toString());
 			prvo = tempVO;
 			session.removeAttribute("redirectPrvo");
 		}
@@ -265,10 +268,19 @@ public class PaymentReservationController {
 		return "redirect: rewardSupportCheck.udo";
 	}
 	
-	
 
-	
-	
+
+	@Scheduled(cron= "1 0 0 * * ?")
+	public void updateProjectDeadlineService() throws URISyntaxException {
+		System.out.println("프로젝트 마감 스케줄러 실행");
+		List<PaymentReserveVO> failedProjectList = updateProjectDeadlineService.updateProjectDeadline();
+		
+		for(PaymentReserveVO prvo :failedProjectList) {
+			kakaoPayService.kakaoPayCancel(prvo);
+		}
+		
+		System.out.println("프로젝트 마감 스케줄러 종료");
+	}
 	
 	
 	

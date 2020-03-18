@@ -84,12 +84,18 @@
 							<c:set var="totalAmount" value="${ totalAmount + rewardSelection.paymentAmount }"/>
 							<div class="row">
 								<div class="col-8">
-									<h5 class="card-title">${rewardSelection.reward.rewardName }</h5>
+									<h5 class="card-title" style="color:#464059; font-weight: 500;">${rewardSelection.reward.rewardName }</h5>
 									<p class="card-text">${rewardSelection.reward.rewardContent }</p>
 									<p class="card-text">옵션: <br>
 									
 									<c:forEach var="option" items="${rewardSelection.rewardOptionValueList}">
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${option }<br>
+										
+										<c:if test="${option eq 'none' }"></c:if>
+										<c:if test="${option ne 'none' }">
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${option }
+										</c:if>
+										<br>
+										
 									</c:forEach>
 									
 									</p>
@@ -103,13 +109,13 @@
 						</c:forEach>
 	
 						<div class="d-flex justify-content-between">
-							<div class="p-2 bd-highlight">추가 펀딩금액</div>
+							<div class="p-2 bd-highlight" style="color:#464059; font-weight: 500;">추가 펀딩금액</div>
 							<fmt:formatNumber type="number" var="additionalAmountfmt" maxFractionDigits="3" value="${paymentReserve.additionalFundingMoney }" />
-							<div class="p-2 bd-highlight">${additionalAmountfmt }원</div>
+							<div class="p-2 bd-highlight" style="color:#464059; font-weight: 500;">${additionalAmountfmt }원</div>
 						</div>
 						<div class="d-flex justify-content-between">
-							<div class="p-2 bd-highlight">이름 비공개</div>
-							<div class="p-2 bd-highlight">
+							<div class="p-2 bd-highlight" style="color:#464059; font-weight: 500;">이름 비공개</div>
+							<div class="p-2 bd-highlight" style="color:#464059; font-weight: 500;">
 								<c:choose>
 									<c:when test="${paymentReserve.privateName eq on }">
 										비공개
@@ -121,8 +127,8 @@
 							</div>
 						</div>
 						<div class="d-flex justify-content-between">
-							<div class="p-2 bd-highlight">펀딩금액 비공개</div>
-							<div class="p-2 bd-highlight">
+							<div class="p-2 bd-highlight" style="color:#464059; font-weight: 500;">펀딩금액 비공개</div>
+							<div class="p-2 bd-highlight" style="color:#464059; font-weight: 500;">
 								<c:choose>
 									<c:when test="${paymentReserve.privateFundingMoney eq on }">
 										비공개
@@ -136,8 +142,8 @@
 						<hr>
 	
 						<div class="d-flex justify-content-between">
-							<div class="p-2 bd-highlight">배송비</div>
-							<div class="p-2 bd-highlight"> ${paymentReserve.shippingFee }원</div>
+							<div class="p-2 bd-highlight" style="color:#464059; font-weight: 500;">배송비</div>
+							<div class="p-2 bd-highlight" style="color:#464059; font-weight: 500;"> ${paymentReserve.shippingFee }원</div>
 						</div>
 						<hr>
 						
@@ -149,7 +155,7 @@
 					<div class="card-body">
 						<div class="d-flex justify-content-between">
 							<div class="p-2 bd-highlight ">
-								<p class="card-text" style="font-weight: bold;">펀딩금액</p>
+								<p class="card-text" style="color:#464059; font-weight: 500;">펀딩금액</p>
 							</div>
 							<div class="p-2 bd-highlight">
 								<fmt:formatNumber type="number" var="totalAmountfmt" maxFractionDigits="3" value="${totalAmount + paymentReserve.shippingFee }" />
@@ -159,7 +165,7 @@
 
 						<div class="d-flex justify-content-between">
 							<div class="p-2 bd-highlight">
-								<p class="card-text" style="font-weight: bold;">배송비</p>
+								<p class="card-text" style="color:#464059; font-weight: 500;">배송비</p>
 							</div>
 							<div class="p-2 bd-highlight">
 								<p class="card-text">${paymentReserve.shippingFee }원</p>
@@ -167,7 +173,7 @@
 						</div>
 						<div class="d-flex justify-content-between">
 							<div class="p-2 bd-highlight">
-								<p class="card-text h6" style="font-weight: bold;">최종결제 금액</p>
+								<p class="card-text h6" style="color:#464059; font-weight: 500;">최종결제 금액</p>
 							</div>
 							
 							 <fmt:formatNumber type="number" var="totalAmountfmt" maxFractionDigits="3" value="${totalAmount + paymentReserve.shippingFee }" />
@@ -183,7 +189,7 @@
 			<article>
 				<div class="row">
 					<div class="col-6">
-						<h3>펀딩 서포터</h3>
+						<h3 style="color:#464059; font-weight: 500;">펀딩 서포터</h3>
 						<div class="card"
 							style="border: 0px; background-color: whitesmoke;">
 	
@@ -220,7 +226,7 @@
 					</div>
 					
 					<div class="col-6">
-						<h3>리워드 배송지</h3>
+						<h3 style="color:#464059; font-weight: 500;">리워드 배송지</h3>
 						<hr class="" style="color: whitesmoke;">
 						<div class="card" style="border: 0px;">
 						
@@ -464,7 +470,6 @@
 			<article class="p-5 d-flex justify-content-center">
 				<div class="d-inline-flex p-2 bd-highlight">
 					<a href="javaScript: return(0);" onclick="document.getElementById('paymentReserveForm').submit();" class="btn btn-primary">리워드 결제하기</a>
-					<!-- <a href="javaScript: return(0);" onclick="document.getElementById('paymentReserveForm').submit();" class="btn btn-primary">결제 예약하기</a> -->
 				</div>
 			</article>
 			<input type="hidden" name="fundingMoney" value="${totalAmount + paymentReserve.shippingFee }">

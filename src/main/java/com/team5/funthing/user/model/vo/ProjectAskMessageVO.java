@@ -24,96 +24,192 @@ public class ProjectAskMessageVO {
 	private int projectAskStep;
 	private int projectNo;
 	
-//	조인시 필요한 VO
+	
 	private ProjectVO project;
+	private CreatorVO creatorVO;
 	
 	
 	
-	
-	public ProjectVO getProject() {
-		return project;
-	}
-	public void setProject(ProjectVO project) {
-		this.project = project;
-	}
-	public int getProjectNo() {
-		return projectNo;
-	}
-	public void setProjectNo(int projectNo) {
-		this.projectNo = projectNo;
-	}
-	public String getProjectAskReplyContentsTitle() {
-		return projectAskReplyContentsTitle;
-	}
-	public void setProjectAskReplyContentsTitle(String projectAskReplyContentsTitle) {
-		this.projectAskReplyContentsTitle = projectAskReplyContentsTitle;
-	}
-	public Date getProjectAskDate() {
-		return projectAskDate;
-	}
-	public void setProjectAskDate(Date projectAskDate) {
-		this.projectAskDate = projectAskDate;
-	}
-	public Date getProjectAskReplyDate() {
-		return projectAskReplyDate;
-	}
-	public void setProjectAskReplyDate(Date projectAskReplyDate) {
-		this.projectAskReplyDate = projectAskReplyDate;
-	}
-	public String getProjectAskContentsTitle() {
-		return projectAskContentsTitle;
-	}
-	public void setProjectAskContentsTitle(String projectAskContentsTitle) {
-		this.projectAskContentsTitle = projectAskContentsTitle;
-	}
 	public int getProjectAskNo() {
 		return projectAskNo;
 	}
+
+
+
 	public void setProjectAskNo(int projectAskNo) {
 		this.projectAskNo = projectAskNo;
 	}
+
+
+
 	public String getEmail() {
 		return email;
 	}
+
+
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+
+
 	public String getCreator() {
 		return creator;
 	}
+
+
+
 	public void setCreator(String creator) {
 		this.creator = creator;
 	}
+
+
+
+	public String getProjectAskContentsTitle() {
+		return projectAskContentsTitle;
+	}
+
+
+
+	public void setProjectAskContentsTitle(String projectAskContentsTitle) {
+		this.projectAskContentsTitle = projectAskContentsTitle;
+	}
+
+
+
 	public String getProjectAskContents() {
 		return projectAskContents;
 	}
+
+
+
 	public void setProjectAskContents(String projectAskContents) {
 		this.projectAskContents = projectAskContents;
 	}
+
+
+
+	public String getProjectAskReplyContentsTitle() {
+		return projectAskReplyContentsTitle;
+	}
+
+
+
+	public void setProjectAskReplyContentsTitle(String projectAskReplyContentsTitle) {
+		this.projectAskReplyContentsTitle = projectAskReplyContentsTitle;
+	}
+
+
+
 	public String getProjectAskReplyContents() {
 		return projectAskReplyContents;
 	}
+
+
+
 	public void setProjectAskReplyContents(String projectAskReplyContents) {
 		this.projectAskReplyContents = projectAskReplyContents;
 	}
+
+
+
 	public String getProjectAskReplyStatus() {
 		return projectAskReplyStatus;
 	}
+
+
+
 	public void setProjectAskReplyStatus(String projectAskReplyStatus) {
 		this.projectAskReplyStatus = projectAskReplyStatus;
 	}
+
+
+
+	public Date getProjectAskDate() {
+		return projectAskDate;
+	}
+
+
+
+	public void setProjectAskDate(Date projectAskDate) {
+		this.projectAskDate = projectAskDate;
+	}
+
+
+
+	public Date getProjectAskReplyDate() {
+		return projectAskReplyDate;
+	}
+
+
+
+	public void setProjectAskReplyDate(Date projectAskReplyDate) {
+		this.projectAskReplyDate = projectAskReplyDate;
+	}
+
+
+
 	public int getProjectAskRef() {
 		return projectAskRef;
 	}
+
+
+
 	public void setProjectAskRef(int projectAskRef) {
 		this.projectAskRef = projectAskRef;
 	}
+
+
+
 	public int getProjectAskStep() {
 		return projectAskStep;
 	}
+
+
+
 	public void setProjectAskStep(int projectAskStep) {
 		this.projectAskStep = projectAskStep;
 	}
+
+
+
+	public int getProjectNo() {
+		return projectNo;
+	}
+
+
+
+	public void setProjectNo(int projectNo) {
+		this.projectNo = projectNo;
+	}
+
+
+
+	public ProjectVO getProject() {
+		return project;
+	}
+
+
+
+	public void setProject(ProjectVO project) {
+		this.project = project;
+	}
+
+
+
+	public CreatorVO getCreatorVO() {
+		return creatorVO;
+	}
+
+
+
+	public void setCreatorVO(CreatorVO creatorVO) {
+		this.creatorVO = creatorVO;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "ProjectAskMessageVO [projectAskNo=" + projectAskNo + ", email=" + email + ", creator=" + creator
@@ -123,8 +219,8 @@ public class ProjectAskMessageVO {
 				+ projectAskDate + ", projectAskReplyDate=" + projectAskReplyDate + ", projectAskRef=" + projectAskRef
 				+ ", projectAskStep=" + projectAskStep + ", projectNo=" + projectNo + ", project=" + project + "]";
 	}
-
 	
+
 
 	
 	

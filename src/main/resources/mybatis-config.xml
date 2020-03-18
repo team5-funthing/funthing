@@ -92,6 +92,7 @@
 		<mapper resource="mappers/deliveryAddress-mapper.xml"/>
 		<mapper resource="mappers/report-mapper.xml" />
 		<mapper resource="mappers/projectAskMessage-mapper.xml"/>
+		<mapper resource="mappers/projectAskMessage2-mapper.xml"/>
 		<mapper resource="mappers/home-mapper.xml"/>
 
 		<mapper resource="mappers/userMainImageChange-mapper.xml"/>

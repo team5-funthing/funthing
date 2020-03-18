@@ -149,6 +149,8 @@ public class ProjectController {
    private RewardVO rewardVO;
    @Autowired
    private ProjectBoardVO projectBoardVO;
+   @Autowired
+   private CreatorVO creatorVO;
    
 
    @Autowired
@@ -252,6 +254,7 @@ public class ProjectController {
       List<CreatorVO> getCreatorList = getCreatorListByEmailService.getCreatorListByEmail(cvo);
       if(!getCreatorList.isEmpty()) {
          model.addAttribute("getCreatorList", getCreatorList);
+         
       }
       
       List<ProjectVO> getProjectList = getProjectListByEmailService.getProjectListByEmail(pvo);
@@ -407,7 +410,7 @@ public class ProjectController {
       
       redirectAttributes.addAttribute("creator", creator);
 
-      redirectAttributes.addAttribute("msg", "3");
+      redirectAttributes.addAttribute("msg", "심사요청에 성공하였습니다.");
       redirectAttributes.addAttribute("currentProjectNo", pvo.getProjectNo());
       return "redirect:getWritingProject.udo";
    }
@@ -642,7 +645,7 @@ public class ProjectController {
             vo.getEndDate() == null ||
 
             vo.getProjectSummary() == null || vo.getProjectSummary().equals("") ||
-            vo.getProjectIntroduceVideo() == null || vo.getProjectIntroduceVideo().equals("") || 
+//            vo.getProjectIntroduceVideo() == null || vo.getProjectIntroduceVideo().equals("") || 
             vo.getProjectStory() == null || vo.getProjectStory().equals("")
 
       ){
@@ -661,6 +664,8 @@ public class ProjectController {
       
       pvo = getProjectService.getProject(pvo);
       int projectNo = pvo.getProjectNo();
+      creatorVO.setCreator(pvo.getCreator());
+      creatorVO = getCreatorService.getCreator(creatorVO);
       
       mavo.setProjectNo(pvo.getProjectNo());
 	   int likeCount = getProjectLikeCountService.getProjectLikeCount(mavo);
@@ -678,7 +683,7 @@ public class ProjectController {
       rewardVO.setProjectNo(projectNo);
       List<RewardVO> rewardList = getRewardListService.getRewardList(rewardVO);
       
-      
+      model.addAttribute("creator", creatorVO);
       model.addAttribute("rewardList", rewardList);
 
       model.addAttribute("getProjectBoardList", getProjectBoardList);

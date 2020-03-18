@@ -18,7 +18,13 @@
 	<!-- ------------------ -->
 	
 	<!-- projectBoard form 시작 -->
-							<div class="commentupdete-form">
+		<section class="container p-5">
+
+			<div class="w-100">
+				<div class="w-75">
+					<article>
+						<div class="col-lg-10 posts-list pt-5">
+							<div class="commentupdete-form p-5">
 								<h4>리뷰 게시판 글 수정하기</h4>
 								
 								<form class="form-contact commentupdete-form" action="updateProjectBoardReply.udo" 
@@ -52,7 +58,13 @@
 									</div>
 								</form>
 							</div>
-							<!-- projectBoard form 끝 -->
+						<!-- projectBoard form 끝 -->
+						</div>
+					</article>
+				<hr>
+			</div>
+		</div>
+	</section>
 	
 	<!-- -------------------- -->
 

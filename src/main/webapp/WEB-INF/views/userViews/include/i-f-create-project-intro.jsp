@@ -15,14 +15,14 @@
 						<input type="text" id="goalMoney" name="goalMoney" value="0" placeholder="펀딩 목표 금액을 입력하세요."
 							onfocus="this.placeholder = ''"
 							onblur="this.placeholder = '펀딩 목표 금액을 입력하세요.'" 
-							class="single-input">
+							class="form-control">
 						<div id="goalMoneyCheck"></div>
 					</c:when>
 					<c:when test="${writingProject.goalMoney ne null}">
 						<input type="text" id="goalMoney" name="goalMoney"
 							value="${writingProject.goalMoney }" placeholder="펀딩 목표 금액을 입력하세요."
 							onfocus="this.placeholder = ''"
-							onblur="this.placeholder = '펀딩 목표 금액을 입력하세요.'" class="single-input">
+							onblur="this.placeholder = '펀딩 목표 금액을 입력하세요.'" class="form-control">
 					</c:when>
 				</c:choose>
 			</div>
@@ -60,13 +60,13 @@
 			<c:when test="${writingProject.projectTitle eq null}">
 				<input type="text" name="projectTitle"
 					placeholder="프로젝트 제목을 입력해주세요!" onfocus="this.placeholder = ''"
-					onblur="this.placeholder = '프로젝트 제목을 입력해주세요!'" class="single-input">
+					onblur="this.placeholder = '프로젝트 제목을 입력해주세요!'" class="form-control">
 			</c:when>
 			<c:when test="${writingProject.projectTitle ne null}">
 				<input type="text" name="projectTitle"
 					value="${writingProject.projectTitle }"
 					placeholder="프로젝트 제목을 입력해주세요!" onfocus="this.placeholder = ''"
-					onblur="this.placeholder = '프로젝트 제목을 입력해주세요!'" class="single-input">
+					onblur="this.placeholder = '프로젝트 제목을 입력해주세요!'" class="form-control">
 			</c:when>
 		</c:choose>
 	</div>
@@ -76,13 +76,13 @@
 		<c:choose>
 			<c:when test="${writingProject.projectSubTitle eq null}">
 				<input type="text" name="projectSubTitle" placeholder="소제목을 입력해주세요!"
-					onblur="this.placeholder = '소제목을 입력해주세요!'" class="single-input">
+					onblur="this.placeholder = '소제목을 입력해주세요!'" class="form-control">
 			</c:when>
 			<c:when test="${writingProject.projectSubTitle ne null}">
 				<input type="text" name="projectSubTitle"
 					value="${writingProject.projectSubTitle }"
 					placeholder="소제목을 입력해주세요!" onblur="this.placeholder = '소제목을 입력해주세요!'"
-					class="single-input">
+					class="form-control">
 			</c:when>
 		</c:choose>
 	</div>
@@ -161,9 +161,9 @@
 						<input type="hidden" name="endDateStr" value="${endDateStr}">
 						
 						<p id="afterSelectDate">
-							펀딩 결제일 &nbsp;
-							<strong><span style="color: #2980b9">${writingProject.endDate }</span></strong>
-							펀딩이 성공 종료 된 후 결제가 +4 영업일 동안 진행됩니다.<br /> 정산금 지급예정일 보름에서 정산은 최대
+							펀딩 종료일 : &nbsp;
+							<strong><span style='color: #2980b9; font-weight:400;'>${writingProject.endDate }</span></strong>
+							<br>펀딩이 성공 종료 된 후 결제가 +4 영업일 동안 진행됩니다.<br /> 정산금 지급예정일 보름에서 정산은 최대
 							한달&nbsp;이내에 시작될 예정이며, 정산금 지급까지는 종료일 기준 최대 +20 영업일이 소요됩니다.&nbsp;
 						</p>
 					</div>
@@ -179,10 +179,10 @@
 			var end = $("#endDate").val();
 			$("#endDate").attr("name", "endDate");
 			$("#afterSelectDate").empty();
-			$("#afterSelectDate").append(
-					"펀딩 결제일 &nbsp;<strong><span style='color:#2980b9'> "+ end +"</span></strong>"
-					+ "펀딩이 성공 종료 된 후 결제가 +4 영업일 동안 진행됩니다.<br />"
-					+ "정산금 지급예정일 보름에서 정산은 최대 한달&nbsp;이내에 시작될 예정이며, 정산금 지급까지는 종료일 기준 최대 +20 영업일이 소요됩니다.&nbsp");
+			$("#afterSelectDate").append("펀딩 종료일 : &nbsp;"
+					+ "<strong><span style='color: #2980b9; font-weight:400;'>" + end + "</span></strong>"
+					+ "<br>펀딩이 성공 종료 된 후 결제가 +4 영업일 동안 진행됩니다.<br /> 정산금 지급예정일 보름에서 정산은 최대"
+					+ "한달&nbsp;이내에 시작될 예정이며, 정산금 지급까지는 종료일 기준 최대 +20 영업일이 소요됩니다.&nbsp");
 		});
 		
 		
@@ -217,7 +217,7 @@
 		<div class="row d-flex align-items-center mb-5">
 		
 			<div class="col-xl-6">
-				<input type="text" id="keyword" name="projectKeyword" placeholder="#검색 키워드를 입력해주세요." onfocus="this.placeholder = ''" class="single-input">
+				<input type="text" id="keyword" name="projectKeyword" placeholder="#검색 키워드를 입력해주세요." onfocus="this.placeholder = ''" class="form-control">
 			</div>
 			
 			<a href="javascript:void(0);" id="addKeywordBtn"><i class="fas fa-plus fa-2x"></i></a>
