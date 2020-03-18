@@ -7,7 +7,7 @@ funthing 회원가입과 관련하여 필요한 사항을 규정합니다.
 </div>
 <ul id="registerTosTitleList">
 <c:forEach var="registerTos" items="${getRegisterTosList}">
-	<li>${registerTos.registerTosTitle}</li>
+	<li><a href="#registerTosNo${registerTos.registerNo}">${registerTos.registerTosTitle}</a></li>
 </c:forEach>
 </ul>
 
