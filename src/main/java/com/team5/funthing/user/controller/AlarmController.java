@@ -27,9 +27,9 @@ public class AlarmController {
 	@RequestMapping("alarmPaging.udo")
 	public String alarmPaging(AlarmVO avo, HttpServletRequest request, HttpSession session) {
 		
+		System.out.println(avo.toString());
+		
 		String requestUrl = null;
-		avo.setReadConfirm('y');
-		updateReadConfirmAlarmService.updateReadConfirmAlarm(avo);
 		
 		String AlarmType = avo.getAlarmType();
 		System.out.println(AlarmType);
@@ -47,6 +47,9 @@ public class AlarmController {
 		}else if(AlarmType.contains("½Å°í")) {
 			requestUrl = "redirect:projectReportCheck.ado";
 		}
+		
+		avo.setReadConfirm('y');
+		updateReadConfirmAlarmService.updateReadConfirmAlarm(avo);
 		
 		return requestUrl;
 	}

@@ -80,9 +80,75 @@
 								"T6JggIUb0xG2LBu9Q7Pf", "http://ec2-54-180-105-174.ap-northeast-2.compute.amazonaws.com/funthing/socialjoin.udo");
 						var state = naver_id_login.getUniqState();		
 						naver_id_login.setButton("green",3,60);
-						naver_id_login.setDomain("http://localhost:8080/funthing");
+						naver_id_login.setDomain("http://ec2-54-180-105-174.ap-northeast-2.compute.amazonaws.com/funthing");
 						naver_id_login.setState(state);
 						naver_id_login.init_naver_id_login();
+						
+						var naver_id_login = new naver_id_login("bm_Jr_lzbfVgnsh6sEyX", "http://ec2-54-180-105-174.ap-northeast-2.compute.amazonaws.com/.udo");
+						  //var naver_id_login = new naver_id_login("bm_Jr_lzbfVgnsh6sEyX", "http://localhost:8080/funthing/.udo");
+						  // 접근 토큰 값 출력
+						  // alert(naver_id_login.oauthParams.access_token);
+						  // 네이버 사용자 프로필 조회
+						  naver_id_login.get_naver_userprofile("naverSignInCallback()");
+						  // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+						  function naverSignInCallback() {
+							 
+							 if(naver_id_login.getProfileData('email')!=null){
+						    	var naverEmail = naver_id_login.getProfileData('email');
+						    	document.getElementById("email2").value = naverEmail;
+						   		var naverName = naver_id_login.getProfileData('name')
+						    	document.getElementById("name").value = naverName;
+						    	var naverId = naver_id_login.getProfileData('id');
+						    	document.getElementById("password2").value = naverId;
+							 }
+							 
+							 
+							 var typedEmail = {"typedEmail":document.getElementById("email2").value};
+							 
+							  $.ajax({type:"GET",
+							        url:"emailCheck.udo",
+							        data:typedEmail,
+							        success:function(data){   
+							           if(data=='2'){
+							        	   
+							        	   var loginsubmit = document.createElement("form");
+							        		var obj1;
+							        		obj1 = document.createElement('input');
+							        		obj1.setAttribute('type', 'hidden');
+							        		obj1.setAttribute('name', 'name');
+							        		obj1.setAttribute('value', naverName);
+							        		loginsubmit.appendChild(obj1);
+							        		
+							        		var obj2;
+							        		obj2 = document.createElement('input');
+							        		obj2.setAttribute('type', 'hidden');
+							        		obj2.setAttribute('name', 'email');
+							        		obj2.setAttribute('value', naverEmail);
+							        		loginsubmit.appendChild(obj2);
+							        		
+							        		var obj3;
+							        		obj3 = document.createElement('input');
+							        		obj3.setAttribute('type', 'hidden');
+							        		obj3.setAttribute('name', 'password');
+							        		obj3.setAttribute('value', naverId);
+							        		loginsubmit.appendChild(obj3);
+							        		
+							        		loginsubmit.setAttribute('method', 'post');
+							        		loginsubmit.setAttribute('action', "socialjoin.udo");
+
+							        		document.body.appendChild(loginsubmit);
+											
+							        		loginsubmit.submit();
+
+							           }else{
+							              alert("가입되지 않은 이메일 입니다. 회원가입을 먼저 해 주세요.");
+							           }
+							        },error:function(){
+							        	alert("서버와 통신이 실패했습니다. 인터넷상태를 다시 확인해주세요.");
+							        }
+							  		
+							  	});  
+							  }
 					</script> 
 						
                     <div class="col-xl-12 kakao_login_btn-wrapper mt-3">

@@ -37,6 +37,31 @@
 	margin: 20px auto;
 }
 </style>
+<script>
+$(window).resize(function() {
+	   resizeYoutube();
+	});
+
+	$(function() {
+	   resizeYoutube();
+	});
+
+	$(document).ready(function(){
+	   
+	   $("iframe").css("height", "420px");
+	   
+	});
+
+	function resizeYoutube() {
+
+	   $("iframe").each(function() {
+	      if (/^https?:\/\/www.youtube.com\/embed\//g.test($(this).attr("src"))) {
+	         $(this).css("width", "100%");
+	         $(this).css("height", Math.ceil(parseInt($(this).css("width")) * 480 / 854) + "px");
+	      }
+	   });
+	}  
+</script>
 </head>
 
 <body>
@@ -209,8 +234,7 @@
 																						class="single-comment justify-content-between d-flex">
 																						<div class="user justify-content-between d-flex">
 																							<div class="thumb">
-																								<img
-																									src="${pageContext.request.contextPath}/resources/admin/img/project_check/comment_1.png"
+																								<img src="${pageContext.request.contextPath}/resources/admin/img/project_check/comment_1.png"
 																									alt="">
 																							</div>
 																							<div class="desc" style="width: 600px;">
@@ -561,6 +585,7 @@
 				<!-- ============================================================== -->
 				<!-- footer -->
 				<!-- ============================================================== -->
+				 <script src="${pageContext.request.contextPath}/resources/user/js/jquery.magnific-popup.min.js"></script>
 				<jsp:include page="include/i-footer.jsp" />
 			</div>
 			<!-- ============================================================== -->
