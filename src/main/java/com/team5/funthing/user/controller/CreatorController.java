@@ -32,11 +32,11 @@ public class CreatorController {
 			cvo = getCreatorService.getCreator(cvo);
 			if(cvo != null) {
 				if(inputCreator.equals(cvo.getCreator())) {
-					msg = "ΐΜΉΜ »ηΏλΑίΐΞ ΓΆΐΫΐΪΈνΐΤ΄Ο΄Ω.";
+					msg = "μ΄λ―Έ λ“±λ΅λ μ°½μ‘μλª…μ…λ‹λ‹¤.";
 				}
 			}else {
 	
-					msg = "»ηΏλ °΅΄ΙΗΡ ΓΆΐΫΐΪΈνΐΤ΄Ο΄Ω.";
+					msg = "μ‚¬μ© κ°€λ¥ν• μ°½μ‘μλª…μ…λ‹λ‹¤.";
 			}
 		}
 		

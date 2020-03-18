@@ -178,10 +178,16 @@ $(document).ready(function(){
 
 					
 					<div class="p-2 bd-highlight">
-						<div class="h4">남은 날짜</div>
-						<div class="h2" style="color: #000000">
-							${endDate - today } 일
-							<div class="h5" style="color: #000000"></div>
+						<div class="h4" style="color: gray; font-weight: 400;">남은 날짜</div>
+						<div class="h2" style="color: black; font-weight: 500;">
+							<c:choose>
+								<c:when test="${endDate - today < 1 }">
+									마감
+								</c:when>
+								<c:otherwise>
+									${endDate - today } 일
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</div>
 					<div class="p-2 bd-highlight mt-auto ml-0">
@@ -343,7 +349,7 @@ $(document).ready(function(){
 							                                             <div class="user justify-content-between d-flex p-3"
 							                                                style="background-color: whitesmoke;">
 																				<div id="projectBoard-profile" class="thumb">
-																					<img class="profile" src="${b2.member.myImage }">
+																					<img class="profile" src="${creator.creatorProfileImage }">
 																				</div>
 																				<div class="desc" style="width: 500px;">
 							                                                    <p class="comment">

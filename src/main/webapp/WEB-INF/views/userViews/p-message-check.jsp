@@ -57,7 +57,7 @@
 									<li class="nav-item">
 										
 										<c:choose>
-											<c:when test="${vo2.creator ne null && empty messagelist}">
+											<c:when test="${empty messagelist}">
 													<div class="row">
 													<div class="col"></div>
 													<div class="col-8 d-flex justify-content-center ">
@@ -82,9 +82,9 @@
 											</c:when>
 											
 										
-											<c:when test="${vo2.creator ne null && not empty messagelist }">
+											<c:when test="${not empty messagelist }">
 												<section class="tiles ml-1 mt-3 row row-cols-1 row-cols-md-3">
-
+													
 													<div class="row row-cols-1 row-cols-md-3">
 														<c:forEach var="messagelist" items="${messagelist}">
 															<div class="card ml-3 mt-3" style="width: 18rem;">

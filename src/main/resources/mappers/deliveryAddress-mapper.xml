@@ -10,14 +10,14 @@
 			SELECT deliveryAddressNo_seq.currval FROM dual
 		</selectKey>
 	
-		INSERT INTO deliveryAddress (deliveryAddressNo, email, name, phone, zipcode, roadAddress, detailedAddress, shippingNote)
-		VALUES (deliveryAddressNo_seq.nextval, #{email}, #{name}, #{phone}, #{zipcode}, #{roadAddress}, #{detailedAddress}, #{shippingNote})
+		INSERT INTO deliveryAddress (deliveryAddressNo, deliveryAddressName, email, name, phone, zipcode, roadAddress, detailedAddress, shippingNote)
+		VALUES (deliveryAddressNo_seq.nextval, #{deliveryAddressName }, #{email}, #{name}, #{phone}, #{zipcode}, #{roadAddress}, #{detailedAddress}, #{shippingNote})
 	</insert>
 	
 	<update id="updateDeliveryAddress" parameterType="deliveryAddress" >
 		UPDATE deliveryAddress
-		SET name = #{name}, phone = #{phone}, zipcode = #{zipcode}, roadAddress = #{roadAddress}, detailedAddress = #{detailedAddress}, shippingNote = #{shippingNote}
-		WHERE deliveryAddressNo = #{deliveryAddressNo}
+		SET name = #{name }, phone = #{phone }, deliveryAddressName = #{deliveryAddressName }, zipcode = #{zipcode }, roadAddress = #{roadAddress }, detailedAddress = #{detailedAddress }, shippingNote = #{shippingNote }
+		WHERE deliveryAddressNo = #{deliveryAddressNo }
 	</update>
 	
 	

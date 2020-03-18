@@ -20,13 +20,7 @@
 	
 	<jsp:include page="./include/i-popupover-mypage.jsp"/>
     <jsp:include page="./include/i-header.jsp"/>
-    
-    <c:if test="${writingProject.projectNo ne -1 }">
-    	<script>
-    		alert("글 상태 : ${writingProject.writeStatus }  projectNo : ${writingProject.projectNo}");
-    		
-    	</script>
-    </c:if>
+
     
     <c:if test="${msg ne null }">
     	<script>
@@ -148,22 +142,32 @@
 				});
 	    	</script>
 	    	
-	    	<script>
-				$(document).on("change keyup", 'input:text', function(){
-					  
-					  $("#inputSaveBtn").click(function() {
+	    	<c:if test="${writingProject.status eq 'n'.charAt(0) || writingProject.status eq 'm'.charAt(0)  }">
+	    		
+		    	<script>
+					$(document).on("change keyup", 'input:text', function(){
 						  
-					  }).prop("disabled", false);
-					  
-					  $(function() {
-						    $("#inputCompleteBtn")
-						      	.click(function() {
-						    	})
-						      	.prop("disabled", true);
-						});
-				
-				});
-			</script>
+						  $("#inputSaveBtn").click(function() {
+							  
+						  }).prop("disabled", false);
+						  
+						  $(function() {
+							    $("#inputCompleteBtn")
+							      	.click(function() {
+							    	})
+							      	.prop("disabled", true);
+							});
+					
+					});
+				</script>
+			</c:if>
+			<c:if test="${writingProject.status ne 'n'.charAt(0) && writingProject.status ne 'm'.charAt(0) }">
+		    	<script>
+		    		$(document).ready(function(){
+						  $('input:text').prop("disabled", true);
+					});
+				</script>
+			</c:if>
 		</c:if>
 	   	<c:if test="${	writingProject.writeStatus eq 'n'.charAt(0) || 
 	   						writingProject.status eq 'w'.charAt(0) ||

@@ -136,21 +136,24 @@
       </div>
 
          <div class="h3 pt-5 d-flex justify-content-between js-slidein block">
+         	
             <a href="javaScript: return(0);" style=" color: #333333;">진행중인 기획전 <i class="fas fa-chevron-right"></i></a>
+            
+	       	<ul class="nav justify-content-end">
+			  <li class="nav-item">
+			    <a class="nav-link active h5" id="exhibition1-tab" data-toggle="tab" href="#exhibition1" role="tab" aria-controls="exhibition1" aria-selected="true">1</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link h5" id="exhibition2-tab" data-toggle="tab" href="#exhibition2" role="tab" aria-controls="exhibition2" aria-selected="false">2</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link h5" id="exhibition3-tab" data-toggle="tab" href="#exhibition3" role="tab" aria-controls="exhibition3" aria-selected="false">3</a>
+			  </li>
+			</ul>
 
          </div>
          
-       	<ul class="nav justify-content-end">
-		  <li class="nav-item">
-		    <a class="nav-link active" id="exhibition1-tab" data-toggle="tab" href="#exhibition1" role="tab" aria-controls="exhibition1" aria-selected="true">1</a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link" id="exhibition2-tab" data-toggle="tab" href="#exhibition2" role="tab" aria-controls="exhibition2" aria-selected="false">2</a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link" id="exhibition3-tab" data-toggle="tab" href="#exhibition3" role="tab" aria-controls="exhibition3" aria-selected="false">3</a>
-		  </li>
-		</ul>
+
 
 		<div class="tab-content" id="myTabContent">
 			<div class="tab-pane fade show active" id="exhibition1" role="tabpanel"
@@ -341,13 +344,13 @@
          
         <ul class="nav justify-content-end">
 		  <li class="nav-item">
-		    <a class="nav-link active" id="popular1-tab" data-toggle="tab" href="#popular1" role="tab" aria-controls="popular1" aria-selected="true">1</a>
+		    <a class="nav-link active h5" id="popular1-tab" data-toggle="tab" href="#popular1" role="tab" aria-controls="popular1" aria-selected="true">1</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" id="popular2-tab" data-toggle="tab" href="#popular2" role="tab" aria-controls="popular2" aria-selected="false">2</a>
+		    <a class="nav-link h5" id="popular2-tab" data-toggle="tab" href="#popular2" role="tab" aria-controls="popular2" aria-selected="false">2</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" id="popular3-tab" data-toggle="tab" href="#popular3" role="tab" aria-controls="popular3" aria-selected="false">3</a>
+		    <a class="nav-link h5" id="popular3-tab" data-toggle="tab" href="#popular3" role="tab" aria-controls="popular3" aria-selected="false">3</a>
 		  </li>
 		</ul>
 
@@ -520,21 +523,22 @@
 
          <div class="h3 pt-5 d-flex justify-content-between js-slidein block">
             <a href="javaScript: return(0);" style=" color: #333333;">성공 임박 프로젝트<i class="fas fa-chevron-right"></i></a>
+	       	<ul class="nav justify-content-end">
+			  <li class="nav-item">
+			    <a class="nav-link active h5" id="success1-tab" data-toggle="tab" href="#success1" role="tab" aria-controls="success1" aria-selected="true">1</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link h5" id="success2-tab" data-toggle="tab" href="#success2" role="tab" aria-controls="success2" aria-selected="false">2</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link h5" id="success3-tab" data-toggle="tab" href="#success3" role="tab" aria-controls="success3" aria-selected="false">3</a>
+			  </li>
+			</ul>            
          </div>
          
          
          
-       	<ul class="nav justify-content-end">
-		  <li class="nav-item">
-		    <a class="nav-link active" id="success1-tab" data-toggle="tab" href="#success1" role="tab" aria-controls="success1" aria-selected="true">1</a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link" id="success2-tab" data-toggle="tab" href="#success2" role="tab" aria-controls="success2" aria-selected="false">2</a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link" id="success3-tab" data-toggle="tab" href="#success3" role="tab" aria-controls="success3" aria-selected="false">3</a>
-		  </li>
-		</ul>
+
 
 		<div class="tab-content" id="myTabContent">
 			<div class="tab-pane fade show active" id="success1" role="tabpanel"
@@ -705,19 +709,20 @@
 
         <div class="h3 pt-5 d-flex justify-content-between js-slidein block">
            <a href="javaScript: return(0);" style=" color: #333333;">마감 임박 프로젝트<i class="fas fa-chevron-right"></i></a>
+			<ul class="nav justify-content-end">
+				<li class="nav-item"><a class="nav-link active h5"
+					id="deadline1-tab" data-toggle="tab" href="#deadline1" role="tab"
+					aria-controls="deadline1" aria-selected="true">1</a></li>
+				<li class="nav-item"><a class="nav-link h5" id="deadline2-tab"
+					data-toggle="tab" href="#deadline2" role="tab"
+					aria-controls="deadline2" aria-selected="false">2</a></li>
+				<li class="nav-item"><a class="nav-link h5" id="deadline3-tab"
+					data-toggle="tab" href="#deadline3" role="tab"
+					aria-controls="deadline3" aria-selected="false">3</a></li>
+			</ul>           
         </div>
 
-		<ul class="nav justify-content-end">
-			<li class="nav-item"><a class="nav-link active"
-				id="deadline1-tab" data-toggle="tab" href="#deadline1" role="tab"
-				aria-controls="deadline1" aria-selected="true">1</a></li>
-			<li class="nav-item"><a class="nav-link" id="deadline2-tab"
-				data-toggle="tab" href="#deadline2" role="tab"
-				aria-controls="deadline2" aria-selected="false">2</a></li>
-			<li class="nav-item"><a class="nav-link" id="deadline3-tab"
-				data-toggle="tab" href="#deadline3" role="tab"
-				aria-controls="deadline3" aria-selected="false">3</a></li>
-		</ul>
+
 
 		<div class="tab-content" id="myTabContent">
 			<div class="tab-pane fade show active" id="deadline1" role="tabpanel"

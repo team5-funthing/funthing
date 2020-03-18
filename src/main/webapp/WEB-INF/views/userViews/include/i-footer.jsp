@@ -8,21 +8,21 @@
 				<div class="row">
 					<div class="col-xl-4 col-md-6 col-lg-3">
 						<div class="footer_widget">
-							<h3 class="footer_title">FunThing 로그인하기</h3>
+							<h3 class="footer_title" style="color: gray; font-weight: 600;">FunThing 로그인하기</h3>
 							<p class="footer_text">회원이 아니신가요?</p>
 							<a href="joinselect.udo" class="line-button">회원가입 하러가기</a>
 						</div>
 					</div>
 					<div class="col-xl-4 col-md-6 col-lg-3">
 						<div class="footer_widget">
-							<h3 class="footer_title">프로젝트 올리기</h3>
+							<h3 class="footer_title" style="color: gray; font-weight: 600;">프로젝트 올리기</h3>
 							<p class="footer_text">당신의 창작물을 후원 받아보세요!</p>
 							<a href="showStartProjectPage.udo" class="line-button">프로젝트 올리기</a>
 						</div>
 					</div>
 					<div class="col-xl-4 col-md-6 col-lg-2">
 						<div class="footer_widget">
-							<h3 class="footer_title">Navigation</h3>
+							<h3 class="footer_title" style="color: gray; font-weight: 600;">메뉴</h3>
 							<ul>
 								<li><a href="getAllFundingProjectList.udo">모든 프로젝트 보기</a></li>
 								<li><a href="getNoticeBoardList.udo">공지</a></li>

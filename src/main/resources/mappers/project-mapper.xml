@@ -142,7 +142,7 @@
 		
 		SELECT *
 		FROM project
-		WHERE TO_CHAR(enddate, 'YYYYMMDD') = TO_CHAR(current_timestamp, 'YYYYMMDD') and funding = 'n'
+		WHERE TO_CHAR(enddate, 'YYYYMMDD') = TO_CHAR(current_timestamp, 'YYYYMMDD') and funding = 'e'
 		
 	</select>
 	
