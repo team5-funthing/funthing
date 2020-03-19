@@ -53,15 +53,21 @@ public class AdminCSBoardController {
    @RequestMapping("insertAdminCSBoard.ado")
    public String insertAdminCSBoard(AdminCSBoardVO avo,CSBoardVO cvo) throws UnsupportedEncodingException, MessagingException{
       
-      avo.setAdminCSTitle("[πÆ¿« ¥‰∫Ø]re:"+cvo.getCsTitle());   
+	  boolean check=avo.getAdminCSContent().isEmpty();
+	 
+	   if(!check) {
+      
+	  avo.setAdminCSTitle("[Î¨∏Ïùò ÎãµÎ≥Ä]re:"+cvo.getCsTitle());   
       avo.setAdminID("admin");
       
       insertAdminCSBoardService.insertAdminCSBoard(avo);
       updateReplyCheckCSBoardService.updateReplyCheckCSBoard(cvo);
 
       sendMailUtil.sendMail(avo.getAdminCSTitle(), avo.getAdminCSContent(),cvo.getEmail());
-      
-      return "redirect:getAdminCSBoardList.ado"; 
+      return "redirect:getAdminCSBoardList.ado";
+	   }
+	  return "redirect:getAdminCSBoardList.ado";
+       
    }
 
    

@@ -174,9 +174,12 @@
 																	<form action="insertFocusProject.ado" method="POST">
 																		<div align="center">
 																			<input type="hidden" name="projectNo" value="${focusProject.projectNo}"> 
-																			<input type="submit" value="주목 프로젝트에 추가하기"> 
+																			
+																			
+																			
 																			<a href="deleteFocusProject.ado?projectNo=${focusProject.projectNo}"><input type="button" value="주목 프로젝트에서 제외하기"></a>
-																			<a href="getUserMainProjectList.ado"><input type="button" value="목록"></a>
+																			
+																			<a href="getFocusProjectList.ado"><input type="button" value="목록"></a>
 																		</div>
 																	</form>
 

@@ -115,7 +115,10 @@
 											<c:if test="${tos.tosNo eq null}">
 												<input type="submit" value="입력">
 											</c:if>
+											<c:if test="${tos.tosNo ne null}">
 												<input type="submit" formaction="deleteTos.ado" value="삭제">
+											</c:if>
+												 <a href="termsOfService.ado"><input type="button" value="목록"></a>
 											</div>
 										</form>
 									</div>
