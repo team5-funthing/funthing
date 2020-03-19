@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.team5.funthing.user.model.dao.PaymentReserveDAO;
@@ -23,8 +22,7 @@ public class UpdateProjectDeadlineServiceImpl implements UpdateProjectDeadlineSe
 	private PaymentReserveDAO paymentReserveDAO;
 	
 	
-	@Override 	
-	@Scheduled(cron= "1 0 0 * * ?")
+	@Override
 	public List<PaymentReserveVO> updateProjectDeadline() {
 		
 		System.out.println(" * UpdateProjectDeadlineService 실행");

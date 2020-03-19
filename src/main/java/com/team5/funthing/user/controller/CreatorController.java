@@ -48,7 +48,7 @@ public class CreatorController {
 	public String selectCreatorCheck(@RequestBody CreatorVO cvo) throws JsonProcessingException {
 
 		cvo = getCreatorService.getCreator(cvo);
-		
+		System.out.println(cvo.getBusinessFileLink());
 		ObjectMapper mapper = new ObjectMapper();
 		String selectedCreatorToJSON = mapper.writeValueAsString(cvo);
 	

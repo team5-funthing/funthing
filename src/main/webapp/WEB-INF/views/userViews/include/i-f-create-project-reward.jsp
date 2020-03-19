@@ -37,7 +37,7 @@
 				</div>
 			</div>
 			<div class="mt-30" id="shippingFeeInput">
-		          <input name="shippingFee" id="shippingFee" class="form-control form-control-lg" type="text"
+		          <input name="shippingFee" id="shippingFee" class="form-control form-control-lg inputMoney" type="text"
 		             placeholder="배송비를 입력해 주세요." onfocus="this.placeholder = ''"
 		             onblur="this.placeholder = '배송비를 입력해 주세요.'" value = "${writingProject.shippingFee }"
 		             class="single-input" required>
