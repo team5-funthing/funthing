@@ -37,6 +37,31 @@
 	margin: 20px auto;
 }
 </style>
+<script>
+$(window).resize(function() {
+	   resizeYoutube();
+	});
+
+	$(function() {
+	   resizeYoutube();
+	});
+
+	$(document).ready(function(){
+	   
+	   $("iframe").css("height", "420px");
+	   
+	});
+
+	function resizeYoutube() {
+
+	   $("iframe").each(function() {
+	      if (/^https?:\/\/www.youtube.com\/embed\//g.test($(this).attr("src"))) {
+	         $(this).css("width", "100%");
+	         $(this).css("height", Math.ceil(parseInt($(this).css("width")) * 480 / 854) + "px");
+	      }
+	   });
+	}  
+</script>
 </head>
 
 <body>
@@ -209,8 +234,7 @@
 																						class="single-comment justify-content-between d-flex">
 																						<div class="user justify-content-between d-flex">
 																							<div class="thumb">
-																								<img
-																									src="${pageContext.request.contextPath}/resources/admin/img/project_check/comment_1.png"
+																								<img src="${pageContext.request.contextPath}/resources/admin/img/project_check/comment_1.png"
 																									alt="">
 																							</div>
 																							<div class="desc" style="width: 600px;">
@@ -561,6 +585,7 @@
 				<!-- ============================================================== -->
 				<!-- footer -->
 				<!-- ============================================================== -->
+				 <script src="${pageContext.request.contextPath}/resources/user/js/jquery.magnific-popup.min.js"></script>
 				<jsp:include page="include/i-footer.jsp" />
 			</div>
 			<!-- ============================================================== -->
@@ -577,56 +602,6 @@
 	<!-- ============================================================== -->
 	<!-- All Jquery -->
 	<!-- ============================================================== -->
-
-
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/jquery/dist/jquery.min.js"></script>
-	<!-- Bootstrap tether Core JavaScript -->
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/popper.js/dist/umd/popper.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/sparkline/sparkline.js"></script>
-	<!--Wave Effects -->
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/dist/js/waves.js"></script>
-	<!--Menu sidebar -->
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/dist/js/sidebarmenu.js"></script>
-	<!--Custom JavaScript -->
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/dist/js/custom.min.js"></script>
-	<!--This page JavaScript -->
-	<!-- <script src="dist/js/pages/dashboards/dashboard1.js"></script> -->
-	<!-- Charts js Files -->
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/excanvas.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.pie.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.time.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.stack.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.crosshair.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/dist/js/pages/chart/chart-page-init.js"></script>
-
-	<script
-		src="${pageContext.request.contextPath}/resources/user/js/jquery.magnific-popup.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/multicheck/jquery.multicheck.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/DataTables/datatables.min.js"></script>
 	<script>
             /****************************************
              *       Basic Table                   *

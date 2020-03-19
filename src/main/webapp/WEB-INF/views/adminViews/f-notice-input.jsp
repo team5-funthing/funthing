@@ -126,7 +126,9 @@
 							<c:if test="${vo.noticeNo eq null}">                 		
                            		 <input type="submit" value="등록" >
                             </c:if>
-                            <input type="submit" formaction="deleteAdminNoticeBoard.ado" value="삭제">
+                            <c:if test="${vo.noticeNo eq null}">       
+                            	<input type="submit" formaction="deleteAdminNoticeBoard.ado" value="삭제">
+                            </c:if>
                             <a href="adminNoticeInput.ado"><input type="button" value="뒤로" ></a>
                         </div>
 					</form>

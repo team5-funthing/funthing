@@ -49,11 +49,11 @@
 
 
 		<span>창작자 | 업체명</span> <input type="text" name="creator"
-				value="${writingProject.creator }" class="single-input" readonly>
+				value="${writingProject.creator }" class="form-control" readonly>
 		</div>
 		<div class="p-2 bd-highlight">
 			<span>이메일</span> <input type="text" name="email"
-				value="${writingProject.email }" class="single-input" readonly>
+				value="${writingProject.email }" class="form-control" readonly>
 		</div>
 		<div class="p-2 bd-highlight">
 			<c:if test="${writingProject.status eq 'm'.charAt(0)}">
@@ -67,7 +67,7 @@
 		</div>
 		<div class="p-2 bd-highlight">
 			<span>문의 전화번호</span> <input type="text" name="makerPhone"
-				value="${writingCreator.makerPhone}"  class="single-input phone-number-check">
+				value="${writingCreator.makerPhone}"  class="form-control phone-number-check">
 		</div>
 		
 		
@@ -92,11 +92,11 @@
 		<div class="p-2 bd-highlight">
 			<span>사업자 번호</span> <input type="text" name="businessNumber"
 				value="${writingCreator.businessNumber}" 
-				class="single-input">
+				class="form-control">
 		</div>
 		<div class="p-2 bd-highlight">
 			<span>소재지</span> <input type="text" name="businessAddress"
-				value="${writingCreator.businessAddress}" class="single-input">
+				value="${writingCreator.businessAddress}" class="form-control">
 		</div>
 
 

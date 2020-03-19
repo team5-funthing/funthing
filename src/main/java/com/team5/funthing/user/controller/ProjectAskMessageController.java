@@ -15,8 +15,8 @@ import com.team5.funthing.user.model.vo.CSBoardVO;
 import com.team5.funthing.user.model.vo.CreatorVO;
 import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.model.vo.ProjectAskMessageVO;
-import com.team5.funthing.user.model.vo.ProjectBoardVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
+import com.team5.funthing.user.service.creatorService.GetCreatorListByEmailService;
 import com.team5.funthing.user.service.csboardService.GetUserCSBoardListService;
 import com.team5.funthing.user.service.memberService.GetMemberService;
 import com.team5.funthing.user.service.projectAskMessageService.GetChoiceProjectAskMessageService;
@@ -47,6 +47,8 @@ public class ProjectAskMessageController {
    private GetProjectService getProjectService;
    @Autowired
    private GetMemberService getMemberService;
+   @Autowired
+   private GetCreatorListByEmailService getCreatorListByEmailService;
 
    
    
@@ -56,64 +58,65 @@ public class ProjectAskMessageController {
    @Autowired
    private MemberVO memberVO;
    
-   
 
    @RequestMapping(value="showInsertwAskMessage.udo", method = RequestMethod.GET)
    public String showInsertwAskMessage(ProjectVO vo, Model model) { 
 
-      vo.setProjectTitle(getProjectService.getProject(vo).getProjectTitle());//title 占쏙옙占쏙옙占쏙옙占쏙옙
-      vo.setCreator(getProjectService.getProject(vo).getCreator());//creator 占쏙옙占쏙옙占쏙옙占쏙옙
+      vo.setProjectTitle(getProjectService.getProject(vo).getProjectTitle());
+      vo.setCreator(getProjectService.getProject(vo).getCreator());
 
       
       model.addAttribute("vo",vo);
 
-      return "f-projectAsk-message"; //占쏙옙占쏙옙占싹깍옙 占쌉뤄옙창占쏙옙占쏙옙 
-         
+      return "f-projectAsk-message";
    }
    @RequestMapping(value="insertProjectAskContents.udo", method = RequestMethod.POST)
-   public String insertProjectAskContents(ProjectAskMessageVO vo) { //占쏙옙占쏙옙占쌘곤옙 => 占쏙옙占쏙옙커占쏙옙占쏙옙 占쏙옙占쏙옙占싹깍옙 占쌉뤄옙
+   public String insertProjectAskContents(ProjectAskMessageVO vo) {
       
-      insertProjectAskContentsService.insertProjectAskContents(vo); //占쏙옙占쏙옙占싹깍옙 占쌉뤄옙 
+      insertProjectAskContentsService.insertProjectAskContents(vo);
       
-      return "p-project-details"; //占쏙옙占쏙옙占쏙옙트 占쏙옙占쏙옙占쏙옙占쏙옙 占싱듸옙 
+      return "p-project-details"; 
 
 
          
    }
    
-   
-
-
-//--------------------------------占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 占쌨쇽옙占쏙옙 클占쏙옙占쏙옙 占쏙옙占쏙옙占승곤옙------------------------------------(占쏙옙占쏙옙占쌍억옙森풔째품占?)
    
    
    @RequestMapping(value="showDetailMyPage.udo",method = RequestMethod.GET)
-   public String showDetailMyPage(MemberVO vo, ProjectAskMessageVO vo2,CSBoardVO vo3, Model model, HttpSession session) { 
+   public String showDetailMyPage(CreatorVO cvo, MemberVO vo, ProjectAskMessageVO vo2, CSBoardVO vo3, Model model, HttpSession session) { 
 	   
 	  memberVO = (MemberVO)session.getAttribute("memberSession");
-	  vo.setEmail(memberVO.getEmail());
-
-	  vo2.setEmail(memberVO.getEmail());
-
+	  
+	  String email = memberVO.getEmail();
+	  
+	  vo.setEmail(email);
+	  vo2.setEmail(email);
+	  cvo.setEmail(email);
       
       if(getMakerMemberCreatorService.getMakerMemberCreator(vo) != null) { 
     	  
-    	  System.out.println("나는 크리에이터");
+    	 System.out.println("나는 크리에이터");
 
          MemberVO getMakerMember = getMakerMemberCreatorService.getMakerMemberCreator(vo); 
-         System.out.println("메이커멤버 확인"+getMakerMember.toString());
-
+         System.out.println("메이커멤버 확인" + getMakerMember.toString());
          model.addAttribute("getMakerMember", getMakerMember);
          
-         vo2.setCreator(getMakerMember.getCreator().getCreator());
-         model.addAttribute("vo2",vo2);
 
-   
-         List<ProjectAskMessageVO>getEntireMakerMessageList = getEntireProjectMakerAskMessageListService.getEntireProjectMakerAskMessageList(vo2);
-         System.out.println("여기에 리스트가 다찍혀야해"+getEntireMakerMessageList.toString());
+         List<ProjectAskMessageVO> getEntireMakerMessageList = getEntireProjectMakerAskMessageListService.getEntireProjectMakerAskMessageList(vo2);
+         
+         ProjectVO pvo = new ProjectVO();
+         for(ProjectAskMessageVO item: getEntireMakerMessageList) {
+        	 System.out.println("작성자 : " + item.getEmail() + " ==  " + item.getProjectNo() + " - " + item.getCreator());
+        	 pvo.setProjectNo(item.getProjectNo());
+        	 pvo = getProjectService.getProject(pvo);
+        	 item.setProject(pvo);
+         }
+         
          model.addAttribute("messagelist", getEntireMakerMessageList);
-        
-      // 그아이디가 보낸 메세지 리스트 띄어주기 
+//        ==================================================================================
+         
+         // 그아이디가 보낸 메세지 리스트 띄어주기 
          List<ProjectAskMessageVO>privateMessagelist = getEntireProjectAskMessageListService.getEntireProjectAskMessageList(vo2);
          System.out.println("여기에는?"+privateMessagelist.toString());
          model.addAttribute("privateMessagelist", privateMessagelist);

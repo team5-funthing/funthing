@@ -174,7 +174,7 @@
 	<update id="updatePaymentCancel" parameterType="int">
 
         Update paymentReserve
-		SET paymentStatus = '결제취소'
+		SET paymentStatus = '취소예정'
 		WHERE projectNo = #{projectNo} and paymentStatus = '결제예약'
 		
 	</update>
@@ -187,7 +187,7 @@
 		
 	</update>
 	
-		<update id="updateKaKaoPayCancelResult" parameterType="paymentReserve">
+	<update id="updateKaKaoPayCancelResult" parameterType="paymentReserve">
 
         Update paymentReserve
 		SET canceledDate = #{canceledDate}, paymentStatus = '결제취소', aid = #{aid}, tid = #{tid}
@@ -202,6 +202,14 @@
 		WHERE orderNo = #{orderNo}
 		
 	</update>
+	
+	<select id="getToCancelOrderList" parameterType="project" resultType="paymentReserve">
+
+		SELECT * 
+		FROM paymentReserve
+		WHERE projctNo = #{projectNo}
+		
+	</select>
 
 	
 	

@@ -27,7 +27,7 @@
 						<c:choose>
 							<c:when test="${writingProject.projectIntroduceVideo eq null || writingProject.projectIntroduceVideo eq ''}">
 								<div class="input-group">
-									<input type="text" id="urlVideo" class="form-control d-flex p-2 bd-highlight" placeholder="소개 영상으로 올리려는 영상 URL 주소를 입력하세요." aria-label="소개 영상으로 올리려는 영상 URL 주소를 입력하세요." aria-describedby="urlBtn">
+									<input type="text" id="urlVideo" class="form-control d-flex p-2 bd-highlight" placeholder="소개영상으로 올리려는 유튜브 소스코드 주소를 입력하세요." aria-label="소개영상으로 올리려는 유튜브 소스코드 주소를 입력하세요." aria-describedby="urlBtn">
 									<div class="input-group-append urlBtn-registry">
 										<button class="btn btn-outline-secondary" type="button" id="urlBtn">등록</button>
 									</div>
@@ -43,7 +43,7 @@
 							
 							<c:when test="${writingProject.projectIntroduceVideo ne null || writingProject.projectIntroduceVideo ne ''}">
 								<div class="input-group">
-									<input type="text" id="urlVideo" class="form-control d-flex p-2 bd-highlight" value="${writingProject.projectIntroduceVideo }"placeholder="소개 영상으로 올리려는 영상 URL 주소를 입력하세요." aria-label="소개 영상으로 올리려는 영상 URL 주소를 입력하세요." aria-describedby="urlBtn">
+									<input type="text" id="urlVideo" class="form-control d-flex p-2 bd-highlight" value="${writingProject.projectIntroduceVideo }"placeholder="소개영상으로 올리려는 유튜브 소스코드 주소를 입력하세요." aria-label="소개영상으로 올리려는 유튜브 소스코드 주소를 입력하세요." aria-describedby="urlBtn">
 									<div class="input-group-append urlBtn-registry">
 										<button class="btn btn-outline-secondary" type="button" id="urlBtn" disabled="true">등록</button>
 									</div>

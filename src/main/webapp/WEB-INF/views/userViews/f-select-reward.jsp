@@ -245,7 +245,7 @@ table, tr, td{
         <article class="mt-5 pb-3">
             <div class="d-flex justify-content-between">
                 <div>
-                    <div class="h5">리워드 선택</div>
+                    <div class="h5" style="color:#464059; font-weight: 500;">리워드 선택</div>
                     <p class="card-text">펀딩 금액에 따라 리워드가 달라 집니다.</p>
                 </div>
                 <div class="">
@@ -323,7 +323,7 @@ table, tr, td{
 						else if(currentVal > elementsLength) {
 							for(i = elementsLength ; i < currentVal; i++){
 								$('#selectBox${cnt.count }').append(	"<c:if test='${empty reward.rewardOptionList}'>"
-									                        		+		"<div id='selectBox${cnt.count }' class='col-5 to-remove-tag mt-2'>"
+									                        		+		"<div style='display: none;' id='selectBox${cnt.count }' class='col-5 to-remove-tag mt-2'>"
 									                        		+			"<input type='hidden' name='rewardOptionValueList' value='none' class='form-control reward${cnt.count }' placeholder=''>"
 									                        		+		"</div>"
 									                        		+	"</c:if>"
@@ -530,7 +530,7 @@ table, tr, td{
 			<article>  
 	            <div class="row">
 	                <div class="col-3">
-	                    <div class="h5">배송비</div>
+	                    <div class="h5" style="color:#464059; font-weight: 500">배송비</div>
 	                </div>
 	                <div class="col-9">
                     	<c:choose>
@@ -558,7 +558,7 @@ table, tr, td{
 	        <article>  
 	            <div class="row">
 	                <div class="col-3">
-	                    <div class="h5">후원금 더하기 (선택)</div>
+	                    <div class="h5" style="color:#464059; font-weight: 500">후원금 더하기 (선택)</div>
 	                </div>
 	                <div class="col-9">
 	                    <p>후원금을 더하여 펀딩할 수 있습니다. 추가 후원금을 입력하시겠습니까?</p>
@@ -574,7 +574,7 @@ table, tr, td{
 	        <article>
 	            <div class="row">
 	                <div class="col-3">
-	                    <div class="h5">공개여부 (선택)</div>
+	                    <div class="h5" style="color:#464059; font-weight: 500;">공개여부 (선택)</div>
 	                </div>
 	                <div class="col-9">
 	                    <p>서포터 목록에 서포터 이름과 펀딩 금액이 공개됩니다. 조용히 펀딩하고 싶으시다면, 비공개로 선택해주세요.<br>
@@ -601,17 +601,15 @@ table, tr, td{
 	            </div>
 	        </article>
 			<hr>
-			
 			<div class="row">
-	                <div class="col-3">
-	                    <div class="h4" style="color:black;">펀딩 금액 : </div>
-	                </div>
-	                <div class="col-9">
-                    	<div class="row">
-                        	<div id="totalAmount" class="h4">
-                        </div>
-                    </div>
+                <div class="col-3">
+                    <div class="h4" style="color:#464059; font-weight: 500;">펀딩 금액 : </div>
                 </div>
+                <div class="col-9">
+                    <div class="row">
+                        <div id="totalAmount" class="h3" style="color:#402d53;"></div>
+                    </div>
+               	</div>
             </div>
 			
 	

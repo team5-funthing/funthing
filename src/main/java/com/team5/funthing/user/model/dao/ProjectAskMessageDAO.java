@@ -6,10 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.team5.funthing.user.model.vo.CreatorVO;
 import com.team5.funthing.user.model.vo.MemberVO;
 import com.team5.funthing.user.model.vo.ProjectAskMessageVO;
-import com.team5.funthing.user.model.vo.ProjectBoardVO;
 
 @Repository
 public class ProjectAskMessageDAO {
@@ -18,7 +16,7 @@ public class ProjectAskMessageDAO {
 	private SqlSessionTemplate projectAskMessageSqlSessionTemplate;
 	
 	
-	public void insertProjectAskContents(ProjectAskMessageVO vo) { //펀딩참여자 -> 메이커에게 문의내용 입력 
+	public void insertProjectAskContents(ProjectAskMessageVO vo) { 
 		projectAskMessageSqlSessionTemplate.insert("projectAskMessageDAO.insertProjectAskContents", vo);
 	}
 	
@@ -42,11 +40,11 @@ public class ProjectAskMessageDAO {
 		return projectAskMessageSqlSessionTemplate.selectOne("projectAskMessageDAO.getMakerMemberCreator", vo);
 	}
 
-	public List<ProjectAskMessageVO> getEntireProjectMakerAskMessageList(ProjectAskMessageVO vo) {
-		List<ProjectAskMessageVO> getEntireProjectMakerAskMessageList = projectAskMessageSqlSessionTemplate.selectList("projectAskMessageDAO.getEntireProjectMakerAskMessageList",vo);
-		
-		return getEntireProjectMakerAskMessageList;
-	}
+//	public List<ProjectAskMessageVO> getEntireProjectMakerAskMessageList(ProjectAskMessageVO vo) {
+//		List<ProjectAskMessageVO> getEntireProjectMakerAskMessageList = projectAskMessageSqlSessionTemplate.selectList("projectAskMessageDAO.getEntireProjectMakerAskMessageList",vo);
+//		
+//		return getEntireProjectMakerAskMessageList;
+//	}
 
 	public List<ProjectAskMessageVO> getProjectAskMessage(ProjectAskMessageVO vo) {
 		return projectAskMessageSqlSessionTemplate.selectList("projectAskMessageDAO.getProjectAskMessage",vo);

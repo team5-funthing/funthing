@@ -85,6 +85,7 @@ a{text-decoration:none;}
 								<br>
 							</div>
 							<!-- 약관 동의 팝업 종료 -->
+							
 							<div class="mt-10">
 								<h5>이메일</h5>
 								<input type="email" id="email2" name="email" placeholder="이메일 입력"
@@ -119,9 +120,7 @@ a{text-decoration:none;}
 									회원 로그인</button>
 							</div> -->
 							<div class="mt-10">
-								<a
-									class="btn btn-registry-way d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
-									href="joinselect.udo">뒤로가기</a>
+								<a class="btn btn-registry-way d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3" href="joinselect.udo">뒤로가기</a>
 							</div>
 							<hr>
 						</form>
@@ -315,21 +314,21 @@ a{text-decoration:none;}
    
 
   var naver_id_login = new naver_id_login("bm_Jr_lzbfVgnsh6sEyX", "http://ec2-54-180-105-174.ap-northeast-2.compute.amazonaws.com/.udo");
-   //var naver_id_login = new naver_id_login("bm_Jr_lzbfVgnsh6sEyX", "http://localhost:8080/funthing/.udo");
+  //var naver_id_login = new naver_id_login("bm_Jr_lzbfVgnsh6sEyX", "http://localhost:8080/funthing/.udo");
   // 접근 토큰 값 출력
- // alert(naver_id_login.oauthParams.access_token);
+  // alert(naver_id_login.oauthParams.access_token);
   // 네이버 사용자 프로필 조회
   naver_id_login.get_naver_userprofile("naverSignInCallback()");
   // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
   function naverSignInCallback() {
 	 
 	 if(naver_id_login.getProfileData('email')!=null){
-    var naverEmail = naver_id_login.getProfileData('email');
-    document.getElementById("email2").value = naverEmail;
-    var naverName = naver_id_login.getProfileData('name')
-    document.getElementById("name").value = naverName;
-    var naverId = naver_id_login.getProfileData('id');
-    document.getElementById("password2").value = naverId;
+    	var naverEmail = naver_id_login.getProfileData('email');
+    	document.getElementById("email2").value = naverEmail;
+   		var naverName = naver_id_login.getProfileData('name')
+    	document.getElementById("name").value = naverName;
+    	var naverId = naver_id_login.getProfileData('id');
+    	document.getElementById("password2").value = naverId;
 	 }
 	 
 	 
@@ -370,8 +369,6 @@ a{text-decoration:none;}
 					
 	        		loginsubmit.submit();
 
-	           }else if(data=='3'){
-	        	  alert("탈퇴한 회원 입니다. 다른 이메일을 이용해 주세요.");
 	           }else{
 	              alert("가입되지 않은 이메일 입니다. 회원가입을 먼저 해 주세요.");
 	           }
@@ -380,9 +377,7 @@ a{text-decoration:none;}
 	        }
 	  		
 	  	});  
-	 
-	
-  }
+	  }
   
    
    
@@ -437,9 +432,6 @@ a{text-decoration:none;}
 							
 			        		loginsubmit.submit();
 			        		
-
-			           }else if(data=='3'){
-				        	  alert("탈퇴한 회원 입니다. 다른 이메일을 이용해 주세요.");
 			           }else{
 			              alert("가입되지 않은 이메일 입니다. 회원가입을 먼저 해 주세요.");
 			           }
