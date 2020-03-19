@@ -192,9 +192,9 @@ public class MemberController {
 				vo.setEmail(email);
 				if(getMemberService.getMember(vo)!=null) {
 				String password = sendMailUtil.createCertificationCode(50);
-				sendMailUtil.sendMail("[Funthing] �엫�쓽濡� �깮�꽦�맂 鍮꾨�踰덊샇 �엯�땲�떎.", "諛쒖넚�맂 鍮꾨�踰덊샇濡� 濡쒓렇�씤�쓣 �븯�떆怨� 瑗� "
-						+ "留덉씠�럹�씠吏� - �쉶�썝�젙蹂댁닔�젙 �뿉�꽌 鍮꾨�踰덊샇瑜� 蹂�寃쏀븯�뿬 �씠�슜�뿉 遺덊렪�븿�씠 �뾾�쑝�떆湲� 諛붾엻�땲�떎. "
-						+ "鍮꾨�踰덊샇 : ["+password+"]", vo.getEmail());
+				sendMailUtil.sendMail("[Funthing] 임시 비밀번호 입니다.", "임의로 지정된 비밀번호를 메일로 보냈습니다 "
+						+ "마이페이지 - 회원정보 수정에서  비밀번호를 변경후 이용해 주세요 "
+						+ "변경된 비밀번호 : ["+password+"]", vo.getEmail());
 				MemberVO vo2 = getMemberService.getMember(vo);
 				vo2.setPassword(password);
 				updateMemberService.updateMember(vo2);

@@ -85,7 +85,7 @@ public class PaymentReservationController {
 		List<RewardSelectionVO> selectedRewardList = (List<RewardSelectionVO>)session.getAttribute("selectedRewardList");
 		
 		if(selectedRewardList == null || selectedRewardList.isEmpty()) {
-			redirectAttributes.addAttribute("msg", "리워드를 선택 후 진행하시기 바랍니다.");
+			redirectAttributes.addAttribute("msg", "리워드를 입력해주시기 바랍니다.");
 			redirectAttributes.addAttribute("projectNo", projectNo);
 			
 			return "redirect:supportProject.udo";
@@ -114,7 +114,7 @@ public class PaymentReservationController {
 		}
 		
 		for(DeliveryAddressVO deliveryAddress : deliveryAddressList) {
-			System.out.println("배송지명 : " + deliveryAddress.getDeliveryAddressName() );
+			System.out.println("諛곗넚吏�紐� : " + deliveryAddress.getDeliveryAddressName() );
 		}
 		
 		
@@ -259,7 +259,7 @@ public class PaymentReservationController {
 	public String updateShipmentComplete(HttpSession session, PaymentReserveVO prvo, Model model) {
 		
 		
-		System.out.println("실행-=====");
+		System.out.println("�떎�뻾-=====");
 		System.out.println(prvo.toString());
 		updateShipmentCompleteService.updateShipmentComplete(prvo);
 		
@@ -272,14 +272,14 @@ public class PaymentReservationController {
 
 	@Scheduled(cron= "1 0 0 * * ?")
 	public void updateProjectDeadlineService() throws URISyntaxException {
-		System.out.println("프로젝트 마감 스케줄러 실행");
+		System.out.println("�봽濡쒖젥�듃 留덇컧 �뒪耳�以꾨윭 �떎�뻾");
 		List<PaymentReserveVO> failedProjectList = updateProjectDeadlineService.updateProjectDeadline();
 		
 		for(PaymentReserveVO prvo :failedProjectList) {
 			kakaoPayService.kakaoPayCancel(prvo);
 		}
 		
-		System.out.println("프로젝트 마감 스케줄러 종료");
+		System.out.println("�봽濡쒖젥�듃 留덇컧 �뒪耳�以꾨윭 醫낅즺");
 	}
 	
 	

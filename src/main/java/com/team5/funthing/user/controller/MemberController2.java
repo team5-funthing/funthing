@@ -163,9 +163,9 @@ public class MemberController2 {
 			List<String> toSettingPath = upload.upload(toDoUploadList, voName, toRemoveFilePath);
 
 
-			if(toSettingPath == null) { System.out.println("占싱뱄옙占쏙옙 占쏙옙占싸듸옙 占싫듸옙"); return;}
+			if(toSettingPath == null) {  return;}
 
-			if(toSettingPath == null) { System.out.println("�횑쨔횑횁철 쩐첨쨌횓쨉책 쩐횊쨉횎"); return;}
+			if(toSettingPath == null) {  return;}
 
 			
 			int cnt = 1;

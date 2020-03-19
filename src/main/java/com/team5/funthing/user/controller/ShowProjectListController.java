@@ -51,9 +51,6 @@ public class ShowProjectListController {
 		model.addAttribute("getAllFundingProjectList", getAllFundingProjectList);
 		
 		model.addAttribute("getAllCategoryList", getCategoryListService.getCategoryList(acvo));
-			
-		
-		
 		
 		return "p-project-list";
 	}

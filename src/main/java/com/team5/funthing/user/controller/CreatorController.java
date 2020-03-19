@@ -32,11 +32,11 @@ public class CreatorController {
 			cvo = getCreatorService.getCreator(cvo);
 			if(cvo != null) {
 				if(inputCreator.equals(cvo.getCreator())) {
-					msg = "이미 등록된 창작자명입니다.";
+					msg = "이미 등록되어 있는 창작자 이름입니다.";
 				}
 			}else {
 	
-					msg = "사용 가능한 창작자명입니다.";
+					msg = "사용 가능한 창작자 이름입니다.";
 			}
 		}
 		
