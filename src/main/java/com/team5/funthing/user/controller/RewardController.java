@@ -52,13 +52,13 @@ public class RewardController {
 	
 //	@RequestMapping("showReward.udo")
 //	public String showRewardList(RewardVO vo, Model model,HttpServletRequest request) {
-//		//=============================ÇÁ·ÎÁ§Æ® ¹øÈ£ ¼¼ÆÃºÎºÐ=======================
+//		//=============================ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½È£ ï¿½ï¿½ï¿½ÃºÎºï¿½=======================
 //		int projectNo = Integer.parseInt(request.getParameter("projectNo"));
 //		
 //		ProjectVO pvo = new ProjectVO();	
 //		pvo.setProjectNo(projectNo);
 //		pvo.setWriteStatus('n');
-//		//=============================°´Ã¼ Àü¼Û ºÎºÐ=============================
+//		//=============================ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½=============================
 //		model.addAttribute("projectNo", projectNo);
 //		model.addAttribute("writingProject",pvo);
 //		List<RewardVO> rewardList = getRewardListService.getRewardList(vo);
@@ -75,7 +75,7 @@ public class RewardController {
 								@RequestParam(value="rewardoptionkey", required=false, defaultValue="") List<String> rewardOptionKeys, 
 								@RequestParam(value="rewardoptionvalue", required=false) List<String> rewardOptionValues) {
 		
-		System.out.println("insertReward·Î ³Ñ¾î¿Â °ª : " + creator);
+		System.out.println("insertRewardï¿½ï¿½ ï¿½Ñ¾ï¿½ï¿½ ï¿½ï¿½ : " + creator);
 		
 		int currentProjectNo = vo.getProjectNo();
 		System.out.println("insertReward - currentProjectNo : " + currentProjectNo);
@@ -83,7 +83,7 @@ public class RewardController {
 		insertRewardService.insertReward(vo);
 		System.out.println(vo.getRewardNo());
 		
-		if(vo.getRewardOption().equals("¼±ÅÃ ¿É¼Ç")) {
+		if(vo.getRewardOption().equals("ï¿½ï¿½ï¿½ï¿½ ï¿½É¼ï¿½")) {
 			if(!(rewardOptionValues==null)) {
 				for(int i=0;i<rewardOptionValues.size();i++) {
 					rovo.setRewardNo(vo.getRewardNo());
@@ -94,7 +94,7 @@ public class RewardController {
 					insertRewardOptionService.insertRewardOption(rovo);
 				}
 			}
-		}else if(vo.getRewardOption().equals("Á÷Á¢ ÀÔ·Â ¿É¼Ç")){
+		}else if(vo.getRewardOption().equals("ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½É¼ï¿½")){
 			rovo.setRewardNo(vo.getRewardNo());
 			rovo.setRewardOptionKey("");
 			rovo.setRewardOptionValue(rewardOptionValues.get(0));
@@ -140,7 +140,7 @@ public class RewardController {
 		System.out.println(rewardOptionNos);
 		System.out.println(rewardOptionValues);
 		System.out.println(rewardOptionKeys);
-		System.out.println("¼öÁ¤Àü ÀÔ·ÂµÈ °ª : " +  rovo.toString());
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·Âµï¿½ ï¿½ï¿½ : " +  rovo.toString());
 		
 		if(rewardOptionNos!=null) {
 			for(int i=0;i<rewardOptionNos.size();i++) {
@@ -164,13 +164,11 @@ public class RewardController {
 	
 	@RequestMapping(value="/getReward.udo" , method=RequestMethod.POST)
 	public String getReward(String indexData,RewardOptionVO rovo, RewardVO vo, Model model) throws JsonProcessingException {
-		
-		//ajax·Î ¹Þ¾Æ¿Â °ªÀ» Á¤¼ö·Î º¯È¯
+
 		int index = Integer.parseInt(indexData);
 		vo.setRewardNo(index);
 		rovo.setRewardNo(index);
 		
-		//¸®¿öµù ³Ñ¹ö¸¸ ¹Þ¾Æ¿Â °´Ã¼¸¦ »ç¿ëÇÏ¿© °´Ã¼ÀÇ Á¤º¸¸¦ ¹Þ¾Æ¿Â´Ù.
 		RewardVO modify = getRewardService.getReward(vo);
 		List<RewardOptionVO> rewardOptionList = getRewardOptionListSerivce.getRewardOptionList(rovo);
 		System.out.println(rovo.toString());
@@ -178,11 +176,43 @@ public class RewardController {
 		
 		ObjectMapper mapper = new ObjectMapper();
 		String modifyToJson = mapper.writeValueAsString(modify);
-		System.out.println("¸®¿öµå ºÒ·¯¿À±â °á°ú : " + modifyToJson);
 
 		model.addAttribute("modifyRewardToJSON", modifyToJson);
 		return "/ajax/getReward";
 	}
 	
+	
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	

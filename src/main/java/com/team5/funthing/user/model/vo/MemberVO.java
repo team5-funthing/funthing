@@ -16,12 +16,9 @@ public class MemberVO {
 
 	private String position;
 
-
 	private CreatorVO creator;
 	
 	
-	
-
 	public String getPosition() {
 		return position;
 	}

@@ -52,6 +52,12 @@
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminCategoryVO" alias="category"/>
 		<typeAlias type="com.team5.funthing.admin.model.vo.AdminMainViewVO" alias="adminMainView"/>
 		
+		<typeAlias type="com.team5.funthing.admin.statistics.vo.StatisticsDateVO" alias="statisticsDate"/>
+		<typeAlias type="com.team5.funthing.admin.statistics.vo.ProjectRegStatisticsVO" alias="projectRegStatistics"/>
+		<typeAlias type="com.team5.funthing.admin.statistics.vo.ProjectRegCategryStatisticsVO" alias="projectRegCategryStatistics"/>
+		<typeAlias type="com.team5.funthing.admin.statistics.vo.SupportStatisticsVO" alias="supportStatistics"/>
+		<typeAlias type="com.team5.funthing.admin.statistics.vo.SupportCategoryStatisticsVO" alias="supportCategoryStatistics"/>
+		
 	</typeAliases>
   
   
@@ -86,6 +92,7 @@
 		<mapper resource="mappers/deliveryAddress-mapper.xml"/>
 		<mapper resource="mappers/report-mapper.xml" />
 		<mapper resource="mappers/projectAskMessage-mapper.xml"/>
+		<mapper resource="mappers/projectAskMessage2-mapper.xml"/>
 		<mapper resource="mappers/home-mapper.xml"/>
 
 		<mapper resource="mappers/userMainImageChange-mapper.xml"/>
@@ -112,6 +119,8 @@
  		<mapper resource="mappers/category-mapper.xml"/>
  		<mapper resource="mappers/adminMainView-mapper.xml"/>
 
+
+		<mapper resource="mappers/statistics-mapper.xml"/>
 
 	</mappers>
 </configuration>

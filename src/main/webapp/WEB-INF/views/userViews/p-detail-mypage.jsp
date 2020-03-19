@@ -58,18 +58,14 @@
                   </div>
 
                   <hr>
-                  <div class="h4 mt-5 pb-3">프로젝트 현황</div>
+                  <div class="h4 mt-5 pb-3" style="color: black;">프로젝트 현황</div>
                   <div class="d-flex justify-content-start">
                      <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                            <a class="nav-item nav-link active" id="nav-created-prj-list-tab" data-toggle="tab"
-                              href="#nav-created-prj-list" role="tab"  aria-controls="nav-created-prj-list" aria-selected="true">만든  프로젝트</a> 
-                           <a class="nav-item nav-link" id="nav-sponsored-prj-list-tab" data-toggle="tab"
-                              href="#nav-sponsored-prj-list" role="tab" aria-controls="nav-sponsored-prj-list" aria-selected="false">후원한  프로젝트</a> 
+                              href="#nav-created-prj-list" role="tab"  aria-controls="nav-created-prj-list" aria-selected="true">만든  프로젝트</a>  
                            <a class="nav-item nav-link" id="nav-like-prj-list-tab" data-toggle="tab" 
                               href="#nav-like-prj-list" role="tab" aria-controls="nav-like-prj-list" aria-selected="false">좋아요  프로젝트</a>
-                           <a class="nav-item nav-link" id="nav-like-prj-list-tab" data-toggle="tab" 
-                           	  href="#nav-reserved-prj-list" role="tab" aria-controls="nav-like-prj-list" aria-selected="false">예정중인 관심 프로젝트</a>
 
                         </div>
                      </nav>
@@ -84,59 +80,57 @@
                      <div class="tab-pane fade show active " id="nav-created-prj-list"
                         role="tabpane" aria-labelledby="nav-created-prj-list-tab">
 						
-                        <div class="container">
+                        <div class="container pt-5 pb-5">
                            <section class="tiles">
                            
                               <!----------------만든 프로젝트 양식 -------------------->
                               <c:if test="${not empty myProjectList }">
 	                              <c:forEach var="myProject" items="${myProjectList }" varStatus="step" >
 		                              <article>
-		                                 <div class="project">
-		                                 	<aside class="row ml-1">
-		                                 	
+		                              		<aside class="row ml-1 mb-0 pb-0">
 		                                 		<c:choose>
 		                                 			<c:when test="${myProject.funding eq 'n'.charAt(0) }"> <!-- 펀징 진행 확인 -->
 		                                 			
 			                                 			<c:choose>
 				                                 			<c:when test="${myProject.status eq 'n'.charAt(0) }">  <!-- 제출 및 심사 확인 -->
-				                                 				
 					                                 			<c:choose>
 						                                 			<c:when test="${myProject.writeStatus eq 'n'.charAt(0) }"> <!-- 작성 완료 확인 -->
-						                                 				<h5><a href="javascript: return(0);" class="badge badge-info m-1">작성중</a></h5>	
+						                                 				<h5><a href="javascript: return(0);" class="btn btn-sm btn-outline-secondary">작성중</a></h5>	
 						                                 			</c:when>
 						                                 			<c:when test="${myProject.writeStatus eq 'y'.charAt(0) }">
-					                                 					<h5><a href="javascript: return(0);" class="badge badge-dark m-1">미제출</a></h5>
-						                                 				<h5><a href="javascript: return(0);" class="badge badge-success m-1">작성완료</a></h5>
+					                                 					<h5><a href="javascript: return(0);" class="btn btn-sm btn-outline-light">미제출</a></h5>
+						                                 				<h5><a href="javascript: return(0);" class="btn btn-sm btn-outline-info">작성완료</a></h5>
 						                                 			</c:when>
 					                                 			</c:choose>		
 				                                 			</c:when>                              			
 				                                 			<c:when test="${myProject.status eq 'w'.charAt(0) }">
-				                                 				<h5><a href="javascript: return(0);" class="badge badge-light m-1">심사중</a></h5>
+				                                 				<h5><a href="javascript: return(0);" class="btn btn-sm btn-outline-secondary">심사중</a></h5>
 				                                 			</c:when>
 				                                 			<c:when test="${myProject.status eq 'm'.charAt(0) }">
-					                                 			<h5><a href="javascript: return(0);" class="badge badge-warning m-1">수정 필요</a></h5>
+					                                 			<h5><a href="javascript: return(0);" class="btn btn-sm btn-outline-warning">수정 요구</a></h5>
 				                                 			</c:when>
 				                                 			<c:when test="${myProject.status eq 'f'.charAt(0) }">
-					                                 			<h5><a href="javascript: return(0);" class="badge badge-danger m-1">승인 실패</a></h5>
+					                                 			<h5><a href="javascript: return(0);" class="btn btn-sm btn-outline-danger">승인 거절</a></h5>
 				                                 			</c:when>
 			                                 			</c:choose>
 		                                 			</c:when>	                                 			
 		                                 			<c:when test="${myProject.funding eq 'y'.charAt(0) }">
 		                                 			
-		                                 				<h5><a href="javascript: return(0);" class="badge badge-primary m-1">펀딩중</a></h5>
+		                                 				<h5><a href="javascript: return(0);" class="btn btn-sm btn-outline-primary">펀딩중</a></h5>
 		                                 			
 		                                 			</c:when>
 		                                 			<c:when test="${myProject.funding eq 'e'.charAt(0) }">
 		                                 			
-		                                 				<h5><a href="javascript: return(0);" class="badge badge-warning m-1">펀딩종료</a></h5>
+		                                 				<button type="button" class="btn btn-sm btn-outline-dark">펀딩마감</button>
 		                                 			
 		                                 			</c:when>
 		                                 		</c:choose>
-			                                 	
 		                                 	</aside>
-		                                    <div class="card">
+		                                 <div class="project pt-0 mt-0" style="min-width: 265px;">
+		                                    <div class="card" style=" border-radius: 10px;">
 		                                       <div class="thumbnail-wrap">
-		                                          <div class="thumbnail ">
+		                                          <div class="thumbnail " style="border-top-left-radius: 10px 10px;
+																										border-top-right-radius: 10px 10px;">
 		                                             <div class="centered">
 	                                             		<c:choose>
 	                                             			<c:when test="${myProject.funding == 'y'.charAt(0) }">
@@ -177,40 +171,58 @@
 		                                          </div>
 		                                       </div>
 												
-		                                       <div class="card-body">
-		                                          <h5 class="card-title">${myProject.projectTitle }</h5>
-		                                          <ul>
-		                                             <li>${myProject.projectSummary }</li>
-		                                             <li>${myProject.goalMoney }</li>
-		                                             <li>${project.endDate }</li>
-		                                          </ul>
-													${myProject.projectNo}
-		                                          <div class="percentage">
-														<fmt:formatNumber type="number" var="progressPercent"
-															value="${(myProject.fundingMoney / myProject.goalMoney)*100}"
-															pattern=".00" />
-														<fmt:formatNumber type="number" var="progress"
-															maxFractionDigits="3" value="${myProject.fundingMoney}" />
-														<p>${progress}원${progressPercent}%진행중</p>
-					
-														<div class="progress">
-															<div class="progress-bar color-7" role="progressbar"
-																style="width: ${progressPercent}%" aria-valuenow="30"
-																aria-valuemin="0" aria-valuemax="100"></div>
+		                                       <div class="card-body pb-2 flex-column bd-highlight" style="min-height:220px;">
+			                                        <div class="card-title h5" style="color: black; font-weight: 450;" >${myProject.projectTitle }</div>
+			                                          <ul>
+			                                             <li style="color: gray;" >${myProject.projectSummary }</li>
+			                                             <li style="color: gray;">${myProject.goalMoney }</li>
+			                                             <li style="color: gray;">${project.endDate }</li>
+			                                          </ul>
+													<div class="mt-auto bd-highlight">
+														<div class="percentage mt-5">
+															<fmt:formatNumber type="number" var="progressPercent"
+																value="${(myProject.fundingMoney / myProject.goalMoney)*100}"
+																pattern=".00" />
+															<fmt:formatNumber type="number" var="progress"
+																maxFractionDigits="3" value="${myProject.fundingMoney}" />
+															<p>${progress}원${progressPercent}%진행중</p>
+															<div class="progress" style=" height: 7px;">
+																<div class="progress-bar" role="progressbar"
+																	style="width: ${progressPercent}%; background-color: #ff9999;" aria-valuenow="30"
+																	aria-valuemin="0" aria-valuemax="100"></div>
+															</div>
 														</div>
 													</div>
 		                                       </div>				
-		                                       <div class="card-footer">
+		                                       <div class="card-footer p-2" style="border-top : none;">
+											   		<div class="d-flex justify-content-center">
+				                                          <a class="btn btn-sm btn-outline-secondary m-1" 
+				                                          	href="getWritingProject.udo?creator=${myProject.creator}&currentProjectNo=${myProject.projectNo }">수정</a>
+				                                          	
+				                                          	
+				                                          	
+				                                          <form action="deleteProject.udo" method="GET" id="deleteProjectForm">	
+				                                          	  <input type="hidden" name="currentProjectNo" value="${myProject.projectNo}">	
+				                                          	  <a class="btn btn-sm btn-outline-secondary m-1" id="deleteProjectBtn"
+					                                          	  href="javascript:return(0);">삭제</a>
+					                                      </form>
+					                                      
+					                                      	
+					                                      	
+					                                          	             
+				                                          <c:choose>
+				                                 			<c:when test="${myProject.funding eq 'y'.charAt(0) || myProject.funding eq 'e'.charAt(0) }"> <!-- 펀징 진행중일때 -->
+				                                         		<a class="btn btn-sm btn-outline-secondary m-1" 
+				                                         			href="getSatistics.udo?currentProjectNo=${myProject.projectNo }">통계</a>
+				                                          	</c:when>
+				                                          </c:choose>
+				                                          <form action="rewardSupportCheck.udo" method="GET" id="rewardSupportCheck${step.count }">
+				                                          	<input type="hidden" name="projectNo" value="${myProject.projectNo}">
+				                                          	<a class="btn btn-sm btn-outline-secondary m-1"
+				                                          		href="javaScript: return(0);" onclick="document.getElementById('rewardSupportCheck${step.count }').submit()">후원내역</a>
+				                                          </form>
+		                                          	</div>
 
-		                                          <a href="getWritingProject.udo?creator=${myProject.creator}&currentProjectNo=${myProject.projectNo }">수정</a>
-
-		                                          <a href="deleteProject.udo?currentProjectNo=${myProject.projectNo }">삭제</a>
-		                                          
-		                                          <c:choose>
-		                                 			<c:when test="${myProject.funding eq 'y'.charAt(0) || myProject.funding eq 'e'.charAt(0) }"> <!-- 펀징 진행중일때 -->
-		                                         		<a href="getSatistics.udo?currentProjectNo=${myProject.projectNo }">통계</a>
-		                                          	</c:when>
-		                                          </c:choose>
 		                                          
 		                                       </div>
 		                                    </div>
@@ -221,14 +233,14 @@
                               <!-- 추가적으로 목록들 생길 시 JSTL로 반복 추가-->
                            </section>
                            <c:if test="${empty myProjectList }">
-                                <div class="row">
+                                <div class="row pt-5 pb-5 ">
                                     <div class="col">
                                     </div>
-                                    <div class="col-8 d-flex justify-content-center ">
+                                    <div class="col-8 pt-5 pb-5 d-flex justify-content-center ">
                                         <div class="pt-5 pb-5 ">
                                            
-                                            <div class="h3">'만든' 프로젝트가 없습니다</div>
-                                            <div class="h5">
+                                            <div class="h3" style="color: gray;">'만든' 프로젝트가 없습니다</div>
+                                            <div class="h5" style="color: gray;">
 
 					                                                상단 메뉴바에서 '프로젝트 올리기' 버튼을 눌러
 					                                                회원님의 아이디어를 제안할 수 있습니다.
@@ -242,132 +254,43 @@
                            </c:if>
                         </div>
                      </div>
-               <!--  카드모듈 끝    그대로 가져다  id 값만 변경해서 써 일단. -->
                
-               		<!-- 후원한 프로젝트 시작 -->
-                     <div class="tab-pane fade" id="nav-sponsored-prj-list"
-                        role="tabpane" aria-labelledby="nav-sponsored-prj-list-tab">
-                         <div class="container">
-                           <section class="tiles">
-                                  <!----------------만든 프로젝트 양식 -------------------->
-                              <c:if test="${not empty projectList }">
-                              <c:forEach var="project2" items="${projectList }">
-                              <article>
-                                 <div class="project">
-                                    <div class="card">
-                                       <div class="thumbnail-wrap">
-                                          <div class="thumbnail ">
-                                             <div class="centered">
-                                                  <%/*  <img src="${myProjectList.projectMainImage}"
-                                                   class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">  */ %>
-                                        <!-- 테스트용 -->            <img src="${pageContext.request.contextPath}/resources/user/img/test/2.jpg"
-                                                   class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
-                                             </div>
-                                          </div>
-                                       </div>
-
-                                       <div class="card-body">
-                                          <h5 class="card-title">${project2.projectTitle }</h5>
-                                          <ul>
-                                             <li>요약 설명 : ${project2.projectSummary }</li>
-                                             <li>목표 금액 : ${project2.goalMoney }</li>
-                                             <li>기간 : ${project2.startDate } ~ ${project2.endDate }</li>
-                                          </ul>
-
-                                          <p>현재 후원받은 금액 : ${project2.fundingMoney }원 ${(project2.fundingMoney div project2.goalMoney)*100 } %</p>
-                                          <div class="progress">
-                                             <div class="progress-bar color-3" role="progressbar"
-                                                style="width: 50%" aria-valuenow="30" aria-valuemin="0"
-                                                aria-valuemax="100"></div>
-                                          </div>
-                                       </div>
-
-                                       <div class="card-footer">
-                                          <a href="#">보러가기</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </article>
-                              </c:forEach>
-                              </c:if>
-                           
-                            <!-- 추가적으로 목록들 생길 시 JSTL로 반복 추가-->
-                           </section>
-                              <c:if test="${empty projectList }">
-                                <div class="row">
-                                    <div class="col">
-                                    </div>
-                                    <div class="col-8 d-flex justify-content-center ">
-                                        <div class="pt-5 pb-5 ">
-                                          
-                                            <div class="h3">'후원한' 프로젝트가 없습니다</div>
-                                            <div class="h5">
-
-					                                                프로젝트 페이지에서 '후원하기' 버튼을 눌러
-					                                                해당프로젝트의 리워드를 받아보실 수 있습니다.
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                    </div>
-                                </div>
-                              </c:if>
-                        </div>
-                     </div>     
-                     <!-- 후원한 프로젝트 종료 -->
-                     
                      <!-- 좋아요 프로젝트 시작 -->
                      <div class="tab-pane fade " id="nav-like-prj-list" role="tabpane" aria-labelledby="nav-like-prj-list-tab">
-                        <div class="container">
+                        <div class="container pt-5 pb-5">
                            <section class="tiles">
                               <c:if test="${not empty projectLikeList }">
-                              <c:forEach var="likeProject" items="${projectLikeList }" varStatus="step">
-                              <article>
-                                 <div class="project">
-                                 <aside class="row ml-1">
-  	
+	                              <c:forEach var="likeProject" items="${projectLikeList }" varStatus="step" >
+		                              <article>
+		                              		<aside class="row ml-1 mb-0 pb-0">
 		                                 		<c:choose>
 		                                 			<c:when test="${likeProject.funding eq 'n'.charAt(0) }"> <!-- 펀징 진행 확인 -->
-			                                 			<c:choose>
-				                                 			<c:when test="${likeProject.status eq 'n'.charAt(0) }">  <!-- 제출 및 심사 확인 -->	
-					                                 			<c:choose>
-						                                 			<c:when test="${likeProject.writeStatus eq 'n'.charAt(0) }"> <!-- 작성 완료 확인 -->
-						                                 				<h5><a href="javascript: return(0);" class="badge badge-info m-1">작성중</a></h5>	
-						                                 			</c:when>
-						                                 			<c:when test="${likeProject.writeStatus eq 'y'.charAt(0) }">
-					                                 					<h5><a href="javascript: return(0);" class="badge badge-dark m-1">미제출</a></h5>
-						                                 				<h5><a href="javascript: return(0);" class="badge badge-success m-1">작성완료</a></h5>
-						                                 			</c:when>
-					                                 			</c:choose>		
-				                                 			</c:when>                              			
-				                                 			<c:when test="${likeProject.status eq 'w'.charAt(0) }">
-				                                 				<h5><a href="javascript: return(0);" class="badge badge-light m-1">심사중</a></h5>
-				                                 			</c:when>
-				                                 			<c:when test="${likeProject.status eq 'm'.charAt(0) }">
-					                                 			<h5><a href="javascript: return(0);" class="badge badge-warning m-1">수정 필요</a></h5>
-				                                 			</c:when>
-				                                 			<c:when test="${likeProject.status eq 'f'.charAt(0) }">
-					                                 			<h5><a href="javascript: return(0);" class="badge badge-danger m-1">승인 실패</a></h5>
-				                                 			</c:when>
-			                                 			</c:choose>
+		                                 			
 		                                 			</c:when>	                                 			
 		                                 			<c:when test="${likeProject.funding eq 'y'.charAt(0) }">
-		                                 				<h5><a href="javascript: return(0);" class="badge badge-primary m-1">펀딩중</a></h5>
+		                                 			
+		                                 				<h5><a href="javascript: return(0);" class="btn btn-sm btn-outline-primary">펀딩중</a></h5>
+		                                 			
+		                                 			</c:when>
+		                                 			<c:when test="${likeProject.funding eq 'e'.charAt(0) }">
+		                                 			
+		                                 				<button type="button" class="btn btn-sm btn-outline-dark">펀딩마감</button>
+		                                 			
 		                                 			</c:when>
 		                                 		</c:choose>
-			                                 	
 		                                 	</aside>
-                                    <div class="card">
-                                       <div class="thumbnail-wrap">
-                                          <div class="thumbnail ">
-                                             <div class="centered">
-                                                 <c:choose>
+		                                 <div class="project pt-0 mt-0" style="min-width: 265px;">
+		                                    <div class="card" style=" border-radius: 10px;">
+		                                       <div class="thumbnail-wrap">
+		                                          <div class="thumbnail " style="border-top-left-radius: 10px 10px;
+																										border-top-right-radius: 10px 10px;">
+		                                             <div class="centered">
+	                                             		<c:choose>
 	                                             			<c:when test="${likeProject.funding == 'y'.charAt(0) }">
 	                                             				
-	                                             				<form id="likePreviewForm${step.count }" action="projectDetails.udo" method="GET">
+	                                             				<form id="previewForm${step.count }" action="projectDetails.udo" method="GET">
 	                                             					<input type="hidden" name="projectNo" value="${likeProject.projectNo}">
-		                                             				<a href="javaScript: return(0);" onclick="document.getElementById('likePreviewForm${step.count }').submit()">
+		                                             				<a href="javaScript: return(0);" onclick="document.getElementById('previewForm${step.count }').submit()">
 				                                             			<c:choose>
 						                                             		<c:when test="${likeProject.projectMainImage eq '' }">
 						                                             				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
@@ -382,7 +305,7 @@
 	                                             			</c:when>
 	                                             			<c:otherwise>
 	                                             			
-	                                             				<form id="previewForm${step.count }" action="showPreviewProject.udo?projectNo=${myProject.projectNo}" method="POST">
+	                                             				<form id="previewForm${step.count }" action="showPreviewProject.udo?projectNo=${likeProject.projectNo}" method="POST">
 		                                             				<a href="javaScript: return(0);" onclick="document.getElementById('previewForm${step.count }').submit()">
 				                                             			<c:choose>
 						                                             		<c:when test="${likeProject.projectMainImage eq '' }">
@@ -397,49 +320,48 @@
 				                                             	</form>
 	                                             			</c:otherwise>
 	                                             		</c:choose>
-                                             </div>
-                                          </div>
-                                       </div>
-
-		                                    <div class="card-body">
-		                                          <h5 class="card-title">${likeProject.projectTitle }</h5>
-		                                          <ul>
-		                                             <li>${likeProject.projectSummary }</li>
-		                                             <li>${likeProject.goalMoney }</li>
-		                                             <li>${likeProject.endDate }</li>
-		                                          </ul>
-													${likeProject.projectNo}
-		                                          <div class="percentage">
-														<fmt:formatNumber type="number" var="progressPercent"
-															value="${(likeProject.fundingMoney / likeProject.goalMoney)*100}"
-															pattern=".00" />
-														<fmt:formatNumber type="number" var="progress"
-															maxFractionDigits="3" value="${likeProject.fundingMoney}" />
-														<p>${progress}원${progressPercent}%진행중</p>
-					
-														<div class="progress">
-															<div class="progress-bar color-7" role="progressbar"
-																style="width: ${progressPercent}%" aria-valuenow="30"
-																aria-valuemin="0" aria-valuemax="100"></div>
+		                                             </div>
+		                                          </div>
+		                                       </div>
+												
+		                                       <div class="card-body pb-2 flex-column bd-highlight" style="min-height:220px;">
+			                                        <div class="card-title h5" style="color: black; font-weight: 450;" >${likeProject.projectTitle }</div>
+			                                          <ul>
+			                                             <li style="color: gray;" >${likeProject.projectSummary }</li>
+			                                             <li style="color: gray;">${likeProject.goalMoney }</li>
+			                                             <li style="color: gray;">${project.endDate }</li>
+			                                          </ul>
+													<div class="mt-auto bd-highlight">
+														<div class="percentage mt-5">
+															<fmt:formatNumber type="number" var="progressPercent"
+																value="${(likeProject.fundingMoney / likeProject.goalMoney)*100}"
+																pattern=".00" />
+															<fmt:formatNumber type="number" var="progress"
+																maxFractionDigits="3" value="${likeProject.fundingMoney}" />
+															<p>${progress}원${progressPercent}%진행중</p>
+															<div class="progress" style=" height: 7px;">
+																<div class="progress-bar" role="progressbar"
+																	style="width: ${progressPercent}%; background-color: #ff9999;" aria-valuenow="30"
+																	aria-valuemin="0" aria-valuemax="100"></div>
+															</div>
 														</div>
 													</div>
 		                                       </div>
-                                    </div>
-                                 </div>
-                              </article>
-                              </c:forEach>
+		                                    </div>
+		                                 </div>
+		                              </article>
+	                              </c:forEach>
                               </c:if>
-                         
-                           <!-- 추가적으로 목록들 생길 시 JSTL로 반복 추가-->
                            </section>
+                           
                               <c:if test="${empty projectLikeList }">
-                                <div class="row">
+                                <div class="row pt-5 pb-5">
                                     <div class="col">
                                     </div>
-                                    <div class="col-8 d-flex justify-content-center ">
+                                    <div class="col-8 pt-5 pb-5 d-flex justify-content-center ">
                                         <div class="pt-5 pb-5 ">
-                                            <div class="h3">'좋아요' 누른 프로젝트가 없습니다</div>
-                                            <div class="h5">
+                                            <div class="h3" style="color: gray;">'좋아요' 누른 프로젝트가 없습니다</div>
+                                            <div class="h5" style="color: gray;">
 
 					                          	프로젝트 상세페이지로 이동하여 '좋아요' 버튼을 누르면
 												선호하는 프로젝트를 확인할 수 있습니다.
@@ -455,80 +377,6 @@
                      </div>
   					<!-- 좋아요 프로젝트 종료 -->
   
-    				<!-- 관심 프로젝트 시작 -->
-                     <div class="tab-pane fade" id="nav-reserved-prj-list"
-                        role="tabpane" aria-labelledby="nav-reserved-prj-list-tab">
-
-                        <div class="container">
-                           <section class="tiles">
-                              <!----------------만든 프로젝트 양식 -------------------->
-                             <c:if test="${not empty projectReservationList }">
-                              <c:forEach var="project4" items="${projectReservationList }">
-                              <article>
-                                 <div class="project">
-                                    <div class="card">
-                                       <div class="thumbnail-wrap">
-                                          <div class="thumbnail ">
-                                             <div class="centered">
-                                              <%/*  <img src="${myProjectList.projectMainImage}"
-                                                   class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">  */ %>
-                                        <!-- 테스트용 -->            <img src="${pageContext.request.contextPath}/resources/user/img/test/2.jpg"
-                                                   class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
-                                             </div>
-                                          </div>
-                                       </div>
-
-                                       <div class="card-body">
-                                          <h5 class="card-title">${project4.projectTitle }</h5>
-                                          <ul>
-                                             <li>요약 설명 : ${project4.projectSummary }</li>
-                                             <li>목표 금액 : ${project4.goalMoney }</li>
-                                             <li>기간 : ${project4.startDate } ~ ${project4.endDate }</li>
-                                          </ul>
-
-                                          <p>현재 후원받은 금액 : ${project4.fundingMoney }원 ${(project4.fundingMoney div project4.goalMoney)*100 } %</p>
-                                          <div class="progress">
-                                             <div class="progress-bar color-3" role="progressbar"
-                                                style="width: 50%" aria-valuenow="30" aria-valuemin="0"
-                                                aria-valuemax="100"></div>
-                                          </div>
-                                       </div>
-
-                                       <div class="card-footer">
-                                          <a href="#">보러가기</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </article>
-                              </c:forEach>
-                              </c:if>
-                          
-                              <!-- 추가적으로 목록들 생길 시 JSTL로 반복 추가-->
-                           </section>
-                               <c:if test="${empty projectReservationList}">
-                                <div class="row">
-                                    <div class="col">
-                                    </div>
-                                    <div class="col-8 d-flex justify-content-center ">
-                                        <div class="pt-5 pb-5 ">
-                                           
-                                            <div class="h3">'예약'한 프로젝트가 없습니다</div>
-                                            <div class="h5">
-
-					                                                프로젝트 페이지에서 '예약하기' 버튼을 눌러
-					                                                프로젝트가 시작되는 날짜를 받아보실 수 있습니다.
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                    </div>
-                                </div>
-                              </c:if> 
-                        </div>
-                     </div>
-               <!--  카드모듈 끝    그대로 가져다  id 값만 변경해서 써 일단. -->
-   					<!-- 관심 프로젝트 종료 -->
                   </div>
                </div>
 
@@ -536,8 +384,53 @@
          </div>
       </div>
    </section>
+   
+   
+  	<form action ="#" method="POST" id="deleteProjectConfirmPopup" class="white-popup-block mfp-hide" >
+         <div class="popup_box">
+             <div class="popup_inner">
+            		<p>프로젝트를 정말 삭제하시겠습니까?</p>
+                  <div class="d-flex justify-content-center mt-3">
+                      <a href="javaScript:return(0);" class="deleteProjectOKBtn btn-lg btn-bd-purple d-none d-lg-inline-block m-1 popup-modal-dismiss pl-4 pr-4">확인</a>
+                      <a href="javaScript:return(0);" class="btn-lg btn-bd-purple d-none d-lg-inline-block m-1 popup-modal-dismiss pl-4 pr-4">취소</a>
+                  </div>
+             </div>
+         </div>
+     </form>
 
-   <jsp:include page="./include/i-footer.jsp"></jsp:include>
+	<script>
+		$(document).on("click", "#deleteProjectBtn", function() {
+
+			var okBtn = $(this);
+
+			$.magnificPopup.open({
+				items : {
+					src : '#deleteProjectConfirmPopup'
+				},
+				type : 'inline',
+				preloader : false,
+				modal : true
+
+			});
+
+			$(document).on('click', '.popup-modal-dismiss', function(e) {
+				e.preventDefault();
+				$.magnificPopup.close();
+			});
+
+			$(document).on("click", ".deleteProjectOKBtn", function() {
+				okBtn.closest("form").submit();
+			});
+
+		})
+	</script>
+
+
+
+
+
+
+	<jsp:include page="./include/i-footer.jsp"></jsp:include>
    <jsp:include page="./include/i-popup-login.jsp"></jsp:include>
    <jsp:include page="./include/i-popup-search.jsp"></jsp:include>
    <jsp:include page="./include/i-body-js.jsp"></jsp:include>

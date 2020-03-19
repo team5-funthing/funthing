@@ -26,17 +26,16 @@
                 <div class="col">
                     <div class="col align-self-center">
                         <form action="#">
-                            <div class="h2 col align-self-center mt-10">
+                            <div class="h2 col align-self-center mt-10" style="color: black;">
                                 비밀번호 찾기
                             </div>
                             <div class="mt-30">
-                                <h5>이메일 입력</h5>
-                               <input id="inputeamil"  class="form-control form-control-lg" type="text" placeholder="이메일 입력"
+                               <div class="h5" style="color: gray;">이메일 입력</div>
+                               <input id="inputeamil" class="form-control form-control-lg" type="text" placeholder="이메일 입력"
                                     onfocus="this.placeholder = ''" onblur="this.placeholder = '이메일 입력'" required
                                     class="single-input">
-                         
-                                    <a class="btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
-                                    href="javascript:certification()">인증번호 보내기</a>
+                         			<a class="mt-10 btn btn-lg btn-block btn-spon-prj d-none d-lg-inline-block pr-5 pl-5 mb-2" href="javascript:certification()">
+                         			 인증번호 보내기</a>
 
 							   <input id="sessionCode" type="hidden" name="sessionCode" value="">
 								     <!-- 자바 팝업창 띄우기 메서드. -->
@@ -45,7 +44,7 @@
 							
 							</div>
                             <div class="mt-30">
-                                <h5>인증번호 입력</h5>
+                                <div class="h5" style="color: gray;">인증번호 입력</div>
                                 <input id="certification" class="form-control form-control-lg" type="text" placeholder="인증번호 입력"
                                     onfocus="this.placeholder = ''" onblur="this.placeholder = '인증번호 입력'" required
                                     class="single-input">
@@ -53,9 +52,10 @@
                                     
                             </div>
                             <hr>
-                            <div class="col-xl-12 mt-10" id="hideBtn" style="display:none">
-                                <a id="changepassword" class="btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
-                                    href="javascript:changePassword()" >확 인</a>
+                            <!-- btn-lg btn-bd-purple d-none d-lg-inline-block m-1 popup-modal-dismiss pl-2 pr-2 -->
+                            <div class="mt-10" id="hideBtn" style="display:none">
+                                <a id="changepassword" class="btn-lg btn-block btn-bd-purple d-none d-lg-inline-block pr-5 pl-5 mb-2"
+                                    href="javascript:changePassword()" style="text-align: center;" >확인</a>
                                     
                                     
                                     <script>                                    
@@ -89,9 +89,10 @@
                                        } // changePassword() 종료                                        
                                     </script>
                                     </div>
-                               <div class="col-xl-12 mt-10">     
-                                <a class="btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
-                                    href="find-id-pw-form.html">뒤로가기</a>
+                               <div class=" mt-10">
+                                    
+                                <a class="mt-10 btn btn-lg btn-block btn-spon-prj d-none d-lg-inline-block pr-5 pl-5 mb-2"
+                                    href="javascript: history.go(-1)">뒤로가기</a>
                             </div>
                         </form>
                     </div>
@@ -121,6 +122,13 @@ function certification() {
 	});
 }
 </script>
+
+
+    <jsp:include page="./include/i-popup-login.jsp"></jsp:include>
+	<jsp:include page="./include/i-popup-search.jsp"></jsp:include>
+    <jsp:include page="./include/i-body-js.jsp"></jsp:include>
+
+
 </body>
 
 </html>

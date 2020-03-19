@@ -14,10 +14,10 @@
   	
     <jsp:include page="./include/i-popupover-mypage.jsp"/>
     <jsp:include page="./include/i-header.jsp"/>
+    
+    
 
-	<!-- ------------------ -->
-
-	<section class="container">
+	<section class="container pt-5">
 
 		<div class="w-100">
 			<div class="w-75">
@@ -25,9 +25,9 @@
 				<article>
 					<div class="col-lg-10 posts-list">
 
-						<div class="comment-form pt-2">
+						<div class="comment-form pt-5">
 							<h4>문의 답변하기</h4>
-							<div class="comment-list p-0">
+							<div class="comment-list p-5">
 								<div class="single-comment justify-content-between d-flex">
 									<div class="user justify-content-between d-flex">
 										<div class="thumb mr-2">
@@ -98,6 +98,9 @@
 	</section>
 
 	<!-- -------------------- -->
+	
+	
+	
 
     <!-- footer -->
     <footer class="footer">

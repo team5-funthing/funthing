@@ -27,16 +27,16 @@ public class CreatorController {
 		String inputCreator = cvo.getCreator();
 		
 		if(inputCreator.length() == 0) {
-			msg = "space";
+			msg = "";
 		}else {
 			cvo = getCreatorService.getCreator(cvo);
 			if(cvo != null) {
 				if(inputCreator.equals(cvo.getCreator())) {
-					msg = "ÀÌ¹Ì »ç¿ëÁßÀÎ Ã¢ÀÛÀÚ | ¾÷Ã¼¸íÀÔ´Ï´Ù.";
+					msg = "ì´ë¯¸ ë“±ë¡ëœ ì°½ì‘ìëª…ì…ë‹ˆë‹¤.";
 				}
 			}else {
 	
-					msg = "»ç¿ë °¡´ÉÇÕ´Ï´Ù.";
+					msg = "ì‚¬ìš© ê°€ëŠ¥í•œ ì°½ì‘ìëª…ì…ë‹ˆë‹¤.";
 			}
 		}
 		
@@ -48,8 +48,6 @@ public class CreatorController {
 	public String selectCreatorCheck(@RequestBody CreatorVO cvo) throws JsonProcessingException {
 
 		cvo = getCreatorService.getCreator(cvo);
-		
-		System.out.println(cvo);
 		
 		ObjectMapper mapper = new ObjectMapper();
 		String selectedCreatorToJSON = mapper.writeValueAsString(cvo);

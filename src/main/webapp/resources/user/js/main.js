@@ -356,7 +356,14 @@ $(function() {
 	resizeYoutube();
 });
 
+$(document).ready(function(){
+	
+	$("iframe").css("height", "420px");
+	
+});
+
 function resizeYoutube() {
+
 	$("iframe").each(function() {
 		if (/^https?:\/\/www.youtube.com\/embed\//g.test($(this).attr("src"))) {
 			$(this).css("width", "100%");
@@ -380,7 +387,6 @@ $(document).on("click","#urlBtn",function(){
 
 	if(sourceCode != ""){
 		$("#toAppendIframeDiv").append(sourceCode);
-//		$("iframe").attr("src", sourceCode);
 		$("#projectIntroduceVideoInput").attr("value", sourceCode);
 
 		var removeUrlBtn = "<div class='input-group-append urlBtn-remove'><a class='btn fas fa-times fa-2x' type='button' id='urlBtn'></a></div>";
@@ -578,7 +584,6 @@ $(document).on("click",".clickKeyword",function(){
 	var idx = $(".clickKeyword").index(this);
 	
 	var keyword = "test" + idx;
-	alert(keyword);
     $("form[id='"+keyword+"']").submit();
     
 

@@ -53,7 +53,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item"> 
-                        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="statisticsManagement.ado" aria-expanded="false">
+                        	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="showStatisticsPage.ado" aria-expanded="false">
                                 <i class="mdi mdi-chart-bar"></i>
                                 <span class="hide-menu">통계관리</span>
                             </a>

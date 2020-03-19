@@ -68,11 +68,11 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">clause_input</h4>
+                        <h4 class="page-title">약관 입력</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#C:\Users\pjh\Desktop\5jo\matrix-admin-master\index.html">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="admindex.ado">Home</a></li>
                                     <!--
                                     <li class="breadcrumb-item active" aria-current="page"></li>
                                     -->
@@ -100,13 +100,13 @@
 							<div class="col-12">
 								<div class="card">
 									<div class="card-body">
-										<h5 class="card-title m-b-0" style="padding-bottom: 2%;">약관
-											입력</h5>
+										<h5 class="card-title m-b-0" style="padding-bottom: 2%;"></h5>
 										<!-- Create the editor container -->
 										<form id="tosForm" method = "post" action="insertTos.ado">
 											<div><h1>${tos.tosTitle}</h1></div>
-											제목 : <input type="text" name="tosTitle" value="${tos.tosTitle}">
+											제목 : <input type="text" size="60" style="margin-bottom: 10px" name="tosTitle" value="${tos.tosTitle}">
 											<input type="hidden" name="no" value="${tos.tosNo}">
+											
 											<textarea name="editor1" rows="7" cols="50">${tos.tosContent}</textarea>
 											<div align="center" style="padding-top: 15px;">
 											<c:if test="${tos.tosNo ne null }">

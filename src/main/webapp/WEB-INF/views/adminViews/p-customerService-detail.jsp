@@ -67,11 +67,11 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">customercenter_detail</h4>
+                        <h4 class="page-title">고객센터</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#C:\Users\pjh\Desktop\5jo\matrix-admin-master\index.html">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="admindex.ado">Home</a></li>
                                     <!--
                                     <li class="breadcrumb-item active" aria-current="page"></li>
                                     -->
@@ -97,7 +97,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title m-b-0">고객센터 상세보기</h4>
+                                <h4 class="card-title m-b-0"></h4>
                         <!-- Create the editor container -->
                         
                         <table style="margin-bottom: 1%;margin-top: 1%;">
@@ -112,9 +112,7 @@
 
                         </table>
                         
-                            <textarea style="width: 80%; height: 150px; overflow: auto; padding: 10px; white-space:pre-wrap; resize: none;"  readonly>
-                            ${getCSBoard.csContent}
-                            </textarea>
+                            <textarea style="width: 80%; height: 150px; overflow: auto; padding: 10px; white-space:pre-wrap; resize: none;"  readonly>${getCSBoard.csContent}</textarea>
                         
                        <form method="POST" action="insertAdminCSBoard.ado">
                        <textarea name="adminCSContent" placeholder="답글 적는 부분" style="width: 80%; height: 150px; overflow: auto; padding: 10px; white-space:pre-wrap; resize: none;"></textarea>
@@ -124,7 +122,7 @@
                   
                         <div align="center" style="padding-top: 2%;">
                         	<input type="submit" value="확인">
-                            <a href="http://localhost:8080/funthing/getAdminCSBoardList.ado"><input type="button" value="뒤로"></a>
+                            <a href="getAdminCSBoardList.ado"><input type="button" value="뒤로"></a>
                         </div>
                         </form>
 

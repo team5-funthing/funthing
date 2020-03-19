@@ -76,17 +76,15 @@
                    <div class="d-flex flex-column bd-highlight mb-3">
                        <ul class="list-group list-group-flush">
                            <li class="list-group-item"><a href="mypage.udo">
-                                   <div class="h6">마이페이지</div>
+                                   <div class="h5">마이페이지</div>
                                </a></li>
                            
                            <li class="list-group-item"><a href="javaScript: return(0);" onclick="document.getElementById('paymentReservationCheckListForm').submit()">
-                                   <div class="h6">후원 결제내역</div>
+                                   <div class="h5">후원 결제내역</div>
                                </a></li>
-                           <li class="list-group-item"><a href="#">
-                                   <div class="h6">수입내역[미구현]</div>
                                </a></li>
                            <li class="list-group-item"><a href="logout.udo">
-                                   <div class="h6">로그아웃 하기</div>
+                                   <div class="h5">로그아웃 하기</div>
                                </a>
                            </li>
                        </ul>

@@ -5,7 +5,7 @@
 
 <!-- 심사 프로젝트 목록 보기 -->
 <select id="getProjectCheckList" resultType="project" parameterType="project">
-	select * from project where status = 'w' OR status = 'f' OR status = 'm'
+	select * from project where status = 'w' OR status = 'm'
 </select>
 
 <!-- 심사 프로젝트 상세 중 리워드 목록까지 보기 위한 resultMap -->

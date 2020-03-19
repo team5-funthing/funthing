@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.team5.funthing.user.model.vo.PaymentReserveVO;
+import com.team5.funthing.user.model.vo.ProjectVO;
 
 @Repository
 public class PaymentReserveDAO {
@@ -27,13 +28,14 @@ public class PaymentReserveDAO {
 		return sqlSessionTemplate.selectList("getPaymentReserveListByEmail", vo);
 	}
 	
-	
-	
 	public void updatePaymentComplete(int projectNo) {
+		
+		System.out.println("펀딩 성공으로 후원 확정");
 		sqlSessionTemplate.update("updatePaymentComplete", projectNo);
 	}
 	
 	public void updatePaymentCancel(int projectNo) {
+		System.out.println("펀딩 실패로 후원 취소");
 		sqlSessionTemplate.update("updatePaymentCancel", projectNo);
 	}
 	
@@ -45,5 +47,16 @@ public class PaymentReserveDAO {
 		sqlSessionTemplate.update("updateKaKaoPayCancelResult", vo);
 	}
 	
+	public List<PaymentReserveVO> getPaymentReserveListByProjectNo(PaymentReserveVO vo) {
+		return sqlSessionTemplate.selectList("getPaymentReserveListByProjectNo", vo);
+	}
+	
+	public void updateShipmentComplete(PaymentReserveVO vo) {
+		sqlSessionTemplate.update("updateShipmentComplete", vo);
+	}
+	
+	public List<PaymentReserveVO> getToCancelOrderList(ProjectVO vo) {
+		return sqlSessionTemplate.selectList("getToCancelOrderList", vo);
+	}
 	
 }

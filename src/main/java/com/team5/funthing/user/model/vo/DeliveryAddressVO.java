@@ -5,13 +5,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class DeliveryAddressVO {
 
-	private int deliveryAddressNo;
+	private int deliveryAddressNo = -1;
 	private String deliveryAddressName;
+	private String name;
 	private String email;
+	private String phone;
 	private String zipcode;
 	private String roadAddress;
 	private String detailedAddress;
 	private String shippingNote;
+	
 	
 	public int getDeliveryAddressNo() {
 		return deliveryAddressNo;
@@ -25,11 +28,23 @@ public class DeliveryAddressVO {
 	public void setDeliveryAddressName(String deliveryAddressName) {
 		this.deliveryAddressName = deliveryAddressName;
 	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	public String getZipcode() {
 		return zipcode;
@@ -58,8 +73,9 @@ public class DeliveryAddressVO {
 	@Override
 	public String toString() {
 		return "DeliveryAddressVO [deliveryAddressNo=" + deliveryAddressNo + ", deliveryAddressName="
-				+ deliveryAddressName + ", email=" + email + ", zipcode=" + zipcode + ", roadAddress=" + roadAddress
-				+ ", detailedAddress=" + detailedAddress + ", shippingNote=" + shippingNote + "]";
+				+ deliveryAddressName + ", name=" + name + ", email=" + email + ", phone=" + phone + ", zipcode="
+				+ zipcode + ", roadAddress=" + roadAddress + ", detailedAddress=" + detailedAddress + ", shippingNote="
+				+ shippingNote + "]";
 	}
 	
 	

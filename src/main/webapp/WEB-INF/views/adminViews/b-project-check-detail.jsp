@@ -12,27 +12,16 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <!-- Favicon icon -->
-<link rel="icon" type="image/png" sizes="16x16"
-	href="${pageContext.request.contextPath }/resources/admin/assets/images/favicon.png">
-<title>Matrix Template - The Ultimate Multipurpose admin
-	template</title>
+<link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath }/resources/admin/assets/images/favicon.png">
+<title>Matrix Template - The Ultimate Multipurpose admin template</title>
 <!-- Custom CSS -->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/multicheck/multicheck.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/user/css/magnific-popup.css">
-<link
-	href="${pageContext.request.contextPath }/resources/admin/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css"
-	rel="stylesheet">
-<link
-	href="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/css/float-chart.css"
-	rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/multicheck/multicheck.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/user/css/magnific-popup.css">
+<link href="${pageContext.request.contextPath }/resources/admin/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/css/float-chart.css" rel="stylesheet">
 <!-- Custom CSS -->
-<link
-	href="${pageContext.request.contextPath }/resources/admin/dist/css/style.min.css"
-	rel="stylesheet">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link href="${pageContext.request.contextPath }/resources/admin/dist/css/style.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -48,6 +37,31 @@
 	margin: 20px auto;
 }
 </style>
+<script>
+$(window).resize(function() {
+	   resizeYoutube();
+	});
+
+	$(function() {
+	   resizeYoutube();
+	});
+
+	$(document).ready(function(){
+	   
+	   $("iframe").css("height", "420px");
+	   
+	});
+
+	function resizeYoutube() {
+
+	   $("iframe").each(function() {
+	      if (/^https?:\/\/www.youtube.com\/embed\//g.test($(this).attr("src"))) {
+	         $(this).css("width", "100%");
+	         $(this).css("height", Math.ceil(parseInt($(this).css("width")) * 480 / 854) + "px");
+	      }
+	   });
+	}  
+</script>
 </head>
 
 <body>
@@ -92,8 +106,7 @@
 						<div class="ml-auto text-right">
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a
-										href="#C:\Users\pjh\Desktop\5jo\matrix-admin-master\index.html">Home</a></li>
+									<li class="breadcrumb-item"></li>
 									<!--
                                     <li class="breadcrumb-item active" aria-current="page"></li>
                                     -->
@@ -182,16 +195,7 @@
 																			<div>${projectCheck.projectStory}</div>
 																		</div>
 																	</div>
-																	<div class="project-author">
-																		<div class="media align-items-center">
-																			<img src="img/project_check/author.png" alt="">
-																			<div class="media-body">
-																				<a href="#">
-																					<h4></h4>
-																				</a>	
-																			</div>
-																		</div>
-																	</div>
+																	
 																	<hr>
 																	<form action="updateProjectCheckApproval.ado" method="POST">
 																		<div align="center">
@@ -210,8 +214,7 @@
 																			<input type="button" value="거부"></a> -->
 																			<!-- 보류 버튼 아직 미완료 상태 -->
 																			<input type="submit" formaction="updateProjectCheckDefer.ado" value="보류">
-																			<a href="http://localhost:8080/funthing/getProjectCheckList.ado">
-																			<input type="button" value="뒤로"></a>
+																			<a href="getProjectCheckList.ado"><input type="button" value="뒤로"></a>
 
 																		</div>
 																	</form>
@@ -231,8 +234,7 @@
 																						class="single-comment justify-content-between d-flex">
 																						<div class="user justify-content-between d-flex">
 																							<div class="thumb">
-																								<img
-																									src="${pageContext.request.contextPath}/resources/admin/img/project_check/comment_1.png"
+																								<img src="${pageContext.request.contextPath}/resources/admin/img/project_check/comment_1.png"
 																									alt="">
 																							</div>
 																							<div class="desc" style="width: 600px;">
@@ -367,8 +369,8 @@
 																<script>
 																	$(document).ready(function() {
 																		$(".openRewardPopup").magnificPopup({
-																					src : "#rewardPopup",
-																					type : 'inline'																						
+																				src : "#rewardPopup",
+																				type : 'inline'																						
 																		});
 													
 																		$("a.card-link").click(function(){
@@ -583,6 +585,7 @@
 				<!-- ============================================================== -->
 				<!-- footer -->
 				<!-- ============================================================== -->
+				 <script src="${pageContext.request.contextPath}/resources/user/js/jquery.magnific-popup.min.js"></script>
 				<jsp:include page="include/i-footer.jsp" />
 			</div>
 			<!-- ============================================================== -->
@@ -599,56 +602,6 @@
 	<!-- ============================================================== -->
 	<!-- All Jquery -->
 	<!-- ============================================================== -->
-
-
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/jquery/dist/jquery.min.js"></script>
-	<!-- Bootstrap tether Core JavaScript -->
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/popper.js/dist/umd/popper.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/sparkline/sparkline.js"></script>
-	<!--Wave Effects -->
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/dist/js/waves.js"></script>
-	<!--Menu sidebar -->
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/dist/js/sidebarmenu.js"></script>
-	<!--Custom JavaScript -->
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/dist/js/custom.min.js"></script>
-	<!--This page JavaScript -->
-	<!-- <script src="dist/js/pages/dashboards/dashboard1.js"></script> -->
-	<!-- Charts js Files -->
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/excanvas.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.pie.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.time.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.stack.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.crosshair.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/dist/js/pages/chart/chart-page-init.js"></script>
-
-	<script
-		src="${pageContext.request.contextPath}/resources/user/js/jquery.magnific-popup.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/multicheck/jquery.multicheck.js"></script>
-	<script
-		src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/DataTables/datatables.min.js"></script>
 	<script>
             /****************************************
              *       Basic Table                   *

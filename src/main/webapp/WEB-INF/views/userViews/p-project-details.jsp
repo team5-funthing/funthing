@@ -34,6 +34,11 @@ $(document).ready(function(){
 		midClick:true
 	});
 });
+
+
+
+
+
 </script>
 </head>
 
@@ -124,7 +129,6 @@ $(document).ready(function(){
 											</c:otherwise>
 										</c:choose>
 									</c:forEach>
-									
 								</div>
 								<a class="carousel-control-prev" href="#carouselIntroduceImages" role="button" data-slide="prev">
 								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -174,14 +178,20 @@ $(document).ready(function(){
 
 					
 					<div class="p-2 bd-highlight">
-						<div class="h4">남은 날짜</div>
-						<div class="h2" style="color: #000000">
-							${endDate - today } 일
-							<div class="h5" style="color: #000000"></div>
+						<div class="h4" style="color: gray; font-weight: 400;">남은 날짜</div>
+						<div class="h2" style="color: black; font-weight: 500;">
+							<c:choose>
+								<c:when test="${endDate - today < 1 }">
+									마감
+								</c:when>
+								<c:otherwise>
+									${endDate - today } 일
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</div>
 					<div class="p-2 bd-highlight mt-auto ml-0">
-						<form id="supportProject" action="supportProjectInterceptor.udo" method="GET">
+						<form id="supportProject" action="supportProject.udo" method="GET">
 							<input type="hidden" name="projectNo" value="${project.projectNo }">
 							<a class="btn btn-lg btn-spon-prj d-none d-lg-inline-block pr-5 pl-5 mb-2"
 								href="javaScript: return(0);" onclick="document.getElementById('supportProject').submit();">
@@ -189,8 +199,8 @@ $(document).ready(function(){
 						</form>
 					</div>
 					<div class="row d-flex justify-content-around m-0 ">
-						<a class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2" href="upCountLikeInterceptor.udo?projectNo=${project.projectNo }">좋아요   ${likeCount}</a> 
-						<a class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2" href="showInsertwAskMessageInterceptor.udo?projectNo=${project.projectNo }">문의하기</a> 
+						<a class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2" href="upCountLike.udo?projectNo=${project.projectNo }">좋아요   ${likeCount}</a> 
+						<a class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2" href="showInsertwAskMessage.udo?projectNo=${project.projectNo }">문의하기</a> 
 						<a class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2" href="#">공유하기</a>
 					</div>
 
@@ -228,7 +238,7 @@ $(document).ready(function(){
 							<div class="comment-form">
 								<h4>리뷰 게시판 글 남기기</h4>
 								
-								<form class="form-contact comment_form" action="insertProjectBoardInterceptor.udo" 
+								<form class="form-contact comment_form" action="insertProjectBoard.udo" 
 												id="commentForm" method="get">
 									<input type="hidden" name="projectNo" value="${project.projectNo}">
 									<div class="row">
@@ -252,12 +262,25 @@ $(document).ready(function(){
 										</div>
 									</div>
 									<div class="form-group">
-										<button type="submit" 
-											class="button button-contactForm btn_1 boxed-btn">글 남기기</button>
+										<button onclick="submitComment()" class="button button-contactForm btn_1 boxed-btn">글 남기기</button>
 									</div>
 								</form>
 							</div>
 							<!-- projectBoard form 끝 -->
+							<script>
+								function submitComment() {
+									var comment = document.getElementById("projectBoardContents").value;
+									
+									if(comment==""){
+										alert("글을 쓰세요");
+										return;
+									}else{
+										document.getElementById("commentForm").submit();
+									}
+									
+								}
+							</script>
+							
 							
 							<!-- proejctBoardList 시작 -->
 							<div class="comments-area">
@@ -279,8 +302,13 @@ $(document).ready(function(){
 														<div class="d-flex justify-content-between">
 															<div class="d-flex align-items-center">
 																<h5>
-																	<a href="http://localhost:8080/funthing/projectDetails.udo?projectNo=${project.projectNo }" onclick="window.open(this.href,'_blank','width=100px, height=100px, toolvars=no'); return false;">${b1.member.name }</a>
+																	
+																	<a href="nameProfile.udo?email=${b1.email}&name=${b1.member.name}" onclick="window.open(this.href,'_blank', toolvars=no'); return false;">${b1.member.name }</a>
+																	
 																</h5>
+																
+																
+
 																<p class="date">${b1.projectBoardDate}</p>
 															</div>
 															<c:choose>
@@ -321,7 +349,7 @@ $(document).ready(function(){
 							                                             <div class="user justify-content-between d-flex p-3"
 							                                                style="background-color: whitesmoke;">
 																				<div id="projectBoard-profile" class="thumb">
-																					<img class="profile" src="${b2.member.myImage }">
+																					<img class="profile" src="${creator.creatorProfileImage }">
 																				</div>
 																				<div class="desc" style="width: 500px;">
 							                                                    <p class="comment">
@@ -330,7 +358,8 @@ $(document).ready(function(){
 							                                                    <div class="d-flex justify-content-between">
 							                                                       <div class="d-flex align-items-center">
 							                                                          <h5>
-							                                                             <a href="javaScript: retrun(0);">${b2.member.name}</a>
+							                                                          <a href="nameProfile.udo?email=${b2.email}&name=${b2.member.name}" onclick="window.open(this.href,'_blank', toolvars=no'); return false;">${b2.member.name }</a>
+							                                                             
 							                                                          </h5>
 							                                                          <p class="date">${b2.projectBoardDate}</p>
 							                                                       </div>
@@ -415,7 +444,7 @@ $(document).ready(function(){
 	</section>
 	
 	<div id="showReportPage" class="white-popup mfp-hide">
-		<form id="reports" action="insertReportInterceptor.udo" method="POST">
+		<form id="reports" action="insertReport.udo" method="POST">
 			<input type="hidden" value="${project.projectNo}" name="projectNo">
 			<input type="hidden" value="${project.email}" name="email">
 	        <div class="report_popup_box ">
@@ -526,6 +555,9 @@ $(document).ready(function(){
 	<jsp:include page="./include/i-popup-login.jsp"></jsp:include>
 	<jsp:include page="./include/i-popup-search.jsp"></jsp:include>
 	<jsp:include page="./include/i-body-js.jsp"></jsp:include>
+	
+	
+	
 
 </body>
 </html>

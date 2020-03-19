@@ -39,7 +39,11 @@ function checkFunction(){
 	}
 	if(finalAgree.checked==true){
 		$("#name").removeAttr("readonly");
+		
+		$(".hideButton").css("background-color", "");
+		$(".hideButton").css("opacity", "");
 		$(".hideButton").css({'pointer-events':'auto'});
+		
 		$("input[name='email']").removeAttr("readonly");
 		$("input[name='emailCheck']").removeAttr("readonly");
 		$("input[name='password']").removeAttr("readonly");
@@ -51,7 +55,11 @@ function checkFunction(){
 		$("input[name='password']").val("");
 		$("input[name='passwordCheck']").val("");
 		$("#name").attr("readonly",true);
+		
+		$(".hideButton").css("background-color", "gray");
+		$(".hideButton").css("opacity", "0.5");
 		$(".hideButton").css({'pointer-events':'none'});
+		
 		$("input[name='email']").attr("readonly",true);
 		$("input[name='emailCheck']").attr("readonly",true);
 		$("input[name='password']").attr("readonly",true);
@@ -171,30 +179,32 @@ $(document).ready(function(){
 								<br>
 							</div>
 							<!-- 약관 동의 팝업 종료 -->
-							<div class="mt-10">
+							<div class="mt-30">
 								<h5>이름</h5>
 								<input type="text" name="name" id="name" placeholder="이름"
 									onfocus="this.placeholder = ''"
-									onblur="this.placeholder = '이름'" class="single-input">
+									onblur="this.placeholder = '이름'" class="form-control form-control-lg">
 							</div>
-							<div class="mt-10">
+							<div class="mt-30">
 								<h5>이메일 입력</h5>
 								<input type="email" id="email" name="email" placeholder="이메일 입력"
 									onfocus="this.placeholder = ''"
 									onblur="this.placeholder = '이메일 입력'" required
-									class="single-input"> 
+									class="form-control form-control-lg"> 
 								<div id="inputEmail"></div>
-								<a class="hideButton btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
-									href="javascript:duplicateCheck()">이메일 중복확인</a> 
+								
+								<a class="hideButton mt-10 btn btn-lg btn-block btn-spon-prj d-none d-lg-inline-block pr-5 pl-5 mb-2"
+									href="javascript:duplicateCheck()" style=" background-color: gray; opacity: 0.5;">이메일 중복확인</a> 
 								<input type="hidden" name="email2" id="email2">
 							</div>
-							<div class="mt-10">
-								<a class="hideButton btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
-									href="javascript:popup()">인증번호 보내기</a>
+							<div class="mt-20">
+								<a class="hideButton mt-10 btn btn-lg btn-block btn-spon-prj d-none d-lg-inline-block pr-5 pl-5 mb-2"
+									href="javascript:popup()" style=" background-color: gray; opacity: 0.5;">인증번호 보내기</a>
 								<input type="text" name="emailCheck" id="emailCheck" placeholder="인증번호를 입력하세요"
 									onfocus="this.placeholder = ''" onblur="this.placeholder = '인증번호를 입력하세요'" required
-									class="single-input">
+									class="form-control form-control-lg">
 							</div>
+							<hr>
 
 							<script
 								src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -202,29 +212,29 @@ $(document).ready(function(){
 								
 							</script>
 							<input id="sessionCode" type="hidden" name="sessionCode" value="">
-							<div class="mt-10">
+							<div class="mt-30">
 								<h5>비밀번호</h5>
 								<input type="password" name="password" id="password"
 									placeholder="비밀번호를 입력하세요 (8자 이상)"
 									onfocus="this.placeholder = ''"
 									onblur="this.placeholder = '비밀번호를 입력하세요 (8자 이상)'" required
-									class="single-input">
+									class="form-control form-control-lg">
 							</div>
-							<div class="mt-10">
+							<div class="mt-30">
 								<input type="password" name="passwordCheck" id="passwordCheck"
 									placeholder="비밀번호를 입력하세요 (8자 이상)"
 									onfocus="this.placeholder = ''"
 									onblur="this.placeholder = '비밀번호를 입력하세요 (8자 이상)'" required
-									class="single-input">
+									class="form-control form-control-lg">
 							</div>
 							<div id="loginInputCheck"></div>
-							<div class="col-xl-12 mt-10">
-								<input class="hideButton btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
-									type="button" onclick="joindo()" value="완료">
+							<div class="mt-30">
+								<input class="hideButton mt-10 btn btn-lg btn-block btn-spon-prj d-none d-lg-inline-block pr-5 pl-5 mb-2"
+									type="button" onclick="joindo()" style=" background-color: gray; opacity: 0.5;" value="완료">
 							</div>
-							<div class="mt-10">
-								<a class="btn btn-registry-way d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3"
-									href="joinselect.udo">뒤로가기</a>
+							<div class="mt-30">
+								<a class="btn-lg btn-block btn-bd-purple d-none d-lg-inline-block pr-5 pl-5 mb-2"
+									style="text-align: center;" href="joinselect.udo">뒤로가기</a>
 							</div>
 							<hr>
 						</form>
@@ -280,10 +290,6 @@ $(document).ready(function(){
 					} else if(data=='2'){
 						$("#inputEmail").empty();
 						$("#inputEmail").append("이미 가입된 메일입니다.").css('color','Tomato').css('font-size','75%');
-						document.getElementById('email').value = "";
-					} else if(data=='3'){
-						$("#inputEmail").empty();
-						$("#inputEmail").append("탈퇴한 회원입니다. 다른 이메일을 이용하여 주세요.").css('color','Tomato').css('font-size','75%');
 						document.getElementById('email').value = "";
 					}
 				},

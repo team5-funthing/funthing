@@ -4689,7 +4689,9 @@ tbody.collapse.show {
 }
 
 .card-title {
+	
     margin-bottom: .75rem
+    
 }
 
 .card-subtitle {
@@ -5373,7 +5375,7 @@ tbody.collapse.show {
     justify-content: center;
     color: #fff;
     text-align: center;
-    background-color: #007bff;
+    background-color: #ffe680;
     transition: width .6s ease
 }
 

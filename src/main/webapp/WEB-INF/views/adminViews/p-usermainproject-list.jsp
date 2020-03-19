@@ -111,8 +111,6 @@
 														<th>창작자/업체명</th>
 														<th>카테고리</th>
 														<th>목표금액</th>
-
-
 													</tr>
 												</thead>
 												<tbody>
@@ -135,18 +133,13 @@
 														<th>창작자/업체명</th>
 														<th>카테고리</th>
 														<th>목표금액</th>
-
 													</tr>
 												</tfoot>
 											</table>
-
-
-
 										</div>
 										<p>
 										<div align="center">
-											<a href="getFocusProjectList.ado"><input type="button"
-												value="주목 프로젝트 목록으로"></a>
+											<a href="getFocusProjectList.ado"><input type="button" value="주목 프로젝트 목록으로"></a>
 										</div>
 									</div>
 								</div>

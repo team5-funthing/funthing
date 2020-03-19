@@ -63,11 +63,11 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">bank_account</h4>
+                        <h4 class="page-title">계좌 상세보기</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#C:\Users\pjh\Desktop\5jo\matrix-admin-master\index.html">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="admindex.ado">Home</a></li>
                                     <!--
                                     <li class="breadcrumb-item active" aria-current="page"></li>
                                     -->
@@ -96,7 +96,7 @@
 
                                  <!-- 여기에 들어갈거-->
                                  <div class="card-body">
-                                    <h5 class="card-title m-b-0">상세보기 계좌 탭</h5>
+                                    <h5 class="card-title m-b-0"></h5>
                                     
                                     <table border="1">
                                         <tr>
@@ -148,29 +148,6 @@
         <!-- ============================================================== -->
         <!-- All Jquery -->
         <!-- ============================================================== -->
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/jquery/dist/jquery.min.js"></script>
-        <!-- Bootstrap tether Core JavaScript -->
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/popper.js/dist/umd/popper.min.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/extra-libs/sparkline/sparkline.js"></script>
-        <!--Wave Effects -->
-        <script src="${pageContext.request.contextPath }/resources/admin/dist/js/waves.js"></script>
-        <!--Menu sidebar -->
-        <script src="${pageContext.request.contextPath }/resources/admin/dist/js/sidebarmenu.js"></script>
-        <!--Custom JavaScript -->
-        <script src="${pageContext.request.contextPath }/resources/admin/dist/js/custom.min.js"></script>
-        <!--This page JavaScript -->
-        <!-- <script src="dist/js/pages/dashboards/dashboard1.js"></script> -->
-        <!-- Charts js Files -->
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/excanvas.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.pie.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.time.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.stack.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot/jquery.flot.crosshair.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-        <script src="${pageContext.request.contextPath }/resources/admin/dist/js/pages/chart/chart-page-init.js"></script>
 
 </body>
 

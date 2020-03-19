@@ -125,11 +125,15 @@
                     </div>
                     <div class="d-flex justify-content-between">
                         <div class="p-2 bd-highlight"> 주문자</div>
-                        <div class="p-2 bd-highlight"> ${memberSession.name }</div>
+                        <div class="p-2 bd-highlight"> ${deliveryAddress.name }</div>
                     </div>
                     <div class="d-flex justify-content-between">
                         <div class="p-2 bd-highlight"> 배송지</div>
                         <div class="p-2 bd-highlight"> ${deliveryAddress.roadAddress }</div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div class="p-2 bd-highlight"> 상세주소</div>
+                        <div class="p-2 bd-highlight"> ${deliveryAddress.detailedAddress }</div>
                     </div>
                     <div class="d-flex justify-content-between">
                         <div class="p-2 bd-highlight"> 요청 사항</div>

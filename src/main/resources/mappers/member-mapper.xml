@@ -13,7 +13,6 @@
 		SELECT *
 		FROM member
 		WHERE email=#{email}
-	
 	</select>
 	
 	<insert id="insertSocialMember" parameterType="member">
@@ -42,7 +41,7 @@
    </update>
    
    <delete id="deleteMember" parameterType="member">
-   DELETE member
+   DELETE deletemember
    WHERE email=#{email}
    </delete>
 

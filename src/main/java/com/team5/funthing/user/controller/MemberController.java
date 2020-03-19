@@ -1,5 +1,6 @@
 package com.team5.funthing.user.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -50,19 +51,19 @@ public class MemberController {
 	@Autowired
 	private GetDeleteMemberService getDeleteMemberService;
 
-
+	//
 	@RequestMapping(value="socialLogin.udo",method=RequestMethod.GET)
 	public String socialLogin() {   
 		return "f-socialjoin";
 	}
 
-
+	//
 	@RequestMapping(value="getMember.udo", method=RequestMethod.POST) 
 	public String getMember(MemberVO vo, AlarmVO avo, Model model, HttpServletRequest request,HttpSession session,HttpServletResponse response) throws IOException {
 
 		MemberVO loginMember = getMemberService.getMember(vo);
 		if(loginMember == null) {
-			model.addAttribute("loginFail", "�벑濡앸맂 �쉶�썝�씠 �븘�떃�땲�떎.");
+			model.addAttribute("loginFail", "등록되지않은 회원입니다.");
 			return "forward:member.udo";
 		}
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -84,6 +85,15 @@ public class MemberController {
 				}
 				MemberVO loginMemberVO = getMemberService.getMember(vo);
 				
+				if (loginMemberVO.getMyImage() == null) {
+					
+					String noneImage = File.separator + "funthing" + File.separator + "resources" + File.separator + "user" + File.separator + "img" + File.separator + "non-profile.png";
+					loginMemberVO.setMyImage(noneImage);
+					
+				}
+				
+				
+				
 				avo.setReceiveId(loginMemberVO.getEmail());
 				avo.setReadConfirm('n');
 				
@@ -91,9 +101,9 @@ public class MemberController {
 				System.out.println(userAlarmList.toString());
 				System.out.println(userAlarmList.isEmpty());
 				if(userAlarmList.isEmpty()) {
-					model.addAttribute("userAlarmList", "알람 없음");
+					session.setAttribute("userAlarmList", "알람 없음");
 				}else {
-					model.addAttribute("userAlarmList", "알람 있음");
+					session.setAttribute("userAlarmList", "알람 있음");
 				}
 				session.setAttribute("memberSession", loginMemberVO);
 				System.out.println(session.getAttribute("memberSession"));
@@ -103,6 +113,7 @@ public class MemberController {
 			return "forward:member.udo";
 	}
 	
+	//
 	@RequestMapping(value="joinselect.udo" ,method=RequestMethod.GET)
 	public String login(HttpSession session) {
 		return "p-waytoJoin-select";
@@ -114,12 +125,13 @@ public class MemberController {
 		return "f-find-pw";
 	}
 
+	//
 	@RequestMapping(value="emailJoin.udo",method=RequestMethod.GET) 
 	public String emailjoin() {
 		return "f-join";
 	}
 
-
+	//
 	@RequestMapping(value="successjoin.udo",method=RequestMethod.POST) 
 	public String successjoin(MemberVO vo,Model model,@RequestParam(name="email2",required=false)String email,HttpSession session) {
 		if(email!=null) {
@@ -138,9 +150,25 @@ public class MemberController {
 		return "ajax/callback";
 	}
 
+	//
 	@RequestMapping(value="socialjoin.udo",method=RequestMethod.GET)
-	public String socialJoin() {
-		return "f-socialjoin";
+	public String socialJoin(String email, String password, String name, MemberVO vo, HttpSession session) {
+		
+		System.out.println(email + " : " + password + " : " + name);
+		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String newPassword = encoder.encode(password);
+		
+		System.out.println(newPassword);
+		
+		vo.setEmail(email);
+		vo.setPassword(newPassword);
+		vo.setName(name);
+		vo.setSocialjoined("Y");
+		
+		session.setAttribute("memberSession", vo);
+		
+		return "forward:member.udo";
 	}
 
 	@RequestMapping(value= "certification.udo" ,method=RequestMethod.GET )
@@ -148,7 +176,7 @@ public class MemberController {
 		try {
 			vo.setEmail(email);
 			String certificationCode = sendMailUtil.createCertificationCode(50);
-			sendMailUtil.sendMail("[Funthing] �씤利앹퐫�뱶 �엯�땲�떎.", "�씤利앹퐫�뱶 : ["+certificationCode+"]", vo.getEmail());   
+			sendMailUtil.sendMail("[Funthing] 인증번호를 전송합니다.", "인증번호 : ["+certificationCode+"]", vo.getEmail());   
 			model.addAttribute("certificationCode",certificationCode);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -192,16 +220,12 @@ public class MemberController {
 		return "redirect:index.udo";
 	}    
 
-
+	//
 	@RequestMapping(value="emailCheck.udo",method=RequestMethod.GET)
 	public String duplicationCheck(MemberVO vo,String typedEmail,Model model) throws JsonProcessingException {
 		vo.setEmail(typedEmail);
-		if(getDeleteMemberService.getDeleteMemberTableMember(vo)!=null) {
-			model.addAttribute("result","3");
-			return "ajax/callback";
-		}
 		if(getMemberService.getMember(vo)==null) {
-			model.addAttribute("result", "1");      
+			model.addAttribute("result","1");      
 		}else {
 			model.addAttribute("result","2");
 		}
@@ -209,7 +233,7 @@ public class MemberController {
 		return "ajax/callback";
 	}
 
-
+	//
 	@RequestMapping(value="updateProfile.udo",method=RequestMethod.GET)
 	public String updateProfile(Model model,HttpSession session) {
 		MemberVO member = (MemberVO)session.getAttribute("memberSession");	

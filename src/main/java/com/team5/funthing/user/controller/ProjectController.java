@@ -170,15 +170,16 @@ public class ProjectController {
    }
 
    @RequestMapping(value="getAllFundingProjectList.udo", method = RequestMethod.GET)
-   public String getAllFundingProjectList(Model model) {
+   public String getAllFundingProjectList(Model model, AdminCategoryVO vo) {
       
       List<ProjectVO> getAllFundingProjectList = getAllFundingProjectListService.getAllFundingProjectList();
       model.addAttribute("getAllFundingProjectList", getAllFundingProjectList);
+      model.addAttribute("getAllCategoryList", getCategoryListSerivce.getCategoryList(vo));
       
       return "p-project-list";
    }
    
-   @RequestMapping(value="/showStartProjectPageInterceptor.udo", method = RequestMethod.GET)
+   @RequestMapping(value="/showStartProjectPage.udo", method = RequestMethod.GET)
    public String startProject(HttpSession session, Model model) {
       
       memberVO = (MemberVO)session.getAttribute("memberSession");
@@ -194,6 +195,8 @@ public class ProjectController {
 	   
 	  System.out.println("creator :" + creator);
 
+	  CreatorVO creatorVO = new CreatorVO();
+	  
 	  System.out.println(creatorVO == null);
 	  
 	  creatorVO.setCreator(creator);
@@ -251,6 +254,7 @@ public class ProjectController {
       List<CreatorVO> getCreatorList = getCreatorListByEmailService.getCreatorListByEmail(cvo);
       if(!getCreatorList.isEmpty()) {
          model.addAttribute("getCreatorList", getCreatorList);
+         
       }
       
       List<ProjectVO> getProjectList = getProjectListByEmailService.getProjectListByEmail(pvo);
@@ -378,12 +382,6 @@ public class ProjectController {
       updateProjectService.updateProject(pvo);
       updateCreatorService.updateCreator(cvo);
       
-      if(checkResult == 'y') {
-         redirectAttributes.addAttribute("msg", "1");
-      }else {
-         redirectAttributes.addAttribute("msg", "2");
-
-      }
       redirectAttributes.addAttribute("creator", cvo.getCreator());
       redirectAttributes.addAttribute("currentProjectNo", pvo.getProjectNo());
       
@@ -402,18 +400,17 @@ public class ProjectController {
       updateProjectService.updateProject(pvo);
       
       
-      avo.setAlarmType(pvo.getProjectTitle() + " 1 ");
+      avo.setAlarmType(pvo.getProjectTitle() + " 프로젝트 심사 요청 ");
       avo.setReceiveId("admin@funthing.com");
       avo.setReadConfirm('n');
       avo.setProjectNo(pvo.getProjectNo());
-      avo.setDetailAlarmType("2");
 
       System.out.println(avo.toString());
       insertProjectJudgeRequestAlarmService.insertProjectJudgeRequestAlarm(avo);
       
       redirectAttributes.addAttribute("creator", creator);
 
-      redirectAttributes.addAttribute("msg", "3");
+      redirectAttributes.addAttribute("msg", "심사요청에 성공하였습니다.");
       redirectAttributes.addAttribute("currentProjectNo", pvo.getProjectNo());
       return "redirect:getWritingProject.udo";
    }
@@ -476,17 +473,9 @@ public class ProjectController {
       model.addAttribute("creator", creator);
       model.addAttribute("rewardList", rewardList);
       
-      for(ProjectIntroduceImageVO projectIntroduceImage :projectIntroduceImageList) {
-    	  
-    	  System.out.println(projectIntroduceImage.getProjectIntroduceImage());
-      
-      }
-      
       model.addAttribute("projectIntroduceImageList", projectIntroduceImageList);
       model.addAttribute("previewProjectKeywordList", projectKeywordList);
       model.addAttribute("previewProject", pvo);
-      
-      System.out.println(pvo.toString());
       
       return "p-project-details-preview";
 
@@ -524,6 +513,7 @@ public class ProjectController {
          insertProjectKeywordService.insertProjectKeywordService(projectKeywordVO);
       }
    }
+   
    public List<ProjectKeywordVO> getProjectKeywordList(ProjectVO pvo){
 
       projectKeywordVO.setProjectNo(pvo.getProjectNo());
@@ -572,8 +562,7 @@ public class ProjectController {
       }
       
       if(!toDoUploadList.isEmpty()){
-
-         
+    	  
          List<String> tmpUploadList = uploadUtil.upload(toDoUploadList, voName, toRemoveFilePath);
          insertProjectIntroduceImageService.insertProjectIntroduceImage(projectIntroduceImageVO, tmpUploadList);
          
@@ -656,7 +645,7 @@ public class ProjectController {
             vo.getEndDate() == null ||
 
             vo.getProjectSummary() == null || vo.getProjectSummary().equals("") ||
-            vo.getProjectIntroduceVideo() == null || vo.getProjectIntroduceVideo().equals("") || 
+//            vo.getProjectIntroduceVideo() == null || vo.getProjectIntroduceVideo().equals("") || 
             vo.getProjectStory() == null || vo.getProjectStory().equals("")
 
       ){
@@ -675,6 +664,8 @@ public class ProjectController {
       
       pvo = getProjectService.getProject(pvo);
       int projectNo = pvo.getProjectNo();
+      creatorVO.setCreator(pvo.getCreator());
+      creatorVO = getCreatorService.getCreator(creatorVO);
       
       mavo.setProjectNo(pvo.getProjectNo());
 	   int likeCount = getProjectLikeCountService.getProjectLikeCount(mavo);
@@ -692,7 +683,7 @@ public class ProjectController {
       rewardVO.setProjectNo(projectNo);
       List<RewardVO> rewardList = getRewardListService.getRewardList(rewardVO);
       
-      
+      model.addAttribute("creator", creatorVO);
       model.addAttribute("rewardList", rewardList);
 
       model.addAttribute("getProjectBoardList", getProjectBoardList);
