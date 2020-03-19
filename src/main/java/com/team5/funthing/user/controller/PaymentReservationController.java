@@ -259,8 +259,6 @@ public class PaymentReservationController {
 	public String updateShipmentComplete(HttpSession session, PaymentReserveVO prvo, Model model) {
 		
 		
-		System.out.println("�떎�뻾-=====");
-		System.out.println(prvo.toString());
 		updateShipmentCompleteService.updateShipmentComplete(prvo);
 		
 		session.setAttribute("redirectPrvo", prvo);

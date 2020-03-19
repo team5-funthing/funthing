@@ -208,7 +208,7 @@
                    <div class="row p-3">
                        <div class="col-4" style="font-weight: bold; color: darkslateblue">금액</div>
                        <div class="col-5">                
-                           <input type="text" name="rewardPrice" class="form-control" placeholder="숫자로 입력하세요">
+                           <input type="text" name="rewardPrice" class="form-control inputMoney" placeholder="숫자로 입력하세요">
                        </div>
                        <div class="col-2">원</div>
                        <div class="col-1"></div>
@@ -285,7 +285,7 @@
                    </div> -->
                    <!-- 배송조건 끝 -->
                    <div class="row p-3">
-                        <div class="col-4" style="font-weight: bold; color: darkslateblue">제한수량</div>
+                        <div class="col-4 inputMoney" style="font-weight: bold; color: darkslateblue">제한수량</div>
                        <div class="col-5">
                            <input type="text" name="rewardAmount" class="form-control">
                        </div>

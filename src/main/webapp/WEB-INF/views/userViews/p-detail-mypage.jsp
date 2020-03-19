@@ -120,9 +120,13 @@
 		                                 			
 		                                 			</c:when>
 		                                 			<c:when test="${myProject.funding eq 'e'.charAt(0) }">
-		                                 			
-		                                 				<button type="button" class="btn btn-sm btn-outline-dark">펀딩마감</button>
-		                                 			
+		                                 				<h5><a href="javascript: return(0);" class="btn btn-sm btn-outline-dark mr-2">펀딩마감</a></h5>
+										  				<c:if test="${project.fundingMoney < project.goalMoney }">
+										  					<h5><a href="javascript: return(0);" class="btn btn-sm btn-outline-danger">실패</a></h5>
+										  				</c:if>
+										  				<c:if test="${project.fundingMoney >= project.goalMoney }">
+										  					<h5><a href="javascript: return(0);" class="btn btn-sm btn-outline-success">성공</a></h5>
+										  				</c:if>
 		                                 			</c:when>
 		                                 		</c:choose>
 		                                 	</aside>
@@ -134,6 +138,23 @@
 		                                             <div class="centered">
 	                                             		<c:choose>
 	                                             			<c:when test="${myProject.funding == 'y'.charAt(0) }">
+	                                             				
+	                                             				<form id="previewForm${step.count }" action="projectDetails.udo" method="GET">
+	                                             					<input type="hidden" name="projectNo" value="${myProject.projectNo}">
+		                                             				<a href="javaScript: return(0);" onclick="document.getElementById('previewForm${step.count }').submit()">
+				                                             			<c:choose>
+						                                             		<c:when test="${myProject.projectMainImage eq '' }">
+						                                             				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
+						                                             					class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+						                                             		</c:when>
+						                                             		<c:when test="${myProject.projectMainImage ne '' }">
+						                                             			<img src="${myProject.projectMainImage }" class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+						                                             		</c:when>
+				                                             			</c:choose>  
+			                                             			</a>
+				                                             	</form>
+	                                             			</c:when>
+	                                             			<c:when test="${myProject.funding == 'e'.charAt(0) }">
 	                                             				
 	                                             				<form id="previewForm${step.count }" action="projectDetails.udo" method="GET">
 	                                             					<input type="hidden" name="projectNo" value="${myProject.projectNo}">
@@ -171,26 +192,61 @@
 		                                          </div>
 		                                       </div>
 												
-		                                       <div class="card-body pb-2 flex-column bd-highlight" style="min-height:220px;">
-			                                        <div class="card-title h5" style="color: black; font-weight: 450;" >${myProject.projectTitle }</div>
+		                                       <div class="card-body pb-2 flex-column bd-highlight" style="min-height:231px;">
+		                                       
+													  <c:choose>
+		                                          		  <c:when test="${myProject.projectTitle eq '' }">
+		                                          			  <div class="card-title h5" style="color: black; font-weight: 450;" >제목을 입력해주세요.</div>
+		                                          		  </c:when>
+		                                          		  <c:otherwise>
+		                                          			  <div class="card-title h5" style="color: black; font-weight: 450;" >${myProject.projectTitle }</div>
+		                                          		  </c:otherwise>
+		                                          	  </c:choose>
+		                                          	
 			                                          <ul>
-			                                             <li style="color: gray;" >${myProject.projectSummary }</li>
-			                                             <li style="color: gray;">${myProject.goalMoney }</li>
-			                                             <li style="color: gray;">${project.endDate }</li>
+			                                          	<c:choose>
+			                                          		<c:when test="${myProject.projectSummary eq '' }">
+			                                          			<li style="color: gray; min-height: 50px;" >스토리 요약 입력하세요.</li>
+			                                          		</c:when>
+			                                          		<c:otherwise>
+			                                          			<li style="color: gray; min-height: 50px;"  >${myProject.projectSummary }</li>
+			                                          		</c:otherwise>
+			                                          	</c:choose>
+				                                             <li style="color: gray;">목표 금액 : ${myProject.goalMoney }</li>
+			                                          	<c:choose>
+			                                          		<c:when test="${myProject.endDate eq null }">
+			                                          			<li style="color: gray;" >마감날짜를 정해주세요.</li>
+			                                          		</c:when>
+			                                          		<c:otherwise>
+			                                          			<li style="color: gray;" >마감일 : ${myProject.endDate }</li>
+			                                          		</c:otherwise>
+			                                          	</c:choose>
 			                                          </ul>
+			                                          
 													<div class="mt-auto bd-highlight">
 														<div class="percentage mt-5">
+													
 															<fmt:formatNumber type="number" var="progressPercent"
 																value="${(myProject.fundingMoney / myProject.goalMoney)*100}"
 																pattern=".00" />
 															<fmt:formatNumber type="number" var="progress"
 																maxFractionDigits="3" value="${myProject.fundingMoney}" />
-															<p>${progress}원${progressPercent}%진행중</p>
+
 															<div class="progress" style=" height: 7px;">
 																<div class="progress-bar" role="progressbar"
 																	style="width: ${progressPercent}%; background-color: #ff9999;" aria-valuenow="30"
 																	aria-valuemin="0" aria-valuemax="100"></div>
 															</div>
+																																		
+															<c:choose>
+																<c:when test="${myProject.fundingMoney eq 0}">
+																	<p>${progress}원  0%진행중</p>
+																</c:when>
+																<c:otherwise>
+																	<p>${progress}원 ${progressPercent}%진행중</p>													
+																</c:otherwise>
+															</c:choose>
+															
 														</div>
 													</div>
 		                                       </div>				
@@ -274,7 +330,7 @@
 		                                 			</c:when>
 		                                 			<c:when test="${likeProject.funding eq 'e'.charAt(0) }">
 		                                 			
-		                                 				<button type="button" class="btn btn-sm btn-outline-dark">펀딩마감</button>
+		                                 				<h5><a href="javascript: return(0);" class="btn btn-sm btn-outline-dark">펀딩마감</a></h5>
 		                                 			
 		                                 			</c:when>
 		                                 		</c:choose>
@@ -324,12 +380,12 @@
 		                                          </div>
 		                                       </div>
 												
-		                                       <div class="card-body pb-2 flex-column bd-highlight" style="min-height:220px;">
+		                                       <div class="card-body pb-2 flex-column bd-highlight" style="min-height:231px;">
 			                                        <div class="card-title h5" style="color: black; font-weight: 450;" >${likeProject.projectTitle }</div>
 			                                          <ul>
-			                                             <li style="color: gray;" >${likeProject.projectSummary }</li>
-			                                             <li style="color: gray;">${likeProject.goalMoney }</li>
-			                                             <li style="color: gray;">${project.endDate }</li>
+			                                             <li style="color: gray; min-height: 50px;" >${likeProject.projectSummary }</li>
+			                                             <li style="color: gray;">목표금액 : ${likeProject.goalMoney }</li>
+			                                             <li style="color: gray;">마감일 : ${project.endDate }</li>
 			                                          </ul>
 													<div class="mt-auto bd-highlight">
 														<div class="percentage mt-5">
@@ -338,14 +394,25 @@
 																pattern=".00" />
 															<fmt:formatNumber type="number" var="progress"
 																maxFractionDigits="3" value="${likeProject.fundingMoney}" />
-															<p>${progress}원${progressPercent}%진행중</p>
+
 															<div class="progress" style=" height: 7px;">
 																<div class="progress-bar" role="progressbar"
 																	style="width: ${progressPercent}%; background-color: #ff9999;" aria-valuenow="30"
 																	aria-valuemin="0" aria-valuemax="100"></div>
 															</div>
+																																		
+															<c:choose>
+																<c:when test="${likeProject.fundingMoney eq 0}">
+																	<p>${progress}원  0%진행중</p>
+																</c:when>
+																<c:otherwise>
+																	<p>${progress}원 ${progressPercent}%진행중</p>													
+																</c:otherwise>
+															</c:choose>
 														</div>
 													</div>
+		                                       </div>
+		                                       <div class="card-footer p-2" style="border-top : none;">
 		                                       </div>
 		                                    </div>
 		                                 </div>

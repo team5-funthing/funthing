@@ -79,13 +79,13 @@
                         <li class="sidebar-item"> 
                         	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="getFocusProjectList.ado" aria-expanded="false">
                                 <i class="mdi mdi-checkbox-multiple-marked-outline"></i>
-                                <span class="hide-menu">유저 메인 주목 프로젝트 설정 </span>
+                                <span class="hide-menu">메인 주목 프로젝트 설정 </span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                         	<a class="sidebar-link waves-effect waves-dark sidebar-link" href="userMainImageChangeForm.ado" aria-expanded="false">
                                 <i class="mdi mdi-folder-multiple-image"></i>
-                                <span class="hide-menu">유저 메인 배너 이미지 설정 </span>
+                                <span class="hide-menu">메인 배너 이미지 설정 </span>
                             </a>
                         </li>
                         
