@@ -124,7 +124,7 @@ table, tr, td{
     </script>
   
     <!-- 팝업 시작 -->
-    <div id="warning-popup" class="mfp-hide white-popup">
+    <div id="warning-popup" class="mfp-hide white-popup p-5">
     	<div style="color:black;"><h3>잠깐! 결제하기가 아닌 펀딩하기인 이유를 확인하고,펀딩하세요.</h3></div>
     	<div>
     		<form action="#">
@@ -147,7 +147,7 @@ table, tr, td{
     				</tr>
     				<tr>
     					<td>
-    						<a id="detailPolicy">프로젝트 상세 정책</a>
+    						<a id="detailPolicy" style="color: gray;">프로젝트 상세 정책</a>
     						<div id="getDetailPolicy" style="overflow:auto;height:130px;"></div>
     					</td>
     				</tr>
@@ -191,7 +191,7 @@ table, tr, td{
     		</form>
     	</div>
     	<div>
-    		<button id="confirmButton">확인</button>
+    		<button id="confirmButton" class="btn btn-dark pl-5 pr-5 pt-3 pb-3">확인</button>
     	</div>
     </div>
 	<!-- 팝업 종료 -->
@@ -296,6 +296,8 @@ table, tr, td{
 	           	
                 <script>
                 	
+                	
+                
 	                $(document).on("click", "a[id='plus${cnt.count }']", function(e){
 	                	e.preventDefault();
 	                	var currentVal = parseInt($('#orderAmount${cnt.count }').val());
@@ -365,9 +367,10 @@ table, tr, td{
                 					
 							                						+"<p class='card-text m-auto'>수량 [${reward.rewardAmount }개 남음]</p>"
 									                            	+	"<div class='row align-items-md-center mb-4'>"
-									                               	+	"<a id='minus${cnt.count }' href='#'> <i class='fas fa-minus ml-3'></i></a>"
-									                                +	"<input class='form-control ml-2 mr-2' style='width:50px; reward${cnt.count }' value='1' id='orderAmount${cnt.count }' type='text' name='orderAmount' placeholder=''>"
-									                                +	"<a id='plus${cnt.count }' href='#'> <i class='fas fa-plus'></i></a>"
+									                               	/* +	"<a id='minus${cnt.count }' href='#'> <i class='fas fa-minus ml-3'></i></a>" */
+									                                +	"<input class='form-control ml-2 mr-2 inputMoney' style='width:50px; reward${cnt.count }' value='0' id='orderAmount${cnt.count }' type='text' name='orderAmount' placeholder=''>"
+									                                +	"<p class='h5'>개</p>"
+									                                /* +	"<a id='plus${cnt.count }' href='#'> <i class='fas fa-plus'></i></a>" */
 									                            	+	"</div>" 
 									                        		+"</div>"
 									                        		+"<c:if test='${empty reward.rewardOptionList}'>"
@@ -439,8 +442,6 @@ table, tr, td{
                 	$(document).on("propertychange change keyup paste input","input.reward${cnt.count }", function(){
 
                 		var jsonData = $("#reward${cnt.count }").serializeObject();
-                		var additionalFundingMoneyStr = $("#additionalFundingMoney").val();
-                		var additionalFundingMoney = parseInt(additionalFundingMoneyStr);
                 		
                			$.ajax({
    						    url: "addSelectReward.udo",
@@ -452,7 +453,7 @@ table, tr, td{
    								var rewardSelection = JSON.parse(data);
    								
    								
-   								var paymentAmount = additionalFundingMoney;
+   								var paymentAmount = 0;
      							$.each(rewardSelection, function(index, value ){
      								
    									paymentAmount += value.paymentAmount;
@@ -476,8 +477,7 @@ table, tr, td{
                 		var jsonData = $("form[name='reward${cnt.count }']").serializeObject();
                 		
                 		console.log(jsonData);
-                		var additionalFundingMoneyStr = $("#additionalFundingMoney").val();
-                		var additionalFundingMoney = parseInt(additionalFundingMoneyStr);
+
                 		
                			$.ajax({
    						    url: "addSelectReward.udo",
@@ -489,7 +489,7 @@ table, tr, td{
    								var rewardSelection = JSON.parse(data);
    								
    								
-   								var paymentAmount = additionalFundingMoney;
+   								var paymentAmount = 0;
      							$.each(rewardSelection, function(index, value ){
      								
    									paymentAmount += value.paymentAmount;
@@ -497,7 +497,7 @@ table, tr, td{
      							});
      							
      							$('#totalAmount').empty();
-     							$('#totalAmount').append("총 " + paymentAmount + "원을 후원합니다.");
+     							$('#totalAmount').append("총 " + paymentAmount + "원을 후원합니다.(배송비 제외)");
    						    },
    						    error: function(errorThrown) {
    						        alert(errorThrown.statusText);
@@ -512,6 +512,20 @@ table, tr, td{
 					$(document).ready(function(){		
 						$("#rewardOptionSelectBox").val("${selectedRewardOption.rewardOptionValue }").prop("selected", true);
 					});
+					
+					$(document).on("propertychange change keyup paste input","#additionalFundingMoney", function(){
+						
+						$("#additionalAmount").empty();
+						
+                		var additionalFundingMoneyStr = $("#additionalFundingMoney").val();
+                		var additionalFundingMoney = parseInt(additionalFundingMoneyStr);
+	
+                		if (additionalFundingMoney > 0){
+                			$("#additionalAmount").append( additionalFundingMoney + "원을 추가로 후원합니다.");
+                		}
+						
+					});
+					
 				</script>                   
                 
                 
@@ -563,7 +577,7 @@ table, tr, td{
 	                <div class="col-9">
 	                    <p>후원금을 더하여 펀딩할 수 있습니다. 추가 후원금을 입력하시겠습니까?</p>
 	                    <div class="row">
-	                        <input type="text" name="additionalFundingMoney" id="additionalFundingMoney" value="0" class="form-control ml-2 mr-2" style="width:200px;" placeholder="0">
+	                        <input type="text" name="additionalFundingMoney" id="additionalFundingMoney" value="0" class="form-control ml-2 mr-2 inputMoney" style="width:200px;" placeholder="0">
 	                        <span>원을 추가로 후원합니다.</span>
 	                    </div>
 	                </div>
@@ -608,6 +622,11 @@ table, tr, td{
                 <div class="col-9">
                     <div class="row">
                         <div id="totalAmount" class="h3" style="color:#402d53;"></div>
+                    </div>
+                    <div id="additionalAmount" class="row">
+                    
+                    	
+                    
                     </div>
                	</div>
             </div>

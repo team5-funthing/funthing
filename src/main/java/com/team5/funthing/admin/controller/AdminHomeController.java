@@ -93,9 +93,7 @@ public class AdminHomeController {
    
       vo2.setFunding("y");
       List<ProjectVO> fundingYList = getMainViewProjectFundingListService.getMainViewProjectFundingList(vo2);
-      System.out.println("fundingYList:"+fundingYList);
       int fundingYListCount = fundingYList.size();
-      System.out.println("fundingYListCount:"+fundingYListCount);
       
       model.addAttribute("fundingYListCount",fundingYListCount);
       model.addAttribute("statusWListCount",statusWListCount);

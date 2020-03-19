@@ -78,15 +78,27 @@
 					<input type="file" name="businessUploadFile" onchange="ValidateSingleDocumentFileInput(this);"
 						class="form-control-file select-project-image mt-2"
 						id="creatorProfileImageFile">
-	                      <div class="select_img"><img src="" /></div>
+	                <div id="existBusinessUpload" style="color: gray;">등록하신 통장사본이 없습니다.</div>
 				</c:when>
 				<c:when test="${writingCreator.businessFileLink ne ''}">
 					<input type="hidden" name="businessFileLink" value="${writingCreator.businessFileLink}">
 					<input type="file" name="businessUploadFile" onchange="ValidateSingleDocumentFileInput(this);"
 						class="form-control-file mt-2"
 						id="businessFileLink">
+					<div id="existBusinessUpload" style="color: gray;">등록하신 통장사본이 있습니다.</div>
+					
+					
+
+						
 				</c:when>
 			</c:choose>
+        			<script>
+                         $("#businessUpload").change(function(){
+                            if(this.files && this.files[0]){
+                           	 $("#existBusinessUpload").empty();
+                            }
+                         })
+                   	</script>			
 		</div>
 		
 		<div class="p-2 bd-highlight">

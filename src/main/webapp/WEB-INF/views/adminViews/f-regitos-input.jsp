@@ -114,7 +114,10 @@
 			                        <c:if test="${RegisterTos.registerNo eq null}">
 			                            <input type="submit" value="입력" >
 			                        </c:if>
+			                        <c:if test="${RegisterTos.registerNo ne null}">
 			                            <input type="submit" formaction="deleteRegisterTos.ado" value="삭제">
+			                        </c:if>
+			                        <a href="registerTos.ado"><input type="button" value="목록"></a>
 			                        </div>
 			                        </form>
                     			</div>

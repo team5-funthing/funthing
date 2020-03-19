@@ -687,7 +687,21 @@ function ValidateSingleDocumentFileInput(oInput) {
 }
 
 
+var replaceNotInt = /[^0-9]/gi;
 
+$(document).ready(function(){
+	$(".inputMoney").on("focusout", function(){
+		var x = $(this).val();
+		if(x.length > 0){
+			if(x.match(replaceNotInt)){
+				x = x.replace(replaceNotInt, "");
+			}
+			$(this).val(x);
+		}
+	}).on("keyup", function(){
+		$(this).val($(this).val().replace(replaceNotInt, ""));
+	});
+});
 
 
 

@@ -137,19 +137,28 @@
                                <input type="file" onchange="ValidateSingleDocumentFileInput(this);"
                                id="businessUpload" name="businessUploadFile" class="form-control-file">
                             </div>
+                            <div id="existBusinessUpload" style="color:gray;"></div>
+                            
+                            <script>
+                              $("#businessUpload").change(function(){
+                                 if(this.files && this.files[0]){
+                                	 $("#existBusinessUpload").empty();
+                                 }
+                              })
+                        	</script>
+                            
                         </div>
                      </div>                        
                      
                      <hr>
-                     <div class="row mt-1 d-flex justify-content-center mb-5">
-                        <div class="col-xl-5">
-                           <a class="btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
+                     <div class="row mt-1 d-flex justify-content-center mb-5 pb-5">
+
+                        <div class="mt-20 d-flex justify-content-center">
+							<a class="btn-lg btn-bd-purple d-lg-inline-block m-1 pl-3 pr-3"
                               href="javaScript:return(0);" onclick="document.getElementById('inputProjectBasicSetting').submit();">시작하기</a> 
-                        </div>
-                        <div class="col-xl-5"> 
-                           <a class="btn btn-lg btn-block btn-registry-way d-none d-lg-inline-block mb-3"
-                              href="javaScript:return(0);" >뒤로가기</a>
-                        </div>
+							<a class="btn-lg btn-bd-purple  d-lg-inline-block m-1 pl-3 pr-3" href="index.udo" >그만하기</a>
+						</div>
+						
                      </div>
                   </form>
                </div>
@@ -233,6 +242,8 @@
                   $('#detail-mypage-profile-img').empty();
                   $('#detail-mypage-profile-img').append("<img class='creator_select_img profile' src=''>");
                   
+                  $("#existBusinessUpload").empty("");
+                  
 
                }
                
@@ -271,6 +282,18 @@
                            
                            $("#creatorProfileImageInput").attr("value", selectedCreator.creatorProfileImage);
                            $('.creator_select_img').attr("src", selectedCreator.creatorProfileImage);
+                           
+                           $("#existBusinessUpload").empty("");
+                           
+                           if(selectedCreator.businessFileLink == ""){
+                        	   $("#existBusinessUpload").append("등록된 통장 사본이 없습니다.");
+                           }else{
+                        	   $("#existBusinessUpload").append("등록된 사본이 있습니다.");
+                           }
+                           
+                           
+                           
+                           
                          },
                          error: function(errorThrown) {
                              console.log(errorThrown.statusText);

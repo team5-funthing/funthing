@@ -193,15 +193,29 @@ $(document).ready(function(){
 					<div class="p-2 bd-highlight mt-auto ml-0">
 						<form id="supportProject" action="supportProject.udo" method="GET">
 							<input type="hidden" name="projectNo" value="${project.projectNo }">
-							<a class="btn btn-lg btn-spon-prj d-none d-lg-inline-block pr-5 pl-5 mb-2"
-								href="javaScript: return(0);" onclick="document.getElementById('supportProject').submit();">
-								프로젝트 밀어주기</a>
+							<c:choose>
+								<c:when test="${endDate - today < 1 }">		
+									<a class="supportProjectBtn btn btn-lg btn-spon-prj d-none d-lg-inline-block pr-5 pl-5 mb-2"
+									href="javaScript: return(0);" onclick="document.getElementById('supportProject').submit();">
+									프로젝트 밀어주기</a>							
+ 									<script>
+										$(".supportProjectBtn").css("background-color", "gray");
+										$(".supportProjectBtn").css("opacity", "0.3");
+										$(".supportProjectBtn").css({'pointer-events':'none'});
+									</script>
+								</c:when>
+								<c:otherwise>
+									<a class="supportProjectBtn btn btn-lg btn-spon-prj d-none d-lg-inline-block pr-5 pl-5 mb-2"
+										href="javaScript: return(0);" onclick="document.getElementById('supportProject').submit();">
+										프로젝트 밀어주기</a>
+								</c:otherwise>
+							</c:choose>
 						</form>
 					</div>
-					<div class="row d-flex justify-content-around m-0 ">
+					<div class="row d-flex justify-content-center m-0 ">
 						<a class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2" href="upCountLike.udo?projectNo=${project.projectNo }">좋아요   ${likeCount}</a> 
 						<a class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2" href="showInsertwAskMessage.udo?projectNo=${project.projectNo }">문의하기</a> 
-						<a class="btn btn-sm btn-detail-prj-etc-btn d-none d-lg-inline-block p-3 m-1 mb-2" href="#">공유하기</a>
+						
 					</div>
 
 				</aside>
@@ -215,16 +229,8 @@ $(document).ready(function(){
 					<div class="row">
 						<div class="col-lg-10 posts-list">
 							<div class="single-project-details">
-								<div class="feature-img">
-									<img class="img-fluid" src="#" alt="">
-								</div>
 								<div class="blog_details">
 									<h3>${project.projectSubTitle }</h3>
-									<ul class="project-info-link mt-3 mb-4">
-										<li><a href="#"><i class="fa fa-user"></i> ${project.category }</a></li>
-										<li><a href="#"><i class="fa fa-comments"></i> projectSupporters
-												후원한사람들</a></li>
-									</ul>
 									<c:if test="${project ne null }">
 										
 										${project.projectStory}
