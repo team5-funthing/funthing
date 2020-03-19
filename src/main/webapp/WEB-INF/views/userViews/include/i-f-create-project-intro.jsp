@@ -15,14 +15,14 @@
 						<input type="text" id="goalMoney" name="goalMoney" value="0" placeholder="펀딩 목표 금액을 입력하세요."
 							onfocus="this.placeholder = ''"
 							onblur="this.placeholder = '펀딩 목표 금액을 입력하세요.'" 
-							class="form-control">
+							class="form-control inputMoney">
 						<div id="goalMoneyCheck"></div>
 					</c:when>
 					<c:when test="${writingProject.goalMoney ne null}">
 						<input type="text" id="goalMoney" name="goalMoney"
 							value="${writingProject.goalMoney }" placeholder="펀딩 목표 금액을 입력하세요."
 							onfocus="this.placeholder = ''"
-							onblur="this.placeholder = '펀딩 목표 금액을 입력하세요.'" class="form-control">
+							onblur="this.placeholder = '펀딩 목표 금액을 입력하세요.'" class="form-control inputMoney">
 					</c:when>
 				</c:choose>
 			</div>
@@ -30,27 +30,7 @@
 				<div class="h6">원</div>
 			</div>
 			
-			
-			<script>
-			
-				//goalMoney
-				var replaceNotInt = /[^0-9]/gi;
-	
-				$(document).ready(function(){
-					$("#goalMoney").on("focusout", function(){
-						var x = $(this).val();
-						if(x.length > 0){
-							if(x.match(replaceNotInt)){
-								x = x.replace(replaceNotInt, "");
-							}
-							$(this).val(x);
-						}
-					}).on("keyup", function(){
-						$(this).val($(this).val().replace(replaceNotInt, ""));
-					});
-				});
-			</script>
-			
+
 		</div>
 	</div>
 	
