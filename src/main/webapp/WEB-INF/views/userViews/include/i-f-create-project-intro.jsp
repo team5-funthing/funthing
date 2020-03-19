@@ -153,11 +153,8 @@
 				</c:when>
 				<c:when test="${writingProject.endDate ne null }">
 					<div class="col-xl-6">
-
-						<!--<fmt:formatDate var="getEndDate" pattern="yyyy-MM-dd" value="${writingProject.endDate }" />-->
-						
+					
 						<input type="text" id="endDate" class="datepicker-here" data-language='ko' data-position='right top'>
-						
 						<input type="hidden" name="endDateStr" value="${endDateStr}">
 						
 						<p id="afterSelectDate">

@@ -207,7 +207,7 @@
 
 		SELECT * 
 		FROM paymentReserve
-		WHERE projctNo = #{proejctNo}
+		WHERE projctNo = #{projectNo}
 		
 	</select>
 

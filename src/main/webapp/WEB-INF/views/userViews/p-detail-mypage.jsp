@@ -254,118 +254,106 @@
                            </c:if>
                         </div>
                      </div>
-               <!--  카드모듈 끝    그대로 가져다  id 값만 변경해서 써 일단. -->
                
                      <!-- 좋아요 프로젝트 시작 -->
                      <div class="tab-pane fade " id="nav-like-prj-list" role="tabpane" aria-labelledby="nav-like-prj-list-tab">
                         <div class="container pt-5 pb-5">
                            <section class="tiles">
                               <c:if test="${not empty projectLikeList }">
-                              <c:forEach var="likeProject" items="${projectLikeList }" varStatus="step">
-                              <article>
-                                 <div class="project">
-                                 	<aside class="row ml-1">
-                                 		<c:choose>
-                                 			<c:when test="${likeProject.funding eq 'n'.charAt(0) }"> <!-- 펀징 진행 확인 -->
-	                                 			<c:choose>
-		                                 			<c:when test="${likeProject.status eq 'n'.charAt(0) }">  <!-- 제출 및 심사 확인 -->	
-			                                 			<c:choose>
-				                                 			<c:when test="${likeProject.writeStatus eq 'n'.charAt(0) }"> <!-- 작성 완료 확인 -->
-				                                 				<h5><a href="javascript: return(0);" class="badge badge-info m-1">작성중</a></h5>	
-				                                 			</c:when>
-				                                 			<c:when test="${likeProject.writeStatus eq 'y'.charAt(0) }">
-			                                 					<h5><a href="javascript: return(0);" class="badge badge-dark m-1">미제출</a></h5>
-				                                 				<h5><a href="javascript: return(0);" class="badge badge-success m-1">작성완료</a></h5>
-				                                 			</c:when>
-			                                 			</c:choose>		
-		                                 			</c:when>                              			
-		                                 			<c:when test="${likeProject.status eq 'w'.charAt(0) }">
-		                                 				<h5><a href="javascript: return(0);" class="badge badge-light m-1">심사중</a></h5>
+	                              <c:forEach var="likeProject" items="${projectLikeList }" varStatus="step" >
+		                              <article>
+		                              		<aside class="row ml-1 mb-0 pb-0">
+		                                 		<c:choose>
+		                                 			<c:when test="${likeProject.funding eq 'n'.charAt(0) }"> <!-- 펀징 진행 확인 -->
+		                                 			
+		                                 			</c:when>	                                 			
+		                                 			<c:when test="${likeProject.funding eq 'y'.charAt(0) }">
+		                                 			
+		                                 				<h5><a href="javascript: return(0);" class="btn btn-sm btn-outline-primary">펀딩중</a></h5>
+		                                 			
 		                                 			</c:when>
-		                                 			<c:when test="${likeProject.status eq 'm'.charAt(0) }">
-			                                 			<h5><a href="javascript: return(0);" class="badge badge-warning m-1">수정 필요</a></h5>
+		                                 			<c:when test="${likeProject.funding eq 'e'.charAt(0) }">
+		                                 			
+		                                 				<button type="button" class="btn btn-sm btn-outline-dark">펀딩마감</button>
+		                                 			
 		                                 			</c:when>
-		                                 			<c:when test="${likeProject.status eq 'f'.charAt(0) }">
-			                                 			<h5><a href="javascript: return(0);" class="badge badge-danger m-1">승인 실패</a></h5>
-		                                 			</c:when>
-	                                 			</c:choose>
-                                 			</c:when>	                                 			
-                                 			<c:when test="${likeProject.funding eq 'y'.charAt(0) }">
-                                 				<h5><a href="javascript: return(0);" class="badge badge-primary m-1">펀딩중</a></h5>
-                                 			</c:when>
-                                 		</c:choose>
-		                            </aside>
-                                    <div class="card">
-                                       <div class="thumbnail-wrap">
-                                          <div class="thumbnail ">
-                                             <div class="centered">
-                                                 <c:choose>
-                                           			<c:when test="${likeProject.funding == 'y'.charAt(0) }">
-                                           				<form id="likePreviewForm${step.count }" action="projectDetails.udo" method="GET">
-                                           					<input type="hidden" name="projectNo" value="${likeProject.projectNo}">
-                                           				<a href="javaScript: return(0);" onclick="document.getElementById('likePreviewForm${step.count }').submit()">
-	                                             			<c:choose>
-			                                             		<c:when test="${likeProject.projectMainImage eq '' }">
-			                                             				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
-			                                             					class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
-			                                             		</c:when>
-			                                             		<c:when test="${likeProject.projectMainImage ne '' }">
-			                                             			<img src="${likeProject.projectMainImage }" class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
-			                                             		</c:when>
-	                                             			</c:choose>  
-                                            			</a>
-	                                             	</form>
-                                           			</c:when>
-                                           			<c:otherwise>
-                                           				<form id="previewForm${step.count }" action="showPreviewProject.udo?projectNo=${myProject.projectNo}" method="POST">
-                                            				<a href="javaScript: return(0);" onclick="document.getElementById('previewForm${step.count }').submit()">
-	                                             			<c:choose>
-			                                             		<c:when test="${likeProject.projectMainImage eq '' }">
-			                                             				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
-			                                             					class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
-			                                             		</c:when>
-			                                             		<c:when test="${likeProject.projectMainImage ne '' }">
-			                                             			<img src="${likeProject.projectMainImage }" class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
-			                                             		</c:when>
-	                                             			</c:choose>  
-	                                             			</a>
-		                                             	</form>
-                                           			</c:otherwise>
-                                           		</c:choose>
-                                             </div>
-                                          </div>
-                                       </div>
-                                       <div class="card-body">
-                                          <h5 class="card-title">${likeProject.projectTitle }</h5>
-                                          <ul>
-                                             <li>${likeProject.projectSummary }</li>
-                                             <li>${likeProject.goalMoney }</li>
-                                             <li>${likeProject.endDate }</li>
-                                          </ul>
-											${likeProject.projectNo}
-                                          <div class="percentage">
-												<fmt:formatNumber type="number" var="progressPercent"
-													value="${(likeProject.fundingMoney / likeProject.goalMoney)*100}"
-													pattern=".00" />
-												<fmt:formatNumber type="number" var="progress"
-													maxFractionDigits="3" value="${likeProject.fundingMoney}" />
-												<p>${progress}원${progressPercent}%진행중</p>
-			
-												<div class="progress">
-													<div class="progress-bar color-7" role="progressbar"
-														style="width: ${progressPercent}%" aria-valuenow="30"
-														aria-valuemin="0" aria-valuemax="100"></div>
-												</div>
-											</div>
-                                      </div>
-                                    </div>
-                                 </div>
-                              </article>
-                              </c:forEach>
+		                                 		</c:choose>
+		                                 	</aside>
+		                                 <div class="project pt-0 mt-0" style="min-width: 265px;">
+		                                    <div class="card" style=" border-radius: 10px;">
+		                                       <div class="thumbnail-wrap">
+		                                          <div class="thumbnail " style="border-top-left-radius: 10px 10px;
+																										border-top-right-radius: 10px 10px;">
+		                                             <div class="centered">
+	                                             		<c:choose>
+	                                             			<c:when test="${likeProject.funding == 'y'.charAt(0) }">
+	                                             				
+	                                             				<form id="previewForm${step.count }" action="projectDetails.udo" method="GET">
+	                                             					<input type="hidden" name="projectNo" value="${likeProject.projectNo}">
+		                                             				<a href="javaScript: return(0);" onclick="document.getElementById('previewForm${step.count }').submit()">
+				                                             			<c:choose>
+						                                             		<c:when test="${likeProject.projectMainImage eq '' }">
+						                                             				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
+						                                             					class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+						                                             		</c:when>
+						                                             		<c:when test="${likeProject.projectMainImage ne '' }">
+						                                             			<img src="${likeProject.projectMainImage }" class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+						                                             		</c:when>
+				                                             			</c:choose>  
+			                                             			</a>
+				                                             	</form>
+	                                             			</c:when>
+	                                             			<c:otherwise>
+	                                             			
+	                                             				<form id="previewForm${step.count }" action="showPreviewProject.udo?projectNo=${likeProject.projectNo}" method="POST">
+		                                             				<a href="javaScript: return(0);" onclick="document.getElementById('previewForm${step.count }').submit()">
+				                                             			<c:choose>
+						                                             		<c:when test="${likeProject.projectMainImage eq '' }">
+						                                             				<img src="${pageContext.request.contextPath}/resources/user/img/elements/a.jpg" 
+						                                             					class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+						                                             		</c:when>
+						                                             		<c:when test="${likeProject.projectMainImage ne '' }">
+						                                             			<img src="${likeProject.projectMainImage }" class="card-img-top landscape" alt="내가만든 프로젝트 대표이미지">
+						                                             		</c:when>
+				                                             			</c:choose>  
+			                                             			</a>
+				                                             	</form>
+	                                             			</c:otherwise>
+	                                             		</c:choose>
+		                                             </div>
+		                                          </div>
+		                                       </div>
+												
+		                                       <div class="card-body pb-2 flex-column bd-highlight" style="min-height:220px;">
+			                                        <div class="card-title h5" style="color: black; font-weight: 450;" >${likeProject.projectTitle }</div>
+			                                          <ul>
+			                                             <li style="color: gray;" >${likeProject.projectSummary }</li>
+			                                             <li style="color: gray;">${likeProject.goalMoney }</li>
+			                                             <li style="color: gray;">${project.endDate }</li>
+			                                          </ul>
+													<div class="mt-auto bd-highlight">
+														<div class="percentage mt-5">
+															<fmt:formatNumber type="number" var="progressPercent"
+																value="${(likeProject.fundingMoney / likeProject.goalMoney)*100}"
+																pattern=".00" />
+															<fmt:formatNumber type="number" var="progress"
+																maxFractionDigits="3" value="${likeProject.fundingMoney}" />
+															<p>${progress}원${progressPercent}%진행중</p>
+															<div class="progress" style=" height: 7px;">
+																<div class="progress-bar" role="progressbar"
+																	style="width: ${progressPercent}%; background-color: #ff9999;" aria-valuenow="30"
+																	aria-valuemin="0" aria-valuemax="100"></div>
+															</div>
+														</div>
+													</div>
+		                                       </div>
+		                                    </div>
+		                                 </div>
+		                              </article>
+	                              </c:forEach>
                               </c:if>
-                         
-                           <!-- 추가적으로 목록들 생길 시 JSTL로 반복 추가-->
                            </section>
+                           
                               <c:if test="${empty projectLikeList }">
                                 <div class="row pt-5 pb-5">
                                     <div class="col">
