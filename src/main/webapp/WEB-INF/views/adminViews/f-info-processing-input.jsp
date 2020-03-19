@@ -114,8 +114,13 @@
 			                        <c:if test="${personalInfoProcessing.infoNo eq null}">
 			                            <input type="submit" value="입력" >
 			                        </c:if>
+			                        <c:if test="${personalInfoProcessing.infoNo ne null}">
 			                            <a href="deletePersonalInfoProcessing.ado?infoNo=${personalInfoProcessing.infoNo}"><input type="button" value="삭제"></a>
+			                            </c:if>
+			                        	<a href="infoProcessingInput.ado"><input type="button" value="목록"></a>
 			                        </div>
+			                       
+			                        
 			                        </form>
                     			</div>
                 			</div>
