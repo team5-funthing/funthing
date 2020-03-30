@@ -113,20 +113,24 @@
 					                                 			<h5><a href="javascript: return(0);" class="btn btn-sm btn-outline-danger">승인 거절</a></h5>
 				                                 			</c:when>
 			                                 			</c:choose>
-		                                 			</c:when>	                                 			
+		                                 			</c:when>	  
+		                                 			                               			
 		                                 			<c:when test="${myProject.funding eq 'y'.charAt(0) }">
 		                                 			
 		                                 				<h5><a href="javascript: return(0);" class="btn btn-sm btn-outline-primary">펀딩중</a></h5>
 		                                 			
 		                                 			</c:when>
+		                                 			
 		                                 			<c:when test="${myProject.funding eq 'e'.charAt(0) }">
 		                                 				<h5><a href="javascript: return(0);" class="btn btn-sm btn-outline-dark mr-2">펀딩마감</a></h5>
-										  				<c:if test="${project.fundingMoney < project.goalMoney }">
-										  					<h5><a href="javascript: return(0);" class="btn btn-sm btn-outline-danger">실패</a></h5>
-										  				</c:if>
-										  				<c:if test="${project.fundingMoney >= project.goalMoney }">
-										  					<h5><a href="javascript: return(0);" class="btn btn-sm btn-outline-success">성공</a></h5>
-										  				</c:if>
+		                                 				<c:choose>
+											  				<c:when test="${myProject.fundingMoney < myProject.goalMoney }">
+											  					<h5><a href="javascript: return(0);" class="btn btn-sm btn-outline-danger">실패</a></h5>
+											  				</c:when>
+											  				<c:otherwise>
+											  					<h5><a href="javascript: return(0);" class="btn btn-sm btn-outline-success">성공</a></h5>                                
+											  				</c:otherwise>
+		                                 				</c:choose>
 		                                 			</c:when>
 		                                 		</c:choose>
 		                                 	</aside>

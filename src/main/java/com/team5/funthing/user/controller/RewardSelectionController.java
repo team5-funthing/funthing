@@ -61,15 +61,6 @@ public class RewardSelectionController {
 		List<RewardVO> getRewardList = getRewardListService.getRewardList(rvo);
 		setRewardOption(getRewardList);
 		
-		System.out.println("=======================================");
-		for(RewardVO getReward: getRewardList) {
-			System.out.println(getReward.toString());
-			if(getReward.getRewardOptionList().isEmpty()) {
-				System.out.println("¸®¿öµå ¿É¼Ç ¸®½ºÆ®°¡ nullÀÎ ¸®¿öµåNo : " + getReward.getRewardNo());
-			}
-		}
-		System.out.println("=======================================");
-		
 		model.addAttribute("msg", msg);
 		model.addAttribute("getRewardList", getRewardList);
 		model.addAttribute("project", pvo);
@@ -91,7 +82,7 @@ public class RewardSelectionController {
 		List<RewardSelectionVO> selectedRewardList = (List<RewardSelectionVO>)session.getAttribute("selectedRewardList");
 
 		if(selectedRewardList == null){
-			System.out.println("selectedRewardList ¼¼¼Ç ÃÊ±â »ý¼º");
+			System.out.println("selectedRewardList ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½ ï¿½ï¿½ï¿½ï¿½");
 			selectedRewardList = new ArrayList<RewardSelectionVO>();
 			session.setAttribute("selectedRewardList", selectedRewardList);
 		}
@@ -126,7 +117,7 @@ public class RewardSelectionController {
 		List<RewardSelectionVO> selectedRewardList = (List<RewardSelectionVO>)session.getAttribute("selectedRewardList");
 		
 		if(selectedRewardList == null){
-			System.out.println("selectedRewardList ¼¼¼Ç ÃÊ±â »ý¼º");
+			System.out.println("selectedRewardList ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½ ï¿½ï¿½ï¿½ï¿½");
 			selectedRewardList = new ArrayList<RewardSelectionVO>();
 			session.setAttribute("selectedRewardList", selectedRewardList);
 		}

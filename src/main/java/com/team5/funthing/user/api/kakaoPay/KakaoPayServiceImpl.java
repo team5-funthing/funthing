@@ -255,11 +255,6 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 		
 		prvo = paymentReserveDAO.getPaymentReserve(prvo);
 		
-	
-		
-		projectVO.setProjectNo(prvo.getProjectNo());
-		projectVO.setFundingMoney(prvo.getFundingMoney());
-		
 		
 
 		HttpHeaders headers = new HttpHeaders();
@@ -275,11 +270,15 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 
 		HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 		try {
+			
+			projectVO.setProjectNo(prvo.getProjectNo());
+			projectVO.setFundingMoney(prvo.getFundingMoney());
 
 			kakaoPayCancelVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/cancel"), body, KakaoPayCancelVO.class);
 			log.info("" + kakaoPayCancelVO);
 			
 
+			
 			prvo.setAid(kakaoPayCancelVO.getAid());
 			prvo.setTid(kakaoPayCancelVO.getTid());
 			prvo.setCanceledDate(kakaoPayCancelVO.getCanceled_at());
