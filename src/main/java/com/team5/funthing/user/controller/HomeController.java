@@ -112,7 +112,6 @@ public class HomeController {
 			List<AdminUserMainImageChangeVO> getUserMainImageChangeList = getUserMainImageChangeListService.getUserMainImageChangeList(vo3);
 			AdminUserMainImageChangeVO getUserMainImageChangeList2 = null;
 			List<AdminUserMainImageChangeVO> getUserMainImageChangeList3 = new ArrayList<AdminUserMainImageChangeVO>();
-			System.out.println("사이즈:"+getUserMainImageChangeList.size());
 			for(int i=0; i<getUserMainImageChangeList.size(); i++) {
 			
 				if(!getUserMainImageChangeList.isEmpty()) {

@@ -192,11 +192,7 @@ public class ProjectController {
                         @RequestParam String creator,
                         AdminCategoryVO cvo, Model model) {
 	   
-	  System.out.println("creator :" + creator);
-
 	  CreatorVO creatorVO = new CreatorVO();
-	  
-	  System.out.println(creatorVO == null);
 	  
 	  creatorVO.setCreator(creator);
 	  creatorVO = getCreatorService.getCreator(creatorVO);

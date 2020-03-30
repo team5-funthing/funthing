@@ -10,15 +10,11 @@
 		FROM (select to_char(startDate,'yyyy-mm-dd') statisticsDate, startDate  from project where startDate is not null 
 
 			<choose>
-				<when test = "'ing'.equals(status)">
-					<![CDATA[
+				<when test = "'ing'.equals(funding)">
 			 			AND funding = 'y'
-			 		]]>
 			 	</when>
-			 	<when test = "'end'.equals(status)">
-					<![CDATA[
+			 	<when test = "'end'.equals(funding)">
 			 			AND funding = 'e'
-			 		]]>
 			 	</when>
 			 	<otherwise></otherwise>
 			</choose>

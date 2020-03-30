@@ -19,8 +19,6 @@
 											<li><a href="getAllLikeCountList.udo">인기 프로젝트</a></li>
 											<li><a href="getDeadLineList.udo">마감임박 프로젝트</a></li>
 											<li><a href="getAllNewProjectList.udo">신규 프로젝트</a></li>
-											<hr>
-											<li><a href="javaScript: return(0);">기획전 보러가기[미구현]</a></li>
 										</ul>
 									<li><a href="showStartProjectPage.udo">프로젝트 올리기</a></li>
 									<li><a href="javaScript: return(0);">더 보기 <i class="ti-angle-down"></i></a>
