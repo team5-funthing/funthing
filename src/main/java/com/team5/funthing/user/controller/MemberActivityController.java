@@ -16,18 +16,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team5.funthing.user.model.vo.MemberActivityVO;
 import com.team5.funthing.user.model.vo.MemberVO;
-import com.team5.funthing.user.model.vo.PaymentReserveVO;
 import com.team5.funthing.user.model.vo.ProjectVO;
-import com.team5.funthing.user.service.memberActivityService.DeleteMemberActivityService;
 import com.team5.funthing.user.service.memberActivityService.GetLikeProjectNoListService;
-import com.team5.funthing.user.service.memberActivityService.GetMemberActivityListService;
 import com.team5.funthing.user.service.memberActivityService.GetReportProjectNoListService;
 import com.team5.funthing.user.service.memberActivityService.GetReservationProjectNoListService;
 import com.team5.funthing.user.service.memberActivityService.InsertMemberActivityService;
-import com.team5.funthing.user.service.memberActivityService.UpdateMemberActivityService;
 import com.team5.funthing.user.service.memberService.GetMemberService;
-import com.team5.funthing.user.service.paymentReserveService.GetPaymentReserveListByEmailService;
-import com.team5.funthing.user.service.paymentReserveService.GetPaymentReserveService;
 import com.team5.funthing.user.service.projectService.GetProjectListByEmailService;
 import com.team5.funthing.user.service.projectService.GetProjectService;
 	
